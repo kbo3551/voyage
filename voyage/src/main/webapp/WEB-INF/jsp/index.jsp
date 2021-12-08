@@ -57,19 +57,21 @@
                                 <div class="main-menu f-right d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">                                                                                                                                     
-                                            <li><a href="index.html">Home</a></li>
-                                            <li><a href="about.html">About</a></li>
-                                            <li><a href="catagori.html">Catagories</a></li>
-                                            <li><a href="listing.html">Listing</a></li>
-                                            <li><a href="#">Page</a>
-                                                <ul class="submenu">
-                                                    <li><a href="blog.html">Blog</a></li>
-                                                    <li><a href="blog_details.html">Blog Details</a></li>
-                                                    <li><a href="elements.html">Element</a></li>
-                                                    <li><a href="listing_details.html">Listing details</a></li>
+                                            <li><a href="/index">Home</a></li>
+                                            <li><a href="/getProductAll">product</a>
+                                            	<ul class="submenu">
+                                                    <li><a href="blog.html">accom</a></li>
+                                                    <li><a href="blog_details.html">activity</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="contact.html">Contact</a></li>
+                                            <li><a href="listing.html">hash-tag</a></li>
+                                            <li><a href="/getReviewList">review</a></li>
+                                            <li><a href="#">service</a>
+                                                <ul class="submenu">
+                                                    <li><a href="blog.html">notice</a></li>
+                                                    <li><a href="blog_details.html">Q&A</a></li>
+                                                </ul>
+                                            </li>
                                             <li class="add-list"><a href="listing_details.html"><i class="ti-plus"></i> add Listing</a></li>
                                             <li class="login"><a href="#">
                                                 <i class="ti-user"></i> Sign in or Register</a>

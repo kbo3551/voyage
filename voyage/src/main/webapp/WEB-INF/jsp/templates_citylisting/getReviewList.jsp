@@ -57,7 +57,7 @@
                                 <div class="main-menu f-right d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">                                                                                                                                     
-                                            <li><a href="index.html">Home</a></li>
+                                            <li><a href="/index">Home</a></li>
                                             <li><a href="about.html">About</a></li>
                                             <li><a href="catagori.html">Catagories</a></li>
                                             <li><a href="listing.html">Listing</a></li>
@@ -97,7 +97,7 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-8 col-lg-9">
                         <div class="hero-cap text-center pt-50 pb-20">
-                            <h2>Our Listing</h2>
+                            <h2>voyage review</h2>
                         </div>
                         <!--Hero form -->
                         <form action="#" class="search-box search-box2">
@@ -240,7 +240,7 @@
                                             </div>
                                             <div class="list-caption">
                                                 <span>Open</span>
-                                                <h3><a href="listing_details.html">Saintmartine</a></h3>
+                                                <h3><a href="/getReviewOne">Saintmartine</a></h3>
                                                 <p>700/D, Kings road, Green lane, 85/ London</p>
                                                 <div class="list-footer">
                                                     <ul>
@@ -259,7 +259,7 @@
                                             </div>
                                             <div class="list-caption">
                                                 <span>Open</span>
-                                                 <h3><a href="listing_details.html">Saintmartine</a></h3>
+                                                 <h3><a href="/getReviewOne">Saintmartine</a></h3>
                                                 <p>700/D, Kings road, Green lane, 85/ London</p>
                                                 <div class="list-footer">
                                                     <ul>
@@ -278,7 +278,7 @@
                                             </div>
                                             <div class="list-caption">
                                                 <span>Open</span>
-                                                 <h3><a href="listing_details.html">Saintmartine</a></h3>
+                                                 <h3><a href="/getReviewOne">Saintmartine</a></h3>
                                                 <p>700/D, Kings road, Green lane, 85/ London</p>
                                                 <div class="list-footer">
                                                     <ul>
@@ -297,7 +297,7 @@
                                             </div>
                                             <div class="list-caption">
                                                 <span>Open</span>
-                                                 <h3><a href="listing_details.html">Saintmartine</a></h3>
+                                                 <h3><a href="/getReviewOne">Saintmartine</a></h3>
                                                 <p>700/D, Kings road, Green lane, 85/ London</p>
                                                 <div class="list-footer">
                                                     <ul>
@@ -316,7 +316,7 @@
                                             </div>
                                             <div class="list-caption">
                                                 <span>Open</span>
-                                                 <h3><a href="listing_details.html">Saintmartine</a></h3>
+                                                 <h3><a href="/getReviewOne">Saintmartine</a></h3>
                                                 <p>700/D, Kings road, Green lane, 85/ London</p>
                                                 <div class="list-footer">
                                                     <ul>
@@ -335,7 +335,7 @@
                                             </div>
                                             <div class="list-caption">
                                                 <span>Open</span>
-                                                 <h3><a href="listing_details.html">Saintmartine</a></h3>
+                                                 <h3><a href="/getReviewOne">Saintmartine</a></h3>
                                                 <p>700/D, Kings road, Green lane, 85/ London</p>
                                                 <div class="list-footer">
                                                     <ul>
