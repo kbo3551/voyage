@@ -48,7 +48,7 @@
                                                 </ul>
                                             </li>
                                             <li class="login"><a href="#">
-                                                <i class="ti-user"></i> 로그인</a>
+                                                <i class="login"></i> 로그인</a>
                                             </li>
                                         </ul>
                                     </nav>
