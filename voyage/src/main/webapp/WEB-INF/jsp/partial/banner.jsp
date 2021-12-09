@@ -18,7 +18,7 @@
                             <!-- Logo -->
                             <div class="col-xl-2 col-lg-2 col-md-1">
                                 <div class="logo">
-                                  <a href="${pageContext.request.contextPath}/index"><img src="assets/img/logo/logo.png" alt="logo"></a>
+                                  <a href="${pageContext.request.contextPath}/index" title="여행을 떠나는 세대"><img src="assets/img/logo/logo.png" alt="logo"></a>
                                 </div>
                             </div>
                             <div class="col-xl-10 col-lg-10 col-md-8">
