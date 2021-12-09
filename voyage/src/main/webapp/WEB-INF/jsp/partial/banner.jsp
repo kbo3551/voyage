@@ -48,7 +48,7 @@
                                                 </ul>
                                             </li>
                                             <li class="login"><a href="${pageContext.request.contextPath}/login">
-                                                <i class="login"></i> 로그인</a>
+                                                <i class="ti-user"></i> 로그인</a>
                                             </li>
                                         </ul>
                                     </nav>
