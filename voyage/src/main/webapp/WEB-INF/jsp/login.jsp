@@ -109,7 +109,7 @@
 		                            <h2>Login</h2> 
 		                            <form action="" method="post">
 		                                <div class="form-group">
-		                                    <label for="email">Email</label>
+		                                    <label for="email">User ID</label>
 		                                    <input type="text" class="form-control" id="email">
 		                                </div>
 		                                <div class="form-group">
