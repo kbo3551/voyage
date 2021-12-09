@@ -5,11 +5,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ReviewController {
-	@GetMapping("/getReviewList")
-	public String getReviewList() {
-		System.out.println("ReviewController() 실행");
+	@GetMapping("/getActivityReviewList")
+	public String getActivityReviewList() {
+		System.out.println("ActivityReviewController() 실행");
 	      
-		return "/templates_citylisting/getReviewList";
+		return "/templates_citylisting/getActivityReviewList";
+	}
+	
+	@GetMapping("/getAccomReviewList")
+	public String getAccomReviewList() {
+		System.out.println("AccomReviewController() 실행");
+	      
+		return "/templates_citylisting/getActivityReviewList";
 	}
 	
 	@GetMapping("/getReviewOne")
@@ -18,4 +25,5 @@ public class ReviewController {
 	      
 		return "/templates_citylisting/getReviewOne";
 	}
+
 }
