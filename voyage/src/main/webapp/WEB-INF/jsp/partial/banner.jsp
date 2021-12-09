@@ -35,7 +35,7 @@
                                                 </ul>
                                             </li>
                                             <li><a href="${pageContext.request.contextPath}/hashtag">해시태그</a></li>
-										 <li><a href="#">후기</a>
+										 <li><a href="${pageContext.request.contextPath}/setReviewCategory">후기</a>
                                                 <ul class="submenu">
                                                     <li><a href="${pageContext.request.contextPath}/getActivityReviewList">체험</a></li>
                                                     <li><a href="${pageContext.request.contextPath}/getAccomReviewList">숙소</a></li>
