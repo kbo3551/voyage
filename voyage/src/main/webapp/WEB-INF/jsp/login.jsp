@@ -50,7 +50,12 @@
 	
 	.btn:hover {
 		color: black;
-	} 
+		
+	}
+	
+	.btn:before {
+		background: rgb(190,255,255);
+	}
 }
 </style>
 
