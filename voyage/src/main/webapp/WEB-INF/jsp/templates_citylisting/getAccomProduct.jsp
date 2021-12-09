@@ -24,10 +24,8 @@
             <link rel="stylesheet" href="assets/css/nice-select.css">
             <link rel="stylesheet" href="assets/css/style.css">
    </head>
-
-   <body>
-   
-   <!-- 눈누 - 한산스네오 레귤러 폰트 -->
+	
+	<!-- 눈누 - 한산스네오 레귤러 폰트 -->
 	<style type="text/css">
 	
 		@font-face {
@@ -42,6 +40,8 @@
 		}
 		
 	</style>
+	
+   <body>
 	
 	<!-- Preloader Start -->
     <div id="preloader-active">
