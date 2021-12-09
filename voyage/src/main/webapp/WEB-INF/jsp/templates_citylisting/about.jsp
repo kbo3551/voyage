@@ -64,7 +64,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center pt-50">
-                            <h2>장군멍군 컴퍼니 개요</h2>
+                            <h2>장군멍군 컴퍼니</h2>
                         </div>
                     </div>
                 </div>
@@ -78,9 +78,8 @@
                     <div class="col-lg-10 col-md-10">
                         <!-- Section Tittle -->
                         <div class="section-tittle section-tittle5 mb-80">
-                            <span>About our company</span>
-                            <h2>Making sure that our products exceed expectations 
-                                for quality, style and performance.</h2>
+                            <span>Company members</span>
+                            <div>박예진-사장, <br>최지혜-부사장, 조유태-이사, 김도훈-디자인 이사, <br>김다원-일러스트레이터, 김상훈-경비원, 김보령-지나가던행인</div>
                         </div> 
                     </div>
                 </div>
