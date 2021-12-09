@@ -18,7 +18,7 @@
                             <!-- Logo -->
                             <div class="col-xl-2 col-lg-2 col-md-1">
                                 <div class="logo">
-                                  <a href="${pageContext.request.contextPath}/index" title="여행을 떠나는 세대"><img src="assets/img/logo/logo.png" alt="logo"></a>
+                                  <a href="${pageContext.request.contextPath}/index"><img src="assets/img/logo/logo.png" alt="logo"></a>
                                 </div>
                             </div>
                             <div class="col-xl-10 col-lg-10 col-md-8">
@@ -30,8 +30,8 @@
                                             <li><a href="${pageContext.request.contextPath}/about">설명</a></li>
                                             <li><a href="#">예약</a>
                                                 <ul class="submenu">
-                                                    <li><a href="blog.html">체험</a></li>
-                                                    <li><a href="blog_details.html">숙소</a></li>
+                                                    <li><a href="getActivityProduct">체험</a></li>
+                                                    <li><a href="getAccomProduct">숙소</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="${pageContext.request.contextPath}/hashtag">해시태그</a></li>
@@ -43,8 +43,8 @@
                                             </li>
                                             <li><a href="#">고객지원</a>
                                                 <ul class="submenu">
-                                                    <li><a href="${pageContext.request.contextPath}/notice">공지사항</a></li>
-                                                    <li><a href="${pageContext.request.contextPath}/qna">Q&A</a></li>
+                                                    <li><a href="${pageContext.request.contextPath}/noticeList">공지사항</a></li>
+                                                    <li><a href="${pageContext.request.contextPath}/qnaList">Q&A</a></li>
                                                 </ul>
                                             </li>
                                             <li class="login"><a href="#">
