@@ -47,7 +47,7 @@
                                                     <li><a href="${pageContext.request.contextPath}/qnaList">Q&A</a></li>
                                                 </ul>
                                             </li>
-                                            <li class="login"><a href="#">
+                                            <li class="login"><a href="${pageContext.request.contextPath}/login">
                                                 <i class="login"></i> 로그인</a>
                                             </li>
                                         </ul>
