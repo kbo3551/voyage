@@ -49,7 +49,6 @@
 	}
 	
 	.btn:hover {
-		background: blue;
 		color: black;
 	} 
 }
