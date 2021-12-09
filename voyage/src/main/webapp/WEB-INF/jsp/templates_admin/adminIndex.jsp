@@ -814,6 +814,7 @@
 				defaultDate: defaultDate
 			});
 		});
+		
 	</script>
 
 </body>
