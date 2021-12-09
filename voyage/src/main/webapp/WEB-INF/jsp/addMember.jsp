@@ -153,6 +153,10 @@
 		                                    <label for="description">Description</label>
 		                                    <input type="text" class="form-control" id="description">
 		                                </div>
+		                                <div class="text-center">
+                                   		<button type="submit" class="btn" style="background: rgb(0,172,238);
+                                   			 background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);"> sign up</button>         
+                                </div>
 		                            </form>
 		                            <br>
 		                            
@@ -163,14 +167,7 @@
 	                                <a href="#"><i class="fab fa-twitter"></i></a>
 	                                <a href="#"><i class="fas fa-globe"></i></a>
 		                            </p> 
-		                        </div>
-		                        
-		                        <div class="text-center">
-                                    <button type="submit" class="btn" style="background: rgb(0,172,238);
-                                    background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
-                                    "> sign up</button>         
-                                </div>
-		                        
+		                        </div> 
 		                    </div>
 		                </div>
 		
