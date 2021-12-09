@@ -3,19 +3,6 @@
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
     <head>
-    <!-- 눈누 - 한산스네오 레귤러 폰트 -->
-	<style type="text/css">
-	    @font-face {
-	        font-family: 'SpoqaHanSansNeo-Regular';
-	            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff%27) format('woff');
-	        font-weight: normal;
-	        font-style: normal;
-	    }
-	
-	    body {
-	        font-family: 'SpoqaHanSansNeo-Regular';
-	    }
-	</style>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Directory HTML-5 Template </title>
@@ -37,6 +24,35 @@
             <link rel="stylesheet" href="assets/css/nice-select.css">
             <link rel="stylesheet" href="assets/css/style.css">
    </head>
+   
+   <!-- 눈누 - 한산스네오 레귤러 폰트 -->
+	<style type="text/css">
+	
+		@font-face {
+		    font-family: 'SpoqaHanSansNeo-Regular';
+		    	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		
+		body {
+			font-family: 'SpoqaHanSansNeo-Regular';
+		}
+		
+	</style>
+	
+	<!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="assets/img/logo/loder.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+   
     <!-- 배너 : 시작 -->
     <c:import url="../partial\\banner.jsp"/>
     <!-- 배너 : 끝 -->
