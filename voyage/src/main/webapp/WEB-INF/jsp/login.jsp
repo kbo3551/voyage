@@ -48,6 +48,11 @@
 		color:white;
 	}
 	
+	.btn:hover {
+		background: blue;
+		color: black;
+	}
+}
 </style>
 
 
@@ -117,7 +122,9 @@
 		                                    <input type="password" class="form-control" id="password">
 		                                </div>
 		                                <div class="text-center">
-		                                    <button type="submit" class="btn btn-default"> Log in</button>
+		                                    <button type="submit" class="btn" style="background: rgb(0,172,238);
+                                    		background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
+                                    		"> Log in</button>
 		                                    
 		                                </div>
 		                            </form>
@@ -131,6 +138,12 @@
 	                                <a href="#"><i class="fas fa-globe"></i></a>
 		                            </p> 
 		                        </div>
+		                        
+		                        <div class="text-center">
+                                    <button type="submit" class="btn" style="background: rgb(0,172,238);
+                                    background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
+                                    "> register</button>         
+                                </div>
 		                        
 		                    </div>
 		                </div>
