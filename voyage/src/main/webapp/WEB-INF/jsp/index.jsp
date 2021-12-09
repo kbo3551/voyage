@@ -119,8 +119,9 @@
                                 <img src="assets/img/gallery/location1.png" alt="">
                             </div>
                             <div class="location-details">
-                                <p>New York</p>
-                                <a href="#" class="location-btn">65 <i class="ti-plus"></i> Location</a>
+                                <p>서울</p>
+                                <a href="#" class="location-btn"> 2 <i class="ti-plus"></i> 체험</a>
+								<a href="#" class="location-btn"> 4 <i class="ti-plus"></i> 숙소</a>
                             </div>
                         </div>
                     </div>
@@ -130,8 +131,9 @@
                                 <img src="assets/img/gallery/location2.png" alt="">
                             </div>
                             <div class="location-details">
-                                <p>Paris</p>
-                                <a href="#" class="location-btn">60 <i class="ti-plus"></i> Location</a>
+                                <p>제주</p>
+                                <a href="#" class="location-btn"> 8 <i class="ti-plus"></i> 체험</a>
+								<a href="#" class="location-btn"> 16 <i class="ti-plus"></i> 숙소</a>
                             </div>
                         </div>
                     </div>
@@ -141,8 +143,9 @@
                                 <img src="assets/img/gallery/location3.png" alt="">
                             </div>
                             <div class="location-details">
-                                <p>Rome</p>
-                                <a href="#" class="location-btn">50 <i class="ti-plus"></i> Location</a>
+                                <p>부산</p>
+                                <a href="#" class="location-btn"> 32 <i class="ti-plus"></i> 체험</a>
+								<a href="#" class="location-btn"> 64 <i class="ti-plus"></i> 숙소</a>
                             </div>
                         </div>
                     </div>
@@ -152,8 +155,9 @@
                                 <img src="assets/img/gallery/location4.png" alt="">
                             </div>
                             <div class="location-details">
-                                <p>Italy</p>
-                                <a href="#" class="location-btn">28 <i class="ti-plus"></i> Location</a>
+                                <p>강원</p>
+                                <a href="#" class="location-btn"> 128 <i class="ti-plus"></i> 체험</a>
+								<a href="#" class="location-btn"> 256 <i class="ti-plus"></i> 숙소</a>
                             </div>
                         </div>
                     </div>
@@ -163,8 +167,9 @@
                                 <img src="assets/img/gallery/location5.png" alt="">
                             </div>
                             <div class="location-details">
-                                <p>Nepal</p>
-                                <a href="#" class="location-btn">99 <i class="ti-plus"></i> Location</a>
+                                <p>인천</p>
+                                <a href="#" class="location-btn"> 512 <i class="ti-plus"></i> 체험</a>
+								<a href="#" class="location-btn"> 1024 <i class="ti-plus"></i> 숙소</a>
                             </div>
                         </div>
                     </div>
@@ -174,8 +179,9 @@
                                 <img src="assets/img/gallery/location6.png" alt="">
                             </div>
                             <div class="location-details">
-                                <p>indonesia</p>
-                                <a href="#" class="location-btn">78 <i class="ti-plus"></i> Location</a>
+                                <p>대구</p>
+                                <a href="#" class="location-btn"> 2048 <i class="ti-plus"></i> 체험</a>
+								<a href="#" class="location-btn"> 4096 <i class="ti-plus"></i> 숙소</a>
                             </div>
                         </div>
                     </div>
@@ -188,6 +194,7 @@
                 </div>
             </div>
         </div>
+         
         <!-- Popular Locations End -->
         <!-- Services Area Start -->
         <div class="services-area pt-150 pb-150 section-bg" data-background="assets/img/gallery/section_bg02.jpg">
@@ -489,85 +496,9 @@
         <!-- Blog Ara End -->
 
     </main>
-    <footer>
-        <!-- Footer Start-->
-        <div class="footer-area">
-            <div class="container">
-               <div class="footer-top footer-padding">
-                    <div class="row justify-content-between">
-                        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
-                            <div class="single-footer-caption mb-50">
-                                <div class="single-footer-caption mb-30">
-                                    <!-- logo -->
-                                    <div class="footer-logo">
-                                        <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
-                            <div class="single-footer-caption mb-50">
-                                <div class="footer-tittle">
-                                    <h4>Quick Link</h4>
-                                    <ul>
-                                        <li><a href="#">Home</a></li>
-                                        <li><a href="#">Listing</a></li>
-                                        <li><a href="#">About</a></li>
-                                        <li><a href="#">Contact</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                            <div class="single-footer-caption mb-50">
-                                <div class="footer-tittle">
-                                    <h4>Categories</h4>
-                                    <ul>
-                                        <li><a href="#">Reasonable Hotel</a></li>
-                                        <li><a href="#">Popular Restaurant</a></li>
-                                        <li><a href="#">Easy Shopping</a></li>
-                                        <li><a href="#">Night Life</a></li>     
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                            <div class="single-footer-caption mb-50">
-                                <div class="footer-tittle">
-                                    <h4>Download App</h4>
-                                    <ul>
-                                        <li class="app-log"><a href="#"><img src="assets/img/gallery/app-logo.png" alt=""></a></li>
-                                        <li><a href="#"><img src="assets/img/gallery/app-logo2.png" alt=""></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-               </div>
-                <div class="footer-bottom">
-                    <div class="row d-flex justify-content-between align-items-center">
-                        <div class="col-xl-9 col-lg-8">
-                            <div class="footer-copy-right">
-                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-4">
-                            <!-- Footer Social -->
-                            <div class="footer-social f-right">
-                                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fas fa-globe"></i></a>
-                                <a href="#"><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-               </div>
-            </div>
-        </div>
-        <!-- Footer End-->
-    </footer>
+    
+    <c:import url="partial\\footer.jsp"/>
+    
     <!-- Scroll Up -->
     <div id="back-top" >
         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
