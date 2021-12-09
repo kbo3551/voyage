@@ -16,7 +16,7 @@ public class ReviewController {
 	public String getAccomReviewList() {
 		System.out.println("AccomReviewController() 실행");
 	      
-		return "/templates_citylisting/getActivityReviewList";
+		return "/templates_citylisting/getAccomReviewList";
 	}
 	
 	@GetMapping("/getReviewOne")
