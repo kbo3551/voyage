@@ -16,6 +16,7 @@
             <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
             <link rel="stylesheet" href="assets/css/slicknav.css">
             <link rel="stylesheet" href="assets/css/flaticon.css">
+            <link rel="stylesheet" href="assets/css/price_rangs.css">
             <link rel="stylesheet" href="assets/css/animate.min.css">
             <link rel="stylesheet" href="assets/css/magnific-popup.css">
             <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
@@ -24,8 +25,8 @@
             <link rel="stylesheet" href="assets/css/nice-select.css">
             <link rel="stylesheet" href="assets/css/style.css">
    </head>
-	
-	<!-- 눈누 - 한산스네오 레귤러 폰트 -->
+   
+   <!-- 눈누 - 한산스네오 레귤러 폰트 -->
 	<style type="text/css">
 	
 		@font-face {
@@ -41,8 +42,6 @@
 		
 	</style>
 	
-   <body>
-	
 	<!-- Preloader Start -->
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
@@ -54,283 +53,303 @@
             </div>
         </div>
     </div>
-    
-     <!-- 배너 : 시작 -->
+
+   <body>
+    <!-- 배너 : 시작 -->
     <c:import url="../partial\\banner.jsp"/>
     <!-- 배너 : 끝 -->
+
     <main>
 
         <!-- Hero Start-->
-        <div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center ">
+        <div class="hero-area3 hero-overly2 d-flex align-items-center ">
             <div class="container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="hero-cap text-center pt-50">
+                <div class="row justify-content-center">
+                    <div class="col-xl-8 col-lg-9">
+                        <div class="hero-cap text-center pt-50 pb-20">
                             <h2>숙소 목록</h2>
                         </div>
+                        <!--Hero form -->
+                        <form action="#" class="search-box search-box2">
+                            <div class="input-form">
+                                <input type="text" placeholder="What are you looking for?">
+                            </div>
+                            <div class="select-form">
+                                <div class="select-itms">
+                                    <select name="select" id="select1">
+                                        <option value="">All Catagories</option>
+                                        <option value="">Catagories One</option>
+                                        <option value="">Catagories Two</option>
+                                        <option value="">Catagories Three</option>
+                                        <option value="">Catagories Four</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Search box -->
+                            <div class="search-form">
+                                <a href="#">Search</a>
+                            </div>	
+                        </form>	
                     </div>
                 </div>
             </div>
         </div>
         <!--Hero End -->
-        <!-- Categories Area Start -->
-        <div class="categories-area section-padding30">
+        <!-- listing Area Start -->
+        <div class="listing-area pt-120 pb-120">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <!-- Section Tittle -->
-                        <div class="section-tittle text-center mb-80">
-                            <span>We are offering for you</span>
-                            <h2>voyage product</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-cat text-center mb-50">
-                            <div class="cat-icon">
-                                <span class="flaticon-drink"></span>
-                            </div>
-                            <div class="cat-cap">
-                                <h5><a href="#">accomodation</a></h5>
-                                <p>Must explain your how this keind denoun pleasure</p>
-                                <a href="#">View Details</a>
+                    <!-- Left content -->
+                    <div class="col-xl-4 col-lg-4 col-md-6">
+                        <div class="row">
+                            <div class="col-12">
+                                    <div class="small-section-tittle2 mb-45">
+                                    <h4>Advanced Filter</h4>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-cat text-center mb-50">
-                            <div class="cat-icon">
-                                <span class="flaticon-home"></span>
+                        <!-- Job Category Listing start -->
+                        <div class="category-listing mb-50">
+                            <!-- single one -->
+                            <div class="single-listing">
+                                <!-- input -->
+                                <div class="input-form">
+                                    <input type="text" placeholder="What are you finding?">
+                                </div>
+                                <!-- Select job items start -->
+                                <div class="select-job-items1">
+                                    <select name="select1">
+                                        <option value="">Choose categories</option>
+                                        <option value="">Category 1</option>
+                                        <option value="">Category 2</option>
+                                        <option value="">Category 3</option>
+                                    </select>
+                                </div>
+                                <!--  Select job items End-->
+                                <!-- Select job items start -->
+                                <div class="select-job-items2">
+                                    <select name="select2">
+                                        <option value="">Location</option>
+                                        <option value="">Dhaka</option>
+                                        <option value="">Mirpur</option>
+                                        <option value="">Dannondi</option>
+                                    </select>
+                                </div>
+                                <!--  Select job items End-->
+                                <!-- select-Categories start -->
+                                <div class="select-Categories pt-140 pb-20">
+                                    <label class="container">Full Time
+                                        <input type="checkbox" >
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="container">Ratings
+                                        <input type="checkbox" checked="checked active">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <!-- select-Categories End -->
+                                <!-- Select job items start -->
+                                <div class="select-job-items2">
+                                    <select name="select2">
+                                        <option value="">Area (km)</option>
+                                        <option value="">Dhaka- 1km</option>
+                                        <option value="">Dinajpur- 2km</option>
+                                        <option value="">Chittagong - 3km</option>
+                                    </select>
+                                </div>
+                                <!--  Select job items End-->
                             </div>
-                            <div class="cat-cap">
-                                <h5><a href="#">activity</a></h5>
-                                <p>Must explain your how this keind denoun pleasure</p>
-                                <a href="#">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                 </div>
-            </div>
-        </div>
-        <!-- Categories Area End -->
-        <!-- Services Area Start -->
-        <div class="services-area pt-150 pb-150 section-bg" data-background="assets/img/gallery/section_bg02.jpg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!-- Section Tittle -->
-                        <div class="section-tittle section-tittle2 text-center mb-80">
-                            <span>Easy to explore</span>
-                            <h2>How It Works</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row justify-content-between">
-                    <div class="col-lg-3 col-md-6">
-                        <div class="single-services text-center mb-50">
-                            <div class="services-icon">
-                                <span class="flaticon-list"></span>
-                            </div>
-                            <div class="services-cap">
-                                <h5><a href="#">1. Choose a Category</a></h5>
-                                <p>incidid labore lore magna aliqua uisipsum suspendis loris.</p>
-                            </div>
-                            <!-- Shpape -->
-                            <img class="shape1 d-none d-lg-block" src="assets/img/icon/serices1.png" alt="">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="single-services text-center mb-50">
-                            <div class="services-icon">
-                                <span class="flaticon-problem"></span>
-                            </div>
-                            <div class="services-cap">
-                                <h5><a href="#">2. what you want</a></h5>
-                                <p>incidid labore lore magna aliqua uisipsum suspendis loris.</p>
-                            </div>
-                            <img class="shape2 d-none d-lg-block" src="assets/img/icon/serices2.png" alt="">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="single-services text-center mb-50">
-                            <div class="services-icon">
-                                <span class="flaticon-respect"></span>
-                            </div>
-                            <div class="services-cap">
-                                <h5><a href="#">3. Go out & Explore</a></h5>
-                                <p>incidid labore lore magna aliqua uisipsum suspendis loris.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Services Area End -->
-        <!-- Popular Locations Start -->
-        <div class="popular-location section-padding30">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!-- Section Tittle -->
-                        <div class="section-tittle text-center mb-80">
-                            <span>Most visited places</span>
-                            <h2>Popular Locations</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-location mb-30">
-                            <div class="location-img">
-                                <img src="assets/img/gallery/location1.png" alt="">
-                            </div>
-                            <div class="location-details">
-                                <p>New York</p>
-                                <a href="#" class="location-btn">65 <i class="ti-plus"></i> Location</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-location mb-30">
-                            <div class="location-img">
-                                <img src="assets/img/gallery/location2.png" alt="">
-                            </div>
-                            <div class="location-details">
-                                <p>Paris</p>
-                                <a href="#" class="location-btn">60 <i class="ti-plus"></i> Location</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-location mb-30">
-                            <div class="location-img">
-                                <img src="assets/img/gallery/location3.png" alt="">
-                            </div>
-                            <div class="location-details">
-                                <p>Rome</p>
-                                <a href="#" class="location-btn">50 <i class="ti-plus"></i> Location</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-location mb-30">
-                            <div class="location-img">
-                                <img src="assets/img/gallery/location4.png" alt="">
-                            </div>
-                            <div class="location-details">
-                                <p>Italy</p>
-                                <a href="#" class="location-btn">28 <i class="ti-plus"></i> Location</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-location mb-30">
-                            <div class="location-img">
-                                <img src="assets/img/gallery/location5.png" alt="">
-                            </div>
-                            <div class="location-details">
-                                <p>Nepal</p>
-                                <a href="#" class="location-btn">99 <i class="ti-plus"></i> Location</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-location mb-30">
-                            <div class="location-img">
-                                <img src="assets/img/gallery/location6.png" alt="">
-                            </div>
-                            <div class="location-details">
-                                <p>indonesia</p>
-                                <a href="#" class="location-btn">78 <i class="ti-plus"></i> Location</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Popular Locations End -->
 
-    </main>
-    <footer>
-        <!-- Footer Start-->
-        <div class="footer-area">
-            <div class="container">
-               <div class="footer-top footer-padding">
-                    <div class="row justify-content-between">
-                        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
-                            <div class="single-footer-caption mb-50">
-                                <div class="single-footer-caption mb-30">
-                                    <!-- logo -->
-                                    <div class="footer-logo">
-                                        <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
+                            <div class="single-listing">
+                                <!-- Range Slider Start -->
+                                <aside class="left_widgets p_filter_widgets price_rangs_aside sidebar_box_shadow">
+                                    <div class="small-section-tittle2">
+                                        <h4>Price range</h4>
+                                    </div>
+                                    <div class="widgets_inner">
+                                        <div class="range_item">
+                                            <!-- <div id="slider-range"></div> -->
+                                            <input type="text" class="js-range-slider" value="" />
+                                            <div class="d-flex align-items-center">
+                                                <div class="price_text">
+                                                    <p>Price :</p>
+                                                </div>
+                                                <div class="price_value d-flex justify-content-center">
+                                                    <input type="text" class="js-input-from" id="amount" readonly />
+                                                    <span>to</span>
+                                                    <input type="text" class="js-input-to" id="amount" readonly />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </aside>
+                              <!-- Range Slider End -->
+                                 <a href="#" class="btn list-btn mt-20">Reset</a>
+                            </div>
+                        </div>
+                        <!-- Job Category Listing End -->
+                    </div>
+                    <!-- Right content -->
+                    <div class="col-xl-8 col-lg-8 col-md-6">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="count mb-35">
+                                    <span>5432 Listings are available</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- listing Details Stat-->
+                        <div class="listing-details-area">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-6 ">
+                                        <div class="single-listing mb-30">
+                                            <div class="list-img">
+                                                <img src="assets/img/gallery/list1.png" alt="">
+                                                <!-- <span>Open</span> -->
+                                            </div>
+                                            <div class="list-caption">
+                                                <span>Open</span>
+                                                <h3><a href="/getReviewOne">Saintmartine</a></h3>
+                                                <p>700/D, Kings road, Green lane, 85/ London</p>
+                                                <div class="list-footer">
+                                                    <ul>
+                                                        <li>+10 278 367 9823</li>
+                                                        <li>contact@midnight.com</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 ">
+                                        <div class="single-listing mb-30">
+                                            <div class="list-img">
+                                                <img src="assets/img/gallery/list2.png" alt="">
+                                                <!-- <span>Open</span> -->
+                                            </div>
+                                            <div class="list-caption">
+                                                <span>Open</span>
+                                                 <h3><a href="/getReviewOne">Saintmartine</a></h3>
+                                                <p>700/D, Kings road, Green lane, 85/ London</p>
+                                                <div class="list-footer">
+                                                    <ul>
+                                                        <li>+10 278 367 9823</li>
+                                                        <li>contact@midnight.com</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 ">
+                                        <div class="single-listing mb-30">
+                                            <div class="list-img">
+                                                <img src="assets/img/gallery/list3.png" alt="">
+                                                <!-- <span>Open</span> -->
+                                            </div>
+                                            <div class="list-caption">
+                                                <span>Open</span>
+                                                 <h3><a href="/getReviewOne">Saintmartine</a></h3>
+                                                <p>700/D, Kings road, Green lane, 85/ London</p>
+                                                <div class="list-footer">
+                                                    <ul>
+                                                        <li>+10 278 367 9823</li>
+                                                        <li>contact@midnight.com</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 ">
+                                        <div class="single-listing mb-30">
+                                            <div class="list-img">
+                                                <img src="assets/img/gallery/list4.png" alt="">
+                                                <!-- <span>Open</span> -->
+                                            </div>
+                                            <div class="list-caption">
+                                                <span>Open</span>
+                                                 <h3><a href="/getReviewOne">Saintmartine</a></h3>
+                                                <p>700/D, Kings road, Green lane, 85/ London</p>
+                                                <div class="list-footer">
+                                                    <ul>
+                                                        <li>+10 278 367 9823</li>
+                                                        <li>contact@midnight.com</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 ">
+                                        <div class="single-listing mb-30">
+                                            <div class="list-img">
+                                                <img src="assets/img/gallery/list5.png" alt="">
+                                                <!-- <span>Open</span> -->
+                                            </div>
+                                            <div class="list-caption">
+                                                <span>Open</span>
+                                                 <h3><a href="/getReviewOne">Saintmartine</a></h3>
+                                                <p>700/D, Kings road, Green lane, 85/ London</p>
+                                                <div class="list-footer">
+                                                    <ul>
+                                                        <li>+10 278 367 9823</li>
+                                                        <li>contact@midnight.com</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 ">
+                                        <div class="single-listing mb-30">
+                                            <div class="list-img">
+                                                <img src="assets/img/gallery/list6.png" alt="">
+                                                <!-- <span>Open</span> -->
+                                            </div>
+                                            <div class="list-caption">
+                                                <span>Open</span>
+                                                 <h3><a href="/getReviewOne">Saintmartine</a></h3>
+                                                <p>700/D, Kings road, Green lane, 85/ London</p>
+                                                <div class="list-footer">
+                                                    <ul>
+                                                        <li>+10 278 367 9823</li>
+                                                        <li>contact@midnight.com</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
-                            <div class="single-footer-caption mb-50">
-                                <div class="footer-tittle">
-                                    <h4>Quick Link</h4>
-                                    <ul>
-                                        <li><a href="#">Home</a></li>
-                                        <li><a href="#">Listing</a></li>
-                                        <li><a href="#">About</a></li>
-                                        <li><a href="#">Contact</a></li>
-                                    </ul>
+                        <!-- listing Details End -->
+                        <!--Pagination Start  -->
+                        <div class="pagination-area pt-70 text-center">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="single-wrap d-flex justify-content-center">
+                                            <nav aria-label="Page navigation example">
+                                                <ul class="pagination justify-content-start">
+                                                    <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">02</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">03</a></li>
+                                                <li class="page-item"><a class="page-link" href="#"><span class="ti-angle-right"></span></a></li>
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                            <div class="single-footer-caption mb-50">
-                                <div class="footer-tittle">
-                                    <h4>Categories</h4>
-                                    <ul>
-                                        <li><a href="#">Reasonable Hotel</a></li>
-                                        <li><a href="#">Popular Restaurant</a></li>
-                                        <li><a href="#">Easy Shopping</a></li>
-                                        <li><a href="#">Night Life</a></li>     
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                            <div class="single-footer-caption mb-50">
-                                <div class="footer-tittle">
-                                    <h4>Download App</h4>
-                                    <ul>
-                                        <li class="app-log"><a href="#"><img src="assets/img/gallery/app-logo.png" alt=""></a></li>
-                                        <li><a href="#"><img src="assets/img/gallery/app-logo2.png" alt=""></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        <!--Pagination End  -->
                     </div>
-               </div>
-                <div class="footer-bottom">
-                    <div class="row d-flex justify-content-between align-items-center">
-                        <div class="col-xl-9 col-lg-8">
-                            <div class="footer-copy-right">
-                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-4">
-                            <!-- Footer Social -->
-                            <div class="footer-social f-right">
-                                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fas fa-globe"></i></a>
-                                <a href="#"><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-               </div>
+                </div>
             </div>
         </div>
-        <!-- Footer End-->
-    </footer>
+        <!-- listing-area Area End -->
+
+    </main>
+    <!--footer.jsp 시작  -->
+    <c:import url="../partial\\footer.jsp"/>
+    <!--footer.jsp 끝  -->
     <!-- Scroll Up -->
     <div id="back-top" >
         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
@@ -352,6 +371,7 @@
         <script src="./assets/js/slick.min.js"></script>
 		<!-- One Page, Animated-HeadLin -->
         <script src="./assets/js/wow.min.js"></script>
+        <script src="./assets/js/price-range.js"></script>
 		<script src="./assets/js/animated.headline.js"></script>
         <script src="./assets/js/jquery.magnific-popup.js"></script>
 

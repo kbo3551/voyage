@@ -496,9 +496,9 @@
         <!-- Blog Ara End -->
 
     </main>
-    
+    <!--footer.jsp 시작  -->
     <c:import url="partial\\footer.jsp"/>
-    
+    <!--footer.jsp 끝  -->
     <!-- Scroll Up -->
     <div id="back-top" >
         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
