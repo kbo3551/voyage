@@ -139,9 +139,9 @@
 		                        </div>
 		                        
 		                        <div class="text-center">
-                                    <button type="submit" class="btn" style="background: rgb(0,172,238);
+                                    <a href="${pageContext.request.contextPath}/addMember"><button type="submit" class="btn" style="background: rgb(0,172,238);
                                     background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
-                                    "> sign up</button>         
+                                    ">sign up</button></a>
                                 </div>
 		                        
 		                    </div>
