@@ -27,17 +27,24 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
 
+<!-- 눈누 - 한산스네오 레귤러 폰트 -->
 <style type="text/css">
 
-	body {
-	  font-family: 'Gugi', cursive;
+	@font-face {
+	    font-family: 'SpoqaHanSansNeo-Regular';
+	    	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
 	}
-
+	
+	body {
+		font-family: 'SpoqaHanSansNeo-Regular';
+	}
+	
 </style>
+
+
 
 <body>
     <!-- Preloader Start -->
@@ -63,30 +70,27 @@
             <div class="single-slider hero-overly  slider-height d-flex align-items-center">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-xl-8 col-lg-9">
+                        <div class="col-xl-10 col-lg-9">
                             <!-- Hero Caption -->
                             <div class="hero__caption">
-                                <span>Explore the city</span>
-                                <h1>Discover Great Places</h1>
+                                <span>Voy Age</span>
+                                <h1>여행을 떠나고 싶으신가요?</h1>
                             </div>
                             <!--Hero form -->
-                            <form action="#" class="search-box">
+                            <form method="get" action="#" class="search-box">
                                 <div class="input-form">
-                                    <input type="text" placeholder="What are you looking for?">
+                                    <input type="text" placeholder="여행지를 입력해주세요">
                                 </div>
                                 <div class="select-form">
                                     <div class="select-itms">
                                         <select name="select" id="select1">
-                                            <option value="">All Catagories</option>
-                                            <option value="">Catagories One</option>
-                                            <option value="">Catagories Two</option>
-                                            <option value="">Catagories Three</option>
-                                            <option value="">Catagories Four</option>
+                                            <option value="숙소">숙소</option>
+                                            <option value="체험">체험</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="search-form">
-                                    <a href="#">Search</a>
+                                    <a href="#" onclick="">Search</a>
                                 </div>	
                             </form>	
                         </div>
