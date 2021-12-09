@@ -51,7 +51,7 @@
                                             <li><a href="#"><i class="ti-user">사용자</i></a>
                                            			<ul class="submenu">
                                             <li><a href="${pageContext.request.contextPath}/login">로그인</a></li>
-                                                    <li><a href="${pageContext.request.contextPath}/register">회원가입</a></li>
+                                                    <li><a href="${pageContext.request.contextPath}/addMember">회원가입</a></li>
                                                		</ul>
                                     </nav>
                                 </div>

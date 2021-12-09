@@ -111,21 +111,47 @@
 		                <div class="col-md-6">
 		                    <div class="box-for overflow">                         
 		                        <div class="col-md-12 col-xs-12 login-blocks">
-		                            <h2>Login</h2> 
+		                            <h2>Sign up</h2> 
 		                            <form action="" method="post">
 		                                <div class="form-group">
-		                                    <label for="id">User ID</label>
+		                                    <label for=id>User ID</label>
 		                                    <input type="text" class="form-control" id="id">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="password">Password</label>
 		                                    <input type="password" class="form-control" id="password">
 		                                </div>
-		                                <div class="text-center">
-		                                    <button type="submit" class="btn" style="background: rgb(0,172,238);
-                                    		background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
-                                    		"> Log in</button>
-		                                    
+										<div class="form-group">
+		                                    <label for="firstname">First name</label>
+		                                    <input type="text" class="form-control" id="firstname">
+		                                </div>
+		                                <div class="form-group">
+		                                    <label for="lastname">Last name</label>
+		                                    <input type="text" class="form-control" id="lastname">
+		                                </div>
+		                                <div class="form-group">
+		                                    <label for="nickname">Nick name</label>
+		                                    <input type="text" class="form-control" id="nickname">
+		                                </div>
+		                                <div class="form-group">
+		                                    <label for="phone">Phone</label>
+		                                    <input type="tel" class="form-control" id="phone">
+		                                </div>
+		                                <div class="form-group">
+		                                    <label for="email">Email</label>
+		                                    <input type="email" class="form-control" id="email">
+		                                </div>
+		                                <div class="form-group">
+		                                    <label for="socialsecuritynumber">Social Security Number</label>
+		                                    <input type="text" class="form-control" id="socialsecuritynumber">
+		                                </div>
+		                                <div class="form-group">
+		                                    <label for="address">Address</label>
+		                                    <input type="url" class="form-control" id="address">
+		                                </div>
+		                                <div class="form-group">
+		                                    <label for="description">Description</label>
+		                                    <input type="text" class="form-control" id="description">
 		                                </div>
 		                            </form>
 		                            <br>
