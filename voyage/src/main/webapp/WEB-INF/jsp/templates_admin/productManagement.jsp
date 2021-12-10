@@ -300,7 +300,7 @@
 		<main class="content">
 			<div class="container-fluid p-0">
 	
-				<h1 class="h3 mb-3"><strong>Analytics</strong> Dashboard</h1>
+				<h1 class="h3 mb-3"><strong>상품</strong> 관리 </h1>
 	
 				<div class="row">
 					<div class="col-xl-6 col-xxl-5 d-flex">
