@@ -49,9 +49,13 @@
 	}
 	
 	.btn:hover {
-		background: blue;
 		color: black;
-	} 
+		
+	}
+	
+	.btn:before {
+		background: rgb(190,255,255);
+	}
 }
 </style>
 
@@ -151,7 +155,7 @@
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="description">Description</label>
-		                                    <input type="text" class="form-control" id="description">
+		                                    <textarea class="form-control" id="description"></textarea>
 		                                </div>
 		                                <div class="text-center">
                                    		<button type="submit" class="btn" style="background: rgb(0,172,238);
@@ -160,13 +164,6 @@
 		                            </form>
 		                            <br>
 		                            
-		                            <h2>Social login</h2> 
-		                            
-		                            <p>
-		                             <a href="#"><i class="fab fa-facebook-f"></i></a>
-	                                <a href="#"><i class="fab fa-twitter"></i></a>
-	                                <a href="#"><i class="fas fa-globe"></i></a>
-		                            </p> 
 		                        </div> 
 		                    </div>
 		                </div>
