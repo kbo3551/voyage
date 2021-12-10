@@ -72,9 +72,9 @@
 								    <div id="hashtag">
 								    	<div>
 <%-- 								    		<jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/hashtag.jsp"></jsp:include> --%>
-								    		<c:forEach items="${hashtagList }" var="hashtag">
-												<button>${hashtag.hashtag }</button>
-											</c:forEach>
+<%-- 								    		<c:forEach items="${hashtagList }" var="hashtag"> --%>
+<%-- 												<button>${hashtag.hashtag }</button> --%>
+<%-- 											</c:forEach> --%>
 								    	</div>
 								    </div>
 								    
