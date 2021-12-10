@@ -1,3 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gdu.voyage.mapper.AccomBuildingMapper"></mapper>
+<mapper namespace="com.gdu.voyage.mapper.AccomBuildingMapper">
+
+	<!-- 숙소-건물 입력 : selectKey를 사용하여 숙소건물의 식별번호를 받아온뒤 나머지 추가 정보들도 함께 insert -->
+	<insert id="insertAccomBuilding" parameterType="com.gdu.voyage.vo.AccomBuilding">
+		INSERT INTO accom_building (
+			host_no,
+			accom_building_name,
+			accom_building_description,
+			accom_building_phone,
+			create_date,
+			update_date
+		) VALUES (
+			#{hostNo},
+			#{accomBuildingName},
+			#{accomBuildingDescription},
+			#{accomBuildingPhone},
+			NOW(),
+			NOW()
+		)
+		<selectKey keyProperty="accomBuildingNo" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<!-- 숙소-건물의 이미지 파일 입력 -->
+	<insert id="insertAccomBuildingImage" parameterType="com.gdu.voyage.vo.AccomBuildingImage">
+		INSERT INTO accom_building_image (
+			accom_building_no,
+			accom_building_image_name,
+			accom_building_image_ext,
+			accom_building_image_size
+		) VALUES (
+			#{accomBuildingNo},
+			#{accomBuildingImageName},
+			#{accomBuildingImageExt},
+			#{accomBuildingImageSize}
+		)
+	</insert>
+	
+	<!-- 숙소-건물의 시설 입력 -->
+	<insert id="insertAccomBuildingFacility" parameterType="com.gdu.voyage.vo.AccomBuildingFacility">
+		INSERT INTO accom_building_facility (
+			accom_building_no,
+			accom_building_facility_name
+		) VALUES (
+			#{accomBuildingNo},
+			#{accomBuildingFacilityName}
+		)
+	</insert>
+	
+	<!-- 숙소-건물의 추천장소 입력 -->
+	<insert id="insertAccomBuildingSpot" parameterType="com.gdu.voyage.vo.AccomBuildingSpot">
+		INSERT INTO accom_building_spot (
+			accom_building_no,
+			accom_building_spot_name,
+			accom_building_spot_category,
+			accom_building_spot_description
+		) VALUES (
+			#{accomBuildingNo},
+			#{accomBuildingSpotName},
+			#{accomBuildingSpotCategory},
+			#{accomBuildingSpotDescription}
+		)
+	</insert>
+	
+	<!-- 숙소-건물의 해시태그 입력 -->
+	<insert id="insertAccomBuildingHashtag" parameterType="com.gdu.voyage.vo.Hashtag">
+		INSERT INTO hashtag (
+			iden_no,
+			table_name,
+			hashtag,
+			create_date
+		) VALUES (
+			#{idenNo},
+			#{tableName},
+			#{hashtag},
+			NOW()
+		)
+	</insert>
+	
+</mapper>
