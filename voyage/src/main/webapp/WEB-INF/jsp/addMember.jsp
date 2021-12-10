@@ -132,7 +132,7 @@
                                 		<div class="form-group">
 		                                    <label for=id>User ID</label>
 		                                    
-		                                    <input type="text" class="form-control" id="id" name="id" placeholder="아이디입력 *" <c:if test="${param.duplication != 'id'}">value="${member.getMemberId}"</c:if>>
+		                                    <input type="text" class="form-control" id="id" name="id" placeholder="아이디입력 *" <c:if test="${param.duplication != 'id'}">value="${member.getMemberId()}"</c:if>>
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="password">Password</label>
@@ -152,7 +152,7 @@
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="nickname">Nick name</label>
-		                                    <input type="text" class="form-control" placeholder="닉네임 *" id="nickname" name="nickname" <c:if test="${param.duplication != 'nickname'}">value="${member.getMemberNickname()}""</c:if>>
+		                                    <input type="text" class="form-control" placeholder="닉네임 *" id="nickname" name="nickname" <c:if test="${param.duplication != 'nickname'}">value="${member.getMemberNickname()}"</c:if>>
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="phone">Phone</label>
