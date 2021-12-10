@@ -59,6 +59,21 @@ $(document).ready(function () {
     $("#wizard-picture").change(function () {
         readURL(this);
     });
+    
+    // Prepare the preview for profile picture
+    $("#wizard-picture2").change(function () {
+        readURL2(this);
+    });
+    
+    // Prepare the preview for profile picture
+    $("#wizard-picture3").change(function () {
+        readURL3(this);
+    });
+    
+    // Prepare the preview for profile picture
+    $("#wizard-picture4").change(function () {
+        readURL4(this);
+    });
 
     $('[data-toggle="wizard-radio"]').click(function () {
         wizard = $(this).closest('.wizard-card');
@@ -184,6 +199,39 @@ function readURL(input) {
 
         reader.onload = function (e) {
             $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function readURL2(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#wizardPicturePreview2').attr('src', e.target.result).fadeIn('slow');
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function readURL3(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#wizardPicturePreview3').attr('src', e.target.result).fadeIn('slow');
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function readURL4(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#wizardPicturePreview4').attr('src', e.target.result).fadeIn('slow');
         }
         reader.readAsDataURL(input.files[0]);
     }
