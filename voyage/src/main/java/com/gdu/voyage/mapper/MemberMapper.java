@@ -8,5 +8,5 @@ import com.gdu.voyage.vo.Member;
 @Mapper
 public interface MemberMapper {
 	void insertMemberAddress(Address address);
-	void insertMember(Member mbmMember);
+	void insertMember(Member member);
 }

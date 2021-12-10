@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.MemberMapper">
-	<insert id="insertMemberAddress">
+	<insert id="insertMemberAddress" parameterType="com.gdu.voyage.vo.Address" useGeneratedKeys="true" keyProperty="addressNo" keyColumn="address_no">
 		INSERT INTO address(address_postal_code,address_zip,address_detail) VALUES(addressPostalCode,addressZip,addressDetail);
 	</insert>
 	
