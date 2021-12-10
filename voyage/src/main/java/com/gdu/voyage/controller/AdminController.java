@@ -11,4 +11,14 @@ public class AdminController {
       
       return "templates_admin/adminIndex";
    }
+
+@Controller
+public class productManagementController {
+   @GetMapping("/productManagement")
+   public String management() {
+      System.out.println("ProductManagement() 실행");
+      
+      return "templates_admin/productManagement";
+   		}
+	}
 }
