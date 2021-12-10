@@ -20,5 +20,5 @@ public class Activity {
 	private String activityStateAdmin;
 	private String createDate;
 	private String updateDate;
-	
+
 }

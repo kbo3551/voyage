@@ -7,4 +7,5 @@ import com.gdu.voyage.vo.Activity;
 
 public interface ActivityMapper {
 	List<Activity> selectActivityList(Map<String, Object> param);
+	
 }

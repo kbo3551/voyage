@@ -14,4 +14,5 @@ public class AccomRoom {
 	private String accomRoomState;
 	private String createDate;
 	private String updateDate;
+	
 }
