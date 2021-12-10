@@ -85,7 +85,7 @@ public class MemberController {
         // 디버그
         log.trace("★controller★"+addr.toString());
         
-        // 주소 삽입.
+        // 주소 삽입
 	    memberService.addMemberAddress(addr);
 	    
 	    return "redirect:/login";
