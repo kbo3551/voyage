@@ -6,6 +6,37 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Directory HTML-5 Template </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+        	$(document).ready(function(){
+        		// 이미지 추가 버튼 눌렀을 때
+        		$('#addImgBtn').click(function(){
+        			let html = '<div><input type="file" name="qnaImg" class="qnaImg"></div>';
+        			$('#Imginput').append(html);
+        		});
+        		// 이미지 삭제 버튼 눌렀을 때
+        		$('removeImgBtn').click(function(){
+        			$('#Imginput').children().last().remove();
+        		});
+        		
+        		$('#sendQBtn').click(function(){
+        			let ck = true;
+        			$('.QnaImg').each(function(index, item){
+        				console.log($(item).val());
+        				if($(item).val() == ''){
+        					ck = false;	
+        				}
+        			});
+        			if(ck == false){
+        				alert('이미지 파일을 선택해주세요');
+        			} else {
+        				$('#addQForm').submit();
+        			}
+        		});
+        	});
+        	
+        	
+        </script>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- <link rel="manifest" href="site.webmanifest"> -->
@@ -140,7 +171,7 @@
                     	<!-- 원본 : Massage -->
                         <h3 class="mb-40">Question</h3>
                         <!-- Form -->
-                        <form class="form-contact contact_form mb-80" action="qnaList.jsp" method="post">
+                        <form class="form-contact contact_form mb-80" enctype="multipart/form-data" action="${pageContext.request.contextPath}/addQ" method="post" id="addQForm">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
@@ -148,18 +179,21 @@
                                     		원본 : <input class="form-control error" name="name" id="name" type="text"  placeholder="Your Name">
                                     	 -->
                                     	 <input class="form-control error" name="memberNickname" id="memberNickname" type="text" placeholder="닉네임을 입력해주세요">
-                                    </div>
+                                    .</div>
                                 </div>
                                 <div>
                                 </div>
+                                <div>
+                                	 <select name="selectAdd">
+	                                    <option value="">전체</option>
+	                                    <option value="">예약</option>
+	                                    <option value="">결제</option>
+	                                    <option value="">기타</option>
+									</select>
+                                </div>
                                 <div class="col-sm-6">	
                                     <div class="form-group">
-                                    	<select name="selectAdd">
-	                                    	<option value="">전체</option>
-	                                    	<option value="">예약</option>
-	                                    	<option value="">결제</option>
-	                                    	<option value="">기타</option>
-										</select>
+                                    	
 	                                    <!-- 
 	                                    	원본 : <input class="form-control error" name="email" id="email" type="email" placeholder = "Enter email address">
 	                                    -->
@@ -171,10 +205,16 @@
                                         <textarea class="form-control w-100 error" name="qnaContent" id="qnaContent" cols="30" rows="9" placeholder="내용을 상세히 입력해주세요. 1) 정확한 날짜와 시간  2) 사진이나 이미지 첨부  3) 상세한 상황 설명 "></textarea>
                                     </div>
                                 </div>
+                                <div>파일 첨부</div>
+                                <div>
+                                	<button type="button" id="addImgBtn">이미지 추가</button>
+                                	<button type="button" id="removeImgBtn">이미지 삭제</button>
+                                </div>
+                                <div id="Imginput"></div>
                             </div>
                             <div class="form-group mt-3">
                             	<!-- 원본 버튼 : Send  -->
-                                <button type="submit" class="button button-contactForm boxed-btn">Send</button>
+                                <button type="submit" id="sendQBtn" class="button button-contactForm boxed-btn">Send</button>
                             </div>
                         </form>
                     </div>
