@@ -68,15 +68,13 @@ public class MemberController {
 	    String duplCheck = memberService.duplMemberCheck(m);
 	    if(duplCheck.equals("아이디중복")) {
 	    	model.addAttribute("member", m);
-	    	model.addAttribute("address", addr);
 	    	return "addMember?duplication=id";
 	    }
 	    if(duplCheck.equals("닉네임중복")) {
 	    	model.addAttribute("member", m);
-	    	model.addAttribute("address", addr);
 	    	return "addMember?duplication=nickname";
 	    }
-
+	    
         
 	    //디버그
         log.trace("★controller★"+addr.toString());

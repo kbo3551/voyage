@@ -116,11 +116,22 @@
 		                        <div class="col-md-12 col-xs-12 login-blocks">
 		                            <h2>Sign up</h2> 
 		                            <br>
-		                            <br>
+		                            <c:choose>
+		                            	<c:when test="${param.duplication == 'id'}">
+		                            		<p style="color: red; font-weight: bold;">이미 사용중인 아이디입니다.</p>
+		                            	</c:when>
+		                            	<c:when test="${param.duplication == 'nickname'}">
+		                            		<p style="color: red; font-weight: bold;">이미 사용중인 닉네임입니다.</p>
+		                            	</c:when>
+		                            	<c:otherwise>
+		                            		<br>
+		                            	</c:otherwise>
+		                            </c:choose>
+		                            
                                 	<form name="AddMember" action="${pageContext.request.contextPath}/addMember" method="post">
                                 		<div class="form-group">
 		                                    <label for=id>User ID</label>
-		                                    <input type="text" class="form-control" id="id" placeholder="아이디입력 *">
+		                                    <input type="text" class="form-control" id="id" placeholder="아이디입력 *" value="${member.memberId}">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="password">Password</label>
@@ -132,23 +143,23 @@
 		                                </div>
 										<div class="form-group">
 		                                    <label for="firstname">First name</label>
-		                                    <input type="text" class="form-control" placeholder="성 *" id="firstname">
+		                                    <input type="text" class="form-control" placeholder="성 *" id="firstname" value="${member.memberFirstName()}">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="lastname">Last name</label>
-		                                    <input type="text" class="form-control" placeholder="이름 *" id="lastname">
+		                                    <input type="text" class="form-control" placeholder="이름 *" id="lastname" value="${member.memberLastName()}">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="nickname">Nick name</label>
-		                                    <input type="text" class="form-control" placeholder="닉네임 *" id="nickname">
+		                                    <input type="text" class="form-control" placeholder="닉네임 *" id="nickname" value="${member.memberNickname()}">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="phone">Phone</label>
-		                                    <input type="tel" class="form-control" placeholder="전화번호 ( - 빼고 입력해주세요) *" id="phone">
+		                                    <input type="tel" class="form-control" placeholder="전화번호 ( - 빼고 입력해주세요) *" id="phone" value="${member.memberPhone()}">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="email">Email</label>
-		                                    <input type="email" class="form-control" placeholder="이메일 *" id="email">
+		                                    <input type="email" class="form-control" placeholder="이메일 *" id="email" value="${member.memberEmail()}">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="socialsecuritynumber">주민등록번호</label>
@@ -176,7 +187,7 @@
    
 		                                <div class="form-group">
 		                                    <label for="description">Description</label>
-		                                    <textarea class="form-control" id="description" placeholder="자기소개를 적어주세요"></textarea>
+		                                    <textarea class="form-control" id="description" placeholder="자기소개를 적어주세요">${member.memberDescription()}</textarea>
 		                                </div>
 		                                <div class="text-center">
 	                                   		<button type="button" class="btn" style="background: rgb(0,172,238);
