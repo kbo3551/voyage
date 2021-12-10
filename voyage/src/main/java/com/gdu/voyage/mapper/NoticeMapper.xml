@@ -4,7 +4,7 @@
 
 	<select id="selectNoticeList">
 		SELECT 
-		notice_no, admin_id, notice_title, create_date, update_date
+		notice_no, admin_id, notice_title, notice_view_cnt, create_date, update_date
 		FROM notice 
 		ORDER BY 
 		notice_top='Y' DESC, update_date DESC
