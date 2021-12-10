@@ -13,13 +13,13 @@ import com.gdu.voyage.service.HashtagService;
 public class HashtagController {
 	@Autowired HashtagService hashtagService;
 	
-	@GetMapping("/banner")
+	@GetMapping("/hashtag")
 	public String hashtag(Model model) {
 		System.out.println("IndexController().hashtag 실행");
 		
 		Map<String, Object> map = hashtagService.getHashtagList();
 		model.addAttribute("hashtagList", map.get("hashtagList"));
 		
-		return "banner";
+		return "hashtag";
 	}
 }

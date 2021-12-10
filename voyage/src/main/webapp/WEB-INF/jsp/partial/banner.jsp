@@ -13,7 +13,7 @@
 	width: 120%;
 	height: auto;
 	left: -20%;
-	top: -0%;
+	top: -1000%;
 	border-radius: 0 0 20px 20px;
 	z-index: 100;
 }
@@ -71,10 +71,7 @@
                                     
 								    <div id="hashtag">
 								    	<div>
-<%-- 								    		<jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/hashtag.jsp"></jsp:include> --%>
-<%-- 								    		<c:forEach items="${hashtagList }" var="hashtag"> --%>
-<%-- 												<button>${hashtag.hashtag }</button> --%>
-<%-- 											</c:forEach> --%>
+											<c:import url="/hashtag"></c:import>
 								    	</div>
 								    </div>
 								    
@@ -98,7 +95,7 @@
     <script type="text/javascript">
     // 해시태그 메뉴 클릭 시 해시태그 창 나타남
     $('.hashtag').click(function(){
-		$('#hashtag').css('background-color','red');
+		$('#hashtag').css('background-color','white');
 		$('#hashtag').css('top','0%');
 	    var top = $('#hashtag').css('top');
 	    console.log('top' + top);
@@ -106,7 +103,7 @@
     
     // 해시태그 창 클릭 시 해시태그 창 사라짐
     $('#hashtag').click(function(){
-		$('#hashtag').css('background-color','red');
+		$('#hashtag').css('background-color','white');
 		$('#hashtag').css('top','-1000%');
 	    var top = $('#hashtag').css('top');
 	    console.log('top' + top);

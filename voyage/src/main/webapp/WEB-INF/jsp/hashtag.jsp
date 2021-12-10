@@ -9,12 +9,11 @@
 </head>
 <body>
 	<c:forEach items="${hashtagList }" var="hashtag">
-		<button>${hashtag.hashtag }</button>
+		<a href="#?hashtag=${hashtag.hashtag }">
+			<button style="background: rgb(0,172,238); background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);">
+				${hashtag.hashtag }
+			</button>
+		</a>
 	</c:forEach>
-	<h1>hasgtag1</h1>
-	<h1>hasgtag2</h1>
-	<h1>hasgtag3</h1>
-	<h1>hasgtag4</h1>
-	<h1>hasgtag5</h1>
 </body>
 </html>

@@ -24,10 +24,7 @@
     <link rel="stylesheet" href="assets/css/slick.css">
     <link rel="stylesheet" href="assets/css/nice-select.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    
-
 </head>
-
 
 <!-- 눈누 - 한산스네오 레귤러 폰트 -->
 <style type="text/css">
