@@ -3,14 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Directory HTML-5 Template </title>
+<title>회원가입</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="manifest" href="site.webmanifest">
 <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
 <!-- CSS here -->
@@ -56,6 +53,8 @@
 	.btn:before {
 		background: rgb(190,255,255);
 	}
+	
+	
 }
 </style>
 
@@ -121,71 +120,104 @@
 		                            <form action="" method="post">
 		                                <div class="form-group">
 		                                    <label for=id>User ID Check</label>
-		                                    <input type="text" class="form-control" id="idCheck">
+		                                    <div>
+		                                    	<input type="text" class="form-control" id="idCheck" placeholder="아이디입력">
+		                                   		<input type="button" class="btn" style="background: rgb(0,172,238);
+		                                   			   background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);"
+			                                    onclick="idCheck()" value="중복검사"> 
+		                                    </div>
+		                                            
 		                                </div>
-		                                <div class="text-center">
-                                   		<button type="submit" class="btn" style="background: rgb(0,172,238);
-                                   				background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);">
-                                   				 중복검사</button>         
-                                		</div>
-                                	</form>
+                                	</form> 
                                 	<form action="" method="post">
                                 		<div class="form-group">
 		                                    <label for=id>User ID</label>
-		                                    <input type="text" class="form-control" id="id" disabled="disabled">
+		                                    <input type="text" class="form-control" id="id" placeholder="체크한 아이디가 이곳에 들어옵니다." disabled="disabled">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="password">Password</label>
-		                                    <input type="password" class="form-control" id="password">
+		                                    <input type="password" class="form-control" placeholder="패스워드" id="password">
 		                                </div>
 										<div class="form-group">
 		                                    <label for="firstname">First name</label>
-		                                    <input type="text" class="form-control" id="firstname">
+		                                    <input type="text" class="form-control" placeholder="성" id="firstname">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="lastname">Last name</label>
-		                                    <input type="text" class="form-control" id="lastname">
+		                                    <input type="text" class="form-control" placeholder="이름" id="lastname">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="nickname">Nick name</label>
-		                                    <input type="text" class="form-control" id="nickname">
+		                                    <input type="text" class="form-control" placeholder="닉네임" id="nickname">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="phone">Phone</label>
-		                                    <input type="tel" class="form-control" id="phone">
+		                                    <input type="tel" class="form-control" placeholder="전화번호 ( - 빼고 입력해주세요)" id="phone">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="email">Email</label>
-		                                    <input type="email" class="form-control" id="email">
+		                                    <input type="email" class="form-control" placeholder="이메일" id="email">
 		                                </div>
 		                                <div class="form-group">
-		                                    <label for="socialsecuritynumber">Social Security Number</label>
-		                                    <input type="text" class="form-control" id="socialsecuritynumber">
+		                                    <label for="socialsecuritynumber">주민등록번호</label>
+		                                    <div>
+		                                    	<input type="password" class="form-control" placeholder="주민등록번호 ( - 빼고 입력해주세요)" id="socialsecuritynumber">
+		                                    </div>
+		                                    
+		                                    
 		                                </div>
 		                                <div class="form-group">
-		                                    <label for="address">Address</label>
-		                                    <input type="url" class="form-control" id="address" disabled="disabled">
+		                                    <label for="address">Post Code</label>
+		                                    <input type="button" class="btn" style="background: rgb(0,172,238);
+	                                   			   background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);"
+		                                    onclick="execDaumPostcode()" value="우편번호">
+		                                    <input type="text" class="form-control" id="postalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요" disabled="disabled">
+		                                    <input type="text" class="form-control" id="roadAddress" placeholder="도로명주소가 입력됩니다." disabled="disabled">
+		                                    <input type="text" class="form-control" id="detailAddress" placeholder="상세주소">
 		                                </div>
-		                                <div class="text-center">
-			                                <button type="submit" class="btn" style="background: rgb(0,172,238);
-	                                   				background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);">
-	                                   				 주소확인</button>  
-                                   		</div>     
-                                   		<div class="form-group">
-		                                    <label for="socialsecuritynumber">Address2</label>
-		                                    <input type="text" class="form-control" id="address2">
-		                                </div>  
+   
 		                                <div class="form-group">
 		                                    <label for="description">Description</label>
 		                                    <textarea class="form-control" id="description"></textarea>
 		                                </div>
 		                                <div class="text-center">
-	                                   		<button type="submit" class="btn" style="background: rgb(0,172,238);
-	                                   				background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);">
+	                                   		<button type="button" class="btn" style="background: rgb(0,172,238);
+	                                   				background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(138,212,3,1) 100%);">
 	                                   				 회원가입</button>         
                                 		</div>
 		                            </form>
 		                            <br>
+		                            <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		                            <script>
+			                            function execDaumPostcode() {
+			                                new daum.Postcode({
+			                                    oncomplete: function(data) {
+			                                        // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+			                                        // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+			                                        var roadAddr = data.roadAddress; // 도로명 주소 변수
+			                                        var extraRoadAddr = ''; // 참고 항목 변수
+	
+			                                        // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+			                                        // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+			                                        if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+			                                            extraRoadAddr += data.bname;
+			                                        }
+			                                        // 건물명이 있고, 공동주택일 경우 추가한다.
+			                                        if(data.buildingName !== '' && data.apartment === 'Y'){
+			                                           extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+			                                        }
+			                                        // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+			                                        if(extraRoadAddr !== ''){
+			                                            extraRoadAddr = ' (' + extraRoadAddr + ')';
+			                                        }
+	
+			                                        // 우편번호와 주소 정보를 해당 필드에 넣는다.
+			                                        document.getElementById('postalCode').value = data.zonecode;
+			                                        document.getElementById("roadAddress").value = roadAddr;
+			                                    }
+			                                }).open();
+			                            }
+		                            </script>
 		                            
 		                        </div> 
 		                    </div>
