@@ -9,7 +9,6 @@
 		ORDER BY 
 		notice_top='Y' DESC, update_date DESC
 	</select>
-	<!-- 
 	<select id="selectNoticeFileList" resultType="com.gdu.voyage.vo.NoticeFile">
 			SELECT
 				notice_no noticedNo,
@@ -17,7 +16,7 @@
 				notice_file_ext fileExt
 			FROM
 				noticefile
-	</select> -->
+	</select> 
 	<!-- 공지사항 insert -->
 	<insert id="inserNotice" parameterType="com.gdu.voyage.vo.Notice">
 	   	INSERT INTO notice(

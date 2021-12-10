@@ -1,6 +1,9 @@
 package com.gdu.voyage.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,11 +43,26 @@ public class NoticeService {
 		NoticeFile noticefile = new NoticeFile();
 		noticefile.setNoticeNo(notice.getNoticeNo());
 		
-	/*	String originName = file.getOriginalFilename();
-		int p = originName.lastIndexOf(".");
-
-
-	*/
+		String fileName = UUID.randomUUID().toString();
+		noticefile.setNoticeFileName(fileName);
+		
+		
+		String originName = ((MultipartFile) file).getOriginalFilename();// 원본이름
+		int p = originName.lastIndexOf(".");	// .의 위치
+		String fileExt = originName.substring(p+1);
+		noticefile.setNoticeFileExt(fileExt); // 뒤에서 .까지
+		noticefile.setNoticeFileSize(file.size());
+		noticeMapper.insertNoticefile(noticefile);
+		// 파일 저장 
+		File f = new File(""+fileName+"."+fileExt); // 경로 아직 공백...
+		try {
+			((MultipartFile) file).transferTo(f);
+		} catch (IllegalStateException | IOException e) { /*IllegalStateException, IOException는 예외처리를 꼭 해야하는데 
+															RuntimeException을 사용해 예외 처리가 필요없는 예외를 던져서 처리*/
+			// TODO Auto-generated catch block
+			e.printStackTrace();	
+			throw new RuntimeException();// @Transactional이 구동되기 위해선 예외가 발생해야함
+			}
 		}
 	}
 }
