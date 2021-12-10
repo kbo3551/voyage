@@ -8,5 +8,5 @@ public class AccomBuildingImage {
 	private int accomBuildingNo;
 	private String accomBuildingImageName;
 	private String accomBuildingImageExt;
-	private String accomBuildingImageSize;
+	private long accomBuildingImageSize;
 }

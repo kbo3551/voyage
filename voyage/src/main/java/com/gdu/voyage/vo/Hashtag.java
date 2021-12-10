@@ -6,7 +6,7 @@ import lombok.Data;
 public class Hashtag {
 	private int hashtagNo;
 	private int idenNo;
-	private String tabe;
+	private String table;
 	private String hashtag;
 	private String createDate;
 }

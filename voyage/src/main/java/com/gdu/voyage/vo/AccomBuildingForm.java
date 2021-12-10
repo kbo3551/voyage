@@ -10,7 +10,7 @@ import lombok.Data;
 public class AccomBuildingForm {
 	private AccomBuilding accomBuilding;
 	private List<MultipartFile> AccomBuildingImage;
-	private List<AccomBuildingFacility> accomBuildingFacilityList;
-	private List<AccomBuildingSpot> accomBuildingSpotList;
-	private List<Hashtag> hashtagList;
+	private List<AccomBuildingFacility> accomBuildingFacility;
+	private List<AccomBuildingSpot> accomBuildingSpot;
+	private List<Hashtag> hashtag;
 }
