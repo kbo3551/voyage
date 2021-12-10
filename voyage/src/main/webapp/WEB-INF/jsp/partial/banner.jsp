@@ -35,7 +35,7 @@
                                                 </ul>
                                             </li>
                                             <li><a href="${pageContext.request.contextPath}/hashtag">해시태그</a></li>
-										 <li><a href="#">후기</a>
+										 <li><a href="${pageContext.request.contextPath}/setReviewCategory">후기</a>
                                                 <ul class="submenu">
                                                     <li><a href="${pageContext.request.contextPath}/getActivityReviewList">체험</a></li>
                                                     <li><a href="${pageContext.request.contextPath}/getAccomReviewList">숙소</a></li>
@@ -48,7 +48,7 @@
                                                 </ul>
                                             </li>
                                            			
-                                            <li><a href="#"><i class="ti-user">사용자</i></a>
+                                            <li><a href="${pageContext.request.contextPath}/login"><i class="ti-user">사용자</i></a>
                                            			<ul class="submenu">
                                             <li><a href="${pageContext.request.contextPath}/login">로그인</a></li>
                                                     <li><a href="${pageContext.request.contextPath}/addMember">회원가입</a></li>
