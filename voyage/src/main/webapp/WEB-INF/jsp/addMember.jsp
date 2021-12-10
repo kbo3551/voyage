@@ -116,10 +116,23 @@
 		                    <div class="box-for overflow">                         
 		                        <div class="col-md-12 col-xs-12 login-blocks">
 		                            <h2>Sign up</h2> 
+		                            <br>
+		                            <br>
 		                            <form action="" method="post">
 		                                <div class="form-group">
+		                                    <label for=id>User ID Check</label>
+		                                    <input type="text" class="form-control" id="idCheck">
+		                                </div>
+		                                <div class="text-center">
+                                   		<button type="submit" class="btn" style="background: rgb(0,172,238);
+                                   				background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);">
+                                   				 중복검사</button>         
+                                		</div>
+                                	</form>
+                                	<form action="" method="post">
+                                		<div class="form-group">
 		                                    <label for=id>User ID</label>
-		                                    <input type="text" class="form-control" id="id">
+		                                    <input type="text" class="form-control" id="id" disabled="disabled">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="password">Password</label>
@@ -151,16 +164,26 @@
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="address">Address</label>
-		                                    <input type="url" class="form-control" id="address">
+		                                    <input type="url" class="form-control" id="address" disabled="disabled">
 		                                </div>
+		                                <div class="text-center">
+			                                <button type="submit" class="btn" style="background: rgb(0,172,238);
+	                                   				background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);">
+	                                   				 주소확인</button>  
+                                   		</div>     
+                                   		<div class="form-group">
+		                                    <label for="socialsecuritynumber">Address2</label>
+		                                    <input type="text" class="form-control" id="address2">
+		                                </div>  
 		                                <div class="form-group">
 		                                    <label for="description">Description</label>
 		                                    <textarea class="form-control" id="description"></textarea>
 		                                </div>
 		                                <div class="text-center">
-                                   		<button type="submit" class="btn" style="background: rgb(0,172,238);
-                                   				background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);"> sign up</button>         
-                                </div>
+	                                   		<button type="submit" class="btn" style="background: rgb(0,172,238);
+	                                   				background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);">
+	                                   				 회원가입</button>         
+                                		</div>
 		                            </form>
 		                            <br>
 		                            
