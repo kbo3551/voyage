@@ -11,4 +11,10 @@ public class QnaController {
 	      
 		return "/templates_citylisting/qnaList";
 	}
+	@GetMapping("/getQnaOne") // Qna 상세 내용
+	public String getQnaOne() {
+		System.out.println("getQnaOneController() 실행");
+	      
+		return "/templates_citylisting/getQnaOne";
+	}
 }
