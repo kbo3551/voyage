@@ -1,5 +1,7 @@
 package com.gdu.voyage.vo;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -12,4 +14,7 @@ public class Notice {
 	private int noticeViewCnt;
 	private String createDate;
 	private String updateDate;
+	
+	// 공지사항 - 파일
+	private List<NoticeFile> noticeFileList;
 }
