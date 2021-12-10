@@ -137,6 +137,7 @@
 		                                <div class="form-group">
 		                                    <label for="password">Password</label>
 		                                    <input type="password" class="form-control" placeholder="패스워드" id="password">
+		                                    <input type="password" class="form-control" placeholder="패스워드확인" id="password2">
 		                                </div>
 										<div class="form-group">
 		                                    <label for="firstname">First name</label>
@@ -178,7 +179,7 @@
    
 		                                <div class="form-group">
 		                                    <label for="description">Description</label>
-		                                    <textarea class="form-control" id="description"></textarea>
+		                                    <textarea class="form-control" id="description">안녕하세요.</textarea>
 		                                </div>
 		                                <div class="text-center">
 	                                   		<button type="button" class="btn" style="background: rgb(0,172,238);
