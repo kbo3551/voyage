@@ -155,7 +155,7 @@
 		                                    <div>
 		                                    	<input type="password" class="form-control" placeholder="주민등록번호 ( - 빼고 입력해주세요) *" id="socialsecuritynumber">
 		                                    </div>
-		                                    
+		                                   
 		                                    
 		                                </div>
 		                                <div class="form-group">
