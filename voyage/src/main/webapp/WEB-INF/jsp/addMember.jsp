@@ -117,55 +117,43 @@
 		                            <h2>Sign up</h2> 
 		                            <br>
 		                            <br>
-		                            <form action="" method="post">
-		                                <div class="form-group">
-		                                    <label for=id>User ID Check</label>
-		                                    <div>
-		                                    	<input type="text" class="form-control" id="idCheck" placeholder="아이디입력">
-		                                   		<input type="button" class="btn" style="background: rgb(0,172,238);
-		                                   			   background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);"
-			                                    onclick="idCheck()" value="중복검사"> 
-		                                    </div>
-		                                            
-		                                </div>
-                                	</form> 
-                                	<form action="" method="post">
+                                	<form name="AddMember" action="${pageContext.request.contextPath}/addMember" method="post">
                                 		<div class="form-group">
 		                                    <label for=id>User ID</label>
-		                                    <input type="text" class="form-control" id="id" placeholder="체크한 아이디가 이곳에 들어옵니다." disabled="disabled">
+		                                    <input type="text" class="form-control" id="id" placeholder="아이디입력 *">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="password">Password</label>
-		                                    <input type="password" class="form-control" placeholder="패스워드" id="password">
+		                                    <input type="password" class="form-control" placeholder="패스워드 *" id="password">
 		                               	</div>
 		                               	<div class="form-group">
 		                               		<br>  
-		                                    <input type="password" class="form-control" placeholder="패스워드확인" id="password2">
+		                                    <input type="password" class="form-control" placeholder="패스워드확인 *" id="password2">
 		                                </div>
 										<div class="form-group">
 		                                    <label for="firstname">First name</label>
-		                                    <input type="text" class="form-control" placeholder="성" id="firstname">
+		                                    <input type="text" class="form-control" placeholder="성 *" id="firstname">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="lastname">Last name</label>
-		                                    <input type="text" class="form-control" placeholder="이름" id="lastname">
+		                                    <input type="text" class="form-control" placeholder="이름 *" id="lastname">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="nickname">Nick name</label>
-		                                    <input type="text" class="form-control" placeholder="닉네임" id="nickname">
+		                                    <input type="text" class="form-control" placeholder="닉네임 *" id="nickname">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="phone">Phone</label>
-		                                    <input type="tel" class="form-control" placeholder="전화번호 ( - 빼고 입력해주세요)" id="phone">
+		                                    <input type="tel" class="form-control" placeholder="전화번호 ( - 빼고 입력해주세요) *" id="phone">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="email">Email</label>
-		                                    <input type="email" class="form-control" placeholder="이메일" id="email">
+		                                    <input type="email" class="form-control" placeholder="이메일 *" id="email">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="socialsecuritynumber">주민등록번호</label>
 		                                    <div>
-		                                    	<input type="password" class="form-control" placeholder="주민등록번호 ( - 빼고 입력해주세요)" id="socialsecuritynumber">
+		                                    	<input type="password" class="form-control" placeholder="주민등록번호 ( - 빼고 입력해주세요) *" id="socialsecuritynumber">
 		                                    </div>
 		                                    
 		                                    
@@ -175,7 +163,7 @@
 		                                    <input type="button" class="btn" style="background: rgb(0,172,238);
 	                                   			   background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);"
 		                                    onclick="execDaumPostcode()" value="우편번호">
-		                                    <input type="text" class="form-control" id="postalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요" disabled="disabled">
+		                                    <input type="text" class="form-control" id="postalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" disabled="disabled">
 		                               	</div>
 		                              	<div class="form-group">
 		                               		<br>  
@@ -188,17 +176,19 @@
    
 		                                <div class="form-group">
 		                                    <label for="description">Description</label>
-		                                    <textarea class="form-control" id="description">안녕하세요.</textarea>
+		                                    <textarea class="form-control" id="description" placeholder="자기소개를 적어주세요"></textarea>
 		                                </div>
 		                                <div class="text-center">
 	                                   		<button type="button" class="btn" style="background: rgb(0,172,238);
-	                                   				background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(138,212,3,1) 100%);">
-	                                   				 회원가입</button>         
+	                               				background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(138,212,3,1) 100%);
+	                                			" onclick="addMember()">회원가입
+                                			</button>         
                                 		</div>
 		                            </form>
 		                            <br>
 		                            <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		                            <script>
+		                            	// 다음(카카오) 주소 api
 			                            function execDaumPostcode() {
 			                                new daum.Postcode({
 			                                    oncomplete: function(data) {
@@ -227,6 +217,46 @@
 			                                    }
 			                                }).open();
 			                            }
+			                            
+			                            // 유효성 검사
+			                            function addMember(){
+											if($("#id").val() == ""){
+												alert('ID를 입력해주세요.');
+												return;
+											} else if($("#password").val() == ""){
+												alert('패스워드를 입력해주세요.');
+												return;
+											} else if($("#password2").val() == ""){
+												alert('패스워드 확인란을 입력해주세요.');
+												return;
+											} else if(!($("#password").val() == $("#password2").val())){
+												alert('PW 값이 동일하지 않습니다.');
+												return;
+											} else if($("#firstname").val() == ""){
+												alert('성을 입력해주세요');
+												return;
+											} else if($("#lastname").val() == ""){
+												alert('이름을 입력해주세요');
+												return;
+											} else if($("#nickname").val() == ""){
+												alert('닉네임을 입력해주세요');
+												return;
+											} else if($("#phone").val() == ""){
+												alert('전화번호를 입력해주세요');
+												return;
+											} else if($("#email").val() == ""){
+												alert('이메일 주소를 입력해주세요');
+												return;
+											} else if($("#socialsecuritynumber").val() == ""){
+												alert('주민등록번호를 입력해주세요');
+												return;
+											} else if($("#postalCode").val() == ""){
+												alert('우편번호를 입력해주세요');
+												return;
+											} else {
+												AddMember.submit();
+											}
+										};
 		                            </script>
 		                            
 		                        </div> 
