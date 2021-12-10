@@ -131,7 +131,8 @@
                                 	<form name="AddMember" action="${pageContext.request.contextPath}/addMember" method="post">
                                 		<div class="form-group">
 		                                    <label for=id>User ID</label>
-		                                    <input type="text" class="form-control" id="id" placeholder="아이디입력 *" value="${member.memberId}">
+		                                    
+		                                    <input type="text" class="form-control" id="id" placeholder="아이디입력 *" <c:if test="${param.duplication != 'id'}">value="${member.memberId}"</c:if>>
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="password">Password</label>
@@ -151,7 +152,7 @@
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="nickname">Nick name</label>
-		                                    <input type="text" class="form-control" placeholder="닉네임 *" id="nickname" value="${member.memberNickname()}">
+		                                    <input type="text" class="form-control" placeholder="닉네임 *" id="nickname" <c:if test="${param.duplication != 'nickname'}">value="${member.memberNickname()}""</c:if>>
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="phone">Phone</label>
