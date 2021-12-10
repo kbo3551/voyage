@@ -129,7 +129,7 @@
 		                            </c:choose>
 		                             
                                 	<form name="AddMember" action="${pageContext.request.contextPath}/addMember" method="post">
-                                		<div class="form-group">
+                                		<div class="form-group"> 
 		                                    <label for=id>User ID</label>
 		                                    
 		                                    <input type="text" class="form-control" id="id" name="id" placeholder="아이디입력 *" <c:if test="${param.duplication != 'id'}">value="${member.getMemberId()}"</c:if>>
