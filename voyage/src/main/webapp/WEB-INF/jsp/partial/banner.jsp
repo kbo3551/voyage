@@ -7,7 +7,7 @@
 <title>배너</title>
 <style type="text/css">
 #hashtag {
-	background-color: white;
+	background-color: rgba(0, 0, 0, 0.5);
     position: absolute;
     transition: all .4s;
 	width: 120%;
@@ -16,6 +16,7 @@
 	top: -1000%;
 	border-radius: 0 0 20px 20px;
 	z-index: 100;
+	padding: 50px 100px;
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -68,16 +69,11 @@
                                                     <li><a href="${pageContext.request.contextPath}/addMember">회원가입</a></li>
                                                		</ul>
                                     </nav>
-                                    
 								    <div id="hashtag">
 								    	<div>
 											<c:import url="/hashtag"></c:import>
 								    	</div>
 								    </div>
-								    
-								    
-								    
-                                    
                                 </div>
                             </div>
                             <!-- Mobile Menu -->
@@ -95,7 +91,7 @@
     <script type="text/javascript">
     // 해시태그 메뉴 클릭 시 해시태그 창 나타남
     $('.hashtag').click(function(){
-		$('#hashtag').css('background-color','white');
+		$('#hashtag').css('background-color','rgba(0, 0, 0, 0.5)');
 		$('#hashtag').css('top','0%');
 	    var top = $('#hashtag').css('top');
 	    console.log('top' + top);
@@ -103,7 +99,7 @@
     
     // 해시태그 창 클릭 시 해시태그 창 사라짐
     $('#hashtag').click(function(){
-		$('#hashtag').css('background-color','white');
+		$('#hashtag').css('background-color','rgba(0, 0, 0, 0.5)');
 		$('#hashtag').css('top','-1000%');
 	    var top = $('#hashtag').css('top');
 	    console.log('top' + top);
