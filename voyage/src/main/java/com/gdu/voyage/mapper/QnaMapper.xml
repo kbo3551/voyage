@@ -3,6 +3,9 @@
 <mapper namespace="com.gdu.voyage.mapper.QnaMapper">
 	<!-- 질문 등록 -->
 	<insert id="addQ" parameterType="com.gdu.voyage.vo.Qna">
+		<selectKey resultType="int" keyProperty="qnaNo" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 		INSERT INTO qna(
 			member_nickname,
 			qna_category,

@@ -8,5 +8,5 @@ public class QnaImg {
 	private int qnaNo;
 	private String qnaImgName;
 	private String qnaImgExt;
-	private String qnaImgSize;
+	private long qnaImgSize;
 }

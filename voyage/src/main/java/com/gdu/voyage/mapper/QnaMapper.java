@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.gdu.voyage.vo.Qna;
+import com.gdu.voyage.vo.QnaImg;
 
 @Mapper
 public interface QnaMapper {
@@ -17,4 +18,8 @@ public interface QnaMapper {
 	int modifyQ(Qna qna);
 	// 질문 삭제
 	int removeQ(Qna qna);
+	// 이미지 파일
+	List<QnaImg> selectQnaImgList();
+	int addQuestion(Qna qna);
+	int addQImg(QnaImg qnaImg);
 }
