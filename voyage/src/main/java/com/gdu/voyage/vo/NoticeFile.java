@@ -8,6 +8,6 @@ public class NoticeFile {
 	private int noticeNo;
 	private String noticeFileName;
 	private String noticeFileExt;
-	private String noticeFileSize;
+	private long noticeFileSize;
 	
 }

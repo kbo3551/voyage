@@ -16,5 +16,6 @@ public class Notice {
 	private String updateDate;
 	
 	// 공지사항 - 파일
+	// 1 : N
 	private List<NoticeFile> noticeFileList;
 }

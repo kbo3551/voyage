@@ -118,8 +118,7 @@
 		                            <form action="" method="post">
 			                                	<label for="id">User ID</label>
 		                                <div class="form-group">
-			                                    <input type="text" class="form-control" id="id" style="float: left; width: 50px;">
-			                                    <button type="submit" class="btn" style="float: left; background: rgb(0,172,238); background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);"> Log in</button>
+			                                    <input type="text" class="form-control" id="id">
 		                                </div>
 		                                <div class="form-group" style="clear: both;">
 		                                    <label for="password">Password</label>

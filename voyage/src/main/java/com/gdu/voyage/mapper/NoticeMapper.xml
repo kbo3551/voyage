@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.NoticeMapper">
-
+	<!--공지사항 리스트 출력  -->
 	<select id="selectNoticeList">
 		SELECT 
 		notice_no, admin_id, notice_title, notice_view_cnt, create_date, update_date
@@ -9,16 +9,41 @@
 		ORDER BY 
 		notice_top='Y' DESC, update_date DESC
 	</select>
-
-	<insert id="inserNotice">
-		INSERT INTO notice() VALUES()
+	<!-- 
+	<select id="selectNoticeFileList" resultType="com.gdu.voyage.vo.NoticeFile">
+			SELECT
+				notice_no noticedNo,
+				notice_file_name fileName,
+				notice_file_ext fileExt
+			FROM
+				noticefile
+	</select> -->
+	<!-- 공지사항 insert -->
+	<insert id="inserNotice" parameterType="com.gdu.voyage.vo.Notice">
+	   	INSERT INTO notice(
+			admin_id,
+			notice_title,
+			notice_content,
+			create_date,
+			update_date
+		) VALUES(
+			#{adminId},
+			#{noticeTitle},
+			#{noticeContent},
+			Now(),
+			Now()
+		) 
 	</insert>
-
+	
+	
+	
+	<!-- 공지사항 delete -->
 	<delete id="deleteNotice">
 		DELETE FROM notice WHERE notice_no
 	</delete>
-	
+	<!-- 공지사항 update -->
 	<update id="updateNotice">
 		UPDATE notice SET *=* WHERE 
 	</update>
+	<!-- 공지사항 One(상세보기) -->
 </mapper>

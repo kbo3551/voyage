@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.voyage.mapper.QnaMapper">
+	<!-- 질문 등록 -->
+	<insert id="addQ" parameterType="com.gdu.voyage.vo.Qna">
+		INSERT INTO qna(
+			member_nickname,
+			qna_category,
+			qna_title,
+			qna_content,
+			qna_secret,
+			update_date,
+			create_date
+		) VALUES(
+			#{memberNickname},
+			#{qnaCategory},
+			#{qnaTitle},
+			#{qnaContent},
+			#{qnaSecret},
+			NOW(),
+			NOW()
+		)
+	</insert>
+	<!-- 질문 수정 -->
+	<update id="modifyQ" parameterType="com.gdu.voyage.vo.Qna">
+		
+	</update>
+	
+	<!-- 이미지 등록 -->
+	<insert id="addQImg" parameterType="com.gdu.voyage.vo.QnaImg">
+		INSERT INTO qna_image(
+			qna_no,
+			qna_image_name,
+			qna_image_ext,
+			qna_image_size
+		) VALUES (
+			#{qnaNo},
+			#{qnaImgName},
+			#{qnaImgExt},
+			#{qnaImgSize}
+		)
+	</insert>
+	
+</mapper>
