@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.MemberMapper">
-	<select id="selectMemberNickName" resultType="int">
+	<select id="selectMemberNickName" resultType="int" parameterType="String">
 		SELECT
-			member_nickname
+			count(member_nickname)
 		FROM
 			member
 		WHERE
-			member_nickname = ${memberId};
+			member_nickname = #{memberNickname};
 	</select>
 	
-	<select id="selectMemberId" resultType="int">
+	<select id="selectMemberId" resultType="int" parameterType="String">
 		SELECT
-			member_id
+			count(member_id)
 		FROM
 			member
 		WHERE
-			member_id = ${memberId};
+			member_id = #{memberId};
 	</select>
 
-	<insert id="insertMemberAddress" parameterType="com.gdu.voyage.vo.Address" useGeneratedKeys="true" keyProperty="addressNo" keyColumn="address_no">
+	<insert id="insertMemberAddress" parameterType="com.gdu.voyage.vo.MemberAddress">
 		INSERT INTO 
-			address(
-				address_postal_code,address_zip,address_detail
+			member_address(
+				member_id,member_address_postal_code,member_address_zip,member_address_detail
 				)
 		VALUES(
-			addressPostalCode,addressZip,addressDetail
+			#{memberId},#{memberAddressPostalCode},#{memberAddressZip},#{memberAddressDetail}
 			);
 	</insert>
 	
@@ -33,11 +33,11 @@
 		INSERT INTO
 			member(
 				member_id,member_pw,member_first_name,member_last_name,member_nickname,member_phone,
-				member_email,member_reg,address_no,member_description,member_level,member_active,create_date,update_date
+				member_email,member_reg,member_description,member_level,member_active,create_date,update_date
 				)
 		VALUES(
-			memberId,memberPw,memberFirstName,memberLastName,memberNickname,memberPhone,memberEmail,memberReg
-			addressNo,memberDescription,0,"활동",now(),now()
+			#{memberId},#{memberPw},#{memberFirstName},#{memberLastName},#{memberNickname},#{memberPhone},#{memberEmail},#{memberReg},
+			#{memberDescription},#{memberLevel},#{memberActive},NOW(),NOW()
 			);
 	</insert>
 
