@@ -117,11 +117,12 @@
 		                        <div class="col-md-12 col-xs-12 login-blocks">
 		                            <h2>Login</h2> 
 		                            <form action="" method="post">
+			                                	<label for="id">User ID</label>
 		                                <div class="form-group">
-		                                    <label for="id">User ID</label>
-		                                    <input type="text" class="form-control" id="id">
+			                                    <input type="text" class="form-control" id="id" style="float: left; width: 50px;">
+			                                    <button type="submit" class="btn" style="float: left; background: rgb(0,172,238); background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);"> Log in</button>
 		                                </div>
-		                                <div class="form-group">
+		                                <div class="form-group" style="clear: both;">
 		                                    <label for="password">Password</label>
 		                                    <input type="password" class="form-control" id="password">
 		                                </div>

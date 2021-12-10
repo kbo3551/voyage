@@ -62,7 +62,6 @@
     
     <c:import url="partial\\banner.jsp"/>
     
-    
     <main>
 
         <!-- Hero Area Start-->
@@ -503,7 +502,7 @@
     <div id="back-top" >
         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
     </div>
-
+    
 
     <!-- JS here -->
 		<!-- All JS Custom Plugins Link Here here -->
