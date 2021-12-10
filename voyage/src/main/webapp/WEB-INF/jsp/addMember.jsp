@@ -132,7 +132,7 @@
                                 		<div class="form-group">
 		                                    <label for=id>User ID</label>
 		                                    
-		                                    <input type="text" class="form-control" id="id" name="id" placeholder="아이디입력 *" <c:if test="${param.duplication != 'id'}">value="${member.memberId}"</c:if>>
+		                                    <input type="text" class="form-control" id="id" name="id" placeholder="아이디입력 *" <c:if test="${param.duplication != 'id'}">value="${member.getMemberId}"</c:if>>
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="password">Password</label>
@@ -144,23 +144,23 @@
 		                                </div>
 										<div class="form-group">
 		                                    <label for="firstname">First name</label>
-		                                    <input type="text" class="form-control" placeholder="성 *" id="firstname" name="firstname" value="${member.memberFirstName()}">
+		                                    <input type="text" class="form-control" placeholder="성 *" id="firstname" name="firstname" value="${member.getMemberFirstName()}">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="lastname">Last name</label>
-		                                    <input type="text" class="form-control" placeholder="이름 *" id="lastname" name="lastname" value="${member.memberLastName()}">
+		                                    <input type="text" class="form-control" placeholder="이름 *" id="lastname" name="lastname" value="${member.getMemberLastName()}">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="nickname">Nick name</label>
-		                                    <input type="text" class="form-control" placeholder="닉네임 *" id="nickname" name="nickname" <c:if test="${param.duplication != 'nickname'}">value="${member.memberNickname()}""</c:if>>
+		                                    <input type="text" class="form-control" placeholder="닉네임 *" id="nickname" name="nickname" <c:if test="${param.duplication != 'nickname'}">value="${member.getMemberNickname()}""</c:if>>
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="phone">Phone</label>
-		                                    <input type="tel" class="form-control" placeholder="전화번호 ( - 빼고 입력해주세요) *" id="phone" name="phone" value="${member.memberPhone()}">
+		                                    <input type="tel" class="form-control" placeholder="전화번호 ( - 빼고 입력해주세요) *" id="phone" name="phone" value="${member.getMemberPhone()}">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="email">Email</label>
-		                                    <input type="email" class="form-control" placeholder="이메일 *" id="email" name="email" value="${member.memberEmail()}">
+		                                    <input type="email" class="form-control" placeholder="이메일 *" id="email" name="email" value="${member.getMemberEmail()}">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="socialsecuritynumber">주민등록번호</label>
@@ -188,7 +188,7 @@
    
 		                                <div class="form-group">
 		                                    <label for="description">Description</label>
-		                                    <textarea class="form-control" id="description" name="description" placeholder="자기소개를 적어주세요">${member.memberDescription()}</textarea>
+		                                    <textarea class="form-control" id="description" name="description" placeholder="자기소개를 적어주세요">${member.getMemberDescription()}</textarea>
 		                                </div>
 		                                <div class="text-center">
 	                                   		<button type="button" class="btn" style="background: rgb(0,172,238);
