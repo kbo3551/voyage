@@ -5,6 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>배너</title>
+<style type="text/css">
+#hashtag {
+	background-color: white;
+    position: absolute;
+    transition: all .4s;
+	width: 120%;
+	height: auto;
+	left: -20%;
+	top: -1000%;
+	border-radius: 0 0 20px 20px;
+	z-index: 100;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
     <!-- Preloader Start -->
@@ -34,8 +48,8 @@
                                                     <li><a href="getAccomProduct">숙소</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="${pageContext.request.contextPath}/hashtag">해시태그</a></li>
-										 <li><a href="${pageContext.request.contextPath}/setReviewCategory">후기</a>
+                                            <li><a href="#hashtag" class="hashtag">해시태그</a></li>
+										 	<li><a href="${pageContext.request.contextPath}/setReviewCategory">후기</a>
                                                 <ul class="submenu">
                                                     <li><a href="${pageContext.request.contextPath}/getActivityReviewList">체험</a></li>
                                                     <li><a href="${pageContext.request.contextPath}/getAccomReviewList">숙소</a></li>
@@ -54,6 +68,16 @@
                                                     <li><a href="${pageContext.request.contextPath}/addMember">회원가입</a></li>
                                                		</ul>
                                     </nav>
+                                    
+								    <div id="hashtag">
+								    	<div>
+								    	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/hashtag.jsp"></jsp:include>
+								    	</div>
+								    </div>
+								    
+								    
+								    
+                                    
                                 </div>
                             </div>
                             <!-- Mobile Menu -->
@@ -67,5 +91,24 @@
        </div>
         <!-- Header End -->
     </header>
+    
+    <script type="text/javascript">
+    // 해시태그 메뉴 클릭 시 해시태그 창 나타남
+    $('.hashtag').click(function(){
+		$('#hashtag').css('background-color','red');
+		$('#hashtag').css('top','0%');
+	    var top = $('#hashtag').css('top');
+	    console.log('top' + top);
+	});
+    
+    // 해시태그 창 클릭 시 해시태그 창 사라짐
+    $('#hashtag').click(function(){
+		$('#hashtag').css('background-color','red');
+		$('#hashtag').css('top','-1000%');
+	    var top = $('#hashtag').css('top');
+	    console.log('top' + top);
+	});
+    </script>
+    
 </body>
 </html>

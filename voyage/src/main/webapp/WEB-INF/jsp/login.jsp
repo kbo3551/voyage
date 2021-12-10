@@ -116,11 +116,11 @@
 		                        <div class="col-md-12 col-xs-12 login-blocks">
 		                            <h2>Login</h2> 
 		                            <form action="" method="post">
+			                                	<label for="id">User ID</label>
 		                                <div class="form-group">
-		                                    <label for="id">User ID</label>
-		                                    <input type="text" class="form-control" id="id">
+			                                    <input type="text" class="form-control" id="id">
 		                                </div>
-		                                <div class="form-group">
+		                                <div class="form-group" style="clear: both;">
 		                                    <label for="password">Password</label>
 		                                    <input type="password" class="form-control" id="password">
 		                                </div>

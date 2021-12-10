@@ -25,4 +25,5 @@ public class IndexController {
 		
 		return "/templates_citylisting/getReviewAll";
 	}
+   
 }
