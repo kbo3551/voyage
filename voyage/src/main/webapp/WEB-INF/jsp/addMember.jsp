@@ -137,6 +137,9 @@
 		                                <div class="form-group">
 		                                    <label for="password">Password</label>
 		                                    <input type="password" class="form-control" placeholder="패스워드" id="password">
+		                               	</div>
+		                               	<div class="form-group">
+		                               		<br>  
 		                                    <input type="password" class="form-control" placeholder="패스워드확인" id="password2">
 		                                </div>
 										<div class="form-group">
@@ -173,7 +176,13 @@
 	                                   			   background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);"
 		                                    onclick="execDaumPostcode()" value="우편번호">
 		                                    <input type="text" class="form-control" id="postalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요" disabled="disabled">
+		                               	</div>
+		                              	<div class="form-group">
+		                               		<br>  
 		                                    <input type="text" class="form-control" id="roadAddress" placeholder="도로명주소가 입력됩니다." disabled="disabled">
+		                              	</div>
+		                              	<div class="form-group">
+		                              	 	<br>     
 		                                    <input type="text" class="form-control" id="detailAddress" placeholder="상세주소">
 		                                </div>
    
