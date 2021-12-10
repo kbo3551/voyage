@@ -15,15 +15,31 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberService {
 	private MemberMapper memberMapper;
 	
+	// 회원가입 중복검사
+	public String duplMemberCheck(Member member) {
+		log.trace("☆service☆"+member.toString());
+		int idCheck = memberMapper.selectMemberId(member.getMemberId());
+		if(idCheck == 1) {
+			return "아이디중복";
+		};
+		int nicknameCheck = memberMapper.selectMemberNickName(member.getMemberNickname());
+		if(nicknameCheck == 1) {
+			return "닉네임중복";
+		}
+		
+		return "중복없음";
+	}
+	
 	// 회원 주소 추가
 	public void addMemberAddress(Address address) {
-		log.trace(address.toString());
+		log.trace("☆service☆"+address.toString());
 		memberMapper.insertMemberAddress(address);
 		return;
 	}
 	
+	// 회원 추가
 	public void addMember(Member member) {
-		log.trace(member.toString());
+		log.trace("☆service☆"+member.toString());
 		memberMapper.insertMember(member);
 		return;
 	}
