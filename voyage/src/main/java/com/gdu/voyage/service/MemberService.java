@@ -29,7 +29,7 @@ public class MemberService {
 		
 		return "중복없음";
 	}
-	
+	 
 	// 회원 주소 추가
 	public void addMemberAddress(Address address) {
 		log.trace("☆service☆"+address.toString());

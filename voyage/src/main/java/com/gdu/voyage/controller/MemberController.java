@@ -75,7 +75,7 @@ public class MemberController {
 	    	return "addMember?duplication=nickname";
 	    }
 	    
-        
+         
 	    //디버그
         log.trace("★controller★"+addr.toString());
         log.trace("★controller★"+m.toString());
