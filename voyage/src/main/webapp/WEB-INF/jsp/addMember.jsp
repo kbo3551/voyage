@@ -132,11 +132,11 @@
                                 		<div class="form-group">
 		                                    <label for=id>User ID</label>
 		                                    
-		                                    <input type="text" class="form-control" id="id" placeholder="아이디입력 *" <c:if test="${param.duplication != 'id'}">value="${member.memberId}"</c:if>>
+		                                    <input type="text" class="form-control" id="id" name="id" placeholder="아이디입력 *" <c:if test="${param.duplication != 'id'}">value="${member.memberId}"</c:if>>
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="password">Password</label>
-		                                    <input type="password" class="form-control" placeholder="패스워드 *" id="password">
+		                                    <input type="password" class="form-control" placeholder="패스워드 *" id="password" name="password">
 		                               	</div>
 		                               	<div class="form-group">
 		                               		<br>  
@@ -144,28 +144,28 @@
 		                                </div>
 										<div class="form-group">
 		                                    <label for="firstname">First name</label>
-		                                    <input type="text" class="form-control" placeholder="성 *" id="firstname" value="${member.memberFirstName()}">
+		                                    <input type="text" class="form-control" placeholder="성 *" id="firstname" name="firstname" value="${member.memberFirstName()}">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="lastname">Last name</label>
-		                                    <input type="text" class="form-control" placeholder="이름 *" id="lastname" value="${member.memberLastName()}">
+		                                    <input type="text" class="form-control" placeholder="이름 *" id="lastname" name="lastname" value="${member.memberLastName()}">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="nickname">Nick name</label>
-		                                    <input type="text" class="form-control" placeholder="닉네임 *" id="nickname" <c:if test="${param.duplication != 'nickname'}">value="${member.memberNickname()}""</c:if>>
+		                                    <input type="text" class="form-control" placeholder="닉네임 *" id="nickname" name="nickname" <c:if test="${param.duplication != 'nickname'}">value="${member.memberNickname()}""</c:if>>
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="phone">Phone</label>
-		                                    <input type="tel" class="form-control" placeholder="전화번호 ( - 빼고 입력해주세요) *" id="phone" value="${member.memberPhone()}">
+		                                    <input type="tel" class="form-control" placeholder="전화번호 ( - 빼고 입력해주세요) *" id="phone" name="phone" value="${member.memberPhone()}">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="email">Email</label>
-		                                    <input type="email" class="form-control" placeholder="이메일 *" id="email" value="${member.memberEmail()}">
+		                                    <input type="email" class="form-control" placeholder="이메일 *" id="email" name="email" value="${member.memberEmail()}">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="socialsecuritynumber">주민등록번호</label>
 		                                    <div>
-		                                    	<input type="password" class="form-control" placeholder="주민등록번호 ( - 빼고 입력해주세요) *" id="socialsecuritynumber">
+		                                    	<input type="password" class="form-control" placeholder="주민등록번호 ( - 빼고 입력해주세요) *" id="socialsecuritynumber" name="socialsecuritynumber">
 		                                    </div>
 		                                   
 		                                    
@@ -175,20 +175,20 @@
 		                                    <input type="button" class="btn" style="background: rgb(0,172,238);
 	                                   			   background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);"
 		                                    onclick="execDaumPostcode()" value="우편번호">
-		                                    <input type="text" class="form-control" id="postalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" disabled="disabled">
+		                                    <input type="number" class="form-control" id="postalCode" name="postalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" readonly="readonly">
 		                               	</div>
 		                              	<div class="form-group">
 		                               		<br>  
-		                                    <input type="text" class="form-control" id="roadAddress" placeholder="도로명주소가 입력됩니다." disabled="disabled">
+		                                    <input type="text" class="form-control" id="roadAddress" name="roadAddress" placeholder="도로명주소가 입력됩니다." readonly="readonly">
 		                              	</div>
 		                              	<div class="form-group">
 		                              	 	<br>     
-		                                    <input type="text" class="form-control" id="detailAddress" placeholder="상세주소">
+		                                    <input type="text" class="form-control" id="detailAddress" name="detailAddress" placeholder="상세주소">
 		                                </div>
    
 		                                <div class="form-group">
 		                                    <label for="description">Description</label>
-		                                    <textarea class="form-control" id="description" placeholder="자기소개를 적어주세요">${member.memberDescription()}</textarea>
+		                                    <textarea class="form-control" id="description" name="description" placeholder="자기소개를 적어주세요">${member.memberDescription()}</textarea>
 		                                </div>
 		                                <div class="text-center">
 	                                   		<button type="button" class="btn" style="background: rgb(0,172,238);
@@ -225,7 +225,7 @@
 	
 			                                        // 우편번호와 주소 정보를 해당 필드에 넣는다.
 			                                        document.getElementById('postalCode').value = data.zonecode;
-			                                        document.getElementById("roadAddress").value = roadAddr;
+			                                        document.getElementById('roadAddress').value = roadAddr;
 			                                    }
 			                                }).open();
 			                            }
