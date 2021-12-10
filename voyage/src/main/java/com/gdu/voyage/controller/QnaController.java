@@ -17,4 +17,10 @@ public class QnaController {
 	      
 		return "/templates_citylisting/getQnaOne";
 	}
+	@GetMapping("/addQ")
+	public String addQ() {
+		System.out.println("addQuestionController() 실행");
+		
+		return "/templates_citylisting/addQ";
+	}
 }

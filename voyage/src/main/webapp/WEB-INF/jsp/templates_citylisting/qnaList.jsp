@@ -8,7 +8,7 @@
         <title>Directory HTML-5 Template </title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="manifest" href="site.webmanifest">
+        <!-- <link rel="manifest" href="site.webmanifest"> -->
 		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
 		<!-- CSS here -->
@@ -204,6 +204,9 @@
                             <div class="col-lg-12">
                                 <div class="count mb-35">
                                     <span>5432 Listings are available</span>
+                                    <div class="single-listing mb-30">
+                                    	<span><a href="/addQ" class="btn list-btn mt-20">Write</a></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
