@@ -88,7 +88,7 @@ public class MemberController {
         // 주소 삽입. 오토인클리먼트 값을 받아옴
 	    memberService.addMemberAddress(addr);
 	    
-	    return "login";
+	    return "redirect:/login";
 	 }
 	
 }	
