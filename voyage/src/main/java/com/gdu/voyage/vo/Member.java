@@ -12,7 +12,6 @@ public class Member {
 	private String memberPhone;
 	private String memberEmail;
 	private String memberReg;
-	private int addressNo;
 	private String memberDescription;
 	private int memberLevel;
 	private String memberActive;
