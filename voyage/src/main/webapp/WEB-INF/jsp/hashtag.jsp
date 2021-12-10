@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,10 +8,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>hashtag1</h1>
-<h1>hashtag2</h1>
-<h1>hashtag3</h1>
-<h1>hashtag4</h1>
-<h1>hashtag5</h1>
+	<c:forEach items="${hashtagList }" var="hashtag">
+		<button>${hashtag.hashtag }</button>
+	</c:forEach>
+	<h1>hasgtag1</h1>
+	<h1>hasgtag2</h1>
+	<h1>hasgtag3</h1>
+	<h1>hasgtag4</h1>
+	<h1>hasgtag5</h1>
 </body>
 </html>

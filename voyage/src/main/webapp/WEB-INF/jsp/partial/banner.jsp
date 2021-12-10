@@ -13,7 +13,7 @@
 	width: 120%;
 	height: auto;
 	left: -20%;
-	top: -1000%;
+	top: -0%;
 	border-radius: 0 0 20px 20px;
 	z-index: 100;
 }
@@ -71,7 +71,10 @@
                                     
 								    <div id="hashtag">
 								    	<div>
-								    	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/hashtag.jsp"></jsp:include>
+<%-- 								    		<jsp:include page="${pageContext.request.contextPath}/WEB-INF/jsp/hashtag.jsp"></jsp:include> --%>
+								    		<c:forEach items="${hashtagList }" var="hashtag">
+												<button>${hashtag.hashtag }</button>
+											</c:forEach>
 								    	</div>
 								    </div>
 								    

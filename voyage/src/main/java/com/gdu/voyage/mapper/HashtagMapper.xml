@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.HashtagMapper">
-	<select id="selectHashtagList">
+	<select id="selectHashtagList" resultType="com.gdu.voyage.vo.Hashtag">
 		SELECT
-			hasgtag_no hashtagNo, iden_no idenNo, table_name tableName, hashtag, create_date createDate
+			hashtag_no hashtagNo, iden_no idenNo, table_name tableName, hashtag, create_date createDate
 		FROM
-			notice
+			hashtag
 		ORDER BY
-			update_date DESC;
+			create_date DESC;
 	</select>
 </mapper>
