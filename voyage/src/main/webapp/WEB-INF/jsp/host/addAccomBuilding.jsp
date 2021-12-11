@@ -129,17 +129,17 @@
 										</div>
 										<div class="col-sm-6" style="margin:0 auto;">
 											<div class="form-group">
-												<label>Name <small>(required)</small></label> 
-												<input name="accomBuildingName" type="text" class="form-control" placeholder="Sky villa ...">
+												<h4>Name <small>(required)</small></h4>
+												<input name="accomBuildingName" type="text" class="form-control" placeholder="Sky villa ..." style="height:34px;">
 											</div>
 	
 											<div class="form-group">
-												<label>Description <small>(required)</small></label>
-												<input name="accomBuildingDescription" type="text" class="form-control" placeholder="루프탑이 있는 ...">
+												<h4>Description <small>(required)</small></h4>
+												<textarea name="accomBuildingDescription" class="form-control" placeholder="루프탑이 있는 ..." rows="8"></textarea>
 											</div>
 											<div class="form-group">
-												<label>Phone <small>(required)</small></label>
-												<input name="accomBuildingPhone" type="text" class="form-control" placeholder="080-0000-0000">
+												<h4>Phone <small>(required)</small></h4>
+												<input name="accomBuildingPhone" type="text" class="form-control" placeholder="080-0000-0000" style="height:34px;">
 											</div>
 										</div>
 									</div>
@@ -147,176 +147,42 @@
 								<!--  End step 1 -->
 	
 								<div class="tab-pane" id="step2">
-									<h4 style="margin:0 auto;">＊건물의 주소와 시설에 대해서 입력해주세요</h4>
-									<div class="row">
-										<div class="col-sm-12">
+									<h4 class="text-center">＊건물의 주소와 시설에 대해서 입력해주세요</h4>
+									<div class="row mt-4">
+										<div class="col-sm-6" style="margin:0 auto;">
+										
 											<div class="col-sm-12">
 												<div class="form-group">
-													<label>Property Description :</label>
-													<textarea name="discrition" class="form-control"></textarea>
+													<h4>
+														Address <small>(required)</small>
+														<input type="button" class="btn-sm" style="width:130px; color:white; background: #ff3d1c; border-radius: 30px;
+    													color: #fff; font-weight: 500;" onclick="execDaumPostcode()" value="우편번호">
+													</h4>
+		                                    		<input type="number" class="form-control" id="postalCode" name="postalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" readonly="readonly" style="height:34px;">
+													<input type="text" class="form-control" id="roadAddress" name="roadAddress" placeholder="도로명주소가 입력됩니다." readonly="readonly" style="height:34px;">
+													<input type="text" class="form-control" id="detailAddress" name="detailAddress" placeholder="상세주소" style="height:34px;">
 												</div>
 											</div>
+											
+											<div class="col-sm-12 mt-4">
+												<div class="form-group">
+													<h4>
+														Facility
+														<span class="m-2" style="float: right;">
+															<input type="button" class="btn-sm" style="width:80px; color:white; background: #ff3d1c; border-radius: 30px;
+		    													color: #fff; font-weight: 500;" id="addFacility" value="시설추가">
+		    												<input type="button" class="btn-sm" style="width:80px; color:white; background: #ff3d1c; border-radius: 30px;
+		    													color: #fff; font-weight: 500;" id="delFacility" value="삭제">
+			                                    		</span>
+		                                    		</h4>
+		                                    		
+		                                    		<div class="form-group" id="facilityPlace">
+														<input type="text" class="form-control" id="accomBuildingFacilityName" name="accomBuildingFacilityName" placeholder="주차장, 바베큐, 빔프로젝터..." style="height:34px;">
+													</div>
+												</div>
+											</div>
+											
 										</div>
-	
-										<div class="col-sm-12">
-											<div class="col-sm-3">
-												<div class="form-group">
-													<label>Property State :</label> 
-													<select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select your city">
-														<option>Seoul</option>
-														<option>Paris</option>
-														<option>Casablanca</option>
-														<option>Tokyo</option>
-														<option>Marraekch</option>
-														<option>kyoto , shibua</option>
-													</select>
-												</div>
-											</div>
-											<div class="col-sm-3">
-												<div class="form-group">
-													<label>Property City :</label> <select id="lunchBegins"
-														class="selectpicker" data-live-search="true"
-														data-live-search-style="begins" title="Select your city">
-														<option>New york, CA</option>
-														<option>Paris</option>
-														<option>Casablanca</option>
-														<option>Tokyo</option>
-														<option>Marraekch</option>
-														<option>kyoto , shibua</option>
-													</select>
-												</div>
-											</div>
-											<div class="col-sm-3">
-												<div class="form-group">
-													<label>Property Statue :</label> <select id="basic"
-														class="selectpicker show-tick form-control">
-														<option>-Status-</option>
-														<option>Rent</option>
-														<option>Boy</option>
-														<option>used</option>
-	
-													</select>
-												</div>
-											</div>
-											<div class="col-sm-3">
-												<div class="form-group">
-													<label>Property Statue :</label> <select id="basic"
-														class="selectpicker show-tick form-control">
-														<option>-Status-</option>
-														<option>Rent</option>
-														<option>Boy</option>
-														<option>used</option>
-	
-													</select>
-												</div>
-											</div>
-										</div>
-										<div class="col-sm-12 padding-top-15">
-											<div class="col-sm-4">
-												<div class="form-group">
-													<label for="property-geo">Min bed :</label> <input
-														type="text" class="span2" value="" data-slider-min="0"
-														data-slider-max="600" data-slider-step="5"
-														data-slider-value="[250,450]" id="min-bed"><br />
-													<b class="pull-left color">1</b> <b
-														class="pull-right color">120</b>
-												</div>
-											</div>
-											<div class="col-sm-4">
-	
-												<div class="form-group">
-													<label for="price-range">Min baths :</label> <input
-														type="text" class="span2" value="" data-slider-min="0"
-														data-slider-max="600" data-slider-step="5"
-														data-slider-value="[250,450]" id="min-baths"><br />
-													<b class="pull-left color">1</b> <b
-														class="pull-right color">120</b>
-												</div>
-											</div>
-											<div class="col-sm-4">
-	
-												<div class="form-group">
-													<label for="property-geo">Property geo (m2) :</label> <input
-														type="text" class="span2" value="" data-slider-min="0"
-														data-slider-max="600" data-slider-step="5"
-														data-slider-value="[50,450]" id="property-geo"><br />
-													<b class="pull-left color">40m</b> <b
-														class="pull-right color">12000m</b>
-												</div>
-											</div>
-										</div>
-										<div class="col-sm-12 padding-top-15">
-											<div class="col-sm-3">
-												<div class="form-group">
-													<div class="checkbox">
-														<label> <input type="checkbox"> Swimming
-															Pool
-														</label>
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-3">
-												<div class="form-group">
-													<div class="checkbox">
-														<label> <input type="checkbox"> 2 Stories
-														</label>
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-3">
-												<div class="form-group">
-													<div class="checkbox">
-														<label> <input type="checkbox"> Emergency
-															Exit
-														</label>
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-3">
-												<div class="form-group">
-													<div class="checkbox">
-														<label> <input type="checkbox"> Fire Place
-														</label>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-sm-12 padding-bottom-15">
-											<div class="col-sm-3">
-												<div class="form-group">
-													<div class="checkbox">
-														<label> <input type="checkbox"> Laundry
-															Room
-														</label>
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-3">
-												<div class="form-group">
-													<div class="checkbox">
-														<label> <input type="checkbox"> Jog Path
-														</label>
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-3">
-												<div class="form-group">
-													<div class="checkbox">
-														<label> <input type="checkbox"> Ceilings
-														</label>
-													</div>
-												</div>
-											</div>
-											<div class="col-sm-3">
-												<div class="form-group">
-													<div class="checkbox">
-														<label> <input type="checkbox"> Dual Sinks
-														</label>
-													</div>
-												</div>
-											</div>
-										</div>
-										<br>
 									</div>
 								</div>
 								<!-- End step 2 -->
@@ -407,6 +273,10 @@
 		</div>
 	</div>
 	
+	<!--footer.jsp 시작  -->
+    	<c:import url="../partial\\footer.jsp"/>
+    <!--footer.jsp 끝  -->
+	
 	<script src="accom/js/vendor/modernizr-2.6.2.min.js"></script>
     <script src="accom/js//jquery-1.10.2.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -424,11 +294,58 @@
     <script src="accom/js/wizard.js"></script>
 
     <script src="accom/js/main.js"></script>
+    
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
+	// 다음(카카오) 주소 api
+	function execDaumPostcode() {
+		new daum.Postcode(
+			{
+				oncomplete : function(data) {
+					// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+					// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+					var roadAddr = data.roadAddress; // 도로명 주소 변수
+					var extraRoadAddr = ''; // 참고 항목 변수
+
+					// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+					// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+					if (data.bname !== ''
+							&& /[동|로|가]$/g.test(data.bname)) {
+						extraRoadAddr += data.bname;
+					}
+					// 건물명이 있고, 공동주택일 경우 추가한다.
+					if (data.buildingName !== ''
+							&& data.apartment === 'Y') {
+						extraRoadAddr += (extraRoadAddr !== '' ? ', '
+								+ data.buildingName : data.buildingName);
+					}
+					// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+					if (extraRoadAddr !== '') {
+						extraRoadAddr = ' (' + extraRoadAddr + ')';
+					}
+
+					// 우편번호와 주소 정보를 해당 필드에 넣는다.
+					document.getElementById('postalCode').value = data.zonecode;
+					document.getElementById('roadAddress').value = roadAddr;
+				}
+			}).open();
+		}
 	
-    
-    <!--footer.jsp 시작  -->
-    	<c:import url="../partial\\footer.jsp"/>
-    <!--footer.jsp 끝  -->
-    
-	</body>
+	// 시설 폼 추가시 사용하는 스크립트 이벤트
+	$('#addFacility').click(function(){
+		let inputFacility = '<input type="text" class="form-control" id="accomBuildingFacilityName" name="accomBuildingFacilityName" placeholder="주차장, 바베큐, 빔프로젝터..." style="height:34px;">';
+		$('#facilityPlace').append(inputFacility);
+	});
+	
+	// 시설 폼 삭제시 사용하는 스크립트 이벤트
+	$('#delFacility').click(function(){
+		if($('input[name=accomBuildingFacilityName]').length>1){
+			$('input[name=accomBuildingFacilityName]:last').remove();
+		} else {
+			alert("한 가지 이상의 시설을 입력해주세요!");
+		}
+	});
+	</script>
+
+</body>
 </html>
