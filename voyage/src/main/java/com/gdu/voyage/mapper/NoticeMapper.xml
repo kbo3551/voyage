@@ -33,9 +33,20 @@
 			Now()
 		) 
 	</insert>
-	
-	
-	
+	<!-- 파일 insert -->
+	<insert id="insertNoticefile" parameterType="com.gdu.voyage.vo.NoticeFile">
+			INSERT INTO notice_file (
+			notice_no,
+			notice_file_name,
+			notice_file_ext,
+			notice_file_size
+		) VALUES (
+			#{noticeNo},
+			#{noticeFileName},
+			#{noticeFileExt},
+			#{noticeFileSize}
+		)
+	</insert>
 	<!-- 공지사항 delete -->
 	<delete id="deleteNotice">
 		DELETE FROM notice WHERE notice_no

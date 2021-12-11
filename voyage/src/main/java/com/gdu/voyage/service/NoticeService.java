@@ -54,7 +54,7 @@ public class NoticeService {
 		noticefile.setNoticeFileSize(file.size());
 		noticeMapper.insertNoticefile(noticefile);
 		// 파일 저장 
-		File f = new File(""+fileName+"."+fileExt); // 경로 아직 공백...
+		File f = new File("E:\\A1\\voyage\\voyage\\src\\main\\file\\notice"+fileName+"."+fileExt); // 임시 경로 
 		try {
 			((MultipartFile) file).transferTo(f);
 		} catch (IllegalStateException | IOException e) { /*IllegalStateException, IOException는 예외처리를 꼭 해야하는데 
