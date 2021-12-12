@@ -85,7 +85,7 @@
 							<div class="wizard-header">
 								<h3>
 									<b>Accommodation</b> _building<br>
-									<small>건물의 정보를 입력해주세요.</small>
+									<small>숙소-건물의 정보를 입력해주세요.</small>
 								</h3>
 							</div>
 	
@@ -99,8 +99,8 @@
 							<div class="tab-content">
 	
 								<div class="tab-pane" id="step1">
+									<h3 class="text-center">Basic information</h3>
 									<div class="row p-b-15">
-										<h4 style="margin:0 auto;">＊건물의 기본 정보에 대해 입력해주세요.</h4>
 										<div class="col-sm-offset-1" style="margnin:0 auto;">
 											<div class="picture-container" style="float:left; margin-left:20px;">
 												<div class="picture">
@@ -147,7 +147,7 @@
 								<!--  End step 1 -->
 	
 								<div class="tab-pane" id="step2">
-									<h4 class="text-center">＊건물의 주소와 시설에 대해서 입력해주세요</h4>
+									<h3 class="text-center">Address &amp; Facility</h3>
 									<div class="row mt-4">
 										<div class="col-sm-6" style="margin:0 auto;">
 										
@@ -175,9 +175,10 @@
 		    													color: #fff; font-weight: 500;" id="delFacility" value="삭제">
 			                                    		</span>
 		                                    		</h4>
+		                                    		<label>* 입력 폼 하나당, 시설 하나씩 입력해주세요.</label>
 		                                    		
 		                                    		<div class="form-group" id="facilityPlace">
-														<input type="text" class="form-control" id="accomBuildingFacilityName" name="accomBuildingFacilityName" placeholder="주차장, 바베큐, 빔프로젝터..." style="height:34px;">
+														<input type="text" class="form-control" id="accomBuildingFacilityName" name="accomBuildingFacilityName" placeholder="ex) 주차장" style="height:34px;">
 													</div>
 												</div>
 											</div>
@@ -188,35 +189,56 @@
 								<!-- End step 2 -->
 	
 								<div class="tab-pane" id="step3">
-									<h4 class="info-text">Give us somme images and videos ?</h4>
-									<div class="row">
-										<div class="col-sm-6">
-											<div class="form-group">
-												<label for="property-images">Chose Images :</label> <input
-													class="form-control" type="file" id="property-images">
-												<p class="help-block">Select multipel images for your
-													property .</p>
+									<h3 class="text-center">Spot &amp; Hashtag</h3>
+									<div class="row mt-4">
+										<div class="col-sm-6" style="margin:0 auto;">
+										
+											<div class="col-sm-12 mt-2">
+												<div class="form-group">
+													<h4>
+														Spot
+														<span class="m-2" style="float: right;">
+															<input type="button" class="btn-sm" style="width:80px; color:white; background: #ff3d1c; border-radius: 30px;
+		    													color: #fff; font-weight: 500;" id="addSpot" value="추천장소추가">
+		    												<input type="button" class="btn-sm" style="width:80px; color:white; background: #ff3d1c; border-radius: 30px;
+		    													color: #fff; font-weight: 500;" id="delSpot" value="삭제">
+			                                    		</span>
+													</h4>
+													
+													<div class="form-group" id="spotPlace">
+														<div id="spotForm">
+															<label>Name</label>
+				                                    		<input type="text" class="form-control" id="accomBuildingSpotName" name="accomBuildingSpotName" placeholder="ex) 보보커피" style="height:34px;">
+															<label>Category</label>
+															<input type="text" class="form-control" id="accomBuildingSpotCategory" name="accomBuildingSpotCategory" placeholder="ex) 카페" style="height:34px;">
+															<label>Description</label>
+															<textarea class="form-control" id="accomBuildingSpotDescription" name="accomBuildingSpotDescription" placeholder="ex) 사장님이 직접 로스팅한 에소프레소를 맛볼 수 있는 곳..." rows="8"></textarea>
+														</div><hr>
+													</div>
+												</div>
 											</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="form-group">
-												<label for="property-video">Property video :</label> <input
-													class="form-control" value=""
-													placeholder="http://www.youtube.com, http://vimeo.com"
-													name="property_video" type="text">
+											
+											<div class="col-sm-12 mt-4">
+												<div class="form-group">
+													<h4>
+														HashTag
+														<span class="m-2" style="float: right;">
+															<input type="button" class="btn-sm" style="width:80px; color:white; background: #ff3d1c; border-radius: 30px;
+		    													color: #fff; font-weight: 500;" id="addHashtag" value="해시태그추가">
+		    												<input type="button" class="btn-sm" style="width:80px; color:white; background: #ff3d1c; border-radius: 30px;
+		    													color: #fff; font-weight: 500;" id="delHashtag" value="삭제">
+			                                    		</span>
+		                                    		</h4>
+		                                    		<label>* 입력 폼 하나당, 해시태그 하나씩 입력해주세요.</label>
+		                                    		<div class="form-group" id="hashtagPlace">
+														<div class="input-group">
+														    <span class="input-group-addon"><i class="fas fa-hashtag"></i></span>
+														    <input type="text" class="form-control" name="hashtag" placeholder="ex) 오션뷰" style="height:34px;">
+														</div>
+													</div>
+												</div>
 											</div>
-	
-											<div class="form-group">
-												<input class="form-control" value=""
-													placeholder="http://www.youtube.com, http://vimeo.com"
-													name="property_video" type="text">
-											</div>
-	
-											<div class="form-group">
-												<input class="form-control" value=""
-													placeholder="http://www.youtube.com, http://vimeo.com"
-													name="property_video" type="text">
-											</div>
+											
 										</div>
 									</div>
 								</div>
@@ -224,17 +246,13 @@
 	
 	
 								<div class="tab-pane" id="step4">
-									<h4 class="info-text">Finished and submit</h4>
+									<h3 class="info-text">Finished and submit</h3>
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="">
 												<p>
-													<label><strong>Terms and Conditions</strong></label> By
-													accessing or using GARO ESTATE services, such as posting
-													your property advertisement with your personal information
-													on our website you agree to the collection, use and
-													disclosure of your personal information in the legal proper
-													manner
+													<label><strong>나중에 추가</strong></label> 
+													약관 및 동의.. 등록비 내용 이런거....
 												</p>
 	
 												<div class="checkbox">
@@ -333,7 +351,7 @@
 	
 	// 시설 폼 추가시 사용하는 스크립트 이벤트
 	$('#addFacility').click(function(){
-		let inputFacility = '<input type="text" class="form-control" id="accomBuildingFacilityName" name="accomBuildingFacilityName" placeholder="주차장, 바베큐, 빔프로젝터..." style="height:34px;">';
+		let inputFacility = '<input type="text" class="form-control" id="accomBuildingFacilityName" name="accomBuildingFacilityName" style="height:34px;">';
 		$('#facilityPlace').append(inputFacility);
 	});
 	
@@ -343,6 +361,48 @@
 			$('input[name=accomBuildingFacilityName]:last').remove();
 		} else {
 			alert("한 가지 이상의 시설을 입력해주세요!");
+		}
+	});
+	
+	// 추천장소 폼 추가시 사용하는 스크립트 이벤트
+	$('#addSpot').click(function(){
+		let inputSpot = '<div id="spotForm">';
+		inputSpot += '<label>Name</label>';
+		inputSpot += '<input type="text" class="form-control" id="accomBuildingSpotName" name="accomBuildingSpotName" style="height:34px;">';
+		inputSpot += '<label>Category</label>';
+		inputSpot += '<input type="text" class="form-control" id="accomBuildingSpotCategory" name="accomBuildingSpotCategory" style="height:34px;">';
+		inputSpot += '<label>Description</label>';
+		inputSpot += '<textarea class="form-control" id="accomBuildingSpotDescription" name="accomBuildingSpotDescription" rows="8"></textarea>';
+		inputSpot += '</div><hr>';
+		$('#spotPlace').append(inputSpot);
+	});
+	
+	// 추천장소 폼 삭제시 사용하는 스크립트 이벤트
+	$('#delSpot').click(function(){
+		if($('div[id=spotForm]').length>1){
+			$('div[id=spotForm]:last').remove();
+			$('hr:last').remove();
+		} else {
+			alert("한 가지 이상의 추천시설을 입력해주세요!");
+		}
+	});
+	
+	// 해시태그 폼 추가시 사용하는 스크립트 이벤트
+	$('#addHashtag').click(function(){
+		let inputHashtag = '<div class="input-group">';
+		inputHashtag += '<span class="input-group-addon"><i class="fas fa-hashtag"></i></span>';
+		inputHashtag += '<input type="text" class="form-control" name="hashtag" style="height:34px;">';
+		inputHashtag += '</div>';
+		$('#hashtagPlace').append(inputHashtag);
+	});
+	
+	// 해시태그 폼 삭제시 사용하는 스크립트 이벤트
+	$('#delHashtag').click(function(){
+		if($('input[name=hashtag]').length>1){
+			$('input[name=hashtag]:last').remove();
+			$('span[class=input-group-addon]:last').remove();
+		} else {
+			alert("한 가지 이상의 해시태그를 입력해주세요!");
 		}
 	});
 	</script>
