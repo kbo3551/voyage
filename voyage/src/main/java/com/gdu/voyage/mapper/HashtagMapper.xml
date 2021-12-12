@@ -7,6 +7,8 @@
 		FROM
 			hashtag
 		ORDER BY
-			create_date DESC;
+			create_date DESC
+		LIMIT
+			0, 50;
 	</select>
 </mapper>
