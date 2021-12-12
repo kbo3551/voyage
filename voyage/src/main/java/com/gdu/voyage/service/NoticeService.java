@@ -26,12 +26,13 @@ public class NoticeService {
 	public List<NoticeFile> getNoticeFileList(){
 		return noticeMapper.selectNoticeFileList();
 	}
+	// 공지사항 입력
 	public void addNotice(NoticeForm noticeForm) {
 		log.debug(noticeForm.toString()+"☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆[보령]NoticeService_noticeform");
 		String noticeContent = noticeForm.getNoticeContent();
 		List<MultipartFile> file = noticeForm.getNoticefile();
 		
-		// 공지사항 입력
+
 		Notice notice = new Notice();
 		notice.setNoticeContent(noticeContent);
 		noticeMapper.insertNotice(notice);
