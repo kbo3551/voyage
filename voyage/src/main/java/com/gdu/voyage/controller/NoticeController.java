@@ -27,7 +27,7 @@ public class NoticeController {
 	}
 	@GetMapping("/addNotice")
 	public String addNotice() {
-		return "addNotice";
+		return "/templates_admin/addNotice";
 	}
 	
 	@PostMapping("/addNotice")

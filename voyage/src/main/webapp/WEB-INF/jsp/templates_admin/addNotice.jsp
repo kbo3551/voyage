@@ -27,34 +27,72 @@
     <!-- adminKit : 시작 -->
     	<c:import url="../adminPartial\\adminKit.jsp"/>
     <!-- adminKit : 끝 -->
+	
 	<div class="main">
-    <!-- adminKit : 시작 -->
+    <!-- adminBanner : 시작 -->
     	<c:import url="../adminPartial\\adminBanner.jsp"/>
-    <!-- adminKit : 끝 -->
-		
+    <!-- adminBanner : 끝 -->
 		
 		<!-- 메인(중앙) -->
 		<main class="content">
 			<div class="container-fluid p-0">
 	
 				<h1 class="h3 mb-3"><strong>관리자</strong> 공지사항</h1>
-				<h3 class="h3 mb-3">공지사항</h3>
-				<table>
-					<c:forEach items="" var="">
-					</c:forEach>
-				</table>
-	
+				
+				<!-- 입력공간 -->
+				<form method="post" action="">
+					<!-- 공지 제목 -->
+					<div class="row">
+						<div class="card">
+							<div class="card-header">
+								<h5 class="card-title mb-0">공지사항 제목</h5>
+							</div>
+							<div class="card-body">
+								<input type="text" class="form-control" placeholder="제목" name="noticeTitle">
+							</div>
+						</div>
+					</div>
+					<!-- 상단고정(공지중요성)체크 -->
+					<div class="col-12 col-lg-6">
+						<div class="card">
+							<div class="card-header">
+								<h5 class="card-title mb-0">상단고정 여부</h5>
+							</div>
+							<div class="card-body">
+								<select class="form-select mb-3">
+									<!-- 상단 비고정 -->
+									<option selected>일반</option>
+									<!-- 상단 고정 -->
+									<option>중요</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<!-- 공지내용 -->
+					<div class="row">
+						<div class="card">
+							<div class="card-header">
+								<h5 class="card-title mb-0">내용</h5>
+							</div>
+							<div class="card-body">
+								<textarea class="form-control" rows="3" placeholder="공란" name="noticeContent"></textarea>
+							</div>
+						</div>
+					</div>
+					<!-- 공지INSERT -->
+					<button class="btn btn-primary btn-lg">입력</button>
+				</form>
 			</div>
 		</main>
+			
     <!-- adminFooter : 시작 -->
     	<c:import url="../adminPartial\\adminFooter.jsp"/>
     <!-- adminFooter : 끝 -->
-
 		</div>
 	</div>
 	
 	<script src="admin/js/app.js"></script>
-	 
+	
 	<script>
 	document.addEventListener("DOMContentLoaded", function() {
 		var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
@@ -277,7 +315,7 @@
 	});
 	
 	</script>
-	
+ 
 </body>
 
 </html>
