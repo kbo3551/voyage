@@ -25,12 +25,12 @@
 <body>
 	<div class="wrapper">
     <!-- adminKit : 시작 -->
-    	<c:import url="../partial\\adminKit.jsp"/>
+    	<c:import url="../adminPartial\\adminKit.jsp"/>
     <!-- adminKit : 끝 -->
 	
 	<div class="main">
     <!-- adminBanner : 시작 -->
-    	<c:import url="../partial\\adminBanner.jsp"/>
+    	<c:import url="../adminPartial\\adminBanner.jsp"/>
     <!-- adminBanner : 끝 -->
 		
 		<!-- 메인(중앙) -->
@@ -86,7 +86,7 @@
 		</main>
 			
     <!-- adminFooter : 시작 -->
-    	<c:import url="../partial\\adminFooter.jsp"/>
+    	<c:import url="../adminPartial\\adminFooter.jsp"/>
     <!-- adminFooter : 끝 -->
 		</div>
 	</div>
