@@ -33,15 +33,15 @@ public class NoticeController {
 	@PostMapping("/addNotice")
 	public String addNotice(NoticeForm noticeForm) {
 		log.debug(noticeForm.toString());
-		noticeService.addNotice(noticeForm);
+		//noticeService.addNotice(noticeForm);
 		return "redirect:/noticefileList";
 	}
 	
 	@GetMapping("/noticefileList") 
 	public String getAccomProduct(Model fmodel) {
 		System.out.println("NoticeController() 실행");
-		List<NoticeFile> list = noticeService.getNoticeFileList();
-	    fmodel.addAttribute("list",list);
+		//List<NoticeFile> list = noticeService.getNoticeFileList();
+	    //fmodel.addAttribute("list",list);
 		return "noticefileList";
 	}
 }

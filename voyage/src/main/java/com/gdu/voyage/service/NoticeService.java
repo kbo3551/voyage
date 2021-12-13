@@ -2,7 +2,9 @@ package com.gdu.voyage.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,29 @@ import lombok.extern.slf4j.Slf4j;
 public class NoticeService {
 	@Autowired NoticeMapper noticeMapper;
 	
+	public Map<String,Object> getNoticeListByTop(int currentPage,int rowPerPage){
+		Map<String,Object> paramMap = new HashMap<>();
+		int beginRow = (currentPage-1)*rowPerPage;
+		paramMap.put("beginRow",beginRow);
+		paramMap.put("rowPerPage", rowPerPage);
+		
+		
+		List<Notice> notcieList = noticeMapper.selectNoticeList(paramMap);
+		log.debug(notcieList.toString()+"☆☆☆[DoHun] NoticeList☆☆☆");
+		Map<String,Object> returnMap = new HashMap<>();
+		int lastPage = 0;
+		int totalCount = noticeMapper.selectNoticeTotalCount();
+		lastPage = totalCount/rowPerPage;
+		if(totalCount%rowPerPage != 0) {
+			lastPage+=1;
+		}
+		returnMap.put("notcieList", notcieList);
+		returnMap.put("lastPage", lastPage);
+	
+		return returnMap;
+	}
+	
+	/*
 	public List<NoticeFile> getNoticeFileList(){
 		return noticeMapper.selectNoticeFileList();
 	}
@@ -35,7 +60,7 @@ public class NoticeService {
 
 		Notice notice = new Notice();
 		notice.setNoticeContent(noticeContent);
-		noticeMapper.insertNotice(notice);
+		noticeMapper.inserNotice(notice);
 		log.debug(notice.getNoticeNo()+"☆☆☆[bryeong]NoticeService_noticeform☆☆☆");
 
 	// 파일 업로드가 되면
@@ -58,12 +83,14 @@ public class NoticeService {
 		File f = new File("E:\\A1\\voyage\\voyage\\src\\main\\file\\notice"+fileName+"."+fileExt); // 임시 경로 
 		try {
 			((MultipartFile) file).transferTo(f);
-		} catch (IllegalStateException | IOException e) { /*IllegalStateException, IOException는 예외처리를 꼭 해야하는데 
-															RuntimeException을 사용해 예외 처리가 필요없는 예외를 던져서 처리*/
+		} catch (IllegalStateException | IOException e) { //IllegalStateException, IOException는 예외처리를 꼭 해야하는데 
+														//RuntimeException을 사용해 예외 처리가 필요없는 예외를 던져서 처리
 			// TODO Auto-generated catch block
 			e.printStackTrace();	
 			throw new RuntimeException();// @Transactional이 구동되기 위해선 예외가 발생해야함
 			}
 		}
+	
 	}
+	*/
 }

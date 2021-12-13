@@ -31,6 +31,13 @@
 		ORDER BY 
 			notice_top='Y' DESC, update_date DESC
 	</select>
+	
+	<!-- 공지사항 카운트 -->
+	<select id="selectNoticeTotalCount" resultType="int">
+		SELECT COUNT(*) FROM notice
+	</select>
+	
+	
 	<!-- 공지사항 insert -->
 	<insert id="inserNotice" parameterType="com.gdu.voyage.vo.Notice">
 	   	INSERT INTO notice(
