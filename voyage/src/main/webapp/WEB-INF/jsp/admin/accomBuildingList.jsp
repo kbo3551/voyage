@@ -54,7 +54,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${accomBuildingList}" var="Accom" >
+										<c:forEach items="${list}" var="Accom" >
 											<tr>
 										        <td>${Accom.accomBuildingNo}</td>
 										        <td>${Accom.accomBuildingName}</td>

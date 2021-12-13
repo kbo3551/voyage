@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.AccomBuildingService;
 import com.gdu.voyage.vo.AccomBuilding;
@@ -40,7 +41,7 @@ public class AccomController {
 	}
 	
 	@RequestMapping("/admin/accomBuildingList")
-	public String getAccomBuildingList(Model model, int pageNo) {
+	public String getAccomBuildingList(Model model, @RequestParam(value="pageNo", defaultValue="1") int pageNo) {
 		currentPage = pageNo;
 		log.debug("accomBuildingList 실행!!");
 		List<AccomBuilding> list = accomBuildingService.getAccomBuildingList(currentPage);
@@ -48,11 +49,5 @@ public class AccomController {
 		return "/admin/accomBuildingList";
 	}
 	
-	@GetMapping("/admin/accomBuildingList")
-	public String accomBuildingList() {
-		System.out.println("AccomBuildingController() 실행");
-		
-		return "/admin/accomBuildingList";
-	}
 	
 }
