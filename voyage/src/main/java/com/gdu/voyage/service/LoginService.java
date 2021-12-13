@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gdu.voyage.mapper.LoginMapper;
+import com.gdu.voyage.vo.Admin;
 import com.gdu.voyage.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
@@ -19,5 +20,10 @@ public class LoginService {
 		log.trace("☆service☆"+member.toString());
 		Member loginMember = loginMapper.login(member);
 		return loginMember;
+	}
+	public Admin adminLogin(Admin admin) {
+		log.debug("☆☆☆[bryeong]LoginService_Admin☆☆☆"+admin.toString());
+		Admin loginAdmin = loginMapper.adminLogin(admin);
+		return loginAdmin;
 	}
 }

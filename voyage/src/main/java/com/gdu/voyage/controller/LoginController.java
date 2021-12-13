@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gdu.voyage.service.LoginService;
+import com.gdu.voyage.vo.Admin;
 import com.gdu.voyage.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +21,6 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class LoginController {
 	@Autowired LoginService loginService;
-	
 	
 	//로그아웃
 	@GetMapping("/logout")
@@ -64,4 +64,42 @@ public class LoginController {
 	    
 	    return "redirect:index";
 	}
+	// 어드민 로그아웃
+	@GetMapping("/adminlogout")
+	public String adminLogout(HttpServletRequest request) {
+		System.out.println("LoginController()_adminLogOut 실행");
+		request.getSession().invalidate();
+		return "redirect:/index";
+	}
+	// 어드민 로그인 페이지 이동
+	@GetMapping("/adminLogin")
+	public String getAdminLogin() {
+		System.out.println("LoginController()_adminLogin 실행");
+		return "adminLogin";
+	}
+	// 어드민 로그인
+	@PostMapping("/adminLogin")
+	public String postAdminLogin(HttpServletRequest request, RedirectAttributes redirect) {
+		System.out.println("★★★[boryeong]postAdminloginController★★★");
+		
+		String adminId = request.getParameter("id");
+		String adminPw = request.getParameter("password");
+		// 어드민 객체
+		Admin a = new Admin();
+		a.setAdminId(adminId);
+		a.setAdminPw(adminPw);
+		
+		log.debug("★★★[boryeong]postAdminloginController★★★"+a.toString());
+		
+		Admin loginAdmin = loginService.adminLogin(a);
+		if(loginAdmin == null) {
+			return "redirect:adminLogin?failed=true";
+		}
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("loginAdmin", loginAdmin);
+		
+		return "redirect:adminIndex";
+	}
+
 }	
