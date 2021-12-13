@@ -24,4 +24,5 @@ public interface NoticeMapper {
 	List<NoticeFile> selectNoticeFileList();
 	int insertNotice(Notice notice);
 	int insertNoticefile(NoticeFile noticefile);
+	int deleteNoticeFile(NoticeFile noticefile);
 }
