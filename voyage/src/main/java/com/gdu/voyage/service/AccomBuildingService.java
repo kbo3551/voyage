@@ -30,14 +30,14 @@ public class AccomBuildingService {
 	// 숙소-건물 입력
 	public void addAccomBuilding(AccomBuildingForm accomBuildingForm) {
 		// 매개변수 디버깅 //accomBuildingForm  --> 숙소-건물정보 + 이미지 + 시설 + 추천장소 + 해시태그
-		log.debug("♡jihye♡ accomBuildingForm : " + accomBuildingForm.toString());
+		log.debug("☆service☆ accomBuildingForm : " + accomBuildingForm.toString());
 		
 		// 1) 숙소-건물 입력 : accomBuilding 입력
 		AccomBuilding accomBuilding = accomBuildingForm.getAccomBuilding();
 		accomBuildingMapper.insertAccomBuilding(accomBuilding);
 		// 입력시 만들어진 key 값을 리턴 받아야 함 -> 매개변수 accomBuildingNo 값 변경해줌
 		// accomBuildingNo = auto increment로 입력된 값
-		log.debug("♡jihye♡ accomBuildingNo : " + accomBuilding.getAccomBuildingNo());
+		log.debug("☆service☆ accomBuildingNo : " + accomBuilding.getAccomBuildingNo());
 		
 		// 2) 숙소-건물의 이미지 입력 : accomBuildingImage 입력
 		List<MultipartFile> imageList = accomBuildingForm.getAccomBuildingImage();
@@ -58,13 +58,13 @@ public class AccomBuildingService {
 				accomBuildingImage.setAccomBuildingImageName(filename);
 				accomBuildingImage.setAccomBuildingImageExt(ext);
 				accomBuildingImage.setAccomBuildingImageSize(i.getSize());
-				log.debug("♡jihye♡ accomBuildingImage : " + accomBuildingImage);
+				log.debug("☆service☆ accomBuildingImage : " + accomBuildingImage);
 				
 				// 2-1) 테이블에 저장
 				accomBuildingMapper.insertAccomBuildingImage(accomBuildingImage);
 				
 				// 2-2) 이미지 파일을 저장
-				File f = new File("D:\\gd\\voyage\\voyage\\src\\main\\webapp\\image\\accom_building\\"+filename+"."+ext);
+				File f = new File("resources\\image\\accom_building\\"+filename+"."+ext);
 				try {
 					i.transferTo(f);
 				} catch (IllegalStateException | IOException e) {
@@ -83,7 +83,7 @@ public class AccomBuildingService {
 				AccomBuildingFacility accomBuildingFacility = new AccomBuildingFacility();
 				accomBuildingFacility.setAccomBuildingNo(accomBuilding.getAccomBuildingNo());
 				accomBuildingFacility.setAccomBuildingFacilityName(f.getAccomBuildingFacilityName());
-				log.debug("♡jihye♡ accomBuildingFacility : " + accomBuildingFacility);
+				log.debug("☆service☆ accomBuildingFacility : " + accomBuildingFacility);
 				
 				// 3-1) 테이블에 저장
 				accomBuildingMapper.insertAccomBuildingFacility(accomBuildingFacility);
@@ -99,6 +99,7 @@ public class AccomBuildingService {
 				accomBuildingSpot.setAccomBuildingSpotName(s.getAccomBuildingSpotName());
 				accomBuildingSpot.setAccomBuildingSpotCategory(s.getAccomBuildingSpotCategory());
 				accomBuildingSpot.setAccomBuildingSpotDescription(s.getAccomBuildingSpotDescription());
+				log.debug("☆service☆ accomBuildingSpot : " + accomBuildingSpot);
 				
 				// 4-1) 테이블에 저장
 				accomBuildingMapper.insertAccomBuildingSpot(accomBuildingSpot);
@@ -113,6 +114,7 @@ public class AccomBuildingService {
 				hashtag.setIdenNo(accomBuilding.getAccomBuildingNo());
 				hashtag.setTableName("건물");
 				hashtag.setHashtag(h.getHashtag());
+				log.debug("☆service☆ hashtag : " + hashtag);
 				
 				// 5-1) 테이블에 저장
 				accomBuildingMapper.insertAccomBuildingHashtag(hashtag);
