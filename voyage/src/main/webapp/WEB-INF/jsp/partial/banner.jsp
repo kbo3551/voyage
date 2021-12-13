@@ -63,7 +63,7 @@
                                                     <li><a href="${pageContext.request.contextPath}/noticeList">공지사항</a></li>
                                                     <li><a href="${pageContext.request.contextPath}/qnaList">Q&A</a></li>
                                                 </ul>
-                                            </li>
+                                            </li> 
                                            	
                                            	<c:choose>
                                            		<c:when test="${empty loginMember}">
