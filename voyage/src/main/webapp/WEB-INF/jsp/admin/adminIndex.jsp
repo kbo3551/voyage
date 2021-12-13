@@ -18,7 +18,7 @@
 
 	<title>관리자 페이지</title>
 
-	<link href="admin/css/app.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/admin/css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
@@ -319,7 +319,7 @@
 		</div>
 	</div>
 	
-	<script src="admin/js/app.js"></script>
+	<script src="${pageContext.request.contextPath}/admin/js/app.js"></script>
 	<!-- 차트 값 정보 -->
 	<script>
 	document.addEventListener("DOMContentLoaded", function() {
