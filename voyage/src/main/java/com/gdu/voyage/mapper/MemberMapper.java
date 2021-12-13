@@ -11,4 +11,5 @@ public interface MemberMapper {
 	int selectMemberNickName(Member member);
 	void insertMemberAddress(MemberAddress mAddress);
 	void insertMember(Member member);
+	void insertCreateId(String memberId);
 }

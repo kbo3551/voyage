@@ -16,6 +16,13 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberService {
 	@Autowired MemberMapper memberMapper;
 	
+	// 회원가입 시 아이디 따로 저장해둠(재가입 방지)
+	public void addMemberCreateId(String memberId) {
+		log.trace("☆service☆"+memberId);
+		memberMapper.insertCreateId(memberId);
+		return;
+	}
+	
 	// 회원가입 중복검사
 	public String duplMemberCheck(Member member) {
 		log.trace("☆service☆"+member.toString());

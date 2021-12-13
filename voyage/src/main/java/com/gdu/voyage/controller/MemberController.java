@@ -94,6 +94,9 @@ public class MemberController {
         // 주소 삽입
 	    memberService.addMemberAddress(addr);
 	    
+	    // create_id 테이블에 아이디 저장
+	    memberService.addMemberCreateId(memberId);
+	    
 	    return "redirect:/login";
 	 }
 	 
