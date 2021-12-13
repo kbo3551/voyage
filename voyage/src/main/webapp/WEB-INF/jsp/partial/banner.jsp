@@ -10,6 +10,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="assets/css/hashtag.css">
 </head>
+<style>
+	.btn:before {
+		background: rgba(190,255,255,0.2);
+	}
+</style>
 <body>
     <!-- Preloader Start -->
     <header>
@@ -38,7 +43,6 @@
                                                     <li><a href="${pageContext.request.contextPath}/templates_citylisting/getAccomProduct">숙소</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a class="hashtag">해시태그</a></li>
 										 	<li><a href="#">후기</a>
                                                 <ul class="submenu">
                                                     <li><a href="${pageContext.request.contextPath}/getActivityReviewList">체험</a></li>
@@ -51,6 +55,7 @@
                                                     <li><a href="${pageContext.request.contextPath}/qnaList">Q&A</a></li>
                                                 </ul>
                                             </li> 
+                                            <li><button class="hashtag btn" style="color: rgba(190,240,80); background-color: rgba(255,255,255,0);">해시태그</button></li>
                                            	
                                            	<c:choose>
                                            		<c:when test="${empty loginMember}">
