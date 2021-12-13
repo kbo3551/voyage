@@ -28,7 +28,7 @@ public class NoticeService {
 	}
 	// 공지사항 입력
 	public void addNotice(NoticeForm noticeForm) {
-		log.debug(noticeForm.toString()+"☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆[보령]NoticeService_noticeform");
+		log.debug(noticeForm.toString()+"☆☆☆[bryeong]NoticeService_noticeform☆☆☆");
 		String noticeContent = noticeForm.getNoticeContent();
 		List<MultipartFile> file = noticeForm.getNoticefile();
 		
@@ -36,7 +36,7 @@ public class NoticeService {
 		Notice notice = new Notice();
 		notice.setNoticeContent(noticeContent);
 		noticeMapper.insertNotice(notice);
-		log.debug(notice.getNoticeNo()+"☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆[보령]NoticeService_noticeform");
+		log.debug(notice.getNoticeNo()+"☆☆☆[bryeong]NoticeService_noticeform☆☆☆");
 
 	// 파일 업로드가 되면
 	if(file != null) {
