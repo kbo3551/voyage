@@ -156,7 +156,7 @@
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="phone">Phone</label>
-		                                    <input type="tel" class="form-control" placeholder="전화번호 ( - 빼고 입력해주세요) *" id="phone" name="phone" value="${member.getMemberPhone()}">
+		                                    <input type="number" class="form-control" placeholder="전화번호 ( - 빼고 입력해주세요) *" id="phone" name="phone" value="${member.getMemberPhone()}">
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="email">Email</label>
@@ -262,10 +262,17 @@
 											} else if($("#socialsecuritynumber").val() == ""){
 												alert('주민등록번호를 입력해주세요');
 												return;
+											} else if(isNaN($("#socialsecuritynumber").val())){
+												alert('주민번호 란에는 숫자만 입력 가능합니다.');
+												return;
+											} else if($("#socialsecuritynumber").val().length != 13){
+												alert('주민번호 길이가 유효하지 않습니다.');
+												return;
 											} else if($("#postalCode").val() == ""){
 												alert('우편번호를 입력해주세요');
 												return;
-											} else {
+											}
+											else {
 												AddMember.submit();
 											}
 										};
