@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -14,25 +15,40 @@ import javax.servlet.http.HttpSession;
 
 import com.gdu.voyage.vo.Member;
 
+import lombok.extern.slf4j.Slf4j;
 
-@WebFilter("/host/*")
+@Slf4j
+@WebFilter(urlPatterns = "/host/*")
 public class HostFilter implements Filter {
-
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// MemberLevel이 1일때만 접근가능
-	    System.out.println("LoginFilter.doFilter() 실행");
-	    HttpSession session = ((HttpServletRequest)request).getSession();
+	@Override
+	 public void init(FilterConfig filterConfig) throws ServletException {
+		log.info("init HostFilter");
+	 }
+	
+	
+	// MemberLevel이 1일때만 접근가능
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {		
+		HttpServletRequest req = (HttpServletRequest) request;
+		HttpServletResponse res = (HttpServletResponse) response;
+		
+	    HttpSession session = req.getSession();
 	    if(session.getAttribute("loginMember") == null) {
-	    	((HttpServletResponse)response).sendRedirect(((HttpServletRequest)request).getContextPath()+"/login");
+	    	res.sendRedirect(req.getContextPath()+"/login");
 	    	return;
 	    }
 	    Member loginMember = (Member)session.getAttribute("loginMember");
 	    if(loginMember.getMemberLevel() != 1) {
-	    	((HttpServletResponse)response).sendRedirect(((HttpServletRequest)request).getContextPath()+"/index");
+	    	res.sendRedirect(req.getContextPath()+"/index");
 	    	return;
 	    }
 	      
-	    chain.doFilter(request, response);
+	    chain.doFilter(req, res);
+	}
+	
+	@Override
+	public void destroy() {
+		log.info("destroy HostFilter");
 	}
 
 }
