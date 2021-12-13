@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.AdminMapper">
-<!-- admin 아이디 중복체크 -->
-<select id="selectAdminId" resultType="int" parameterType="String">
-	SELECT
-		count(admin_id)
-	FROM 
-		admin
-	WHERE
-		admin_id =#{adminId};		
-</select>
 
 <insert id="insertAdminAddress" parameterType="com.gdu.voyage.vo.AdminAddress">
 	INSERT INTO
@@ -31,24 +22,20 @@
 	INSERT INTO
 		admin(
 			admin_id,
-			admin_pw,
 			admin_first_name,
 			admin_last_name,
 			admin_phone,
 			admin_email,
-			admin_reg,
 			admin_active,
 			create_date,
 			update_date
 			)	
 		VALUES(
 			#{adminId},
-			PASSWORD(#{adminPw}),
 			#{adminFirstName},
 			#{adminLastName},
 			#{adminPhone},
 			#{adminEmail},
-			#{adminReg},
 			#{adminActive},
 			NOW(),
 			NOW()

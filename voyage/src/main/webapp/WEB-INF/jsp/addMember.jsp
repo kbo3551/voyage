@@ -65,7 +65,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/loder.jpg" alt="">
+                    <img src="${pageContext.request.contextPath}/assets/img/logo/loder.jpg" alt="">
                 </div>
             </div>
         </div>
