@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.voyage.mapper.LoginMapper">
+	<select id="login" resultType="com.gdu.voyage.vo.Member">
+		SELECT
+			member_id memberId,
+			member_first_name memberFirstName,
+			member_last_name memberLastName,
+			member_nickname memberNickname,
+			member_level memberLevel
+		FROM
+			member
+		WHERE
+			member_id = #{memberId}
+			AND
+			member_pw = PASSWORD(#{memberPw});
+	</select>
+</mapper>

@@ -81,50 +81,31 @@
         <div class="slider-area hero-overly">
             <div class="single-slider hero-overly  slider-height d-flex align-items-center">
 		            <div class="container" style="margin-top: 128px">
-		            <!-- 
-		                <div class="col-md-6">
-		                    <div class="box-for overflow">
-		                        <div class="col-md-12 col-xs-12 register-blocks">
-		                            <h2 style="color:white">New account</h2> 
-		                            <form action="" method="post">
-		                                <div class="form-group">
-		                                    <label for="name">Name</label>
-		                                    <input type="text" class="form-control" id="name">
-		                                </div>
-		                                <div class="form-group">
-		                                    <label for="email">Email</label>
-		                                    <input type="text" class="form-control" id="email">
-		                                </div>
-		                                <div class="form-group">
-		                                    <label for="password">Password</label>
-		                                    <input type="password" class="form-control" id="password">
-		                                </div>
-		                                <div class="text-center">
-		                                    <button type="submit" class="btn btn-default">Register</button>
-		                                </div>
-		                            </form>
-		                        </div>
-		                    </div>
-		                </div>
-		            -->
 		
 		                <div class="col-md-6">
 		                    <div class="box-for overflow">                         
 		                        <div class="col-md-12 col-xs-12 login-blocks">
+		                        
+ 
+		                        	<c:if test="${param.failed == true}">
+		                        		<p style="color: red; font-weight: bold;">아이디 또는 비밀번호를 틀렸습니다.</p>
+		                        	</c:if>
 		                            <h2>Login</h2> 
-		                            <form action="" method="post">
+		                            <form id="login" action="${pageContext.request.contextPath}/login" method="post">
 			                                	<label for="id">User ID</label>
 		                                <div class="form-group">
-			                                    <input type="text" class="form-control" id="id">
+			                                    <input type="text" class="form-control" id="id" name="id">
 		                                </div>
 		                                <div class="form-group" style="clear: both;">
 		                                    <label for="password">Password</label>
-		                                    <input type="password" class="form-control" id="password">
+		                                    <input type="password" class="form-control" id="password" name="password">
 		                                </div>
 		                                <div class="text-center">
-		                                    <button type="submit" class="btn" style="background: rgb(0,172,238);
+		                                    <button type="button" class="btn" style="background: rgb(0,172,238);
                                     		background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
-                                    		"> Log in</button>
+                                    		"
+                                    		onclick="loginAction()"
+                                    		> Log in</button>
 		                                    
 		                                </div>
 		                            </form>
@@ -147,6 +128,21 @@
 		                        
 		                    </div>
 		                </div>
+		                
+		                <script type="text/javascript">
+			             	// 유효성 검사
+	                        function loginAction(){
+								if($("#id").val() == ""){
+									alert('ID를 입력해주세요.');
+									return;
+								} else if($("#password").val() == ""){
+									alert('패스워드를 입력해주세요.');
+									return;
+								} else {
+									login.submit();
+								}
+							};
+		                </script>
 		
 		            </div>
 		        </div>
