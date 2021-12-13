@@ -5,97 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-
-.btn {
-	margin: 2px auto;
-/* 	align-items: center; */
-/* 	justify-content: center; */
-}
-
-.center_wrap {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: center;
-}
-.quest_box {
-	width: 400px;
-}
-.hero__caption {
-	text-align: center;
-}
-.hero__caption h1 {
-    font-size: 50px;
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.5;
-}
-.hero__caption .scroll {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 14px;
-    color: #fff;
-    line-height: 1.3;
-}
-#hashtag_search {
-	z-index: 200 !important;
-}
-#hashtag_search form.search-box {
-    border: 8px solid rgba(255,255,255,0.2);
-    display: flex;
-    border-radius: 50px;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 15px;
-    height: 65px;
-}
-
-#hashtag_search form.search-box .input-form {
-    width: 70%;
-    position: relative;
-    border-top-left-radius: 50px;
-    overflow: hidden;
-    border-bottom-left-radius: 50px;
-    height: 50px;
-}
-#hashtag_search form.search-box .input-form input {
-    height: 50px;
-    width: 100%;
-    color: #777777;
-    font-size: 15px;
-    font-weight: 400;
-    padding: 9px 33px 9px 32px;
-    border: none;
-    border-radius: 0px;
-    position: relative;
-	z-index: 200 !important;
-}
-#hashtag_search form.search-box .search-form {
-    width: 30%;
-    border-top-right-radius: 50px;
-    overflow: hidden;
-    border-bottom-right-radius: 50px;
-    height: 50px;
-}
-#hashtag_search form.search-box .search-form a {
-    width: 100%;
-    height: 50px;
-    background: #ff3d1c;
-    font-size: 20px;
-    text-align: center;
-    color: #fff;
-    display: block;
-    padding: 15px;
-    border-radius: 0px;
-    text-transform: capitalize;
-    font-family: "Sulphur Point",sans-serif;
-    line-height: 20px;
-    font-size: 15px;
-	z-index: 200 !important;
-}
-</style>
 <script src="assets/js/wow.js"></script>
+<link rel="stylesheet" href="assets/css/hashtag.css">
 </head>
 <body>
 	<div id="hashtag_search">
@@ -106,20 +17,8 @@
 		        <span class="scroll">scroll !</span>
 			</div>
 		</div>
-		<div class="center_wrap">
-			<div class="quest_box">
-			    <form action="#" class="search-box">
-			    	<div class="input-form">
-			    		<input type="text" placeholder="해시태그를 입력해주세요">
-			    	</div>
-			    	<div class="search-form">
-			            <a href="###" onclick="">Search</a>
-			        </div>
-			    </form>
-			</div>
-		</div>
 	</div>
-	<div class="center_wrap" style="padding-top: 30px;">
+	<div class="center_wrap" style="padding-top: 100px;">
 		<c:forEach items="${hashtagList }" var="hashtag" varStatus="status">
 			<a href="#?hashtag=${hashtag.hashtag }&id=hashtag${status.count}">
 				<button type="submit" class="btn wow pulse fadeInDown animated" data-wow-delay="0.${status.count }s"
@@ -147,6 +46,7 @@
 	var largeNum = arr.slice(25, 40);
 	var smallNum = arr.slice(10, 20);
 	
+	// larg Button
 	var idL0 = 'hashtag' + largeNum[0];
 	var idL1 = 'hashtag' + largeNum[1];
 	var idL2 = 'hashtag' + largeNum[2];
@@ -166,27 +66,27 @@
 	document.getElementById(idL0).style.fontSize = '1.5em';
 	document.getElementById(idL0).style.padding = '1.8em';
 	document.getElementById(idL0).style.borderRadius = '1.8em';
-	document.getElementById(idL0).style.backgroundColor = 'rgba( 255, 61, 28, 0.6 )';
+	document.getElementById(idL0).style.backgroundColor = 'rgba(249, 52, 50)';
 	
 	document.getElementById(idL1).style.fontSize = '1.5em';
 	document.getElementById(idL1).style.padding = '1.8em';
 	document.getElementById(idL1).style.borderRadius = '1.8em';
-	document.getElementById(idL1).style.backgroundColor = 'rgba( 255, 61, 28, 0.6 )';
+	document.getElementById(idL1).style.backgroundColor = 'rgba(249, 52, 50)';
 	
 	document.getElementById(idL2).style.fontSize = '1.5em';
 	document.getElementById(idL2).style.padding = '1.8em';
 	document.getElementById(idL2).style.borderRadius = '1.8em';
-	document.getElementById(idL2).style.backgroundColor = 'rgba( 255, 61, 28, 0.6 )';
+	document.getElementById(idL2).style.backgroundColor = 'rgba(249, 52, 50)';
 	
 	document.getElementById(idL3).style.fontSize = '1.5em';
 	document.getElementById(idL3).style.padding = '1.8em';
 	document.getElementById(idL3).style.borderRadius = '1.8em';
-	document.getElementById(idL3).style.backgroundColor = 'rgba( 255, 61, 28, 0.6 )';
+	document.getElementById(idL3).style.backgroundColor = 'rgba(249, 52, 50)';
 	
 	document.getElementById(idL4).style.fontSize = '1.5em';
 	document.getElementById(idL4).style.padding = '1.8em';
 	document.getElementById(idL4).style.borderRadius = '1.8em';
-	document.getElementById(idL4).style.backgroundColor = 'rgba( 255, 61, 28, 0.6 )';
+	document.getElementById(idL4).style.backgroundColor = 'rgba(249, 52, 50)';
 	
 	document.getElementById(idL5).style.fontSize = '1.5em';
 	document.getElementById(idL5).style.padding = '1.8em';
@@ -228,6 +128,7 @@
 	document.getElementById(idL14).style.padding = '1.8em';
 	document.getElementById(idL14).style.borderRadius = '1.8em';
 	
+	// small Button
 	var idS0 = 'hashtag' + smallNum[0];
 	var idS1 = 'hashtag' + smallNum[1];
 	var idS2 = 'hashtag' + smallNum[2];
@@ -242,17 +143,17 @@
 	document.getElementById(idS0).style.fontSize = '0.8em';
 	document.getElementById(idS0).style.padding = '1.3em';
 	document.getElementById(idS0).style.borderRadius = '1.3em';
-	document.getElementById(idS0).style.backgroundColor = 'rgba( 255, 61, 28, 0.6 )';
+	document.getElementById(idS0).style.backgroundColor = 'rgba(249, 52, 50)';
 	
 	document.getElementById(idS1).style.fontSize = '0.8em';
 	document.getElementById(idS1).style.padding = '1.3em';
 	document.getElementById(idS1).style.borderRadius = '1.3em';
-	document.getElementById(idS1).style.backgroundColor = 'rgba( 255, 61, 28, 0.6 )';
+	document.getElementById(idS1).style.backgroundColor = 'rgba(249, 52, 50)';
 	
 	document.getElementById(idS2).style.fontSize = '0.8em';
 	document.getElementById(idS2).style.padding = '1.3em';
 	document.getElementById(idS2).style.borderRadius = '1.3em';
-	document.getElementById(idS2).style.backgroundColor = 'rgba( 255, 61, 28, 0.6 )';
+	document.getElementById(idS2).style.backgroundColor = 'rgba(249, 52, 50)';
 	
 	document.getElementById(idS3).style.fontSize = '0.8em';
 	document.getElementById(idS3).style.padding = '1.3em';
