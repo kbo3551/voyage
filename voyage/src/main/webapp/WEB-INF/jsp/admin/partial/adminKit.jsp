@@ -77,7 +77,7 @@
 				</li>
 				
 				<li class="sidebar-item">
-					<a class="sidebar-link" href="${pageContext.request.contextPath}/admin/activityBuildingList">
+					<a class="sidebar-link" href="${pageContext.request.contextPath}/admin/activityList">
 	            		<i class="align-middle" data-feather="grid"></i> <span class="align-middle">체험 관리</span>
 	         		</a>
 				</li>

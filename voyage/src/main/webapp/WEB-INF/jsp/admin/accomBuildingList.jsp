@@ -36,21 +36,23 @@
 		<main class="content">
 			<div class="container-fluid p-0">
 	
-				<h1 class="h3 mb-3"><strong>상품 관리</strong></h1>
+				<h1 class="h3 mb-3"><strong>숙소 관리</strong></h1>
 					<div class="row">
 						<div class="col-12 col-lg-8 col-xxl-9 d-flex">
 							<div class="card flex-fill">
 								<div class="card-header">
 	
-									<h5 class="card-title mb-0">Latest Products</h5>
+									<h5 class="card-title mb-0">Latest AccomBuilding</h5>
 								</div>
 								<table class="table table-hover my-0">
 									<thead>
 										<tr>
 											<th>Building Name</th>
-											<th class="d-none d-xl-table-cell">Building Description</th>
-											<th class="d-none d-xl-table-cell">Building phone</th>
+											<th>Building Description</th>
+											<th>Building Phone</th>
 											<th>Building State</th>
+											<th>create Date</th>
+											<th>update Date</th>
 										</tr>
 									</thead>
 									<tbody> 
@@ -64,16 +66,11 @@
 										        <td>${Accom.updateDate}</td>
 										        </tr>
 									    </c:forEach>
-									    <c:if test="${empty accomBuildingList}">
-									        ${"데이터가 없습니다"}
-									    </c:if>
-										
 									</tbody>
 								</table>
 							</div>
 						</div>
 					</div>
-	
 				</div>
 			</main>
 	
