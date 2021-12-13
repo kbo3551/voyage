@@ -5,23 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>배너</title>
-<style type="text/css">
-#hashtag {
-	background-color: rgba(0, 0, 0, 0.5);
-    position: absolute;
-    transition: all .4s;
-	width: 120%;
-	height: auto;
-	left: -20%;
-	top: -1500%;
-	border-radius: 0 0 20px 20px;
-	z-index: 100;
-	padding: 30px 100px 50px 100px;
-	overflow: hidden;
-}
-
-</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="assets/css/hashtag.css">
 </head>
 <body>
     <!-- Preloader Start -->
@@ -51,7 +38,7 @@
                                                     <li><a href="${pageContext.request.contextPath}/templates_citylisting/getAccomProduct">숙소</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="#hashtag" class="hashtag">해시태그</a></li>
+                                            <li><a class="hashtag">해시태그</a></li>
 										 	<li><a href="#">후기</a>
                                                 <ul class="submenu">
                                                     <li><a href="${pageContext.request.contextPath}/getActivityReviewList">체험</a></li>
@@ -107,12 +94,26 @@
                                            	</c:choose>
                                             
                                     </nav>
-                                    
-									<div id="hashtag">
-								    	<div>
-											<c:import url="${pageContext.request.contextPath}/hashtag"></c:import>
-								    	</div>
-								    </div>
+                                </div>
+                                <div id="hashtag">
+                                    <div id="search__box">
+                                        <div class="quest_box" >
+                                            <div class="search-box">
+                                                <div class="input-form">
+                                                    <input type="text" id="word" onkeyup="search(this);" placeholder="해시태그를 입력해주세요">
+                                                </div>
+                                                <div class="search-form">
+                                                    <button type="button" id="btn_search">Search</button>
+                                                </div>
+                                            </div>
+                                            <ul id="hashtagList"></ul> <!-- hashtag 검색 제시어가 나타나는 영역 -->
+                                        </div>
+                                    </div>
+                                    <div class="hashtag_body">
+                                        <div>
+                                            <c:import url="/hashtag"></c:import>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <!-- Mobile Menu -->
@@ -130,17 +131,62 @@
     <script type="text/javascript">
     // 해시태그 메뉴 클릭 시 해시태그 창 나타남
     $('.hashtag').click(function(){
-		$('#hashtag').css('background-color','rgba(0, 0, 0, 0.5)');
-		$('#hashtag').css('top','0%');
-	    var top = $('#hashtag').css('top');
-	});
+      $('.hashtag_body').css('background-color','rgba(0, 0, 0, 0.5)');
+      $('.hashtag_body').css('top','0%');
+      $('#search__box').css('top','152%');
+   });
     
     // 해시태그 창 클릭 시 해시태그 창 사라짐
-    $('#hashtag').click(function(){
-		$('#hashtag').css('background-color','rgba(0, 0, 0, 0.5)');
-		$('#hashtag').css('top','-1500%');
-	    var top = $('#hashtag').css('top');
-	});
+    $('.hashtag_body').click(function(){
+      $('.hashtag_body').css('background-color','rgba(0, 0, 0, 0.5)');
+      $('.hashtag_body').css('top','-1500%');
+      $('#search__box').css('top','-1500%');
+   });
+
+    // 검색 제시어 이벤트
+    function search(target){
+       
+       var word = target.value;
+       var encodeWord = encodeURI(word);
+       console.log(word);
+       console.log(encodeWord);
+       
+    //start Ajax
+    $.ajax({
+        type : 'GET',
+        dataType : 'json',
+        url : "http://localhost/hashtagSearh?"
+            + "searchKeyword="
+            + word,
+            error : function(err) {
+                console.log("실행중 오류가 발생하였습니다.");
+            },
+            success : function(data) {
+                console.log("data확인 : "+data);
+                console.log("결과 갯수 : "+data.dataSearch.content.length);
+                console.log("첫번째 결과 : "+data.dataSearch.content[0]);
+                $("#hashtagList").empty();
+                var checkWord = $("#word").val(); // 검색어 입력값
+                console.log(data.dataSearch.content.length);
+                if(checkWord.length > 0 && data.dataSearch.content.length > 0){
+                    for (i = 0; i < data.dataSearch.content.length; i++) {
+                    $("#hashtagList")
+                        .append(
+                                "<li class='hashtagList' value='"
+                                + data.dataSearch.content[i].schoolName
+                                + "' data-input='"
+                                + data.dataSearch.content[i].schoolName
+                                + ">"
+                                + "<a href='javascript:void(0);'>"
+                                + data.dataSearch.content[i].schoolName
+                                + "</a>"
+                                + "</li>");
+                }
+            } 
+        } 
+        });
+        //end Ajax
+    }
     </script>
     
 </body>

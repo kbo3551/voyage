@@ -11,15 +11,15 @@ import com.gdu.voyage.service.HashtagService;
 
 @Controller
 public class HashtagController {
-	@Autowired HashtagService hashtagService;
-	
-	@GetMapping("/hashtag")
-	public String hashtag(Model model) {
-		System.out.println("IndexController().hashtag 실행");
-		
-		Map<String, Object> map = hashtagService.getHashtagList();
-		model.addAttribute("hashtagList", map.get("hashtagList"));
-		
-		return "hashtag";
-	}
+   @Autowired HashtagService hashtagService;
+   
+   @GetMapping("/hashtag")
+   public String hashtag(Model model) {
+      System.out.println("HashtagController().hashtag 실행");
+      
+      Map<String, Object> map = hashtagService.getHashtagList();
+      model.addAttribute("hashtagList", map.get("hashtagList"));
+      
+      return "hashtag";
+   }   
 }
