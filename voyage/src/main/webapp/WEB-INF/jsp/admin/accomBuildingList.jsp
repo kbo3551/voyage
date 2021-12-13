@@ -53,7 +53,7 @@
 											<th>Building State</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody> 
 										<c:forEach items="${list}" var="Accom" >
 											<tr>
 										        <td>${Accom.accomBuildingNo}</td>
