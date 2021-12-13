@@ -21,6 +21,12 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 	@Autowired MemberService memberService;
 	
+	@GetMapping("/member/myPage")
+	public String myPage() {
+    	System.out.println("MemberController() 실행");
+    	return "/member/myPage";
+    }
+	
 	@GetMapping("/addMember")
 	public String getAddMember() {
     	System.out.println("MemberController() 실행");
