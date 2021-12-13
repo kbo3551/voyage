@@ -71,7 +71,7 @@
 				</li>
 	
 				<li class="sidebar-item">
-					<a class="sidebar-link" href="${pageContext.request.contextPath}/accomBuildingList">
+					<a class="sidebar-link" href="${pageContext.request.contextPath}/admin/accomBuildingList">
 	            		<i class="align-middle" data-feather="grid"></i> <span class="align-middle">숙소 관리</span>
 	         		</a>
 				</li>
