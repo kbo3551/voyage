@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>로그인</title>
+<title>마이페이지</title>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="">
@@ -56,7 +56,7 @@
 
 <body>
 
-    <!-- Preloader Start -->
+	<!-- Preloader Start -->
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
@@ -69,86 +69,32 @@
     </div>
     
     
-    <c:import url="/WEB-INF/jsp/partial/banner.jsp"/>
+   	<c:import url="/WEB-INF/jsp/partial/banner.jsp"/>
 
-	
-        
+
+
 	<main>
-		
-		<!-- Hero Area Start-->
-        <div class="slider-area hero-overly">
-            <div class="single-slider hero-overly  slider-height d-flex align-items-center">
-		            <div class="container" style="margin-top: 128px">
-		
-		                <div class="col-md-6">
-		                    <div class="box-for overflow">                         
-		                        <div class="col-md-12 col-xs-12 login-blocks">
-		                        
- 
-		                        	<c:if test="${param.failed == true}">
-		                        		<p style="color: red; font-weight: bold;">아이디 또는 비밀번호를 틀렸습니다.</p>
-		                        	</c:if>
-		                            <h2>Login</h2> 
-		                            <form id="login" action="${pageContext.request.contextPath}/login" method="post">
-			                                	<label for="id">User ID</label>
-		                                <div class="form-group">
-			                                    <input type="text" class="form-control" id="id" name="id">
-		                                </div>
-		                                <div class="form-group" style="clear: both;">
-		                                    <label for="password">Password</label>
-		                                    <input type="password" class="form-control" id="password" name="password">
-		                                </div>
-		                                <div class="text-center">
-		                                    <button type="button" class="btn" style="background: rgb(0,172,238);
-                                    		background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
-                                    		"
-                                    		onclick="loginAction()"
-                                    		> Log in</button>
-		                                    
-		                                </div>
-		                            </form>
-		                            <br>
-		                            
-		                            <h2>Social login</h2> 
-		                            
-		                            <p>
-		                             <a href="#"><i class="fab fa-facebook-f"></i></a>
-	                                <a href="#"><i class="fab fa-twitter"></i></a>
-	                                <a href="#"><i class="fas fa-globe"></i></a>
-		                            </p> 
-		                        </div>
-		                        
-		                        <div class="text-center">
-                                    <a href="${pageContext.request.contextPath}/addMember"><button type="submit" class="btn" style="background: rgb(0,172,238);
-                                    background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
-                                    ">sign up</button></a>
-                                </div>
-		                        
-		                    </div>
-		                </div>
-		                
-		                <script type="text/javascript">
-			             	// 유효성 검사
-	                        function loginAction(){
-								if($("#id").val() == ""){
-									alert('ID를 입력해주세요.');
-									return;
-								} else if($("#password").val() == ""){
-									alert('패스워드를 입력해주세요.');
-									return;
-								} else {
-									login.submit();
-								}
-							};
-		                </script>
-		
-		            </div>
-		        </div>
-            </div>
+	
+	<div style="height:130px; background-color: black;"></div>
+    <!-- property area -->
+	<div class="content-area submit-property">
+		<div class="container" style="background-color: #FCFCFC;">
+			<div class="clearfix">
+				<div class="wizard-container">
+	
+					<div class="wizard-card ct-wizard-orange" id="wizardProperty">
+						dd
+					</div>
+					<!-- End submit form -->
+				</div>
+			</div>
+		</div>
+	</div>
 	
 	</main>
-    
-    <c:import url="/WEB-INF/jsp/partial/footer.jsp"/>
+
+
+	<c:import url="/WEB-INF/jsp/partial/footer.jsp"/>
     
     <!-- Scroll Up -->
     <div id="back-top" >

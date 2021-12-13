@@ -63,7 +63,7 @@
                                                     <li><a href="${pageContext.request.contextPath}/noticeList">공지사항</a></li>
                                                     <li><a href="${pageContext.request.contextPath}/qnaList">Q&A</a></li>
                                                 </ul>
-                                            </li>
+                                            </li> 
                                            	
                                            	<c:choose>
                                            		<c:when test="${empty loginMember}">
@@ -76,7 +76,7 @@
                                            		</c:when>
                                            		
                                            		<c:when test="${loginMember.getMemberLevel() == 0}">
-                                           			<li><a href="${pageContext.request.contextPath}/myPage"><i class="ti-user">${loginMember.getMemberNickname()}</i></a>
+                                           			<li><a href="${pageContext.request.contextPath}/member/myPage"><i class="ti-user">${loginMember.getMemberNickname()}</i></a>
 			                                           	<ul class="submenu">
 				                                            <li><a href="${pageContext.request.contextPath}/member/myPage">마이페이지</a></li>
 				                                            <li><a href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
@@ -85,7 +85,7 @@
                                            		</c:when>
                                            		
                                            		<c:when test="${loginMember.getMemberLevel() == 1}">
-                                           			<li><a href="${pageContext.request.contextPath}/myPage"><i class="ti-user">${loginMember.getMemberNickname()}</i></a>
+                                           			<li><a href="${pageContext.request.contextPath}/member/myPage"><i class="ti-user">${loginMember.getMemberNickname()}</i></a>
 			                                           	<ul class="submenu">
 				                                            <li><a href="${pageContext.request.contextPath}/member/myPage">마이페이지</a></li>
 				                                            <li><a href="${pageContext.request.contextPath}/host/hostIndex">사업자페이지</a></li>
@@ -95,7 +95,7 @@
                                            		</c:when>
                                            		
                                            		<c:when test="${loginMember.getMemberLevel() == 2}">
-                                           			<li><a href="${pageContext.request.contextPath}/myPage"><i class="ti-user">${loginMember.getMemberNickname()}</i></a>
+                                           			<li><a href="${pageContext.request.contextPath}/member/myPage"><i class="ti-user">${loginMember.getMemberNickname()}</i></a>
 			                                           	<ul class="submenu">
 				                                            <li><a href="${pageContext.request.contextPath}/member/myPage">마이페이지</a></li>
 				                                            <li><a href="${pageContext.request.contextPath}/admin/adminIndex">관리자페이지</a></li>

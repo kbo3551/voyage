@@ -59,7 +59,7 @@
     </div>
     
     
-    <c:import url="partial\\banner.jsp"/>
+    <c:import url="/WEB-INF/jsp/partial/banner.jsp"/>
     
     <main>
 
@@ -495,7 +495,7 @@
 
     </main>
     <!--footer.jsp 시작  -->
-    <c:import url="${pageContext.request.contextPath}\\partial\\footer.jsp"/>
+    <c:import url="/WEB-INF/jsp/partial/footer.jsp"/>
     <!--footer.jsp 끝  -->
     <!-- Scroll Up -->
     <div id="back-top" >

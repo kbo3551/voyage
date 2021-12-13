@@ -21,6 +21,12 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 	@Autowired MemberService memberService;
 	
+	@GetMapping("/member/myPage")
+	public String myPage() {
+    	System.out.println("MemberController() 실행");
+    	return "/member/myPage";
+    }
+	
 	@GetMapping("/addMember")
 	public String getAddMember() {
     	System.out.println("MemberController() 실행");
@@ -87,6 +93,9 @@ public class MemberController {
         
         // 주소 삽입
 	    memberService.addMemberAddress(addr);
+	    
+	    // create_id 테이블에 아이디 저장
+	    memberService.addMemberCreateId(memberId);
 	    
 	    return "redirect:/login";
 	 }
