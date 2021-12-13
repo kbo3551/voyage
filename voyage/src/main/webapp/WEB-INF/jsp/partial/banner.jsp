@@ -45,14 +45,14 @@
                                         <ul id="navigation">                                                                                                                                     
                                             <li><a href="${pageContext.request.contextPath}/index">메인</a></li>
                                             <li><a href="${pageContext.request.contextPath}/about">설명</a></li>
-                                            <li><a href="#">예약</a>
+                                            <li><a href="${pageContext.request.contextPath}/setProductCategory">예약</a>
                                                 <ul class="submenu">
                                                     <li><a href="getActivityProduct">체험</a></li>
                                                     <li><a href="getAccomProduct">숙소</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="#hashtag" class="hashtag">해시태그</a></li>
-										 	<li><a href="${pageContext.request.contextPath}/setReviewCategory">후기</a>
+										 	<li><a href="#">후기</a>
                                                 <ul class="submenu">
                                                     <li><a href="${pageContext.request.contextPath}/getActivityReviewList">체험</a></li>
                                                     <li><a href="${pageContext.request.contextPath}/getAccomReviewList">숙소</a></li>

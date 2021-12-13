@@ -5,12 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ReviewController {
-	@GetMapping("/setReviewCategory")
-	public String setReviewCategory() {
-		System.out.println("ActivityReviewController() 실행");
-	      
-		return "/templates_citylisting/setReviewCategory";
-	}
 	
 	@GetMapping("/getActivityReviewList")
 	public String getActivityReviewList() {

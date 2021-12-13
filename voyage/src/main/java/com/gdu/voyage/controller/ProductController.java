@@ -18,4 +18,11 @@ public class ProductController {
 	    
 		return "/templates_citylisting/getActivityProduct";
 	}
+	
+	@GetMapping("/setProductCategory")
+	public String setReviewCategory() {
+		System.out.println("ActivityReviewController() 실행");
+	      
+		return "/templates_citylisting/setProductCategory";
+	}
 }
