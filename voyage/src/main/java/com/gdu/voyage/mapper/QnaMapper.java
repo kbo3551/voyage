@@ -11,15 +11,18 @@ import com.gdu.voyage.vo.QnaImg;
 @Mapper
 public interface QnaMapper {
 	// Qna 전체 목록
+	List<Qna> selectQnaList(int pageNo);
 	List<Qna> selectQnaListByCategory(Map<String, Object> param);
-	// 질문 작성
-	int addQ(Qna qna);
+
+	int selectQnaTotalCount(String qnaCategory);
+	int selectCountPage();
+	// 목록 상세 내용
+	Qna selectQnaOne(int qnaNo);
 	// 질문 수정
-	void modifyQ(Qna qna);
+	int modifyQ(Qna qna);
 	// 질문 삭제
-	void removeQ(Qna qna);
-	// 이미지 파일
-	List<QnaImg> selectQnaImgList();
-	int addQuestion(Qna qna);
+	int removeQ(Qna qna);
+	// 이미지 파일 및 질문 추가
+	int addQ(Qna qna);
 	int addQImg(QnaImg qnaImg);
 }
