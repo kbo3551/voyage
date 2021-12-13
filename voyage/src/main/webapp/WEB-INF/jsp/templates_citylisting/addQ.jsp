@@ -179,7 +179,7 @@
                                     		원본 : <input class="form-control error" name="name" id="name" type="text"  placeholder="Your Name">
                                     	 -->
                                     	 <input class="form-control error" name="memberNickname" id="memberNickname" type="text" placeholder="닉네임을 입력해주세요">
-                                    .</div>
+                                    </div>
                                 </div>
                                 <div>
                                 </div>
