@@ -71,8 +71,14 @@
 				</li>
 	
 				<li class="sidebar-item">
-					<a class="sidebar-link" href="${pageContext.request.contextPath}/productManagement">
-	            		<i class="align-middle" data-feather="grid"></i> <span class="align-middle">상품 관리</span>
+					<a class="sidebar-link" href="${pageContext.request.contextPath}/accomBuildingList">
+	            		<i class="align-middle" data-feather="grid"></i> <span class="align-middle">숙소 관리</span>
+	         		</a>
+				</li>
+				
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="${pageContext.request.contextPath}/admin/activityBuildingList">
+	            		<i class="align-middle" data-feather="grid"></i> <span class="align-middle">체험 관리</span>
 	         		</a>
 				</li>
 	

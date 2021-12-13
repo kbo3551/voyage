@@ -31,6 +31,13 @@ public class AccomBuildingService {
 	@Autowired
 	private HttpServletRequest request;
 	
+	// 숙소 등록 목록 조회
+		public List<AccomBuilding> getAccomBuildingList(int pageNo) {
+			pageNo = (pageNo - 1) * 10;
+			log.debug(accomBuildingMapper.selectAccomBuildingList(pageNo) + "***********[상훈] accomBuildingService");
+			return accomBuildingMapper.selectAccomBuildingList(pageNo);
+		}
+	
 	// 숙소-건물 입력
 	public void addAccomBuilding(AccomBuildingForm accomBuildingForm) {
 		// 매개변수 디버깅 //accomBuildingForm  --> 숙소-건물정보 + 이미지 + 시설 + 추천장소 + 해시태그
@@ -125,5 +132,23 @@ public class AccomBuildingService {
 				accomBuildingMapper.insertAccomBuildingHashtag(hashtag);
 			}
 		}
+	}
+
+	// 페이징
+	public int[] countPage(int currentPage) {
+		int[] num = new int[10];
+		int listNum = accomBuildingMapper.selectCountPage();
+		listNum = (listNum / 10) + (listNum % 10);
+		for(int i=1; i<=10; i++) {
+			if(currentPage <= 10) {
+				num[i-1] = (currentPage / 10) + i;
+			} else {
+				if(listNum == ((currentPage / 10) * 10) + i) {
+					break;
+				}
+				num[i-1] = ((currentPage / 10) * 10) + i;
+			}
+		}
+		return num;
 	}
 }
