@@ -19,18 +19,18 @@
 
 	<title>AdminKit Demo - Bootstrap 5 Admin Templateee</title>
 
-	<link href="admin/css/app.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/admin/css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 	<div class="wrapper">
     <!-- adminKit : 시작 -->
-    	<c:import url="../adminPartial\\adminKit.jsp"/>
+    	<c:import url="partial\\adminKit.jsp"/>
     <!-- adminKit : 끝 -->
 	<div class="main">
     <!-- adminKit : 시작 -->
-    	<c:import url="../adminPartial\\adminBanner.jsp"/>
+    	<c:import url="partial\\adminBanner.jsp"/>
     <!-- adminKit : 끝 -->
 	
 		<main class="content">
@@ -126,12 +126,12 @@
 			</main>
 	
     <!-- adminFooter : 시작 -->
-    	<c:import url="../adminPartial\\adminFooter.jsp"/>
+    	<c:import url="partial\\adminFooter.jsp"/>
     <!-- adminFooter : 끝 -->
 		</div>
 	</div>
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src="admin/js/app.js"></script>
+	<script src="${pageContext.request.contextPath}/admin/js/app.js"></script>
 	
 	<script>
 	document.addEventListener("DOMContentLoaded", function() {
