@@ -39,20 +39,20 @@ public class AccomController {
 		return "redirect:/accomBuildingList";
 	}
 	
-	@RequestMapping("accomBuildingList")
+	@RequestMapping("/admin/accomBuildingList")
 	public String getAccomBuildingList(Model model, int pageNo) {
 		currentPage = pageNo;
 		log.debug("accomBuildingList 실행!!");
 		List<AccomBuilding> list = accomBuildingService.getAccomBuildingList(currentPage);
 		model.addAttribute("list", list);
-		return "/templates_admin/accomBuildingList";
+		return "/admin/accomBuildingList";
 	}
 	
-	@GetMapping("accomBuildingList")
+	@GetMapping("/admin/accomBuildingList")
 	public String accomBuildingList() {
 		System.out.println("AccomBuildingController() 실행");
 		
-		return "/templates_admin/accomBuildingList";
+		return "/admin/accomBuildingList";
 	}
 	
 }

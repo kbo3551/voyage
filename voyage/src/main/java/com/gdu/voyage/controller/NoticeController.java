@@ -25,12 +25,12 @@ public class NoticeController {
 	      
 		return "/templates_citylisting/noticeList";
 	}
-	@GetMapping("/addNotice")
+	@GetMapping("/admin/addNotice")
 	public String addNotice() {
-		return "/templates_admin/addNotice";
+		return "/admin/addNotice";
 	}
 	
-	@PostMapping("/addNotice")
+	@PostMapping("/admin/addNotice")
 	public String addNotice(NoticeForm noticeForm) {
 		log.debug(noticeForm.toString());
 		noticeService.addNotice(noticeForm);
