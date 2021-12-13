@@ -84,7 +84,7 @@
                                 <span class="flaticon-drink"></span>
                             </div>
                             <div class="cat-cap">
-                                <h5><a href="catagori.html">체험</a></h5>
+                                <h5><a href="${pageContext.request.contextPath}/getActivityProduct">체험</a></h5>
                                 <p>인생의 전환점을 찾아보세요</p>
                                 <a href="${pageContext.request.contextPath}/getActivityProduct">View Details</a>
                             </div>
@@ -96,7 +96,7 @@
                                 <span class="flaticon-bed"></span>
                             </div>
                             <div class="cat-cap">
-                                <h5><a href="catagori.html">숙소</a></h5>
+                                <h5><a href="${pageContext.request.contextPath}/getAccomProduct">숙소</a></h5>
                                 <p>휴식이 필요하지 않으신가요?</p>
                                 <a href="${pageContext.request.contextPath}/getAccomProduct">View Details</a>
                             </div>
