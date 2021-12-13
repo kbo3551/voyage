@@ -86,7 +86,7 @@
 		                    <div class="box-for overflow">                         
 		                        <div class="col-md-12 col-xs-12 login-blocks">
 		                        
-
+ 
 		                        	<c:if test="${param.failed == true}">
 		                        		<p style="color: red; font-weight: bold;">아이디 또는 비밀번호를 틀렸습니다.</p>
 		                        	</c:if>
