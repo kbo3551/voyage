@@ -79,5 +79,14 @@
 			NOW()
 		)
 	</insert>
-	
+	<!-- 숙소 건물을 불러옴 -->
+	<select id="selectAccombuildingList" resultType="com.gdu.voyage.vo.AccomBuilding">
+            select accom_building_no as accomBuildingNo,
+            accom_building_name as accomBuildingName,
+            accom_building_description as accomBuildingDescription,
+            accom_building_phone as accomBuildingPhone,
+            create_date as createDate,
+            update_date as updateDate
+            from accom_building
+    </select>
 </mapper>
