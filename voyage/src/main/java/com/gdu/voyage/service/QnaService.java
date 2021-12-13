@@ -1,6 +1,7 @@
 package com.gdu.voyage.service;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -23,53 +24,54 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Transactional
 public class QnaService {
-	private final Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired QnaMapper qnaMapper;
 	
+	public List<QnaImg> getQnaImgList(){
+		return qnaMapper.selectQnaImgList();
+	}
+	// Qna 게시판 질문 작성
 	public void addQ(QnaForm qnaForm) {
+		log.debug(qnaForm.toString() + "☆☆☆☆☆☆☆☆☆☆[다원] QnaService_qnaForm debug");
+		
+		String qnaContent = qnaForm.getQnaContent();
+		List<MultipartFile> Img = qnaForm.getQnaImg();
 		
 		Qna qna = new Qna();
-		qna.setMemberNickname(qnaForm.getQna().getMemberNickname());
-		qna.setQnaCategory(qnaForm.getQna().getQnaCategory());
-		qna.setQnaTitle(qnaForm.getQna().getQnaTitle());
-		qna.setQnaContent(qnaForm.getQna().getQnaContent());
-		qna.setQnaSecret(qnaForm.getQna().getQnaSecret());
-		// debug 코드
-		System.out.println("qna" + qna);
-		
-		qnaMapper.addQ(qna);
+		qna.setQnaContent(qnaContent);
+		qnaMapper.addQuestion(qna);
+		log.debug(qna.getQnaNo() + "☆☆☆☆☆☆☆☆☆☆[다원] QnaService_qnaNo debug");
 		
 		// 이미지 추가
-		List<QnaImg> qnaImg = null;
 		if(qnaForm.getQnaImg() != null) {
-			qnaImg = new ArrayList<QnaImg>();
-			for(MultipartFile mf : qnaForm.getQnaImg()) {
-				QnaImg qImg = new QnaImg();
-				qImg.setQnaNo(qna.getQnaNo());
-				int p = mf.getOriginalFilename().lastIndexOf(".");
-				String ext = mf.getOriginalFilename().substring(p).toLowerCase();
-				String imgName = UUID.randomUUID().toString().replace("-", "");
-				qImg.setQnaImgName(imgName + ext);
-				qImg.setQnaImgSize(mf.getSize());
-				qImg.setQnaImgExt(mf.getContentType());
-				qnaImg.add(qImg);
-				// debug 코드
-				logger.debug("qImg" + qImg);
-				try {
-					// 임시 파일 경로
-					mf.transferTo(new File("C:\\Users\\dawon\\voyage\\voyage\\src\\main\\resources\\resources\\assets\\img\\"+ imgName + ext));
-				}catch(Exception e) {
+			QnaImg qnaImg = new QnaImg();
+			qnaImg.setQnaNo(qna.getQnaNo());
+			
+			// 이미지 파일 이름 설정
+			String qnaImgName = UUID.randomUUID().toString();
+			qnaImg.setQnaImgName(qnaImgName);
+			
+			// 이미지 파일 원본 이름
+			String qnaImgOriginName = ((MultipartFile) Img).getOriginalFilename();
+			// 이미지 파일명 뒤에 .확장자명에서 . 위치
+			int p = qnaImgOriginName.lastIndexOf(".");
+			String qnaImgExt = qnaImgOriginName.substring(p+1);
+			// 뒤에서 .까지(확장자명에서 .까지)
+			qnaImg.setQnaImgExt(qnaImgExt); 
+			qnaImg.setQnaImgSize(Img.size());
+			qnaMapper.addQImg(qnaImg);
+			
+			// 파일 경로 임시 설정
+			File Imgfile = new File(("C:\\Users\\dawon\\voyage\\voyage\\src\\main\\resources\\resources\\assets\\img\\"+ qnaImgName + qnaImgExt));
+			// 필요한 exception이 아닌 다른 exception을 RuntimeException()을 던져 예외 발생시킴
+			// 트랜잭션 처리할 때, 필요한 과정임
+			try {
+				((MultipartFile) Img).transferTo(Imgfile);
+				}catch(IllegalStateException | IOException e) {
 					e.printStackTrace();
-					// Exception
+					
 					throw new RuntimeException();
 				}
 			}
-		}
-		
-		if(qnaImg != null) {
-			for(QnaImg qImg : qnaImg) {
-				qnaMapper.addQImg(qImg);
-			}
-		}
+		}		
 	}
-}
+
