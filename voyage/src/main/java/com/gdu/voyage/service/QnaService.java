@@ -3,7 +3,9 @@ package com.gdu.voyage.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -25,12 +27,49 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 public class QnaService {
 	@Autowired QnaMapper qnaMapper;
-	
-	public List<QnaImg> getQnaImgList(){
-		return qnaMapper.selectQnaImgList();
+	// Qna 게시판 목록 조회
+	public List<Qna> getQnaList(int pageNo){
+		// 매개변수 pageNo값 가공
+		pageNo = (pageNo - 1) * 10;
+		log.debug(qnaMapper.selectQnaList(pageNo) + "☆☆☆☆☆☆☆☆☆☆[다원] QnaService_pageNo debug");
+		return qnaMapper.selectQnaList(pageNo);
 	}
+	// Qna 게시판 목록 카테고리 별 조회
+	public Map<String, Object> getQnaListByCategory(String qnaCategory, int currentPage, int rowPerPage){
+		// 매개변수 값 가공 
+		Map<String, Object> paramMap = new HashMap<>();
+
+		int beginRow = (currentPage - 1) * rowPerPage;
+		
+		paramMap.put("qnaCategory", qnaCategory);
+		paramMap.put("beginRow", beginRow);
+		paramMap.put("rowPerPage", rowPerPage);
+		
+		List<Qna> qnaList = qnaMapper.selectQnaListByCategory(paramMap);
+		// Mapper로부터 호출한 결과값 가공
+		Map<String, Object> returnMap = new HashMap<>();
+		returnMap.put("qnaList", qnaList);
+		int lastPage = 0;
+		int totalCount = qnaMapper.selectQnaTotalCount(qnaCategory);
+		lastPage = (totalCount / rowPerPage);
+		if(totalCount % rowPerPage != 0) {
+			lastPage += 1;
+		}
+		returnMap.put("qnaList", qnaList);
+		returnMap.put("lastPage", lastPage);
+		return returnMap;
+	}
+	// Qna 게시판 목록 상세 내용
+	public Qna getQnaOne(int qnaNo) {
+		log.debug(qnaMapper.selectQnaOne(qnaNo)+"☆☆☆☆☆☆☆☆☆☆[다원] QnaService_qnaNo debug");
+		return qnaMapper.selectQnaOne(qnaNo);
+	}
+	// Qna 게시판 질문 수정
+	
+	// Qna 게시판 질문 삭제
+	
 	// Qna 게시판 질문 작성
-	public void addQ(QnaForm qnaForm) {
+	public void addQ(QnaForm qnaForm) throws Exception {
 		log.debug(qnaForm.toString() + "☆☆☆☆☆☆☆☆☆☆[다원] QnaService_qnaForm debug");
 		
 		String qnaContent = qnaForm.getQnaContent();
@@ -38,7 +77,7 @@ public class QnaService {
 		
 		Qna qna = new Qna();
 		qna.setQnaContent(qnaContent);
-		qnaMapper.addQuestion(qna);
+		qnaMapper.addQ(qna);
 		log.debug(qna.getQnaNo() + "☆☆☆☆☆☆☆☆☆☆[다원] QnaService_qnaNo debug");
 		
 		// 이미지 추가
@@ -62,16 +101,35 @@ public class QnaService {
 			
 			// 파일 경로 임시 설정
 			File Imgfile = new File(("C:\\Users\\dawon\\voyage\\voyage\\src\\main\\resources\\resources\\assets\\img\\"+ qnaImgName + qnaImgExt));
-			// 필요한 exception이 아닌 다른 exception을 RuntimeException()을 던져 예외 발생시킴
+			// 필요한 exception(IllegalStateException, IOException)이 아닌 다른 exception을 Exception()을 던져 예외 발생시킴
 			// 트랜잭션 처리할 때, 필요한 과정임
 			try {
 				((MultipartFile) Img).transferTo(Imgfile);
 				}catch(IllegalStateException | IOException e) {
 					e.printStackTrace();
 					
-					throw new RuntimeException();
+					throw new Exception();
 				}
 			}
-		}		
+		}
+	//
+	
+	// 페이징
+	public int[] countPage(int currentPage) {
+		int[] num = new int[10];
+		int listNum = qnaMapper.selectCountPage();
+		listNum = (listNum / 10) + (listNum % 10);
+		for(int i=1; i<=10; i++) {
+			if(currentPage <= 10) {
+				num[i-1] = (currentPage / 10) + i;
+			} else {
+				if(listNum == ((currentPage / 10) * 10) + i) {
+					break;
+				}
+				num[i-1] = ((currentPage / 10) * 10) + i;
+			}
+		}
+		return num;
 	}
+}
 
