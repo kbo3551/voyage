@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -43,6 +44,20 @@
 	
 									<h5 class="card-title mb-0">Latest Products</h5>
 								</div>
+								<table class="table table-hover my_0">
+								<c:forEach items="${list}" var="Ac" >
+							        ${Ac.accomBuildingNo }<br>
+							        ${Ac.accomBuildingName }<br>
+							        ${Ac.accomBuildingDescription }<br>
+							        ${Ac.accomBuildingPhone }<br>
+							        ${Ac.createDate }<br>
+							        ${Ac.updateDate }<br><br>
+							    </c:forEach>
+							    <c:if test="${empty list}">
+							        ${"데이터가 없습니다"}
+							    </c:if>
+							    
+								</table>
 								<table class="table table-hover my-0">
 									<thead>
 										<tr>
@@ -105,19 +120,6 @@
 								</table>
 							</div>
 						</div>
-						<div class="col-12 col-lg-4 col-xxl-3 d-flex">
-							<div class="card flex-fill w-100">
-								<div class="card-header">
-
-									<h5 class="card-title mb-0">Monthly Sales</h5>
-								</div>
-								<div class="card-body d-flex w-100">
-									<div class="align-self-center chart chart-lg">
-										<canvas id="chartjs-dashboard-bar"></canvas>
-									</div>
-								</div>
-							</div>
-						</div>
 					</div>
 	
 				</div>
@@ -128,7 +130,7 @@
     <!-- adminFooter : 끝 -->
 		</div>
 	</div>
-	
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="admin/js/app.js"></script>
 	
 	<script>
