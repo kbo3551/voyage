@@ -21,9 +21,9 @@ public class LoginService {
 		Member loginMember = loginMapper.login(member);
 		return loginMember;
 	}
-	public Admin adminLogin(Admin admin) {
-		log.debug("☆☆☆[bryeong]LoginService_Admin☆☆☆"+admin.toString());
-		Admin loginAdmin = loginMapper.adminLogin(admin);
+	public Admin adminLogin(String memberId) {
+		log.debug("☆☆☆[bryeong]LoginService_Admin☆☆☆"+memberId);
+		Admin loginAdmin = loginMapper.adminLogin(memberId);
 		return loginAdmin;
 	}
 }

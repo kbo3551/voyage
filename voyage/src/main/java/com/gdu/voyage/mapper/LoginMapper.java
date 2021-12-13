@@ -10,5 +10,5 @@ public interface LoginMapper {
 	// Member 로그인 정보
 	Member login(Member member);
 	// Admin 로그인 정보
-	Admin adminLogin(Admin admin);
+	Admin adminLogin(String memberId);
 }

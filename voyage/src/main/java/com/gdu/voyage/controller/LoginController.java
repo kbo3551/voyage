@@ -58,12 +58,19 @@ public class LoginController {
 	    	return "redirect:login?failed=true";
 	    }
 	    
-	    
 	    HttpSession session = request.getSession();
 	    session.setAttribute("loginMember", loginMember);
 	    
+	    if(loginMember.getMemberLevel()==2) {
+	    	Admin adminSession = loginService.adminLogin(memberId);
+	    	if(adminSession != null) {
+	    		session.setAttribute("adminSession", adminSession);
+	    	}
+	    }
+	    
 	    return "redirect:index";
 	}
+	/*
 	// 어드민 로그아웃
 	@GetMapping("/adminlogout")
 	public String adminLogout(HttpServletRequest request) {
@@ -101,5 +108,6 @@ public class LoginController {
 		
 		return "redirect:adminIndex";
 	}
+	*/
 
 }	
