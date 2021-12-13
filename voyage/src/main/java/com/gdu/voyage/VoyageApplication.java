@@ -12,4 +12,4 @@ public class VoyageApplication {
 		SpringApplication.run(VoyageApplication.class, args);
 	}
 
-}
+} 

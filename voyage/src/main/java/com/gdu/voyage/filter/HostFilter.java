@@ -39,7 +39,7 @@ public class HostFilter implements Filter {
 	    }
 	    Member loginMember = (Member)session.getAttribute("loginMember");
 	    if(loginMember.getMemberLevel() != 1) {
-	    	res.sendRedirect(req.getContextPath()+"/index");
+	    	res.sendRedirect(req.getContextPath()+"/index"); 
 	    	return;
 	    }
 	      
