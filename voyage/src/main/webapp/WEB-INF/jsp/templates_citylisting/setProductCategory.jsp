@@ -78,27 +78,27 @@
         <div class="categories-area section-padding30">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-30 col-md-6 col-sm-6">
+                	<div class="col-lg-30 col-md-6 col-sm-6">
                         <div class="single-cat text-center mb-50">
                             <div class="cat-icon">
-                                <span class="flaticon-bed"></span>
+                                <span class="flaticon-drink"></span>
                             </div>
                             <div class="cat-cap">
-                                <h5><a href="catagori.html">숙소</a></h5>
-                                <p>휴식이 필요하지 않으신가요?</p>
-                                <a href="${pageContext.request.contextPath}/getAccomReviewList">View Details</a>
+                                <h5><a href="${pageContext.request.contextPath}/getActivityProduct">체험</a></h5>
+                                <p>인생의 전환점을 찾아보세요</p>
+                                <a href="${pageContext.request.contextPath}/getActivityProduct">View Details</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-30 col-md-6 col-sm-6">
                         <div class="single-cat text-center mb-50">
                             <div class="cat-icon">
-                                <span class="flaticon-drink"></span>
+                                <span class="flaticon-bed"></span>
                             </div>
                             <div class="cat-cap">
-                                <h5><a href="catagori.html">체험</a></h5>
-                                <p>인생의 전환점이 될 수도 있습니다.</p>
-                                <a href="${pageContext.request.contextPath}/getActivityReviewList">View Details</a>
+                                <h5><a href="${pageContext.request.contextPath}/getAccomProduct">숙소</a></h5>
+                                <p>휴식이 필요하지 않으신가요?</p>
+                                <a href="${pageContext.request.contextPath}/getAccomProduct">View Details</a>
                             </div>
                         </div>
                     </div>

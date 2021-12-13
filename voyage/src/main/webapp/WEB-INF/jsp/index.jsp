@@ -4,27 +4,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Voyage</title>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <title>Directory HTML-5 Template </title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="manifest" href="site.webmanifest">
-<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
 
 <!-- CSS here -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/slicknav.css">
-    <link rel="stylesheet" href="assets/css/flaticon.css">
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/slick.css">
-    <link rel="stylesheet" href="assets/css/nice-select.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/slicknav.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/flaticon.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/animate.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/slick.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/nice-select.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 </head>
 
 
@@ -53,7 +52,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/loder.jpg" alt="">
+                    <img src="${pageContext.request.contextPath}/assets/img/logo/loder.jpg" alt="">
                 </div>
             </div>
         </div>
@@ -115,7 +114,7 @@
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="single-location mb-30">
                             <div class="location-img">
-                                <img src="assets/img/gallery/location1.png" alt="">
+                                <img src="${pageContext.request.contextPath}/assets/img/gallery/location1.png" alt="">
                             </div>
                             <div class="location-details">
                                 <p>서울</p>
@@ -127,7 +126,7 @@
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="single-location mb-30">
                             <div class="location-img">
-                                <img src="assets/img/gallery/location2.png" alt="">
+                                <img src="${pageContext.request.contextPath}/assets/img/gallery/location2.png" alt="">
                             </div>
                             <div class="location-details">
                                 <p>제주</p>
@@ -139,7 +138,7 @@
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="single-location mb-30">
                             <div class="location-img">
-                                <img src="assets/img/gallery/location3.png" alt="">
+                                <img src="${pageContext.request.contextPath}/assets/img/gallery/location3.png" alt="">
                             </div>
                             <div class="location-details">
                                 <p>부산</p>
@@ -151,7 +150,7 @@
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="single-location mb-30">
                             <div class="location-img">
-                                <img src="assets/img/gallery/location4.png" alt="">
+                                <img src="${pageContext.request.contextPath}/assets/img/gallery/location4.png" alt="">
                             </div>
                             <div class="location-details">
                                 <p>강원</p>
@@ -163,7 +162,7 @@
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="single-location mb-30">
                             <div class="location-img">
-                                <img src="assets/img/gallery/location5.png" alt="">
+                                <img src="${pageContext.request.contextPath}/assets/img/gallery/location5.png" alt="">
                             </div>
                             <div class="location-details">
                                 <p>인천</p>
@@ -175,7 +174,7 @@
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="single-location mb-30">
                             <div class="location-img">
-                                <img src="assets/img/gallery/location6.png" alt="">
+                                <img src="${pageContext.request.contextPath}/assets/img/gallery/location6.png" alt="">
                             </div>
                             <div class="location-details">
                                 <p>대구</p>
@@ -379,7 +378,7 @@
                                     <!-- founder -->
                                     <div class="testimonial-founder d-flex align-items-center justify-content-center mb-30">
                                         <div class="founder-img">
-                                            <img src="assets/img/testmonial/Homepage_testi.png" alt="">
+                                            <img src="${pageContext.request.contextPath}/assets/img/testmonial/Homepage_testi.png" alt="">
                                         </div>
                                         <div class="founder-text">
                                             <span>Oliva jems</span>
@@ -398,7 +397,7 @@
                                     <!-- founder -->
                                     <div class="testimonial-founder d-flex align-items-center justify-content-center mb-30">
                                         <div class="founder-img">
-                                            <img src="assets/img/testmonial/Homepage_testi.png" alt="">
+                                            <img src="${pageContext.request.contextPath}/assets/img/testmonial/Homepage_testi.png" alt="">
                                         </div>
                                         <div class="founder-text">
                                             <span>Oliva jems</span>
@@ -453,7 +452,7 @@
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-team mb-30">
                             <div class="team-img">
-                                <img src="assets/img/gallery/home_blog1.png" alt="">
+                                <img src="${pageContext.request.contextPath}/assets/img/gallery/home_blog1.png" alt="">
                             </div>
                             <div class="team-caption">
                                 <span>HEALTH & CARE</span>
@@ -466,7 +465,7 @@
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-team mb-30">
                             <div class="team-img">
-                                <img src="assets/img/gallery/home_blog2.png" alt="">
+                                <img src="${pageContext.request.contextPath}/assets/img/gallery/home_blog2.png" alt="">
                             </div>
                             <div class="team-caption">
                                 <span>HEALTH & CARE</span>
@@ -479,7 +478,7 @@
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                         <div class="single-team mb-30">
                             <div class="team-img">
-                                <img src="assets/img/gallery/home_blog3.png" alt="">
+                                <img src="${pageContext.request.contextPath}/assets/img/gallery/home_blog3.png" alt="">
                             </div>
                             <div class="team-caption">
                                 <span>HEALTH & CARE</span>
@@ -496,7 +495,7 @@
 
     </main>
     <!--footer.jsp 시작  -->
-    <c:import url="partial\\footer.jsp"/>
+    <c:import url="${pageContext.request.contextPath}\\partial\\footer.jsp"/>
     <!--footer.jsp 끝  -->
     <!-- Scroll Up -->
     <div id="back-top" >
@@ -506,36 +505,36 @@
 
     <!-- JS here -->
 		<!-- All JS Custom Plugins Link Here here -->
-        <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/vendor/modernizr-3.5.0.min.js"></script>
 		<!-- Jquery, Popper, Bootstrap -->
-		<script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-        <script src="./assets/js/popper.min.js"></script>
-        <script src="./assets/js/bootstrap.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/popper.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
 	    <!-- Jquery Mobile Menu -->
-        <script src="./assets/js/jquery.slicknav.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/jquery.slicknav.min.js"></script>
 
 		<!-- Jquery Slick , Owl-Carousel Plugins -->
-        <script src="./assets/js/owl.carousel.min.js"></script>
-        <script src="./assets/js/slick.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/owl.carousel.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/slick.min.js"></script>
 		<!-- One Page, Animated-HeadLin -->
-        <script src="./assets/js/wow.min.js"></script>
-		<script src="./assets/js/animated.headline.js"></script>
-        <script src="./assets/js/jquery.magnific-popup.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/wow.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/animated.headline.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/jquery.magnific-popup.js"></script>
 
 		<!-- Nice-select, sticky -->
-        <script src="./assets/js/jquery.nice-select.min.js"></script>
-		<script src="./assets/js/jquery.sticky.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/jquery.nice-select.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/jquery.sticky.js"></script>
         
         <!-- contact js -->
-        <script src="./assets/js/contact.js"></script>
-        <script src="./assets/js/jquery.form.js"></script>
-        <script src="./assets/js/jquery.validate.min.js"></script>
-        <script src="./assets/js/mail-script.js"></script>
-        <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/contact.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/jquery.form.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/jquery.validate.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/mail-script.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/jquery.ajaxchimp.min.js"></script>
         
 		<!-- Jquery Plugins, main Jquery -->	
-        <script src="./assets/js/plugins.js"></script>
-        <script src="./assets/js/main.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/plugins.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
         
     </body>
 </html>
