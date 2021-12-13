@@ -35,9 +35,10 @@
 	            		<i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
 	          		</a>
 				</li>
+				<li><a href="${pageContext.request.contextPath}/adminlogout">로그아웃</a></li>
 				<!-- 관리자 가입 -->
 				<li class="sidebar-item">
-					<a class="sidebar-link" href="pages-sign-up.html">
+					<a class="sidebar-link" href="${pageContext.request.contextPath}/addAdmin">
 	           			<i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Sign Up</span>
 	          		</a>
 				</li>
