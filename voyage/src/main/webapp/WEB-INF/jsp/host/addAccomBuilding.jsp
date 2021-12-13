@@ -105,41 +105,41 @@
 											<div class="picture-container" style="float:left; margin-left:20px;">
 												<div class="picture">
 													<img src="assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview" title="" />
-													<input type="file" name="AccomBuildingImage[0]" id="wizard-picture">
+													<input type="file" name="accomBuildingImage" id="wizard-picture">
 												</div>
 											</div>
 											<div class="picture-container" style="float:left; margin-left:20px;">
 												<div class="picture">
 													<img src="assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview2" title="" />
-													<input type="file" name="AccomBuildingImage[1]" id="wizard-picture2">
+													<input type="file" name="accomBuildingImage" id="wizard-picture2">
 												</div>
 											</div>
 											<div class="picture-container" style="float:left; margin-left:20px;">
 												<div class="picture">
 													<img src="assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview3" title="" />
-													<input type="file" name="AccomBuildingImage[2]" id="wizard-picture3">
+													<input type="file" name="accomBuildingImage" id="wizard-picture3">
 												</div>
 											</div>
 											<div class="picture-container" style="float:left; margin-left:20px;">
 												<div class="picture">
 													<img src="assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview4" title="" />
-													<input type="file" name="AccomBuildingImage[3]" id="wizard-picture4">
+													<input type="file" name="accomBuildingImage" id="wizard-picture4">
 												</div>
 											</div>
 										</div>
 										<div class="col-sm-6" style="margin:0 auto;">
 											<div class="form-group">
 												<h4>Name <small>(required)</small></h4>
-												<input name="accomBuildingName" type="text" class="form-control" placeholder="Sky villa ..." style="height:34px;">
+												<input name="accomBuilding.accomBuildingName" type="text" class="form-control" placeholder="Sky villa ..." style="height:34px;">
 											</div>
 	
 											<div class="form-group">
 												<h4>Description <small>(required)</small></h4>
-												<textarea name="accomBuildingDescription" class="form-control" placeholder="루프탑이 있는 ..." rows="8"></textarea>
+												<textarea name="accomBuilding.accomBuildingDescription" class="form-control" placeholder="루프탑이 있는 ..." rows="8"></textarea>
 											</div>
 											<div class="form-group">
 												<h4>Phone <small>(required)</small></h4>
-												<input name="accomBuildingPhone" type="text" class="form-control" placeholder="080-0000-0000" style="height:34px;">
+												<input name="accomBuilding.accomBuildingPhone" type="text" class="form-control" placeholder="080-0000-0000" style="height:34px;">
 											</div>
 										</div>
 									</div>
@@ -178,7 +178,7 @@
 		                                    		<label>* 입력 폼 하나당, 시설 하나씩 입력해주세요.</label>
 		                                    		
 		                                    		<div class="form-group" id="facilityPlace">
-														<input type="text" class="form-control" id="accomBuildingFacilityName" name="accomBuildingFacilityName[0]" placeholder="ex) 주차장" style="height:34px;">
+														<input type="text" class="form-control" id="accomBuildingFacilityName" name="accomBuildingFacility[0].accomBuildingFacilityName" placeholder="ex) 주차장" style="height:34px;">
 													</div>
 												</div>
 											</div>
@@ -208,11 +208,11 @@
 													<div class="form-group" id="spotPlace">
 														<div id="spotForm">
 															<label>Name</label>
-				                                    		<input type="text" class="form-control" id="accomBuildingSpotName" name="accomBuildingSpotName[0]" placeholder="ex) 보보커피" style="height:34px;">
+				                                    		<input type="text" class="form-control" id="accomBuildingSpotName" name="accomBuildingSpot[0].accomBuildingSpotName" placeholder="ex) 보보커피" style="height:34px;">
 															<label>Category</label>
-															<input type="text" class="form-control" id="accomBuildingSpotCategory" name="accomBuildingSpotCategory[0]" placeholder="ex) 카페" style="height:34px;">
+															<input type="text" class="form-control" id="accomBuildingSpotCategory" name="accomBuildingSpot[0].accomBuildingSpotCategory" placeholder="ex) 카페" style="height:34px;">
 															<label>Description</label>
-															<textarea class="form-control" id="accomBuildingSpotDescription" name="accomBuildingSpotDescription[0]" placeholder="ex) 사장님이 직접 로스팅한 에소프레소를 맛볼 수 있는 곳..." rows="8"></textarea>
+															<textarea class="form-control" id="accomBuildingSpotDescription" name="accomBuildingSpot[0].accomBuildingSpotDescription" placeholder="ex) 사장님이 직접 로스팅한 에소프레소를 맛볼 수 있는 곳..." rows="8"></textarea>
 														</div><hr>
 													</div>
 												</div>
@@ -233,7 +233,7 @@
 		                                    		<div class="form-group" id="hashtagPlace">
 														<div class="input-group">
 														    <span class="input-group-addon"><i class="fas fa-hashtag"></i></span>
-														    <input type="text" class="form-control" name="hashtag[0]" placeholder="ex) 오션뷰" style="height:34px;">
+														    <input type="text" class="form-control" id="inputHashtag" name="hashtag[0].hashtag" placeholder="ex) 오션뷰" style="height:34px;">
 														</div>
 													</div>
 												</div>
@@ -352,7 +352,7 @@
 	
 	$('#addFacility').click(function(){
 		numFacility = numFacility + 1;
-		let inputFacility = '<input type="text" class="form-control" id="accomBuildingFacilityName" name="accomBuildingFacilityName['+numFacility+']" style="height:34px;">';
+		let inputFacility = '<input type="text" class="form-control" id="accomBuildingFacilityName" name="accomBuildingFacility['+numFacility+'].accomBuildingFacilityName" style="height:34px;">';
 		$('#facilityPlace').append(inputFacility);
 	});
 	
@@ -373,11 +373,11 @@
 		numSpot = numSpot + 1;
 		let inputSpot = '<div id="spotForm">';
 		inputSpot += '<label>Name</label>';
-		inputSpot += '<input type="text" class="form-control" id="accomBuildingSpotName" name="accomBuildingSpotName['+numSpot+']" style="height:34px;">';
+		inputSpot += '<input type="text" class="form-control" id="accomBuildingSpotName" name="accomBuildingSpot['+numSpot+'].accomBuildingSpotName" style="height:34px;">';
 		inputSpot += '<label>Category</label>';
-		inputSpot += '<input type="text" class="form-control" id="accomBuildingSpotCategory" name="accomBuildingSpotCategory['+numSpot+']" style="height:34px;">';
+		inputSpot += '<input type="text" class="form-control" id="accomBuildingSpotCategory" name="accomBuildingSpot['+numSpot+'].accomBuildingSpotCategory" style="height:34px;">';
 		inputSpot += '<label>Description</label>';
-		inputSpot += '<textarea class="form-control" id="accomBuildingSpotDescription" name="accomBuildingSpotDescription['+numSpot+']" rows="8"></textarea>';
+		inputSpot += '<textarea class="form-control" id="accomBuildingSpotDescription" name="accomBuildingSpot['+numSpot+'].accomBuildingSpotDescription" rows="8"></textarea>';
 		inputSpot += '</div><hr>';
 		$('#spotPlace').append(inputSpot);
 	});
@@ -400,16 +400,16 @@
 		numHashtag = numHashtag + 1;
 		let inputHashtag = '<div class="input-group">';
 		inputHashtag += '<span class="input-group-addon"><i class="fas fa-hashtag"></i></span>';
-		inputHashtag += '<input type="text" class="form-control" name="hashtag'+numHashtag+'" style="height:34px;">';
+		inputHashtag += '<input type="text" class="form-control" id="inputHashtag" name="hashtag['+numHashtag+'].hashtag" style="height:34px;">';
 		inputHashtag += '</div>';
 		$('#hashtagPlace').append(inputHashtag);
 	});
 	
 	// 해시태그 폼 삭제시 사용하는 스크립트 이벤트
 	$('#delHashtag').click(function(){
-		if($('input[name=hashtag]').length>1){
+		if($('input[id=inputHashtag]').length>1){
 			numHashtag = numHashtag - 1;
-			$('input[name=hashtag]:last').remove();
+			$('input[id=inputHashtag]:last').remove();
 			$('span[class=input-group-addon]:last').remove();
 		} else {
 			alert("한 가지 이상의 해시태그를 입력해주세요!");

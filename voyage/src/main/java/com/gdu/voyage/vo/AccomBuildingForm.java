@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class AccomBuildingForm {
 	private AccomBuilding accomBuilding;
-	private List<MultipartFile> AccomBuildingImage;
+	private List<MultipartFile> accomBuildingImage;
 	private List<AccomBuildingFacility> accomBuildingFacility;
 	private List<AccomBuildingSpot> accomBuildingSpot;
 	private List<Hashtag> hashtag;
