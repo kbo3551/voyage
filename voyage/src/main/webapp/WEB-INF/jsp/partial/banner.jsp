@@ -90,7 +90,7 @@
                                            			<li><a href="${pageContext.request.contextPath}/member/myPage"><i class="ti-user">${loginMember.getMemberNickname()}</i></a>
 			                                           	<ul class="submenu">
 				                                            <li><a href="${pageContext.request.contextPath}/member/myPage">마이페이지</a></li>
-				                                            <li><a href="${pageContext.request.contextPath}/adminLogin/addAdmin">관리자회원가입</a></li>
+				                                            <li><a href="${pageContext.request.contextPath}/addAdmin">관리자회원가입</a></li>
 				                                            <li><a href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
