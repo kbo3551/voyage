@@ -17,14 +17,16 @@ public class AccomController {
 	
 	@GetMapping("addAccomBuilding")
 	public String addAccomBuilding() {
-		log.debug("♡jihye♡ AccomController 실행");
+		log.debug("AccomController 실행");
 		return "/host/addAccomBuilding";
 	}
 	
 	@PostMapping("addAccomBuilding")
 	public String addAccomBuilding(AccomBuildingForm accomBuildingForm) {
+		log.debug("AccomController 실행");
+		
 		// 참조타입 객체를 log.debug로 출력할 때는 toString()으로 출력함
-		log.debug("♡jihye♡ accomBuildingForm : " + accomBuildingForm.toString());
+		log.debug("★controller★ accomBuildingForm : " + accomBuildingForm.toString());
 		accomBuildingService.addAccomBuilding(accomBuildingForm);
 		return "redirect:/accomBuildingList";
 	}

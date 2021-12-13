@@ -12,7 +12,7 @@
 			create_date,
 			update_date
 		) VALUES (
-			#{hostNo},
+			'2',
 			#{accomBuildingName},
 			#{accomBuildingDescription},
 			#{accomBuildingPhone},
