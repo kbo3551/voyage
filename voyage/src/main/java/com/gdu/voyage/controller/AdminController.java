@@ -20,17 +20,20 @@ import lombok.extern.slf4j.Slf4j;
 public class AdminController {
 	@Autowired AdminService adminService;
 
-
+	@GetMapping("/admin/adminUpdate")
+	public String adminUpdate() {
+		System.out.println("AdminController()_adminUpdate 실행");
+		return "admin/adminUpdate";
+	}
 	@GetMapping("/addAdmin")
 	public String getAddAdmin() {
 		System.out.println("AdminController() 실행");
 		return "addAdmin";
 	}
-	
 	@PostMapping("/addAdmin")
 	public String postAddAdmin(HttpServletRequest request, RedirectAttributes redirect) {
 		System.out.println("AdminController() 실행");
-		// 값
+		// 값	
 		String adminId = request.getParameter("id");
 	    String adminFirstName = request.getParameter("firstname");
 	    String adminLastName = request.getParameter("lastname");
