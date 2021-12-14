@@ -8,7 +8,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" href="assets/css/hashtag.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/hashtag.css">
 </head>
 <style>
 	.btn:before {
@@ -55,7 +55,7 @@
                                                     <li><a href="${pageContext.request.contextPath}/qnaList">Q&A</a></li>
                                                 </ul>
                                             </li> 
-                                            <li><button class="hashtag btn" style="color: rgba(190,240,80); background-color: rgba(255,255,255,0);">해시태그</button></li>
+                                            <li><button class="btn hashtag" style="color: rgba(190,240,80); background-color: rgba(255,255,255,0);">해시태그</button></li>
                                            	
                                            	<c:choose>
                                            		<c:when test="${empty loginMember}">
@@ -105,7 +105,6 @@
 			                                            </ul>
 		                                            </li>
                                            		</c:when>
-                                           	
                                            	</c:choose>
                                             
                                     </nav>
@@ -142,67 +141,7 @@
        </div>
         <!-- Header End -->
     </header>
-    
-    <script type="text/javascript">
-    // 해시태그 메뉴 클릭 시 해시태그 창 나타남
-    $('.hashtag').click(function(){
-      $('.hashtag_body').css('background-color','rgba(0, 0, 0, 0.5)');
-      $('.hashtag_body').css('top','0%');
-      $('#search__box').css('top','152%');
-   });
-    
-    // 해시태그 창 클릭 시 해시태그 창 사라짐
-    $('.hashtag_body').click(function(){
-      $('.hashtag_body').css('background-color','rgba(0, 0, 0, 0.5)');
-      $('.hashtag_body').css('top','-1500%');
-      $('#search__box').css('top','-1500%');
-   });
-
-    // 검색 제시어 이벤트
-    function search(target){
-       
-       var word = target.value;
-       var encodeWord = encodeURI(word);
-       console.log(word);
-       console.log(encodeWord);
-       
-    //start Ajax
-    $.ajax({
-        type : 'GET',
-        dataType : 'json',
-        url : "http://localhost/hashtagSearh?"
-            + "searchKeyword="
-            + word,
-            error : function(err) {
-                console.log("실행중 오류가 발생하였습니다.");
-            },
-            success : function(data) {
-                console.log("data확인 : "+data);
-                console.log("결과 갯수 : "+data.dataSearch.content.length);
-                console.log("첫번째 결과 : "+data.dataSearch.content[0]);
-                $("#hashtagList").empty();
-                var checkWord = $("#word").val(); // 검색어 입력값
-                console.log(data.dataSearch.content.length);
-                if(checkWord.length > 0 && data.dataSearch.content.length > 0){
-                    for (i = 0; i < data.dataSearch.content.length; i++) {
-                    $("#hashtagList")
-                        .append(
-                                "<li class='hashtagList' value='"
-                                + data.dataSearch.content[i].schoolName
-                                + "' data-input='"
-                                + data.dataSearch.content[i].schoolName
-                                + ">"
-                                + "<a href='javascript:void(0);'>"
-                                + data.dataSearch.content[i].schoolName
-                                + "</a>"
-                                + "</li>");
-                }
-            } 
-        } 
-        });
-        //end Ajax
-    }
-    </script>
-    
+  
+	<script src="${pageContext.request.contextPath}/assets/js/hashtag.js"></script>
 </body>
 </html>
