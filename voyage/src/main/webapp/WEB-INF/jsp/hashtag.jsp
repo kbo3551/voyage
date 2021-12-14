@@ -12,7 +12,6 @@
    <div id="hashtag_search">
       <div class="center_wrap">
          <div class="hero__caption">
-            <span>Voy Age</span>
               <h1>더 다양한 해시태그가 궁금하다면?</h1>
               <span class="scroll">scroll !</span>
          </div>
