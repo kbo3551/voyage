@@ -80,6 +80,7 @@
 		WHERE 
 			notice_file_no = #{noticeFileNo}
 	</delete>
+
 	<!-- 공지사항 update -->
 	<!-- 파일(사진)은 수정될 때 추가,삭제,유지만 가능 -->
 	<!-- 사진은 noticeNo에만 묶여있어 수정시 사진이 삭제 추가만 가능 -->
