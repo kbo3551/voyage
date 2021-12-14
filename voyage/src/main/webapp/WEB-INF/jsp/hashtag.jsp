@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="assets/js/wow.js"></script>
-<link rel="stylesheet" href="assets/css/hashtag.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/hashtag.css">
 </head>
 <body>
    <div id="hashtag_search">
