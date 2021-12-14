@@ -1,9 +1,5 @@
 package com.gdu.voyage.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -13,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gdu.voyage.service.LoginService;
@@ -24,12 +19,15 @@ import com.gdu.voyage.vo.MemberAddress;
 
 import lombok.extern.slf4j.Slf4j;
 
+
+// 회원탈퇴는 pwCheck에 포함돼있음
 @Slf4j
 @Transactional
 @Controller
 public class MemberController {
 	@Autowired MemberService memberService;
 	@Autowired LoginService loginService;
+	
 	
 	// PW 변경
 	@PostMapping("/member/updatePw")
@@ -172,8 +170,12 @@ public class MemberController {
 			model.addAttribute("updatePwCheck", updatePwCheck);
 			return "/member/updatePw";
 		} else if (route.equals("4")) {
-			model.addAttribute("m", m);
-			return "/member/deleteMember";
+			// 회원 탈퇴(delete는 아니고 active를 탈퇴로 변경)
+			request.getSession().invalidate();
+			memberService.deleteMember(m);
+			model.addAttribute("msg", "탈퇴되었습니다.\n이용해주셔서 감사합니다.");
+		    model.addAttribute("url", "redirect:/login");
+		    return "/alert";
 		}
 		
 		return "/member/pwCheck";
