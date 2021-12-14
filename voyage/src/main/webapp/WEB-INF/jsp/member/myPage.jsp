@@ -10,25 +10,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
 
-
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/normalize.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/font-awesome.min.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/fontello.css">
-		<link href="${pageContext.request.contextPath}/accom/fonts/icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
-		<link href="${pageContext.request.contextPath}/accom/fonts/icon-7-stroke/css/helper.css" rel="stylesheet">
-		<link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet" media="screen">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/bootstrap-select.min.css"> 
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/icheck.min_all.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/price-range.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/owl.carousel.css">  
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/owl.theme.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/owl.transitions.css"> 
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/wizard.css"> 
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/style.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/responsive.css">
-		
 		<!-- CSS here -->
+			<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/bootstrap-select.min.css"> 
             <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
             <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/owl.carousel.min.css">
             <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/slicknav.css">
@@ -41,6 +24,8 @@
             <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/slick.css">
             <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/nice-select.css">
             <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+            <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
+            
     
 </head>
 
@@ -90,18 +75,23 @@
     
    	<c:import url="/WEB-INF/jsp/partial/banner.jsp"/>
 
-
+	
 
 	<main>
 	
+
 	
 
 
-        <div class="page-head"> 
-            <div class="container">
+        <div class="page-head" style="background-image: url('${pageContext.request.contextPath}/assets/img/page-header.jpg'); background-repeat : no-repeat;"> 
+            <div class=" container">
                 <div class="row">
-                    <div class="page-head-content">
-                        <h1 class="page-title">Hello : <span class="orange strong">${loginMember.getMemberNickname()}</span></h1>               
+                    <div class="col-sm-10 col-sm-offset-1 profiel-container" style="line-height:125%">
+                    <br>
+                    <br>                
+                    <br>
+                    <br>
+                    <br>
                     </div>
                 </div>
             </div>
@@ -109,94 +99,133 @@
         <!-- End page header --> 
 
         <!-- property area -->
-        <div class="content-area user-profiel" style="background-color: #FCFCFC;">&nbsp;
-            <div class="container">   
-                <div class="row">
-                    <div class="col-sm-10 col-sm-offset-1 profiel-container">
+        <form name="UpdateMember" method="post" action="${pageContext.request.contextPath}/member/myPage">
+	        <div class="content-area user-profiel" style="background-color: #FCFCFC;">&nbsp;
+	            <div class="container">   
+	                <div class="row">
+	                    <div class="col-sm-10 col-sm-offset-1 profiel-container">
+	                   		<h1 class="page-title">Hello!  <span class="orange strong" style="color: olive;">${loginMember.getMemberNickname()}</span></h1>
+							<br>
+	                        <div class="profiel-header">
+	                            <h2>
+	                                YOUR PROFILE <br>
+	                            </h2>
+	                            <hr>
+	                        </div>
+	                        <div class="clear"> 
+	                            <div class="col-sm-5">
+	                                <div class="form-group">
+	                                    <label>First Name</label>
+	                                    <input name="firstname" type="text" class="form-control" id="firstname" name="firstname" placeholder="성" value="${loginMember.memberFirstName}">
+	                                </div>
+	                                <div class="form-group">
+	                                    <label>Last Name </label>
+	                                    <input name="lastname" type="text" class="form-control" id="lastname" name="lastname" placeholder="이름" value="${loginMember.memberLastName}">
+	                                </div> 
+	                                <div class="form-group">
+	                                    <label>Email</label>
+	                                    <input name="email" type="email" id="email" name="email" class="form-control" placeholder="이메일" value="${loginMember.memberEmail}">
+	                                </div> 
+	                                <div class="form-group">
+	                                    <label>Phone</label>
+	                                    <input name="phone" type="number" class="form-control" id="phone" name="phone" placeholder="전화번호" value="${loginMember.memberPhone}">
+	                                </div> 
+	                            </div>
+	                            <div class="col-sm-5">
+	                                <div class="form-group">
+	                                  <input type="button" class="btn" style="background: rgba(0,172,238,50);"
+	                                  onclick="execDaumPostcode()" value="우편번호">
+	                                  <input type="number" class="form-control" id="postalCode" name="postalCode" placeholder="우편번호" value="${loginMember.memberAddress.memberAddressPostalCode}" readonly="readonly">
+	                             	</div>
+	                            	<div class="form-group">
+	                             		<br>  
+	                                  <input type="text" class="form-control" id="roadAddress" name="roadAddress" placeholder="도로명주소" value="${loginMember.memberAddress.memberAddressZip}" readonly="readonly">
+	                            	</div>
+	                            	<div class="form-group">
+	                            	 	<br>     
+	                                  <input type="text" class="form-control" id="detailAddress" name="detailAddress" placeholder="상세주소" value="${loginMember.memberAddress.memberAddressDetail}">
+	                              </div>
+	                            </div>  
+	
+	                        </div>
+	                        	<div class="clear">
+	                        		<div class="col-sm-20">
+	                             	<hr>
+	                                 <div class="form-group">
+	                                     <label>Description</label>
+	                                     <textarea rows="5" cols="80" id="description" name="description" placeholder="자기소개">${loginMember.memberDescription }</textarea>
+	                                 </div>
+	                            	</div>
+	                        	</div>
+	                        	<div class="col-sm-20 col-sm-offset-1" style="text-align: right;">
+	                             <br>
+	                             <input type='button' onclick="addAdmin()" class='btn btn-finish btn-primary' name='finish' value='Update' />
+	                         </div>
+	                         <br>
+			            </div>
+	                </div>
+	                <br>
+	                <div><a href="${pageContext.request.contextPath}/member/updateNickname" class="btn">닉네임변경</a></div>
+    				<div><a href="${pageContext.request.contextPath}/member/updatePw" class="btn">비밀번호변경</a></div>
+	            </div>
+	    	</div>
+    	</form>
+    
+    
+    	
+    	
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+         <script>
+         	// 다음(카카오) 주소 api
+            function execDaumPostcode() {
+               new daum.Postcode({
+                   oncomplete: function(data) {
+                       // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                       // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                       var roadAddr = data.roadAddress; // 도로명 주소 변수
+                       var extraRoadAddr = ''; // 참고 항목 변수
 
-                            <div class="profiel-header">
-                                <h2>
-                                    YOUR PROFILE <br>
-                                </h2>
-                                <hr>
-                            </div>
+                       // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                       // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                       if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                           extraRoadAddr += data.bname;
+                       }
+                       // 건물명이 있고, 공동주택일 경우 추가한다.
+                       if(data.buildingName !== '' && data.apartment === 'Y'){
+                          extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                       }
+                       // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                       if(extraRoadAddr !== ''){
+                           extraRoadAddr = ' (' + extraRoadAddr + ')';
+                       }
 
-                            <div class="clear" style="margin-left: 8%;">
-                                
-
-                                <div class="col-sm-3 padding-top-25">
-
-                                    <div class="form-group">
-                                        <label>First Name <small>(required)</small></label>
-                                        <input name="firstname" type="text" class="form-control" placeholder="Andrew...">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Last Name <small>(required)</small></label>
-                                        <input name="lastname" type="text" class="form-control" placeholder="Smith...">
-                                    </div> 
-                                    <div class="form-group">
-                                        <label>Email <small>(required)</small></label>
-                                        <input name="email" type="email" class="form-control" placeholder="andrew@email@email.com.com">
-                                    </div> 
-                                </div>
-                                <div class="col-sm-3 padding-top-25">
-                                    <div class="form-group">
-                                        <label>Password <small>(required)</small></label>
-                                        <input name="Password" type="password" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Confirm password : <small>(required)</small></label>
-                                        <input type="password" class="form-control">
-                                    </div>
-                                </div>  
-
-                            </div>
-                                <br>
-                                <hr>
-                                <br>
-                                <div class="col-sm-5 col-sm-offset-1">
-                                    <div class="form-group">
-                                        <label>Facebook :</label>
-                                        <input name="Facebook" type="text" class="form-control" placeholder="https://facebook.com/user">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Twitter :</label>
-                                        <input name="Twitter" type="text" class="form-control" placeholder="https://Twitter.com/@user">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Website :</label>
-                                        <input name="website" type="text" class="form-control" placeholder="https://yoursite.com/">
-                                    </div>
-                                </div>  
-
-                                <div class="col-sm-5">
-                                    <div class="form-group">
-                                        <label>Public email :</label>
-                                        <input name="p-email" type="email" class="form-control" placeholder="p-email@rmail.com">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Phone :</label>
-                                        <input name="Phone" type="text" class="form-control" placeholder="+1 9090909090">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>FAX :</label>
-                                        <input name="FAX" type="text" class="form-control" placeholder="+1 9090909090">
-                                    </div>
-                                </div>
- 
-                            </div>
-                    
-                            <div class="col-sm-5 col-sm-offset-1">
-                                <br>
-                                <input type='button' class='btn btn-finish btn-primary' name='finish' value='Finish' />
-                            </div>
-                            <br>
-
-                </div>
-            </div><!-- end row -->
-
-    </div>
-
+                       // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                       document.getElementById('postalCode').value = data.zonecode;
+                       document.getElementById('roadAddress').value = roadAddr;
+                   }
+               }).open();
+           }
+			
+         	
+         // 유효성 검사
+            function addAdmin(){
+				if($("#firstname").val() == ""){
+					alert('성을 입력해주세요.');
+					return;
+				} else if($("#lastname").val() == ""){
+					alert('이름을 입력해주세요');
+					return;
+				} else if($("#email").val() == ""){
+					alert('이메일 주소를 입력해주세요');
+					return;
+				} else if($("#phone").val() == ""){
+					alert('전화번호를 입력해주세요');
+					return;
+				} else {
+					UpdateMember.submit();
+				}
+			};
+     </script>
 
 
 	
