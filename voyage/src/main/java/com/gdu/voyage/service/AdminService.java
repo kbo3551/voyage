@@ -15,7 +15,18 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AdminService {
 	@Autowired AdminMapper adminMapper;
-	
+	// admin 정보 변경
+	public void  updateAdmin(Admin admin) {
+		log.debug("☆☆☆[bryeong]AdminService 어드민 정보 변경☆☆☆"+admin);
+		adminMapper.updateAdmin(admin);
+		return;
+	}
+	// admin 주소 변경
+	public void  updateAdminAddress(AdminAddress aAddress) {
+		log.debug("☆☆☆[bryeong]AdminService 어드민 주소 정보 변경☆☆☆"+aAddress);
+		adminMapper.updateAdminAddress(aAddress);
+		return;
+	}
 	// admin ID 중복 검사
 	public String adminIdCheck(Admin admin) {
 		log.debug("☆☆☆[bryeong]AdminService 중복검사☆☆☆"+admin.toString());
