@@ -25,6 +25,8 @@ import lombok.extern.slf4j.Slf4j;
 public class NoticeService {
 	@Autowired NoticeMapper noticeMapper;
 	
+	//ISSUE : 들어오는 FILE의 확장자, 네임 분리 필요. FILE의 사이즈 식별 필요
+	//고민 사항 : 수정 시 추가로 들어올 파일의 중복 검사는 필요한가?
 	
 	//Map(notice 리스트,페이징)으로 묶어서 리턴
 	public Map<String,Object> getNoticeListByTop(int currentPage,int rowPerPage){
@@ -59,20 +61,22 @@ public class NoticeService {
 	}
 	
 	//insert(내용+사진 입력)
-	public Map<String, Object> insertNoticeOne(Notice notice,NoticeFile noticeFile) {
+	public Map<String, Object> insertNoticeOne(Notice notice,NoticeFile noticeFile,NoticeForm noticeForm) {
 		Map<String, Object> insertNoticeMap = new HashMap<>();
 		
 		Notice insertNotice = noticeMapper.inserNotice(notice);
-		Notice insertNoticeFile = noticeMapper.insertNoticefile(noticeFile);
-		
+	
 		log.debug(insertNotice.toString()+"☆☆☆[DoHun] NoticeMapper insert + insert ,Service☆☆☆");
-		log.debug(insertNoticeMap.toString()+"☆☆☆[DoHun] NoticeFileMapper insert + insert ,Service☆☆☆");
 		
 		insertNoticeMap.put("insertNotice",insertNotice);
-		insertNoticeMap.put("insertNoticeFile",insertNoticeFile);
 		
+		if(noticeForm.getNoticefile() != null) {
+			Notice insertNoticeFile = noticeMapper.insertNoticefile(noticeFile);
+			log.debug(insertNoticeMap.toString()+"☆☆☆[DoHun] NoticeFileMapper insert + insert ,Service☆☆☆");
+			insertNoticeMap.put("insertNoticeFile",insertNoticeFile);
+		}
 		log.debug(insertNoticeMap.toString()+"☆☆☆[DoHun] Notice insert + insert Map ,Service☆☆☆");
-		
+
 		return insertNoticeMap;
 	}
 	
@@ -85,21 +89,35 @@ public class NoticeService {
 		Notice deleteNotice = noticeMapper.deleteNotice(notice);
 		log.debug(notice.toString()+"☆☆☆[DoHun] Notice delete + delete Map ,Service☆☆☆");
 		
-		log.debug(notice.toString()+"☆☆☆[DoHun] NoticeFile notice + delete Map ,Service☆☆☆");
-		Notice deleteNoticeFile = noticeMapper.deleteNoticeFile(noticeFile);
-		log.debug(notice.toString()+"☆☆☆[DoHun] NoticeFile delete + delete Map ,Service☆☆☆");
-		
+		if(noticeFile.getNoticeFileNo() >= 1) {
+			log.debug(notice.toString()+"☆☆☆[DoHun] NoticeFile notice + delete Map ,Service☆☆☆");
+			Notice deleteNoticeFile = noticeMapper.deleteNoticeFile(noticeFile);
+			log.debug(notice.toString()+"☆☆☆[DoHun] NoticeFile delete + delete Map ,Service☆☆☆");
+			deleteNoticeMap.put("deleteNoticeFile", deleteNoticeFile);
+		}
 		deleteNoticeMap.put("deleteNotice", deleteNotice);
-		deleteNoticeMap.put("deleteNoticeFile", deleteNoticeFile);
 		
 		return deleteNoticeMap;
 	}
 	
 	//수정
-	public Notice updateNoticeOne(Notice notice) {
+	public Notice updateNoticeOne(Notice notice, NoticeFile noticeFile, NoticeForm noticeForm) {
 		log.debug(notice.toString()+"☆☆☆[DoHun] Notice notice + update Map ,Service☆☆☆");
 		noticeMapper.updateNotice(notice);
 		log.debug(notice.toString()+"☆☆☆[DoHun] Notice update + update Map ,Service☆☆☆");
+		
+		//insert(파일 추가)
+		if(noticeMapper.insertNoticefile(noticeFile) != null) {
+			if(noticeFile.getNoticeNo() == notice.getNoticeNo()) {		
+				noticeMapper.insertNoticefile(noticeFile);
+			}
+		}
+		//delete(파일 삭제)
+		if(noticeMapper.deleteNoticeFile(noticeFile) != null) {
+			if(noticeFile.getNoticeNo() == notice.getNoticeNo()) {		
+				noticeMapper.deleteNoticeFile(noticeFile);
+			}
+		}
 		
 		return notice;
 	}

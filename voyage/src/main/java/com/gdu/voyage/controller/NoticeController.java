@@ -56,10 +56,10 @@ public class NoticeController {
 	}
 	
 	@PostMapping("/addNotice")
-	public String addNoticeOne(Notice notice,NoticeFile noticeFile) {
+	public String addNoticeOne(Notice notice,NoticeFile noticeFile, NoticeForm noticeForm) {
 		log.debug(notice+"★★★ [DoHun] Notice insert Controller 실행, notice ★★★");
 		log.debug(noticeFile+"★★★ [DoHun] Notice insert Controller 실행, notice File ★★★");
-		noticeService.insertNoticeOne(notice, noticeFile);
+		noticeService.insertNoticeOne(notice, noticeFile, noticeForm);
 
 		return "noticeList";
 	}
@@ -84,9 +84,9 @@ public class NoticeController {
 	}
 	
 	@PostMapping("/modifyNotice")
-	public String modifyNoticeOne(Notice notice) {
+	public String modifyNoticeOne(Notice notice,NoticeFile noticeFile, NoticeForm noticeForm) {
 		log.debug(notice.toString()+"★★★ [DoHun] Notice update Controller 실행, notice ★★★");
-		noticeService.updateNoticeOne(notice);
+		noticeService.updateNoticeOne(notice, noticeFile, noticeForm);
 		log.debug(notice.toString()+"★★★ [DoHun] Notice update Controller 실행, notice ★★★");
 		
 		return "noticeList";

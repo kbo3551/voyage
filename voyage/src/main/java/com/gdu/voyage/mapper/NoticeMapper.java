@@ -26,4 +26,7 @@ public interface NoticeMapper {
 	
 	Notice insertNoticefile(NoticeFile noticefile);
 	Notice deleteNoticeFile(NoticeFile noticefile);
+	
+	Notice insertNoticefileUpdate(NoticeFile noticefile);
+	Notice deleteNoticeFileUpdate(NoticeFile noticefile);
 }
