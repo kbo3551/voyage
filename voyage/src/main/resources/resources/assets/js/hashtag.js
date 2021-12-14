@@ -12,8 +12,8 @@
     // 해시태그 창 클릭 시 해시태그 창 사라짐
     $('.hashtag_body').click(function(){
       $('.hashtag_body').css('background-color','rgba(0, 0, 0, 0.5)');
-      $('.hashtag_body').css('top','-250000%');
-      $('#search__box').css('top','-250000%');
+      $('.hashtag_body').css('top','-300000%');
+      $('#search__box').css('top','-300000%');
    });
 
     // 검색 제시어 이벤트
