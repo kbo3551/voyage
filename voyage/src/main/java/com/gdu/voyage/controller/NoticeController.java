@@ -24,6 +24,7 @@ public class NoticeController {
 	
 	private final int ROW_PER_PAGE = 10;
 	
+	//noticeList
 	@GetMapping("/noticeList")
 	public String notcieList(Model model,
 								@RequestParam(defaultValue = "1") int currentPage) {
@@ -36,7 +37,7 @@ public class NoticeController {
 		
 		return "noticeList";
 	}
-	
+	//noticeOne
 	@GetMapping("/noticeOne")
 	public String noticeOne(Model model, int noticeNo) {
 		log.debug(noticeNo+"★★★ [DoHun] Notice One Controller 실행, noticeNo ★★★");
@@ -48,7 +49,7 @@ public class NoticeController {
 		
 		return "noticeOne";
 	}
-	
+	//insert
 	@GetMapping("/addNotice")
 	public String addNoticeOne() {
 		return "addNotice";
@@ -62,7 +63,7 @@ public class NoticeController {
 
 		return "noticeList";
 	}
-	
+	//delete
 	@GetMapping("/removeNotice")
 	public String removeNoticeOne() {
 		return "removeNotice";
@@ -76,7 +77,7 @@ public class NoticeController {
 		
 		return "boardList";
 	}
-	
+	//update
 	@GetMapping("/modifyNotice")
 	public String updateNoticeOne() {
 		return "modifyNotice";

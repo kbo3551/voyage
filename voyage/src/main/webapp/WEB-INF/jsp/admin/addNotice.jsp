@@ -40,7 +40,7 @@
 				<h1 class="h3 mb-3"><strong>관리자</strong> 공지사항</h1>
 				
 				<!-- 입력공간 -->
-				<form method="post" action="">
+				<form method="post" action="${pageContext.request.contextPath}/addNotice">
 					<!-- 공지 제목 -->
 					<div class="row">
 						<div class="card">
@@ -59,15 +59,22 @@
 								<h5 class="card-title mb-0">상단고정 여부</h5>
 							</div>
 							<div class="card-body">
-								<select class="form-select mb-3">
+								<select class="form-select mb-3" name="noticeTop">
 									<!-- 상단 비고정 -->
-									<option selected>일반</option>
+									<option selected value="N">일반</option>
 									<!-- 상단 고정 -->
-									<option>중요</option>
+									<option value="Y">중요</option>
 								</select>
 							</div>
 						</div>
 					</div>
+					<!-- 사진 -->
+					<input type="file" name="noticeFile">			
+					<c:forEach items="${NoticeFileList}" var="noticeFileList">
+						<c:if test="${noticeFile eq null}">
+							<input type="file" name="noticeFile">
+						</c:if>
+					</c:forEach>					
 					<!-- 공지내용 -->
 					<div class="row">
 						<div class="card">
@@ -75,12 +82,12 @@
 								<h5 class="card-title mb-0">내용</h5>
 							</div>
 							<div class="card-body">
-								<textarea class="form-control" rows="3" placeholder="공란" name="noticeContent"></textarea>
+								<textarea class="form-control" rows="3" placeholder="내용입력" name="noticeContent"></textarea>
 							</div>
 						</div>
 					</div>
 					<!-- 공지INSERT -->
-					<button class="btn btn-primary btn-lg">입력</button>
+					<button class="btn btn-primary btn-lg" type="submit">입력</button>
 				</form>
 			</div>
 		</main>
