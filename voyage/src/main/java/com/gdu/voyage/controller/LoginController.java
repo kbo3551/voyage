@@ -53,9 +53,19 @@ public class LoginController {
 	    // 디버그
 	    log.trace("★controller★"+m.toString());
 	    
+	    
+	    /* faild가 1이면 존재하지 않는 회원 또는 아이디 비밀번호 오타
+	     * 2면 탈퇴한 회원, 3이면 정지당한 회원
+	     */
+	    if(loginService.selectBanMember(memberId) == 1) {
+	    	return "redirect:login?failed=3";
+	    }
+	    if(loginService.selectDeleteMember(memberId) == 1) {
+	    	return "redirect:login?failed=2";
+	    }
 	    Member loginMember = loginService.login(m);
 	    if(loginMember == null) {
-	    	return "redirect:login?failed=true";
+	    	return "redirect:login?failed=1";
 	    }
 	    
 	    HttpSession session = request.getSession();

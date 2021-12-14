@@ -84,10 +84,18 @@
 		                    <div class="box-for overflow">                         
 		                        <div class="col-md-12 col-xs-12 login-blocks">
 		                        
- 
-		                        	<c:if test="${param.failed == true}">
-		                        		<p style="color: red; font-weight: bold;">아이디 또는 비밀번호를 틀렸습니다.</p>
-		                        	</c:if>
+ 									<c:choose>
+ 										<c:when test="${param.failed == 1}">
+ 											<p style="color: red; font-weight: bold;">아이디 또는 비밀번호를 틀렸습니다.</p>
+ 										</c:when>
+ 										<c:when test="${param.failed == 2}">
+ 											<p style="color: red; font-weight: bold;">탈퇴한 회원입니다.</p>
+ 										</c:when>
+ 										<c:when test="${param.failed == 3}">
+ 											<p style="color: red; font-weight: bold;">정지당한 회원입니다.</p>
+ 										</c:when>
+ 									</c:choose>
+ 									
 		                            <h2>Login</h2> 
 		                            <form id="login" action="${pageContext.request.contextPath}/login" method="post">
 			                                	<label for="id">User ID</label>

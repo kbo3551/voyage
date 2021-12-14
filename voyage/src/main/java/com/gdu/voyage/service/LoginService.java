@@ -16,11 +16,20 @@ import lombok.extern.slf4j.Slf4j;
 public class LoginService {
 	@Autowired LoginMapper loginMapper;
 	
+	public int selectBanMember(String memberId) {
+		return loginMapper.selectBanMember(memberId);
+	}
+	
+	public int selectDeleteMember(String memberId) {
+		return loginMapper.selectDeleteMember(memberId);
+	}
+	
 	public Member login(Member member) {
 		log.trace("☆service☆"+member.toString());
 		Member loginMember = loginMapper.login(member);
 		return loginMember;
 	}
+	
 	public Admin adminLogin(String memberId) {
 		log.debug("☆☆☆[bryeong]LoginService_Admin☆☆☆"+memberId);
 		Admin loginAdmin = loginMapper.adminLogin(memberId);

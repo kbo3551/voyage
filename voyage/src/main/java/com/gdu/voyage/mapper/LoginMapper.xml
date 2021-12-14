@@ -22,8 +22,28 @@
 	</resultMap>
 	
 	<!-- 정지당한 회원 확인 -->
+	<select id="selectBanMember" resultType="int">
+		SELECT
+			count(member_id)
+		FROM
+			member
+		WHERE
+			member_id = #{memberId}
+			AND
+			member_active = "정지"
+	</select>
 	
 	<!-- 탈퇴한 회원 확인 -->
+	<select id="selectDeleteMember" resultType="int">
+		SELECT
+			count(member_id)
+		FROM
+			member
+		WHERE
+			member_id = #{memberId}
+			AND
+			member_active = "탈퇴"
+	</select>
 
 	<!-- 멤버 로그인 쿼리 -->
 	<select id="login" resultMap="member">
