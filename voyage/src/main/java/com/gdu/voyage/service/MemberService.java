@@ -16,6 +16,13 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberService {
 	@Autowired MemberMapper memberMapper;
 	
+	// 회원 닉네임 변경
+	public void updateMemberNickname(Member member) {
+		log.trace("☆service☆"+member);
+		memberMapper.updateMemberNickname(member);
+		return;
+	}
+	
 	// 회원 주소 수정
 	public void updateMemberAddress(MemberAddress mAddress) {
 		log.trace("☆service☆"+mAddress);
@@ -42,10 +49,12 @@ public class MemberService {
 		log.trace("☆service☆"+member.toString());
 		int idCheck = memberMapper.selectMemberId(member);
 		if(idCheck == 1) {
+			log.trace("☆service☆ : 아이디중복");
 			return "아이디중복";
 		};
 		int nicknameCheck = memberMapper.selectMemberNickName(member);
 		if(nicknameCheck == 1) {
+			log.trace("☆service☆ : 닉네임중복");
 			return "닉네임중복";
 		}
 		

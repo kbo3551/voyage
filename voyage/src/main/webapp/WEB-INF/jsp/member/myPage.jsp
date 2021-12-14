@@ -132,8 +132,7 @@
                             </div>
                             <div class="col-sm-5">
                                 <div class="form-group">
-                                  <input type="button" class="btn" style="background: rgba(0,172,238,50);"
-                                  onclick="execDaumPostcode()" value="우편번호">
+                                  <label>우편번호</label>
                                   <input type="number" class="form-control" id="postalCode" name="postalCode" placeholder="우편번호" value="${loginMember.memberAddress.memberAddressPostalCode}" readonly="readonly">
                              	</div>
                             	<div class="form-group">

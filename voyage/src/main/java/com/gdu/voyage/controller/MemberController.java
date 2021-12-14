@@ -26,6 +26,66 @@ public class MemberController {
 	@Autowired MemberService memberService;
 	@Autowired LoginService loginService;
 	
+	@GetMapping("/member/updateNickname")
+	public String getUpdateNickname() {
+    	System.out.println("MemberController() 실행");
+    	return "/member/updateNickname";
+    }
+	
+	// 닉네임 변경
+	@PostMapping("/member/updateNickname")
+	public String postUpdateNickname(HttpServletRequest request, RedirectAttributes redirect, Model model) {
+		System.out.println("MemberController() 실행");
+		Member loginMember = (Member) request.getSession().getAttribute("loginMember");
+		
+		String memberId = loginMember.getMemberId();
+		String memberPw = request.getParameter("password");
+		String memberNickname = request.getParameter("nickname");
+		String route = request.getParameter("route");
+		
+		// 중복체크를 위해 아이디는 공백으로 둠
+		Member m = new Member();
+		m.setMemberId("");
+		m.setMemberPw(memberPw);
+		m.setMemberNickname(memberNickname);
+		
+		// 중복체크
+	    String duplCheck = memberService.duplMemberCheck(m);
+	    if(duplCheck.equals("닉네임중복")) {
+	    	redirect.addFlashAttribute("m",m);
+	    	return "redirect:/member/updateNickname?failed=true&route="+route;
+	    }
+	    
+	    // 중복체크 후 아이디 셋팅
+	    m.setMemberId(memberId);
+		
+		// 디버그
+	    log.trace("★controller★"+m.toString());
+	    
+	    
+		
+	    //닉네임 변경
+	  	memberService.updateMemberNickname(m);
+
+	  	// 재반환(로그인)을 위해 일단 로그아웃
+	    request.getSession().invalidate();
+	    
+	    // 재로그인
+	    Member reLoginMember = loginService.login(m);
+	    HttpSession session = request.getSession();
+	    session.setAttribute("loginMember", reLoginMember);
+	    
+	    if(reLoginMember.getMemberLevel()==2) {
+	    	Admin adminSession = loginService.adminLogin(memberId);
+	    	if(adminSession != null) {
+	    		session.setAttribute("adminSession", adminSession);
+	    	}
+	    }
+	    
+	    return "redirect:/member/myPage";
+	}
+	
+	
 	// 비밀번호 체크
 	@GetMapping("/member/pwCheck")
 	public String getPwCheck(HttpServletRequest request,String route,Model model) {
@@ -34,6 +94,7 @@ public class MemberController {
 		return "/member/pwCheck";
 	}
 	
+	// 분기
 	@PostMapping("/member/pwCheck")
 	public String PostPwCheck(HttpServletRequest request, RedirectAttributes redirect, String password, Model model) {
 		System.out.println("MemberController() 실행");
@@ -61,8 +122,10 @@ public class MemberController {
 			return "/member/updateMyPage";
 		} else if (route.equals("2")) {
 			model.addAttribute("m", m);
+			model.addAttribute("route", route);
 			return "/member/updateNickname";
 		} else if (route.equals("3")) {
+			model.addAttribute("route", route);
 			model.addAttribute("m", m);
 			return "/member/updatePassword";
 		} else if (route.equals("4")) {

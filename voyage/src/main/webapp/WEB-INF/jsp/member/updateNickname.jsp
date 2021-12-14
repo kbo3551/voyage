@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>패스워드 확인</title>
+<title>프로필 수정</title>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="">
@@ -98,8 +98,7 @@
         </div>
         <!-- End page header --> 
 
-        <!-- property area -->
-        <form name="UpdateMember" method="post" action="${pageContext.request.contextPath}/member/pwCheck">
+        <form name="UpdateNickname" method="post" action="${pageContext.request.contextPath}/member/updateNickname">
 	        <div class="content-area user-profiel" style="background-color: #FCFCFC;">&nbsp;
 	            <div class="container">   
 	                <div class="row">
@@ -108,36 +107,29 @@
 							<br>
 	                        <div class="profiel-header">
 	                            <h2>
-	                                PW Check <br>
+	                                닉네임 입력 <br>
 	                            </h2>
 	                            <hr>
 	                        </div>
 	                        <div class="clear"> 
 	                            <div class="col-sm-5">
 	                                <div class="form-group">
-	                                    <label>PW</label>
-	                                    <input type="password" class="form-control" id="password" name="password">
+	                                    <label>Nickname</label>
+	                                    <input type="text" class="form-control" id="nickname" name="nickname">
 	                                    <input name="route" type="hidden" value="${route}">
+	                                    <input name="password" type="hidden" value="${m.getMemberPw()}">
 	                                </div>
 	                        	<div class="col-sm-20 col-sm-offset-1" style="text-align: right;">
 	                        	
 	                        	<c:choose>
 									<c:when test="${param.failed == true}">
-										<p style="color: red; font-weight: bold;">비밀번호를 틀렸습니다.</p>
+										<p style="color: red; font-weight: bold;">이미 사용중인 닉네임입니다.</p>
 									</c:when>
 									<c:otherwise>
 										<br>
 									</c:otherwise>
 								</c:choose>
-	                            <c:choose>
-									<c:when test="${route == 4}">
-										<input type='button' onclick="updateMember()" class='btn btn-finish btn-primary' style="background-color: red" name='finish' value='탈퇴' />
-									</c:when>
-									<c:otherwise>
-										<input type='button' onclick="updateMember()" class='btn btn-finish btn-primary' name='finish' value='확인' />
-									</c:otherwise>
-								</c:choose>
-	                             
+								<input type='button' onclick="updateNickname()" class='btn btn-finish btn-primary' name='finish' value='입력' />
 	                         </div>
 	                         <br>
 			            </div>
@@ -149,18 +141,15 @@
 	    	</div>
     	</form>
      
-    
-    	
 
          <script>
-
          // 유효성 검사
-            function updateMember(){
-				if($("#password").val() == ""){
-					alert('패스워드를 입력해주세요');
+            function updateNickname(){
+				if($("#nickname").val() == ""){
+					alert('닉네임을 입력해주세요.');
 					return;
 				} else {
-					UpdateMember.submit();
+					UpdateNickname.submit();
 				}
 			};
      </script>
