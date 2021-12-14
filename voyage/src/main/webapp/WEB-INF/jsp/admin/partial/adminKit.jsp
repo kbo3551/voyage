@@ -9,8 +9,8 @@
 <body>
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
-			<a class="sidebar-brand" href="index.html">
-	          <span class="align-middle">AdminKit</span>
+			<a class="sidebar-brand" href="${pageContext.request.contextPath}/admin/adminIndex">
+	          <span class="align-middle">Admin Page</span>
 	        </a>
 	
 			<ul class="sidebar-nav">
