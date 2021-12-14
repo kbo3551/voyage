@@ -10,18 +10,20 @@ import com.gdu.voyage.vo.NoticeFile;
 
 @Mapper
 public interface NoticeMapper {
+	int selectNoticeTotalCount();
 	// 리스트 가져오기
 	List<Notice> selectNoticeList(Map<String, Object> param);
 	// 공지사항 작성
-	int inserNotice(Notice notice);
+	Notice inserNotice(Notice notice);
 	// 공지사항 삭제
-	void deleteNotice(Notice notice);
+	Notice deleteNotice(Notice notice);
 	// 공지사항 수정
-	void updateNotice(Notice notice);
+	Notice updateNotice(Notice notice);
 	// 공지사항 One
 	Notice selectNoticeOne(int noticeNo);
 	// 공지사항 파일
 	List<NoticeFile> selectNoticeFileList();
-	int insertNotice(Notice notice);
-	int insertNoticefile(NoticeFile noticefile);
+	
+	Notice insertNoticefile(NoticeFile noticefile);
+	Notice deleteNoticeFile(NoticeFile noticefile);
 }

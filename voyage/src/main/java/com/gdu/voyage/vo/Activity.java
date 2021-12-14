@@ -7,7 +7,6 @@ public class Activity {
 	private int activityNo;
 	private int hostNo;
 	private String activityName;
-	private int addressNo;
 	private String activityOpenDate;
 	private String activityCloseDate;
 	private int activityPrice;

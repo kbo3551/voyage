@@ -1,22 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.NoticeMapper">
+	<resultMap type="com.gdu.voyage.vo.Notice" id="notice">
+		<id column = "notice_no" property="noticeNo"/>
+		<result column = "admin_id" property="adminId"/>
+		<result column = "notice_title" property="noticeTitle"/>
+		<result column = "notice_top" property="noticeTop"/>
+		<result column = "notice_content" property="noticeContent"/>
+		<result column = "create_date" property="createDate"/>
+		<result column = "update_date" property="updateDate"/>
+		<collection property="noticeFileList" ofType="com.gdu.voyage.vo.NoticeFile">
+			<id column ="notice_file_no" property="noticeFileNo"/>
+			<result column = "notice_file_name" property="noticeFileName"/>
+			<result column = "notice_file_ext" property="noticeFileExt"/>
+			<result column = "notice_file_size" property="noticeFileSize"/>
+		</collection>
+	</resultMap>
+	
+	
 	<!--공지사항 리스트 출력  -->
-	<select id="selectNoticeList">
+	<select id="selectNoticeList" resultMap="notice" parameterType="Map">
 		SELECT 
-		notice_no, admin_id, notice_title, notice_view_cnt, create_date, update_date
+			notice_no, 
+			admin_id, 
+			notice_title, 
+			notice_view_cnt, 
+			create_date, 
+			update_date
 		FROM notice 
 		ORDER BY 
-		notice_top='Y' DESC, update_date DESC
+			notice_top='Y' DESC, update_date DESC
 	</select>
-	<select id="selectNoticeFileList" resultType="com.gdu.voyage.vo.NoticeFile">
-			SELECT
-				notice_no noticedNo,
-				notice_file_name fileName,
-				notice_file_ext fileExt
-			FROM
-				noticefile
-	</select> 
+	
+	<!-- 공지사항 카운트 -->
+	<select id="selectNoticeTotalCount" resultType="int">
+		SELECT COUNT(*) FROM notice
+	</select>
+	
+	
 	<!-- 공지사항 insert -->
 	<insert id="inserNotice" parameterType="com.gdu.voyage.vo.Notice">
 	   	INSERT INTO notice(
@@ -35,7 +56,7 @@
 	</insert>
 	<!-- 파일 insert -->
 	<insert id="insertNoticefile" parameterType="com.gdu.voyage.vo.NoticeFile">
-			INSERT INTO notice_file (
+		INSERT INTO notice_file (
 			notice_no,
 			notice_file_name,
 			notice_file_ext,
@@ -48,12 +69,47 @@
 		)
 	</insert>
 	<!-- 공지사항 delete -->
-	<delete id="deleteNotice">
-		DELETE FROM notice WHERE notice_no
+	<delete id="deleteNotice" parameterType="com.gdu.voyage.vo.Notice">
+		DELETE FROM notice 
+		WHERE 
+			notice_no = #{noticeNo}
+	</delete>
+	
+	<delete id="deleteNoticeFile" parameterType="com.gdu.voyage.vo.NoticeFile">
+		DELETE FROM noticeFile 
+		WHERE 
+			notice_file_no = #{noticeFileNo}
 	</delete>
 	<!-- 공지사항 update -->
-	<update id="updateNotice">
-		UPDATE notice SET *=* WHERE 
+	<!-- 파일(사진)은 수정될 때 추가,삭제,유지만 가능 -->
+	<!-- 사진은 noticeNo에만 묶여있어 수정시 사진이 삭제 추가만 가능 -->
+	<update id="updateNotice" parameterType="com.gdu.voyage.vo.Notice">
+		UPDATE notice 
+		SET 
+			notice_title = #{noticeTitle},
+			notice_content = #{noticeContent},
+			update_date = NOW()
+		WHERE 
+			notice_no = #{noticeNo}
 	</update>
+
 	<!-- 공지사항 One(상세보기) -->
+	<select id="selectNoticeOne" resultMap="notice" parameterType="com.gdu.voyage.vo.Notice">
+		SELECT
+			n.notice_no,
+			n.admin_id,
+			n.notice_title,
+			n.notice_top,
+			n.notice_content,
+			n.notice_view_cnt,
+			n.create_date,
+			n.update_date,
+			f.notice_file_no,
+			f.notice_file_name,
+			f.notice_file_ext,
+			f.notice_file_size
+		FROM notice n LEFT JOIN notice_file f
+		ON n.notice_no = f.notice_no
+		WHERE n.notice_no = #{noticeNo}
+	</select>
 </mapper>

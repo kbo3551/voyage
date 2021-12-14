@@ -58,7 +58,6 @@
 
 	<!-- 눈누 - 한산스네오 레귤러 폰트 -->
 	<style type="text/css">
-	
 		@font-face {
 		    font-family: 'SpoqaHanSansNeo-Regular';
 		    	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff');
@@ -190,6 +189,12 @@
 	                                    <option value="">결제</option>
 	                                    <option value="">기타</option>
 									</select>
+                                </div>
+                                <div>
+                                	<input name="qnaSecret" id="qnaSecret" type="checkbox" value="비밀글"/>
+                                	<label><span>비밀글</span></label>
+                                	<input name="qnaSecret" id="qnaSecret" type="checkbox" value="공개글"/>
+                                	<label><span>공개글</span></label>
                                 </div>
                                 <div class="col-sm-6">	
                                     <div class="form-group">

@@ -11,13 +11,12 @@ import com.gdu.voyage.vo.QnaImg;
 @Mapper
 public interface QnaMapper {
 	// Qna 전체 목록
-	List<Qna> selectQnaList(int pageNo);
 	List<Qna> selectQnaListByCategory(Map<String, Object> param);
 
 	int selectQnaTotalCount(String qnaCategory);
 	int selectCountPage();
 	// 목록 상세 내용
-	Qna selectQnaOne(int qnaNo);
+	Qna selectQnaOneAndAnswer(int qnaNo);
 	// 질문 수정
 	int modifyQ(Qna qna);
 	// 질문 삭제
