@@ -1,20 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.LoginMapper">
+
+	<resultMap type="com.gdu.voyage.vo.MemberAddress" id="memberAddress">
+		<result column="memberAddressPostalCode" property="memberAddressPostalCode" />
+		<result column="memberAddressZip" property="memberAddressZip" />
+		<result column="memberAddressDetail" property="memberAddressDetail" />
+	</resultMap>
+
+	<resultMap type="com.gdu.voyage.vo.Member" id="member">
+		<result column="memberId" property="memberId" />
+		<result column="memberFirstName" property="memberFirstName" />
+		<result column="memberLastName" property="memberLastName" />
+		<result column="memberNickname" property="memberNickname" />
+		<result column="memberPhone" property="memberPhone" />
+		<result column="memberEmail" property="memberEmail" />
+		<result column="memberDescription" property="memberDescription" />
+		<result column="memberLevel" property="memberLevel" />
+		<result column="memberActive" property="memberActive" />
+		<collection property="memberAddress" resultMap="memberAddress" />
+	</resultMap>
+
 	<!-- 멤버 로그인 쿼리 -->
-	<select id="login" resultType="com.gdu.voyage.vo.Member">
+	<select id="login" resultMap="member">
 		SELECT
-			member_id memberId,
-			member_first_name memberFirstName,
-			member_last_name memberLastName,
-			member_nickname memberNickname,
-			member_level memberLevel
+			m.member_id memberId,
+			m.member_first_name memberFirstName,
+			m.member_last_name memberLastName,
+			m.member_nickname memberNickname,
+			m.member_email memberEmail,
+			m.member_phone memberPhone,
+			m.member_description memberDescription,
+			m.member_level memberLevel,
+			m.member_active memberActive,
+			a.member_address_postal_code memberAddressPostalCode,
+			a.member_address_zip memberAddressZip,
+			a.member_address_detail memberAddressDetail
 		FROM
-			member
+			member m
+		INNER JOIN
+			member_address a
+		ON
+			m.member_id = a.member_id
 		WHERE
-			member_id = #{memberId}
+			m.member_id = #{memberId}
 			AND
-			member_pw = PASSWORD(#{memberPw});
+			m.member_pw =  PASSWORD(#{memberPw});
 	</select>
 	
 	
