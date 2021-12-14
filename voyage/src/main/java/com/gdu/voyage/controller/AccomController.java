@@ -21,33 +21,43 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Transactional
 public class AccomController {
-	@Autowired AccomBuildingService accomBuildingService;
+	@Autowired
+	AccomBuildingService accomBuildingService;
 	private Integer currentPage = 1;
-	
+
 	@GetMapping("/host/addAccomBuilding")
 	public String addAccomBuilding() {
 		log.debug("AccomController 실행");
 		return "/host/addAccomBuilding";
 	}
-	
+
 	@PostMapping("/host/addAccomBuilding")
 	public String addAccomBuilding(AccomBuildingForm accomBuildingForm) {
 		log.debug("AccomController 실행");
-		
+
 		// 참조타입 객체를 log.debug로 출력할 때는 toString()으로 출력함
-		log.debug("★controller★ accomBuildingForm : " + accomBuildingForm.toString());
+		log.debug("★[지혜]controller★ accomBuildingForm : " + accomBuildingForm.toString());
 		accomBuildingService.addAccomBuilding(accomBuildingForm);
-		return "redirect:/host/accomBuildingList";
+		return "redirect:/accomBuildingList";
 	}
-	
+
+	// accomBuilding 목록 조회
 	@RequestMapping("/admin/accomBuildingList")
-	public String getAccomBuildingList(Model model, @RequestParam(value="pageNo", defaultValue="1") int pageNo) {
+	public String getAccomBuildingList(Model model, @RequestParam(value = "pageNo", defaultValue = "1") int pageNo) {
 		currentPage = pageNo;
 		log.debug("accomBuildingList 실행!!");
 		List<AccomBuilding> list = accomBuildingService.getAccomBuildingList(currentPage);
 		model.addAttribute("list", list);
 		return "/admin/accomBuildingList";
 	}
-	
-	
+
+	// accomBuilding 상세목록 조회
+	@GetMapping("/admin/accomBuildingOne")
+	public String getAccomBuildingOne(Model model, int accomBuildingNo) {
+		System.out.println("accomBuildingOne 실행!!");
+		AccomBuilding accomBuilding = accomBuildingService.getAccomBuildingOne(accomBuildingNo);
+		model.addAttribute("accomBuilding", accomBuilding);
+		return "/admin/accomBuildingOne";
+	}
+
 }

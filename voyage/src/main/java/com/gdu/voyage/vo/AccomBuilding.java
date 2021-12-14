@@ -12,6 +12,7 @@ public class AccomBuilding {
 	private String accomBuildingDescription;
 	private String accomBuildingPhone;
 	private String accomBuildingState;
+	private String accomBuildingStateAdmin;
 	private String createDate;
 	private String updateDate;
 	

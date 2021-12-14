@@ -7,6 +7,8 @@ import com.gdu.voyage.vo.MemberAddress;
 
 @Mapper
 public interface MemberMapper {
+	void updateMember(Member member);
+	void updateMemberAddress(MemberAddress mAddress);
 	int selectMemberId(Member member);
 	int selectMemberNickName(Member member);
 	void insertMemberAddress(MemberAddress mAddress);

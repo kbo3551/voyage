@@ -9,13 +9,17 @@ import com.gdu.voyage.vo.AccomBuildingFacility;
 import com.gdu.voyage.vo.AccomBuildingImage;
 import com.gdu.voyage.vo.AccomBuildingSpot;
 import com.gdu.voyage.vo.Hashtag;
+import com.gdu.voyage.vo.AccomAddress;
+import com.gdu.voyage.vo.SpotAddress;
 @Mapper
 public interface AccomBuildingMapper {
 	// 숙소-건물 입력 : 숙소-건물정보 + 이미지 + 시설 + 추천장소 + 해시태그
 	int insertAccomBuilding(AccomBuilding accomBuilding);
 	int insertAccomBuildingImage(AccomBuildingImage accomBuidingImage);
+	int insertAccomBuildingAddress(AccomAddress accomAddress);
 	int insertAccomBuildingFacility(AccomBuildingFacility accomBuildingFacility);
 	int insertAccomBuildingSpot(AccomBuildingSpot accomBuildingSpot);
+	int insertAccomSpotAddress(SpotAddress spotAddress);
 	int insertAccomBuildingHashtag(Hashtag Hashtag);
 	
 	// 숙소 조회 list
@@ -23,6 +27,6 @@ public interface AccomBuildingMapper {
 	int selectCountPage();
 	
 	// 숙소 조회 one
-	AccomBuilding selectAccomBuildingOne(int AccomBuildingNo);
+	AccomBuilding selectAccomBuildingOne(int accomBuildingNo);
 	
 }

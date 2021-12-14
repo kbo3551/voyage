@@ -16,6 +16,20 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberService {
 	@Autowired MemberMapper memberMapper;
 	
+	// 회원 주소 수정
+	public void updateMemberAddress(MemberAddress mAddress) {
+		log.trace("☆service☆"+mAddress);
+		memberMapper.updateMemberAddress(mAddress);
+		return;
+	}
+	
+	// 회원 정보 수정
+	public void updateMember(Member member) {
+		log.trace("☆service☆"+member);
+		memberMapper.updateMember(member);
+		return;
+	}
+	
 	// 회원가입 시 아이디 따로 저장해둠(재가입 방지)
 	public void addMemberCreateId(String memberId) {
 		log.trace("☆service☆"+memberId);

@@ -59,15 +59,15 @@
 				</li>
 	
 				<li class="sidebar-item">
-					<a class="sidebar-link" href="ui-buttons.html">
-	           			<i class="align-middle" data-feather="square"></i> <span class="align-middle">회원 관리</span>
-	          		</a>
+					<a class="sidebar-link" href="pages-profile.html">
+	           			<i class="align-middle" data-feather="user"></i> <span class="align-middle">회원 관리</span>
+	         		</a>
 				</li>
 	
 				<li class="sidebar-item">
-					<a class="sidebar-link" href="ui-forms.html">
-	           			<i class="align-middle" data-feather="check-square"></i> <span class="align-middle">사업자 관리</span>
-	        		</a>
+					<a class="sidebar-link" href="pages-profile.html">
+	           			<i class="align-middle" data-feather="user"></i> <span class="align-middle">사업자 관리</span>
+	         		</a>
 				</li>
 	
 				<li class="sidebar-item">

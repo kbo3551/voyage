@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.MemberMapper">
+	<!-- 프로필 주소 업데이트 -->
+	<update id="updateMemberAddress">
+		UPDATE member_address
+		set
+			member_address_postal_code = #{memberAddressPostalCode},
+			member_address_zip = #{memberAddressZip},
+			member_address_detail = #{memberAddressDetail}
+		WHERE member_id = #{memberId}
+	</update>
+
+	<!-- 프로필 업데이트 -->
+	<update id="updateMember">
+		UPDATE member
+		set
+			member_first_name = #{memberFirstName},
+			member_last_name = #{memberLastName},
+			member_phone = #{memberPhone},
+			member_email = #{memberEmail},
+			member_description = #{memberDescription}
+		WHERE member_id = #{memberId}
+	</update>
 	
 	<!-- 재가입 방지를 위해 아이디 저장 -->
 	<insert id="insertCreateId" parameterType="String">
