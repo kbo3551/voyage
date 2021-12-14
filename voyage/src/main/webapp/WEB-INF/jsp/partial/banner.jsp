@@ -209,6 +209,6 @@
     }
   	</script>
   	
-	<%--    <script src="${pageContext.request.contextPath}/assets/js/hashtag.js"></script> --%>
+  <%--    <script src="${pageContext.request.contextPath}/assets/js/hashtag.js"></script> --%>
 </body>
 </html>
