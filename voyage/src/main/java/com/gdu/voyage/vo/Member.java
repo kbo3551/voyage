@@ -17,4 +17,6 @@ public class Member {
 	private String memberActive;
 	private String createDate;
 	private String updateDate;
+	
+	private MemberAddress memberAddress;
 }
