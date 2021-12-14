@@ -19,17 +19,25 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class AdminController {
 	@Autowired AdminService adminService;
-
+	// 어드민 정보수정
 	@GetMapping("/admin/adminUpdate")
-	public String adminUpdate() {
+	public String getAdminUpdate() {
 		System.out.println("AdminController()_adminUpdate 실행");
 		return "admin/adminUpdate";
+	}
+	
+	// 어드민 주소 정보 수정
+	@GetMapping("/admin/adminAddressUpdate")
+	public String getAdminAddressUpdate() {
+		System.out.println("AdminController()_adminUpdate 실행");
+		return "admin/adminAddressUpdate";
 	}
 	@GetMapping("/addAdmin")
 	public String getAddAdmin() {
 		System.out.println("AdminController() 실행");
 		return "addAdmin";
 	}
+	// 어드민 회원가입
 	@PostMapping("/addAdmin")
 	public String postAddAdmin(HttpServletRequest request, RedirectAttributes redirect) {
 		System.out.println("AdminController() 실행");
