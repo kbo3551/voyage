@@ -20,36 +20,36 @@
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		
-		<link rel="stylesheet" href="accom/css/normalize.css">
-		<link rel="stylesheet" href="accom/css/font-awesome.min.css">
-		<link rel="stylesheet" href="accom/css/fontello.css">
-		<link href="accom/fonts/icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
-		<link href="accom/fonts/icon-7-stroke/css/helper.css" rel="stylesheet">
-		<link href="css/animate.css" rel="stylesheet" media="screen">
-		<link rel="stylesheet" href="accom/css/bootstrap-select.min.css"> 
-		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="accom/css/icheck.min_all.css">
-		<link rel="stylesheet" href="accom/css/price-range.css">
-		<link rel="stylesheet" href="accom/css/owl.carousel.css">  
-		<link rel="stylesheet" href="accom/css/owl.theme.css">
-		<link rel="stylesheet" href="accom/css/owl.transitions.css"> 
-		<link rel="stylesheet" href="accom/css/wizard.css"> 
-		<link rel="stylesheet" href="accom/css/style.css">
-		<link rel="stylesheet" href="accom/css/responsive.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/normalize.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/font-awesome.min.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/fontello.css">
+		<link href="${pageContext.request.contextPath}/accom/fonts/icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/accom/fonts/icon-7-stroke/css/helper.css" rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet" media="screen">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/bootstrap-select.min.css"> 
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/icheck.min_all.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/price-range.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/owl.carousel.css">  
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/owl.theme.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/owl.transitions.css"> 
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/wizard.css"> 
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/style.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/responsive.css">
 		
 		<!-- CSS here -->
-            <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-            <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-            <link rel="stylesheet" href="assets/css/slicknav.css">
-            <link rel="stylesheet" href="assets/css/flaticon.css">
-            <link rel="stylesheet" href="assets/css/price_rangs.css">
-            <link rel="stylesheet" href="assets/css/animate.min.css">
-            <link rel="stylesheet" href="assets/css/magnific-popup.css">
-            <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-            <link rel="stylesheet" href="assets/css/themify-icons.css">
-            <link rel="stylesheet" href="assets/css/slick.css">
-            <link rel="stylesheet" href="assets/css/nice-select.css">
-            <link rel="stylesheet" href="assets/css/style.css">
+            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
+            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/owl.carousel.min.css">
+            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/slicknav.css">
+            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/flaticon.css">
+            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/price_rangs.css">
+            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/animate.min.css">
+            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/magnific-popup.css">
+            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/fontawesome-all.min.css">
+            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/themify-icons.css">
+            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/slick.css">
+            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/nice-select.css">
+            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 		
 		<!-- 눈누 - 한산스네오 레귤러 폰트 -->
 		<style type="text/css">
@@ -293,23 +293,23 @@
     	<c:import url="../partial\\footer.jsp"/>
     <!--footer.jsp 끝  -->
 	
-	<script src="accom/js/vendor/modernizr-2.6.2.min.js"></script>
-    <script src="accom/js//jquery-1.10.2.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="accom/js/bootstrap-select.min.js"></script>
-    <script src="accom/js/bootstrap-hover-dropdown.js"></script>
-    <script src="accom/js/easypiechart.min.js"></script>
-    <script src="accom/js/jquery.easypiechart.min.js"></script>
-    <script src="accom/js/owl.carousel.min.js"></script>
-    <script src="accom/js/wow.js"></script>
-    <script src="accom/js/icheck.min.js"></script>
+	<script src="${pageContext.request.contextPath}/accom/js/vendor/modernizr-2.6.2.min.js"></script>
+    <script src="${pageContext.request.contextPath}/accom/js//jquery-1.10.2.min.js"></script>
+    <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/accom/js/bootstrap-select.min.js"></script>
+    <script src="${pageContext.request.contextPath}/accom/js/bootstrap-hover-dropdown.js"></script>
+    <script src="${pageContext.request.contextPath}/accom/js/easypiechart.min.js"></script>
+    <script src="${pageContext.request.contextPath}/accom/js/jquery.easypiechart.min.js"></script>
+    <script src="${pageContext.request.contextPath}/accom/js/owl.carousel.min.js"></script>
+    <script src="${pageContext.request.contextPath}/accom/js/wow.js"></script>
+    <script src="${pageContext.request.contextPath}/accom/js/icheck.min.js"></script>
 
-    <script src="accom/js/price-range.js"></script> 
-    <script src="accom/js/jquery.bootstrap.wizard.js" type="text/javascript"></script>
-    <script src="accom/js/jquery.validate.min.js"></script>
-    <script src="accom/js/wizard.js"></script>
+    <script src="${pageContext.request.contextPath}/accom/js/price-range.js"></script> 
+    <script src="${pageContext.request.contextPath}/accom/js/jquery.bootstrap.wizard.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/accom/js/jquery.validate.min.js"></script>
+    <script src="${pageContext.request.contextPath}/accom/js/wizard.js"></script>
 
-    <script src="accom/js/main.js"></script>
+    <script src="${pageContext.request.contextPath}/accom/js/main.js"></script>
     
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
