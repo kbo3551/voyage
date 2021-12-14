@@ -46,6 +46,10 @@
 			m.member_id = #{memberId}
 			AND
 			m.member_pw =  PASSWORD(#{memberPw});
+			AND
+			NOT m.member_active = '탈퇴'
+			AND
+			NOT m.member_active = '정지'
 	</select>
 	
 	
