@@ -121,17 +121,7 @@
                                         <input name="email" type="email" class="form-control" placeholder="andrew@email@email.com.com">
                                     </div> 
 
-                                </div>
-                                <div class="col-sm-3 padding-top-25">
-                                    <div class="form-group">
-                                        <label>Password <small>(required)</small></label>
-                                        <input name="Password" type="password" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Confirm password : <small>(required)</small></label>
-                                        <input type="password" class="form-control">
-                                    </div>
-                                </div>  
+
 
                             </div>
                      
