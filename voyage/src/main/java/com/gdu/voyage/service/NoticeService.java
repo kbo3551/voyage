@@ -25,26 +25,83 @@ import lombok.extern.slf4j.Slf4j;
 public class NoticeService {
 	@Autowired NoticeMapper noticeMapper;
 	
+	
+	//Map(notice 리스트,페이징)으로 묶어서 리턴
 	public Map<String,Object> getNoticeListByTop(int currentPage,int rowPerPage){
 		Map<String,Object> paramMap = new HashMap<>();
 		int beginRow = (currentPage-1)*rowPerPage;
+		
 		paramMap.put("beginRow",beginRow);
 		paramMap.put("rowPerPage", rowPerPage);
 		
+		List<Notice> noticeList = noticeMapper.selectNoticeList(paramMap);
+		log.debug(noticeList.toString()+"☆☆☆[DoHun] NoticeList , Service☆☆☆");
 		
-		List<Notice> notcieList = noticeMapper.selectNoticeList(paramMap);
-		log.debug(notcieList.toString()+"☆☆☆[DoHun] NoticeList☆☆☆");
 		Map<String,Object> returnMap = new HashMap<>();
 		int lastPage = 0;
 		int totalCount = noticeMapper.selectNoticeTotalCount();
+		
 		lastPage = totalCount/rowPerPage;
 		if(totalCount%rowPerPage != 0) {
 			lastPage+=1;
 		}
-		returnMap.put("notcieList", notcieList);
+		
+		returnMap.put("noticeList", noticeList);
 		returnMap.put("lastPage", lastPage);
 	
 		return returnMap;
+	}
+	
+	//notice one(상세)
+	public Notice getNoticeOne(int noticeNo) {
+		log.debug(noticeNo+"☆☆☆[DoHun] NoticeOne, Service☆☆☆");
+		return noticeMapper.selectNoticeOne(noticeNo);
+	}
+	
+	//insert(내용+사진 입력)
+	public Map<String, Object> insertNoticeOne(Notice notice,NoticeFile noticeFile) {
+		Map<String, Object> insertNoticeMap = new HashMap<>();
+		
+		Notice insertNotice = noticeMapper.inserNotice(notice);
+		Notice insertNoticeFile = noticeMapper.insertNoticefile(noticeFile);
+		
+		log.debug(insertNotice.toString()+"☆☆☆[DoHun] NoticeMapper insert + insert ,Service☆☆☆");
+		log.debug(insertNoticeMap.toString()+"☆☆☆[DoHun] NoticeFileMapper insert + insert ,Service☆☆☆");
+		
+		insertNoticeMap.put("insertNotice",insertNotice);
+		insertNoticeMap.put("insertNoticeFile",insertNoticeFile);
+		
+		log.debug(insertNoticeMap.toString()+"☆☆☆[DoHun] Notice insert + insert Map ,Service☆☆☆");
+		
+		return insertNoticeMap;
+	}
+	
+	
+	//삭제(내용+사진 삭제)
+	public Map<String, Object> deleteNoticeOne(Notice notice,NoticeFile noticeFile) {
+		Map<String, Object> deleteNoticeMap = new HashMap<>();
+		
+		log.debug(notice.toString()+"☆☆☆[DoHun] Notice notice + delete Map ,Service☆☆☆");
+		Notice deleteNotice = noticeMapper.deleteNotice(notice);
+		log.debug(notice.toString()+"☆☆☆[DoHun] Notice delete + delete Map ,Service☆☆☆");
+		
+		log.debug(notice.toString()+"☆☆☆[DoHun] NoticeFile notice + delete Map ,Service☆☆☆");
+		Notice deleteNoticeFile = noticeMapper.deleteNoticeFile(noticeFile);
+		log.debug(notice.toString()+"☆☆☆[DoHun] NoticeFile delete + delete Map ,Service☆☆☆");
+		
+		deleteNoticeMap.put("deleteNotice", deleteNotice);
+		deleteNoticeMap.put("deleteNoticeFile", deleteNoticeFile);
+		
+		return deleteNoticeMap;
+	}
+	
+	//수정
+	public Notice updateNoticeOne(Notice notice) {
+		log.debug(notice.toString()+"☆☆☆[DoHun] Notice notice + update Map ,Service☆☆☆");
+		noticeMapper.updateNotice(notice);
+		log.debug(notice.toString()+"☆☆☆[DoHun] Notice update + update Map ,Service☆☆☆");
+		
+		return notice;
 	}
 	
 	/*
