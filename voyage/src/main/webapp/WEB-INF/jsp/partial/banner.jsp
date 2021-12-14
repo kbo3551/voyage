@@ -117,7 +117,7 @@
                                                 <div class="input-form">
                                                     <input type="text" id="word" onkeyup="search(this);" placeholder="해시태그를 입력해주세요">
                                                 </div>
-                                                <div class="search-form">
+                                                <div class="hashtag-search-form">
                                                     <button type="button" id="btn_search">Search</button>
                                                 </div>
                                             </div>
