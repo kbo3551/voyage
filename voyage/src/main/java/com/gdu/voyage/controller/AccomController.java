@@ -35,9 +35,9 @@ public class AccomController {
 		log.debug("AccomController 실행");
 		
 		// 참조타입 객체를 log.debug로 출력할 때는 toString()으로 출력함
-		log.debug("★controller★ accomBuildingForm : " + accomBuildingForm.toString());
+		log.debug("★[지혜]controller★ accomBuildingForm : " + accomBuildingForm.toString());
 		accomBuildingService.addAccomBuilding(accomBuildingForm);
-		return "redirect:/host/accomBuildingList";
+		return "redirect:/accomBuildingList";
 	}
 	
 	@RequestMapping("/admin/accomBuildingList")

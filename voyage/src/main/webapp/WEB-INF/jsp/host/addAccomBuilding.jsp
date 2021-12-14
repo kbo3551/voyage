@@ -81,7 +81,7 @@
 				<div class="wizard-container">
 	
 					<div class="wizard-card ct-wizard-orange" id="wizardProperty">
-						<form action="${pageContext.request.contextPath}/addAccomBuilding" method="post" enctype="multipart/form-data" id="accomBuildingForm">
+						<form action="${pageContext.request.contextPath}/host/addAccomBuilding" method="post" enctype="multipart/form-data" id="accomBuildingForm">
 							<div class="wizard-header">
 								<h3>
 									<b>Accommodation</b> _building<br>
@@ -104,25 +104,25 @@
 										<div class="col-sm-offset-1" style="margnin:0 auto;">
 											<div class="picture-container" style="float:left; margin-left:20px;">
 												<div class="picture">
-													<img src="assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview" title="" />
+													<img src="${pageContext.request.contextPath}/assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview" title="" />
 													<input type="file" name="accomBuildingImage" id="wizard-picture">
 												</div>
 											</div>
 											<div class="picture-container" style="float:left; margin-left:20px;">
 												<div class="picture">
-													<img src="assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview2" title="" />
+													<img src="${pageContext.request.contextPath}/assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview2" title="" />
 													<input type="file" name="accomBuildingImage" id="wizard-picture2">
 												</div>
 											</div>
 											<div class="picture-container" style="float:left; margin-left:20px;">
 												<div class="picture">
-													<img src="assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview3" title="" />
+													<img src="${pageContext.request.contextPath}/assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview3" title="" />
 													<input type="file" name="accomBuildingImage" id="wizard-picture3">
 												</div>
 											</div>
 											<div class="picture-container" style="float:left; margin-left:20px;">
 												<div class="picture">
-													<img src="assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview4" title="" />
+													<img src="${pageContext.request.contextPath}/assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview4" title="" />
 													<input type="file" name="accomBuildingImage" id="wizard-picture4">
 												</div>
 											</div>
@@ -158,9 +158,9 @@
 														<input type="button" class="btn-sm" style="width:130px; color:white; background: #ff3d1c; border-radius: 30px;
     													color: #fff; font-weight: 500;" onclick="execDaumPostcode()" value="우편번호">
 													</h4>
-		                                    		<input type="number" class="form-control" id="postalCode" name="postalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" readonly="readonly" style="height:34px;">
-													<input type="text" class="form-control" id="roadAddress" name="roadAddress" placeholder="도로명주소가 입력됩니다." readonly="readonly" style="height:34px;">
-													<input type="text" class="form-control" id="detailAddress" name="detailAddress" placeholder="상세주소" style="height:34px;">
+		                                    		<input type="number" class="form-control" id="postalCode" name="AccomAddress.AccomAddressPotalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" readonly="readonly" style="height:34px;">
+													<input type="text" class="form-control" id="roadAddress" name="AccomAddress.AccomAddressZip" placeholder="도로명주소가 입력됩니다." readonly="readonly" style="height:34px;">
+													<input type="text" class="form-control" id="prdAddressDetail" name="AccomAddress.AccomAddressDetail" placeholder="상세주소" style="height:34px;">
 												</div>
 											</div>
 											
@@ -208,12 +208,23 @@
 													<div class="form-group" id="spotPlace">
 														<div id="spotForm">
 															<label>Name</label>
-				                                    		<input type="text" class="form-control" id="accomBuildingSpotName" name="accomBuildingSpot[0].accomBuildingSpotName" placeholder="ex) 보보커피" style="height:34px;">
+				                                    		<input type="text" class="form-control" id="accomBuildingSpotName" name="accomSpotForm[0].accomBuildingSpot.accomBuildingSpotName" placeholder="ex) 보보커피" style="height:34px;">
 															<label>Category</label>
-															<input type="text" class="form-control" id="accomBuildingSpotCategory" name="accomBuildingSpot[0].accomBuildingSpotCategory" placeholder="ex) 카페" style="height:34px;">
+															<input type="text" class="form-control" id="accomBuildingSpotCategory" name="accomSpotForm[0].accomBuildingSpot.accomBuildingSpotCategory" placeholder="ex) 카페" style="height:34px;">
 															<label>Description</label>
-															<textarea class="form-control" id="accomBuildingSpotDescription" name="accomBuildingSpot[0].accomBuildingSpotDescription" placeholder="ex) 사장님이 직접 로스팅한 에소프레소를 맛볼 수 있는 곳..." rows="8"></textarea>
-														</div><hr>
+															<textarea class="form-control" id="accomBuildingSpotDescription" name="accomSpotForm[0].accomBuildingSpot.accomBuildingSpotDescription" placeholder="ex) 사장님이 직접 로스팅한 에소프레소를 맛볼 수 있는 곳..." rows="8"></textarea>
+														</div>
+														<div>
+															<span>
+																<label>Spot Address </label>
+																<input type="button" class="btn-sm" style="width:130px; color:white; background: #ff3d1c; border-radius: 30px;
+		    													color: #fff; font-weight: 500;" onclick="execDaumPostcodeSpot()" value="우편번호">
+															</span>
+				                                    		<input type="number" class="form-control" id="spotPostalCode" name="accomSpotForm[0].spotAddress.spotAddressPotalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" readonly="readonly" style="height:34px;">
+															<input type="text" class="form-control" id="spotRoadAddress" name="accomSpotForm[0].spotAddress.spotAddressZip" placeholder="도로명주소가 입력됩니다." readonly="readonly" style="height:34px;">
+															<input type="text" class="form-control" id="prdAddressDetail" name="accomSpotForm[0].spotAddress.spotAddressDetail" placeholder="상세주소" style="height:34px;">
+														</div>
+														<hr>
 													</div>
 												</div>
 											</div>
@@ -358,35 +369,153 @@
 	
 	// 시설 폼 삭제시 사용하는 스크립트 이벤트
 	$('#delFacility').click(function(){
-		if($('input[name=accomBuildingFacilityName]').length>1){
+		if($('input[id=accomBuildingFacilityName]').length>1){
 			numFacility = numFacility - 1;
-			$('input[name=accomBuildingFacilityName]:last').remove();
+			$('input[id=accomBuildingFacilityName]:last').remove();
 		} else {
 			alert("한 가지 이상의 시설을 입력해주세요!");
 		}
 	});
+	
+	// 다음(카카오) 주소 api - 추천장소
+	function execDaumPostcodeSpot() {
+		new daum.Postcode(
+			{
+				oncomplete : function(data) {
+					// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+					// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+					var roadAddr = data.roadAddress; // 도로명 주소 변수
+					var extraRoadAddr = ''; // 참고 항목 변수
+
+					// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+					// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+					if (data.bname !== ''
+							&& /[동|로|가]$/g.test(data.bname)) {
+						extraRoadAddr += data.bname;
+					}
+					// 건물명이 있고, 공동주택일 경우 추가한다.
+					if (data.buildingName !== ''
+							&& data.apartment === 'Y') {
+						extraRoadAddr += (extraRoadAddr !== '' ? ', '
+								+ data.buildingName : data.buildingName);
+					}
+					// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+					if (extraRoadAddr !== '') {
+						extraRoadAddr = ' (' + extraRoadAddr + ')';
+					}
+
+					// 우편번호와 주소 정보를 해당 필드에 넣는다.
+					document.getElementById('spotPostalCode').value = data.zonecode;
+					document.getElementById('spotRoadAddress').value = roadAddr;
+				}
+			}).open();
+		}
 	
 	// 추천장소 폼 추가시 사용하는 스크립트 이벤트
 	let numSpot = 0;
 	
 	$('#addSpot').click(function(){
 		numSpot = numSpot + 1;
-		let inputSpot = '<div id="spotForm">';
-		inputSpot += '<label>Name</label>';
-		inputSpot += '<input type="text" class="form-control" id="accomBuildingSpotName" name="accomBuildingSpot['+numSpot+'].accomBuildingSpotName" style="height:34px;">';
-		inputSpot += '<label>Category</label>';
-		inputSpot += '<input type="text" class="form-control" id="accomBuildingSpotCategory" name="accomBuildingSpot['+numSpot+'].accomBuildingSpotCategory" style="height:34px;">';
-		inputSpot += '<label>Description</label>';
-		inputSpot += '<textarea class="form-control" id="accomBuildingSpotDescription" name="accomBuildingSpot['+numSpot+'].accomBuildingSpotDescription" rows="8"></textarea>';
-		inputSpot += '</div><hr>';
-		$('#spotPlace').append(inputSpot);
+		if($('div[id=spotForm]').length<3){
+			let inputSpot = '<div id="spotForm">';
+			inputSpot += '<label>Name</label>';
+			inputSpot += '<input type="text" class="form-control" id="accomBuildingSpotName" name="accomSpotForm['+numSpot+'].accomBuildingSpot.accomBuildingSpotName" style="height:34px;">';
+			inputSpot += '<label>Category</label>';
+			inputSpot += '<input type="text" class="form-control" id="accomBuildingSpotCategory" name="accomSpotForm['+numSpot+'].accomBuildingSpot.accomBuildingSpotCategory" style="height:34px;">';
+			inputSpot += '<label>Description</label>';
+			inputSpot += '<textarea class="form-control" id="accomBuildingSpotDescription" name="accomSpotForm['+numSpot+'].accomBuildingSpot.accomBuildingSpotDescription" rows="8"></textarea>';
+			inputSpot += '</div>';
+			inputSpot += '<div id="addSpotAddr">';
+			inputSpot += '<span>';
+			inputSpot += '<label>Spot Address&nbsp;</label>';
+			inputSpot += '<input type="button" class="btn-sm" style="width:130px; color:white; background: #ff3d1c; border-radius: 30px;';
+			inputSpot += 'color: #fff; font-weight: 500;" onclick="execDaumPostcodeSpot'+numSpot+'()" value="우편번호">';
+			inputSpot += '</span>';
+			inputSpot += '<input type="number" class="form-control" id="spotPostalCode'+numSpot+'" name="accomSpotForm['+numSpot+'].spotAddress.spotAddressPotalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" readonly="readonly" style="height:34px;">';
+			inputSpot += '<input type="text" class="form-control" id="spotRoadAddress'+numSpot+'" name="accomSpotForm['+numSpot+'].spotAddress.spotAddressZip" placeholder="도로명주소가 입력됩니다." readonly="readonly" style="height:34px;">';
+			inputSpot += '<input type="text" class="form-control" id="prdAddressDetail" name="accomSpotForm['+numSpot+'].spotAddress.spotAddressDetail" placeholder="상세주소" style="height:34px;">';
+			inputSpot += '</div><hr>';
+			inputSpot += '</div>';
+			$('#spotPlace').append(inputSpot);
+		} else {
+			alert("세 가지 이상의 추천장소를 등록할 수 없습니다!");
+		}
 	});
+	
+	// 다음(카카오) 주소 api - 추천장소 추가시 사용
+	function execDaumPostcodeSpot1() {
+		new daum.Postcode(
+			{
+				oncomplete : function(data) {
+					// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+					// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+					var roadAddr = data.roadAddress; // 도로명 주소 변수
+					var extraRoadAddr = ''; // 참고 항목 변수
+
+					// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+					// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+					if (data.bname !== ''
+							&& /[동|로|가]$/g.test(data.bname)) {
+						extraRoadAddr += data.bname;
+					}
+					// 건물명이 있고, 공동주택일 경우 추가한다.
+					if (data.buildingName !== ''
+							&& data.apartment === 'Y') {
+						extraRoadAddr += (extraRoadAddr !== '' ? ', '
+								+ data.buildingName : data.buildingName);
+					}
+					// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+					if (extraRoadAddr !== '') {
+						extraRoadAddr = ' (' + extraRoadAddr + ')';
+					}
+
+					// 우편번호와 주소 정보를 해당 필드에 넣는다.
+					document.getElementById('spotPostalCode1').value = data.zonecode;
+					document.getElementById('spotRoadAddress1').value = roadAddr;
+				}
+			}).open();
+		}
+	
+	// 다음(카카오) 주소 api - 추천장소 추가시 사용
+	function execDaumPostcodeSpot2() {
+		new daum.Postcode(
+			{
+				oncomplete : function(data) {
+					// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+					// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+					var roadAddr = data.roadAddress; // 도로명 주소 변수
+					var extraRoadAddr = ''; // 참고 항목 변수
+
+					// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+					// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+					if (data.bname !== ''
+							&& /[동|로|가]$/g.test(data.bname)) {
+						extraRoadAddr += data.bname;
+					}
+					// 건물명이 있고, 공동주택일 경우 추가한다.
+					if (data.buildingName !== ''
+							&& data.apartment === 'Y') {
+						extraRoadAddr += (extraRoadAddr !== '' ? ', '
+								+ data.buildingName : data.buildingName);
+					}
+					// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+					if (extraRoadAddr !== '') {
+						extraRoadAddr = ' (' + extraRoadAddr + ')';
+					}
+
+					// 우편번호와 주소 정보를 해당 필드에 넣는다.
+					document.getElementById('spotPostalCode2').value = data.zonecode;
+					document.getElementById('spotRoadAddress2').value = roadAddr;
+				}
+			}).open();
+		}
 	
 	// 추천장소 폼 삭제시 사용하는 스크립트 이벤트
 	$('#delSpot').click(function(){
 		if($('div[id=spotForm]').length>1){
 			numSpot = numSpot - 1;
 			$('div[id=spotForm]:last').remove();
+			$('div[id=addSpotAddr]:last').remove();
 			$('hr:last').remove();
 		} else {
 			alert("한 가지 이상의 추천시설을 입력해주세요!");

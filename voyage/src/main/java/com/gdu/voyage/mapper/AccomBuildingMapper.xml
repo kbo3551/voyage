@@ -12,7 +12,7 @@
 			create_date,
 			update_date
 		) VALUES (
-			'2',
+			'3',
 			#{accomBuildingName},
 			#{accomBuildingDescription},
 			#{accomBuildingPhone},
@@ -36,6 +36,21 @@
 			#{accomBuildingImageName},
 			#{accomBuildingImageExt},
 			#{accomBuildingImageSize}
+		)
+	</insert>
+	
+	<!-- 숙소-건물의 주소 입력 -->
+	<insert id="insertAccomBuildingAddress" parameterType="com.gdu.voyage.vo.AccomAddress">
+		INSERT INTO accom_address (
+			accom_building_no,
+			accom_address_postal_code,
+			accom_address_zip,
+			accom_address_detail
+		) VALUES (
+			#{accomBuildingNo},
+			#{AccomAddressPotalCode},
+			#{AccomAddressZip},
+			#{AccomAddressDetail}
 		)
 	</insert>
 	
@@ -63,6 +78,26 @@
 			#{accomBuildingSpotCategory},
 			#{accomBuildingSpotDescription}
 		)
+		<selectKey keyProperty="accomBuildingSpotNo" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<!-- 숙소-건물, 추천장소의 주소 입력 -->
+	<insert id="insertAccomSpotAddress" parameterType="com.gdu.voyage.vo.SpotAddress">
+		INSERT INTO spot_address (
+			spot_table,
+			spot_no,
+			spot_address_postal_code,
+			spot_address_zip,
+			spot_adress_detail
+		) VALUES (
+			'건물',
+			#{spotNo},
+			#{spotAddressPotalCode},
+			#{spotAddressZip},
+			#{spotAddressDetail}
+		)
 	</insert>
 	
 	<!-- 숙소-건물의 해시태그 입력 -->
@@ -79,6 +114,7 @@
 			NOW()
 		)
 	</insert>
+	
 	<!-- 숙소 건물을 불러옴 -->
 	<select id="selectAccomBuildingList" resultType="com.gdu.voyage.vo.AccomBuilding">
             SELECT accom_building_no as accomBuildingNo,
