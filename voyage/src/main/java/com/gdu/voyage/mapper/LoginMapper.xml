@@ -77,16 +77,44 @@
 	</select>
 	
 	
+	
+	
+	<resultMap type="com.gdu.voyage.vo.AdminAddress" id="adminAddress">
+		<result column="adminAddressPostalCode" property="adminAddressPostalCode" />
+		<result column="adminAddressZip" property="adminAddressZip" />
+		<result column="adminAddressDetail" property="adminAddressDetail" />
+	</resultMap>
+	<resultMap type="com.gdu.voyage.vo.Admin" id="admin">
+		<result column="adminId" property="adminId" />
+		<result column="adminFirstName" property="adminFirstName" />
+		<result column="adminLastName" property="adminLastName" />
+		<result column="adminPhone" property="adminPhone" />
+		<result column="adminEmail" property="adminEmail" />
+		<result column="adminActive" property="adminActive" />
+		<collection property="adminAddress" resultMap="adminAddress" />
+	</resultMap>
+	
 	<!-- 어드민 로그인 쿼리 -->
-	<select id="adminLogin" resultType="com.gdu.voyage.vo.Admin" parameterType="String">
+	<select id="adminLogin" resultType="com.gdu.voyage.vo.Admin" parameterType="String" resultMap="admin">
 		SELECT
-			admin_id adminId,
-			admin_first_name adminFirstName,
-			admin_last_name adminLastName
+			a.admin_id adminId,
+			a.admin_first_name adminFirstName,
+			a.admin_last_name adminLastName,
+			a.admin_email adminEmail,
+			a.admin_phone adminPhone,
+			a.admin_active adminActive,
+			f.admin_address_postal_code adminAddressPostalCode,
+			f.admin_address_zip adminAddressZip,
+			f.admin_address_detail adminAddressDetail
 		FROM
-			admin
+			admin a
+		INNER JOIN
+			admin_address f
+		ON
+			a.admin_id = f.admin_id
 		WHERE
-			admin_id = #{memberId}
+			a.admin_id = #{memberId}
+
 	</select>
 	
 </mapper>

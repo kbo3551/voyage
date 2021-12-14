@@ -14,4 +14,6 @@ public class Admin {
 	private String adminActive;
 	private String createDate;
 	private String updateDate;
+	
+	private AdminAddress adminAddress;
 }
