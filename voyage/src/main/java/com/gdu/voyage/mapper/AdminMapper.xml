@@ -41,25 +41,25 @@
 			NOW()
 			);
 </insert>
-
-<update id="updateAdmin" parameterType="com.gdu.voyage.vo.Admin">
-		UPDATE
-			admin a 
-		INNER JOIN 
-			admin_address b
-		ON 
-		a.admin_id = b.admin_id
-		SET 
-			a.admin_first_name = #{adminFirstName},
-			a.admin_last_name = #{adminLastName},
-			a.admin_phone = #{adminPhone},
-			a.admin_email = #{adminEmail},
-			a.admin_active = #{adminActive},
-			b.admin_address_postal_code = #{adminAddressPostalCode},
-			b.admin_address_zip = #{adminAddressZip}
-			b.admin_address_detail = #{adminAddressDetail}
-		WHERE
-			a.admin_id = #{adminId}
+<!-- 어드민 정보 수정 -->
+<update id="updateAdmin">
+	UPDATE admin
+		set
+			admin_first_name = #{adminFirstName},
+			admin_last_name = #{adminLastName},
+			admin_phone = #adminPhone},
+			admin_email = #{adminEmail},
+		WHERE 
+			admin_id = #{adminId}
 </update>
-
+<!-- 어드민 주소 정보 수정 -->
+<update id="updateAdminAddress">
+	UPDATE member_address
+		set
+			admin_address_postal_code = #{adminAddressPostalCode},
+			admin_address_zip = #{adminAddressZip},
+			admin_address_detail = #{adminAddressDetail}
+		WHERE 
+			admin_id = #{adminId}
+</update>
 </mapper>

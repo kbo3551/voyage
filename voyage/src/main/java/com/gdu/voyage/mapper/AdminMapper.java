@@ -13,4 +13,6 @@ public interface AdminMapper {
 	void insertAdmin(Admin admin);
 	// 어드민 회원정보수정
 	void updateAdmin(Admin admin);
+	// 어드민 주소 변경
+	void updateAdminAddress(AdminAddress aaddress);
 }
