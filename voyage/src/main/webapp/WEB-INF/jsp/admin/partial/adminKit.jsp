@@ -29,18 +29,18 @@
 	           			<i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
 	         		</a>
 				</li>
-				<!-- 로그인 -->
-				<li class="sidebar-item">
+			
+			<!-- 	<li class="sidebar-item">
 					<a class="sidebar-link" href="pages-sign-in.html">
 	            		<i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
 	          		</a>
-				</li>
-				<!-- 관리자 가입 -->
+				</li>	
+			
 				<li class="sidebar-item">
 					<a class="sidebar-link" href="${pageContext.request.contextPath}/addAdmin">
 	           			<i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Sign Up</span>
 	          		</a>
-				</li>
+				</li>           -->   
 				<!-- 공란(복사해서 이용) -->
 				<li class="sidebar-item">
 					<a class="sidebar-link" href="pages-blank.html">
