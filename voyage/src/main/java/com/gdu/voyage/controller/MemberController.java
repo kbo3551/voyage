@@ -3,16 +3,17 @@ package com.gdu.voyage.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gdu.voyage.service.LoginService;
@@ -30,25 +31,23 @@ public class MemberController {
 	@Autowired MemberService memberService;
 	@Autowired LoginService loginService;
 	
-	@GetMapping("/member/updatePw")
-	public String getUpdatePw() {
-    	System.out.println("MemberController() 실행");
-    	return "/member/updatePw";
-    }
-	
 	// PW 변경
 	@PostMapping("/member/updatePw")
-	public String postUpdatePw(HttpServletRequest request,Response response, RedirectAttributes redirect) {
+	public String postUpdatePw(HttpServletRequest request, Model model){
 		System.out.println("MemberController() 실행");
+		
+		// 우선 세션을 가져옴
+		Member loginMember = (Member) request.getSession().getAttribute("loginMember");
+		// PW 변경 전 우선 로그아웃
+	    request.getSession().invalidate();
+		
+	    // 방어코드
 		int updatePwCheck = Integer.parseInt(request.getParameter("updatePwCheck"));
 		log.trace("aaaaaaaaaaaaaaaaaaaaaaaaaa"+updatePwCheck);
-		// 방어코드
 		if(updatePwCheck != 1) {
 			return "redirect:/login";
 		}
-		
-		Member loginMember = (Member) request.getSession().getAttribute("loginMember");
-		
+
 		String memberId = loginMember.getMemberId();
 		String memberPw = request.getParameter("password");
 		String memberNickname = request.getParameter("nickname");
@@ -61,24 +60,13 @@ public class MemberController {
 		// 디버그
 	    log.trace("★controller★"+m.toString());
 	    
+	    // pw 변경
 	    memberService.updateMemberPw(m);
-
-	  	// PW를 변경했으므로 로그아웃
-	    request.getSession().invalidate();
 	    
-	    // pw 변경 알림
-	    response.setContentType("text/html; charset=UTF-8");
-	    PrintWriter out;
-		try {
-			out = response.getWriter();
-			out.println("<script>alert('PW가 변경되었으므로 로그인 화면으로 돌아갑니다.');</script>");
-		    out.flush();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	    
-	    return "redirect:/login";
+	    model.addAttribute("msg", "PW 변경이 완료되었습니다.\n로그인 화면으로 돌아갑니다.");
+	    model.addAttribute("url", "redirect:/login");
+	    return "/alert";
 	}
 	
 	@GetMapping("/member/updateNickname")

@@ -118,6 +118,7 @@
 	                                    <input type="password" class="form-control" id="password" name="password">
 	                                    <label>PW 확인</label>
 	                                    <input type="password" class="form-control" id="password2" name="password2">
+	                                    <input type="hidden" class="form-control" name="updatePwCheck" value="${updatePwCheck}">
 	                                </div>
 	                        	<div class="col-sm-20 col-sm-offset-1" style="text-align: right;">
 	                        	
