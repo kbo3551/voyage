@@ -93,7 +93,7 @@
             <div class="container">
                 <div class="row">
                     <div class="page-head-content">
-                        <h1 class="page-title">Hello : <span class="orange strong">${loginMember.getMemberNickname()}</span></h1>               
+                        <h1 class="page-title">Hello : <span class="orange strong">${adminSession.getAdminId()}</span></h1>               
                     </div>
                 </div>
             </div>
