@@ -89,7 +89,7 @@
     font-family: "Sulphur Point",sans-serif;
     line-height: 20px;
     font-size: 15px;
-   z-index: 200 !important;
+   	z-index: 200 !important;
 }
 .hashtag_body {
    background-color: rgba(0, 0, 0, 0.5);
@@ -108,8 +108,28 @@
 .hashtag-search-form {
 	padding: 0;
 }
-.hashtag {
-	z-index: 150;
+/* .hashtag { */
+/* 	z-index: 150; */
+/* } */
+.quest_box #hashtagList {
+/*     background-color: #fff; */
+    width: 85%;
+    margin-left: 7.5%;
+    margin-top: -1%;
+/*     padding: 5% 10%; */
+}
+.quest_box #hashtagList .hashtagList_result {
+	background-color: rgba(255, 255, 255);
+/* 	width: 50%; */
+    padding: 4% 10% 5% 10%;
+    margin-bottom: 3px;
+/*     border-bottom-left-radius: 15px; */
+/*     border-bottom-right-radius: 15px; */
+    border-top: 3px solid #ff3d1c;
+/*     box-sizing: border-box; */
+}
+.quest_box #hashtagList .hashtagList_result a {
+    color: #000;	
 }
 
 /* 반응형 */

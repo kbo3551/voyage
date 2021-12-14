@@ -16,49 +16,42 @@
       $('#search__box').css('top','-300000%');
    });
 
-    // 검색 제시어 이벤트
-    function search(target){
+	// 검색 제시어 이벤트
+    function search(target) {
        
        var word = target.value;
-       var encodeWord = encodeURI(word);
-       console.log(word);
-       console.log(encodeWord);
+       console.log(word); // 검색어 입력값
        
-    //start Ajax
-    $.ajax({
-        type : 'GET',
-        dataType : 'json',
-        url : "http://localhost/hashtagSearh?"
-            + "searchKeyword="
-            + word,
-            error : function(err) {
-                console.log("실행중 오류가 발생하였습니다.");
-            },
-            success : function(data) {
-                console.log("data확인 : "+data);
-                console.log("결과 갯수 : "+data.dataSearch.content.length);
-                console.log("첫번째 결과 : "+data.dataSearch.content[0]);
-                $("#hashtagList").empty();
-                var checkWord = $("#word").val(); // 검색어 입력값
-                console.log(data.dataSearch.content.length);
-                if(checkWord.length > 0 && data.dataSearch.content.length > 0){
-                    for (i = 0; i < data.dataSearch.content.length; i++) {
-                    $("#hashtagList")
-                        .append(
-                                "<li class='hashtagList' value='"
-                                + data.dataSearch.content[i].schoolName
-                                + "' data-input='"
-                                + data.dataSearch.content[i].schoolName
-                                + ">"
-                                + "<a href='javascript:void(0);'>"
-                                + data.dataSearch.content[i].schoolName
-                                + "</a>"
-                                + "</li>");
-                }
-            } 
-        } 
-        });
-        //end Ajax
+	    // start Ajax
+	    $.ajax({
+	        type : 'GET',
+	        dataType : 'json',
+	        url : "http://localhost/hashtagSearh?"
+	            + "searchKeyword="
+	            + word,
+	            error : function(err) {
+	                console.log("실행중 오류가 발생하였습니다.");
+	            },
+	            success : function(data) {
+					$("#hashtagList").empty(); // 검색 전 제시어 비우기
+	            	
+					$(data).each(function(index, item) { // each : JSON의 반복문
+						var checkWord = $("#word").val(); // 검색어 입력값 저장
+						
+						if(checkWord.length > 0) { // 검색어 입력값의 길이가 0보다 클 때만
+							let result = '<li class="hashtagList_result"><a href="${pageContext.request.contextPath}/hashtag?hashtag="';
+							result += item.hashtag;
+							result += '">';
+							result += item.hashtag;
+							result += '</a></li>';
+							$('#hashtagList').append(result);
+						}
+						
+					});
+	
+	        	} 
+	     });
+	     // end Ajax
     }
     
 /**
