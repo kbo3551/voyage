@@ -30,16 +30,16 @@ public class HashtagService {
       return returnMap;
    }
    
-   public Map<String, Object> getHashtagListBySearch(String searchKeyword) {
+   public List<Map<String, Object>> getHashtagListBySearch(String searchKeyword) {
       log.debug("[degug] searchKeyword : " + searchKeyword);
       
-      List<Hashtag> hashtagList = hashtagMapper.selectHashtagListBySearch(searchKeyword);
+      List<Map<String, Object>> hashtagList = hashtagMapper.selectHashtagListBySearch(searchKeyword);
       log.debug("[degug] hashtagList : " + hashtagList);
       
-      Map<String, Object> returnMap = new HashMap<>();
-      returnMap.put("hashtagList", hashtagList);
+//      Map<String, Object> returnMap = new HashMap<>();
+//      returnMap.put("hashtagList", hashtagList);
       
-      return returnMap;
+      return hashtagList;
    }
 
 }

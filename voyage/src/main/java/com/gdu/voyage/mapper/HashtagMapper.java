@@ -9,8 +9,11 @@ import com.gdu.voyage.vo.Hashtag;
 
 @Mapper
 public interface HashtagMapper {
-   // 해시태그 조회
-   List<Hashtag> selectHashtagList();
-   // 해시태그 검색
-   List<Hashtag> selectHashtagListBySearch(String searchKeyword);
+	// 해시태그 조회
+	List<Hashtag> selectHashtagList();
+	// 해시태그 검색
+//	List<Hashtag> selectHashtagListBySearch(String searchKeyword);
+	
+	List<Map<String, Object>> selectHashtagListBySearch(String searchKeyword);
+
 }

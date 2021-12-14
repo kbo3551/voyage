@@ -12,12 +12,13 @@
          0, 50;
    </select>
    
-   <select id="selectHashtagListBySearch" parameterType="String" resultType="com.gdu.voyage.vo.Hashtag">
+   <!-- $ !!!!!!!!!!!!!!!!!! -->
+   <select id="selectHashtagListBySearch" parameterType="String" resultType="java.util.Map">
       SELECT
          hashtag_no hashtagNo, iden_no idenNo, table_name tableName, hashtag, create_date createDate
       FROM
          hashtag
       WHERE
-         hashtag LIKE '%?%';
+         hashtag LIKE '%${searchKeyword}%';
    </select>
 </mapper>
