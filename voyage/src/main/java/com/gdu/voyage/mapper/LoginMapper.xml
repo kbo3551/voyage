@@ -7,7 +7,7 @@
 		<result column="memberAddressZip" property="memberAddressZip" />
 		<result column="memberAddressDetail" property="memberAddressDetail" />
 	</resultMap>
-
+ 
 	<resultMap type="com.gdu.voyage.vo.Member" id="member">
 		<result column="memberId" property="memberId" />
 		<result column="memberFirstName" property="memberFirstName" />
