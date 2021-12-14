@@ -16,6 +16,14 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberService {
 	@Autowired MemberMapper memberMapper;
 	
+	
+	// 회원 PW 변경
+	public void updateMemberPw(Member member) {
+		log.trace("☆service☆"+member);
+		memberMapper.updateMemberPw(member);
+		return;
+	}
+	
 	// 회원 닉네임 변경
 	public void updateMemberNickname(Member member) {
 		log.trace("☆service☆"+member);

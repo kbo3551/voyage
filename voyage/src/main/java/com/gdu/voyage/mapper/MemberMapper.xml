@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.MemberMapper">
+	<!-- PW 수정 --> 
+	<update id="updateMemberPw"> 
+		UPDATE member
+		set
+			member_pw = PASSWORD(#{memberPw})
+		WHERE 
+			member_id = #{memberId}
+	</update>
+	
 	<!-- 닉네임 수정 --> 
 	<update id="updateMemberNickname">
 		UPDATE member

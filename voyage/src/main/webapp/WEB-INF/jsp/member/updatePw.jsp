@@ -98,7 +98,7 @@
         </div>
         <!-- End page header --> 
 
-        <form name="UpdateNickname" method="post" action="${pageContext.request.contextPath}/member/updateNickname">
+        <form name="UpdatePw" method="post" action="${pageContext.request.contextPath}/member/updatePw">
 	        <div class="content-area user-profiel" style="background-color: #FCFCFC;">&nbsp;
 	            <div class="container">   
 	                <div class="row">
@@ -107,29 +107,21 @@
 							<br>
 	                        <div class="profiel-header">
 	                            <h2>
-	                                닉네임 변경 <br>
+	                                PW 변경 <br>
 	                            </h2>
 	                            <hr>
 	                        </div>
 	                        <div class="clear"> 
 	                            <div class="col-sm-5">
 	                                <div class="form-group">
-	                                    <label>Nickname</label>
-	                                    <input type="text" class="form-control" id="nickname" name="nickname">
-	                                    <input name="route" type="hidden" value="${route}">
-	                                    <input name="password" type="hidden" value="${m.getMemberPw()}">
+	                                    <label>PW</label>
+	                                    <input type="password" class="form-control" id="password" name="password">
+	                                    <label>PW 확인</label>
+	                                    <input type="password" class="form-control" id="password2" name="password2">
 	                                </div>
 	                        	<div class="col-sm-20 col-sm-offset-1" style="text-align: right;">
 	                        	
-	                        	<c:choose>
-									<c:when test="${param.failed == true}">
-										<p style="color: red; font-weight: bold;">이미 사용중인 닉네임입니다.</p>
-									</c:when>
-									<c:otherwise>
-										<br>
-									</c:otherwise>
-								</c:choose>
-								<input type='button' onclick="updateNickname()" class='btn btn-finish btn-primary' name='finish' value='입력' />
+								<input type='button' onclick="updatePw()" class='btn btn-finish btn-primary' name='finish' value='입력' />
 	                         </div>
 	                         <br>
 			            </div>
@@ -144,12 +136,18 @@
 
          <script>
          // 유효성 검사
-            function updateNickname(){
-				if($("#nickname").val() == ""){
-					alert('닉네임을 입력해주세요.');
+            function updatePw(){
+				if($("#password").val() == ""){
+					alert('패스워드를 입력해주세요.');
+					return;
+				} else if($("#password2").val() == ""){
+					alert('패스워드 확인을 진행해주세요.');
+					return;
+				} else if($("#password").val() != $("#password2").val()){
+					alert('패스워드가 일치하지 않습니다.');
 					return;
 				} else {
-					UpdateNickname.submit();
+					UpdatePw.submit();
 				}
 			};
      </script>
