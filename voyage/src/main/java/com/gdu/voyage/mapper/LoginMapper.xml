@@ -20,6 +20,10 @@
 		<result column="memberActive" property="memberActive" />
 		<collection property="memberAddress" resultMap="memberAddress" />
 	</resultMap>
+	
+	<!-- 정지당한 회원 확인 -->
+	
+	<!-- 탈퇴한 회원 확인 -->
 
 	<!-- 멤버 로그인 쿼리 -->
 	<select id="login" resultMap="member">
@@ -45,11 +49,11 @@
 		WHERE
 			m.member_id = #{memberId}
 			AND
-			m.member_pw =  PASSWORD(#{memberPw});
+			m.member_pw =  PASSWORD(#{memberPw})
 			AND
-			NOT m.member_active = '탈퇴'
+			NOT m.member_active = "탈퇴"
 			AND
-			NOT m.member_active = '정지'
+			NOT m.member_active = "정지";
 	</select>
 	
 	
