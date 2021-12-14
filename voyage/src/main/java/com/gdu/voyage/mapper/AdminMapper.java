@@ -8,6 +8,9 @@ import com.gdu.voyage.vo.AdminAddress;
 @Mapper
 public interface AdminMapper {
 	int selectAdminId(Admin admin);
+	// 어드민 회원가입
 	void insertAdminAddress(AdminAddress aaddress);
 	void insertAdmin(Admin admin);
+	// 어드민 회원정보수정
+	void updateAdmin(Admin admin);
 }
