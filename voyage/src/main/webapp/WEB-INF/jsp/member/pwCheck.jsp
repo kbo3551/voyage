@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>마이페이지</title>
+<title>패스워드 확인</title>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="">
@@ -99,77 +99,64 @@
         <!-- End page header --> 
 
         <!-- property area -->
-        <div class="content-area user-profiel" style="background-color: #FCFCFC;">&nbsp;
-            <div class="container">   
-                <div class="row">
-                    <div class="col-sm-10 col-sm-offset-1 profiel-container">
-                   		<h1 class="page-title">Hello!  <span class="orange strong" style="color: olive;">${loginMember.getMemberNickname()}</span></h1>
-						<br>
-                        <div class="profiel-header">
-                            <h2>
-                                YOUR PROFILE <br>
-                            </h2>
-                            <hr>
-                        </div>
-                        <div class="clear"> 
-                            <div class="col-sm-5">
-                                <div class="form-group">
-                                    <label>First Name</label>
-                                    <input name="firstname" type="text" class="form-control" id="firstname" name="firstname" placeholder="성" value="${loginMember.memberFirstName}" readonly="readonly">
-                                </div>
-                                <div class="form-group">
-                                    <label>Last Name </label>
-                                    <input name="lastname" type="text" class="form-control" id="lastname" name="lastname" placeholder="이름" value="${loginMember.memberLastName}" readonly="readonly">
-                                </div> 
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input name="email" type="email" id="email" name="email" class="form-control" placeholder="이메일" value="${loginMember.memberEmail}" readonly="readonly">
-                                </div> 
-                                <div class="form-group">
-                                    <label>Phone</label>
-                                    <input name="phone" type="number" class="form-control" id="phone" name="phone" placeholder="전화번호" value="${loginMember.memberPhone}" readonly="readonly">
-                                </div> 
-                            </div>
-                            <div class="col-sm-5">
-                                <div class="form-group">
-                                  <input type="button" class="btn" style="background: rgba(0,172,238,50);"
-                                  onclick="execDaumPostcode()" value="우편번호">
-                                  <input type="number" class="form-control" id="postalCode" name="postalCode" placeholder="우편번호" value="${loginMember.memberAddress.memberAddressPostalCode}" readonly="readonly">
-                             	</div>
-                            	<div class="form-group">
-                             		<br>  
-                                  <input type="text" class="form-control" id="roadAddress" name="roadAddress" placeholder="도로명주소" value="${loginMember.memberAddress.memberAddressZip}" readonly="readonly">
-                            	</div>
-                            	<div class="form-group">
-                            	 	<br>     
-                                  <input type="text" class="form-control" id="detailAddress" name="detailAddress" placeholder="상세주소" value="${loginMember.memberAddress.memberAddressDetail}" readonly="readonly">
-                              </div>
-                            </div>  
-
-                        </div>
-                        	<div class="clear">
-                        		<div class="col-sm-20">
-                             	<hr>
-                                 <div class="form-group">
-                                     <label>Description</label>
-                                     <textarea rows="5" cols="80" id="description" name="description" placeholder="자기소개" readonly="readonly">${loginMember.memberDescription }</textarea>
-                                 </div>
-                            	</div>
-                        	</div>
-                        	<div class="col-sm-20 col-sm-offset-1" style="text-align: right;">
-                             <br>
-                             <a href="${pageContext.request.contextPath}/member/pwCheck?route=1" class='btn btn-finish btn-primary'>수정</a>
-                         </div>
-                         <br>
-		            </div>
-                </div>
-                <br>
-                <div><a href="${pageContext.request.contextPath}/member/pwCheck?route=2" class="btn">닉네임변경</a></div>
-   				<div><a href="${pageContext.request.contextPath}/member/pwCheck?route=3" class="btn">비밀번호변경</a></div>
-   				<div><a href="${pageContext.request.contextPath}/member/pwCheck?route=4" class="btn">회원탈퇴</a></div>
-            </div>
-    	</div>
+        <form name="UpdateMember" method="post" action="${pageContext.request.contextPath}/member/pwCheck">
+	        <div class="content-area user-profiel" style="background-color: #FCFCFC;">&nbsp;
+	            <div class="container">   
+	                <div class="row">
+	                    <div class="col-sm-10 col-sm-offset-1 profiel-container">
+	                   		<h1 class="page-title">Hello!  <span class="orange strong" style="color: olive;">${loginMember.getMemberNickname()}</span></h1>
+							<br>
+	                        <div class="profiel-header">
+	                            <h2>
+	                                PW Check <br>
+	                            </h2>
+	                            <hr>
+	                        </div>
+	                        <div class="clear"> 
+	                            <div class="col-sm-5">
+	                                <div class="form-group">
+	                                    <label>PW</label>
+	                                    <input type="text" class="form-control" id="password" name="password">
+	                                    <input name="route" type="hidden" value="${route}">
+	                                </div>
+	                        	<div class="col-sm-20 col-sm-offset-1" style="text-align: right;">
+	                        	
+	                        	<c:choose>
+									<c:when test="${param.failed == true}">
+										<p style="color: red; font-weight: bold;">비밀번호를 틀렸습니다.</p>
+									</c:when>
+									<c:otherwise>
+										<br>
+									</c:otherwise>
+								</c:choose>
+	                             
+	                             <input type='button' onclick="updateMember()" class='btn btn-finish btn-primary' name='finish' value='확인' />
+	                         </div>
+	                         <br>
+			            </div>
+	                </div>
+	                </div>
+	                <br>
+	            </div>
+	            </div>
+	    	</div>
+    	</form>
      
+    
+    	
+
+         <script>
+
+         // 유효성 검사
+            function updateMember(){
+				if($("#password").val() == ""){
+					alert('패스워드를 입력해주세요');
+					return;
+				} else {
+					UpdateMember.submit();
+				}
+			};
+     </script>
 
 
 	

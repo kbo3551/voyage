@@ -10,6 +10,8 @@ import com.gdu.voyage.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
+
+//MemberController에서도 참조
 @Service
 @Transactional
 @Slf4j
