@@ -6,6 +6,13 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Directory HTML-5 Template </title>
+        <!-- jquery here -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+        	
+        </script>
+        <!-- jquery end -->
+        
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- <link rel="manifest" href="site.webmanifest"> -->
@@ -70,16 +77,16 @@
                             <h2>문의 사항</h2>
                         </div>
                         <!--Hero form -->
-                        <form action="#" class="search-box search-box2">
+                        <form action="" id="searchQnaForm" class="search-box search-box2">
                             <div class="input-form">
                             	<!-- 
                             	 <input type="text" placeholder="What are you looking for?">
                             	 -->
-                               	 <input type="text" placeholder="문의사항을 검색해보세요">
+                               	 <input type="text" placeholder="문의사항을 검색해보세요" id="qnaSearchKeyword" value="">
                             </div>
                             <div class="select-form">
                                 <div class="select-itms">
-                                    <select name="select" id="select1">
+                                    <select name="select" id="selectQnaCategory">
                                     	<!--  
                                     	<option value="">All Catagories</option>
                                         <option value="">Catagories One</option>
@@ -88,15 +95,15 @@
                                         <option value="">Catagories Four</option>
                                     	-->
                                         <option value="">전체</option>
-                                        <option value="">예약</option>
-                                        <option value="">결제</option>
-                                        <option value="">기타</option>
+                                        <option value="예약문의">예약</option>
+                                        <option value="결제문의">결제</option>
+                                        <option value="기타">기타</option>
                                     </select>
                                 </div>
                             </div>
                             <!-- Search box -->
                             <div class="search-form">
-                                <a href="#">Search</a>
+                                <a type="button" id="qnaSearchBtn">Search</a>
                             </div>	
                         </form>	
                     </div>
@@ -105,10 +112,11 @@
         </div>
         <!--Hero End -->
         <!-- listing Area Start -->
-        <div class="listing-area pt-120 pb-120">
+        <!-- 
+        	<div class="listing-area pt-120 pb-120">
             <div class="container">
                 <div class="row">
-                    <!-- Left content -->
+                   Left content
                     <div class="col-xl-4 col-lg-4 col-md-6">
                         <div class="row">
                             <div class="col-12">
@@ -117,15 +125,15 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Job Category Listing start -->
+                        Job Category Listing start
                         <div class="category-listing mb-50">
-                            <!-- single one -->
+                            single one
                             <div class="single-listing">
-                                <!-- input -->
+                                input
                                 <div class="input-form">
                                     <input type="text" placeholder="What are you finding?">
                                 </div>
-                                <!-- Select job items start -->
+                                Select job items start
                                 <div class="select-job-items1">
                                     <select name="select1">
                                         <option value="">Choose categories</option>
@@ -134,8 +142,8 @@
                                         <option value="">Category 3</option>
                                     </select>
                                 </div>
-                                <!--  Select job items End-->
-                                <!-- Select job items start -->
+                                Select job items End
+                                Select job items start
                                 <div class="select-job-items2">
                                     <select name="select2">
                                         <option value="">Location</option>
@@ -144,8 +152,8 @@
                                         <option value="">Dannondi</option>
                                     </select>
                                 </div>
-                                <!--  Select job items End-->
-                                <!-- select-Categories start -->
+                               Select job items End
+                                select-Categories start
                                 <div class="select-Categories pt-140 pb-20">
                                     <label class="container">Full Time
                                         <input type="checkbox" >
@@ -156,8 +164,8 @@
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
-                                <!-- select-Categories End -->
-                                <!-- Select job items start -->
+                                select-Categories End
+                                Select job items start
                                 <div class="select-job-items2">
                                     <select name="select2">
                                         <option value="">Area (km)</option>
@@ -166,18 +174,19 @@
                                         <option value="">Chittagong - 3km</option>
                                     </select>
                                 </div>
-                                <!--  Select job items End-->
+                               Select job items End
                             </div>
 
                             <div class="single-listing">
-                                <!-- Range Slider Start -->
+                                Range Slider Start
                                 <aside class="left_widgets p_filter_widgets price_rangs_aside sidebar_box_shadow">
                                     <div class="small-section-tittle2">
                                         <h4>Price range</h4>
                                     </div>
                                     <div class="widgets_inner">
                                         <div class="range_item">
-                                            <!-- <div id="slider-range"></div> -->
+                                        
+                                         주석 : <div id="slider-range"></div>
                                             <input type="text" class="js-range-slider" value="" />
                                             <div class="d-flex align-items-center">
                                                 <div class="price_text">
@@ -192,12 +201,17 @@
                                         </div>
                                     </div>
                                 </aside>
-                              <!-- Range Slider End -->
+                             Range Slider End
                                  <a href="#" class="btn list-btn mt-20">Reset</a>
                             </div>
                         </div>
-                        <!-- Job Category Listing End -->
+                        Job Category Listing End
                     </div>
+       		-->  	
+       	<div class="listing-area pt-120 pb-120">
+            <div class="container">
+                <div class="row">
+                   <!-- Left Content -->
                     <!-- Right content -->
                     <div class="col-xl-8 col-lg-8 col-md-6">
                         <div class="row">
@@ -205,43 +219,58 @@
                                 <div class="count mb-35">
                                     <span>5432 Listings are available</span>
                                     <div class="single-listing mb-30">
+                                    	<!-- 문의글을 작성하는 페이지 이동 버튼  -->
                                     	<span><a href="/addQ" class="btn list-btn mt-20">Write</a></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- 문의글 목록으로 활용할 예정... or 삭제? -->
                         <!-- listing Details Stat-->
                         <div class="listing-details-area">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-lg-6 ">
-                                        <div class="single-listing mb-30">
-                                            <div class="list-img">
-                                                <img src="assets/img/gallery/list1.png" alt="">
-                                                <!-- <span>Open</span> -->
-                                            </div>
-                                            <div class="list-caption">
-                                                <span>Open</span>
-                                                <h3><a href="/getQnaOne">Saintmartine</a></h3>
-                                                <p>700/D, Kings road, Green lane, 85/ London</p>
-                                                <div class="list-footer">
-                                                    <ul>
-                                                        <li>+10 278 367 9823</li>
-                                                        <li>contact@midnight.com</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                        <div class="single-listing mb-30" id = "qnaArrayList">
+                                        	<div class="list-img">
+	                                        	<img src="assets/img/gallery/list1.png" alt="">
+		                                        <!-- <span>Open</span> -->
+	                                        </div>
+	                                        
+                                        	<c:forEach items="${qnaList}" var="qna">
+	                                            <div class="list-caption">
+	                                                <span>${qna.qnaCategory}</span>
+	                                                <h3><a href="${pageContext.request.contextPath}/getQnaOne?qnaNo=${qna.qnaNo}">${qna.qnaTitle}</a></h3>
+	                                                <p>${qna.qnaNo}</p>
+	                                                <div class="list-footer">
+	                                                	<ul>
+	                                                		<li>${qna.memberNickname}</li>
+	                                               		</ul>
+	                                                </div>
+	                                                <!-- 
+	                                                	<div class="list-footer">
+		                                                    <ul>
+		                                                        <li>+10 278 367 9823</li>
+		                                                        <li>contact@midnight.com</li>
+		                                                    </ul>
+	                                                	</div>
+	                                                 -->
+	                                            </div>
+                                        	</c:forEach>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 ">
+                                    <!-- 
+                                    	<div class="col-lg-6 ">
                                         <div class="single-listing mb-30">
                                             <div class="list-img">
                                                 <img src="assets/img/gallery/list2.png" alt="">
-                                                <!-- <span>Open</span> -->
+                                                주석 :<span>Open</span> 
                                             </div>
                                             <div class="list-caption">
-                                                <span>Open</span>
-                                                 <h3><a href="/getQnaOne">Saintmartine</a></h3>
+                                                주석 : 원본 : OPEN
+                                                주석 : 문의글 카테고리를 가져와서 표시 
+                                                <span>OPEN</span>
+                                                 <h3><a href="${pageContext.request.contextPath}/getQnaOne">Saintmartine</a></h3>
                                                 <p>700/D, Kings road, Green lane, 85/ London</p>
                                                 <div class="list-footer">
                                                     <ul>
@@ -256,7 +285,7 @@
                                         <div class="single-listing mb-30">
                                             <div class="list-img">
                                                 <img src="assets/img/gallery/list3.png" alt="">
-                                                <!-- <span>Open</span> -->
+                                                주석 : <span>Open</span> 
                                             </div>
                                             <div class="list-caption">
                                                 <span>Open</span>
@@ -275,7 +304,7 @@
                                         <div class="single-listing mb-30">
                                             <div class="list-img">
                                                 <img src="assets/img/gallery/list4.png" alt="">
-                                                <!-- <span>Open</span> -->
+                                                주석 : <span>Open</span> 
                                             </div>
                                             <div class="list-caption">
                                                 <span>Open</span>
@@ -294,7 +323,7 @@
                                         <div class="single-listing mb-30">
                                             <div class="list-img">
                                                 <img src="assets/img/gallery/list5.png" alt="">
-                                                <!-- <span>Open</span> -->
+                                                주석 : <span>Open</span> 
                                             </div>
                                             <div class="list-caption">
                                                 <span>Open</span>
@@ -313,7 +342,7 @@
                                         <div class="single-listing mb-30">
                                             <div class="list-img">
                                                 <img src="assets/img/gallery/list6.png" alt="">
-                                                <!-- <span>Open</span> -->
+                                                주석 : <span>Open</span>
                                             </div>
                                             <div class="list-caption">
                                                 <span>Open</span>
@@ -330,7 +359,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>      
+                         -->
+                                    
                         <!-- listing Details End -->
                         <!--Pagination Start  -->
                         <div class="pagination-area pt-70 text-center">
@@ -357,7 +388,7 @@
             </div>
         </div>
         <!-- listing-area Area End -->
-
+	
     </main>
     <!--footer.jsp 시작  -->
     <c:import url="../partial\\footer.jsp"/>

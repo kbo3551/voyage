@@ -6,9 +6,29 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Directory HTML-5 Template </title>
+        <!-- jQuery here -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+        	// 버튼 눌렀을 때, 이동 경로 설정
+        	$(function(){
+        		// Back 버튼 눌렀을 때
+        		$('#goBackBtn').click(function(){
+        			location.href = '/qnaList';
+        		});
+        		// Edit 버튼 눌렀을 때
+        		$('#moveToModQBtn').click(function(){
+        			location.href = '/modifyQ';
+        		});
+        		// Del 버튼 눌렀을 때
+        		$('#moveToRemQBtn').click(function(){
+        			location.href = '/romoveQ';
+        		});
+        	});
+        </script>
+        <!-- jQuery end -->
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="manifest" href="site.webmanifest">
+        <!-- <link rel="manifest" href="site.webmanifest">  -->
 		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
 		<!-- CSS here -->
@@ -76,9 +96,11 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
-                        <h3 class="mb-20">Description</h3>
-                        <p class="mb-30">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or rannjdomised words which don't look even slightly believable. If you are going to use a passage of fhorem Ipvbsum, you need to orem Ipsum available, but the ma be sure there isvgnn't anything embarrassing.</p>
-                        <p class="mb-30">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or rannjdomised words which don't look even slightly believable. If you are going to use a passage of fhorem Ipvbsum.</p>
+                        <h3 class="mb-20">경고</h3>
+                        <p class="mb-30">문의 내용은 관리자의 답글이 달리기 전까지만 수정, 삭제가 가능합니다.</p>
+                        <p class="mb-30">해당 게시글에 오타가 난 경우나 문의 내용을 잘못 적었는데 답글이 달린 경우 등 상황에서는 새로 문의글을 적어주시면 확인 후 답변 드리겠습니다.</p>
+           				<p class="mb-30">다른 경우에도 마찬가지오니 이 점 유의해서 활용해주시길 바랍니다.</p>
+                        
                     </div>
                 </div>
                 <!-- Map
@@ -133,38 +155,40 @@
                     <div class="col-lg-8">
                     	<!-- 원본 : Massage -->
                         <h3 class="mb-40">Question </h3>
-                        <!-- Form -->
-                        <form class="form-contact contact_form mb-80" action="qnaList.jsp" method="post">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                       		 <input class="form-control error" name="memberNickname" id="memberNickname" type="text" value="${memberNickname}">
+                                    	<input class="form-control error" name="qnaTitle" id="qnaTitle">${qnaTitle}
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input class="form-control error" name="email" id="email" type="email" placeholder = 'Enter email address'">
+                                <div>
+                   					<div class="form-group">
+                                    	<input class="form-control error" name="qnaNo" id="qnaNo">${qna.qnaNo}
+                                    </div>
+                                	<select name="selectAdd" id="selectQnaCategoryAdd" value="${qna.qnaCategory}">
+	                                	<option value="예약문의">예약</option>
+	                                    <option value="결제문의">결제</option>
+	                                    <option value="기타">기타</option>
+									</select>
+									<div class="form-group">
+                                    	<input class="form-control error" name="updateDate" id="qnaUpdateDate">${qna.updateDate}
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <textarea class="form-control w-100 error" name="message" id="message" cols="30" rows="9" placeholder = 'Enter Message'" placeholder="Enter Message"></textarea>
+                                        <textarea class="form-control w-100 error" name="qnaContent" id="qnaContent" cols="30" rows="9">${qna.qnaContent}</textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group mt-3">
                             	<!-- 원본 버튼 : Send  -->
-                                <button type="button" class="button button-contactForm boxed-btn">Back</button>
+                                <button type="button" id="goBackBtn"class="button button-contactForm boxed-btn">Back</button>
+                            	<button type="button" id="moveToModQBtn" class="button button-contactForm boxed-btn">Edit</button>
+                            	<button type="button" id="moveToRemQBtn" class="button button-contactForm boxed-btn">Del</button>
                             </div>
-                            <div class="form-group mt-3">
-                            	<button type="button" class="button button-contactForm boxed-btn">Edit</button>
-                            </div>
-                            <div class="form-group mt-3">
-                            	<button type="button" class="button button-contactForm boxed-btn">Del</button>
-                            </div>
-                        </form>
                     </div>
                 </div>
+                <!-- 다른 사용자들이 단 문의글로 이용할 예정... or 삭제? -->
                 <!-- listing Details Stat-->
                 <div class="listing-details-area">
                     <div class="container">

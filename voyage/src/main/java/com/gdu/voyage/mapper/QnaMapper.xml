@@ -42,14 +42,19 @@
 			q.qna_content qnaContent,
 			q.create_date,
 			q.update_date
+			<!--
 			a.qna_answer_no,
 			a.answer_content
-		FROM qna q LEFT JOIN qna_answer a
+			-->
+		FROM qna q <!-- LEFT JOIN qna_answer a 
 		ON q.qna_no = a.qna_no
+		-->
 		<where>
+			<!--  
 			<if test="a.qna_answer_no != null">
 				a.qna_answer_no = #{qnaAnswerNo}
 			</if>
+			-->
 			q.qna_no = #{qnaNo}
 		</where>
 	</select>
