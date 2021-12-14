@@ -37,7 +37,7 @@
 				</li>
 				<!-- 관리자 가입 -->
 				<li class="sidebar-item">
-					<a class="sidebar-link" href="pages-sign-up.html">
+					<a class="sidebar-link" href="${pageContext.request.contextPath}/addAdmin">
 	           			<i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Sign Up</span>
 	          		</a>
 				</li>
@@ -71,8 +71,14 @@
 				</li>
 	
 				<li class="sidebar-item">
-					<a class="sidebar-link" href="${pageContext.request.contextPath}/productManagement">
-	            		<i class="align-middle" data-feather="grid"></i> <span class="align-middle">상품 관리</span>
+					<a class="sidebar-link" href="${pageContext.request.contextPath}/admin/accomBuildingList">
+	            		<i class="align-middle" data-feather="grid"></i> <span class="align-middle">숙소 관리</span>
+	         		</a>
+				</li>
+				
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="${pageContext.request.contextPath}/admin/activityList">
+	            		<i class="align-middle" data-feather="grid"></i> <span class="align-middle">체험 관리</span>
 	         		</a>
 				</li>
 	

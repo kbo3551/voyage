@@ -17,16 +17,29 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 @Service
 public class HashtagService {
-	@Autowired HashtagMapper hashtagMapper;
-	
-	public Map<String, Object> getHashtagList() {
-		
-		List<Hashtag> hashtagList = hashtagMapper.selectHashtagList();
-		
-		Map<String, Object> returnMap = new HashMap<>();
-		returnMap.put("hashtagList", hashtagList);
-		
-		return returnMap;
-	}
+   @Autowired HashtagMapper hashtagMapper;
+   
+   public Map<String, Object> getHashtagList() {
+      
+      List<Hashtag> hashtagList = hashtagMapper.selectHashtagList();
+      log.debug("[degug] hashtagList : " + hashtagList);
+      
+      Map<String, Object> returnMap = new HashMap<>();
+      returnMap.put("hashtagList", hashtagList);
+      
+      return returnMap;
+   }
+   
+   public Map<String, Object> getHashtagListBySearch(String searchKeyword) {
+      log.debug("[degug] searchKeyword : " + searchKeyword);
+      
+      List<Hashtag> hashtagList = hashtagMapper.selectHashtagListBySearch(searchKeyword);
+      log.debug("[degug] hashtagList : " + hashtagList);
+      
+      Map<String, Object> returnMap = new HashMap<>();
+      returnMap.put("hashtagList", hashtagList);
+      
+      return returnMap;
+   }
 
 }

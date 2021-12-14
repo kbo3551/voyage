@@ -32,12 +32,10 @@ public class AdminController {
 		System.out.println("AdminController() 실행");
 		// 값
 		String adminId = request.getParameter("id");
-		String adminPw = request.getParameter("password");
 	    String adminFirstName = request.getParameter("firstname");
 	    String adminLastName = request.getParameter("lastname");
 	    String adminPhone = request.getParameter("phone");
 	    String adminEmail = request.getParameter("email");
-	    String adminReg = request.getParameter("socialsecuritynumber");
 	    int adminAddressPostalCode = Integer.parseInt(request.getParameter("postalCode"));
 	    String adminAddressZip = request.getParameter("roadAddress");
 	    String adminAddressDetail = request.getParameter("detailAddress");
@@ -45,22 +43,13 @@ public class AdminController {
 	    // admin 객체
 	    Admin a = new Admin();
 	    a.setAdminId(adminId);
-	    a.setAdminPw(adminPw);
 	    a.setAdminFirstName(adminFirstName);
 	    a.setAdminLastName(adminLastName);
 	    a.setAdminPhone(adminPhone);
 	    a.setAdminEmail(adminEmail);
-	    a.setAdminReg(adminReg);
 	    a.setAdminActive("활동");
 	    
 	    log.debug("★★★[boryeong]AdminController★★★"+a.toString());
-	    
-	    // 중복 검사
-	    String idCheck = adminService.adminIdCheck(a);
-	    if(idCheck.equals("아이디중복")) {
-	    	redirect.addFlashAttribute("admin",a);
-	    	return "redirect:addAdmin?idChecking=id";
-	    }
 	    
 	    // admin 추가
 	    adminService.addAdmin(a);
@@ -76,23 +65,25 @@ public class AdminController {
 	    
 	    adminService.addAdminAddress(aAddress);
 	    
-		return "redirect:/adminLogin";
+	    request.getSession().invalidate();
+	    
+		return "redirect:/login";
 	}
 	
-	@GetMapping("/adminIndex")
+	@GetMapping("/admin/adminIndex")
 	public String index() {
 		System.out.println("AdminController() 실행");
 
-		return "templates_admin/adminIndex";
+		return "admin/adminIndex";
 	}
 	
 	@Controller
 	public class productManagementController {
-		@GetMapping("/productManagement")
+		@GetMapping("/admin/productManagement")
 		public String management() {
 			System.out.println("ProductManagement() 실행");
 
-			return "templates_admin/productManagement";
+			return "admin/productManagement";
 		}
 	}
 }

@@ -1,7 +1,6 @@
 package com.gdu.voyage.mapper;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -20,8 +19,10 @@ public interface AccomBuildingMapper {
 	int insertAccomBuildingHashtag(Hashtag Hashtag);
 	
 	// 숙소 조회 list
-	List<AccomBuilding> selectAccombuildingList(Map<String, Object> param);
+	List<AccomBuilding> selectAccomBuildingList(int pageNo);
+	int selectCountPage();
 	
 	// 숙소 조회 one
 	AccomBuilding selectAccomBuildingOne(int AccomBuildingNo);
+	
 }

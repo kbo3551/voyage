@@ -37,7 +37,7 @@ public class QnaController {
 	@GetMapping("/qnaList")  
 	public String QnaList() {
 		System.out.println("QnaController() 실행");
-	      
+	    
 		return "/templates_citylisting/qnaList";
 	}
 	// Qna 상세 내용

@@ -25,4 +25,5 @@ public class ProductController {
 	      
 		return "/templates_citylisting/setProductCategory";
 	}
+	
 }

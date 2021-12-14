@@ -19,17 +19,15 @@
 	
 	
 	<!-- 어드민 로그인 쿼리 -->
-	<select id="AdminLogin" resultType="com.gdu.voyage.vo.Admin">
+	<select id="adminLogin" resultType="com.gdu.voyage.vo.Admin" parameterType="String">
 		SELECT
 			admin_id adminId,
 			admin_first_name adminFirstName,
-			admin_last_name adminLastName,
+			admin_last_name adminLastName
 		FROM
 			admin
 		WHERE
-			admin_id = #{adminId}
-			AND
-			admin_pw = PASSWORD(#{adminPw});
+			admin_id = #{memberId}
 	</select>
 	
 </mapper>

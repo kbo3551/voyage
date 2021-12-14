@@ -1,11 +1,14 @@
 package com.gdu.voyage.mapper;
 
 import java.util.List;
-import java.util.Map;
+
+import org.apache.ibatis.annotations.Mapper;
 
 import com.gdu.voyage.vo.Activity;
-
+@Mapper
 public interface ActivityMapper {
-	List<Activity> selectActivityList(Map<String, Object> param);
+	// 체험 조회 list
+		List<Activity> selectActivityList(int pageNo);
+		int selectCountPage();
 	
 }

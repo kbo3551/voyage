@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -18,43 +19,69 @@
 
 	<title>AdminKit Demo - Bootstrap 5 Admin Templateee</title>
 
-	<link href="admin/css/app.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/admin/css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 	<div class="wrapper">
     <!-- adminKit : 시작 -->
-    	<c:import url="../adminPartial\\adminKit.jsp"/>
+    	<c:import url="partial\\adminKit.jsp"/>
     <!-- adminKit : 끝 -->
 	<div class="main">
     <!-- adminKit : 시작 -->
-    	<c:import url="../adminPartial\\adminBanner.jsp"/>
+    	<c:import url="partial\\\\adminBanner.jsp"/>
     <!-- adminKit : 끝 -->
-		
-		
-		<!-- 메인(중앙) -->
+	
 		<main class="content">
 			<div class="container-fluid p-0">
 	
-				<h1 class="h3 mb-3"><strong>관리자</strong> 공지사항</h1>
-				<h3 class="h3 mb-3">공지사항</h3>
-				<table>
-					<c:forEach items="" var="">
-					</c:forEach>
-				</table>
+				<h1 class="h3 mb-3"><strong>숙소 관리</strong></h1>
+					<div class="row">
+						<div class="col-12 col-lg-8 col-xxl-9 d-flex">
+							<div class="card flex-fill">
+								<div class="card-header">
 	
-			</div>
-		</main>
+									<h5 class="card-title mb-0">Latest AccomBuilding</h5>
+								</div>
+								<table class="table table-hover my-0">
+									<thead>
+										<tr>
+											<th>Building Name</th>
+											<th>Building Description</th>
+											<th>Building Phone</th>
+											<th>Building State</th>
+											<th>create Date</th>
+											<th>update Date</th>
+										</tr>
+									</thead>
+									<tbody> 
+										<c:forEach items="${list}" var="Accom" >
+											<tr>
+										        <td>${Accom.accomBuildingNo}</td>
+										        <td>${Accom.accomBuildingName}</td>
+										        <td>${Accom.accomBuildingDescription}</td>
+										        <td>${Accom.accomBuildingPhone}</td>
+										        <td>${Accom.createDate}</td>
+										        <td>${Accom.updateDate}</td>
+										        </tr>
+									    </c:forEach>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+	
     <!-- adminFooter : 시작 -->
-    	<c:import url="../adminPartial\\adminFooter.jsp"/>
+    	<c:import url="partial\\\\adminFooter.jsp"/>
     <!-- adminFooter : 끝 -->
-
 		</div>
 	</div>
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/admin/js/app.js"></script>
 	
-	<script src="admin/js/app.js"></script>
-	 
 	<script>
 	document.addEventListener("DOMContentLoaded", function() {
 		var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
@@ -277,7 +304,7 @@
 	});
 	
 	</script>
-	
+
 </body>
 
 </html>

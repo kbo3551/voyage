@@ -19,119 +19,81 @@
 
 	<title>AdminKit Demo - Bootstrap 5 Admin Templateee</title>
 
-	<link href="admin/css/app.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/admin/css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 	<div class="wrapper">
     <!-- adminKit : 시작 -->
-    	<c:import url="../adminPartial\\adminKit.jsp"/>
+    	<c:import url="partial\\adminKit.jsp"/>
     <!-- adminKit : 끝 -->
 	<div class="main">
     <!-- adminKit : 시작 -->
-    	<c:import url="../adminPartial\\adminBanner.jsp"/>
+    	<c:import url="partial\\\\adminBanner.jsp"/>
     <!-- adminKit : 끝 -->
 	
 		<main class="content">
 			<div class="container-fluid p-0">
 	
-				<h1 class="h3 mb-3"><strong>상품</strong> 관리 </h1>
+				<h1 class="h3 mb-3"><strong>체험 관리</strong></h1>
 					<div class="row">
 						<div class="col-12 col-lg-8 col-xxl-9 d-flex">
 							<div class="card flex-fill">
 								<div class="card-header">
 	
-									<h5 class="card-title mb-0">Latest Products</h5>
+									<h5 class="card-title mb-0">Latest Activity</h5>
 								</div>
-								<table class="table table-hover my_0">
-								<c:forEach items="${list}" var="Ac" >
-							        ${Ac.accomBuildingNo }<br>
-							        ${Ac.accomBuildingName }<br>
-							        ${Ac.accomBuildingDescription }<br>
-							        ${Ac.accomBuildingPhone }<br>
-							        ${Ac.createDate }<br>
-							        ${Ac.updateDate }<br><br>
-							    </c:forEach>
-							    <c:if test="${empty list}">
-							        ${"데이터가 없습니다"}
-							    </c:if>
-							    
-								</table>
 								<table class="table table-hover my-0">
 									<thead>
 										<tr>
-											<th>Building Name</th>
-											<th class="d-none d-xl-table-cell">Building Description</th>
-											<th class="d-none d-xl-table-cell">Building phone</th>
-											<th>Building State</th>
+											<th>Activity Name</th>
+											<th>Activity OpenDate</th>
+											<th>Activity CloseDate</th>
+											<th>Activity price</th>
+											<th>Activity OpenHour</th>
+											<th>Activity CloseHour</th>
+											<th>Activity MaxT</th>
+											<th>Activity Description</th>
+											<th>Activity MaxP</th>
+											<th>Activity State</th>
+											<th>Activity StateAdmin</th>
+											<th>Create Date</th>
+											<th>Update Date</th>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<td>Project Apollo</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-success">Done</span></td>
-										</tr>
-										<tr>
-											<td>Project Fireball</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-danger">Cancelled</span></td>
-										</tr>
-										<tr>
-											<td>Project Hades</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-success">Done</span></td>
-										</tr>
-										<tr>
-											<td>Project Nitro</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-warning">In progress</span></td>
-										</tr>
-										<tr>
-											<td>Project Phoenix</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-success">Done</span></td>
-										</tr>
-										<tr>
-											<td>Project X</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-success">Done</span></td>
-										</tr>
-										<tr>
-											<td>Project Romeo</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-success">Done</span></td>
-										</tr>
-										<tr>
-											<td>Project Wombat</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-warning">In progress</span></td>
-										</tr>
+									<tbody> 
+										<c:forEach items="${list}" var="Ac" >
+											<tr>
+										        <td>${Ac.activityNo}</td>
+										        <td>${Ac.activityName}</td>
+										        <td>${Ac.activityOpenDate}</td>
+										        <td>${Ac.activityCloseDate}</td>
+										        <td>${Ac.activityPrice}</td>
+										        <td>${Ac.activityOpenHour}</td>
+										        <td>${Ac.activityCloseHour}</td>
+										        <td>${Ac.activityMaxT}</td>
+										        <td>${Ac.activityDescription}</td>
+										        <td>${Ac.activityMaxP}</td>
+										        <td>${Ac.createDate}</td>
+										        <td>${Ac.updateDate}</td>
+											</tr>
+									    </c:forEach>
 									</tbody>
 								</table>
 							</div>
 						</div>
 					</div>
-	
 				</div>
 			</main>
 	
     <!-- adminFooter : 시작 -->
-    	<c:import url="../adminPartial\\adminFooter.jsp"/>
+    	<c:import url="partial\\\\adminFooter.jsp"/>
     <!-- adminFooter : 끝 -->
 		</div>
 	</div>
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src="admin/js/app.js"></script>
+	<script src="${pageContext.request.contextPath}/admin/js/app.js"></script>
 	
 	<script>
 	document.addEventListener("DOMContentLoaded", function() {

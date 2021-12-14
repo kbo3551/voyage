@@ -1,2 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.voyage.mapper.ActivityMapper">
+<!-- 등록된 체험을 불러옴 -->
+	<select id="selectActivityList" resultType="com.gdu.voyage.vo.Activity">
+            SELECT 
+            activity_no as ActivityNo,
+            activity_name as ActivityName,
+            activity_opendate as ActivityOpenDate,
+            activity_closedate as ActivityCloseDate,
+            activity_price as ActivityPrice,
+            activity_openhour as ActivityOpenHour,
+            activity_closedate as ActivityCloseHour,
+            activity_max_t as ActivityMaxT,
+            activity_description as ActivityDescription,
+            activity_max_p as ActivityMaxP,
+            create_date as createDate,
+            update_date as updateDate
+            FROM activity
+    </select>
+</mapper>
