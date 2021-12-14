@@ -40,6 +40,11 @@ public class AccomBuildingService {
 			log.debug(accomBuildingMapper.selectAccomBuildingList(pageNo) + "***********[상훈] accomBuildingService");
 			return accomBuildingMapper.selectAccomBuildingList(pageNo);
 		}
+	// 숙소 등록 목록 상세 조회 One
+			public AccomBuilding getAccomBuildingOne(int accomBuildingNo) {
+			log.debug(accomBuildingMapper.selectAccomBuildingOne(accomBuildingNo) + "***********[상훈] accomBuildingService One");
+			return accomBuildingMapper.selectAccomBuildingOne(accomBuildingNo);
+		}
 	
 	// 숙소-건물 입력
 	public void addAccomBuilding(AccomBuildingForm accomBuildingForm) {

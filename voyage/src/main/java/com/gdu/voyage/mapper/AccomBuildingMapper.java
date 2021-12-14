@@ -27,6 +27,6 @@ public interface AccomBuildingMapper {
 	int selectCountPage();
 	
 	// 숙소 조회 one
-	AccomBuilding selectAccomBuildingOne(int AccomBuildingNo);
+	AccomBuilding selectAccomBuildingOne(int accomBuildingNo);
 	
 }

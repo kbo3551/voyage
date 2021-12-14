@@ -36,7 +36,7 @@
 		<main class="content">
 			<div class="container-fluid p-0">
 	
-				<h1 class="h3 mb-3"><strong>숙소 관리</strong></h1>
+				<h1 class="h3 mb-3"><strong>상세 보기</strong></h1>
 					<div class="row">
 						<div class="col-12 col-lg-8 col-xxl-9 d-flex">
 							<div class="card flex-fill">
@@ -48,33 +48,33 @@
 									<thead>
 										<tr>
 											<th>Building No</th>
+											<th>Host No</th>
 											<th>Building Name</th>
 											<th>Building Description</th>
-											<th>View Details</th>
+											<th>Building Phone</th>
+											<th>Building State</th>
+											<th>Building State Admin</th>
+											<th>create Date</th>
+											<th>update Date</th>
 										</tr>
 									</thead>
 									<tbody> 
 										<c:forEach items="${list}" var="Accom" >
 											<tr>
 										        <td>${Accom.accomBuildingNo}</td>
+										        <td>${Accom.hostNo}</td>
 										        <td>${Accom.accomBuildingName}</td>
 										        <td>${Accom.accomBuildingDescription}</td>
-										        <td><a href="${pageContext.request.contextPath}/admin/accomBuildingOne?accomBuildingNo=${Accom.accomBuildingNo}">상세 보기</a></td>
+										        <td>${Accom.accomBuildingPhone}</td>
+										        <td>${Accom.accomBuildingState}</td>
+										        <td>${Accom.accomBuildingStateAdmin}</td>
+										        <td>${Accom.createDate}</td>
+										        <td>${Accom.updateDate}</td>
 										        </tr>
 									    </c:forEach>
 									</tbody>
 								</table>
-								<ul class="paging">
-								    <c:if test="${paging.prev}">
-								        <span><a href='<c:url value="/accomBuildingList?page=${paging.startPage-1}"/>'>이전</a></span>
-								    </c:if>
-								    <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
-								        <span><a href='<c:url value="/accomBuildingList?page=${num}"/>'>${num}</a></span>
-								    </c:forEach>
-								    <c:if test="${paging.next && paging.endPage>0}">
-								        <span><a href='<c:url value="/accomBuildingList?page=${paging.endPage+1}"/>'>다음</a></span>
-								    </c:if>
-								</ul>
+							
 							</div>
 						</div>
 					</div>

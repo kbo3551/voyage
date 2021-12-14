@@ -18,4 +18,8 @@
             update_date as updateDate
             FROM activity
     </select>
+    <select id="activityCnt" resultType="int">
+    	SELECT count(*)
+    	FROM activity
+    </select>
 </mapper>

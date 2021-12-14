@@ -115,14 +115,22 @@
 		)
 	</insert>
 	
-	<!-- 숙소 건물을 불러옴 -->
+	<!-- 숙소 목록 출력 -->
 	<select id="selectAccomBuildingList" resultType="com.gdu.voyage.vo.AccomBuilding">
-            SELECT accom_building_no as accomBuildingNo,
+            SELECT
+            accom_building_no as accomBuildingNo,
             accom_building_name as accomBuildingName,
             accom_building_description as accomBuildingDescription,
             accom_building_phone as accomBuildingPhone,
             create_date as createDate,
             update_date as updateDate
             FROM accom_building
+    </select>
+    
+    <!-- 건물번호에따른 숙소 상세 목록 출력 -->
+    <select id="selectAccomBuildingOne" resultType="com.gdu.voyage.vo.AccomBuilding">
+            SELECT *
+			FROM accom_building
+            WHERE accom_building_no = #{accom_building_no}
     </select>
 </mapper>
