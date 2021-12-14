@@ -27,13 +27,6 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 public class QnaService {
 	@Autowired QnaMapper qnaMapper;
-	// Qna 게시판 목록 조회
-	public List<Qna> getQnaList(int pageNo){
-		// 매개변수 pageNo값 가공
-		pageNo = (pageNo - 1) * 10;
-		log.debug(qnaMapper.selectQnaList(pageNo) + "☆☆☆☆☆☆☆☆☆☆[다원] QnaService_pageNo debug");
-		return qnaMapper.selectQnaList(pageNo);
-	}
 	// Qna 게시판 목록 카테고리 별 조회
 	public Map<String, Object> getQnaListByCategory(String qnaCategory, int currentPage, int rowPerPage){
 		// 매개변수 값 가공 
@@ -49,6 +42,7 @@ public class QnaService {
 		// Mapper로부터 호출한 결과값 가공
 		Map<String, Object> returnMap = new HashMap<>();
 		returnMap.put("qnaList", qnaList);
+		// 마지막 페이지
 		int lastPage = 0;
 		int totalCount = qnaMapper.selectQnaTotalCount(qnaCategory);
 		lastPage = (totalCount / rowPerPage);
@@ -60,14 +54,19 @@ public class QnaService {
 		return returnMap;
 	}
 	// Qna 게시판 목록 상세 내용
-	public Qna getQnaOne(int qnaNo) {
-		log.debug(qnaMapper.selectQnaOne(qnaNo)+"☆☆☆☆☆☆☆☆☆☆[다원] QnaService_qnaNo debug");
-		return qnaMapper.selectQnaOne(qnaNo);
+	public Qna getQnaOneAndAnswer(int qnaNo) {
+		log.debug(qnaMapper.selectQnaOneAndAnswer(qnaNo)+"☆☆☆☆☆☆☆☆☆☆[다원] QnaService_qnaNo debug");
+		return qnaMapper.selectQnaOneAndAnswer(qnaNo);
 	}
 	// Qna 게시판 질문 수정
-	
+	public void modifyQ(Qna qna) {
+		log.debug(qna.toString() + "☆☆☆☆☆☆☆☆☆☆[다원] QnaService_modifyQ_Qna debug");
+		qnaMapper.modifyQ(qna);
+	}
 	// Qna 게시판 질문 삭제
-	
+	public void removeQ(Qna qna) {
+		log.debug(qna.toString() + "☆☆☆☆☆☆☆☆☆☆[다원] QnaService_removeQ_Qna debug");	
+	}
 	// Qna 게시판 질문 작성
 	public void addQ(QnaForm qnaForm) throws Exception {
 		log.debug(qnaForm.toString() + "☆☆☆☆☆☆☆☆☆☆[다원] QnaService_qnaForm debug");
@@ -111,9 +110,7 @@ public class QnaService {
 					throw new Exception();
 				}
 			}
-		}
-	//
-	
+		}	
 	// 페이징
 	public int[] countPage(int currentPage) {
 		int[] num = new int[10];

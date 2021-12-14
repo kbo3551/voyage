@@ -81,7 +81,7 @@
                         <p class="mb-30">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or rannjdomised words which don't look even slightly believable. If you are going to use a passage of fhorem Ipvbsum.</p>
                     </div>
                 </div>
-                <!-- Map -->
+                <!-- Map
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
                         <h3 class="mb-30">Location</h3>
@@ -126,18 +126,19 @@
                         </div>
                     </div>
                 </div>
-                 <!--End Map -->
+                -->
                 <!-- Contact From -->
                 <!-- From -->
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
-                        <h3 class="mb-40">Massage </h3>
+                    	<!-- 원본 : Massage -->
+                        <h3 class="mb-40">Question </h3>
                         <!-- Form -->
                         <form class="form-contact contact_form mb-80" action="qnaList.jsp" method="post">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                       		 <input class="form-control error" name="name" id="name" type="text"  placeholder="Your Name">
+                                       		 <input class="form-control error" name="memberNickname" id="memberNickname" type="text" value="${memberNickname}">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -153,7 +154,13 @@
                             </div>
                             <div class="form-group mt-3">
                             	<!-- 원본 버튼 : Send  -->
-                                <button type="submit" class="button button-contactForm boxed-btn">Back</button>
+                                <button type="button" class="button button-contactForm boxed-btn">Back</button>
+                            </div>
+                            <div class="form-group mt-3">
+                            	<button type="button" class="button button-contactForm boxed-btn">Edit</button>
+                            </div>
+                            <div class="form-group mt-3">
+                            	<button type="button" class="button button-contactForm boxed-btn">Del</button>
                             </div>
                         </form>
                     </div>
