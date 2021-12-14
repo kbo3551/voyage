@@ -116,7 +116,7 @@
 	                            <div class="col-sm-5">
 	                                <div class="form-group">
 	                                    <label>PW</label>
-	                                    <input type="text" class="form-control" id="password" name="password">
+	                                    <input type="text" class="form-control" id="password" name="password" value="${route}">
 	                                    <input name="route" type="hidden" value="${route}">
 	                                </div>
 	                        	<div class="col-sm-20 col-sm-offset-1" style="text-align: right;">

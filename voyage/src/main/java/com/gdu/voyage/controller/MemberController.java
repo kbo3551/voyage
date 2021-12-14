@@ -53,7 +53,7 @@ public class MemberController {
 		Member reLoginMember = loginService.login(m);
 		if(reLoginMember == null) {
 			model.addAttribute("route", route);
-	    	return "redirect:/member/pwCheck?failed=true";
+	    	return "redirect:/member/pwCheck?failed=true&route="+route;
 	    }
 		
 		if(route.equals("1")) {
@@ -69,14 +69,13 @@ public class MemberController {
 			model.addAttribute("m", m);
 			return "/member/deleteMember";
 		}
-		 
 		
-		return "redirect:/login";
+		return "/member/pwCheck";
 	}
 	
 	// 회원정보 수정
 	@PostMapping("member/myPage")
-	public String postUpdateMember(HttpServletRequest request, RedirectAttributes redirect) {
+	public String postUpdateMember(HttpServletRequest request, RedirectAttributes redirect, Model model) {
 		System.out.println("MemberController() 실행");
 		Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
