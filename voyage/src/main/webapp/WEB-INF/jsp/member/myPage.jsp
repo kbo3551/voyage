@@ -167,6 +167,7 @@
 	                <br>
 	                <div><a href="${pageContext.request.contextPath}/member/updateNickname" class="btn">닉네임변경</a></div>
     				<div><a href="${pageContext.request.contextPath}/member/updatePw" class="btn">비밀번호변경</a></div>
+    				<div><a href="${pageContext.request.contextPath}/member/deleteMember" class="btn">회원탈퇴</a></div>
 	            </div>
 	    	</div>
     	</form>
