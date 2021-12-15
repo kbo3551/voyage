@@ -1,58 +1,58 @@
 /**
  * banner.jsp
  */
- // 해시태그 메뉴 클릭 시 해시태그 창 나타남
+ 	// 해시태그 메뉴 클릭 시 해시태그 창 나타남
     $('.hashtag').click(function(){
-    	console.log(".hashtag 클릭");
-      $('.hashtag_body').css('background-color','rgba(0, 0, 0, 0.5)');
-      $('.hashtag_body').css('top','0%');
-      $('#search__box').css('top','152%');
-   });
+		console.log(".hashtag 클릭");
+	  	$('.hashtag_body').css('background-color','rgba(0, 0, 0, 0.5)');
+	  	$('.hashtag_body').css('top','0%');
+	  	$('#search__box').css('top','152%');
+    });
     
     // 해시태그 창 클릭 시 해시태그 창 사라짐
     $('.hashtag_body').click(function(){
-      $('.hashtag_body').css('background-color','rgba(0, 0, 0, 0.5)');
-      $('.hashtag_body').css('top','-300000%');
-      $('#search__box').css('top','-300000%');
-   });
+		$('.hashtag_body').css('background-color','rgba(0, 0, 0, 0.5)');
+		$('.hashtag_body').css('top','-300000%');
+		$('#search__box').css('top','-300000%');
+    });
 
 	// 검색 제시어 이벤트
-    function search(target) {
-       
-       var word = target.value;
-       console.log(word); // 검색어 입력값
-       
-	    // start Ajax
-	    $.ajax({
-	        type : 'GET',
-	        dataType : 'json',
-	        url : "http://localhost/hashtagSearh?"
-	            + "searchKeyword="
-	            + word,
-	            error : function(err) {
-	                console.log("실행중 오류가 발생하였습니다.");
-	            },
-	            success : function(data) {
-					$("#hashtagList").empty(); // 검색 전 제시어 비우기
-	            	
-					$(data).each(function(index, item) { // each : JSON의 반복문
-						var checkWord = $("#word").val(); // 검색어 입력값 저장
-						
-						if(checkWord.length > 0) { // 검색어 입력값의 길이가 0보다 클 때만
-							let result = '<li class="hashtagList_result"><a href="${pageContext.request.contextPath}/hashtag?hashtag="';
-							result += item.hashtag;
-							result += '">';
-							result += item.hashtag;
-							result += '</a></li>';
-							$('#hashtagList').append(result);
-						}
-						
-					});
-	
-	        	} 
-	     });
-	     // end Ajax
-    }
+	    function search(target) {
+	       
+	       var word = target.value;
+	       console.log(word); // 검색어 입력값
+	       
+		    // start Ajax
+		    $.ajax({
+		        type : 'GET',
+		        dataType : 'json',
+		        url : "http://localhost/hashtagSearh?"
+		            + "searchKeyword="
+		            + word,
+		            error : function(err) {
+		                console.log("실행중 오류가 발생하였습니다.");
+		            },
+		            success : function(data) {
+						$("#hashtagList").empty(); // 검색 전 제시어 비우기
+		            	
+						$(data).each(function(index, item) { // each : JSON의 반복문
+							var checkWord = $("#word").val(); // 검색어 입력값 저장
+							
+							if(checkWord.length > 0) { // 검색어 입력값의 길이가 0보다 클 때만
+								let result = '<li class="hashtagList_result"><a href="${pageContext.request.contextPath}/hashtag?hashtag="';
+								result += item.hashtag;
+								result += '">';
+								result += item.hashtag;
+								result += '</a></li>';
+								$('#hashtagList').append(result);
+							}
+							
+						});
+		
+		        	} 
+		     });
+		     // end Ajax
+	    }
     
 /**
  * hashtag.jsp

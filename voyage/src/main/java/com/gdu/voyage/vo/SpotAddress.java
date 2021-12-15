@@ -10,4 +10,6 @@ public class SpotAddress {
 	private int spotAddressPotalCode;
 	private String spotAddressZip;
 	private String spotAddressDetail;
+	private String createDate;
+	private String updateDate;
 }

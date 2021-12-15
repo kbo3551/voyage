@@ -77,8 +77,8 @@
 			<div class="container-fluid p-0">
             <div class="container-fluid p-0">
                 <div class="row">
-                    <div class="page-head-content">
-                        <h1 class="page-title">Hello : <span class="orange strong">${adminSession.getAdminId()}</span></h1>               
+                    <div class="content">
+                        <h1 class="page-title">관리자 : <span class="orange strong">${adminSession.getAdminId()}</span></h1>               
                     </div>
                 </div>
             </div>
@@ -86,7 +86,7 @@
         <!-- End page header --> 
 
         <!-- property area -->
-        <form name="UpdateAdmin" method="post" action="${pageContext.request.contextPath}/admin/adminUpdate">
+        <form name="adminUpdate" method="post" action="${pageContext.request.contextPath}/admin/adminUpdate">
         <div class="content-area user-profiel" style="background-color: #FCFCFC;">&nbsp;
             <div class="container">   
                 <div class="row">
@@ -104,21 +104,21 @@
 
                                 <div class="col-sm-3 padding-top-25">
 
-                                    <div class="form-group">
+                                    <div class="update">
                                         <label>First Name <small>(required)</small></label>
-                                        <input name="firstname" type="text" class="form-control" placeholder="Andrew...">
+                                        <input name="firstname" type="text" class="form-control" id="firstname" placeholder="성">
                                     </div>
                                     <div class="form-group">
                                         <label>Last Name <small>(required)</small></label>
-                                        <input name="lastname" type="text" class="form-control" placeholder="Smith...">
+                                        <input name="lastname" type="text" class="form-control" id="lastname" placeholder="이름">
                                     </div> 
                                                                      <div class="form-group">
                                         <label>Phone <small>(required)</small></label>
-                                        <input name="phone" type="text" class="form-control" placeholder="010-0000-0000">
+                                        <input name="phone" type="text" class="form-control" id="phone" placeholder="010-0000-0000">
                                     </div>
                                     <div class="form-group">
                                         <label>Email <small>(required)</small></label>
-                                        <input name="email" type="email" class="form-control" placeholder="andrew@email@email.com.com">
+                                        <input name="email" type="email" class="form-control" id="email" placeholder="andrew@email@email.com.com">
                                     </div> 
 
 
@@ -130,7 +130,7 @@
                             <br>
    							 <div class="col-sm-5">
 	                                <div class="form-group">
-	                                  <input type="button" class="btn btn-finish btn-primary");
+	                                  <input type="button" class="btn btn-primary");
 	                                  onclick="execDaumPostcode()" value="우편번호">
 	                                  <input type="number" class="form-control" id="postalCode" name="postalCode" placeholder="우편번호" value="${adminSession.adminAddress.adminAddressPostalCode}" readonly="readonly">
 	                             	</div>
@@ -146,11 +146,11 @@
 	
                             <div class="col-sm-5 col-sm-offset-1">
                                 <br>
-                                <input type='button' class='btn btn-finish btn-primary' name='finish' value='Finish'style='float:right;' />
+                               <button type="button" class="btn btn-finish btn-primary" onclick="adminUpdate()">수정</button>  
                             </div>
                 </div>
             </div><!-- end row -->
-
+		</div>
     </div>
     </form>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -187,7 +187,7 @@
 			
          	
          // 유효성 검사
-            function addAdmin(){
+            function adminUpdate(){
 				if($("#firstname").val() == ""){
 					alert('성을 입력해주세요.');
 					return;
@@ -201,7 +201,7 @@
 					alert('전화번호를 입력해주세요');
 					return;
 				} else {
-					UpdateMember.submit();
+					adminUpdate.submit();
 				}
 			};
      </script>
@@ -210,11 +210,9 @@
 	
 	</main>
 
-
-	
-	</main>
-
-
+    <!-- adminFooter : 시작 -->
+    	<c:import url="partial\\adminFooter.jsp"/>
+    <!-- adminFooter : 끝 -->
 
     
     <!-- Scroll Up -->

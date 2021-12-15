@@ -122,7 +122,7 @@
 	                        	<div class="col-sm-20 col-sm-offset-1" style="text-align: right;">
 	                        	
 	                        	<c:choose>
-									<c:when test="${param.failed == true}">
+									<c:when test="${failed == true}">
 										<p style="color: red; font-weight: bold;">이미 사용중인 닉네임입니다.</p>
 									</c:when>
 									<c:otherwise>

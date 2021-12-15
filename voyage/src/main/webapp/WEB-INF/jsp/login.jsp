@@ -85,13 +85,13 @@
 		                        <div class="col-md-12 col-xs-12 login-blocks">
 		                        
  									<c:choose>
- 										<c:when test="${param.failed == 1}">
+ 										<c:when test="${failed == '1'}">
  											<p style="color: red; font-weight: bold;">아이디 또는 비밀번호를 틀렸습니다.</p>
  										</c:when>
- 										<c:when test="${param.failed == 2}">
+ 										<c:when test="${failed == '2'}">
  											<p style="color: red; font-weight: bold;">탈퇴한 회원입니다.</p>
  										</c:when>
- 										<c:when test="${param.failed == 3}">
+ 										<c:when test="${failed == '3'}">
  											<p style="color: red; font-weight: bold;">정지당한 회원입니다.</p>
  										</c:when>
  									</c:choose>
