@@ -38,7 +38,7 @@
 	
 				<h1 class="h3 mb-3"><strong>숙소 관리</strong></h1>
 					<div class="row">
-						<div class="col-12 col-lg-8 col-xxl-9 d-flex">
+						<div>
 							<div class="card flex-fill">
 								<div class="card-header">
 	

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.ActivityService;
+import com.gdu.voyage.vo.AccomBuilding;
 import com.gdu.voyage.vo.Activity;
 import com.gdu.voyage.vo.ActivityForm;
 
@@ -23,6 +24,7 @@ public class ActivityController {
 	@Autowired ActivityService activityService;
 	private Integer currentPage = 1;
 	
+	// activity 목록 조회
 	@RequestMapping("/admin/activityList")
 	public String getActivityList(Model model, @RequestParam(value="pageNo", defaultValue="1") int pageNo) {
 		currentPage = pageNo;
@@ -31,6 +33,14 @@ public class ActivityController {
 		model.addAttribute("list", list);
 		return "/admin/activityList";
 	}
+	// accomBuilding 상세목록 조회
+		@GetMapping("/admin/activityOne")
+		public String getActivityOne(Model model, int activityNo) {
+			System.out.println("accomBuildingOne 실행!!");
+			List<Activity> activity = activityService.getActivityOne(activityNo);
+			model.addAttribute("activity", activity);
+			return "/admin/activityOne";
+		}
 	
 	@GetMapping("/host/addActivity")
 	public String addActivity() {

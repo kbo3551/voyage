@@ -39,6 +39,11 @@ public class ActivityService {
 		log.debug(activityMapper.selectActivityList(pageNo) + "***********[상훈] activityService");
 		return activityMapper.selectActivityList(pageNo);
 	}
+	// 체험 등록 목록 상세 조회 One
+	public List<Activity> getActivityOne(int activityNo) {
+		log.debug(activityMapper.selectActivityOne(activityNo) + "***********[상훈] activityService One");
+		return activityMapper.selectActivityOne(activityNo);
+	}
 
 	// 페이징
 	public int[] countPage(int currentPage) {

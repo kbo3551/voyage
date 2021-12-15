@@ -15,7 +15,9 @@ public interface ActivityMapper {
 	// 체험 조회 list
 		List<Activity> selectActivityList(int pageNo);
 		int selectCountPage();
-	
+	// 체험 조회 one
+		List<Activity> selectActivityOne(int activityNo);
+		
 	// 체험 입력 : 체험 정보 + 이미지 + 추천장소 + 해시태그
 	int insertActivity(Activity activity);
 	int insertActivityImage(ActivityImage activityImage);
