@@ -69,10 +69,6 @@
             </div>
         </div>
     </div>
-    
-
-
-
 			<main class="content">
 			<div class="container-fluid p-0">
             <div class="container-fluid p-0">
@@ -86,47 +82,38 @@
         <!-- End page header --> 
 
         <!-- property area -->
-        <form name="adminUpdate" method="post" action="${pageContext.request.contextPath}/admin/adminUpdate">
         <div class="content-area user-profiel" style="background-color: #FCFCFC;">&nbsp;
             <div class="container">   
                 <div class="row">
                     <div class="col-sm-10 col-sm-offset-1 profiel-container">
-
                             <div class="profiel-header">
                                 <h2>
                                     관리자 정보 수정 <br>
                                 </h2>
                                 <hr>
                             </div>
-
+              	<form name="AdminUpdate" action="${pageContext.request.contextPath}/adminUpdate" method="post">
                             <div class="clear" style="margin-left: 8%;">
-                                
-
                                 <div class="col-sm-3 padding-top-25">
 
-                                    <div class="update">
-                                        <label>First Name <small>(required)</small></label>
+                                    <div class="form-group">
+                                        <label>First Name</label>
                                         <input name="firstname" type="text" class="form-control" id="firstname" placeholder="성">
                                     </div>
                                     <div class="form-group">
-                                        <label>Last Name <small>(required)</small></label>
+                                        <label>Last Name</label>
                                         <input name="lastname" type="text" class="form-control" id="lastname" placeholder="이름">
                                     </div> 
-                                                                     <div class="form-group">
-                                        <label>Phone <small>(required)</small></label>
+                                    <div class="form-group">
+                                        <label>Phone</label>
                                         <input name="phone" type="text" class="form-control" id="phone" placeholder="010-0000-0000">
                                     </div>
                                     <div class="form-group">
-                                        <label>Email <small>(required)</small></label>
+                                        <label>Email</label>
                                         <input name="email" type="email" class="form-control" id="email" placeholder="andrew@email@email.com.com">
                                     </div> 
-
-
-
                             </div>
-                     
                             </div>
-                 
                             <br>
    							 <div class="col-sm-5">
 	                                <div class="form-group">
@@ -143,47 +130,48 @@
 	                                  <input type="text" class="form-control" id="detailAddress" name="detailAddress" placeholder="상세주소" value="${adminSession.adminAddress.adminAddressDetail}">
 	                              </div>
 	                            </div>  
-	
                             <div class="col-sm-5 col-sm-offset-1">
                                 <br>
                                <button type="button" class="btn btn-finish btn-primary" onclick="adminUpdate()">수정</button>  
                             </div>
+                            </form>
                 </div>
             </div><!-- end row -->
 		</div>
     </div>
-    </form>
+
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
          <script>
          	// 다음(카카오) 주소 api
-            function execDaumPostcode() {
-               new daum.Postcode({
-                   oncomplete: function(data) {
-                       // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-                       // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                       var roadAddr = data.roadAddress; // 도로명 주소 변수
-                       var extraRoadAddr = ''; // 참고 항목 변수
-
-                       // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                       // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                       if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                           extraRoadAddr += data.bname;
-                       }
-                       // 건물명이 있고, 공동주택일 경우 추가한다.
-                       if(data.buildingName !== '' && data.apartment === 'Y'){
-                          extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                       }
-                       // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                       if(extraRoadAddr !== ''){
-                           extraRoadAddr = ' (' + extraRoadAddr + ')';
-                       }
-
-                       // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                       document.getElementById('postalCode').value = data.zonecode;
-                       document.getElementById('roadAddress').value = roadAddr;
-                   }
-               }).open();
-           }
+			                            function execDaumPostcode() {
+			                                new daum.Postcode({
+			                                    oncomplete: function(data) {
+			                                        // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+			                                        // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+			                                        var roadAddr = data.roadAddress; // 도로명 주소 변수
+			                                        var extraRoadAddr = ''; // 참고 항목 변수
+	
+			                                        // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+			                                        // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+			                                        if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+			                                            extraRoadAddr += data.bname;
+			                                        }
+			                                        // 건물명이 있고, 공동주택일 경우 추가한다.
+			                                        if(data.buildingName !== '' && data.apartment === 'Y'){
+			                                           extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+			                                        }
+			                                        // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+			                                        if(extraRoadAddr !== ''){
+			                                            extraRoadAddr = ' (' + extraRoadAddr + ')';
+			                                        }
+	
+			                                        // 우편번호와 주소 정보를 해당 필드에 넣는다.
+			                                        document.getElementById('postalCode').value = data.zonecode;
+			                                        document.getElementById('roadAddress').value = roadAddr;
+			                                    }
+			                                }).open();
+			                            }
 			
          	
          // 유효성 검사
@@ -201,7 +189,7 @@
 					alert('전화번호를 입력해주세요');
 					return;
 				} else {
-					adminUpdate.submit();
+					AdminUpdate.submit();
 				}
 			};
      </script>
@@ -209,7 +197,8 @@
 
 	
 	</main>
-
+</div>
+</div>
     <!-- adminFooter : 시작 -->
     	<c:import url="partial\\adminFooter.jsp"/>
     <!-- adminFooter : 끝 -->
@@ -444,7 +433,6 @@
 	
 	</script>
 	
-</div>
-</div>
+
 </body>
 </html>
