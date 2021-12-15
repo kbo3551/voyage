@@ -83,11 +83,6 @@ public class MemberController {
 		String memberNickname = request.getParameter("nickname");
 		String route = request.getParameter("route");
 		
-		log.trace("aaaaaaaaaaaaaa"+memberId);
-		log.trace("aaaaaaaaaaaaaa"+memberPw);
-    	log.trace("aaaaaaaaaaaaaa"+memberNickname);
-    	log.trace("aaaaaaaaaaaaaa"+route);
-		
 		// 중복체크를 위해 아이디는 공백으로 둠
 		Member m = new Member();
 		m.setMemberId("");
@@ -111,8 +106,6 @@ public class MemberController {
 		// 디버그
 	    log.trace("★controller★"+m.toString());
 	    
-	    
-		
 	    //닉네임 변경
 	  	memberService.updateMemberNickname(m);
 

@@ -35,12 +35,14 @@
 		            success : function(data) {
 						$("#hashtagList").empty(); // 검색 전 제시어 비우기
 		            	
-						$(data).each(function(index, item) { // each : JSON의 반복문
+						$(data).each(function(index, item){ // each : JSON의 반복문
 							var checkWord = $("#word").val(); // 검색어 입력값 저장
 							
 							if(checkWord.length > 0) { // 검색어 입력값의 길이가 0보다 클 때만
-								let result = '<li class="hashtagList_result"><a href="${pageContext.request.contextPath}/hashtag?hashtag="';
+								let result = '<li class="hashtagList_result"><a href="/hashtag?hashtag=';
 								result += item.hashtag;
+								result += '" id="';
+								result +=item.hashtagNo;
 								result += '">';
 								result += item.hashtag;
 								result += '</a></li>';
