@@ -184,7 +184,7 @@
                                     	<!-- 
                                     		원본 : <input class="form-control error" name="name" id="name" type="text"  placeholder="Your Name">
                                     	 -->
-                                    	 <input class="form-control error" name="memberNickname" id="memberNickname" type="text" placeholder="닉네임을 입력해주세요">
+                                    	 <input class="form-control error" name="memberNickname" id="memberNickname" type="text" value="${qna.memberNickname}" readonly="readonly">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">	
@@ -193,14 +193,14 @@
 	                                    <!-- 
 	                                    	원본 : <input class="form-control error" name="email" id="email" type="email" placeholder = "Enter email address">
 	                                    -->
-	                                    <input class="form-control error" name="qnaTitle" id="qnaTitle" type="text"	placeholder="제목을 입력해주세요">
+	                                    <input class="form-control error" name="qnaTitle" id="qnaTitle" type="text"	value="${qna.qnaTitle}">
   									</div>
                                 </div>
                                 <div class="col-sm-6">
                                 	<table class="form-group">
                                 		<tr>
                                 			<td>
-                                				<select name="selectAdd" id="selectQnaCategoryAdd">
+                                				<select name="qnaCategory" id="qnaCategoryModify">
 				                            		<option value="예약문의">예약</option>
 				                                	<option value="결제문의">결제</option>
 				                                	<option value="기타">기타</option>
@@ -221,7 +221,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <textarea class="form-control w-100 error" name="qnaContent" id="qnaContent" cols="30" rows="9" placeholder="내용을 상세히 입력해주세요. 1) 정확한 날짜와 시간  2) 사진이나 이미지 첨부  3) 상세한 상황 설명 "></textarea>
+                                        <textarea class="form-control w-100 error" name="qnaContent" id="qnaContent" cols="30" rows="9">${qna.qnaContent}</textarea>
                                     </div>
                                 </div>
                                 <div>파일 첨부</div>
@@ -234,8 +234,8 @@
                             <div class="form-group mt-3">
                             	<!-- 원본 버튼 : Send  -->
                                 <div>
-                                	<button type="submit" id="saveQBtn" class="button button-contactForm boxed-btn">Save</button>
                                 	<a type="button" href="${pageContext.request.contextPath}/qnaList" class="button button-contactForm boxed-btn">Back</a>
+                                	<button type="submit" id="saveQBtn" class="button button-contactForm boxed-btn">Save</button>
                                 </div>
                             </div>
                         </form>

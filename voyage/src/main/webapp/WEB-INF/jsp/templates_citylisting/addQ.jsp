@@ -184,21 +184,6 @@
                                     	 <input class="form-control error" name="memberNickname" id="memberNickname" type="text" placeholder="닉네임을 입력해주세요">
                                     </div>
                                 </div>
-                                <div>
-                                </div>
-                                <div>
-                                	 <select name="qnaCategory" id="qnaCategory">
-	                                    <option value="예약문의">예약</option>
-	                                    <option value="결제문의">결제</option>
-	                                    <option value="기타">기타</option>
-									</select>
-                                </div>
-                                <div>
-                                	<input name="qnaSecret" id="qnaSecret" type="checkbox" value="비밀글"/>
-                                	<label><span>비밀글</span></label>
-                                	<input name="qnaSecret" id="qnaSecret" type="checkbox" value="공개글"/>
-                                	<label><span>공개글</span></label>
-                                </div>
                                 <div class="col-sm-6">	
                                     <div class="form-group">
                                     	
@@ -207,6 +192,29 @@
 	                                    -->
 	                                    <input class="form-control error" name="qnaTitle" id="qnaTitle" type="text"	placeholder="제목을 입력해주세요">
   									</div>
+                                </div>
+                                <div class="col-sm-6">
+                                	<table class="form-group">
+                                		<tr>
+                                			<td>
+                                				<select name="selectAdd" id="selectQnaCategoryAdd">
+				                            		<option value="예약문의">예약</option>
+				                                	<option value="결제문의">결제</option>
+				                                	<option value="기타">기타</option>
+												</select>
+                                			</td>
+                                			
+                                			<td>
+                                				<input name="qnaSecret" id="qnaSecret" type="checkbox" value="비밀글"/>
+	                                			<label><span>비밀글</span></label>
+                                			</td>
+                                			
+                                			<td>
+                                				<input name="qnaSecret" id="qnaSecret" type="checkbox" value="공개글"/>
+	                                			<label><span>공개글</span></label>
+                                			</td>
+                                		</tr>
+                                	</table>			
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
@@ -222,6 +230,7 @@
                             </div>
                             <div class="form-group mt-3">
                             	<!-- 원본 버튼 : Send  -->
+                            	<a type="button" href="${pageContext.request.contextPath}/qnaList" class="button button-contactForm boxed-btn">Back</a>
                                 <button type="submit" id="sendQBtn" class="button button-contactForm boxed-btn">Send</button>
                             </div>
                         </form>
