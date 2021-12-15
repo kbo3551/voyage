@@ -98,11 +98,11 @@ public class MemberController {
 	    String duplCheck = memberService.duplMemberCheck(m);
 	    if(duplCheck.equals("닉네임중복")) {
 	    	// 객체값을 넘기기 위해 중복이더라도 아이디를 추가
-	    	request.setAttribute("password", memberPw);
-	    	request.setAttribute("nickname", memberNickname);
-	    	request.setAttribute("route", route);
-	    	redirect.addFlashAttribute("failed", true);
-	    	return "redirect:/member/updateNickname";
+	    	m.setMemberId(memberId);
+	    	model.addAttribute("m", m);
+	    	model.addAttribute("route", route);
+	    	model.addAttribute("failed", true);
+	    	return "/member/updateNickname";
 	    }
 	    
 	    // 중복체크 후 아이디 셋팅
