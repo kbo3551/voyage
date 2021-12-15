@@ -108,12 +108,47 @@ public class NoticeService {
 		
 		//insert(파일 추가)
 		if(noticeMapper.insertNoticefile(noticeFile) != null) {
+			//보령님이 사용하셨던 코드
+			String noticeContent = noticeForm.getNoticeContent();
+			List<MultipartFile> file = noticeForm.getNoticefile();
+			
+			notice.setNoticeContent(noticeContent);
+			noticeMapper.inserNotice(notice);
+			log.debug(notice.getNoticeNo()+"☆☆☆[bryeong]NoticeService_noticeform☆☆☆");
+			
+			NoticeFile noticefile = new NoticeFile();
+			noticefile.setNoticeNo(notice.getNoticeNo());
+			
+			String fileName = UUID.randomUUID().toString();
+			noticefile.setNoticeFileName(fileName);
+			
+			
+			String originName = ((MultipartFile) file).getOriginalFilename();// 원본이름
+			int p = originName.lastIndexOf(".");	// .의 위치
+			String fileExt = originName.substring(p+1);
+			noticefile.setNoticeFileExt(fileExt); // 뒤에서 .까지
+			noticefile.setNoticeFileSize(file.size());
+			noticeMapper.insertNoticefile(noticefile);
+			// 파일 저장 
+			File f = new File("E:\\A1\\voyage\\voyage\\src\\main\\file\\notice"+fileName+"."+fileExt); // 임시 경로 
 			if(noticeFile.getNoticeNo() == notice.getNoticeNo()) {		
 				noticeMapper.insertNoticefile(noticeFile);
 			}
+			try {
+				((MultipartFile) file).transferTo(f);
+			} catch (IllegalStateException | IOException e) { //IllegalStateException, IOException는 예외처리를 꼭 해야하는데 
+															//RuntimeException을 사용해 예외 처리가 필요없는 예외를 던져서 처리
+				// TODO Auto-generated catch block
+				e.printStackTrace();	
+				throw new RuntimeException();// @Transactional이 구동되기 위해선 예외가 발생해야함
+			}
 		}
+			
+
+
 		//delete(파일 삭제)
 		if(noticeMapper.deleteNoticeFile(noticeFile) != null) {
+			
 			if(noticeFile.getNoticeNo() == notice.getNoticeNo()) {		
 				noticeMapper.deleteNoticeFile(noticeFile);
 			}

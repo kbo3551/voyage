@@ -35,25 +35,43 @@
 		<!-- 메인(중앙) -->
 		<main class="content">
 			<div class="container-fluid p-0">
-	
 				<h1 class="h3 mb-3"><strong>관리자</strong> 공지사항</h1>
-				
-				<div class="row">
-					<div class="col-12 col-lg-8 col-xxl-9 d-flex">
-						<div class="card flex-fill">
-							<div class="card-header">
-								<h3 class="h3 mb-3"> ${noticeNo}. 공지사항 상세항목</h3>
+			</div>
+			<div class="row">
+				<div class="col-12 col-lg-8 col-xxl-9 d-flex">
+					<div class="card flex-fill">
+						<div class="card-header">
+							<h3 class="h3 mb-3"> ${noticeNo}. 공지사항 상세항목</h3>
+						</div>
+						<div class="card">
+							<div>
+								${noticeNo()}
 							</div>
-							<div class="card">
-								
-								
-								<a href="${pageContext.request.contextPath}/admin/modfiyNotice">수정</a>
-								<a href="${pageContext.request.contextPath}/admin/removeNotice">삭제</a>
+							<div>
+								${noticeTitle()}	
 							</div>
+							<div>
+								${noticeContent()}
+							</div>
+							<div>
+								${noticeFileNo()}
+							</div>
+							<div>
+								조회수 : ${noticeViewCnt()}
+							</div>
+							<div>
+								생성일 : ${craetDate()}
+							</div>
+							<div>
+								수정일 : ${updateDate()}
+							</div>
+							<a href="${pageContext.request.contextPath}/admin/modfiyNotice?noticeNo=${noticeNo}">수정</a>
+							<a href="${pageContext.request.contextPath}/admin/removeNotice?noticeNo=${noticeNo}">삭제</a>
 						</div>
 					</div>
 				</div>
 			</div>
+			
 		</main>
    
     <!-- adminFooter : 시작 -->
