@@ -11,17 +11,25 @@
         <script>
         	// 버튼 눌렀을 때, 이동 경로 설정
         	$(function(){
+        		// 변수 qnaNo 생성
+        		// qnaNo 값 저장
+        		var qnaNo = $('#qnaNo');
+        		// 변수 ck 생성
+        		// 관리자 답변 여부 체크 용도로 사용
+        		// false : 수정 가능 / true : 수정 불가
+        		var ck;
         		// Back 버튼 눌렀을 때
         		$('#goBackBtn').click(function(){
         			location.href = '/qnaList';
         		});
         		// Edit 버튼 눌렀을 때
         		$('#moveToModQBtn').click(function(){
-        			location.href = '/modifyQ';
+        			
+        			document.modifyQ.submit();
         		});
         		// Del 버튼 눌렀을 때
         		$('#moveToRemQBtn').click(function(){
-        			location.href = '/romoveQ';
+        			location.href = '/romoveQ?qnaNo=${qna.qnaNo}' + qnaNo;
         		});
         	});
         </script>
@@ -158,33 +166,29 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                    	<input class="form-control error" name="qnaTitle" id="qnaTitle">${qnaTitle}
+                                    	<input class="form-control error" name="qnaTitle" id="qnaTitle" value="${qna.qnaTitle}" readonly="readonly">
                                     </div>
-                                </div>
-                                <div>
                    					<div class="form-group">
-                                    	<input class="form-control error" name="qnaNo" id="qnaNo">${qna.qnaNo}
-                                    </div>
-                                	<select name="selectAdd" id="selectQnaCategoryAdd" value="${qna.qnaCategory}">
-	                                	<option value="예약문의">예약</option>
-	                                    <option value="결제문의">결제</option>
-	                                    <option value="기타">기타</option>
-									</select>
-									<div class="form-group">
-                                    	<input class="form-control error" name="updateDate" id="qnaUpdateDate">${qna.updateDate}
+                                    	<input class="form-control error" name="qnaNo" id="qnaNo" value="${qna.qnaNo}" readonly="readonly">
+                                   	</div>
+                                   	<div class="form-group">
+                                   		<input class="form-control error" name="qnaCategory" id="qnaCategory" value="${qna.qnaCategory}" readonly="readonly">
+                                   	</div>
+                                    <div class="form-group">
+                                    	<input class="form-control error" name="memberNickname" id="memberNickName" value="${qna.memberNickname}" readonly="readonly">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <textarea class="form-control w-100 error" name="qnaContent" id="qnaContent" cols="30" rows="9">${qna.qnaContent}</textarea>
+                                        <textarea class="form-control w-100 error" name="qnaContent" id="qnaContent" cols="30" rows="9" value="${qna.qnaContent}" readonly="readonly"></textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group mt-3">
                             	<!-- 원본 버튼 : Send  -->
                                 <button type="button" id="goBackBtn"class="button button-contactForm boxed-btn">Back</button>
-                            	<button type="button" id="moveToModQBtn" class="button button-contactForm boxed-btn">Edit</button>
-                            	<button type="button" id="moveToRemQBtn" class="button button-contactForm boxed-btn">Del</button>
+                                <a href="${pageContext.request.contextPath}/modifyQ?qnaNo=${qna.qnaNo}" type="button" class="button button-contactForm boxed-btn">edit</a>
+                            	<a href="${pageContext.request.contextPath}/removeQ?qnaNo=${qna.qnaNo}" type="button" class="button button-contactForm boxed-btn">Del</a>
                             </div>
                     </div>
                 </div>

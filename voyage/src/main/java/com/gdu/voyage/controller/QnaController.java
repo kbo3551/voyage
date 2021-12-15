@@ -41,8 +41,11 @@ public class QnaController {
 	@GetMapping("/getQnaOne") 
 	public String getQnaOne(Model model, int qnaNo) {
 		System.out.println("getQnaOneController() 실행");
+		log.debug(qnaNo + "★★★★★★★★★★★ [다원] qnaNo_Controller() debug");
 	    Qna qna = qnaService.getQnaOneAndAnswer(qnaNo);
+	    log.debug(qna + "★★★★★★★★★★★ [다원] qna_Controller() debug");
 	    model.addAttribute("qna", qna);
+	    
 		return "/templates_citylisting/getQnaOne";
 	}
 	// 질문 작성 get
@@ -53,9 +56,10 @@ public class QnaController {
 	}
 	// 질문 작성 post
 	@PostMapping("/addQ")
-	public String addQ(QnaForm qnaForm) throws Exception {
-		log.debug(qnaForm.toString());
-		qnaService.addQ(qnaForm);
+	public String addQ(QnaForm qnaForm, Qna qna, QnaImg qnaImg) throws Exception {
+		log.debug(qna.toString());
+		log.debug(qnaImg.toString());
+		qnaService.addQ(qnaForm, qna, qnaImg);
 		return "redirect:/qnaList?pageNo=1";
 	}
 	// 질문 수정
@@ -67,8 +71,8 @@ public class QnaController {
 		return "/templates_citylisting/modifyQ";
 	}
 	@PostMapping("/modifyQ")
-	public String modifyQ(Qna qna) {
-		qnaService.modifyQ(qna);
+	public String modifyQ(Qna qna, QnaImg qnaImg) {
+		qnaService.modifyQ(qna, qnaImg);
 		return "redirect:/getQnaOne?qnaNo=" + qna.getQnaNo();
 	}
 	// 질문 삭제

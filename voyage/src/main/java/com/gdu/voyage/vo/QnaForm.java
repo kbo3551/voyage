@@ -8,6 +8,7 @@ import lombok.Data;
 
 @Data
 public class QnaForm {
+	private String qnaCategory;
 	private String qnaContent;
 	private List<MultipartFile> qnaImg;
 }

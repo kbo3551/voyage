@@ -21,7 +21,12 @@ public interface QnaMapper {
 	int modifyQ(Qna qna);
 	// 질문 삭제
 	int removeQ(Qna qna);
-	// 이미지 파일 및 질문 추가
+	// 질문 추가
 	int addQ(Qna qna);
+	// 이미지 추가
 	int addQImg(QnaImg qnaImg);
+	// 이미지 수정
+	int modifyQImg(QnaImg qnaImg);
+	// 이미지 삭제
+	int removeQImg(QnaImg qnaImg);
 }
