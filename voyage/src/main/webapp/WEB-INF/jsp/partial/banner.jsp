@@ -141,6 +141,10 @@
        </div>
         <!-- Header End -->
     </header>
+    
+    <script type="text/javascript">
+	 
+    </script>
   
   	<script src="${pageContext.request.contextPath}/assets/js/hashtag.js"></script>
 </body>

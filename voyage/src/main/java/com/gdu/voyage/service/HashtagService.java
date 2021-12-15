@@ -1,5 +1,6 @@
 package com.gdu.voyage.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,10 +20,19 @@ import lombok.extern.slf4j.Slf4j;
 public class HashtagService {
    @Autowired HashtagMapper hashtagMapper;
    
-   public Map<String, Object> getHashtagList() {
+   // 해시태그 전체 조회
+   public Map<String, Object> getHashtagList(String hashtag) {
+	  log.debug("[degug] HashtagService.getHashtagList hashtag : " + hashtag);
       
-      List<Hashtag> hashtagList = hashtagMapper.selectHashtagList();
-      log.debug("[degug] hashtagList : " + hashtagList);
+	  List<Hashtag> hashtagList = new ArrayList<>();
+	  
+	  if(hashtag != null) {
+	      hashtagList = hashtagMapper.selectHashtagListByResult(hashtag);
+	      log.debug("[degug] hashtagList : " + hashtagList);
+	  } else {
+		  hashtagList = hashtagMapper.selectHashtagList();
+	      log.debug("[degug] hashtagList : " + hashtagList);
+	  }
       
       Map<String, Object> returnMap = new HashMap<>();
       returnMap.put("hashtagList", hashtagList);
@@ -30,6 +40,7 @@ public class HashtagService {
       return returnMap;
    }
    
+   // 해시태그 검색
    public List<Map<String, Object>> getHashtagListBySearch(String searchKeyword) {
       log.debug("[degug] searchKeyword : " + searchKeyword);
       
@@ -41,5 +52,17 @@ public class HashtagService {
       
       return hashtagList;
    }
-
+   
+//   // 해시태그 검색 결과 조회
+//   public Map<String, Object> getHashtagListByResult(String hashtag) {
+//	  log.debug("[degug] hashtag : " + hashtag);
+//	      
+//      List<Hashtag> hashtagList = hashtagMapper.selectHashtagListByResult(hashtag);
+//      log.debug("[degug] hashtagList : " + hashtagList);
+//      
+//      Map<String, Object> returnMap = new HashMap<>();
+//      returnMap.put("hashtagList", hashtagList);
+//      
+//      return returnMap;
+//   }
 }

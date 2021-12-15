@@ -1,24 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.HashtagMapper">
+
+	<!-- 해시태그 전체 조회 -->
    <select id="selectHashtagList" resultType="com.gdu.voyage.vo.Hashtag">
       SELECT
          hashtag_no hashtagNo, iden_no idenNo, table_name tableName, hashtag, create_date createDate
       FROM
          hashtag
+      GROUP BY 
+	  	 hashtag
       ORDER BY
-         create_date DESC
+         COUNT(hashtag) DESC
       LIMIT
          0, 50;
    </select>
    
-   <!-- $ !!!!!!!!!!!!!!!!!! -->
-   <select id="selectHashtagListBySearch" parameterType="String" resultType="java.util.Map">
+   <!-- 해시태그 검색 결과 조회 -->
+   <select id="selectHashtagListByResult" parameterType="String" resultType="com.gdu.voyage.vo.Hashtag">
       SELECT
          hashtag_no hashtagNo, iden_no idenNo, table_name tableName, hashtag, create_date createDate
       FROM
          hashtag
       WHERE
-         hashtag LIKE '%${searchKeyword}%';
+         hashtag = '${hashtag}';
    </select>
+   
+   <!-- $ !!!!!!!!!!!!!!!!!! -->
+   <!-- 해시태그 검색 -->
+   <select id="selectHashtagListBySearch" parameterType="String" resultType="java.util.Map">
+      SELECT DISTINCT
+         hashtag_no hashtagNo, iden_no idenNo, table_name tableName, hashtag, create_date createDate, COUNT(hashtag) cnt
+      FROM
+         hashtag
+      WHERE
+         hashtag LIKE '%${searchKeyword}%'
+	  GROUP BY 
+	  	 hashtag
+	  ORDER BY
+	  	 COUNT(hashtag) DESC
+	  LIMIT
+	  	 0, 10;
+   </select>
+   
 </mapper>
