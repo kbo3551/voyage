@@ -96,7 +96,7 @@
 			#{activityNo},
 			#{activityAddressPostalCode},
 			#{activityAddressZip},
-			#activityAddressDetail},
+			#{activityAddressDetail},
 			NOW(),
 			NOW()
 		)
