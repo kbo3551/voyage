@@ -45,12 +45,16 @@
 			accom_building_no,
 			accom_address_postal_code,
 			accom_address_zip,
-			accom_address_detail
+			accom_address_detail,
+			create_date,
+			update_date
 		) VALUES (
 			#{accomBuildingNo},
-			#{AccomAddressPotalCode},
-			#{AccomAddressZip},
-			#{AccomAddressDetail}
+			#{accomAddressPotalCode},
+			#{accomAddressZip},
+			#{accomAddressDetail},
+			NOW(),
+			NOW()
 		)
 	</insert>
 	
@@ -90,13 +94,17 @@
 			spot_no,
 			spot_address_postal_code,
 			spot_address_zip,
-			spot_adress_detail
+			spot_adress_detail,
+			create_date,
+			update_date
 		) VALUES (
 			'건물',
 			#{spotNo},
 			#{spotAddressPotalCode},
 			#{spotAddressZip},
-			#{spotAddressDetail}
+			#{spotAddressDetail},
+			NOW(),
+			NOW()
 		)
 	</insert>
 	
