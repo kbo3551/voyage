@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.gdu.voyage.service.AccomBuildingService;
 import com.gdu.voyage.vo.AccomBuilding;
 import com.gdu.voyage.vo.AccomBuildingForm;
+import com.gdu.voyage.vo.Qna;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,6 +28,7 @@ public class AccomController {
 	AccomBuildingService accomBuildingService;
 	private Integer currentPage = 1;
 
+	// 사업자
 	// 숙소_건물 등록
 	@GetMapping("/host/addAccomBuilding")
 	public String addAccomBuilding() {
@@ -50,6 +52,7 @@ public class AccomController {
 		return "redirect:/accomBuildingList";
 	}
 
+	// 관리자
 	// accomBuilding 목록 조회
 	@RequestMapping("/admin/accomBuildingList")
 	public String getAccomBuildingList(Model model, @RequestParam(value = "pageNo", defaultValue = "1") int pageNo) {
@@ -68,5 +71,7 @@ public class AccomController {
 		model.addAttribute("accomBuilding", accomBuilding);
 		return "/admin/accomBuildingOne";
 	}
-
+	
+	// accomBuilding state 승인여부 수정
+	
 }

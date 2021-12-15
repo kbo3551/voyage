@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.AccomBuildingMapper">
 
+	<!-- 사업자 -->
 	<!-- 숙소-건물 입력 : selectKey를 사용하여 숙소건물의 식별번호를 받아온뒤 나머지 추가 정보들도 함께 insert -->
 	<insert id="insertAccomBuilding" parameterType="com.gdu.voyage.vo.AccomBuilding">
 		INSERT INTO accom_building (
@@ -123,6 +124,8 @@
 		)
 	</insert>
 	
+	
+	<!-- 관리자 -->
 	<!-- 숙소 목록 출력 -->
 	<select id="selectAccomBuildingList" resultType="com.gdu.voyage.vo.AccomBuilding">
             SELECT
@@ -150,4 +153,14 @@
 			FROM accom_building
             WHERE accom_building_no = #{accom_building_no}
     </select>
+    
+    <!-- 등록된 숙소 승인여부 수정 -->
+    <update id="accomBuildingUpdate" parameterType="com.gdu.voyage.vo.AccomBuilding">
+    	UPDATE accom_building SET
+    		accom_building_state = #{accomBuildingState},
+    		accom_building_state_admin = #{accomBuildingStateAdmin}
+    		update_date = NOW()
+    	WHERE accom_building_no = #{accomBuildingNo}
+    	AND host_no = #{hostNo}
+    </update>
 </mapper>
