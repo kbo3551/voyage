@@ -117,17 +117,17 @@
                             <br>
    							 <div class="col-sm-5">
 	                                <div class="form-group">
-	                                  <input type="button" class="btn btn-primary");
+	                                  <input type="button" class="btn btn-primary")
 	                                  onclick="execDaumPostcode()" value="우편번호">
-	                                  <input type="number" class="form-control" id="postalCode" name="adminAddressPostalCode" placeholder="우편번호" value="${adminSession.adminAddress.adminAddressPostalCode}" readonly="readonly">
+	                                  <input type="number" class="form-control" id="adminAddressPostalCode" name="adminAddressPostalCode" placeholder="우편번호" value="${adminSession.adminAddress.adminAddressPostalCode}" readonly="readonly">
 	                             	</div>
 	                            	<div class="form-group">
 	                             		<br>  
-	                                  <input type="text" class="form-control" id="adminAddressZip" name="adminRoadAddress" placeholder="도로명주소" value="${adminSession.adminAddress.adminAddressZip}" readonly="readonly">
+	                                  <input type="text" class="form-control" id="adminRoadAddress" name="adminRoadAddress" placeholder="도로명주소" value="${adminSession.adminAddress.adminAddressZip}" readonly="readonly">
 	                            	</div>
 	                            	<div class="form-group">
 	                            	 	<br>     
-	                                  <input type="text" class="form-control" id="adminAddressDetail" name="adminDetailAddress" placeholder="상세주소" value="${adminSession.adminAddress.adminAddressDetail}">
+	                                  <input type="text" class="form-control" id="adminDetailAddress" name="adminDetailAddress" placeholder="상세주소" value="${adminSession.adminAddress.adminAddressDetail}">
 	                              </div>
 	                            </div>  
                             <div class="col-sm-5 col-sm-offset-1">
