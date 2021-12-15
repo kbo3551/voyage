@@ -30,7 +30,7 @@ public class AdminController {
 	public String postAdminUpdate(HttpServletRequest request, RedirectAttributes redirect, Model model) {
 		System.out.println("AdminController()_adminUpdate 실행");
 		// 값
-		Admin adminSession = (Admin) request.getAttribute(getAdminUpdate());
+		Admin adminSession = (Admin) request.getSession().getAttribute("adminSession");
 		
 		String adminId = adminSession.getAdminId();
 		String adminFirstName = request.getParameter("firstname");
@@ -38,13 +38,10 @@ public class AdminController {
 		String adminPhone = request.getParameter("phone");
 		String adminEmail = request.getParameter("email");
 		String adminActive = request.getParameter("adminactive");
-		String updateDate = request.getParameter("updatedate");
 		int adminAddressPostalCode = Integer.parseInt("postalCode");
 		String adminAddressZip = request.getParameter("roadAddress");
 		String adminAddressDetail = request.getParameter("detailAddress");
 		
-	    String createDate = request.getParameter("createDate");
-	    
 		Admin a = new Admin();
 		
 		a.setAdminId(adminId);
@@ -53,7 +50,6 @@ public class AdminController {
 		a.setAdminPhone(adminPhone);
 		a.setAdminEmail(adminEmail);
 		a.setAdminActive(adminActive);
-		a.setUpdateDate(updateDate);
 		log.debug("★★★[boryeong]AdminController★★★"+ a.toString());
 		// 업데이트 어드민
 		adminService.updateAdmin(a);
@@ -63,9 +59,6 @@ public class AdminController {
 	    aAddress.setAdminAddressPostalCode(adminAddressPostalCode);
 	    aAddress.setAdminAddressZip(adminAddressZip);
 	    aAddress.setAdminAddressDetail(adminAddressDetail);
-	    aAddress.setCreateDate(createDate);
-	    aAddress.setUpdateDate(updateDate);
-	    
 	    
 		log.debug("★★★[boryeong]AdminController★★★"+aAddress.toString());
 		// 주소 업데이트
