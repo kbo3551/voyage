@@ -16,6 +16,10 @@
 		$('#search__box').css('top','-300000%');
     });
 
+
+	       var donut = $('#hashtagSearchParam').val();
+	       console.log("donut : "+donut);
+
 	// 검색 제시어 이벤트
 	    function search(target) {
 	       
