@@ -64,7 +64,7 @@ public class AccomController {
 	@GetMapping("/admin/accomBuildingOne")
 	public String getAccomBuildingOne(Model model, int accomBuildingNo) {
 		System.out.println("accomBuildingOne 실행!!");
-		AccomBuilding accomBuilding = accomBuildingService.getAccomBuildingOne(accomBuildingNo);
+		List<AccomBuilding> accomBuilding = accomBuildingService.getAccomBuildingOne(accomBuildingNo);
 		model.addAttribute("accomBuilding", accomBuilding);
 		return "/admin/accomBuildingOne";
 	}

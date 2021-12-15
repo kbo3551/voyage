@@ -56,10 +56,11 @@
 											<th>Building State Admin</th>
 											<th>create Date</th>
 											<th>update Date</th>
+											<th>수정하기</th>
 										</tr>
 									</thead>
 									<tbody> 
-										<c:forEach items="${list}" var="Accom" >
+										<c:forEach items="${accomBuilding}" var="Accom" >
 											<tr>
 										        <td>${Accom.accomBuildingNo}</td>
 										        <td>${Accom.hostNo}</td>
@@ -70,6 +71,7 @@
 										        <td>${Accom.accomBuildingStateAdmin}</td>
 										        <td>${Accom.createDate}</td>
 										        <td>${Accom.updateDate}</td>
+										        <td><a href="/admin/accomBuildingUpdate">수정하기</a></td>
 										        </tr>
 									    </c:forEach>
 									</tbody>

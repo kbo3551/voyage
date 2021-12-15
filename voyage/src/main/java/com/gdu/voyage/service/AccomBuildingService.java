@@ -37,7 +37,7 @@ public class AccomBuildingService {
 			return accomBuildingMapper.selectAccomBuildingList(pageNo);
 		}
 	// 숙소 등록 목록 상세 조회 One
-			public AccomBuilding getAccomBuildingOne(int accomBuildingNo) {
+		public List<AccomBuilding> getAccomBuildingOne(int accomBuildingNo) {
 			log.debug(accomBuildingMapper.selectAccomBuildingOne(accomBuildingNo) + "***********[상훈] accomBuildingService One");
 			return accomBuildingMapper.selectAccomBuildingOne(accomBuildingNo);
 		}
