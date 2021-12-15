@@ -25,7 +25,7 @@ public class HashtagController {
 	  log.debug("[debug] map" + map);
       model.addAttribute("hashtagList", map.get("hashtagList"));
       
-      return "hashtag";
+      return "/hashtag";
    }
    
 //   @GetMapping("/hashtagResult")
