@@ -22,4 +22,126 @@
     	SELECT count(*)
     	FROM activity
     </select>
+    
+    <!-- 체험 입력 : selectKey를 사용하여 체험의 식별번호를 받아온뒤 나머지 추가 정보들도 함께 insert  -->
+    <insert id="insertActivity" parameterType="com.gdu.voyage.vo.Activity">
+		INSERT INTO activity (
+			host_no,
+			activity_name,
+			activity_open_date,
+			activity_close_date,
+			activity_price,
+			activity_open_hour,
+			activity_close_hour,
+			activity_max_t,
+			activity_max_p,
+			activity_description,
+			create_date,
+			update_date
+		) VALUES (
+			'3',
+			#{activityName},
+			#{activityOpenDate},
+			#{activityCloseDate},
+			#{activityPrice},
+			#{activityOpenHour},
+			#{activityCloseHour},
+			#{activityMaxT},
+			#{activityMaxP},
+			#{activityDescription},
+			NOW(),
+			NOW()
+		)
+		<selectKey keyProperty="activityNo" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<!-- 체험의 이미지 파일 입력 -->
+	<insert id="insertActivityImage" parameterType="com.gdu.voyage.vo.ActivityImage">
+		INSERT INTO activity_image(
+			activity_no,
+			activity_image_name,
+			activity_image_ext,
+			activity_image_size
+		) VALUES (
+			#{activityNo},
+			#{activityImageName},
+			#{activityImageExt},
+			#{activityImageSize}
+		)
+	</insert>
+	
+	<!-- 체험의 주소 입력 -->
+	<insert id="insertActivityAddress" parameterType="com.gdu.voyage.vo.ActivityAddress">
+		INSERT INTO activity_address (
+			activity_no,
+			activity_address_postal_code,
+			activity_address_zip,
+			activity_address_detail,
+			create_date,
+			update_date
+		) VALUES (
+			#{activityNo},
+			#{activityAddressPostalCode},
+			#{activityAddressZip},
+			#activityAddressDetail},
+			NOW(),
+			NOW()
+		)
+	</insert>
+	
+	<!-- 체험의 추천 장소 입력 -->
+	<insert id="insertActivitySpot" parameterType="com.gdu.voyage.vo.ActivitySpot">
+		INSERT INTO activity_spot (
+			activity_no,
+			activity_spot_name,
+			activity_spot_category,
+			activity_spot_description
+		) VALUES (
+			#{activityNo},
+			#{activitySpotName},
+			#{activitySpotCategory},
+			#{activitySpotDescription}
+		)
+		<selectKey keyProperty="activitySpotNo" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<!-- 체험 추천장소의 주소 입력 -->
+	<insert id="insertActivitySpotAddress" parameterType="com.gdu.voyage.vo.SpotAddress">
+		INSERT INTO spot_address (
+			spot_table,
+			spot_no,
+			spot_address_postal_code,
+			spot_address_zip,
+			spot_adress_detail,
+			create_date,
+			update_date
+		) VALUES (
+			'체험',
+			#{spotNo},
+			#{spotAddressPotalCode},
+			#{spotAddressZip},
+			#{spotAddressDetail},
+			NOW(),
+			NOW()
+		)
+	</insert>
+	
+	<!-- 체험의 해시태그 입력 -->
+	<insert id="insertActivityHashtag" parameterType="com.gdu.voyage.vo.Hashtag">
+		INSERT INTO hashtag (
+			iden_no,
+			table_name,
+			hashtag,
+			create_date
+		) VALUES (
+			#{idenNo},
+			#{tableName},
+			#{hashtag},
+			NOW()
+		)
+	</insert>
 </mapper>
