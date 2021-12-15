@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,8 +28,6 @@ import lombok.extern.slf4j.Slf4j;
 public class ActivityService {
 	@Autowired
 	private ActivityMapper activityMapper;
-	@Autowired
-	private HttpServletRequest request;
 
 	// 숙소 등록 목록 조회
 	public List<Activity> getActivityList(int pageNo) {
@@ -64,7 +60,7 @@ public class ActivityService {
 	}
 	
 	// 체험 입력
-	public void addActivity(ActivityForm activityForm) {
+	public void addActivity(ActivityForm activityForm, String realPath) {
 		// 매개변수 디버깅 //activityForm  --> 숙소-건물정보 + 이미지 + 시설 + 추천장소 + 해시태그
 		log.debug("☆[지혜]service☆ activityForm : " + activityForm.toString());
 		
@@ -100,7 +96,6 @@ public class ActivityService {
 				activityMapper.insertActivityImage(activityImage);
 				
 				// 2-2) 이미지 파일을 저장
-				String realPath = request.getServletContext().getRealPath("resources/image/activity//");
 				File f = new File(realPath+filename+"."+ext);
 				try {
 					i.transferTo(f);
