@@ -89,10 +89,10 @@
 		                            <h2>Sign up</h2> 
 		                            <br>
 		                            <c:choose>
-		                            	<c:when test="${param.duplication == 'id'}">
+		                            	<c:when test="${duplication == 'id'}">
 		                            		<p style="color: red; font-weight: bold;">사용할 수 없는 ID입니다.</p>
 		                            	</c:when>
-		                            	<c:when test="${param.duplication == 'nickname'}">
+		                            	<c:when test="${duplication == 'nickname'}">
 		                            		<p style="color: red; font-weight: bold;">이미 사용중인 닉네임입니다.</p>
 		                            	</c:when>
 		                            	<c:otherwise>

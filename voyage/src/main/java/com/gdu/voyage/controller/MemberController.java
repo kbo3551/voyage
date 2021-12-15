@@ -41,7 +41,6 @@ public class MemberController {
 		
 	    // 방어코드
 		int updatePwCheck = Integer.parseInt(request.getParameter("updatePwCheck"));
-		log.trace("aaaaaaaaaaaaaaaaaaaaaaaaaa"+updatePwCheck);
 		if(updatePwCheck != 1) {
 			return "redirect:/login";
 		}
@@ -84,6 +83,11 @@ public class MemberController {
 		String memberNickname = request.getParameter("nickname");
 		String route = request.getParameter("route");
 		
+		log.trace("aaaaaaaaaaaaaa"+memberId);
+		log.trace("aaaaaaaaaaaaaa"+memberPw);
+    	log.trace("aaaaaaaaaaaaaa"+memberNickname);
+    	log.trace("aaaaaaaaaaaaaa"+route);
+		
 		// 중복체크를 위해 아이디는 공백으로 둠
 		Member m = new Member();
 		m.setMemberId("");
@@ -93,8 +97,12 @@ public class MemberController {
 		// 중복체크
 	    String duplCheck = memberService.duplMemberCheck(m);
 	    if(duplCheck.equals("닉네임중복")) {
-	    	redirect.addFlashAttribute("m",m);
-	    	return "redirect:/member/updateNickname?failed=true&route="+route;
+	    	// 객체값을 넘기기 위해 중복이더라도 아이디를 추가
+	    	request.setAttribute("password", memberPw);
+	    	request.setAttribute("nickname", memberNickname);
+	    	request.setAttribute("route", route);
+	    	redirect.addFlashAttribute("failed", true);
+	    	return "redirect:/member/updateNickname";
 	    }
 	    
 	    // 중복체크 후 아이디 셋팅
@@ -155,7 +163,8 @@ public class MemberController {
 		Member reLoginMember = loginService.login(m);
 		if(reLoginMember == null) {
 			model.addAttribute("route", route);
-	    	return "redirect:/member/pwCheck?failed=true&route="+route;
+	    	redirect.addFlashAttribute("failed",true);
+	    	return "redirect:/member/pwCheck?route="+route;
 	    }
 		
 		if(route.equals("1")) {
@@ -295,11 +304,13 @@ public class MemberController {
 	    String duplCheck = memberService.duplMemberCheck(m);
 	    if(duplCheck.equals("아이디중복")) {
 	    	redirect.addFlashAttribute("member",m);
-	    	return "redirect:addMember?duplication=id";
+	    	redirect.addFlashAttribute("duplication","id");
+	    	return "redirect:addMember";
 	    }
 	    if(duplCheck.equals("닉네임중복")) {
 	    	redirect.addFlashAttribute("member",m);
-	    	return "redirect:addMember?duplication=nickname";
+	    	redirect.addFlashAttribute("duplication","nickname");
+	    	return "redirect:addMember";
 	    }
 	    
 	    // 멤버 추가
