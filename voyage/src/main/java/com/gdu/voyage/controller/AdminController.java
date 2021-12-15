@@ -38,9 +38,9 @@ public class AdminController {
 		String adminPhone = request.getParameter("phone");
 		String adminEmail = request.getParameter("email");
 		String adminActive = request.getParameter("adminactive");
-		int adminAddressPostalCode = Integer.parseInt("postalCode");
-		String adminAddressZip = request.getParameter("roadAddress");
-		String adminAddressDetail = request.getParameter("detailAddress");
+		int adminAddressPostalCode = Integer.parseInt(request.getParameter("adminAddressPostalCode"));
+		String adminAddressZip = request.getParameter("adminRoadAddress");
+		String adminAddressDetail = request.getParameter("adminDetailAddress");
 		
 		Admin a = new Admin();
 		
@@ -67,7 +67,7 @@ public class AdminController {
 	    request.getSession().invalidate();
 	    
 	    
-		return "admin/adminUpdate";
+		return "/login";
 	}
 		
 	// 어드민 회원가입

@@ -2,6 +2,8 @@ package com.gdu.voyage.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.ActivityService;
-import com.gdu.voyage.vo.AccomBuilding;
 import com.gdu.voyage.vo.Activity;
 import com.gdu.voyage.vo.ActivityForm;
 
@@ -49,12 +50,18 @@ public class ActivityController {
 	}
 
 	@PostMapping("/host/addActivity")
-	public String addActivity(ActivityForm activityForm) {
+	public String addActivity(ActivityForm activityForm, HttpServletRequest request) {
 		log.debug("ActivityController 실행");
 
 		// 참조타입 객체를 log.debug로 출력할 때는 toString()으로 출력함
 		log.debug("★[지혜]controller★ activityForm : " + activityForm.toString());
-		activityService.addActivity(activityForm);
+		
+		// 파일 저장 시, 절대경로를 알기 위해 HttpServletRequest를 사용해서 realPath를 잡아준 뒤 변수에 저장함
+		String realPath = request.getServletContext().getRealPath("resources/image/activity//");
+		
+		// accomBuildingForm과 realPath를 매개변수로 하여 같이 service에 전달
+		activityService.addActivity(activityForm ,realPath);
+		
 		return "redirect:/activityList";
 	}
 }
