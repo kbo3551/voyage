@@ -151,7 +151,7 @@
                              	<hr>
                                  <div class="form-group">
                                      <label>Description</label>
-                                     <textarea rows="5" cols="80" id="description" name="description" placeholder="자기소개" readonly="readonly">${loginMember.memberDescription }</textarea>
+                                     <textarea rows="5" style="width: 78.7%" id="description" name="description" placeholder="자기소개" readonly="readonly">${loginMember.memberDescription }</textarea>
                                  </div>
                             	</div>
                         	</div>
