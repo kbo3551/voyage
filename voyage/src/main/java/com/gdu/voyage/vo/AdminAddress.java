@@ -8,4 +8,6 @@ public class AdminAddress {
 	private int adminAddressPostalCode;
 	private String adminAddressZip;
 	private String adminAddressDetail;
+	private String createDate;
+	private String updateDate;
 }

@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -25,19 +26,63 @@ public class AdminController {
 		System.out.println("AdminController()_adminUpdate 실행");
 		return "admin/adminUpdate";
 	}
-	
-	// 어드민 주소 정보 수정
-	@GetMapping("/admin/adminAddressUpdate")
-	public String getAdminAddressUpdate() {
+	@PostMapping("/admin/adminUpdate")
+	public String postAdminUpdate(HttpServletRequest request, RedirectAttributes redirect, Model model) {
 		System.out.println("AdminController()_adminUpdate 실행");
-		return "admin/adminAddressUpdate";
+		// 값
+		Admin adminSession = (Admin) request.getAttribute(getAdminUpdate());
+		
+		String adminId = adminSession.getAdminId();
+		String adminFirstName = request.getParameter("firstname");
+		String adminLastName = request.getParameter("lastname");
+		String adminPhone = request.getParameter("phone");
+		String adminEmail = request.getParameter("email");
+		String adminActive = request.getParameter("adminactive");
+		String updateDate = request.getParameter("updatedate");
+		int adminAddressPostalCode = Integer.parseInt("postalCode");
+		String adminAddressZip = request.getParameter("roadAddress");
+		String adminAddressDetail = request.getParameter("detailAddress");
+		
+	    String createDate = request.getParameter("createDate");
+	    
+		Admin a = new Admin();
+		
+		a.setAdminId(adminId);
+		a.setAdminFirstName(adminFirstName);
+		a.setAdminLastName(adminLastName);
+		a.setAdminPhone(adminPhone);
+		a.setAdminEmail(adminEmail);
+		a.setAdminActive(adminActive);
+		a.setUpdateDate(updateDate);
+		log.debug("★★★[boryeong]AdminController★★★"+ a.toString());
+		// 업데이트 어드민
+		adminService.updateAdmin(a);
+		 // 주소 객체
+	    AdminAddress aAddress = new AdminAddress();
+	    aAddress.setAdminId(adminId);
+	    aAddress.setAdminAddressPostalCode(adminAddressPostalCode);
+	    aAddress.setAdminAddressZip(adminAddressZip);
+	    aAddress.setAdminAddressDetail(adminAddressDetail);
+	    aAddress.setCreateDate(createDate);
+	    aAddress.setUpdateDate(updateDate);
+	    
+	    
+		log.debug("★★★[boryeong]AdminController★★★"+aAddress.toString());
+		// 주소 업데이트
+		adminService.updateAdminAddress(aAddress);
+		// 로그아웃
+	    request.getSession().invalidate();
+	    
+	    
+		return "admin/adminUpdate";
 	}
+		
+	// 어드민 회원가입
 	@GetMapping("/addAdmin")
 	public String getAddAdmin() {
 		System.out.println("AdminController() 실행");
 		return "addAdmin";
 	}
-	// 어드민 회원가입
 	@PostMapping("/addAdmin")
 	public String postAddAdmin(HttpServletRequest request, RedirectAttributes redirect) {
 		System.out.println("AdminController() 실행");
@@ -50,6 +95,8 @@ public class AdminController {
 	    int adminAddressPostalCode = Integer.parseInt(request.getParameter("postalCode"));
 	    String adminAddressZip = request.getParameter("roadAddress");
 	    String adminAddressDetail = request.getParameter("detailAddress");
+	    String createDate = request.getParameter("createDate");
+	    String updateDate = request.getParameter("updateDate");
 		
 	    // admin 객체
 	    Admin a = new Admin();
@@ -71,6 +118,8 @@ public class AdminController {
 	    aAddress.setAdminAddressPostalCode(adminAddressPostalCode);
 	    aAddress.setAdminAddressZip(adminAddressZip);
 	    aAddress.setAdminAddressDetail(adminAddressDetail);
+	    aAddress.setCreateDate(createDate);
+	    aAddress.setUpdateDate(updateDate);
 	    
 	    log.debug("★★★[boryeong]AdminController★★★"+aAddress.toString());
 	    
