@@ -158,9 +158,9 @@
 														<input type="button" class="btn-sm" style="width:130px; color:white; background: #ff3d1c; border-radius: 30px;
     													color: #fff; font-weight: 500;" onclick="execDaumPostcode()" value="우편번호">
 													</h4>
-		                                    		<input type="number" class="form-control" id="postalCode" name="AccomAddress.accomAddressPotalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" readonly="readonly" style="height:34px;">
-													<input type="text" class="form-control" id="roadAddress" name="AccomAddress.accomAddressZip" placeholder="도로명주소가 입력됩니다." readonly="readonly" style="height:34px;">
-													<input type="text" class="form-control" id="prdAddressDetail" name="AccomAddress.accomAddressDetail" placeholder="상세주소" style="height:34px;">
+		                                    		<input type="number" class="form-control" id="postalCode" name="accomAddress.accomAddressPotalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" readonly="readonly" style="height:34px;">
+													<input type="text" class="form-control" id="roadAddress" name="accomAddress.accomAddressZip" placeholder="도로명주소가 입력됩니다." readonly="readonly" style="height:34px;">
+													<input type="text" class="form-control" id="prdAddressDetail" name="accomAddress.accomAddressDetail" placeholder="상세주소" style="height:34px;">
 												</div>
 											</div>
 											
