@@ -92,7 +92,7 @@
                                 </h2>
                                 <hr>
                             </div>
-              	<form name="AdminUpdate" action="${pageContext.request.contextPath}/adminUpdate" method="post">
+              	<form name="AdminUpdate" action="${pageContext.request.contextPath}/admin/adminUpdate" method="post">
                             <div class="clear" style="margin-left: 8%;">
                                 <div class="col-sm-3 padding-top-25">
 
@@ -119,15 +119,15 @@
 	                                <div class="form-group">
 	                                  <input type="button" class="btn btn-primary");
 	                                  onclick="execDaumPostcode()" value="우편번호">
-	                                  <input type="number" class="form-control" id="postalCode" name="postalCode" placeholder="우편번호" value="${adminSession.adminAddress.adminAddressPostalCode}" readonly="readonly">
+	                                  <input type="number" class="form-control" id="postalCode" name="adminAddressPostalCode" placeholder="우편번호" value="${adminSession.adminAddress.adminAddressPostalCode}" readonly="readonly">
 	                             	</div>
 	                            	<div class="form-group">
 	                             		<br>  
-	                                  <input type="text" class="form-control" id="roadAddress" name="roadAddress" placeholder="도로명주소" value="${adminSession.adminAddress.adminAddressZip}" readonly="readonly">
+	                                  <input type="text" class="form-control" id="adminAddressZip" name="adminRoadAddress" placeholder="도로명주소" value="${adminSession.adminAddress.adminAddressZip}" readonly="readonly">
 	                            	</div>
 	                            	<div class="form-group">
 	                            	 	<br>     
-	                                  <input type="text" class="form-control" id="detailAddress" name="detailAddress" placeholder="상세주소" value="${adminSession.adminAddress.adminAddressDetail}">
+	                                  <input type="text" class="form-control" id="adminAddressDetail" name="adminDetailAddress" placeholder="상세주소" value="${adminSession.adminAddress.adminAddressDetail}">
 	                              </div>
 	                            </div>  
                             <div class="col-sm-5 col-sm-offset-1">
@@ -167,8 +167,8 @@
 			                                        }
 	
 			                                        // 우편번호와 주소 정보를 해당 필드에 넣는다.
-			                                        document.getElementById('postalCode').value = data.zonecode;
-			                                        document.getElementById('roadAddress').value = roadAddr;
+			                                        document.getElementById('adminAddressPostalCode').value = data.zonecode;
+			                                        document.getElementById('adminRoadAddress').value = roadAddr;
 			                                    }
 			                                }).open();
 			                            }
