@@ -25,7 +25,7 @@ public class NoticeController {
 	private final int ROW_PER_PAGE = 10;
 	
 	//noticeList
-	@GetMapping("/noticeList")
+	@GetMapping("/adminNoticeList")
 	public String notcieList(Model model,
 								@RequestParam(defaultValue = "1") int currentPage) {
 		
@@ -35,10 +35,10 @@ public class NoticeController {
 		model.addAttribute("noticeList", noticeMap.get("noticeList"));
 		model.addAttribute("lastPage", noticeMap.get("lastPage"));
 		
-		return "noticeList";
+		return "adminNoticeList";
 	}
 	//noticeOne
-	@GetMapping("/noticeOne")
+	@GetMapping("/adminNoticeOne")
 	public String noticeOne(Model model, int noticeNo) {
 		log.debug(noticeNo+"★★★ [DoHun] Notice One Controller 실행, noticeNo ★★★");
 		Notice notice = noticeService.getNoticeOne(noticeNo);
@@ -47,7 +47,7 @@ public class NoticeController {
 		model.addAttribute("notice", notice);
 		log.debug(model+"★★★ [DoHun] Notice One Controller 실행, notice model ★★★");
 		
-		return "noticeOne";
+		return "adminNoticeOne";
 	}
 	//insert
 	@GetMapping("/addNotice")

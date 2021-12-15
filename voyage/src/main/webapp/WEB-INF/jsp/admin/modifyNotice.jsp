@@ -40,7 +40,7 @@
 				<h1 class="h3 mb-3"><strong>관리자</strong> 공지사항</h1>
 				
 				<!-- 입력공간 -->
-				<form method="post" action="${pageContext.request.contextPath}/admin/addNotice">
+				<form method="post" action="${pageContext.request.contextPath}/admin/modifyNotice">
 					<!-- 공지 제목 -->
 					<div class="row">
 						<div class="card">
@@ -48,7 +48,7 @@
 								<h5 class="card-title mb-0">공지사항 제목</h5>
 							</div>
 							<div class="card-body">
-								<input type="text" class="form-control" placeholder="제목" name="noticeTitle">
+								<input type="text" class="form-control" placeholder="제목" name="noticeTitle" value="noticeTitle">
 							</div>
 						</div>
 					</div>
@@ -60,17 +60,30 @@
 							</div>
 							<div class="card-body">
 								<select class="form-select mb-3" name="noticeTop">
-									<!-- 상단 비고정 -->
-									<option selected value="N">일반</option>
-									<!-- 상단 고정 -->
-									<option value="Y">중요</option>
+									<!-- 게시글 수정 전 고정여부에 따른 option -->
+									<c:choose>
+										<c:when test="${noticeTop eq 'Y'}">
+											<!-- 상단 비고정 -->
+											<option value="N">일반</option>
+											<!-- 상단 고정 -->
+											<option selected value="Y">중요</option>
+										</c:when>
+										<c:otherwise>
+											<!-- 상단 비고정 -->
+											<option selected value="N">일반</option>
+											<!-- 상단 고정 -->
+											<option value="Y">중요</option>
+										</c:otherwise>
+									</c:choose>
 								</select>
 							</div>
 						</div>
 					</div>
-					<!-- 사진 -->
-					<input type="file" name="noticeFile">			
+					<!-- 사진 -->		
 					<c:forEach items="${NoticeFileList}" var="noticeFileList">
+						<c:if test="${noticeFile ne null}">
+							<input type="file" name="noticeFile" value="${noticeFileList}">
+						</c:if>
 						<c:if test="${noticeFile eq null}">
 							<input type="file" name="noticeFile">
 						</c:if>
@@ -82,12 +95,12 @@
 								<h5 class="card-title mb-0">내용</h5>
 							</div>
 							<div class="card-body">
-								<textarea class="form-control" rows="3" placeholder="내용입력" name="noticeContent"></textarea>
+								<textarea class="form-control" rows="3" placeholder="내용입력" name="noticeContent">${noticeContent}</textarea>
 							</div>
 						</div>
 					</div>
-					<!-- 공지 Insert -->
-					<button class="btn btn-primary btn-lg" type="submit">입력</button>
+					<!-- 공지 Update -->
+					<button class="btn btn-primary btn-lg" type="submit">수정</button>
 				</form>
 			</div>
 		</main>
@@ -102,8 +115,7 @@
 	
 	
 	
-	
-	<!-- 원본차트 가짜데이터 -->
+	<!-- 원본 차트 가짜데이터 -->
 	<script>
 	document.addEventListener("DOMContentLoaded", function() {
 		var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");

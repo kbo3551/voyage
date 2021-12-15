@@ -32,20 +32,30 @@
     	<c:import url="partial\\adminBanner.jsp"/>
     <!-- adminKit : 끝 -->
 		
-		
 		<!-- 메인(중앙) -->
 		<main class="content">
 			<div class="container-fluid p-0">
 	
 				<h1 class="h3 mb-3"><strong>관리자</strong> 공지사항</h1>
-				<h3 class="h3 mb-3">공지사항</h3>
-				<table>
-					<c:forEach items="" var="">
-					</c:forEach>
-				</table>
-	
+				
+				<div class="row">
+					<div class="col-12 col-lg-8 col-xxl-9 d-flex">
+						<div class="card flex-fill">
+							<div class="card-header">
+								<h3 class="h3 mb-3"> ${noticeNo}. 공지사항 상세항목</h3>
+							</div>
+							<div class="card">
+								
+								
+								<a href="${pageContext.request.contextPath}/admin/modfiyNotice">수정</a>
+								<a href="${pageContext.request.contextPath}/admin/removeNotice">삭제</a>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</main>
+   
     <!-- adminFooter : 시작 -->
     	<c:import url="partial\\adminFooter.jsp"/>
     <!-- adminFooter : 끝 -->
@@ -54,7 +64,10 @@
 	</div>
 	
 	<script src="${pageContext.request.contextPath}/admin/js/app.js"></script>
-	 
+	
+	
+	
+	<!-- 원본 차트 가짜데이터 --> 
 	<script>
 	document.addEventListener("DOMContentLoaded", function() {
 		var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");

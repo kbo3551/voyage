@@ -27,11 +27,10 @@
     <!-- adminKit : 시작 -->
     	<c:import url="partial\\adminKit.jsp"/>
     <!-- adminKit : 끝 -->
-	
 	<div class="main">
-    <!-- adminBanner : 시작 -->
+    <!-- adminKit : 시작 -->
     	<c:import url="partial\\adminBanner.jsp"/>
-    <!-- adminBanner : 끝 -->
+    <!-- adminKit : 끝 -->
 		
 		<!-- 메인(중앙) -->
 		<main class="content">
@@ -39,62 +38,49 @@
 	
 				<h1 class="h3 mb-3"><strong>관리자</strong> 공지사항</h1>
 				
-				<!-- 입력공간 -->
-				<form method="post" action="${pageContext.request.contextPath}/admin/addNotice">
-					<!-- 공지 제목 -->
-					<div class="row">
-						<div class="card">
+				<div class="row">
+					<div class="col-12 col-lg-8 col-xxl-9 d-flex">
+						<div class="card flex-fill">
 							<div class="card-header">
-								<h5 class="card-title mb-0">공지사항 제목</h5>
+								<h3 class="h3 mb-3">공지사항 리스트</h3>
 							</div>
-							<div class="card-body">
-								<input type="text" class="form-control" placeholder="제목" name="noticeTitle">
-							</div>
+							<table class="table table-hover my-0">
+								<thead>
+									<tr>
+										<th>번호</th>
+										<th>관리자 명</th>
+										<th>제목</th>
+										<th>조회수</th>
+										<th>생성일</th>
+										<th>수정일</th>
+										<th>상세보기</th>
+									</tr>
+								</thead>
+								<tbody> 
+									<c:forEach items="${noticeList}" var="n" >
+										<tr>
+									        <td>${n.noticeNo}</td>
+									        <td>${n.adminId}</td>
+									        <td>${n.noticeTitle}</td>
+									        <td>${n.noticeViewCnt}</td>
+									        <td>${n.createDate}</td>
+									        <td>${n.updateDate}</td>
+									        <td><a href="${pageContext.request.contextPath}/admin/adminNoticceOne?noticeNo=${n.noticeNo}" class="btn">상세 보기</a></td>
+									    </tr>
+								    </c:forEach>
+								</tbody>
+							</table>
+							
 						</div>
 					</div>
-					<!-- 상단고정(공지중요성)체크 -->
-					<div class="col-12 col-lg-6">
-						<div class="card">
-							<div class="card-header">
-								<h5 class="card-title mb-0">상단고정 여부</h5>
-							</div>
-							<div class="card-body">
-								<select class="form-select mb-3" name="noticeTop">
-									<!-- 상단 비고정 -->
-									<option selected value="N">일반</option>
-									<!-- 상단 고정 -->
-									<option value="Y">중요</option>
-								</select>
-							</div>
-						</div>
-					</div>
-					<!-- 사진 -->
-					<input type="file" name="noticeFile">			
-					<c:forEach items="${NoticeFileList}" var="noticeFileList">
-						<c:if test="${noticeFile eq null}">
-							<input type="file" name="noticeFile">
-						</c:if>
-					</c:forEach>					
-					<!-- 공지내용 -->
-					<div class="row">
-						<div class="card">
-							<div class="card-header">
-								<h5 class="card-title mb-0">내용</h5>
-							</div>
-							<div class="card-body">
-								<textarea class="form-control" rows="3" placeholder="내용입력" name="noticeContent"></textarea>
-							</div>
-						</div>
-					</div>
-					<!-- 공지 Insert -->
-					<button class="btn btn-primary btn-lg" type="submit">입력</button>
-				</form>
+				</div>
 			</div>
 		</main>
-			
+   
     <!-- adminFooter : 시작 -->
     	<c:import url="partial\\adminFooter.jsp"/>
     <!-- adminFooter : 끝 -->
+
 		</div>
 	</div>
 	
@@ -102,8 +88,7 @@
 	
 	
 	
-	
-	<!-- 원본차트 가짜데이터 -->
+	<!-- 원본 차트 가짜데이터 --> 
 	<script>
 	document.addEventListener("DOMContentLoaded", function() {
 		var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
@@ -326,7 +311,7 @@
 	});
 	
 	</script>
- 
+	
 </body>
 
 </html>
