@@ -8,5 +8,5 @@ public class ActivityImage {
 	private int activityNo;
 	private String activityImageName;
 	private String activityImageExt;
-	private String activityImageSize;
+	private long activityImageSize;
 }

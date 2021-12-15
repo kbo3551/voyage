@@ -96,7 +96,7 @@ public class AccomBuildingService {
 			}
 		}
 		
-		// 3) 숙소-건물의 주소 입력 : prdAddress 입력
+		// 3) 숙소-건물의 주소 입력 : accomAddress 입력
 		AccomAddress accomAddress = accomBuildingForm.getAccomAddress();
 		accomAddress.setAccomBuildingNo(accomBuilding.getAccomBuildingNo());
 		log.debug("☆[지혜]service☆ accomAddress : " + accomAddress);
