@@ -166,21 +166,21 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                    	<input class="form-control error" name="qnaTitle" id="qnaTitle" value="${qna.qnaTitle}" readonly="readonly">
+                                    	Title : <input class="form-control error" name="qnaTitle" id="qnaTitle" value="${qna.qnaTitle}" readonly="readonly">
                                     </div>
                    					<div class="form-group">
-                                    	<input class="form-control error" name="qnaNo" id="qnaNo" value="${qna.qnaNo}" readonly="readonly">
+                                    	No : <input class="form-control error" name="qnaNo" id="qnaNo" value="${qna.qnaNo}" readonly="readonly">
                                    	</div>
                                    	<div class="form-group">
-                                   		<input class="form-control error" name="qnaCategory" id="qnaCategory" value="${qna.qnaCategory}" readonly="readonly">
+                                   		Category : <input class="form-control error" name="qnaCategory" id="qnaCategory" value="${qna.qnaCategory}" readonly="readonly">
                                    	</div>
                                     <div class="form-group">
-                                    	<input class="form-control error" name="memberNickname" id="memberNickName" value="${qna.memberNickname}" readonly="readonly">
+                                    	Nickname : <input class="form-control error" name="memberNickname" id="memberNickName" value="${qna.memberNickname}" readonly="readonly">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <textarea class="form-control w-100 error" name="qnaContent" id="qnaContent" cols="30" rows="9" value="${qna.qnaContent}" readonly="readonly"></textarea>
+                                        Content : <textarea class="form-control w-100 error" name="qnaContent" id="qnaContentOne" cols="30" rows="9" readonly="readonly">${qna.qnaContent}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -192,6 +192,26 @@
                             </div>
                     </div>
                 </div>
+                <!-- Answer Here -->
+              	<div class="row justify-content-center">
+                	<div class="col-lg-8">
+                    	<h3 class="mb-40">Answer</h3>
+                    		<div class="row">
+                    			<div class="col-sm-6">
+                                    <div class="form-group">
+                                    	Date : <input class="form-control error" name="createDate" id="answerCreateDate" type="text" value="${qnaAnswer.createDate}"readonly="readonly">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                	<div class="form-group">
+                                        Content : <textarea class="form-control w-100 error" name="answerContent" id="answerContent" cols="30" rows="9" readonly="readonly">${qnaAnswer.answerContent}</textarea>
+                                    </div>
+                                </div>
+                    		</div>
+                    	</div>
+                    </div>
+                    <!-- Answer End -->
+                
                 <!-- 다른 사용자들이 단 문의글로 이용할 예정... or 삭제? -->
                 <!-- listing Details Stat-->
                 <div class="listing-details-area">

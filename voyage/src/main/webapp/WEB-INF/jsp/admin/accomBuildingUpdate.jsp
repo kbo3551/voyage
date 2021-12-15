@@ -9,7 +9,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
-	<meta name="author" content="AdminKit">
 	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
@@ -25,64 +24,56 @@
 
 <body>
 	<div class="wrapper">
-    <!-- adminKit : 시작 -->
-    	<c:import url="partial\\adminKit.jsp"/>
-    <!-- adminKit : 끝 -->
 	<div class="main">
-    <!-- adminKit : 시작 -->
-    	<c:import url="partial\\\\adminBanner.jsp"/>
-    <!-- adminKit : 끝 -->
-	
 		<main class="content">
 			<div class="container-fluid p-0">
 	
-				<h1 class="h3 mb-3"><strong>체험 관리</strong></h1>
+				<h1 class="h3 mb-3"><strong>상세 보기</strong></h1>
 					<div class="row">
 						<div>
 							<div class="card flex-fill">
-							<div class="d-flex align-content-start flex-wrap">
 								<div class="card-header">
 	
-									<h5 class="card-title my-0">Latest Activity</h5>
+									<h5 class="card-title mb-0">Latest AccomBuilding</h5>
 								</div>
 								<table class="table table-hover my-0">
 									<thead>
 										<tr>
-											<th>Activity No</th>
-											<th>Activity Name</th>
-											<th>Activity OpenDate</th>
-											<th>Activity CloseDate</th>
-											<th>Activity Description</th>
-											<th>Create Date</th>
-											<th>Update Date</th>
-											<th>상세보기</th>
+											<th>Building No</th>
+											<th>Host No</th>
+											<th>Building Name</th>
+											<th>Building Description</th>
+											<th>Building Phone</th>
+											<th>Building State</th>
+											<th>Building State Admin</th>
+											<th>create Date</th>
+											<th>update Date</th>
+											<th>수정하기</th>
 										</tr>
 									</thead>
 									<tbody> 
-										<c:forEach items="${list}" var="Ac" >
+										<c:forEach items="${accomBuilding}" var="Accom" >
 											<tr>
-										        <td>${Ac.activityNo}</td>
-										        <td>${Ac.activityName}</td>
-										        <td>${Ac.activityOpenDate}</td>
-										        <td>${Ac.activityCloseDate}</td>
-										        <td>${Ac.activityDescription}</td>
-										        <td>${Ac.createDate}</td>
-										        <td>${Ac.updateDate}</td>
-										        <td><a href="${pageContext.request.contextPath}/admin/activityOne?activityNo=${Ac.activityNo}">상세보기</a></td>
-											</tr>
+										        <td>${Accom.accomBuildingNo}</td>
+										        <td>${Accom.hostNo}</td>
+										        <td>${Accom.accomBuildingName}</td>
+										        <td>${Accom.accomBuildingDescription}</td>
+										        <td>${Accom.accomBuildingPhone}</td>
+										        <td>${Accom.accomBuildingState}</td>
+										        <td>${Accom.accomBuildingStateAdmin}</td>
+										        <td>${Accom.createDate}</td>
+										        <td>${Accom.updateDate}</td>
+										        <td><a href="${pageContext.request.contextPath}/admin/accomBuildingUpdate">수정하기</a></td>
+										        </tr>
 									    </c:forEach>
 									</tbody>
 								</table>
-							</div>
+							
 							</div>
 						</div>
 					</div>
 				</div>
 			</main>
-	
-    <!-- adminFooter : 시작 -->
-    	<c:import url="partial\\\\adminFooter.jsp"/>
-    <!-- adminFooter : 끝 -->
 		</div>
 	</div>
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>

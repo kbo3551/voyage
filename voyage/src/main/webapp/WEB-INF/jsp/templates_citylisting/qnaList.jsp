@@ -217,11 +217,11 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="count mb-35">
-                                    <span>5432 Listings are available</span>
-                                    <div class="single-listing mb-30">
+                                    <span> + ${qnaTotalCount}개의 문의글이 존재합니다.</span>
                                     	<!-- 문의글을 작성하는 페이지 이동 버튼  -->
-                                    	<span><a href="/addQ" class="btn list-btn mt-20">Write</a></span>
-                                    </div>
+                                    	<div class="form-group mt-3">
+                                    		<a type="button" href="${pageContext.request.contextPath}/addQ" class="button button-contactForm boxed-btn">Write</a>
+                                    	</div>
                                 </div>
                             </div>
                         </div>

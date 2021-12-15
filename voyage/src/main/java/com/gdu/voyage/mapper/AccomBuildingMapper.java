@@ -13,6 +13,7 @@ import com.gdu.voyage.vo.AccomAddress;
 import com.gdu.voyage.vo.SpotAddress;
 @Mapper
 public interface AccomBuildingMapper {
+	// 사업자
 	// 숙소-건물 입력 : 숙소-건물정보 + 이미지 + 시설 + 추천장소 + 해시태그
 	int insertAccomBuilding(AccomBuilding accomBuilding);
 	int insertAccomBuildingImage(AccomBuildingImage accomBuidingImage);
@@ -22,11 +23,14 @@ public interface AccomBuildingMapper {
 	int insertAccomSpotAddress(SpotAddress spotAddress);
 	int insertAccomBuildingHashtag(Hashtag Hashtag);
 	
+	// 관리자
 	// 숙소 조회 list
 	List<AccomBuilding> selectAccomBuildingList(int pageNo);
 	int selectCountPage();
 	
-	// 숙소 조회 one
+	// 숙소 상세 조회 one
 	List<AccomBuilding> selectAccomBuildingOne(int accomBuildingNo);
 	
+	// 숙소 승인여부 수정
+	int accomBuildingUpdate(AccomBuilding accomBuilding);
 }
