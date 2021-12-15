@@ -1,25 +1,158 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.ActivityMapper">
-<!-- 등록된 체험을 불러옴 -->
+	<!-- 등록된 체험을 불러옴 -->
 	<select id="selectActivityList" resultType="com.gdu.voyage.vo.Activity">
             SELECT 
-            activity_no as ActivityNo,
-            activity_name as ActivityName,
-            activity_opendate as ActivityOpenDate,
-            activity_closedate as ActivityCloseDate,
-            activity_price as ActivityPrice,
-            activity_openhour as ActivityOpenHour,
-            activity_closedate as ActivityCloseHour,
-            activity_max_t as ActivityMaxT,
-            activity_description as ActivityDescription,
-            activity_max_p as ActivityMaxP,
+            activity_no as activityNo,
+            activity_name as activityName,
+            activity_open_date as activityOpenDate,
+            activity_close_date as activityCloseDate,
+            activity_description as activityDescription,
             create_date as createDate,
             update_date as updateDate
             FROM activity
     </select>
-    <select id="activityCnt" resultType="int">
-    	SELECT count(*)
-    	FROM activity
+    <!-- 체험번호에따른 체험 상세 목록 출력 -->
+    <select id="selectActivityOne" resultType="com.gdu.voyage.vo.Activity">
+            SELECT activity_no as activityNo,
+            host_no as HostNo,
+            activity_name as activityName,
+            activity_open_date as activityOpenDate,
+            activity_close_date as activityCloseDate,
+            activity_price as activityPrice,
+            activity_open_hour as activityOpenHour,
+            activity_close_hour as activityCloseHour,
+            activity_max_t as activityMaxT,
+            activity_max_p as activityMaxP,
+            activity_description as activityDescription,
+            activity_state as activityState,
+            activity_state_admin as activityStateAdmin,
+            create_date as createDate,
+            update_date as updateDate
+            FROM activity
+            WHERE activity_no = #{activity_no}
     </select>
+    
+    <!-- 체험 입력 : selectKey를 사용하여 체험의 식별번호를 받아온뒤 나머지 추가 정보들도 함께 insert  -->
+    <insert id="insertActivity" parameterType="com.gdu.voyage.vo.Activity">
+		INSERT INTO activity (
+			host_no,
+			activity_name,
+			activity_open_date,
+			activity_close_date,
+			activity_price,
+			activity_open_hour,
+			activity_close_hour,
+			activity_max_t,
+			activity_max_p,
+			activity_description,
+			create_date,
+			update_date
+		) VALUES (
+			'3',
+			#{activityName},
+			#{activityOpenDate},
+			#{activityCloseDate},
+			#{activityPrice},
+			#{activityOpenHour},
+			#{activityCloseHour},
+			#{activityMaxT},
+			#{activityMaxP},
+			#{activityDescription},
+			NOW(),
+			NOW()
+		)
+		<selectKey keyProperty="activityNo" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<!-- 체험의 이미지 파일 입력 -->
+	<insert id="insertActivityImage" parameterType="com.gdu.voyage.vo.ActivityImage">
+		INSERT INTO activity_image(
+			activity_no,
+			activity_image_name,
+			activity_image_ext,
+			activity_image_size
+		) VALUES (
+			#{activityNo},
+			#{activityImageName},
+			#{activityImageExt},
+			#{activityImageSize}
+		)
+	</insert>
+	
+	<!-- 체험의 주소 입력 -->
+	<insert id="insertActivityAddress" parameterType="com.gdu.voyage.vo.ActivityAddress">
+		INSERT INTO activity_address (
+			activity_no,
+			activity_address_postal_code,
+			activity_address_zip,
+			activity_address_detail,
+			create_date,
+			update_date
+		) VALUES (
+			#{activityNo},
+			#{activityAddressPostalCode},
+			#{activityAddressZip},
+			#{activityAddressDetail},
+			NOW(),
+			NOW()
+		)
+	</insert>
+	
+	<!-- 체험의 추천 장소 입력 -->
+	<insert id="insertActivitySpot" parameterType="com.gdu.voyage.vo.ActivitySpot">
+		INSERT INTO activity_spot (
+			activity_no,
+			activity_spot_name,
+			activity_spot_category,
+			activity_spot_description
+		) VALUES (
+			#{activityNo},
+			#{activitySpotName},
+			#{activitySpotCategory},
+			#{activitySpotDescription}
+		)
+		<selectKey keyProperty="activitySpotNo" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<!-- 체험 추천장소의 주소 입력 -->
+	<insert id="insertActivitySpotAddress" parameterType="com.gdu.voyage.vo.SpotAddress">
+		INSERT INTO spot_address (
+			spot_table,
+			spot_no,
+			spot_address_postal_code,
+			spot_address_zip,
+			spot_adress_detail,
+			create_date,
+			update_date
+		) VALUES (
+			'체험',
+			#{spotNo},
+			#{spotAddressPotalCode},
+			#{spotAddressZip},
+			#{spotAddressDetail},
+			NOW(),
+			NOW()
+		)
+	</insert>
+	
+	<!-- 체험의 해시태그 입력 -->
+	<insert id="insertActivityHashtag" parameterType="com.gdu.voyage.vo.Hashtag">
+		INSERT INTO hashtag (
+			iden_no,
+			table_name,
+			hashtag,
+			create_date
+		) VALUES (
+			#{idenNo},
+			#{tableName},
+			#{hashtag},
+			NOW()
+		)
+	</insert>
 </mapper>

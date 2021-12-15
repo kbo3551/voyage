@@ -19,11 +19,12 @@
    </div>
    <div class="center_wrap" style="padding-top: 100px;">
       <c:forEach items="${hashtagList }" var="hashtag" varStatus="status">
-         <a href="#?hashtag=${hashtag.hashtag }&id=hashtag${status.count}">
+         <a href="/hashtag?hashtag=${hashtag.hashtag }">
             <button type="submit" class="btn wow pulse fadeInDown animated" data-wow-delay="0.${status.count }s"
                   style="visibility: visible; animation-delay: 0.${status.count}s; animation-name: fadeInDown;"
                   id="hashtag${status.count}" >
-               #${hashtag.hashtag }
+               		#${hashtag.hashtag }<br>
+					${hashtag.tableName } - ${hashtag.idenNo }
             </button>
          </a>
       </c:forEach>

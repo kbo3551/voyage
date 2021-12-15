@@ -5,7 +5,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>VOYAGE | addAccomBuilding</title>
+		<title>VOYAGE | addActivity</title>
 		<meta name="description" content="GARO is a real-estate template">
 		<meta name="author" content="Kimarotec">
 	   	<meta name="keyword" content="html5, css, bootstrap, property, real-estate theme , bootstrap template">
@@ -81,11 +81,11 @@
 				<div class="wizard-container">
 	
 					<div class="wizard-card ct-wizard-orange" id="wizardProperty">
-						<form action="${pageContext.request.contextPath}/host/addAccomBuilding" method="post" enctype="multipart/form-data" id="accomBuildingForm">
+						<form action="${pageContext.request.contextPath}/host/addActivity" method="post" enctype="multipart/form-data" id="activityForm">
 							<div class="wizard-header">
 								<h3>
-									<b>Accommodation</b> _building<br>
-									<small>숙소-건물의 정보를 입력해주세요.</small>
+									<b>Activity</b><br>
+									<small>체험의 정보를 입력해주세요.</small>
 								</h3>
 							</div>
 	
@@ -105,41 +105,67 @@
 											<div class="picture-container" style="float:left; margin-left:20px;">
 												<div class="picture">
 													<img src="${pageContext.request.contextPath}/assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview" title="" />
-													<input type="file" name="accomBuildingImage" id="wizard-picture">
+													<input type="file" name="activityImage" id="wizard-picture">
 												</div>
 											</div>
 											<div class="picture-container" style="float:left; margin-left:20px;">
 												<div class="picture">
 													<img src="${pageContext.request.contextPath}/assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview2" title="" />
-													<input type="file" name="accomBuildingImage" id="wizard-picture2">
+													<input type="file" name="activityImage" id="wizard-picture2">
 												</div>
 											</div>
 											<div class="picture-container" style="float:left; margin-left:20px;">
 												<div class="picture">
 													<img src="${pageContext.request.contextPath}/assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview3" title="" />
-													<input type="file" name="accomBuildingImage" id="wizard-picture3">
+													<input type="file" name="activityImage" id="wizard-picture3">
 												</div>
 											</div>
 											<div class="picture-container" style="float:left; margin-left:20px;">
 												<div class="picture">
 													<img src="${pageContext.request.contextPath}/assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview4" title="" />
-													<input type="file" name="accomBuildingImage" id="wizard-picture4">
+													<input type="file" name="activityImage" id="wizard-picture4">
 												</div>
 											</div>
 										</div>
 										<div class="col-sm-6" style="margin:0 auto;">
 											<div class="form-group">
 												<h4>Name <small>(required)</small></h4>
-												<input name="accomBuilding.accomBuildingName" type="text" class="form-control" placeholder="Sky villa ..." style="height:34px;">
+												<input name="activity.activityName" type="text" class="form-control" placeholder="나만의 그릇 만들기..." style="height:34px;">
 											</div>
 	
 											<div class="form-group">
 												<h4>Description <small>(required)</small></h4>
-												<textarea name="accomBuilding.accomBuildingDescription" class="form-control" placeholder="루프탑이 있는 ..." rows="8"></textarea>
+												<textarea name="activity.activityDescription" class="form-control" placeholder="내 스타일의 그릇을 만들어보기 ..." rows="8"></textarea>
 											</div>
 											<div class="form-group">
-												<h4>Phone <small>(required)</small></h4>
-												<input name="accomBuilding.accomBuildingPhone" type="text" class="form-control" placeholder="080-0000-0000" style="height:34px;">
+												<h4>Start Date <small>(required)</small></h4>
+												<input name="activity.activityOpenDate" type="date" class="form-control" style="height:34px;">
+											</div>
+											<div class="form-group">
+												<h4>End Date <small>(required)</small></h4>
+												<input name="activity.activityCloseDate" type="date" class="form-control" style="height:34px;">
+											</div>
+											<div class="form-group">
+												<h4>Open Hour <small>(required)</small></h4>
+												<input name="activity.activityOpenHour" type="time" class="form-control" style="height:34px;">
+											</div>
+											<div class="form-group">
+												<h4>Close Hour <small>(required)</small></h4>
+												<input name="activity.activityCloseHour" type="time" class="form-control" style="height:34px;">
+											</div>
+											<div class="form-group">
+												<h4>Maximum usage time <small>(required)</small></h4>
+												<div class="input-group">
+												    <input type="number" class="form-control" name="activity.activityMaxT" style="height:34px;">
+													<span class="input-group-text">시간</span>
+												</div>
+											</div>
+											<div class="form-group">
+												<h4>Maximum users <small>(required)</small></h4>
+												<div class="input-group">
+												    <input type="number" class="form-control" name="activity.activityMaxP" style="height:34px;">
+													<span class="input-group-text">명</span>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -147,7 +173,7 @@
 								<!--  End step 1 -->
 	
 								<div class="tab-pane" id="step2">
-									<h3 class="text-center">Address &amp; Facility</h3>
+									<h3 class="text-center">Address &amp; Price</h3>
 									<div class="row mt-4">
 										<div class="col-sm-6" style="margin:0 auto;">
 										
@@ -158,27 +184,18 @@
 														<input type="button" class="btn-sm" style="width:130px; color:white; background: #ff3d1c; border-radius: 30px;
     													color: #fff; font-weight: 500;" onclick="execDaumPostcode()" value="우편번호">
 													</h4>
-		                                    		<input type="number" class="form-control" id="postalCode" name="accomAddress.accomAddressPotalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" readonly="readonly" style="height:34px;">
-													<input type="text" class="form-control" id="roadAddress" name="accomAddress.accomAddressZip" placeholder="도로명주소가 입력됩니다." readonly="readonly" style="height:34px;">
-													<input type="text" class="form-control" id="prdAddressDetail" name="accomAddress.accomAddressDetail" placeholder="상세주소" style="height:34px;">
+		                                    		<input type="number" class="form-control" id="postalCode" name="activityAddress.activityAddressPostalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" readonly="readonly" style="height:34px;">
+													<input type="text" class="form-control" id="roadAddress" name="activityAddress.activityAddressZip" placeholder="도로명주소가 입력됩니다." readonly="readonly" style="height:34px;">
+													<input type="text" class="form-control" id="prdAddressDetail" name="activityAddress.activityAddressDetail" placeholder="상세주소" style="height:34px;">
 												</div>
 											</div>
 											
 											<div class="col-sm-12 mt-4">
 												<div class="form-group">
-													<h4>
-														Facility
-														<span class="m-2" style="float: right;">
-															<input type="button" class="btn-sm" style="width:80px; color:white; background: #ff3d1c; border-radius: 30px;
-		    													color: #fff; font-weight: 500;" id="addFacility" value="시설추가">
-		    												<input type="button" class="btn-sm" style="width:80px; color:white; background: #ff3d1c; border-radius: 30px;
-		    													color: #fff; font-weight: 500;" id="delFacility" value="삭제">
-			                                    		</span>
-		                                    		</h4>
-		                                    		<label>* 입력 폼 하나당, 시설 하나씩 입력해주세요.</label>
-		                                    		
-		                                    		<div class="form-group" id="facilityPlace">
-														<input type="text" class="form-control" id="accomBuildingFacilityName" name="accomBuildingFacility[0].accomBuildingFacilityName" placeholder="ex) 주차장" style="height:34px;">
+													<h4> Price <small>(required)</small> </h4>
+		                                    		<div class="input-group">
+													    <input type="number" class="form-control" name="activity.activityPrice" style="height:34px;">
+														<span class="input-group-text">원</span>
 													</div>
 												</div>
 											</div>
@@ -208,11 +225,11 @@
 													<div class="form-group" id="spotPlace">
 														<div id="spotForm">
 															<label>Name</label>
-				                                    		<input type="text" class="form-control" id="accomBuildingSpotName" name="accomSpotForm[0].accomBuildingSpot.accomBuildingSpotName" placeholder="ex) 보보커피" style="height:34px;">
+				                                    		<input type="text" class="form-control" id="activitySpotName" name="activitySpotForm[0].activitySpot.activitySpotName" placeholder="ex) 보보커피" style="height:34px;">
 															<label>Category</label>
-															<input type="text" class="form-control" id="accomBuildingSpotCategory" name="accomSpotForm[0].accomBuildingSpot.accomBuildingSpotCategory" placeholder="ex) 카페" style="height:34px;">
+															<input type="text" class="form-control" id="activitySpotCategory" name="activitySpotForm[0].activitySpot.activitySpotCategory" placeholder="ex) 카페" style="height:34px;">
 															<label>Description</label>
-															<textarea class="form-control" id="accomBuildingSpotDescription" name="accomSpotForm[0].accomBuildingSpot.accomBuildingSpotDescription" placeholder="ex) 사장님이 직접 로스팅한 에소프레소를 맛볼 수 있는 곳..." rows="8"></textarea>
+															<textarea class="form-control" id="activitySpotDescription" name="activitySpotForm[0].activitySpot.activitySpotDescription" placeholder="ex) 사장님이 직접 로스팅한 에소프레소를 맛볼 수 있는 곳..." rows="8"></textarea>
 														</div>
 														<div>
 															<span>
@@ -220,9 +237,9 @@
 																<input type="button" class="btn-sm" style="width:130px; color:white; background: #ff3d1c; border-radius: 30px;
 		    													color: #fff; font-weight: 500;" onclick="execDaumPostcodeSpot()" value="우편번호">
 															</span>
-				                                    		<input type="number" class="form-control" id="spotPostalCode" name="accomSpotForm[0].spotAddress.spotAddressPotalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" readonly="readonly" style="height:34px;">
-															<input type="text" class="form-control" id="spotRoadAddress" name="accomSpotForm[0].spotAddress.spotAddressZip" placeholder="도로명주소가 입력됩니다." readonly="readonly" style="height:34px;">
-															<input type="text" class="form-control" id="prdAddressDetail" name="accomSpotForm[0].spotAddress.spotAddressDetail" placeholder="상세주소" style="height:34px;">
+				                                    		<input type="number" class="form-control" id="spotPostalCode" name="activitySpotForm[0].spotAddress.spotAddressPotalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" readonly="readonly" style="height:34px;">
+															<input type="text" class="form-control" id="spotRoadAddress" name="activitySpotForm[0].spotAddress.spotAddressZip" placeholder="도로명주소가 입력됩니다." readonly="readonly" style="height:34px;">
+															<input type="text" class="form-control" id="prdAddressDetail" name="activitySpotForm[0].spotAddress.spotAddressDetail" placeholder="상세주소" style="height:34px;">
 														</div>
 														<hr>
 													</div>
@@ -283,7 +300,7 @@
 							<div class="wizard-footer">
 								<div class="pull-right">
 									<input type='button' class='btn btn-next btn-primary' name='next' value='Next' /> 
-									<input type='button' class='btn btn-finish btn-primary' name='finish' id="accomSubmit" value='Finish' />
+									<input type='button' class='btn btn-finish btn-primary' name='finish' id="activitySubmit" value='Finish' />
 								</div>
 	
 								<div class="pull-left">
@@ -324,6 +341,7 @@
     
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
+	
 	// 다음(카카오) 주소 api
 	function execDaumPostcode() {
 		new daum.Postcode(
@@ -357,25 +375,6 @@
 				}
 			}).open();
 		}
-	
-	// 시설 폼 추가시 사용하는 스크립트 이벤트
-	let numFacility = 0;
-	
-	$('#addFacility').click(function(){
-		numFacility = numFacility + 1;
-		let inputFacility = '<input type="text" class="form-control" id="accomBuildingFacilityName" name="accomBuildingFacility['+numFacility+'].accomBuildingFacilityName" style="height:34px;">';
-		$('#facilityPlace').append(inputFacility);
-	});
-	
-	// 시설 폼 삭제시 사용하는 스크립트 이벤트
-	$('#delFacility').click(function(){
-		if($('input[id=accomBuildingFacilityName]').length>1){
-			numFacility = numFacility - 1;
-			$('input[id=accomBuildingFacilityName]:last').remove();
-		} else {
-			alert("한 가지 이상의 시설을 입력해주세요!");
-		}
-	});
 	
 	// 다음(카카오) 주소 api - 추천장소
 	function execDaumPostcodeSpot() {
@@ -419,11 +418,11 @@
 		if($('div[id=spotForm]').length<3){
 			let inputSpot = '<div id="spotForm">';
 			inputSpot += '<label>Name</label>';
-			inputSpot += '<input type="text" class="form-control" id="accomBuildingSpotName" name="accomSpotForm['+numSpot+'].accomBuildingSpot.accomBuildingSpotName" style="height:34px;">';
+			inputSpot += '<input type="text" class="form-control" id="activitySpotName" name="activitySpotForm['+numSpot+'].activitySpot.activitySpotName" style="height:34px;">';
 			inputSpot += '<label>Category</label>';
-			inputSpot += '<input type="text" class="form-control" id="accomBuildingSpotCategory" name="accomSpotForm['+numSpot+'].accomBuildingSpot.accomBuildingSpotCategory" style="height:34px;">';
+			inputSpot += '<input type="text" class="form-control" id="activitySpotCategory" name="activitySpotForm['+numSpot+'].activitySpot.activitySpotCategory" style="height:34px;">';
 			inputSpot += '<label>Description</label>';
-			inputSpot += '<textarea class="form-control" id="accomBuildingSpotDescription" name="accomSpotForm['+numSpot+'].accomBuildingSpot.accomBuildingSpotDescription" rows="8"></textarea>';
+			inputSpot += '<textarea class="form-control" id="activitySpotDescription" name="activitySpotForm['+numSpot+'].activitySpot.activitySpotDescription" rows="8"></textarea>';
 			inputSpot += '</div>';
 			inputSpot += '<div id="addSpotAddr">';
 			inputSpot += '<span>';
@@ -431,9 +430,9 @@
 			inputSpot += '<input type="button" class="btn-sm" style="width:130px; color:white; background: #ff3d1c; border-radius: 30px;';
 			inputSpot += 'color: #fff; font-weight: 500;" onclick="execDaumPostcodeSpot'+numSpot+'()" value="우편번호">';
 			inputSpot += '</span>';
-			inputSpot += '<input type="number" class="form-control" id="spotPostalCode'+numSpot+'" name="accomSpotForm['+numSpot+'].spotAddress.spotAddressPotalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" readonly="readonly" style="height:34px;">';
-			inputSpot += '<input type="text" class="form-control" id="spotRoadAddress'+numSpot+'" name="accomSpotForm['+numSpot+'].spotAddress.spotAddressZip" placeholder="도로명주소가 입력됩니다." readonly="readonly" style="height:34px;">';
-			inputSpot += '<input type="text" class="form-control" id="prdAddressDetail" name="accomSpotForm['+numSpot+'].spotAddress.spotAddressDetail" placeholder="상세주소" style="height:34px;">';
+			inputSpot += '<input type="number" class="form-control" id="spotPostalCode'+numSpot+'" name="activitySpotForm['+numSpot+'].spotAddress.spotAddressPotalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" readonly="readonly" style="height:34px;">';
+			inputSpot += '<input type="text" class="form-control" id="spotRoadAddress'+numSpot+'" name="activitySpotForm['+numSpot+'].spotAddress.spotAddressZip" placeholder="도로명주소가 입력됩니다." readonly="readonly" style="height:34px;">';
+			inputSpot += '<input type="text" class="form-control" id="prdAddressDetail" name="activitySpotForm['+numSpot+'].spotAddress.spotAddressDetail" placeholder="상세주소" style="height:34px;">';
 			inputSpot += '</div><hr>';
 			inputSpot += '</div>';
 			$('#spotPlace').append(inputSpot);
@@ -545,8 +544,8 @@
 		}
 	});
 	
-	$('#accomSubmit').click(function(){
-		$('#accomBuildingForm').submit();
+	$('#activitySubmit').click(function(){
+		$('#activityForm').submit();
 	});
 	</script>
 

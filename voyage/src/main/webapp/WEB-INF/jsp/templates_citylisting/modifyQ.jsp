@@ -6,9 +6,44 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Directory HTML-5 Template </title>
+        <!-- jquery here -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+        	$(function(){
+        		// 이미지 추가 버튼 눌렀을 때
+        		$('#addImgBtn').click(function(){
+        			let html = '<div><input type="file" name="qnaImg" id="qnaImg"></div>';
+        			$('#Imginput').append(html);
+        		});
+        		// 이미지 삭제 버튼 눌렀을 때
+        		$('#removeImgBtn').click(function(){
+        			$('#Imginput').children().last().remove();
+        		});
+        		// send 버튼 눌렀을 때
+        		$('#saveQBtn').click(function(){
+					if("memberNickname")
+        			let ck = true;
+        			// index : 이미지 파일명, item : 파일 경로
+        			$('#qnaImg').each(function(index, item){
+        				console.log($(item).val());
+        				if($(item).val() == ''){
+        					ck = false;	
+        				}
+        			});
+        			// 만약 이미지 파일을 선택하지 않았다면...
+        			if(ck == false){
+        				alert('이미지 파일을 선택해주세요');
+        			} else {
+        				$('#addQForm').submit();
+        			}
+        		});
+        	});
+        </script>
+        <!-- jquery end -->
+        
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- <link rel="manifest" href="site.webmanifest">  -->
+        <!-- <link rel="manifest" href="site.webmanifest"> -->
 		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
 		<!-- CSS here -->
@@ -27,7 +62,6 @@
 
 	<!-- 눈누 - 한산스네오 레귤러 폰트 -->
 	<style type="text/css">
-	
 		@font-face {
 		    font-family: 'SpoqaHanSansNeo-Regular';
 		    	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff');
@@ -64,7 +98,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center pt-50">
-                            <h2>문의내용</h2>
+                            <h2>문의글 수정</h2>
                         </div>
                     </div>
                 </div>
@@ -76,14 +110,17 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
-                        <h3 class="mb-20">경고</h3>
-                        <p class="mb-30">문의 내용은 관리자의 답글이 달리기 전까지만 수정, 삭제가 가능합니다.</p>
-                        <p class="mb-30">해당 게시글에 오타가 난 경우나 문의 내용을 잘못 적었는데 답글이 달린 경우 등 상황에서는 새로 문의글을 적어주시면 확인 후 답변 드리겠습니다.</p>
-           				<p class="mb-30">다른 경우에도 마찬가지오니 이 점 유의해서 활용해주시길 바랍니다.</p>
-                        
+                    	<!-- 
+                    	<h3 class="mb-20">Description</h3>
+                        <p class="mb-30">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or rannjdomised words which don't look even slightly believable. If you are going to use a passage of fhorem Ipvbsum, you need to orem Ipsum available, but the ma be sure there isvgnn't anything embarrassing.</p>
+                        <p class="mb-30">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or rannjdomised words which don't look even slightly believable. If you are going to use a passage of fhorem Ipvbsum.</p>
+                    	 -->
+                       <h3 class="mb-20">경고</h3>
+                       <p class="mb-30">질문은 최대한 상세히 되도록이면 사진이나 이미지파일 첨부해서 작성해주세요.</p>
+                       <p class="mb-30">지나친 모욕, 원색적인 욕설 등 과한 비방글은 추후 관리자의 판단 하에 삭제될 수 있습니다.</p>
                     </div>
                 </div>
-                <!-- Map
+                <!-- map
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
                         <h3 class="mb-30">Location</h3>
@@ -128,46 +165,82 @@
                         </div>
                     </div>
                 </div>
-                -->
+                 -->
+               	<!-- End Map -->
                 <!-- Contact From -->
                 <!-- From -->
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
                     	<!-- 원본 : Massage -->
-                        <h3 class="mb-40">Question </h3>
+                        <h3 class="mb-40">Question</h3>
                         <!-- Form -->
-                        <form class="form-contact contact_form mb-80" action="qnaList.jsp" method="post">
+                        <form class="form-contact contact_form mb-80" enctype="multipart/form-data" action="${pageContext.request.contextPath}/modifyQ" method="post" name="modifyQ" id="modifyQForm">
                             <div class="row">
                                 <div class="col-sm-6">
+                                	<div class="form-group">
+                                		<input class="form-control error" name="qnaNo" id="qnaNo" type="text" value="${qna.qnaNo}" readonly="readonly"/>
+                                	</div>
                                     <div class="form-group">
-                                       		 <input class="form-control error" name="memberNickname" id="memberNickname" type="text" value="${memberNickname}">
+                                    	<!-- 
+                                    		원본 : <input class="form-control error" name="name" id="name" type="text"  placeholder="Your Name">
+                                    	 -->
+                                    	 <input class="form-control error" name="memberNickname" id="memberNickname" type="text" placeholder="닉네임을 입력해주세요">
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-6">	
                                     <div class="form-group">
-                                        <input class="form-control error" name="email" id="email" type="email" placeholder = 'Enter email address'">
-                                    </div>
+                                    	
+	                                    <!-- 
+	                                    	원본 : <input class="form-control error" name="email" id="email" type="email" placeholder = "Enter email address">
+	                                    -->
+	                                    <input class="form-control error" name="qnaTitle" id="qnaTitle" type="text"	placeholder="제목을 입력해주세요">
+  									</div>
+                                </div>
+                                <div class="col-sm-6">
+                                	<table class="form-group">
+                                		<tr>
+                                			<td>
+                                				<select name="selectAdd" id="selectQnaCategoryAdd">
+				                            		<option value="예약문의">예약</option>
+				                                	<option value="결제문의">결제</option>
+				                                	<option value="기타">기타</option>
+												</select>
+                                			</td>
+                                			
+                                			<td>
+                                				<input name="qnaSecret" id="qnaSecret" type="checkbox" value="비밀글"/>
+	                                			<label><span>비밀글</span></label>
+                                			</td>
+                                			
+                                			<td>
+                                				<input name="qnaSecret" id="qnaSecret" type="checkbox" value="공개글"/>
+	                                			<label><span>공개글</span></label>
+                                			</td>
+                                		</tr>
+                                	</table>			
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <textarea class="form-control w-100 error" name="message" id="message" cols="30" rows="9" placeholder = 'Enter Message'" placeholder="Enter Message"></textarea>
+                                        <textarea class="form-control w-100 error" name="qnaContent" id="qnaContent" cols="30" rows="9" placeholder="내용을 상세히 입력해주세요. 1) 정확한 날짜와 시간  2) 사진이나 이미지 첨부  3) 상세한 상황 설명 "></textarea>
                                     </div>
                                 </div>
+                                <div>파일 첨부</div>
+                                <div>
+                                	<button type="button" id="addImgBtn">Add Img</button>
+                                	<button type="button" id="removeImgBtn">Del Img</button>
+                                </div>
+                                <div id="Imginput"></div>
                             </div>
                             <div class="form-group mt-3">
                             	<!-- 원본 버튼 : Send  -->
-                                <button type="button" class="button button-contactForm boxed-btn">Back</button>
-                            </div>
-                            <div class="form-group mt-3">
-                            	<button type="button" class="button button-contactForm boxed-btn">Edit</button>
-                            </div>
-                            <div class="form-group mt-3">
-                            	<button type="button" class="button button-contactForm boxed-btn">Del</button>
+                                <div>
+                                	<button type="submit" id="saveQBtn" class="button button-contactForm boxed-btn">Save</button>
+                                	<a type="button" href="${pageContext.request.contextPath}/qnaList" class="button button-contactForm boxed-btn">Back</a>
+                                </div>
                             </div>
                         </form>
                     </div>
                 </div>
-                <!-- 다른 사용자들이 단 문의글로 이용할 예정... or 삭제? -->
                 <!-- listing Details Stat-->
                 <div class="listing-details-area">
                     <div class="container">

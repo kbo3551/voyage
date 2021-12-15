@@ -20,11 +20,12 @@ public class HashtagRestController {
    @Autowired HashtagService hashtagService;
 
    @GetMapping("/hashtagSearh")
-   public List<Map<String, Object>> hashtagSearh(Model model, String searchKeyword) {
-	  log.debug("HashtagRestController().hashtagSearh 실행");
+   public List<Map<String, Object>> getHashtagListBySearh(Model model, String searchKeyword) {
+	  log.debug("HashtagRestController.getHashtagListBySearh 실행");
+	  log.debug("HashtagRestController.getHashtagListBySearh searchKeyword : "+searchKeyword);
       
 	  List<Map<String, Object>> map = hashtagService.getHashtagListBySearch(searchKeyword);
-	  log.debug("map" + map);
+	  log.debug("[debug] map" + map);
       
 //      Map<String, Object> returnMap = new HashMap<>();
 //      returnMap.put("hashtagList", map);

@@ -9,6 +9,8 @@
 		<result column="qna_category" property="qnaCategory"/>
 		<result column="qna_title" property="qnaTitle"/>
 		<result column="qna_secret" property="qnaSecret"/>
+		<result column="update_date" property="updateDate"/>
+		<result column="create_date" property="createDate"/>
 		<collection property="qnaAnswer" ofType="com.gdu.voyage.vo.QnaAnswer">
 			<id column="qna_answer_no" property="qnaAnswerNo"/>
 			<result column="answer_content" property="answerContent"/>
@@ -33,20 +35,21 @@
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	<!-- 질문 내용 상세 조회 -->
+	<!-- ISSUE : service에서 모든 값이 null로 찍힘-->
 	<select id="selectQnaOneAndAnswer" parameterType="int" resultMap="resultQna">
 		SELECT
-			q.qna_no qnaNo,
-			q.member_nickname memberNickname,
-			q.qna_category qnaCategory,
-			q.qna_title qnaTitle,
-			q.qna_content qnaContent,
-			q.create_date,
-			q.update_date
+			qna_no,
+			member_nickname,
+			qna_category,
+			qna_title,
+			qna_content,
+			create_date,
+			update_date
 			<!--
 			a.qna_answer_no,
 			a.answer_content
 			-->
-		FROM qna q <!-- LEFT JOIN qna_answer a 
+		FROM qna<!-- LEFT JOIN qna_answer a 
 		ON q.qna_no = a.qna_no
 		-->
 		<where>
@@ -55,7 +58,7 @@
 				a.qna_answer_no = #{qnaAnswerNo}
 			</if>
 			-->
-			q.qna_no = #{qnaNo}
+			qna_no = #{qnaNo}
 		</where>
 	</select>
 	<!-- 질문 등록 -->
@@ -68,7 +71,7 @@
 			qna_secret,
 			update_date,
 			create_date
-		)VALUES(
+		) VALUES (
 			#{memberNickname},
 			#{qnaCategory},
 			#{qnaTitle},
@@ -81,7 +84,7 @@
 	<!-- 질문 수정 -->
 	<update id="modifyQ" parameterType="com.gdu.voyage.vo.Qna">
 		UPDATE qna SET
-			qna_categoty = #{qnaCategory},
+			qna_category = #{qnaCategory},
 			qna_title = #{qnaTitle},
 			qna_content = #{qnaContent},
 			update_date = NOW()

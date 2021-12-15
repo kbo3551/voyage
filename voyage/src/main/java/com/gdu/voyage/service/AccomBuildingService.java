@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,8 +29,6 @@ import lombok.extern.slf4j.Slf4j;
 public class AccomBuildingService {
 	@Autowired
 	private AccomBuildingMapper accomBuildingMapper;
-	@Autowired
-	private HttpServletRequest request;
 	
 	// 숙소 등록 목록 조회
 		public List<AccomBuilding> getAccomBuildingList(int pageNo) {
@@ -41,13 +37,13 @@ public class AccomBuildingService {
 			return accomBuildingMapper.selectAccomBuildingList(pageNo);
 		}
 	// 숙소 등록 목록 상세 조회 One
-			public AccomBuilding getAccomBuildingOne(int accomBuildingNo) {
+		public List<AccomBuilding> getAccomBuildingOne(int accomBuildingNo) {
 			log.debug(accomBuildingMapper.selectAccomBuildingOne(accomBuildingNo) + "***********[상훈] accomBuildingService One");
 			return accomBuildingMapper.selectAccomBuildingOne(accomBuildingNo);
 		}
 	
 	// 숙소-건물 입력
-	public void addAccomBuilding(AccomBuildingForm accomBuildingForm) {
+	public void addAccomBuilding(AccomBuildingForm accomBuildingForm, String realPath) {
 		// 매개변수 디버깅 //accomBuildingForm  --> 숙소-건물정보 + 이미지 + 시설 + 추천장소 + 해시태그
 		log.debug("☆[지혜]service☆ accomBuildingForm : " + accomBuildingForm.toString());
 		
@@ -83,7 +79,6 @@ public class AccomBuildingService {
 				accomBuildingMapper.insertAccomBuildingImage(accomBuildingImage);
 				
 				// 2-2) 이미지 파일을 저장
-				String realPath = request.getServletContext().getRealPath("resources/image/accom_building//");
 				File f = new File(realPath+filename+"."+ext);
 				try {
 					i.transferTo(f);
@@ -96,7 +91,7 @@ public class AccomBuildingService {
 			}
 		}
 		
-		// 3) 숙소-건물의 주소 입력 : prdAddress 입력
+		// 3) 숙소-건물의 주소 입력 : accomAddress 입력
 		AccomAddress accomAddress = accomBuildingForm.getAccomAddress();
 		accomAddress.setAccomBuildingNo(accomBuilding.getAccomBuildingNo());
 		log.debug("☆[지혜]service☆ accomAddress : " + accomAddress);

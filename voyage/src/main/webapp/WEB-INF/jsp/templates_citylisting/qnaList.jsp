@@ -230,35 +230,37 @@
                         <div class="listing-details-area">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-lg-6 ">
-                                        <div class="single-listing mb-30" id = "qnaArrayList">
-                                        	<div class="list-img">
-	                                        	<img src="assets/img/gallery/list1.png" alt="">
-		                                        <!-- <span>Open</span> -->
-	                                        </div>
-	                                        
-                                        	<c:forEach items="${qnaList}" var="qna">
-	                                            <div class="list-caption">
-	                                                <span>${qna.qnaCategory}</span>
-	                                                <h3><a href="${pageContext.request.contextPath}/getQnaOne?qnaNo=${qna.qnaNo}">${qna.qnaTitle}</a></h3>
-	                                                <p>${qna.qnaNo}</p>
-	                                                <div class="list-footer">
-	                                                	<ul>
-	                                                		<li>${qna.memberNickname}</li>
-	                                               		</ul>
-	                                                </div>
-	                                                <!-- 
-	                                                	<div class="list-footer">
-		                                                    <ul>
-		                                                        <li>+10 278 367 9823</li>
-		                                                        <li>contact@midnight.com</li>
-		                                                    </ul>
-	                                                	</div>
-	                                                 -->
-	                                            </div>
-                                        	</c:forEach>
-                                        </div>
-                                    </div>
+                                	<c:forEach items="${qnaList}" var="qna">
+                                    	<div class="col-lg-6 ">
+                                        	<div class="single-listing mb-30" id = "qnaArrayList">
+	                                        	<div class="list-img">
+			                                    	<img src="assets/img/gallery/list1.png" alt="">
+				                                    	<!-- <span>Open</span> -->
+		                                        </div>
+		                                   		<div class="list-caption">
+		                                        	<span>${qna.qnaCategory}</span>
+		                                            <h3><a href="${pageContext.request.contextPath}/getQnaOne?qnaNo=${qna.qnaNo}">${qna.qnaTitle}</a></h3>
+		                                            <p>${qna.qnaNo}</p>
+		                                            <div class="list-footer">
+		                                            	<ul>
+		                                                	<li>${qna.memberNickname}</li>
+		                                               	</ul>
+		                                            </div>
+		                                                <!-- 
+		                                                	<div class="list-footer">
+			                                                    <ul>
+			                                                        <li>+10 278 367 9823</li>
+			                                                        <li>contact@midnight.com</li>
+			                                                    </ul>
+		                                                	</div>
+		                                                 -->
+		                                          </div>
+		                                        </div>
+		                                      </div>
+                                        </c:forEach>
+                                   	</div>
+                                </div>
+                           	</div>
                                     <!-- 
                                     	<div class="col-lg-6 ">
                                         <div class="single-listing mb-30">

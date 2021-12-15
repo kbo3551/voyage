@@ -39,27 +39,22 @@
 				<h1 class="h3 mb-3"><strong>체험 관리</strong></h1>
 					<div class="row">
 						<div class="col-12 col-lg-8 col-xxl-9 d-flex">
-							<div class="card flex-fill">
+							<div class="d-flex align-content-start flex-wrap">
 								<div class="card-header">
 	
-									<h5 class="card-title mb-0">Latest Activity</h5>
+									<h5 class="card-title my-0">Latest Activity</h5>
 								</div>
 								<table class="table table-hover my-0">
 									<thead>
 										<tr>
+											<th>Activity No</th>
 											<th>Activity Name</th>
 											<th>Activity OpenDate</th>
 											<th>Activity CloseDate</th>
-											<th>Activity price</th>
-											<th>Activity OpenHour</th>
-											<th>Activity CloseHour</th>
-											<th>Activity MaxT</th>
 											<th>Activity Description</th>
-											<th>Activity MaxP</th>
-											<th>Activity State</th>
-											<th>Activity StateAdmin</th>
 											<th>Create Date</th>
 											<th>Update Date</th>
+											<th>상세보기</th>
 										</tr>
 									</thead>
 									<tbody> 
@@ -69,14 +64,10 @@
 										        <td>${Ac.activityName}</td>
 										        <td>${Ac.activityOpenDate}</td>
 										        <td>${Ac.activityCloseDate}</td>
-										        <td>${Ac.activityPrice}</td>
-										        <td>${Ac.activityOpenHour}</td>
-										        <td>${Ac.activityCloseHour}</td>
-										        <td>${Ac.activityMaxT}</td>
 										        <td>${Ac.activityDescription}</td>
-										        <td>${Ac.activityMaxP}</td>
 										        <td>${Ac.createDate}</td>
 										        <td>${Ac.updateDate}</td>
+										        <td><a href="${pageContext.request.contextPath}/admin/activityOne?activityNo=${Ac.activityNo}">상세보기</a></td>
 											</tr>
 									    </c:forEach>
 									</tbody>

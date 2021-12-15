@@ -9,14 +9,16 @@
 			admin_address_postal_code,
 			admin_address_zip,
 			admin_address_detail,
-			create_date,
+			create_date
 			update_date
 		)
 		VALUES(
 			#{adminId},
 			#{adminAddressPostalCode},
 			#{adminAddressZip},
-			#{adminAddressDetail}
+			#{adminAddressDetail},
+			NOW(),
+			NOW()
 			);
 </insert>
 <!-- 어드민 회원가입 -->
@@ -49,18 +51,20 @@
 		set
 			admin_first_name = #{adminFirstName},
 			admin_last_name = #{adminLastName},
-			admin_phone = #adminPhone},
+			admin_phone = #{adminPhone},
 			admin_email = #{adminEmail},
+			update_date = NOW()
 		WHERE 
 			admin_id = #{adminId}
 </update>
 <!-- 어드민 주소 정보 수정 -->
 <update id="updateAdminAddress">
-	UPDATE member_address
+	UPDATE admin_address
 		set
 			admin_address_postal_code = #{adminAddressPostalCode},
 			admin_address_zip = #{adminAddressZip},
-			admin_address_detail = #{adminAddressDetail}
+			admin_address_detail = #{adminAddressDetail},
+			update_date = NOW()
 		WHERE 
 			admin_id = #{adminId}
 </update>

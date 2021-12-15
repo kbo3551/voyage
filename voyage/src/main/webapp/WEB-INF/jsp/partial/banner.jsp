@@ -118,6 +118,7 @@
                                                 </div>
                                                 <div class="hashtag-search-form">
                                                     <button type="button" id="btn_search">Search</button>
+                            						<button id="hashtagSearchParam" value="도넛맨 미안해 마이크 못줘서 미안해">돌 맞은 개구리</button>
                                                 </div>
                                             </div>
                                             <ul id="hashtagList"></ul> <!-- hashtag 검색 제시어가 나타나는 영역 -->
@@ -125,7 +126,9 @@
                                     </div>
                                     <div class="hashtag_body">
                                         <div>
-                                            <c:import url="/hashtag"></c:import>
+                                            <c:import url="/hashtag">
+<%--                                             	<c:param name="hashtag" id="hashtag_result_param" value="hashtag"></c:param> --%>
+                                            </c:import>
                                         </div>
                                     </div>
                                 </div>
@@ -133,6 +136,7 @@
                             <!-- Mobile Menu -->
                             <div class="col-12">
                                 <div class="mobile_menu d-block d-lg-none"></div>
+                                
                             </div>
                         </div>
                     </div>
@@ -141,6 +145,10 @@
        </div>
         <!-- Header End -->
     </header>
+    
+    <script type="text/javascript">
+	 
+    </script>
   
   	<script src="${pageContext.request.contextPath}/assets/js/hashtag.js"></script>
 </body>

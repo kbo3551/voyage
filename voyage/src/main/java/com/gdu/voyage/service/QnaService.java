@@ -1,6 +1,7 @@
 package com.gdu.voyage.service;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +27,14 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Transactional
 public class QnaService {
-	@Autowired QnaMapper qnaMapper;
+	@Autowired private QnaMapper qnaMapper;
+	
+	// Qna 게시판 목록 상세 내용
+	public Qna getQnaOneAndAnswer(int qnaNo) {
+		// ISSUE : qnaContent, updateDate, createDate 값 null값 넘어옴
+		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_getQnaOneAndAnswer_qnaNo debug" + qnaMapper.selectQnaOneAndAnswer(qnaNo));
+		return qnaMapper.selectQnaOneAndAnswer(qnaNo);
+	}
 	// Qna 게시판 목록 카테고리 별 조회
 	public Map<String, Object> getQnaListByCategory(String qnaCategory, int currentPage, int rowPerPage){
 		// 매개변수 값 가공 
@@ -53,64 +61,37 @@ public class QnaService {
 		returnMap.put("lastPage", lastPage);
 		return returnMap;
 	}
-	// Qna 게시판 목록 상세 내용
-	public Qna getQnaOneAndAnswer(int qnaNo) {
-		log.debug(qnaMapper.selectQnaOneAndAnswer(qnaNo)+"☆☆☆☆☆☆☆☆☆☆[다원] QnaService_qnaNo debug");
-		return qnaMapper.selectQnaOneAndAnswer(qnaNo);
-	}
+	
 	// Qna 게시판 질문 수정
-	public void modifyQ(Qna qna) {
+	public Qna modifyQ(Qna qna, QnaImg qnaImg) {
 		log.debug(qna.toString() + "☆☆☆☆☆☆☆☆☆☆[다원] QnaService_modifyQ_Qna debug");
 		qnaMapper.modifyQ(qna);
+		return null;
 	}
 	// Qna 게시판 질문 삭제
 	public void removeQ(Qna qna) {
 		log.debug(qna.toString() + "☆☆☆☆☆☆☆☆☆☆[다원] QnaService_removeQ_Qna debug");	
 	}
 	// Qna 게시판 질문 작성
-	public void addQ(QnaForm qnaForm) throws Exception {
-		log.debug(qnaForm.toString() + "☆☆☆☆☆☆☆☆☆☆[다원] QnaService_qnaForm debug");
+	public Map<String, Object> addQ(QnaForm qnaForm, Qna qna, QnaImg qnaImg) throws Exception {
+		Map<String, Object> addQMap = new HashMap<>();
 		
-		String qnaContent = qnaForm.getQnaContent();
-		List<MultipartFile> Img = qnaForm.getQnaImg();
-		
-		Qna qna = new Qna();
-		qna.setQnaContent(qnaContent);
-		qnaMapper.addQ(qna);
-		log.debug(qna.getQnaNo() + "☆☆☆☆☆☆☆☆☆☆[다원] QnaService_qnaNo debug");
+		int addQ = qnaMapper.addQ(qna);
+		// addQ값 디버깅 코드
+		log.debug(addQ + "☆☆☆☆☆☆☆☆☆☆[다원] QnaService_addQ debug");
+	
+		addQMap.put("addQ", addQ);
 		
 		// 이미지 추가
 		if(qnaForm.getQnaImg() != null) {
-			QnaImg qnaImg = new QnaImg();
-			qnaImg.setQnaNo(qna.getQnaNo());
-			
-			// 이미지 파일 이름 설정
-			String qnaImgName = UUID.randomUUID().toString();
-			qnaImg.setQnaImgName(qnaImgName);
-			
-			// 이미지 파일 원본 이름
-			String qnaImgOriginName = ((MultipartFile) Img).getOriginalFilename();
-			// 이미지 파일명 뒤에 .확장자명에서 . 위치
-			int p = qnaImgOriginName.lastIndexOf(".");
-			String qnaImgExt = qnaImgOriginName.substring(p+1);
-			// 뒤에서 .까지(확장자명에서 .까지)
-			qnaImg.setQnaImgExt(qnaImgExt); 
-			qnaImg.setQnaImgSize(Img.size());
-			qnaMapper.addQImg(qnaImg);
-			
-			// 파일 경로 임시 설정
-			File Imgfile = new File(("C:\\Users\\dawon\\voyage\\voyage\\src\\main\\resources\\resources\\assets\\img\\"+ qnaImgName + qnaImgExt));
-			// 필요한 exception(IllegalStateException, IOException)이 아닌 다른 exception을 Exception()을 던져 예외 발생시킴
-			// 트랜잭션 처리할 때, 필요한 과정임
-			try {
-				((MultipartFile) Img).transferTo(Imgfile);
-				}catch(IllegalStateException | IOException e) {
-					e.printStackTrace();
-					
-					throw new Exception();
-				}
-			}
-		}	
+			int addQImg = qnaMapper.addQImg(qnaImg);
+			log.debug(addQMap.toString() + "☆☆☆☆☆☆☆☆☆☆[다원] QnaService_addQMap debug");
+			addQMap.put("addQImg", addQImg);
+		}
+		log.debug(addQMap.toString() + "☆☆☆☆☆☆☆☆☆☆[다원] QnaService_addQMap debug2222");
+		
+		return addQMap;
+	}	
 	// 페이징
 	public int[] countPage(int currentPage) {
 		int[] num = new int[10];

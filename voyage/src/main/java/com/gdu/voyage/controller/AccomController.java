@@ -2,6 +2,8 @@ package com.gdu.voyage.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,19 +27,26 @@ public class AccomController {
 	AccomBuildingService accomBuildingService;
 	private Integer currentPage = 1;
 
+	// 숙소_건물 등록
 	@GetMapping("/host/addAccomBuilding")
 	public String addAccomBuilding() {
 		log.debug("AccomController 실행");
 		return "/host/addAccomBuilding";
 	}
 
+	// 숙소_건물 등록
 	@PostMapping("/host/addAccomBuilding")
-	public String addAccomBuilding(AccomBuildingForm accomBuildingForm) {
+	public String addAccomBuilding(AccomBuildingForm accomBuildingForm, HttpServletRequest request) {
 		log.debug("AccomController 실행");
 
 		// 참조타입 객체를 log.debug로 출력할 때는 toString()으로 출력함
 		log.debug("★[지혜]controller★ accomBuildingForm : " + accomBuildingForm.toString());
-		accomBuildingService.addAccomBuilding(accomBuildingForm);
+		
+		// 파일 저장 시, 절대경로를 알기 위해 HttpServletRequest를 사용해서 realPath를 잡아준 뒤 변수에 저장함
+		String realPath = request.getServletContext().getRealPath("resources/image/accom_building//");
+		
+		// accomBuildingForm과 realPath를 매개변수로 하여 같이 service에 전달
+		accomBuildingService.addAccomBuilding(accomBuildingForm, realPath);
 		return "redirect:/accomBuildingList";
 	}
 
@@ -55,7 +64,7 @@ public class AccomController {
 	@GetMapping("/admin/accomBuildingOne")
 	public String getAccomBuildingOne(Model model, int accomBuildingNo) {
 		System.out.println("accomBuildingOne 실행!!");
-		AccomBuilding accomBuilding = accomBuildingService.getAccomBuildingOne(accomBuildingNo);
+		List<AccomBuilding> accomBuilding = accomBuildingService.getAccomBuildingOne(accomBuildingNo);
 		model.addAttribute("accomBuilding", accomBuilding);
 		return "/admin/accomBuildingOne";
 	}

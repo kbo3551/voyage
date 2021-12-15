@@ -187,7 +187,7 @@
                                 <div>
                                 </div>
                                 <div>
-                                	 <select name="selectAdd" id="selectQnaCategoryAdd">
+                                	 <select name="qnaCategory" id="qnaCategory">
 	                                    <option value="예약문의">예약</option>
 	                                    <option value="결제문의">결제</option>
 	                                    <option value="기타">기타</option>
@@ -215,14 +215,14 @@
                                 </div>
                                 <div>파일 첨부</div>
                                 <div>
-                                	<button type="button" id="addImgBtn">이미지 추가</button>
-                                	<button type="button" id="removeImgBtn">이미지 삭제</button>
+                                	<button type="button" id="addImgBtn">Add Img</button>
+                                	<button type="button" id="removeImgBtn">Del Img</button>
                                 </div>
                                 <div id="Imginput"></div>
                             </div>
                             <div class="form-group mt-3">
                             	<!-- 원본 버튼 : Send  -->
-                                <button type="button" id="sendQBtn" class="button button-contactForm boxed-btn">Send</button>
+                                <button type="submit" id="sendQBtn" class="button button-contactForm boxed-btn">Send</button>
                             </div>
                         </form>
                     </div>

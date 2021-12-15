@@ -137,7 +137,16 @@
     
     <!-- 건물번호에따른 숙소 상세 목록 출력 -->
     <select id="selectAccomBuildingOne" resultType="com.gdu.voyage.vo.AccomBuilding">
-            SELECT *
+            SELECT
+            accom_building_no as accomBuildingNo,
+            host_no as hostNo,
+            accom_building_name as accomBuildingName,
+            accom_building_description as accomBuildingDescription,
+            accom_building_phone as accomBuildingPhone,
+            accom_building_state as accomBuildingState,
+            accom_building_state_admin as accomBuildingStateAdmin,
+            create_date as createDate,
+            update_date as updateDate
 			FROM accom_building
             WHERE accom_building_no = #{accom_building_no}
     </select>

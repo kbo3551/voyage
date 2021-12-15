@@ -47,32 +47,44 @@
 								<table class="table table-hover my-0">
 									<thead>
 										<tr>
-											<th>Building No</th>
+											<th>ActivityNo</th>
 											<th>Host No</th>
-											<th>Building Name</th>
-											<th>Building Description</th>
-											<th>Building Phone</th>
-											<th>Building State</th>
-											<th>Building State Admin</th>
-											<th>create Date</th>
-											<th>update Date</th>
+											<th>ActivityName</th>
+											<th>ActivityOpenDate</th>
+											<th>ActivityCloseDate</th>
+											<th>ActivityPrice</th>
+											<th>ActivityOpenHour</th>
+											<th>ActivityCloseHour</th>
+											<th>ActivityMaxT</th>
+											<th>ActivityMaxP</th>
+											<th>ActivityDescription</th>
+											<th>ActivityState</th>
+											<th>ActivityStateAdmin</th>
+											<th>CreateDate</th>
+											<th>UpdateDate</th>
 											<th>수정하기</th>
 										</tr>
 									</thead>
 									<tbody> 
-										<c:forEach items="${accomBuilding}" var="Accom" >
+										<c:forEach items="${activity}" var="Act" >
 											<tr>
-										        <td>${Accom.accomBuildingNo}</td>
-										        <td>${Accom.hostNo}</td>
-										        <td>${Accom.accomBuildingName}</td>
-										        <td>${Accom.accomBuildingDescription}</td>
-										        <td>${Accom.accomBuildingPhone}</td>
-										        <td>${Accom.accomBuildingState}</td>
-										        <td>${Accom.accomBuildingStateAdmin}</td>
-										        <td>${Accom.createDate}</td>
-										        <td>${Accom.updateDate}</td>
-										        <td><a href="${pageContext.request.contextPath}/admin/accomBuildingUpdate">수정하기</a></td>
-										        </tr>
+										        <td>${Act.activityNo}</td>
+										        <td>${Act.hostNo}</td>
+										        <td>${Act.activityName}</td>
+										        <td>${Act.activityOpenDate}</td>
+										        <td>${Act.activityCloseDate}</td>
+										        <td>${Act.activityPrice}</td>
+										        <td>${Act.activityOpenHour}</td>
+										        <td>${Act.activityCloseHour}</td>
+										        <td>${Act.activityMaxT}</td>
+										        <td>${Act.activityMaxP}</td>
+										        <td>${Act.activityDescription}</td>
+										        <td>${Act.activityState}</td>
+										        <td>${Act.activityStateAdmin}</td>
+										        <td>${Act.createDate}</td>
+										        <td>${Act.updateDate}</td>
+										        <td><a href="${pageContext.request.contextPath}/admin/accomActivityUpdate">수정하기</a></td>
+										   </tr>
 									    </c:forEach>
 									</tbody>
 								</table>

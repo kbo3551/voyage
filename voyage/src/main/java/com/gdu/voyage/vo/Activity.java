@@ -12,9 +12,9 @@ public class Activity {
 	private int activityPrice;
 	private String activityOpenHour;
 	private String activityCloseHour;
-	private int activityMaxT;
+	private int activityMaxT; // 최대이용시간
+	private int activityMaxP; // 최대인원
 	private String activityDescription;
-	private int activityMaxP;
 	private String activityState;
 	private String activityStateAdmin;
 	private String createDate;
