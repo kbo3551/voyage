@@ -5,7 +5,8 @@
 	<update id="deleteMember"> 
 		UPDATE member
 		SET
-			member_active = "탈퇴"
+			member_active = "탈퇴",
+			update_date = NOW()
 		WHERE 
 			member_id = #{memberId}
 			AND
@@ -16,7 +17,8 @@
 	<update id="updateMemberPw"> 
 		UPDATE member
 		SET
-			member_pw = PASSWORD(#{memberPw})
+			member_pw = PASSWORD(#{memberPw}),
+			update_date = NOW()
 		WHERE 
 			member_id = #{memberId}
 	</update>
@@ -25,7 +27,8 @@
 	<update id="updateMemberNickname">
 		UPDATE member
 		SET
-			member_nickname = #{memberNickname}
+			member_nickname = #{memberNickname},
+			update_date = NOW()
 		WHERE 
 			member_id = #{memberId}
 			AND 
@@ -38,7 +41,8 @@
 		SET
 			member_address_postal_code = #{memberAddressPostalCode},
 			member_address_zip = #{memberAddressZip},
-			member_address_detail = #{memberAddressDetail}
+			member_address_detail = #{memberAddressDetail},
+			update_date = NOW()
 		WHERE member_id = #{memberId}
 	</update>
 
@@ -50,7 +54,8 @@
 			member_last_name = #{memberLastName},
 			member_phone = #{memberPhone},
 			member_email = #{memberEmail},
-			member_description = #{memberDescription}
+			member_description = #{memberDescription},
+			update_date = NOW()
 		WHERE member_id = #{memberId}
 	</update>
 	
@@ -94,13 +99,17 @@
 				member_id,
 				member_address_postal_code,
 				member_address_zip,
-				member_address_detail
+				member_address_detail,
+				create_date,
+				update_date
 				)
 		VALUES(
 			#{memberId},
 			#{memberAddressPostalCode},
 			#{memberAddressZip},
-			#{memberAddressDetail}
+			#{memberAddressDetail},
+			NOW(),
+			NOW()
 			);
 	</insert>
 	
