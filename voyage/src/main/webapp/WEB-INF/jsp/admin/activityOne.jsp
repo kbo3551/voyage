@@ -42,7 +42,7 @@
 							<div class="card flex-fill">
 								<div class="card-header">
 	
-									<h5 class="card-title mb-0">Latest AccomBuilding</h5>
+									<h5 class="card-title mb-0">Latest Activity</h5>
 								</div>
 								<table class="table table-hover my-0">
 									<thead>
