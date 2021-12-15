@@ -58,14 +58,17 @@ public class LoginController {
 	     * 2면 탈퇴한 회원, 3이면 정지당한 회원
 	     */
 	    if(loginService.selectBanMember(memberId) == 1) {
-	    	return "redirect:login?failed=3";
+	    	redirect.addFlashAttribute("failed","3");
+	    	return "redirect:login";
 	    }
 	    if(loginService.selectDeleteMember(memberId) == 1) {
-	    	return "redirect:login?failed=2";
+	    	redirect.addFlashAttribute("failed","2");
+	    	return "redirect:login";
 	    }
 	    Member loginMember = loginService.login(m);
+	    redirect.addFlashAttribute("failed","1");
 	    if(loginMember == null) {
-	    	return "redirect:login?failed=1";
+	    	return "redirect:login";
 	    }
 	    
 	    HttpSession session = request.getSession();

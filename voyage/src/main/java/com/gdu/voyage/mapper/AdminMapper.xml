@@ -8,7 +8,9 @@
 			admin_id,
 			admin_address_postal_code,
 			admin_address_zip,
-			admin_address_detail
+			admin_address_detail,
+			create_date,
+			update_date
 		)
 		VALUES(
 			#{adminId},
