@@ -158,9 +158,8 @@
     <update id="accomBuildingUpdate" parameterType="com.gdu.voyage.vo.AccomBuilding">
     	UPDATE accom_building SET
     		accom_building_state = #{accomBuildingState},
-    		accom_building_state_admin = #{accomBuildingStateAdmin}
+    		accom_building_state_admin = #{accomBuildingStateAdmin},
     		update_date = NOW()
     	WHERE accom_building_no = #{accomBuildingNo}
-    	AND host_no = #{hostNo}
     </update>
 </mapper>
