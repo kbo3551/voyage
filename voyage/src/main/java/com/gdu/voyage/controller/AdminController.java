@@ -1,5 +1,7 @@
 package com.gdu.voyage.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gdu.voyage.service.AdminService;
@@ -20,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class AdminController {
 	@Autowired AdminService adminService;
+		private final int ROW_PER_PAGE = 10;
 	// 어드민 정보수정
 	@GetMapping("/admin/adminUpdate")
 	public String getAdminUpdate() {
@@ -129,7 +133,7 @@ public class AdminController {
 
 		return "admin/adminIndex";
 	}
-	
+	/*
 	@Controller
 	public class productManagementController {
 		@GetMapping("/admin/productManagement")
@@ -138,5 +142,27 @@ public class AdminController {
 
 			return "admin/productManagement";
 		}
+	}*/
+	// 멤버 관리 리스트
+	@GetMapping("/admin/memberList")
+	public String getMemberList(HttpServletRequest request, Model model,@RequestParam(defaultValue = "1") int currentPage) {
+		System.out.println("AdminController()_memberList실행");
+		log.debug("★★★[boryeong]AdminController★★★"+currentPage);
+		
+		int beginRow = (currentPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
+		
+		Map<String, Object> map = adminService.getMemberList(currentPage, ROW_PER_PAGE);
+		// 값
+		model.addAttribute("beginRow", beginRow);
+		model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
+		model.addAttribute("memberList", map.get("memberList"));
+		model.addAttribute("lastPage", map.get("lastPage"));
+		model.addAttribute("currentPage", currentPage);
+		
+		int pageNo = ((beginRow / 100) * 10 + 1);
+		log.debug("★★★[boryeong]AdminController_pageNo★★★" + "pageNo");
+		model.addAttribute("pageNo", pageNo);
+		
+		return "admin/memberList";
 	}
 }
