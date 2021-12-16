@@ -8,11 +8,11 @@
 		SET
 			member_active = "휴면"
 		WHERE
-			DATEDIFF(NOW(),last_login_date) >= 180
+			DATEDIFF(NOW(),last_login) >= 180
 			OR
 			DATEDIFF(NOW(),create_date) >= 180
 			AND
-			last_login_date IS NULL
+			last_login IS NULL
 	</update>
 
 	<!-- 멤버 탈퇴(active를 탈퇴로 수정) -->

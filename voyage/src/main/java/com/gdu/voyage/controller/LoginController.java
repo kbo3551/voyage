@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -39,7 +40,7 @@ public class LoginController {
 	
 	// 로그인
 	@PostMapping("/login")
-	public String postLogin(HttpServletRequest request, RedirectAttributes redirect) {
+	public String postLogin(HttpServletRequest request, RedirectAttributes redirect,Model model) {
 		System.out.println("LoginController() 실행");
 		
 		String memberId = request.getParameter("id");
@@ -71,14 +72,27 @@ public class LoginController {
 	    	return "redirect:login";
 	    }
 	    
+	    // 회원 로그인, 관리자 가입이 되어있다면 관리자 세션까지 한번에 받아옴
 	    HttpSession session = request.getSession();
 	    session.setAttribute("loginMember", loginMember);
-	    
 	    if(loginMember.getMemberLevel()==2) {
 	    	Admin adminSession = loginService.adminLogin(memberId);
 	    	if(adminSession != null) {
 	    		session.setAttribute("adminSession", adminSession);
 	    	}
+	    }
+	    
+	    // 마지막 로그인 날짜를 현재 시각으로
+	    loginService.updateLastLogin(memberId);
+	    
+	    // 로그인 시 휴면계정을 활동으로 변환시킴.
+	    // Active update는 여기서만 사용하므로 따로 로그인 세션을 추가로 받아오거나 하지 않음
+	    if(loginMember.getMemberActive().equals("휴면")) {
+	    	loginService.updateEnableActive(memberId);
+	    	
+	    	model.addAttribute("msg", "휴면계정 비활성화 처리되었습니다.");
+		    model.addAttribute("url", "redirect:index");
+		    return "/alert";
 	    }
 	    
 	    return "redirect:index";
