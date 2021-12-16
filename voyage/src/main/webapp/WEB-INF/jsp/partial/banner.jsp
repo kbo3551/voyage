@@ -54,7 +54,8 @@
                                                     <li><a href="${pageContext.request.contextPath}/noticeList">공지사항</a></li>
                                                     <li><a href="${pageContext.request.contextPath}/qnaList">Q&A</a></li>
                                                     <c:if test="${loginMember.getMemberLevel() == 0}">
-                                                    	<li><a href="${pageContext.request.contextPath}/requestHost">사업자신청</a></li>
+                                                    	<!-- 필터를 먹여야하기 때문에 member에 집어넣음 -->
+                                                    	<li><a href="${pageContext.request.contextPath}/member/requestHost">사업자신청</a></li>
                                                     </c:if>
                                                 </ul>
                                             </li> 
