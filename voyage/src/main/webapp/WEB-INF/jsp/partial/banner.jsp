@@ -53,6 +53,10 @@
                                                 <ul class="submenu">
                                                     <li><a href="${pageContext.request.contextPath}/noticeList">공지사항</a></li>
                                                     <li><a href="${pageContext.request.contextPath}/qnaList">Q&A</a></li>
+                                                    <c:if test="${loginMember.getMemberLevel() == 0}">
+                                                    	<!-- 필터를 먹여야하기 때문에 member에 집어넣음 -->
+                                                    	<li><a href="${pageContext.request.contextPath}/member/requestHost">사업자신청</a></li>
+                                                    </c:if>
                                                 </ul>
                                             </li> 
                                             <li><button class="btn hashtag" style="color: rgba(190,240,80); background-color: rgba(255,255,255,0);">해시태그</button></li>
@@ -71,6 +75,7 @@
                                            			<li><a href="${pageContext.request.contextPath}/member/myPage"><i class="ti-user">${loginMember.getMemberNickname()}</i></a>
 			                                           	<ul class="submenu">
 				                                            <li><a href="${pageContext.request.contextPath}/member/myPage">마이페이지</a></li>
+				                                            <li><a href="${pageContext.request.contextPath}/member/coupon">쿠폰</a></li>
 				                                            <li><a href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
@@ -81,6 +86,7 @@
 			                                           	<ul class="submenu">
 				                                            <li><a href="${pageContext.request.contextPath}/member/myPage">마이페이지</a></li>
 				                                            <li><a href="${pageContext.request.contextPath}/host/hostIndex">사업자페이지</a></li>
+				                                            <li><a href="${pageContext.request.contextPath}/member/coupon">쿠폰</a></li>
 				                                            <li><a href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
@@ -91,6 +97,7 @@
 			                                           	<ul class="submenu">
 				                                            <li><a href="${pageContext.request.contextPath}/member/myPage">마이페이지</a></li>
 				                                            <li><a href="${pageContext.request.contextPath}/addAdmin">관리자회원가입</a></li>
+				                                            <li><a href="${pageContext.request.contextPath}/member/coupon">쿠폰</a></li>
 				                                            <li><a href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
@@ -101,6 +108,7 @@
 			                                           	<ul class="submenu">
 				                                            <li><a href="${pageContext.request.contextPath}/member/myPage">마이페이지</a></li>
 				                                            <li><a href="${pageContext.request.contextPath}/admin/adminIndex">관리자페이지</a></li>
+				                                            <li><a href="${pageContext.request.contextPath}/member/coupon">쿠폰</a></li>
 				                                            <li><a href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
