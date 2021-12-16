@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.HostMapper">
+
+	<!-- 사업자 신청 -->
+	<insert id="insertRequestHost" parameterType="com.gdu.voyage.vo.HostAsk">
+		INSERT INTO 
+			host_ask(
+				member_id,
+				host_reg,
+				create_date,
+				ask_state
+				)
+		VALUES(
+			#{memberId},
+			#{hostReg},
+			NOW(),
+			"승인대기"
+			);
+	</insert>
+
+	<!-- 신청중인 목록 카운트 -->
 	<select id="selectRequestingHost" resultType="int">
 		SELECT
 			COUNT(member_id)
