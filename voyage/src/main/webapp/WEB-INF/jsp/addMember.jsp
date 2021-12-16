@@ -124,7 +124,7 @@
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="nickname">Nick name</label>
-		                                    <input type="text" class="form-control" placeholder="닉네임 *" id="nickname" name="nickname" <c:if test="${param.duplication != 'nickname'}">value="${member.getMemberNickname()}"</c:if>>
+		                                    <input type="text" class="form-control" placeholder="닉네임(1~12글자) *" id="nickname" name="nickname" <c:if test="${param.duplication != 'nickname'}">value="${member.getMemberNickname()}"</c:if>>
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="phone">Phone</label>
@@ -243,8 +243,10 @@
 											} else if($("#postalCode").val() == ""){
 												alert('우편번호를 입력해주세요');
 												return;
-											}
-											else {
+											} else if($("#nickname").val().length > 12){
+												alert('닉네임이 너무 깁니다.');
+												return;
+											} else {
 												AddMember.submit();
 											}
 										};
