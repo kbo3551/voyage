@@ -70,6 +70,7 @@ public class NoticeService {
 		
 		insertNoticeMap.put("insertNotice",insertNotice);
 		
+		//파일이 존재한다면 파일 추가
 		if(noticeForm.getNoticefile() != null) {
 			Notice insertNoticeFile = noticeMapper.insertNoticefile(noticeFile);
 			log.debug(insertNoticeMap.toString()+"☆☆☆[DoHun] NoticeFileMapper insert + insert ,Service☆☆☆");
@@ -89,6 +90,7 @@ public class NoticeService {
 		Notice deleteNotice = noticeMapper.deleteNotice(notice);
 		log.debug(notice.toString()+"☆☆☆[DoHun] Notice delete + delete Map ,Service☆☆☆");
 		
+		//파일이 존재시 같이 삭제
 		if(noticeFile.getNoticeFileNo() >= 1) {
 			log.debug(notice.toString()+"☆☆☆[DoHun] NoticeFile notice + delete Map ,Service☆☆☆");
 			Notice deleteNoticeFile = noticeMapper.deleteNoticeFile(noticeFile);

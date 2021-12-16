@@ -44,29 +44,38 @@
 							<h3 class="h3 mb-3"> ${noticeNo}. 공지사항 상세항목</h3>
 						</div>
 						<div class="card">
-							<div>
-								${noticeNo()}
+							<div class="card-header">
+								<div>
+									${noticeNo()}
+								</div>
+								<div>
+									<h5 class="card_title mb-0">${noticeTitle()}</h5>
+								</div>
+								<div>
+									조회수 : <input type="text" readonly="readonly" value=" ${noticeViewCnt()}">
+								</div>
+							</div>
+							<div class="card_body">
+								<div>
+									<textarea cols="5" rows="5" readonly="readonly">${noticeContent()}</textarea>
+								</div>
+								<div>
+									<img class="card-img-top" src="${pageContext.request.contextPath}image/${noticeFileName+'.'+noticeFileExt}" alt="unplash">
+									${noticeFileNo()}
+								</div>
 							</div>
 							<div>
-								${noticeTitle()}	
+								생성일 : <input type="text" readonly="readonly" value="${craetDate()}">
 							</div>
 							<div>
-								${noticeContent()}
+								수정일 : <input type="text" readonly="readonly" value="${updateDate()}">
 							</div>
 							<div>
-								${noticeFileNo()}
+								<a href="${pageContext.request.contextPath}/admin/modfiyNotice?noticeNo=${noticeNo}" class="btn">수정</a>
 							</div>
 							<div>
-								조회수 : ${noticeViewCnt()}
+								<a href="${pageContext.request.contextPath}/admin/removeNotice?noticeNo=${noticeNo}" class="btn">삭제</a>
 							</div>
-							<div>
-								생성일 : ${craetDate()}
-							</div>
-							<div>
-								수정일 : ${updateDate()}
-							</div>
-							<a href="${pageContext.request.contextPath}/admin/modfiyNotice?noticeNo=${noticeNo}">수정</a>
-							<a href="${pageContext.request.contextPath}/admin/removeNotice?noticeNo=${noticeNo}">삭제</a>
 						</div>
 					</div>
 				</div>

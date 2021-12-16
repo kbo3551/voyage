@@ -23,10 +23,10 @@ public interface NoticeMapper {
 	Notice selectNoticeOne(int noticeNo);
 	// 공지사항 파일
 	List<NoticeFile> selectNoticeFileList();
-	
+	//입력, 삭제 단계에서 사용되는 추가 삭제
 	Notice insertNoticefile(NoticeFile noticefile);
 	Notice deleteNoticeFile(NoticeFile noticefile);
-	
+	//업데이트시 사용되는 파일 추가 삭제
 	Notice insertNoticefileUpdate(NoticeFile noticefile);
 	Notice deleteNoticeFileUpdate(NoticeFile noticefile);
 }
