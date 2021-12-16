@@ -102,7 +102,7 @@ public class AccomRoomService {
 				hashtag.setHashtag(h.getHashtag());
 				log.debug("☆[지혜]service☆ hashtag : " + hashtag);
 				
-				// 6-1) 테이블에 저장
+				// 4-1) 테이블에 저장
 				accomRoomMapper.insertAccomRoomHashtag(hashtag);
 			}
 		}
