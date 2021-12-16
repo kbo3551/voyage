@@ -39,8 +39,8 @@
                                             <li><a href="${pageContext.request.contextPath}/about">설명</a></li>
                                             <li><a href="${pageContext.request.contextPath}/setProductCategory">예약</a>
                                                 <ul class="submenu">
-                                                    <li><a href="${pageContext.request.contextPath}/templates_citylisting/getActivityProduct">체험</a></li>
-                                                    <li><a href="${pageContext.request.contextPath}/templates_citylisting/getAccomProduct">숙소</a></li>
+                                                    <li><a href="${pageContext.request.contextPath}/getActivityProductList">체험</a></li>
+                                                    <li><a href="${pageContext.request.contextPath}/getAccomProductList">숙소</a></li>
                                                 </ul>
                                             </li>
 										 	<li><a href="#">후기</a>
@@ -106,7 +106,7 @@
 		                                            </li>
                                            		</c:when>
                                            	</c:choose>
-                                            
+                                    	</ul>
                                     </nav>
                                 </div>
                                 <div id="hashtag">
