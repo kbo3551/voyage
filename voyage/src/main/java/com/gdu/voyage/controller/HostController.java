@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gdu.voyage.service.HostService;
 import com.gdu.voyage.vo.HostAsk;
@@ -43,7 +42,7 @@ public class HostController {
 	
 	// 사업자 신청 페이지 post
 	@PostMapping("/member/requestHost")
-	public String postRequestHost(HttpServletRequest request, RedirectAttributes redirect) {
+	public String postRequestHost(HttpServletRequest request, Model model) {
     	System.out.println("HostController() 실행");
     	
     	Member loginMember = (Member) request.getSession().getAttribute("loginMember");
@@ -64,7 +63,8 @@ public class HostController {
     	
     	// 추가
     	hostService.insertRequestHost(hostAsk);
-    	
-    	return "redirect:/index";
+    	model.addAttribute("msg", "사업자 신청이 완료되었습니다.\n승인까지 시간이 걸릴 수 있습니다.");
+	    model.addAttribute("url", "redirect:/index");
+	    return "/alert";
     }
 }
