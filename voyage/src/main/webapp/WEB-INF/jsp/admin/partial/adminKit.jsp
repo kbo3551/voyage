@@ -59,7 +59,7 @@
 				</li>
 	
 				<li class="sidebar-item">
-					<a class="sidebar-link" href="pages-profile.html">
+					<a class="sidebar-link" href="${pageContext.request.contextPath}/admin/memberList">
 	           			<i class="align-middle" data-feather="user"></i> <span class="align-middle">회원 관리</span>
 	         		</a>
 				</li>

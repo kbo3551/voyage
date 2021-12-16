@@ -3,6 +3,9 @@ package com.gdu.voyage.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.QnaService;
+import com.gdu.voyage.vo.Member;
 import com.gdu.voyage.vo.Qna;
 import com.gdu.voyage.vo.QnaForm;
 import com.gdu.voyage.vo.QnaImg;
@@ -39,13 +43,12 @@ public class QnaController {
 	}
 	// Qna 상세 내용
 	@GetMapping("/getQnaOne") 
-	public String getQnaOne(Model model, int qnaNo) {
+	public String getQnaOne(HttpServletRequest request, Model model, int qnaNo) {
 		System.out.println("getQnaOneController() 실행");
 		log.debug(qnaNo + "★★★★★★★★★★★ [다원] qnaNo_Controller() debug");
-	    Qna qna = qnaService.getQnaOneAndAnswer(qnaNo);
+		Qna qna = qnaService.getQnaOneAndAnswer(qnaNo);
 	    log.debug(qna + "★★★★★★★★★★★ [다원] qna_Controller() debug");
 	    model.addAttribute("qna", qna);
-	    
 		return "/templates_citylisting/getQnaOne";
 	}
 	// 질문 작성 get
@@ -81,7 +84,7 @@ public class QnaController {
 		System.out.println("removeQuestionController() 실행");
 		Qna qna = qnaService.getQnaOneAndAnswer(qnaNo);
 		model.addAttribute("qna", qna);
-		return "/templates_citylisting/removeQ";
+		return ("/templates_citylisting/removeQ");
 	}
 	@PostMapping
 	public String removeQ(Qna qna) {

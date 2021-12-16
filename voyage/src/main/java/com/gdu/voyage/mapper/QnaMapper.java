@@ -17,6 +17,8 @@ public interface QnaMapper {
 	int selectCountPage();
 	// 목록 상세 내용
 	Qna selectQnaOneAndAnswer(int qnaNo);
+	// memberId를 매개로 memberNickname select
+	String selectMemberNickname(Qna qna);
 	// 질문 수정
 	int modifyQ(Qna qna);
 	// 질문 삭제

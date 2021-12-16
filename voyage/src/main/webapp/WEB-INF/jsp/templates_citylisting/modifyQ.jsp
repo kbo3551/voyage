@@ -19,7 +19,7 @@
         		$('#removeImgBtn').click(function(){
         			$('#Imginput').children().last().remove();
         		});
-        		// send 버튼 눌렀을 때
+        		// save 버튼 눌렀을 때
         		$('#saveQBtn').click(function(){
 					if("memberNickname")
         			let ck = true;
@@ -115,8 +115,9 @@
                         <p class="mb-30">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or rannjdomised words which don't look even slightly believable. If you are going to use a passage of fhorem Ipvbsum, you need to orem Ipsum available, but the ma be sure there isvgnn't anything embarrassing.</p>
                         <p class="mb-30">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or rannjdomised words which don't look even slightly believable. If you are going to use a passage of fhorem Ipvbsum.</p>
                     	 -->
-                       <h3 class="mb-20">경고</h3>
-                       <p class="mb-30">질문은 최대한 상세히 되도록이면 사진이나 이미지파일 첨부해서 작성해주세요.</p>
+                       <h3 class="mb-20">안내</h3>
+                       <p class="mb-30">작성 시, 최대한 상세히 되도록이면 사진이나 이미지파일 첨부해서 작성해주세요.</p>
+                       <p class="mb-30">수정은 문의 제목, 문의 종류, 문의 내용, 비밀글 여부만 가능하며 닉네임이나 문의글 번호는 불가하다는 점 양해 부탁드립니다.</p>
                        <p class="mb-30">지나친 모욕, 원색적인 욕설 등 과한 비방글은 추후 관리자의 판단 하에 삭제될 수 있습니다.</p>
                     </div>
                 </div>

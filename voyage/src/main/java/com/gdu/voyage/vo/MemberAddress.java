@@ -8,4 +8,6 @@ public class MemberAddress {
 	private int memberAddressPostalCode;
 	private String memberAddressZip;
 	private String memberAddressDetail;
+	private String createDate;
+	private String updateDate;
 }

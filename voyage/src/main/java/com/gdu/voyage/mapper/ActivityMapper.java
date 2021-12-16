@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.gdu.voyage.vo.AccomBuilding;
 import com.gdu.voyage.vo.Activity;
 import com.gdu.voyage.vo.ActivityAddress;
 import com.gdu.voyage.vo.ActivityImage;
@@ -15,8 +16,12 @@ public interface ActivityMapper {
 	// 체험 조회 list
 		List<Activity> selectActivityList(int pageNo);
 		int selectCountPage();
+		
 	// 체험 조회 one
 		List<Activity> selectActivityOne(int activityNo);
+		
+	// 숙소 공개,승인여부 수정
+	int activityUpdate(Activity activity);
 		
 	// 체험 입력 : 체험 정보 + 이미지 + 추천장소 + 해시태그
 	int insertActivity(Activity activity);

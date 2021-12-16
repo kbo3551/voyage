@@ -43,7 +43,11 @@ public class AccomBuildingService {
 		}
 	
 	// 숙소 공개, 승인여부 수정
-		
+		public AccomBuilding accomBuildingUpdate(AccomBuilding accomBuilding) {
+			log.debug(accomBuilding.toString() + "********[상훈] AccomBuildingUpdate debug");
+			accomBuildingMapper.accomBuildingUpdate(accomBuilding);
+			return accomBuilding;
+		}
 	
 	// 숙소-건물 입력
 	public void addAccomBuilding(AccomBuildingForm accomBuildingForm, String realPath) {

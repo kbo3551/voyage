@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.AccomBuildingService;
+import com.gdu.voyage.service.AccomRoomService;
 import com.gdu.voyage.vo.AccomBuilding;
 import com.gdu.voyage.vo.AccomBuildingForm;
-import com.gdu.voyage.vo.Qna;
+import com.gdu.voyage.vo.AccomRoomForm;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,6 +27,8 @@ import lombok.extern.slf4j.Slf4j;
 public class AccomController {
 	@Autowired
 	AccomBuildingService accomBuildingService;
+	@Autowired
+	AccomRoomService accomRoomService;
 	private Integer currentPage = 1;
 
 	// 사업자
@@ -51,6 +54,29 @@ public class AccomController {
 		accomBuildingService.addAccomBuilding(accomBuildingForm, realPath);
 		return "redirect:/accomBuildingList";
 	}
+	
+	// 숙소_객실 등록
+	@GetMapping("/host/addAccomRoom")
+	public String addAccomRoom() {
+		log.debug("AccomController 실행");
+		return "/host/addAccomRoom";
+	}
+
+	// 숙소_객실 등록
+	@PostMapping("/host/addAccomRoom")
+	public String addAccomRoom(AccomRoomForm accomRoomForm, HttpServletRequest request) {
+		log.debug("AccomController 실행");
+
+		// 참조타입 객체를 log.debug로 출력할 때는 toString()으로 출력함
+		log.debug("★[지혜]controller★ accomRoomForm : " + accomRoomForm.toString());
+		
+		// 파일 저장 시, 절대경로를 알기 위해 HttpServletRequest를 사용해서 realPath를 잡아준 뒤 변수에 저장함
+		String realPath = request.getServletContext().getRealPath("resources/image/accom_room//");
+		
+		// accomRoomForm과 realPath를 매개변수로 하여 같이 service에 전달
+		accomRoomService.addAccomRoom(accomRoomForm, realPath);
+		return "redirect:/accomRoomList";
+	}
 
 	// 관리자
 	// accomBuilding 목록 조회
@@ -73,5 +99,18 @@ public class AccomController {
 	}
 	
 	// accomBuilding state 승인여부 수정
+	// 수정페이지 이동
+	@GetMapping("/admin/accomBuildingUpdate")
+	public String AccomBuildingUpdate() {
+		System.out.println("accomBuildingUpdate 실행!!");
+		return "/admin/accomBuildingUpdate";
+	}
+	
+	// 페이지 수정
+	@PostMapping("/admin/accomBuildingUpdate")
+	public String AccomBuildingUpdate(AccomBuilding accomBuilding) {
+		accomBuildingService.accomBuildingUpdate(accomBuilding);
+		return "redirect:/admin/accomBuildingOne?accomBuildingNo=" +accomBuilding.getAccomBuildingNo();
+	}
 	
 }

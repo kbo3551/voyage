@@ -11,25 +11,25 @@
         <script>
         	// 버튼 눌렀을 때, 이동 경로 설정
         	$(function(){
-        		// 변수 qnaNo 생성
-        		// qnaNo 값 저장
-        		var qnaNo = $('#qnaNo');
         		// 변수 ck 생성
         		// 관리자 답변 여부 체크 용도로 사용
-        		// false : 수정 가능 / true : 수정 불가
+        		// false : 수정, 삭제 가능 / true : 수정, 삭제 불가
         		var ck;
         		// Back 버튼 눌렀을 때
         		$('#goBackBtn').click(function(){
         			location.href = '/qnaList';
         		});
         		// Edit 버튼 눌렀을 때
-        		$('#moveToModQBtn').click(function(){
-        			
-        			document.modifyQ.submit();
+        		$('#moveModQBtn').click(function(){
+        			// ck = true -> 페이지 이동
+        			// ck = false -> 안내메시지 띄우고, 페이지 이동 불가
+					location.href = '/modifyQ?qnaNo=' + $('#qnaNo').val();
         		});
         		// Del 버튼 눌렀을 때
-        		$('#moveToRemQBtn').click(function(){
-        			location.href = '/romoveQ?qnaNo=${qna.qnaNo}' + qnaNo;
+        		$('#moveRemQBtn').click(function(){
+        			// ck = true -> 페이지 이동
+        			// ck = false -> 안내메시지 띄우고, 페이지 이동 불가
+        			location.href = '/romoveQ?qnaNo=' + $('#qnaNo').val();
         		});
         	});
         </script>
@@ -187,8 +187,12 @@
                             <div class="form-group mt-3">
                             	<!-- 원본 버튼 : Send  -->
                                 <button type="button" id="goBackBtn"class="button button-contactForm boxed-btn">Back</button>
-                                <a href="${pageContext.request.contextPath}/modifyQ?qnaNo=${qna.qnaNo}" type="button" class="button button-contactForm boxed-btn">edit</a>
-                            	<a href="${pageContext.request.contextPath}/removeQ?qnaNo=${qna.qnaNo}" type="button" class="button button-contactForm boxed-btn">Del</a>
+                                <button type="button" id="moveModQBtn" class="button button-contactForm boxed-btn">Edit</button>
+                                <button type="button" id="moveRemQBtn" class="button button-contactForm boxed-btn">Del</button>
+                                <!-- 
+                                	<a href="${pageContext.request.contextPath}/modifyQ?qnaNo=${qna.qnaNo}" type="button" class="button button-contactForm boxed-btn">edit</a>
+                            		<a href="${pageContext.request.contextPath}/removeQ?qnaNo=${qna.qnaNo}" type="button" class="button button-contactForm boxed-btn">Del</a>  
+                            	-->
                             </div>
                     </div>
                 </div>

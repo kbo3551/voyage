@@ -16,8 +16,17 @@
 			<result column="answer_content" property="answerContent"/>
 		</collection>
 	</resultMap>
+	<!--  -->
+	<select id="selectMemberNickname" parameterType="String" resultType="String">
+		SELECT
+			member_nickname
+		FROM qna
+		<where>
+			member_id = ${memberId}
+		</where>
+	</select>
 	<!-- 질문 목록 조회 -->
-	<select id="selectQnaListByCategory" parameterType="Map" resultMap="resultQna">
+	<select id="selectQnaListByCategory" parameterType="com.gdu.voyage.vo.Qna">
 		SELECT
 			qna_no,
 			member_nickname,
