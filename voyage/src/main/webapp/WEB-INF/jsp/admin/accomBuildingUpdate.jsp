@@ -27,51 +27,67 @@
 	<div class="main">
 		<main class="content">
 			<div class="container-fluid p-0">
-	
+				<form class="form-contact contact_form mb-80" action="${pageContext.request.contextPath}/admin/accomBuildingUpdate" method="post" name="accomBuildingUpdate" id="accomBuildingUpdateForm">
 				<h1 class="h3 mb-3"><strong>상세 보기</strong></h1>
 					<div class="row">
 						<div>
 							<div class="card flex-fill">
 								<div class="card-header">
 	
-									<h5 class="card-title mb-0">Latest AccomBuilding</h5>
+									<h5 class="card-title mb-0">Update AccomBuilding</h5>
 								</div>
-								<table class="table table-hover my-0">
-									<thead>
-										<tr>
-											<th>Building No</th>
-											<th>Host No</th>
-											<th>Building Name</th>
-											<th>Building Description</th>
-											<th>Building Phone</th>
-											<th>Building State</th>
-											<th>Building State Admin</th>
-											<th>create Date</th>
-											<th>update Date</th>
-											<th>수정하기</th>
-										</tr>
-									</thead>
-									<tbody> 
-										<c:forEach items="${accomBuilding}" var="Accom" >
+								
+									<table class="table table-hover my-0">
+										<thead>
 											<tr>
-										        <td>${Accom.accomBuildingNo}</td>
-										        <td>${Accom.hostNo}</td>
-										        <td>${Accom.accomBuildingName}</td>
-										        <td>${Accom.accomBuildingDescription}</td>
-										        <td>${Accom.accomBuildingPhone}</td>
-										        <td>${Accom.accomBuildingState}</td>
-										        <td>${Accom.accomBuildingStateAdmin}</td>
-										        <td>${Accom.createDate}</td>
-										        <td>${Accom.updateDate}</td>
-										        <td><a href="${pageContext.request.contextPath}/admin/accomBuildingUpdate">수정하기</a></td>
-										        </tr>
-									    </c:forEach>
+												<th>Building No</th>
+												<th>Host No</th>
+												<th>Building Name</th>
+												<th>Building Description</th>
+												<th>Building Phone</th>
+												<th>Building State</th>
+												<th>Building State Admin</th>
+												<th>create Date</th>
+												<th>update Date</th>
+											</tr>
+										</thead>
+									</table>
+									<tbody>
+									<tr>
+									<td><input name="accomBuildingNo" id="accomBuildingNo" type="text" value="${accomBuilding.accomBuildingNo}" readonly="readonly"/></td>
+	                                
+	                                <td><input name="hostNo" id="hostNo" type="text" value="${accomBuilding.hostNo}" readonly="readonly"/></td>
+	                                
+	                                <td><input name="accomBuildingName" id="accomBuildingName" type="text" value="${accomBuilding.accomBuildingName}" readonly="readonly"/></td>
+	                                
+	                                <td><input name="accomBuildingDescription" id="accomBuildingDescription" type="text" value="${accomBuilding.accomBuildingDescription}" readonly="readonly"/></td>
+	                                
+	                                <td><input name="accomBuildingPhone" id="accomBuildingPhone" type="text" value="${accomBuilding.accomBuildingPhone}" readonly="readonly"/></td>
+	                                <td>
+                                		<select name="accomBuildingState" id="accomBuildingState">
+				                            <option value="공개">공개</option>
+				                            <option value="비공개">비공개</option>
+										</select>
+                                	</td>
+                                			
+                                	<td>
+                                		<select name="accomBuildingStateAdmin" id="accomBuildingStateAdmin">
+				                           	<option value="승인대기">승인대기</option>
+				                          	<option value="승인완료">승인완료</option>
+				                            <option value="점검">점검</option>
+				                            <option value="삭제">삭제</option>
+										</select>
+                                	</td>
+	                                <td><input name="createDate" id="createDate" type="text" value="${accomBuilding.createDate}" readonly="readonly"/></td>
+	                                
+	                                <td><input name="updateDate" id="updateDate" type="text" value="${accomBuilding.updateDate}" readonly="readonly"/></td>
+	                                </tr>
 									</tbody>
-								</table>
-							
+	                                	<button type="submit">수정하기</button>
 							</div>
 						</div>
 					</div>
+					</form>
 				</div>
 			</main>
 		</div>
