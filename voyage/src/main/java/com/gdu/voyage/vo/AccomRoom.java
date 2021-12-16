@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class AccomRoom {
 	private int accomRoomNo;
+	private int accomBuildingNo;
 	private int hostNo;
 	private String accomRoomName;
 	private int accomRoomPrice;
