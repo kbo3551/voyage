@@ -16,7 +16,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.gdu.voyage.mapper.MemberMapper;
 import com.gdu.voyage.mapper.QnaMapper;
+import com.gdu.voyage.vo.Member;
 import com.gdu.voyage.vo.Qna;
 import com.gdu.voyage.vo.QnaForm;
 import com.gdu.voyage.vo.QnaImg;
@@ -33,6 +35,10 @@ public class QnaService {
 	// qnaContent, qnaSecret value => null...
 	// mapper까지는 출력했을 때 문제 없었고, service부터 null값 들어옴...
 	public Qna getQnaOneAndAnswer(int qnaNo) {
+		Qna qna = new Qna();
+		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] selectQnaOne_memberId debug" + qna.getMemberId());
+		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] selectQnaOne_qnaNo debug" + qnaNo);
+		qna.setMemberNickname(qnaMapper.selectMemberNickname(qna));
 		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] selectQnaOne debug" + qnaMapper.selectQnaOneAndAnswer(qnaNo));
 		return qnaMapper.selectQnaOneAndAnswer(qnaNo);
 	}

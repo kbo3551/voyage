@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class Qna {
 	private int qnaNo;
+	private String memberId;
 	private String memberNickname;
 	private String qnaCategory;
 	private String qnaTitle;
