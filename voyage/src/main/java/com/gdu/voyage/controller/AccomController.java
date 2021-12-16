@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gdu.voyage.service.AccomBuildingService;
 import com.gdu.voyage.vo.AccomBuilding;
@@ -73,5 +74,18 @@ public class AccomController {
 	}
 	
 	// accomBuilding state 승인여부 수정
+	// 수정페이지 이동
+	@GetMapping("/admin/accomBuildingUpdate")
+	public String AccomBuildingUpdate() {
+		System.out.println("accomBuildingUpdate 실행!!");
+		return "/admin/accomBuildingUpdate";
+	}
+	
+	// 페이지 수정
+	@PostMapping("/admin/accomBuildingUpdate")
+	public String AccomBuildingUpdate(AccomBuilding accomBuilding) {
+		accomBuildingService.accomBuildingUpdate(accomBuilding);
+		return "redirect:/admin/accomBuildingOne?accomBuildingNo=" +accomBuilding.getAccomBuildingNo();
+	}
 	
 }

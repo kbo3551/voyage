@@ -31,6 +31,6 @@ public interface AccomBuildingMapper {
 	// 숙소 상세 조회 one
 	List<AccomBuilding> selectAccomBuildingOne(int accomBuildingNo);
 	
-	// 숙소 승인여부 수정
+	// 숙소 공개,승인여부 수정
 	int accomBuildingUpdate(AccomBuilding accomBuilding);
 }
