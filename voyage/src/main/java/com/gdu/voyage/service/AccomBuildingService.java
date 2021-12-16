@@ -42,6 +42,9 @@ public class AccomBuildingService {
 			return accomBuildingMapper.selectAccomBuildingOne(accomBuildingNo);
 		}
 	
+	// 숙소 공개, 승인여부 수정
+		
+	
 	// 숙소-건물 입력
 	public void addAccomBuilding(AccomBuildingForm accomBuildingForm, String realPath) {
 		// 매개변수 디버깅 //accomBuildingForm  --> 숙소-건물정보 + 이미지 + 시설 + 추천장소 + 해시태그

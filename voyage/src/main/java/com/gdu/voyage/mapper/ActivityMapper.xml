@@ -6,8 +6,8 @@
             SELECT 
             activity_no as activityNo,
             activity_name as activityName,
-            activity_opendate as activityOpenDate,
-            activity_closedate as activityCloseDate,
+            activity_open_date as activityOpenDate,
+            activity_close_date as activityCloseDate,
             activity_description as activityDescription,
             create_date as createDate,
             update_date as updateDate
@@ -18,11 +18,11 @@
             SELECT activity_no as activityNo,
             host_no as HostNo,
             activity_name as activityName,
-            activity_opendate as activityOpenDate,
-            activity_closedate as activityCloseDate,
+            activity_open_date as activityOpenDate,
+            activity_close_date as activityCloseDate,
             activity_price as activityPrice,
-            activity_openhour as activityOpenHour,
-            activity_closedate as activityCloseHour,
+            activity_open_hour as activityOpenHour,
+            activity_close_hour as activityCloseHour,
             activity_max_t as activityMaxT,
             activity_max_p as activityMaxP,
             activity_description as activityDescription,
@@ -96,7 +96,7 @@
 			#{activityNo},
 			#{activityAddressPostalCode},
 			#{activityAddressZip},
-			#activityAddressDetail},
+			#{activityAddressDetail},
 			NOW(),
 			NOW()
 		)

@@ -30,9 +30,10 @@ public class QnaService {
 	@Autowired private QnaMapper qnaMapper;
 	
 	// Qna 게시판 목록 상세 내용
+	// qnaContent, qnaSecret value => null...
+	// mapper까지는 출력했을 때 문제 없었고, service부터 null값 들어옴...
 	public Qna getQnaOneAndAnswer(int qnaNo) {
-		// ISSUE : qnaContent, updateDate, createDate 값 null값 넘어옴
-		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_getQnaOneAndAnswer_qnaNo debug" + qnaMapper.selectQnaOneAndAnswer(qnaNo));
+		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] selectQnaOne debug" + qnaMapper.selectQnaOneAndAnswer(qnaNo));
 		return qnaMapper.selectQnaOneAndAnswer(qnaNo);
 	}
 	// Qna 게시판 목록 카테고리 별 조회
