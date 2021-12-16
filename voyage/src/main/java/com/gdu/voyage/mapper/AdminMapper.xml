@@ -68,4 +68,82 @@
 		WHERE 
 			admin_id = #{adminId}
 </update>
+
+
+	<resultMap type="com.gdu.voyage.vo.MemberAddress" id="memberAddress">
+		<result column="member_address_postal_code" property="memberAddressPostalCode" />
+		<result column="member_address_zip" property="memberAddressZip" />
+		<result column="member_address_detail" property="memberAddressDetail" />
+		<result column="create_date" property="createDate" />
+		<result column="update_date" property="updateDate" />
+	</resultMap>
+ 
+	<resultMap type="com.gdu.voyage.vo.Member" id="member">
+		<result column="member_id" property="memberId" />
+		<result column="member_first_name" property="memberFirstName" />
+		<result column="member_last_name" property="memberLastName" />
+		<result column="member_nickname" property="memberNickname" />
+		<result column="member_phone" property="memberPhone" />
+		<result column="member_email" property="memberEmail" />
+		<result column="member_reg" property="memberReg" />
+		<result column="member_description" property="memberDescription" />
+		<result column="member_level" property="memberLevel" />
+		<result column="member_active" property="memberActive" />
+		<result column="create_date" property="createDate" />
+		<result column="update_date" property="updateDate" />
+		<result column="last_login" property="lastLogin" />
+		<collection property="memberAddress" resultMap="memberAddress" />
+	</resultMap>
+	
+<!-- 멤버 리스트 출력 -->
+<select id="selectMemberList" parameterType="com.gdu.voyage.vo.Member" resultMap="member">
+	SELECT 
+		member_id,
+		member_pw,
+		member_first_name,
+		member_last_name,
+		member_nickname,
+		member_level,
+		member_active
+	FROM 
+		member 
+	LIMIT 
+		#{beginRow}, #{rowPerPage}
+</select>
+<!-- 멤버 상세보기 -->
+<select id="selectMemberOne" parameterType="com.gdu.voyage.vo.Member" resultMap="member">
+	SELECT 
+		m.member_id,
+		m.member_pw,
+		m.member_first_name,
+		m.member_last_name,
+		m.member_nickname,
+		m.member_phone,
+		m.member_email,
+		m.member_reg,
+		m.member_description,
+		m.member_level,
+		m.member_active,
+		m.create_date,
+		m.update_date,
+		m.last_login,
+		a.member_address_postal_code,
+		a.member_address_zip,
+		a.member_address_detail,
+		a.create_date,
+		a.update_date
+	FROM 
+		member m
+	INNER JOIN 
+		member_address a
+	ON
+		m.member_id = a.member_id
+	WHERE m.member_id = #{memberId}
+</select>
+	<select id="memberTotalCount" resultType="int" parameterType="com.gdu.voyage.vo.Member">
+ 	SELECT
+		COUNT(*)
+ 	FROM 
+ 		member
+	</select>
 </mapper>

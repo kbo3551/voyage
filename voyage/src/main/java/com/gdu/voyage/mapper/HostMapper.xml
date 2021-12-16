@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.voyage.mapper.HostMapper">
+	<select id="selectRequestingHost" resultType="int">
+		SELECT
+			COUNT(member_id)
+		FROM
+			host_ask
+		WHERE
+			member_id = #{memberId}
+			AND 
+			ask_state = '승인대기'
+	</select>
+</mapper>
