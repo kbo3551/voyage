@@ -18,6 +18,16 @@ import lombok.extern.slf4j.Slf4j;
 public class LoginService {
 	@Autowired LoginMapper loginMapper;
 	
+	public void updateEnableActive(String memberId) {
+		loginMapper.updateEnableActive(memberId);
+		return;
+	}
+	
+	public void updateLastLogin(String memberId) {
+		loginMapper.updateLastLogin(memberId);
+		return;
+	}
+	
 	public int selectBanMember(String memberId) {
 		return loginMapper.selectBanMember(memberId);
 	}

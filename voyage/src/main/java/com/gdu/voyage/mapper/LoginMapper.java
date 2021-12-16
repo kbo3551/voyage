@@ -7,6 +7,8 @@ import com.gdu.voyage.vo.Member;
 
 @Mapper
 public interface LoginMapper {
+	void updateEnableActive(String memberId);
+	void updateLastLogin(String memberId);
 	int selectBanMember(String memberId);
 	int selectDeleteMember(String memberId);
 	// Member 로그인 정보

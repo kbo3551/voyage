@@ -16,12 +16,18 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberService {
 	@Autowired MemberMapper memberMapper;
 	
+ /* 휴면 계정 처리. 마지막 로그인 날짜가 지금으로부터 반년 이상이거나
+	생성날짜가 반년 이상이고 로그인 기록이 없는 대상을 휴면 처리 */
+	public int updateDormantMember() {
+		return memberMapper.updateDormantMember();
+	}
+	
 	// 회원 PW 변경
-		public void deleteMember(Member member) {
-			log.trace("☆service☆"+member);
-			memberMapper.deleteMember(member);
-			return;
-		}
+	public void deleteMember(Member member) {
+		log.trace("☆service☆"+member);
+		memberMapper.deleteMember(member);
+		return;
+	}
 	
 	// 회원 PW 변경
 	public void updateMemberPw(Member member) {

@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.MemberMapper">
+	<!-- 휴면 계정 처리. 마지막 로그인 날짜가 지금으로부터 반년 이상이거나
+		생성날짜가 반년 이상이고 로그인 기록이 없는 대상을 휴면 처리 -->
+	<update id="updateDormantMember">
+		UPDATE member
+		SET
+			member_active = "휴면"
+		WHERE
+			DATEDIFF(NOW(),last_login) >= 180
+			OR
+			DATEDIFF(NOW(),create_date) >= 180
+			AND
+			last_login IS NULL
+	</update>
+
 	<!-- 멤버 탈퇴(active를 탈퇴로 수정) -->
 	<update id="deleteMember"> 
 		UPDATE member
