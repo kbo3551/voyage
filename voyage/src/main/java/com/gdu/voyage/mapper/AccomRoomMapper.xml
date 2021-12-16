@@ -5,6 +5,7 @@
 	<!-- 숙소-객실 입력 : selectKey를 사용하여 숙소객실의 식별번호를 받아온뒤 나머지 추가 정보들도 함께 insert -->
 	<insert id="insertAccomRoom" parameterType="com.gdu.voyage.vo.AccomRoom">
 		INSERT INTO accom_room (
+			accom_building_no,
 			host_no,
 			accom_room_name,
 			accom_room_price,
@@ -14,6 +15,7 @@
 			create_date,
 			update_date
 		) VALUES (
+			'34',
 			'3',
 			#{accomRoomName},
 			#{accomRoomPrice},
