@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.voyage.mapper.AccomRoomMapper">
+	<!-- 사업자 -->
+	<!-- 숙소-객실 입력 : selectKey를 사용하여 숙소객실의 식별번호를 받아온뒤 나머지 추가 정보들도 함께 insert -->
+	<insert id="insertAccomRoom" parameterType="com.gdu.voyage.vo.AccomRoom">
+		INSERT INTO accom_room (
+			host_no,
+			accom_room_name,
+			accom_room_price,
+			accom_room_description,
+			accom_room_stan,
+			accom_room_max,
+			create_date,
+			update_date
+		) VALUES (
+			'3',
+			#{accomRoomName},
+			#{accomRoomPrice},
+			#{accomRoomDescription},
+			#{accomRoomStan},
+			#{accomRoomMax},
+			NOW(),
+			NOW()
+		)
+		<selectKey keyProperty="accomRoomNo" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<!-- 숙소-객실의 이미지 파일 입력 -->
+	<insert id="insertAccomRoomImage" parameterType="com.gdu.voyage.vo.AccomRoomImage">
+		INSERT INTO accom_room_image (
+			accom_room_no,
+			accom_room_image_name,
+			accom_room_image_ext,
+			accom_room_image_size
+		) VALUES (
+			#{accomRoomNo},
+			#{accomRoomImageName},
+			#{accomRoomImageExt},
+			#{accomRoomImageSize}
+		)
+	</insert>
+	
+	<!-- 숙소-객실의 물품옵션 입력 -->
+	<insert id="insertAccomRoomItem" parameterType="com.gdu.voyage.vo.AccomRoomItem">
+		INSERT INTO accom_room_item (
+			accom_room_no,
+			accom_room_item_name,
+			accom_room_item_qnt,
+			accom_room_item_price
+		) VALUES (
+			#{accomRoomNo},
+			#{accomRoomItemName},
+			#{accomRoomItemQnt},
+			#{accomRoomItemPrice}
+		)
+	</insert>
+	
+	<!-- 숙소-객실의 해시태그 입력 -->
+	<insert id="insertAccomRoomHashtag" parameterType="com.gdu.voyage.vo.Hashtag">
+		INSERT INTO hashtag (
+			iden_no,
+			table_name,
+			hashtag,
+			create_date
+		) VALUES (
+			#{idenNo},
+			#{tableName},
+			#{hashtag},
+			NOW()
+		)
+	</insert>
+</mapper>
