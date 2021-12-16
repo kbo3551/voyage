@@ -51,7 +51,7 @@
 												<th>update Date</th>
 											</tr>
 										</thead>
-									</table>
+									
 									<tbody>
 									<tr>
 									<td><input name="accomBuildingNo" id="accomBuildingNo" type="text" value="${accomBuilding.accomBuildingNo}" readonly="readonly"/></td>
@@ -83,6 +83,7 @@
 	                                <td><input name="updateDate" id="updateDate" type="text" value="${accomBuilding.updateDate}" readonly="readonly"/></td>
 	                                </tr>
 									</tbody>
+									</table>
 	                                	<button type="submit">수정하기</button>
 							</div>
 						</div>
