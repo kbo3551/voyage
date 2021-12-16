@@ -29,7 +29,7 @@ public interface AccomBuildingMapper {
 	int selectCountPage();
 	
 	// 숙소 상세 조회 one
-	List<AccomBuilding> selectAccomBuildingOne(int accomBuildingNo);
+	AccomBuilding selectAccomBuildingOne(int accomBuildingNo);
 	
 	// 숙소 공개,승인여부 수정
 	int accomBuildingUpdate(AccomBuilding accomBuilding);

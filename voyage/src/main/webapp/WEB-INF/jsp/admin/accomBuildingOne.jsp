@@ -60,20 +60,18 @@
 										</tr>
 									</thead>
 									<tbody> 
-										<c:forEach items="${accomBuilding}" var="Accom" >
 											<tr>
-										        <td>${Accom.accomBuildingNo}</td>
-										        <td>${Accom.hostNo}</td>
-										        <td>${Accom.accomBuildingName}</td>
-										        <td>${Accom.accomBuildingDescription}</td>
-										        <td>${Accom.accomBuildingPhone}</td>
-										        <td>${Accom.accomBuildingState}</td>
-										        <td>${Accom.accomBuildingStateAdmin}</td>
-										        <td>${Accom.createDate}</td>
-										        <td>${Accom.updateDate}</td>
+										        <td>${accomBuilding.accomBuildingNo}</td>
+										        <td>${accomBuilding.hostNo}</td>
+										        <td>${accomBuilding.accomBuildingName}</td>
+										        <td>${accomBuilding.accomBuildingDescription}</td>
+										        <td>${accomBuilding.accomBuildingPhone}</td>
+										        <td>${accomBuilding.accomBuildingState}</td>
+										        <td>${accomBuilding.accomBuildingStateAdmin}</td>
+										        <td>${accomBuilding.createDate}</td>
+										        <td>${accomBuilding.updateDate}</td>
 										        <td><a href="${pageContext.request.contextPath}/admin/accomBuildingUpdate">수정하기</a></td>
-										        </tr>
-									    </c:forEach>
+										   </tr>
 									</tbody>
 								</table>
 							

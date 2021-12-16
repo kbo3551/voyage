@@ -93,7 +93,7 @@ public class AccomController {
 	@GetMapping("/admin/accomBuildingOne")
 	public String getAccomBuildingOne(Model model, int accomBuildingNo) {
 		System.out.println("accomBuildingOne 실행!!");
-		List<AccomBuilding> accomBuilding = accomBuildingService.getAccomBuildingOne(accomBuildingNo);
+		AccomBuilding accomBuilding = accomBuildingService.getAccomBuildingOne(accomBuildingNo);
 		model.addAttribute("accomBuilding", accomBuilding);
 		return "/admin/accomBuildingOne";
 	}
@@ -101,14 +101,16 @@ public class AccomController {
 	// accomBuilding state 승인여부 수정
 	// 수정페이지 이동
 	@GetMapping("/admin/accomBuildingUpdate")
-	public String AccomBuildingUpdate() {
+	public String accomBuildingUpdate(Model model, int accomBuildingNo) {
 		System.out.println("accomBuildingUpdate 실행!!");
+		AccomBuilding accomBuilding = accomBuildingService.getAccomBuildingOne(accomBuildingNo);
+		model.addAttribute("accomBuilding", accomBuilding);
 		return "/admin/accomBuildingUpdate";
 	}
 	
 	// 페이지 수정
 	@PostMapping("/admin/accomBuildingUpdate")
-	public String AccomBuildingUpdate(AccomBuilding accomBuilding) {
+	public String accomBuildingUpdate(AccomBuilding accomBuilding) {
 		accomBuildingService.accomBuildingUpdate(accomBuilding);
 		return "redirect:/admin/accomBuildingOne?accomBuildingNo=" +accomBuilding.getAccomBuildingNo();
 	}
