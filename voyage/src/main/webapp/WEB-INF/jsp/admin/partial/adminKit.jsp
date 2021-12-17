@@ -69,6 +69,12 @@
 	           			<i class="align-middle" data-feather="user"></i> <span class="align-middle">사업자 관리</span>
 	         		</a>
 				</li>
+				
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="pages-profile.html">
+	           			<i class="align-middle" data-feather="user"></i> <span class="align-middle">사업자 신청 관리</span>
+	         		</a>
+				</li>
 	
 				<li class="sidebar-item">
 					<a class="sidebar-link" href="${pageContext.request.contextPath}/admin/accomBuildingList">
