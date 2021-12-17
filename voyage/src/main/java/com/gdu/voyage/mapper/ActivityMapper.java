@@ -18,6 +18,9 @@ public interface ActivityMapper {
 		
 	// 체험 조회 one
 	Activity selectActivityOne(int activityNo);
+	
+	// 사업자별 체험리스트
+	Activity selectActivityListByHost(int hostNo);
 		
 	// 숙소 공개,승인여부 수정
 	int activityUpdate(Activity activity);

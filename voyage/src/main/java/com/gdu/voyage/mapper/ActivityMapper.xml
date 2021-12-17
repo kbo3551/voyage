@@ -124,6 +124,19 @@
 		)
 	</insert>
 	
+	
+	<!-- 사업자별 등록된 체험 리스트 -->
+	<select id="selectActivityListByHost" resultType="com.gdu.voyage.vo.Activity">
+		SELECT 
+		   activity_name activityName,
+		   create_date createDate,
+		   activity_state activityState
+		FROM
+			activity
+		WHERE
+			host_no = #{hostNo}
+	</select>
+	
 	<!-- 관리자 -->
 	<!-- 등록된 체험을 불러옴 -->
 	<select id="selectActivityList" resultType="com.gdu.voyage.vo.Activity">
