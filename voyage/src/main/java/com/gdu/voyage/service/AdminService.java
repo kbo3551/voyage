@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.gdu.voyage.mapper.AdminMapper;
 import com.gdu.voyage.vo.Admin;
 import com.gdu.voyage.vo.AdminAddress;
+import com.gdu.voyage.vo.HostAsk;
 import com.gdu.voyage.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
@@ -87,10 +88,37 @@ public class AdminService {
 		return returnMap;
 		
 	}
-		// 회원 등급/상태 수정 
-		public void updateMember(Member member) {
-			log.debug("☆☆☆[bryeong]AdminService 회원 수정☆☆☆"+member.toString());
-			adminMapper.updateMember(member);
-			return ;
+	// 회원 등급/상태 수정 
+	public void updateMember(Member member) {
+		log.debug("☆☆☆[bryeong]AdminService 회원 수정☆☆☆"+member.toString());
+		adminMapper.updateMember(member);
+		return ;
 	}
+	// 사업자 신청 목록 리스트
+	public Map<String, Object> getHostAskList(int currentPage, int rowPerPage){
+		
+		Map<String, Object> paraMap = new HashMap<>();
+		int beginRow = (currentPage-1) * rowPerPage;
+		
+		paraMap.put("beginRow", beginRow);
+		paraMap.put("rowPerPage", rowPerPage);
+		
+		List<HostAsk> hostAskList = adminMapper.selectHostAskList(paraMap);
+		
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		int lastPage = 0;
+		int totalCount = adminMapper.hostAskTotalCount();
+	
+		lastPage = totalCount / rowPerPage;
+		
+		if(totalCount % rowPerPage !=0) {
+			lastPage += 1;
+		}
+		
+		returnMap.put("hostAskList", hostAskList);
+		returnMap.put("lastPage", lastPage);
+		return returnMap;
+	}
+		
 }

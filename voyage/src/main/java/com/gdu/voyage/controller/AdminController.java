@@ -186,6 +186,27 @@ public class AdminController {
 	@PostMapping("admin/updateMember")
 	public String postUpdateMember(Member member) {
 	adminService.updateMember(member);
-		return "/admin/updateMember";
+		return "redirect:/admin/memberList?memberId="+member.getMemberId();
+	}
+	// 사업자 신청 리스트
+	@GetMapping("/admin/hostAskList")
+	public String getHostAskList(HttpServletRequest request, Model model,@RequestParam(defaultValue = "1") int currentPage){
+		System.out.println("AdminController()_hostAsk실행");
+		log.debug("★★★[boryeong]AdminController★★★"+currentPage);
+		
+		int beginRow = (currentPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
+		
+		Map<String, Object> map = adminService.getHostAskList(currentPage, ROW_PER_PAGE);
+		// 값
+		model.addAttribute("beginRow", beginRow);
+		model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
+		model.addAttribute("hostAskList", map.get("hostAskList"));
+		model.addAttribute("lastPage", map.get("lastPage"));
+		model.addAttribute("currentPage", currentPage);
+		int pageNo = ((beginRow / 100) * 10 + 1);
+		log.debug("★★★[boryeong]AdminController_pageNo★★★" + pageNo);
+		model.addAttribute("pageNo",pageNo);
+		
+		return "admin/hostAskList";
 	}
 }
