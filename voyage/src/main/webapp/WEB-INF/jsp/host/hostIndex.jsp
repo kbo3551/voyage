@@ -114,25 +114,25 @@
                         </div>
                         <div class="clear"> 
                             <div class="col-sm-12">
-                            	&nbsp;&nbsp;<label>운영 숙소</label><span style="text-align: right;"><a class="btn">숙소추가</a></span>
+                            &nbsp;&nbsp;<label>운영 숙소</label><span>&nbsp;&nbsp;<a class="btn" style="background: rgb(40,180,240);">신청조회</a></span>
 								<div>
 									<c:choose>
 										<c:when test="${AccomBuildingList ne null}">
 											<div>
-												<table class="table" style="text-align: center;">
+												<table class="table" style="text-align: center; vertical-align: middle; display:table;">
 													<tr>
-														<td style="font-weight: bold;">이름</td>
-														<td style="font-weight: bold;">생성일</td>
-														<td style="font-weight: bold;">공개여부</td>
-														<td></td>
+														<td style="font-weight: bold; display:table-cell;vertical-align:middle;">이름</td>
+														<td style="font-weight: bold; display:table-cell;vertical-align:middle;">생성일</td>
+														<td style="font-weight: bold; display:table-cell;vertical-align:middle;">공개여부</td>
+														<td style="font-weight: bold; display:table-cell;vertical-align:middle;"><a class="btn" style="background: rgb(40,180,240); color: white;">숙소추가</a></td>
 													</tr>
 													<c:forEach var="ab" items="${AccomBuildingList}">
 														<tr>
-															<td width="25%">${ab.key}</td>
+															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${ab.key}</small></td>
 															<fmt:parseDate var="createDateString" value="${ab.value.getCreateDate()}" pattern="yyyy-MM-dd HH:mm:ss.S" />
-															<td width="25%"><fmt:formatDate value="${createDateString}" pattern="yyyy-MM-dd" /></td>
-															<td width="25%">${ab.value.getAccomBuildingState()}</td>
-															<td width="25%"><a href="#" class="btn" style="background: rgb(130,130,130);">수정</a></td>
+															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><fmt:formatDate value="${createDateString}" pattern="yyyy-MM-dd" /></small></td>
+															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${ab.value.getAccomBuildingState()}</small></td>
+															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="#" class="btn" style="background: rgb(130,130,130);">수정</a></small></td>
 														</tr>
 													</c:forEach>
 												</table>
