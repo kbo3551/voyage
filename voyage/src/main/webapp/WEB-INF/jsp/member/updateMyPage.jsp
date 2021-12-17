@@ -116,7 +116,8 @@
 	                            <div class="col-sm-5">
 	                                <input name="password" type="hidden" value="${m.getMemberPw()}">
 	                            
-	                                <div class="form-group">
+	                                <div class="form-group" style="line-height:90%">
+	                                	<br>
 	                                    <label>First Name</label>
 	                                    <input name="firstname" type="text" class="form-control" id="firstname" name="firstname" placeholder="성" value="${loginMember.memberFirstName}">
 	                                </div>
@@ -139,11 +140,11 @@
 	                                  onclick="execDaumPostcode()" value="우편번호">
 	                                  <input type="number" class="form-control" id="postalCode" name="postalCode" placeholder="우편번호" value="${loginMember.memberAddress.memberAddressPostalCode}" readonly="readonly">
 	                             	</div>
-	                            	<div class="form-group">
+	                            	<div class="form-group" style="line-height:168%">
 	                             		<br>  
 	                                  <input type="text" class="form-control" id="roadAddress" name="roadAddress" placeholder="도로명주소" value="${loginMember.memberAddress.memberAddressZip}" readonly="readonly">
 	                            	</div>
-	                            	<div class="form-group">
+	                            	<div class="form-group" style="line-height:169%">
 	                            	 	<br>     
 	                                  <input type="text" class="form-control" id="detailAddress" name="detailAddress" placeholder="상세주소" value="${loginMember.memberAddress.memberAddressDetail}">
 	                              </div>
