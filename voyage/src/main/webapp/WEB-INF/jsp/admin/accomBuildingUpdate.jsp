@@ -85,7 +85,7 @@
 									</tbody>
 									</table>
 									<div style="text-align: center;">
-	                                	<button class="btn btn-primary" type="submit">수정하기</button>
+	                                	<button class="btn btn-info" type="submit">수정하기</button>
 								</div>
 							</div>
 						</div>

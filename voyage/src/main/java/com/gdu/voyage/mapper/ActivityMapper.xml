@@ -1,39 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.ActivityMapper">
-	<!-- 등록된 체험을 불러옴 -->
-	<select id="selectActivityList" resultType="com.gdu.voyage.vo.Activity">
-            SELECT 
-            activity_no as activityNo,
-            activity_name as activityName,
-            activity_open_date as activityOpenDate,
-            activity_close_date as activityCloseDate,
-            activity_description as activityDescription,
-            create_date as createDate,
-            update_date as updateDate
-            FROM activity
-    </select>
-    <!-- 체험번호에따른 체험 상세 목록 출력 -->
-    <select id="selectActivityOne" resultType="com.gdu.voyage.vo.Activity">
-            SELECT activity_no as activityNo,
-            host_no as HostNo,
-            activity_name as activityName,
-            activity_open_date as activityOpenDate,
-            activity_close_date as activityCloseDate,
-            activity_price as activityPrice,
-            activity_open_hour as activityOpenHour,
-            activity_close_hour as activityCloseHour,
-            activity_max_t as activityMaxT,
-            activity_max_p as activityMaxP,
-            activity_description as activityDescription,
-            activity_state as activityState,
-            activity_state_admin as activityStateAdmin,
-            create_date as createDate,
-            update_date as updateDate
-            FROM activity
-            WHERE activity_no = #{activity_no}
-    </select>
-    
+	<!-- 사업자 -->
     <!-- 체험 입력 : selectKey를 사용하여 체험의 식별번호를 받아온뒤 나머지 추가 정보들도 함께 insert  -->
     <insert id="insertActivity" parameterType="com.gdu.voyage.vo.Activity">
 		INSERT INTO activity (
@@ -155,4 +123,48 @@
 			NOW()
 		)
 	</insert>
+	
+	<!-- 관리자 -->
+	<!-- 등록된 체험을 불러옴 -->
+	<select id="selectActivityList" resultType="com.gdu.voyage.vo.Activity">
+            SELECT 
+            activity_no as activityNo,
+            activity_name as activityName,
+            activity_open_date as activityOpenDate,
+            activity_close_date as activityCloseDate,
+            activity_description as activityDescription,
+            create_date as createDate,
+            update_date as updateDate
+            FROM activity
+    </select>
+    <!-- 체험번호에따른 체험 상세 목록 출력 -->
+    <select id="selectActivityOne" resultType="com.gdu.voyage.vo.Activity">
+            SELECT activity_no as activityNo,
+            host_no as HostNo,
+            activity_name as activityName,
+            activity_open_date as activityOpenDate,
+            activity_close_date as activityCloseDate,
+            activity_price as activityPrice,
+            activity_open_hour as activityOpenHour,
+            activity_close_hour as activityCloseHour,
+            activity_max_t as activityMaxT,
+            activity_max_p as activityMaxP,
+            activity_description as activityDescription,
+            activity_state as activityState,
+            activity_state_admin as activityStateAdmin,
+            create_date as createDate,
+            update_date as updateDate
+            FROM activity
+            WHERE activity_no = #{activity_no}
+    </select>
+    
+    <!-- 등록된 체험 승인여부 수정 -->
+    <update id="activityUpdate" parameterType="com.gdu.voyage.vo.Activity">
+    	UPDATE activity SET
+    		activity_state = #{activityState},
+    		activity_state_admin = #{activityStateAdmin},
+    		update_date = NOW()
+    	WHERE activity_no = #{activityNo}
+    </update>
+    
 </mapper>

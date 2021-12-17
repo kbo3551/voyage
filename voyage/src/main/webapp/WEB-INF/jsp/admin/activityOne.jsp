@@ -47,7 +47,6 @@
 									<h5 class="card-title mb-0">Latest Activity</h5>
 								</div>
 								<table class="table table-hover my-0">
-									<c:forEach items="${activity}" var="Act" >
 									<thead>
 										<tr>
 											<th>ActivityNo</th>
@@ -58,11 +57,11 @@
 										</tr>
 									</thead>
 										<tr>
-											<td>${Act.activityNo}</td>
-										    <td>${Act.hostNo}</td>
-										    <td>${Act.activityName}</td>
-										    <td>${Act.activityOpenDate}</td>
-										    <td>${Act.activityCloseDate}</td>
+											<td>${activity.activityNo}</td>
+										    <td>${activity.hostNo}</td>
+										    <td>${activity.activityName}</td>
+										    <td>${activity.activityOpenDate}</td>
+										    <td>${activity.activityCloseDate}</td>
 										</tr>
 										
 									<thead>
@@ -75,11 +74,11 @@
 										<tr>
 									</thead>
 										<tr>
-									 		<td>${Act.activityPrice}</td>
-										    <td>${Act.activityOpenHour}</td>
-										    <td>${Act.activityCloseHour}</td>
-										    <td>${Act.activityMaxT}</td>
-										    <td>${Act.activityMaxP}</td>
+									 		<td>${activity.activityPrice}</td>
+										    <td>${activity.activityOpenHour}</td>
+										    <td>${activity.activityCloseHour}</td>
+										    <td>${activity.activityMaxT}</td>
+										    <td>${activity.activityMaxP}</td>
 										</tr>
 									
 									<thead>
@@ -91,17 +90,16 @@
 											<th>UpdateDate</th>
 										</tr>
 									</thead>
-											<tr>
-										        <td>${Act.activityDescription}</td>
-										        <td>${Act.activityState}</td>
-										        <td>${Act.activityStateAdmin}</td>
-										        <td>${Act.createDate}</td>
-										        <td>${Act.updateDate}</td>
-										   </tr>
-									    </c:forEach>
+										<tr>
+										    <td>${activity.activityDescription}</td>
+										    <td>${activity.activityState}</td>
+										    <td>${activity.activityStateAdmin}</td>
+										    <td>${activity.createDate}</td>
+										    <td>${activity.updateDate}</td>
+										</tr>
 									</table>
 									<br>
-								<div style="text-align: center;"><a class="btn btn-primary" href="${pageContext.request.contextPath}/admin/accomActivityUpdate">수정하기</a></div>
+								<div style="text-align: center;"><a class="btn btn-info" href="${pageContext.request.contextPath}/admin/activityUpdate?activityNo=${activity.activityNo}">수정하기</a></div>
 								<br>
 							</div>
 						</div>

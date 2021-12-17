@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.ActivityService;
-import com.gdu.voyage.vo.AccomBuilding;
 import com.gdu.voyage.vo.Activity;
 import com.gdu.voyage.vo.ActivityForm;
 
@@ -66,7 +65,7 @@ public class ActivityController {
 	@GetMapping("/admin/activityOne")
 	public String getActivityOne(Model model, int activityNo) {
 		System.out.println("accomBuildingOne 실행!!");
-		List<Activity> activity = activityService.getActivityOne(activityNo);
+		Activity activity = activityService.getActivityOne(activityNo);
 		model.addAttribute("activity", activity);
 		return "/admin/activityOne";
 	}
@@ -74,14 +73,16 @@ public class ActivityController {
 	// activity state 승인여부 수정
 	// 수정페이지 이동
 	@GetMapping("/admin/activityUpdate")
-	public String ActivityUpdate() {
+	public String activityUpdate(Model model, int activityNo) {
 		System.out.println("activityUpdate 실행!!");
+		Activity activity = activityService.getActivityOne(activityNo);
+		model.addAttribute("activity", activity);
 		return "/admin/activityUpdate";
 	}
 
 	// 페이지 수정
 	@PostMapping("/admin/activityUpdate")
-	public String ActivityUpdate(Activity activity) {
+	public String activityUpdate(Activity activity) {
 		activityService.activityUpdate(activity);
 		return "redirect:/admin/activityOne?activityNo=" + activity.getActivityNo();
 	}
