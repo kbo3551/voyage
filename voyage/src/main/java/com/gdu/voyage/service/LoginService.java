@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gdu.voyage.mapper.LoginMapper;
 import com.gdu.voyage.vo.Admin;
+import com.gdu.voyage.vo.Host;
 import com.gdu.voyage.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LoginService {
 	@Autowired LoginMapper loginMapper;
+	
+	public Host hostLogin(String memberId) {
+		log.trace("☆service☆"+memberId);
+		Host loginHost = loginMapper.hostLogin(memberId);
+		return loginHost;
+	}
 	
 	public void updateEnableActive(String memberId) {
 		loginMapper.updateEnableActive(memberId);

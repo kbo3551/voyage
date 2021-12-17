@@ -132,7 +132,15 @@
 			a.admin_id = f.admin_id
 		WHERE
 			a.admin_id = #{memberId}
-
+	</select>
+	
+	<select id="hostLogin" resultType="com.gdu.voyage.vo.Host">
+		SELECT
+			host_no
+		FROM
+			host
+		WHERE
+			member_id = #{memberId}
 	</select>
 	
 </mapper>
