@@ -1,6 +1,8 @@
 package com.gdu.voyage.controller;
 
+import java.util.List;
 import java.util.Random;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,7 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.gdu.voyage.service.AccomBuildingService;
 import com.gdu.voyage.service.HostService;
+import com.gdu.voyage.vo.AccomBuilding;
+import com.gdu.voyage.vo.Host;
 import com.gdu.voyage.vo.HostAsk;
 import com.gdu.voyage.vo.Member;
 
@@ -22,6 +27,35 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class HostController {
 	@Autowired private HostService hostService;
+	@Autowired private AccomBuildingService accomBuildingService;
+	
+	// 사업자 myPage
+	@GetMapping("/host/hostIndex")
+	public String getHostIndex(HttpServletRequest request,Model model) {
+    	System.out.println("HostController() 실행");
+    	
+    	// host세션
+    	Host hostSession = (Host)request.getSession().getAttribute("hostSession");
+    	
+    	// hostNo 추출
+    	int hostNo = hostSession.getHostNo();
+    	
+    	
+    	// 정렬을 위한 TreeMap 선언
+    	TreeMap<String,AccomBuilding> abMap = new TreeMap<>();
+    	
+    	// List로 받아온 목록 TreeMap으로 변환
+    	int index=0;
+    	List<AccomBuilding> AccomBuildingList = accomBuildingService.selectAccomBuildingListByHost(hostNo);
+    	for(AccomBuilding item : AccomBuildingList) {
+    		abMap.put(item.getAccomBuildingName(), AccomBuildingList.get(index));
+    		index++;
+    	}
+    	
+    	model.addAttribute("AccomBuildingList", abMap);
+
+    	return "/host/hostIndex";
+    }
 	
 	// 사업자 신청 페이지 get
 	@GetMapping("/member/requestHost")

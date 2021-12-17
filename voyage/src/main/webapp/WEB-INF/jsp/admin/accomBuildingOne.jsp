@@ -70,7 +70,7 @@
 										        <td>${accomBuilding.accomBuildingStateAdmin}</td>
 										        <td>${accomBuilding.createDate}</td>
 										        <td>${accomBuilding.updateDate}</td>
-										        <td><a class="btn btn-primary" href="${pageContext.request.contextPath}/admin/accomBuildingUpdate?accomBuildingNo=${accomBuilding.accomBuildingNo}">수정하기</a></td>
+										        <td><a class="btn btn-info" href="${pageContext.request.contextPath}/admin/accomBuildingUpdate?accomBuildingNo=${accomBuilding.accomBuildingNo}">수정하기</a></td>
 										   </tr>
 									</tbody>
 								</table>

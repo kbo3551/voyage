@@ -142,12 +142,18 @@
 	<!-- host_no에 따른 숙소 목록 출력 -->
 	<select id="selectAccomBuildingListByHost" resultType="com.gdu.voyage.vo.AccomBuilding">
             SELECT
-            accom_building_no as accomBuildingNo,
-            accom_building_name as accomBuildingName,
-            create_date as createDate,
-            update_date as updateDate
-            FROM accom_building
-            WHERE host_no = #{hostNo}
+            	accom_building_no accomBuildingNo,
+            	accom_building_name accomBuildingName,
+            	accom_building_state accomBuildingState,
+            	create_date createDate
+            FROM
+            	accom_building
+            WHERE
+            	host_no = #{hostNo}
+            	AND
+            	NOT accom_building_state_admin = "승인대기"
+            	AND
+            	NOT accom_building_state_admin = "삭제"
     </select>
     
     <!-- 건물번호에따른 숙소 상세 목록 출력 -->

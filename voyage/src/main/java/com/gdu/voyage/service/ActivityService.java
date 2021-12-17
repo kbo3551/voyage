@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gdu.voyage.mapper.ActivityMapper;
-import com.gdu.voyage.vo.AccomBuilding;
 import com.gdu.voyage.vo.Activity;
 import com.gdu.voyage.vo.ActivityAddress;
 import com.gdu.voyage.vo.ActivityForm;
@@ -37,7 +36,7 @@ public class ActivityService {
 		return activityMapper.selectActivityList(pageNo);
 	}
 	// 체험 등록 목록 상세 조회 One
-	public List<Activity> getActivityOne(int activityNo) {
+	public Activity getActivityOne(int activityNo) {
 		log.debug(activityMapper.selectActivityOne(activityNo) + "***********[상훈] activityService One");
 		return activityMapper.selectActivityOne(activityNo);
 	}

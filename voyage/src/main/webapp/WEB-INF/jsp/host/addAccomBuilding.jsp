@@ -67,6 +67,7 @@
 			}
 			
 		</style>
+		
     </head>
     
     <body>
@@ -130,16 +131,16 @@
 										<div class="col-sm-6" style="margin:0 auto;">
 											<div class="form-group">
 												<h4>Name <small>(required)</small></h4>
-												<input name="accomBuilding.accomBuildingName" type="text" class="form-control" placeholder="Sky villa ..." style="height:34px;">
+												<input name="accomBuilding.accomBuildingName" type="text" id="accomBuildingName" class="form-control" placeholder="Sky villa ..." style="height:34px;">
 											</div>
 	
 											<div class="form-group">
 												<h4>Description <small>(required)</small></h4>
-												<textarea name="accomBuilding.accomBuildingDescription" class="form-control" placeholder="루프탑이 있는 ..." rows="8"></textarea>
+												<textarea name="accomBuilding.accomBuildingDescription" id="accomBuildingDescription" class="form-control" placeholder="루프탑이 있는 ..." rows="8"></textarea>
 											</div>
 											<div class="form-group">
 												<h4>Phone <small>(required)</small></h4>
-												<input name="accomBuilding.accomBuildingPhone" type="text" class="form-control" placeholder="080-0000-0000" style="height:34px;">
+												<input name="accomBuilding.accomBuildingPhone" type="tel" id="accomBuildingPhone" class="form-control" placeholder="02-0000-0000" style="height:34px;">
 											</div>
 										</div>
 									</div>
@@ -154,13 +155,13 @@
 											<div class="col-sm-12">
 												<div class="form-group">
 													<h4>
-														Address <small>(required)</small>
+														Address <small>(required) </small>
 														<input type="button" class="btn-sm" style="width:130px; color:white; background: #ff3d1c; border-radius: 30px;
     													color: #fff; font-weight: 500;" onclick="execDaumPostcode()" value="우편번호">
 													</h4>
 		                                    		<input type="number" class="form-control" id="postalCode" name="accomAddress.accomAddressPotalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" readonly="readonly" style="height:34px;">
 													<input type="text" class="form-control" id="roadAddress" name="accomAddress.accomAddressZip" placeholder="도로명주소가 입력됩니다." readonly="readonly" style="height:34px;">
-													<input type="text" class="form-control" id="prdAddressDetail" name="accomAddress.accomAddressDetail" placeholder="상세주소" style="height:34px;">
+													<input type="text" class="form-control" id="addressDetail" name="accomAddress.accomAddressDetail" placeholder="상세주소" style="height:34px;">
 												</div>
 											</div>
 											
@@ -216,13 +217,13 @@
 														</div>
 														<div>
 															<span>
-																<label>Spot Address </label>
+																<label>Spot Address</label>
 																<input type="button" class="btn-sm" style="width:130px; color:white; background: #ff3d1c; border-radius: 30px;
 		    													color: #fff; font-weight: 500;" onclick="execDaumPostcodeSpot()" value="우편번호">
 															</span>
 				                                    		<input type="number" class="form-control" id="spotPostalCode" name="accomSpotForm[0].spotAddress.spotAddressPotalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" readonly="readonly" style="height:34px;">
 															<input type="text" class="form-control" id="spotRoadAddress" name="accomSpotForm[0].spotAddress.spotAddressZip" placeholder="도로명주소가 입력됩니다." readonly="readonly" style="height:34px;">
-															<input type="text" class="form-control" id="prdAddressDetail" name="accomSpotForm[0].spotAddress.spotAddressDetail" placeholder="상세주소" style="height:34px;">
+															<input type="text" class="form-control" id="spotAddressDetail" name="accomSpotForm[0].spotAddress.spotAddressDetail" placeholder="상세주소" style="height:34px;">
 														</div>
 														<hr>
 													</div>
@@ -267,8 +268,9 @@
 												</p>
 	
 												<div class="checkbox">
-													<label> <input type="checkbox" /> <strong>Accept
-															termes and conditions.</strong>
+													<label> 
+														<input type="checkbox" class="checkAccept" /> 
+														<strong>Accept termes and conditions.</strong>
 													</label>
 												</div>
 	
@@ -323,6 +325,10 @@
     <script src="${pageContext.request.contextPath}/accom/js/main.js"></script>
     
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
+	<!-- [최지혜] addAccomBuilding의 유효성 검사를 진행하는 js -->
+	<script src="${pageContext.request.contextPath}/accom/js/jeje.js"></script>
+	
 	<script>
 	// 다음(카카오) 주소 api
 	function execDaumPostcode() {
@@ -543,10 +549,6 @@
 		} else {
 			alert("한 가지 이상의 해시태그를 입력해주세요!");
 		}
-	});
-	
-	$('#accomSubmit').click(function(){
-		$('#accomBuildingForm').submit();
 	});
 	</script>
 
