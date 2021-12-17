@@ -260,6 +260,7 @@ public class MemberController {
     }
 
 	
+	// 회원가입
 	@PostMapping("/addMember")
 	public String postAddMember(HttpServletRequest request, RedirectAttributes redirect) {
 		System.out.println("MemberController() 실행");
@@ -275,6 +276,8 @@ public class MemberController {
 	    String memberAddressZip = request.getParameter("roadAddress");
 	    String memberAddressDetail = request.getParameter("detailAddress");
 	    String memberDescription = request.getParameter("description");
+	    
+	    memberReg = memberReg.substring(0, 6)+"-"+memberReg.substring(6, 13);
 	    
 	    // 맴버 객체. 포함되지 않은 4개의 값은 Mapper에 존재
 	    Member m = new Member();
