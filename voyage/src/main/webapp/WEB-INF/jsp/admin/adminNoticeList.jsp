@@ -65,7 +65,7 @@
 									        <td>${n.noticeViewCnt}</td>
 									        <td>${n.createDate}</td>
 									        <td>${n.updateDate}</td>
-									        <td><a href="${pageContext.request.contextPath}/admin/adminNoticceOne?noticeNo=${n.noticeNo}" class="btn">상세 보기</a></td>
+									        <td><a href="${pageContext.request.contextPath}/admin/adminNoticeOne?noticeNo=${n.noticeNo}" class="btn">상세 보기</a></td>
 									    </tr>
 								    </c:forEach>
 								</tbody>

@@ -49,7 +49,7 @@
 				</li>
 				<!-- 추가사항 -->
 				<li class="sidebar-item">
-					<a class="sidebar-link" href="pages-blank.html">
+					<a class="sidebar-link" href="${pageContext.request.contextPath}/admin/adminNoticeList">
 	           			<i class="align-middle" data-feather="book"></i> <span class="align-middle">공지사항 관리</span>
 	          		</a>
 				</li>

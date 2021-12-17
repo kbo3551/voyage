@@ -25,7 +25,7 @@ public class NoticeController {
 	private final int ROW_PER_PAGE = 10;
 	
 	//noticeList
-	@GetMapping("/adminNoticeList")
+	@GetMapping("/admin/adminNoticeList")
 	public String notcieList(Model model,
 								@RequestParam(defaultValue = "1") int currentPage) {
 		
@@ -35,10 +35,10 @@ public class NoticeController {
 		model.addAttribute("noticeList", noticeMap.get("noticeList"));
 		model.addAttribute("lastPage", noticeMap.get("lastPage"));
 		
-		return "adminNoticeList";
+		return "/admin/adminNoticeList";
 	}
 	//noticeOne
-	@GetMapping("/adminNoticeOne")
+	@GetMapping("/admin/adminNoticeOne")
 	public String noticeOne(Model model, int noticeNo) {
 		log.debug(noticeNo+"★★★ [DoHun] Notice One Controller 실행, noticeNo ★★★");
 		Notice notice = noticeService.getNoticeOne(noticeNo);
@@ -47,49 +47,49 @@ public class NoticeController {
 		model.addAttribute("notice", notice);
 		log.debug(model+"★★★ [DoHun] Notice One Controller 실행, notice model ★★★");
 		
-		return "adminNoticeOne";
+		return "/admin/adminNoticeOne";
 	}
 	//insert
-	@GetMapping("/addNotice")
+	@GetMapping("/admin/addNotice")
 	public String addNoticeOne() {
-		return "addNotice";
+		return "/admin/addNotice";
 	}
 	
-	@PostMapping("/addNotice")
+	@PostMapping("/admin/addNotice")
 	public String addNoticeOne(Notice notice,NoticeFile noticeFile, NoticeForm noticeForm) {
 		log.debug(notice+"★★★ [DoHun] Notice insert Controller 실행, notice ★★★");
 		log.debug(noticeFile+"★★★ [DoHun] Notice insert Controller 실행, notice File ★★★");
 		noticeService.insertNoticeOne(notice, noticeFile, noticeForm);
 
-		return "noticeList";
+		return "/admin/adminNoticeList";
 	}
 	//delete
-	@GetMapping("/removeNotice")
+	@GetMapping("/admin/removeNotice")
 	public String removeNoticeOne() {
-		return "removeNotice";
+		return "/admin/removeNotice";
 	}
 	
-	@PostMapping("/removeNotice")
+	@PostMapping("/admin/removeNotice")
 	public String deleteNoticeOne(Notice notice, NoticeFile noticeFile) {
 		log.debug(notice.toString()+"★★★ [DoHun] Notice delete Controller 실행, notice ★★★");
 		log.debug(noticeFile+"★★★ [DoHun] Notice delete Controller 실행, notice File ★★★");
 		noticeService.deleteNoticeOne(notice, noticeFile);
 		
-		return "boardList";
+		return "/admin/adminNoticeList";
 	}
 	//update
-	@GetMapping("/modifyNotice")
+	@GetMapping("/admin/modifyNotice")
 	public String updateNoticeOne() {
-		return "modifyNotice";
+		return "/admin/modifyNotice";
 	}
 	
-	@PostMapping("/modifyNotice")
+	@PostMapping("/admin/modifyNotice")
 	public String modifyNoticeOne(Notice notice,NoticeFile noticeFile, NoticeForm noticeForm) {
 		log.debug(notice.toString()+"★★★ [DoHun] Notice update Controller 실행, notice ★★★");
 		noticeService.updateNoticeOne(notice, noticeFile, noticeForm);
 		log.debug(notice.toString()+"★★★ [DoHun] Notice update Controller 실행, notice ★★★");
 		
-		return "noticeList";
+		return "/admin/adminNoticeList";
 	}
 	
 	/*
