@@ -50,31 +50,25 @@
 							<div class="card-body">
 								<input type="text" class="form-control" placeholder="제목" name="noticeTitle">
 							</div>
-						</div>
-					</div>
-					<!-- 상단고정(공지중요성)체크 -->
-					<div class="col-12 col-lg-6">
-						<div class="card">
-							<div class="card-header">
-								<h5 class="card-title mb-0">상단고정 여부</h5>
-							</div>
 							<div class="card-body">
+								<!-- 상단고정(공지중요성)체크 -->
+								<h5 class="card-title mb-0">상단고정 여부</h5>
 								<select class="form-select mb-3" name="noticeTop">
 									<!-- 상단 비고정 -->
 									<option selected value="N">일반</option>
 									<!-- 상단 고정 -->
 									<option value="Y">중요</option>
 								</select>
+								<!-- 사진 -->
+								<input type="file" name="noticeFile">			
+								<c:forEach items="${NoticeFileList}" var="noticeFileList">
+									<c:if test="${noticeFile eq null}">
+										<input type="file" name="noticeFile">
+									</c:if>
+								</c:forEach>
 							</div>
 						</div>
-					</div>
-					<!-- 사진 -->
-					<input type="file" name="noticeFile">			
-					<c:forEach items="${NoticeFileList}" var="noticeFileList">
-						<c:if test="${noticeFile eq null}">
-							<input type="file" name="noticeFile">
-						</c:if>
-					</c:forEach>					
+					</div>				
 					<!-- 공지내용 -->
 					<div class="row">
 						<div class="card">

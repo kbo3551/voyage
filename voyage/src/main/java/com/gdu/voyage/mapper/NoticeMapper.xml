@@ -44,12 +44,14 @@
 			admin_id,
 			notice_title,
 			notice_content,
+			notice_view_cnt,
 			create_date,
 			update_date
 		) VALUES(
 			#{adminId},
 			#{noticeTitle},
 			#{noticeContent},
+			'0',
 			Now(),
 			Now()
 		) 

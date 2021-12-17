@@ -75,6 +75,7 @@
 					</div>
 				</div>
 			</div>
+			<div><a href="${pageContext.request.contextPath}/admin/addNotice" class="btn">공지사항 작성</a></div>
 		</main>
    
     <!-- adminFooter : 시작 -->
