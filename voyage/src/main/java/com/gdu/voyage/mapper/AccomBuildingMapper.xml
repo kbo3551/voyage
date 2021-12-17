@@ -140,7 +140,7 @@
     
     <!-- 사업자 -->
 	<!-- host_no에 따른 숙소 목록 출력 -->
-	<select id="selectAccomBuildingList" resultType="com.gdu.voyage.vo.AccomBuilding">
+	<select id="selectAccomBuildingListByHost" resultType="com.gdu.voyage.vo.AccomBuilding">
             SELECT
             accom_building_no as accomBuildingNo,
             accom_building_name as accomBuildingName,
