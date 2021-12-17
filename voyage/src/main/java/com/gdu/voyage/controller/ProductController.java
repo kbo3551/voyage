@@ -1,7 +1,11 @@
 package com.gdu.voyage.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.gdu.voyage.service.ProductService;
@@ -14,24 +18,28 @@ public class ProductController {
 	@Autowired ProductService productService;
 	
 	@GetMapping("/getAccomProductList")
-	public String getAccomProduct() {
-		System.out.println("ProductController() 실행");
+	public String getAccomBuildingProduct(Model model) {
+		log.debug("ProductController.getAccomBuildingProduct 실행");
+		
+		List<Map<String, Object>> accomBuildingList = productService.getAccomBuildingList();
+		model.addAttribute("accomBuildingList", accomBuildingList);
+		log.debug("[debug] ProductController.getAccomBuildingProduct accomBuildingList " + accomBuildingList);
 	    
-		return "/getAccomProductList";
+		return "/product/getAccomBuildingProductList";
 	}
 	
 	@GetMapping("/getActivityProductList")
 	public String getActivityProduct() {
-		System.out.println("ProductController() 실행");
+		log.debug("ProductController.getActivityProduct 실행");
 	    
-		return "/getActivityProductList";
+		return "/product/getActivityProductList";
 	}
 	
 	@GetMapping("/setProductCategory")
-	public String setReviewCategory() {
-		System.out.println("ActivityReviewController() 실행");
+	public String setProductCategory() {
+		log.debug("ProductController.setProductCategory 실행");
 	      
-		return "/setProductCategory";
+		return "/product/setProductCategory";
 	}
 	
 }

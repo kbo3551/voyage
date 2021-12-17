@@ -135,12 +135,12 @@
                                   <label>우편번호</label>
                                   <input type="number" class="form-control" id="postalCode" name="postalCode" placeholder="우편번호" value="${loginMember.memberAddress.memberAddressPostalCode}" readonly="readonly">
                              	</div>
-                            	<div class="form-group">
-                             		<br>  
+                            	<div class="form-group" style="line-height:168%">
+                             		<br> 
                                   <input type="text" class="form-control" id="roadAddress" name="roadAddress" placeholder="도로명주소" value="${loginMember.memberAddress.memberAddressZip}" readonly="readonly">
                             	</div>
-                            	<div class="form-group">
-                            	 	<br>     
+                            	<div class="form-group" style="line-height:169%">
+                            	 	<br> 
                                   <input type="text" class="form-control" id="detailAddress" name="detailAddress" placeholder="상세주소" value="${loginMember.memberAddress.memberAddressDetail}" readonly="readonly">
                               </div>
                             </div>  

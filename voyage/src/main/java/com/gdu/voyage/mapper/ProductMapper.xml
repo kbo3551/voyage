@@ -1,3 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gdu.voyage.mapper.ProductMapper"></mapper>
+<mapper namespace="com.gdu.voyage.mapper.ProductMapper">
+	
+	<!-- accom_building 테이블 -->
+<!-- 	<resultMap type="HashMap" id="selectAccomBuildingList"> -->
+<!-- 		<id column="accom_building_no" property="accomBuildingNo"/> -->
+<!-- 		<result column="host_no" property="hostNo"/> -->
+<!-- 		<result column="accom_building_name" property="accomBuildingName"/> -->
+<!-- 		<result column="accom_building_description" property="accomBuildingDescription"/> -->
+<!-- 		<result column="accom_building_phone" property="accomBuildingPhone"/> -->
+<!-- 		<result column="accom_building_state" property="accomBuildingState"/> -->
+<!-- 		<result column="accom_building_state_admin" property="accomBuildingStateAdmin"/> -->
+<!-- 		<result column="create_date" property="createDate"/> -->
+<!-- 		<result column="update_date" property="updateDate"/> -->
+<!-- 	</resultMap> -->
+	
+	<!-- accom_building_faclity 테이블 -->
+<!-- 	<resultMap type="HashMap" id="selectAccomBuildingFacility"> -->
+<!-- 		<id column="accom_building_facility_no" property="accomBuildingFacilityNo"/> -->
+<!-- 		<result column="accom_building_facility_name" property="accomBuilding_facility_name"/> -->
+<!-- 	</resultMap> -->
+
+	<!-- 숙소-건물 기본 정보 조회 -->
+	<select id="selectAccomBuilding" resultType="HashMap">
+		SELECT                                      
+			b.accom_building_no accomBuildingNo,
+			b.host_no hostNo,
+			b.accom_building_name accomBuildingName,
+			b.accom_building_description accomBuildingDescription, 
+			b.accom_building_phone accomBuildingPhone,
+			b.accom_building_state accomBuildingState,
+			b.accom_building_state_admin accomBuildingStateAdmin,
+			b.create_date createDate,
+			b.update_date updateDate,
+			f.accom_building_facility_no accomBuildingFacilityNo,
+			f.accom_building_facility_name accomBuildingFacilityName,
+			i.accom_building_image_no accomBuildingImageNo,
+			i.accom_building_image_name accomBuildingImageName,
+			i.accom_building_image_ext accomBuildingImageExt,
+			i.accom_building_image_size accomBuildingImageSize,
+			s.accom_building_spot_no accomBuildingSpotNo,
+			a.accom_address_no accomAddressNo
+		FROM                                        
+			accom_building b                         
+			INNER JOIN
+				accom_building_facility f
+			INNER JOIN
+				accom_building_image i
+			INNER JOIN
+				accom_building_spot s
+			INNER JOIN
+				accom_address a
+			ON
+				b.accom_building_no = f.accom_building_no
+				AND b.accom_building_no = i.accom_building_no
+				AND b.accom_building_no = s.accom_building_no
+				AND b.accom_building_no = a.accom_building_no	                                              
+		WHERE                                       
+			accom_building_state_admin = '승인완료' AND accom_building_state = '공개'                                               
+		GROUP BY                                    
+			b.accom_building_no
+		ORDER BY
+			b.update_date;
+	</select>
+</mapper>
