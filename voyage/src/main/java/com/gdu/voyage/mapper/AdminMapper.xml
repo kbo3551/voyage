@@ -145,5 +145,15 @@
 		COUNT(*)
  	FROM 
  		member
-	</select>
+</select>
+<!-- 회원 등급/상태 수정 -->
+<update id="updateMember" parameterType="com.gdu.voyage.vo.Member">
+	UPDATE member
+		set
+			member_level = #{memberLevel},
+			member_active = #{memberActive},
+			update_date = Now()
+		WHERE
+			member_id = #{memberId}
+</update>	
 </mapper>

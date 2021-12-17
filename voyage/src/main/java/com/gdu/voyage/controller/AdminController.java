@@ -176,4 +176,16 @@ public class AdminController {
 		
 		return "admin/selectMemberOne";
 	}
+	// 멤버 정보 수정
+	@GetMapping("admin/updateMember")
+	public String getUpdateMember(Model model,String memberId) {
+		Member member = adminService.getMemberOne(memberId);
+		model.addAttribute("member",member);
+		return "/admin/updateMember";
+	}
+	@PostMapping("admin/updateMember")
+	public String postUpdateMember(Member member) {
+	adminService.updateMember(member);
+		return "/admin/updateMember";
+	}
 }

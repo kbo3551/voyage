@@ -58,7 +58,6 @@ public class AdminService {
 	public Member getMemberOne(String memberId) {
 		log.debug("☆☆☆[bryeong]AdminService 회원목록 상세보기☆☆☆"+memberId);
 		return adminMapper.selectMemberOne(memberId);
-		
 	}
 	// 회원 목록 리스트
 	public Map<String, Object> getMemberList(int currentPage, int rowPerPage){
@@ -89,7 +88,9 @@ public class AdminService {
 		
 	}
 		// 회원 등급/상태 수정 
-		public void getmodifyMemberList(Member member) {
-			adminMapper.modifyMemberList(member);
+		public void updateMember(Member member) {
+			log.debug("☆☆☆[bryeong]AdminService 회원 수정☆☆☆"+member.toString());
+			adminMapper.updateMember(member);
+			return ;
 	}
 }
