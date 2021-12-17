@@ -80,6 +80,7 @@ public class QnaService {
 		log.debug(qna.toString() + "☆☆☆☆☆☆☆☆☆☆[다원] QnaService_removeQ_Qna debug");	
 	}
 	// Qna 게시판 질문 작성
+	// qnaCategory에 null값 들어옴... 수정 중
 	public Map<String, Object> addQ(QnaForm qnaForm, Qna qna, QnaImg qnaImg) throws Exception {
 		Map<String, Object> addQMap = new HashMap<>();
 		

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gdu.voyage.service.LoginService;
 import com.gdu.voyage.vo.Admin;
+import com.gdu.voyage.vo.Host;
 import com.gdu.voyage.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
@@ -72,13 +73,19 @@ public class LoginController {
 	    	return "redirect:login";
 	    }
 	    
-	    // 회원 로그인, 관리자 가입이 되어있다면 관리자 세션까지 한번에 받아옴
+	    // 회원 로그인, 관리자,사업자 가입이 되어있다면 관리자(사업자) 세션까지 한번에 받아옴
 	    HttpSession session = request.getSession();
 	    session.setAttribute("loginMember", loginMember);
 	    if(loginMember.getMemberLevel()==2) {
 	    	Admin adminSession = loginService.adminLogin(memberId);
 	    	if(adminSession != null) {
 	    		session.setAttribute("adminSession", adminSession);
+	    	}
+	    }
+	    if(loginMember.getMemberLevel()==1) {
+	    	Host hostSession = loginService.hostLogin(memberId);
+	    	if(hostSession != null) {
+	    		session.setAttribute("hostSession", hostSession);
 	    	}
 	    }
 	    

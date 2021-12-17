@@ -54,6 +54,7 @@
 											<th>닉네임</th>
 											<th>레벨</th>
 											<th>상태</th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -65,7 +66,7 @@
 												<td>${am.memberNickname}</td>
 												<td>${am.memberLevel}</td>
 												<td>${am.memberActive}</td>
-												<td><a href="">상세보기</a></td>
+												<td><a href="${pageContext.request.contextPath}/admin/selectMemberOne?memberId=${am.memberId}">상세보기</a></td>
 											</tr>
 										</c:forEach>
 									</tbody>

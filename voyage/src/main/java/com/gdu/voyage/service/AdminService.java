@@ -55,7 +55,7 @@ public class AdminService {
 		return;
 	}
 	// 회원 목록 상세보기
-	public Member getMemberOne(int memberId) {
+	public Member getMemberOne(String memberId) {
 		log.debug("☆☆☆[bryeong]AdminService 회원목록 상세보기☆☆☆"+memberId);
 		return adminMapper.selectMemberOne(memberId);
 		
@@ -88,7 +88,7 @@ public class AdminService {
 		return returnMap;
 		
 	}
-		// 회원 등급수정 
+		// 회원 등급/상태 수정 
 		public void getmodifyMemberList(Member member) {
 			adminMapper.modifyMemberList(member);
 	}

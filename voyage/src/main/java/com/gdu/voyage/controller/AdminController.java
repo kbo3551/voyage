@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.gdu.voyage.service.AdminService;
 import com.gdu.voyage.vo.Admin;
 import com.gdu.voyage.vo.AdminAddress;
+import com.gdu.voyage.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
@@ -158,11 +159,21 @@ public class AdminController {
 		model.addAttribute("memberList", map.get("memberList"));
 		model.addAttribute("lastPage", map.get("lastPage"));
 		model.addAttribute("currentPage", currentPage);
-		
 		int pageNo = ((beginRow / 100) * 10 + 1);
-		log.debug("★★★[boryeong]AdminController_pageNo★★★" + "pageNo");
+		log.debug("★★★[boryeong]AdminController_pageNo★★★" + pageNo);
 		model.addAttribute("pageNo", pageNo);
 		
 		return "admin/memberList";
+	}
+	// 멤버 관리 상세 보기
+	@GetMapping("admin/selectMemberOne")
+	public String getMemberOne(String memberId, Model model) {
+		System.out.println("★★★[boryeong]AdminController_MemberOne★★★");
+		
+		Member member = adminService.getMemberOne(memberId);
+		
+		model.addAttribute(member);
+		
+		return "admin/selectMemberOne";
 	}
 }

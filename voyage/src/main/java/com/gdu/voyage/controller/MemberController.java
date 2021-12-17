@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.gdu.voyage.service.LoginService;
 import com.gdu.voyage.service.MemberService;
 import com.gdu.voyage.vo.Admin;
+import com.gdu.voyage.vo.Host;
 import com.gdu.voyage.vo.Member;
 import com.gdu.voyage.vo.MemberAddress;
  
@@ -121,6 +122,12 @@ public class MemberController {
 	    	Admin adminSession = loginService.adminLogin(memberId);
 	    	if(adminSession != null) {
 	    		session.setAttribute("adminSession", adminSession);
+	    	}
+	    }
+	    if(reLoginMember.getMemberLevel()==1) {
+	    	Host hostSession = loginService.hostLogin(memberId);
+	    	if(hostSession != null) {
+	    		session.setAttribute("hostSession", hostSession);
 	    	}
 	    }
 	    
@@ -241,6 +248,12 @@ public class MemberController {
 	    	Admin adminSession = loginService.adminLogin(memberId);
 	    	if(adminSession != null) {
 	    		session.setAttribute("adminSession", adminSession);
+	    	}
+	    }
+	    if(reLoginMember.getMemberLevel()==1) {
+	    	Host hostSession = loginService.hostLogin(memberId);
+	    	if(hostSession != null) {
+	    		session.setAttribute("hostSession", hostSession);
 	    	}
 	    }
 	    

@@ -28,5 +28,5 @@ public interface AdminMapper {
 	// 멤버 등급수정
 	int modifyMemberList(Member memeber);
 	// 멤버 상세보기
-	Member selectMemberOne(int Membmer);
+	Member selectMemberOne(String memberId);
 }
