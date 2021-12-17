@@ -123,7 +123,7 @@
 													<tr>
 														<td style="font-weight: bold;">이름</td>
 														<td style="font-weight: bold;">생성일</td>
-														<td style="font-weight: bold;">마지막수정일</td>
+														<td style="font-weight: bold;">공개여부</td>
 														<td></td>
 													</tr>
 													<c:forEach var="ab" items="${AccomBuildingList}">
@@ -131,8 +131,7 @@
 															<td width="25%">${ab.key}</td>
 															<fmt:parseDate var="createDateString" value="${ab.value.getCreateDate()}" pattern="yyyy-MM-dd HH:mm:ss.S" />
 															<td width="25%"><fmt:formatDate value="${createDateString}" pattern="yyyy-MM-dd" /></td>
-															<fmt:parseDate var="UpdateDateString" value="${ab.value.getUpdateDate()}" pattern="yyyy-MM-dd HH:mm:ss.S" />
-															<td width="25%"><fmt:formatDate value="${UpdateDateString}" pattern="yyyy-MM-dd" /></td>
+															<td width="25%">${ab.value.getAccomBuildingState()}</td>
 															<td width="25%"><a href="#" class="btn" style="background: rgb(130,130,130);">수정</a></td>
 														</tr>
 													</c:forEach>
