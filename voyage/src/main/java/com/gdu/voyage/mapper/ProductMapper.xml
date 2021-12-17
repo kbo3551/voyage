@@ -3,22 +3,54 @@
 <mapper namespace="com.gdu.voyage.mapper.ProductMapper">
 	
 	<!-- accom_building 테이블 -->
-<!-- 	<resultMap type="HashMap" id="selectAccomBuildingList"> -->
-<!-- 		<id column="accom_building_no" property="accomBuildingNo"/> -->
-<!-- 		<result column="host_no" property="hostNo"/> -->
-<!-- 		<result column="accom_building_name" property="accomBuildingName"/> -->
-<!-- 		<result column="accom_building_description" property="accomBuildingDescription"/> -->
-<!-- 		<result column="accom_building_phone" property="accomBuildingPhone"/> -->
-<!-- 		<result column="accom_building_state" property="accomBuildingState"/> -->
-<!-- 		<result column="accom_building_state_admin" property="accomBuildingStateAdmin"/> -->
-<!-- 		<result column="create_date" property="createDate"/> -->
-<!-- 		<result column="update_date" property="updateDate"/> -->
-<!-- 	</resultMap> -->
+	<resultMap type="com.gdu.voyage.vo.AccomBuilding" id="selectAccomBuildingList">
+		<id column="accom_building_no" property="accomBuildingNo"/>
+		<result column="host_no" property="hostNo"/>
+		<result column="accom_building_name" property="accomBuildingName"/>
+		<result column="accom_building_description" property="accomBuildingDescription"/>
+		<result column="accom_building_phone" property="accomBuildingPhone"/>
+		<result column="accom_building_state" property="accomBuildingState"/>
+		<result column="accom_building_state_admin" property="accomBuildingStateAdmin"/>
+		<result column="create_date" property="createDate"/>
+		<result column="update_date" property="updateDate"/>
+		<collection property="" ofType="com.gdu.voyage.vo.AccomBuildingFacility">
+			<id column="accom_building_facility_no" property="accomBuildingFacilityNo"/>
+			<result column="accom_building_facility_name" property="accomBuildingFacilityName"/>
+		</collection>
+		<collection property="" ofType="com.gdu.voyage.vo.AccomBuildingImage">
+			<id column="accom_building_image_no" property="accomBuildingImageNo"/>
+		<result column="accom_building_image_name" property="accomBuildingImageName"/>
+		<result column="accom_building_image_ext" property="accomBuildingImageExt"/>
+		</collection>
+		<collection property="" ofType="com.gdu.voyage.vo.AccomBuildingSpot">
+			<id column="accom_building_spot_no" property="accomBuildingSpotNo"/>
+		</collection>
+		<collection property="" ofType="com.gdu.voyage.vo.AccomAddress">
+			<id column="accom_address_no" property="accomAddressNo"/>
+		</collection>
+	</resultMap>
 	
 	<!-- accom_building_faclity 테이블 -->
 <!-- 	<resultMap type="HashMap" id="selectAccomBuildingFacility"> -->
 <!-- 		<id column="accom_building_facility_no" property="accomBuildingFacilityNo"/> -->
-<!-- 		<result column="accom_building_facility_name" property="accomBuilding_facility_name"/> -->
+<!-- 		<result column="accom_building_facility_name" property="accomBuildingFacilityName"/> -->
+<!-- 	</resultMap> -->
+	
+	<!-- accom_building_image 테이블 -->
+<!-- 	<resultMap type="HashMap" id="selectAccomBuildingImage"> -->
+<!-- 		<id column="accom_building_image_no" property="accomBuildingImageNo"/> -->
+<!-- 		<result column="accom_building_image_name" property="accomBuildingImageName"/> -->
+<!-- 		<result column="accom_building_image_ext" property="accomBuildingImageExt"/> -->
+<!-- 	</resultMap> -->
+	
+	<!-- accom_building_spot 테이블 -->
+<!-- 	<resultMap type="HashMap" id="selectAccomBuildingSpot"> -->
+<!-- 		<id column="accom_building_spot_no" property="accomBuildingSpotNo"/> -->
+<!-- 	</resultMap> -->
+	
+	<!-- accom_address_no 테이블 -->
+<!-- 	<resultMap type="HashMap" id="selectAccomAddress"> -->
+<!-- 		<id column="accom_address_no" property="accomAddressNo"/> -->
 <!-- 	</resultMap> -->
 
 	<!-- 숙소-건물 기본 정보 조회 -->
@@ -38,7 +70,6 @@
 			i.accom_building_image_no accomBuildingImageNo,
 			i.accom_building_image_name accomBuildingImageName,
 			i.accom_building_image_ext accomBuildingImageExt,
-			i.accom_building_image_size accomBuildingImageSize,
 			s.accom_building_spot_no accomBuildingSpotNo,
 			a.accom_address_no accomAddressNo
 		FROM                                        
