@@ -19,8 +19,8 @@
         		$('#removeImgBtn').click(function(){
         			$('#Imginput').children().last().remove();
         		});
-        		// send 버튼 눌렀을 때
-        		$('#sendQBtn').click(function(){
+        		// save 버튼 눌렀을 때
+        		$('#saveQBtn').click(function(){
 					if("memberNickname")
         			let ck = true;
         			// index : 이미지 파일명, item : 파일 경로
@@ -98,7 +98,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center pt-50">
-                            <h2>문의 작성</h2>
+                            <h2>문의글 수정</h2>
                         </div>
                     </div>
                 </div>
@@ -115,8 +115,9 @@
                         <p class="mb-30">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or rannjdomised words which don't look even slightly believable. If you are going to use a passage of fhorem Ipvbsum, you need to orem Ipsum available, but the ma be sure there isvgnn't anything embarrassing.</p>
                         <p class="mb-30">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or rannjdomised words which don't look even slightly believable. If you are going to use a passage of fhorem Ipvbsum.</p>
                     	 -->
-                       <h3 class="mb-20">경고</h3>
-                       <p class="mb-30">질문은 최대한 상세히 되도록이면 사진이나 이미지파일 첨부해서 작성해주세요.</p>
+                       <h3 class="mb-20">안내</h3>
+                       <p class="mb-30">작성 시, 최대한 상세히 되도록이면 사진이나 이미지파일 첨부해서 작성해주세요.</p>
+                       <p class="mb-30">수정은 문의 제목, 문의 종류, 문의 내용, 비밀글 여부만 가능하며 닉네임이나 문의글 번호는 불가하다는 점 양해 부탁드립니다.</p>
                        <p class="mb-30">지나친 모욕, 원색적인 욕설 등 과한 비방글은 추후 관리자의 판단 하에 삭제될 수 있습니다.</p>
                     </div>
                 </div>
@@ -174,29 +175,33 @@
                     	<!-- 원본 : Massage -->
                         <h3 class="mb-40">Question</h3>
                         <!-- Form -->
-                        <form class="form-contact contact_form mb-80" enctype="multipart/form-data" action="${pageContext.request.contextPath}/addQ" method="post" id="addQForm">
+                        <form class="form-contact contact_form mb-80" enctype="multipart/form-data" action="${pageContext.request.contextPath}/modifyQ" method="post" name="modifyQ" id="modifyQForm">
                             <div class="row">
                                 <div class="col-sm-6">
                                 	<div class="form-group">
-                                		<input class="form-controle error" name="memberId" id="memberId" type="text" value="${memberId}" hidden="hidden">
+                                		<input class="form-control error" name="qnaNo" id="qnaNo" type="text" value="${qna.qnaNo}" readonly="readonly"/>
                                 	</div>
                                     <div class="form-group">
                                     	<!-- 
                                     		원본 : <input class="form-control error" name="name" id="name" type="text"  placeholder="Your Name">
                                     	 -->
-                                    	 <input class="form-control error" name="memberNickname" id="memberNickname" type="text" placeholder="닉네임을 입력해주세요">
+                                    	 <input class="form-control error" name="memberNickname" id="memberNickname" type="text" value="${qna.memberNickname}" readonly="readonly">
                                     </div>
+                                </div>
+                                <div class="col-sm-6">	
                                     <div class="form-group">
                                     	
 	                                    <!-- 
 	                                    	원본 : <input class="form-control error" name="email" id="email" type="email" placeholder = "Enter email address">
 	                                    -->
-	                                    <input class="form-control error" name="qnaTitle" id="qnaTitle" type="text"	placeholder="제목을 입력해주세요">
+	                                    <input class="form-control error" name="qnaTitle" id="qnaTitle" type="text"	value="${qna.qnaTitle}">
   									</div>
+                                </div>
+                                <div class="col-sm-6">
                                 	<table class="form-group">
                                 		<tr>
                                 			<td>
-                                				<select name="selectAdd" id="selectQnaCategoryAdd">
+                                				<select name="qnaCategory" id="qnaCategoryModify">
 				                            		<option value="예약문의">예약</option>
 				                                	<option value="결제문의">결제</option>
 				                                	<option value="기타">기타</option>
@@ -217,7 +222,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <textarea class="form-control w-100 error" name="qnaContent" id="qnaContent" cols="30" rows="9" placeholder="내용을 상세히 입력해주세요. 1) 정확한 날짜와 시간  2) 사진이나 이미지 첨부  3) 상세한 상황 설명 "></textarea>
+                                        <textarea class="form-control w-100 error" name="qnaContent" id="qnaContent" cols="30" rows="9">${qna.qnaContent}</textarea>
                                     </div>
                                 </div>
                                 <div>파일 첨부</div>
@@ -229,8 +234,10 @@
                             </div>
                             <div class="form-group mt-3">
                             	<!-- 원본 버튼 : Send  -->
-                            	<a type="button" href="${pageContext.request.contextPath}/qnaList" class="button button-contactForm boxed-btn">Back</a>
-                                <button type="submit" id="sendQBtn" class="button button-contactForm boxed-btn">Send</button>
+                                <div>
+                                	<a type="button" href="${pageContext.request.contextPath}/qnaList" class="button button-contactForm boxed-btn">Back</a>
+                                	<button type="submit" id="saveQBtn" class="button button-contactForm boxed-btn">Save</button>
+                                </div>
                             </div>
                         </form>
                     </div>

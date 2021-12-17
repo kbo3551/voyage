@@ -26,7 +26,7 @@
 		</where>
 	</select>
 	<!-- 질문 목록 조회 -->
-	<select id="selectQnaListByCategory" parameterType="com.gdu.voyage.vo.Qna">
+	<select id="selectQnaListByCategory" parameterType="com.gdu.voyage.vo.Qna" resultMap="resultQna">
 		SELECT
 			qna_no,
 			member_nickname,
@@ -73,6 +73,7 @@
 	<!-- 질문 등록 -->
 	<insert id="addQ" parameterType="com.gdu.voyage.vo.Qna">
 		INSERT INTO qna(
+			member_id,
 			member_nickname,
 			qna_category,
 			qna_title,
@@ -81,6 +82,7 @@
 			update_date,
 			create_date
 		) VALUES (
+			#{memberId},
 			#{memberNickname},
 			#{qnaCategory},
 			#{qnaTitle},
