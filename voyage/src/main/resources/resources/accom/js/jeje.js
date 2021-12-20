@@ -88,7 +88,7 @@ $('#roomSubmit').click(function(){
 	let fileSize;
 	if ($('#wizard-picture').val() == '' && $('#wizard-picture2').val() == '' && $('#wizard-picture3').val() == '' && $('#wizard-picture4').val() == '') {
 		if(!imgFile.match(fileForm) && !imgFile2.match(fileForm) && !imgFile3.match(fileForm) && !imgFile4.match(fileForm)) {
-	    	alert("숙소 건물의 이미지 파일을 4개 업로드 해주세요!");
+	    	alert("객실의 이미지 파일을 4개 업로드 해주세요!");
 	        return;
 	    } else if(fileSize = maxSize) {
 	    	alert("파일 사이즈는 한 파일당 20MB까지 가능합니다!");
@@ -144,4 +144,102 @@ $('#roomSubmit').click(function(){
 	}
 
 	$('#accomRoomForm').submit();
+});
+
+
+
+// addActivity 폼의 유효성 검사
+$('#activitySubmit').click(function(){
+	// 체험의 이미지 파일 유효성 검사
+	let imgFile = $('#wizard-picture').val();
+	let imgFile2 = $('#wizard-picture2').val();
+	let imgFile3 = $('#wizard-picture3').val();
+	let imgFile4 = $('#wizard-picture4').val();
+	let fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
+	let maxSize = 20 * 1024 * 1024;
+	let fileSize;
+	if ($('#wizard-picture').val() == '' && $('#wizard-picture2').val() == '' && $('#wizard-picture3').val() == '' && $('#wizard-picture4').val() == '') {
+		if(!imgFile.match(fileForm) && !imgFile2.match(fileForm) && !imgFile3.match(fileForm) && !imgFile4.match(fileForm)) {
+	    	alert("체험의 이미지 파일을 4개 업로드 해주세요!");
+	        return;
+	    } else if(fileSize = maxSize) {
+	    	alert("파일 사이즈는 한 파일당 20MB까지 가능합니다!");
+	        return;
+	    }
+	}
+	
+	// 체험의 기본 정보 유효성 검사
+	if ($('#activityName').val() == '') {
+		alert('체험의 이름을 입력하세요!');
+		return;
+	}
+	if ($('#activityDescription').val() == '') {
+		alert('체험의 설명글을 입력하세요!');
+		return;
+	}
+	if ($('#activityOpenDate').val() == '') {
+		alert('체험의 시작일을 입력하세요!');
+		return;
+	}
+	if ($('#activityCloseDate').val() == '') {
+		alert('체험의 마감일을 입력하세요!');
+		return;
+	}
+	if ($('#activityOpenHour').val() == '') {
+		alert('체험의 오픈시간을 입력하세요!');
+		return;
+	}
+	if ($('#activityCloseHour').val() == '') {
+		alert('체험의 마감시간을 입력하세요!');
+		return;
+	}
+	if ($('#activityMaxT').val() == '') {
+		alert('체험의 최대 이용 시간을 입력하세요!');
+		return;
+	}
+	if ($('#activityMaxP').val() == '') {
+		alert('체험의 최대 이용 인원을 입력하세요!');
+		return;
+	}
+	
+	// 체험의 주소 유효성 검사
+	if ($('#postalCode').val() == '' || $('#roadAddress').val() == '') {
+		alert('체험의 주소를 입력하기 위해 우편번호 찾기를 진행해주세요!');
+		return;
+	}
+	if ($('#activityAddressDetail').val() == '') {
+		alert('체험의 주소를 상세주소도 입력하세요!');
+		return;
+	}
+	
+	// 체험의 가격 유효성 검사
+	if ($('#activityPrice').val() == '') {
+		alert('체험의 가격을 입력하세요!');
+		return;
+	}
+	
+	// 체험의 추천장소 유효성 검사
+	if ($('#activitySpotName').val() == '' ||  $('#activitySpotCategory').val() == '' || $('#activitySpotDescription').val() == '') {
+		alert('추천장소의 입력 부분을 전부 입력하세요!');
+		return;
+	}
+	if ($('#spotPostalCode').val() == '' ||  $('#spotRoadAddress').val() == '' || $('#spotAddressDetail').val() == '') {
+		alert('추천장소의 주소를 입력하세요!');
+		return;
+	}
+	
+	// 체험의 해시태그 유효성 검사
+	if ($('#inputHashtag').val() == '') {
+		alert('체험의 해시태그를 입력하세요!');
+		return;
+	}
+	
+	// 체험의 등록시 약관 확인 check 검사
+	let checkAccept = $('.icheckbox_square-yellow:checked'); // . 클래스속성으로 부르면 리턴값은 배열
+	if (checkAccept.length == 0) {
+		alert('약관과 수수료 등을 확인해주세요!');
+		return;
+	}
+
+	$('#activityForm').submit();
 });

@@ -15,6 +15,7 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/wizard.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/style.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/icheck.min_all.css">
 		
 		<!-- CSS here -->
             <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
@@ -151,40 +152,40 @@
 										<div class="col-sm-6" style="margin:0 auto;">
 											<div class="form-group">
 												<h4>Name <small>(required)</small></h4>
-												<input name="activity.activityName" type="text" class="form-control" placeholder="나만의 그릇 만들기..." style="height:34px;">
+												<input name="activity.activityName" id="activityName" type="text" class="form-control" placeholder="나만의 그릇 만들기..." style="height:34px;">
 											</div>
 	
 											<div class="form-group">
 												<h4>Description <small>(required)</small></h4>
-												<textarea name="activity.activityDescription" class="form-control" placeholder="내 스타일의 그릇을 만들어보기 ..." rows="8"></textarea>
+												<textarea name="activity.activityDescription" id="activityDescription" class="form-control" placeholder="내 스타일의 그릇을 만들어보기 ..." rows="8"></textarea>
 											</div>
 											<div class="form-group">
 												<h4>Start Date <small>(required)</small></h4>
-												<input name="activity.activityOpenDate" type="date" class="form-control" style="height:34px;">
+												<input name="activity.activityOpenDate" id="activityOpenDate" type="date" class="form-control" style="height:34px;">
 											</div>
 											<div class="form-group">
 												<h4>End Date <small>(required)</small></h4>
-												<input name="activity.activityCloseDate" type="date" class="form-control" style="height:34px;">
+												<input name="activity.activityCloseDate" id="activityCloseDate" type="date" class="form-control" style="height:34px;">
 											</div>
 											<div class="form-group">
 												<h4>Open Hour <small>(required)</small></h4>
-												<input name="activity.activityOpenHour" type="time" class="form-control" style="height:34px;">
+												<input name="activity.activityOpenHour" id="activityOpenHour" type="time" class="form-control" style="height:34px;">
 											</div>
 											<div class="form-group">
 												<h4>Close Hour <small>(required)</small></h4>
-												<input name="activity.activityCloseHour" type="time" class="form-control" style="height:34px;">
+												<input name="activity.activityCloseHour" id="activityCloseHour" type="time" class="form-control" style="height:34px;">
 											</div>
 											<div class="form-group">
 												<h4>Maximum usage time <small>(required)</small></h4>
 												<div class="input-group">
-												    <input type="number" class="form-control" name="activity.activityMaxT" style="height:34px;">
+												    <input type="number" class="form-control" name="activity.activityMaxT" id="activityMaxT" style="height:34px;">
 													<span class="input-group-text">시간</span>
 												</div>
 											</div>
 											<div class="form-group">
 												<h4>Maximum users <small>(required)</small></h4>
 												<div class="input-group">
-												    <input type="number" class="form-control" name="activity.activityMaxP" style="height:34px;">
+												    <input type="number" class="form-control" name="activity.activityMaxP" id="activityMaxP" style="height:34px;">
 													<span class="input-group-text">명</span>
 												</div>
 											</div>
@@ -207,7 +208,7 @@
 													</h4>
 		                                    		<input type="number" class="form-control" id="postalCode" name="activityAddress.activityAddressPostalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" readonly="readonly" style="height:34px;">
 													<input type="text" class="form-control" id="roadAddress" name="activityAddress.activityAddressZip" placeholder="도로명주소가 입력됩니다." readonly="readonly" style="height:34px;">
-													<input type="text" class="form-control" id="prdAddressDetail" name="activityAddress.activityAddressDetail" placeholder="상세주소" style="height:34px;">
+													<input type="text" class="form-control" id="activityAddressDetail" name="activityAddress.activityAddressDetail" placeholder="상세주소" style="height:34px;">
 												</div>
 											</div>
 											
@@ -215,7 +216,7 @@
 												<div class="form-group">
 													<h4> Price <small>(required)</small> </h4>
 		                                    		<div class="input-group">
-													    <input type="number" class="form-control" name="activity.activityPrice" style="height:34px;">
+													    <input type="number" class="form-control" name="activity.activityPrice" id="activityPrice" style="height:34px;">
 														<span class="input-group-text">원</span>
 													</div>
 												</div>
@@ -260,7 +261,7 @@
 															</span>
 				                                    		<input type="number" class="form-control" id="spotPostalCode" name="activitySpotForm[0].spotAddress.spotAddressPotalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" readonly="readonly" style="height:34px;">
 															<input type="text" class="form-control" id="spotRoadAddress" name="activitySpotForm[0].spotAddress.spotAddressZip" placeholder="도로명주소가 입력됩니다." readonly="readonly" style="height:34px;">
-															<input type="text" class="form-control" id="prdAddressDetail" name="activitySpotForm[0].spotAddress.spotAddressDetail" placeholder="상세주소" style="height:34px;">
+															<input type="text" class="form-control" id="spotAddressDetail" name="activitySpotForm[0].spotAddress.spotAddressDetail" placeholder="상세주소" style="height:34px;">
 														</div>
 														<hr>
 													</div>
@@ -305,7 +306,7 @@
 												</p>
 	
 												<div class="checkbox">
-													<label> <input type="checkbox" /> <strong>Accept
+													<label><input type="checkbox" class="icheckbox_square-yellow"> <strong>Accept
 															termes and conditions.</strong>
 													</label>
 												</div>
@@ -347,6 +348,9 @@
     <div id="back-top" >
         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
     </div>
+    
+    <!-- [최지혜] addAccomBuilding의 유효성 검사를 진행하는 js -->
+	<script src="${pageContext.request.contextPath}/accom/js/jeje.js"></script>
 	
 	<script src="${pageContext.request.contextPath}/accom/js/vendor/modernizr-2.6.2.min.js"></script>
     <script src="${pageContext.request.contextPath}/accom/js//jquery-1.10.2.min.js"></script>
@@ -459,7 +463,7 @@
 			inputSpot += '</span>';
 			inputSpot += '<input type="number" class="form-control" id="spotPostalCode'+numSpot+'" name="activitySpotForm['+numSpot+'].spotAddress.spotAddressPotalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" readonly="readonly" style="height:34px;">';
 			inputSpot += '<input type="text" class="form-control" id="spotRoadAddress'+numSpot+'" name="activitySpotForm['+numSpot+'].spotAddress.spotAddressZip" placeholder="도로명주소가 입력됩니다." readonly="readonly" style="height:34px;">';
-			inputSpot += '<input type="text" class="form-control" id="prdAddressDetail" name="activitySpotForm['+numSpot+'].spotAddress.spotAddressDetail" placeholder="상세주소" style="height:34px;">';
+			inputSpot += '<input type="text" class="form-control" id="spotAddressDetail" name="activitySpotForm['+numSpot+'].spotAddress.spotAddressDetail" placeholder="상세주소" style="height:34px;">';
 			inputSpot += '</div><hr>';
 			inputSpot += '</div>';
 			$('#spotPlace').append(inputSpot);
@@ -569,10 +573,6 @@
 		} else {
 			alert("한 가지 이상의 해시태그를 입력해주세요!");
 		}
-	});
-	
-	$('#activitySubmit').click(function(){
-		$('#activityForm').submit();
 	});
 	</script>
 
