@@ -35,4 +35,20 @@ public class ProductService {
 		
 		return accomBuildingList;
 	}
+	
+	// 숙소-건물 시설 목록 조회
+		public List<Map<String, Object>> getAccomBuildingFacilityList(int accomBuildingNo){
+			
+//			List<Map<String, Object>> accomBuildingFacilityList = productMapper.selectAccomBuildingFacility(accomBuildingNo);
+			List<Map<String, Object>> accomBuildingFacilityList = productMapper.selectAccomBuildingFacility(accomBuildingNo);
+//			List<AccomBuildingFacility> accomBuildingFacility = productMapper.selectAccomBuildingFacility();
+//			List<AccomBuildingImage> accomBuildingImage = productMapper.selectAccomBuildingImage();
+			
+//			Map<String, Object> accomBuildingList = new HashMap<>();
+//			accomBuildingList.put("accomBuilding", accomBuilding);
+			
+			log.debug("[debug] ProductService.getAccomBuildingList accomBuildingFacilityList : " + accomBuildingFacilityList);
+			
+			return accomBuildingFacilityList;
+		}
 }

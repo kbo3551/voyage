@@ -24,9 +24,15 @@ public class ProductController {
 		List<Map<String, Object>> accomBuildingList = productService.getAccomBuildingList();
 		model.addAttribute("accomBuildingList", accomBuildingList);
 		log.debug("[debug] ProductController.getAccomBuildingProduct accomBuildingList " + accomBuildingList);
+		
+//		List<Map<String, Object>> accomBuildingFacilityList = productService.getAccomBuildingFacilityList(accomBuildingList.get(0).get("accomBuildingNo").toString());
+//		model.addAttribute("accomBuildingFacilityList", accomBuildingFacilityList);
+//		log.debug("[debug] ProductController.getAccomBuildingProduct accomBuildingFacilityList " + accomBuildingFacilityList);
 	    
 		return "/product/getAccomBuildingProductList";
 	}
+	
+	
 	
 	@GetMapping("/getActivityProductList")
 	public String getActivityProduct() {
