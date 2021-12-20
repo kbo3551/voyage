@@ -125,6 +125,24 @@
 	</insert>
 	
 	
+	<!-- 사업자별 대기중인 체험 신청 리스트 -->
+	<select id="selectReqActivityListByHost" resultType="com.gdu.voyage.vo.Activity">
+		SELECT
+			activity_no activityNo,
+			activity_name activityName,
+			activity_state_admin activityStateAdmin,
+			create_date createDate,
+			COUNT(*)
+		FROM
+			activity
+		WHERE
+			host_no = #{hostNo}
+			AND
+			activity_state_admin = "승인대기"
+		ORDER BY
+			activity_name ASC
+	</select>
+	
 	<!-- 사업자별 등록된 체험 리스트 -->
 	<select id="selectActivityListByHost" resultType="com.gdu.voyage.vo.Activity">
 		SELECT

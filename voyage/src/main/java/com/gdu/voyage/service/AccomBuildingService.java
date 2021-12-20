@@ -30,9 +30,13 @@ public class AccomBuildingService {
 	@Autowired
 	private AccomBuildingMapper accomBuildingMapper;
 	
+	// 사업자별 신청중인 숙소 목록 조회
+	public List<AccomBuilding> selectReqAccomBuildingListByHost(int hostNo){
+		return accomBuildingMapper.selectReqAccomBuildingListByHost(hostNo);
+	}
+	
 	// 사업자별 숙소 등록 목록 조회
 	public List<AccomBuilding> selectAccomBuildingListByHost(int hostNo){
-		log.trace("☆service☆ : "+hostNo);
 		return accomBuildingMapper.selectAccomBuildingListByHost(hostNo);
 	}
 	

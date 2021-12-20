@@ -21,6 +21,9 @@ public interface ActivityMapper {
 	
 	// 사업자별 체험리스트
 	List<Activity> selectActivityListByHost(int hostNo);
+	
+	// 사업자별 신청 대기중인 체험 리스트
+	List<Activity> selectReqActivityListByHost(int hostNo);
 		
 	// 숙소 공개,승인여부 수정
 	int activityUpdate(Activity activity);
