@@ -15,6 +15,7 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/wizard.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/style.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/icheck.min_all.css">
 		
 		<!-- CSS here -->
             <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
@@ -289,7 +290,7 @@
 	
 												<div class="checkbox">
 													<label> 
-														<input type="checkbox" class="checkAccept" /> 
+														<input type="checkbox" class="icheckbox_square-yellow">
 														<strong>Accept termes and conditions.</strong>
 													</label>
 												</div>

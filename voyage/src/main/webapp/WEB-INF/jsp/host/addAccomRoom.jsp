@@ -15,6 +15,7 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/wizard.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/style.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/icheck.min_all.css">
 		
 		<!-- CSS here -->
             <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
@@ -151,12 +152,12 @@
 										<div class="col-sm-6" style="margin:0 auto;">
 											<div class="form-group">
 												<h4>Name <small>(required)</small></h4>
-												<input name="accomRoom.accomRoomName" type="text" class="form-control" placeholder="Deluxe room" style="height:34px;">
+												<input name="accomRoom.accomRoomName" id="accomRoomName" type="text" class="form-control" placeholder="Deluxe room" style="height:34px;">
 											</div>
 	
 											<div class="form-group">
 												<h4>Description <small>(required)</small></h4>
-												<textarea name="accomRoom.accomRoomDescription" class="form-control" placeholder="통유리창이 매력적인 ..." rows="8"></textarea>
+												<textarea name="accomRoom.accomRoomDescription" id="accomRoomDescription" class="form-control" placeholder="통유리창이 매력적인 ..." rows="8"></textarea>
 											</div>
 										</div>
 									</div>
@@ -171,21 +172,21 @@
 												<div class="form-group">
 													<h4>Standard number of people <small>(required)</small></h4>
 													<div class="input-group">
-													    <input type="number" class="form-control" name="accomRoom.accomRoomStan" style="height:34px;">
+													    <input type="number" class="form-control" name="accomRoom.accomRoomStan" id="accomRoomStan" style="height:34px;">
 														<span class="input-group-text">명</span>
 													</div>
 												</div>
 												<div class="form-group">
 													<h4>Maximum number of people <small>(required)</small></h4>
 													<div class="input-group">
-													    <input type="number" class="form-control" name="accomRoom.accomRoomMax" style="height:34px;">
+													    <input type="number" class="form-control" name="accomRoom.accomRoomMax" id="accomRoomMax" style="height:34px;">
 														<span class="input-group-text">명</span>
 													</div>
 												</div>
 												<div class="form-group">
 													<h4>Price <small>(required)</small></h4>
 													<div class="input-group">
-													    <input type="number" class="form-control" name="accomRoom.accomPrice" style="height:34px;">
+													    <input type="number" class="form-control" name="accomRoom.accomPrice" id="accomPrice" style="height:34px;">
 														<span class="input-group-text">원</span>
 													</div>
 												</div>
@@ -215,15 +216,15 @@
 													<div class="form-group" id="itemPlace">
 														<div id="itemForm">
 															<label><small>Name</small></label>
-				                                    		<input type="text" class="form-control" id="accomBuildingSpotName" name="accomRoomItem[0].accomRoomItemName" placeholder="ex) 칫솔" style="height:34px;">
+				                                    		<input type="text" class="form-control" id="accomRoomItemName" name="accomRoomItem[0].accomRoomItemName" placeholder="ex) 칫솔" style="height:34px;">
 															<label><small>Quantity</small></label>
 															<div class="input-group">
-															    <input type="number" class="form-control" name="accomRoomItem[0].accomRoomItemQnt" placeholder="ex) 2" style="height:34px;">
+															    <input type="number" class="form-control" id="accomRoomItemQnt" name="accomRoomItem[0].accomRoomItemQnt" placeholder="ex) 2" style="height:34px;">
 																<span class="input-group-text">개</span>
 															</div>
 															<label><small>Price</small></label>
 															<div class="input-group">
-															    <input type="number" class="form-control" name="accomRoomItem[0].accomRoomItemPrice" placeholder="ex) 2000" style="height:34px;">
+															    <input type="number" class="form-control" id="accomRoomItemPrice" name="accomRoomItem[0].accomRoomItemPrice" placeholder="ex) 2000" style="height:34px;">
 																<span class="input-group-text">원</span>
 															</div>
 															<hr>
@@ -270,7 +271,7 @@
 												</p>
 	
 												<div class="checkbox">
-													<label> <input type="checkbox" /> <strong>Accept
+													<label> <input type="checkbox" class="icheckbox_square-yellow"> <strong>Accept
 															termes and conditions.</strong>
 													</label>
 												</div>
@@ -312,6 +313,9 @@
     <div id="back-top" >
         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
     </div>
+    
+    	<!-- [최지혜] addAccomBuilding의 유효성 검사를 진행하는 js -->
+	<script src="${pageContext.request.contextPath}/accom/js/jeje.js"></script>
 	
 	<script src="${pageContext.request.contextPath}/accom/js/vendor/modernizr-2.6.2.min.js"></script>
     <script src="${pageContext.request.contextPath}/accom/js//jquery-1.10.2.min.js"></script>
@@ -388,10 +392,6 @@
 		} else {
 			alert("한 가지 이상의 해시태그를 입력해주세요!");
 		}
-	});
-	
-	$('#roomSubmit').click(function(){
-		$('#accomRoomForm').submit();
 	});
 	</script>
 
