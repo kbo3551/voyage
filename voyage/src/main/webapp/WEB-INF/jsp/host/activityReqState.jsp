@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>숙소 신청 현황</title>
+<title>체험 신청 현황</title>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="">
@@ -116,7 +116,7 @@
                             <div class="col-sm-12">
 								<div>
 									<c:choose>
-										<c:when test="${activityReqState ne null}">
+										<c:when test="${activityReqState ne '[]'}">
 											${activityReqCount}개의 대기목록이 있습니다.
 											<div>
 												<table class="table" style="text-align: center; vertical-align: middle; display:table;">

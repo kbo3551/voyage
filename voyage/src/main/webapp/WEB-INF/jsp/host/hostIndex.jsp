@@ -112,6 +112,9 @@
                             </h2>
                             <hr>
                         </div>
+                        
+                        <!-- 숙소는 TreeMap으로, 체험은 List로 가져옴. Treemap은 null로 체크가 가능하지만 List는 '[]'로 체크를 해줘야함 -->
+                        
                         <div class="clear"> 
                             <div class="col-sm-12">
                             &nbsp;&nbsp;<label>운영 숙소</label><span>&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/host/accomReqState" class="btn" style="background: rgb(40,180,240); color: white;">신청조회</a></span>
@@ -124,7 +127,7 @@
 														<td style="font-weight: bold; display:table-cell;vertical-align:middle;">이름</td>
 														<td style="font-weight: bold; display:table-cell;vertical-align:middle;">생성일</td>
 														<td style="font-weight: bold; display:table-cell;vertical-align:middle;">공개여부</td>
-														<td style="font-weight: bold; display:table-cell;vertical-align:middle;"><a class="btn" style="background: rgb(40,180,240); color: white;">숙소추가</a></td>
+														<td style="font-weight: bold; display:table-cell;vertical-align:middle;"><a class="btn" href="${pageContext.request.contextPath}/host/addAccomBuilding" style="background: rgb(40,180,240); color: white;">숙소추가</a></td>
 													</tr>
 													<c:forEach var="ab" items="${AccomBuildingList}">
 														<tr>
@@ -150,14 +153,14 @@
 	                            &nbsp;&nbsp;<label>운영 체험</label><span>&nbsp;&nbsp;<a class="btn" href="${pageContext.request.contextPath}/host/activityReqState" style="background: rgb(40,180,240); color: white;">신청조회</a></span>
 									<div>
 										<c:choose>
-											<c:when test="${ActivityList ne null}">
+											<c:when test="${ActivityList ne '[]'}">
 												<div>
 													<table class="table" style="text-align: center; vertical-align: middle; display:table;">
 														<tr>
 															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">이름</td>
 															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">생성일</td>
 															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">공개여부</td>
-															<td style="font-weight: bold; display:table-cell;vertical-align:middle;"><a class="btn" href="${pageContext.request.contextPath}/host/addAccomBuilding" style="background: rgb(40,180,240); color: white;">숙소추가</a></td>
+															<td style="font-weight: bold; display:table-cell;vertical-align:middle;"><a class="btn" style="background: rgb(40,180,240); color: white;">체험추가</a></td>
 														</tr>
 														<c:forEach var="al" items="${ActivityList}">
 															<tr>

@@ -116,7 +116,7 @@
                             <div class="col-sm-12">
 								<div>
 									<c:choose>
-										<c:when test="${accomReqState ne null}">
+										<c:when test="${accomReqState ne '[]'}">
 											${accomReqCount}개의 대기목록이 있습니다.
 											<div>
 												<table class="table" style="text-align: center; vertical-align: middle; display:table;">
