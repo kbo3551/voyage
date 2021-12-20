@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>사업자페이지</title>
+<title>숙소 신청 현황</title>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="">
@@ -108,31 +108,31 @@
 						<br>
                         <div class="profiel-header">
                             <h2>
-                                사업자페이지 <br>
+                                신청 대기목록 <br>
                             </h2>
                             <hr>
                         </div>
                         <div class="clear"> 
                             <div class="col-sm-12">
-                            &nbsp;&nbsp;<label>운영 숙소</label><span>&nbsp;&nbsp;<a class="btn" style="background: rgb(40,180,240); color: white;">신청조회</a></span>
 								<div>
 									<c:choose>
-										<c:when test="${AccomBuildingList ne null}">
+										<c:when test="${accomReqState ne null}">
+											${accomReqCount}개의 대기목록이 있습니다.
 											<div>
 												<table class="table" style="text-align: center; vertical-align: middle; display:table;">
 													<tr>
 														<td style="font-weight: bold; display:table-cell;vertical-align:middle;">이름</td>
 														<td style="font-weight: bold; display:table-cell;vertical-align:middle;">생성일</td>
-														<td style="font-weight: bold; display:table-cell;vertical-align:middle;">공개여부</td>
+														<td style="font-weight: bold; display:table-cell;vertical-align:middle;"></td>
 														<td style="font-weight: bold; display:table-cell;vertical-align:middle;"><a class="btn" style="background: rgb(40,180,240); color: white;">숙소추가</a></td>
 													</tr>
-													<c:forEach var="ab" items="${AccomBuildingList}">
+													<c:forEach var="as" items="${accomReqState}">
 														<tr>
-															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${ab.key}</small></td>
-															<fmt:parseDate var="abCreateDateString" value="${ab.value.getCreateDate()}" pattern="yyyy-MM-dd HH:mm:ss.S" />
-															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><fmt:formatDate value="${abCreateDateString}" pattern="yyyy-MM-dd" /></small></td>
-															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${ab.value.getAccomBuildingState()}</small></td>
-															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="#" class="btn" style="background: rgb(130,130,130);">수정</a></small></td>
+															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${as.getAccomBuildingName()}</small></td>
+															<fmt:parseDate var="asCreateDateString" value="${as.getCreateDate()}" pattern="yyyy-MM-dd HH:mm:ss.S" />
+															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><fmt:formatDate value="${asCreateDateString}" pattern="yyyy-MM-dd" /></small></td>
+															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${as.getAccomBuildingStateAdmin()}</small></td>
+															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="#" class="btn" style="background: rgb(130,130,130);">상세</a></small></td>
 														</tr>
 													</c:forEach>
 												</table>

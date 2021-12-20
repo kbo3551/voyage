@@ -114,7 +114,7 @@
                         </div>
                         <div class="clear"> 
                             <div class="col-sm-12">
-                            &nbsp;&nbsp;<label>운영 숙소</label><span>&nbsp;&nbsp;<a class="btn" style="background: rgb(40,180,240); color: white;">신청조회</a></span>
+                            &nbsp;&nbsp;<label>운영 숙소</label><span>&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/host/accomReqState" class="btn" style="background: rgb(40,180,240); color: white;">신청조회</a></span>
 								<div>
 									<c:choose>
 										<c:when test="${AccomBuildingList ne null}">

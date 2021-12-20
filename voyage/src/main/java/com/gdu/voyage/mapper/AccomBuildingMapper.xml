@@ -145,16 +145,28 @@
             	accom_building_no accomBuildingNo,
             	accom_building_name accomBuildingName,
             	accom_building_state_admin accomBuildingStateAdmin,
-            	create_date createDate,
+            	create_date createDate
+            FROM
+            	accom_building
+            WHERE
+            	host_no = #{hostNo}
+            	AND
+            	accom_building_state_admin = "승인대기"
+			ORDER BY
+				accom_building_name ASC
+    </select>
+    
+    <!-- 사업자 -->
+	<!-- host_no에 따른 대기중인 숙소 신청 갯수 -->
+	<select id="selectReqAccomBuildingCountByHost" resultType="int">
+            SELECT
             	COUNT(*)
             FROM
             	accom_building
             WHERE
             	host_no = #{hostNo}
             	AND
-            	NOT accom_building_state_admin = "승인대기"
-			ORDER BY
-				accom_building_name ASC
+            	accom_building_state_admin = "승인대기"
     </select>
     
     <!-- 사업자 -->
