@@ -62,6 +62,11 @@ public class AccomBuildingService {
 			accomBuildingMapper.accomBuildingUpdate(accomBuilding);
 			return accomBuilding;
 		}
+	// 승인완료된 숙소 목록
+		public AccomBuilding selectAccessAccomBuilding(int accomBuildingNo) {
+			log.debug(accomBuildingMapper.selectAccessAccomBuilding(accomBuildingNo) + "***********[상훈] accomBuildingService Access");
+			return accomBuildingMapper.selectAccessAccomBuilding(accomBuildingNo);
+		}
 	
 	// 숙소-건물 입력
 	public void addAccomBuilding(AccomBuildingForm accomBuildingForm, String realPath) {

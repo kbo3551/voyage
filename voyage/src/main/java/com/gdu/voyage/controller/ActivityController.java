@@ -86,4 +86,13 @@ public class ActivityController {
 		activityService.activityUpdate(activity);
 		return "redirect:/admin/activityOne?activityNo=" + activity.getActivityNo();
 	}
+	
+	// 승인완료된 activity 목록
+	@GetMapping("/admin/accessActivity")
+	public String selectAccessActivity(Model model, int activityNo) {
+		System.out.println("accessActivity 실행!!");
+		Activity activity = activityService.selectAccessActivity(activityNo);
+		model.addAttribute("activity", activity);
+		return "/admin/accessActivity";
+	}
 }

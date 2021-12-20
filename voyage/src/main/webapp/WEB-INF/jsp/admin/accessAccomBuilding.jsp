@@ -36,49 +36,43 @@
 		<main class="content">
 			<div class="container-fluid p-0">
 	
-				<h1 class="h3 mb-3"><strong>숙소 관리</strong></h1>
+				<h1 class="h3 mb-3"><strong>승인된 숙소 목록 보기</strong></h1>
 					<div class="row">
 						<div>
 							<div class="card flex-fill">
 								<div class="card-header">
 	
-									<h5 class="card-title mb-0">Latest AccomBuilding</h5>
+									<h5 class="card-title mb-0">Access AccomBuilding</h5>
 								</div>
 								<table class="table table-hover my-0">
 									<thead>
 										<tr>
 											<th>Building No</th>
+											<th>Host No</th>
 											<th>Building Name</th>
 											<th>Building Description</th>
+											<th>Building Phone</th>
 											<th>Building State</th>
 											<th>Building State Admin</th>
-											<th>View Details</th>
+											<th>create Date</th>
+											<th>update Date</th>
 										</tr>
 									</thead>
 									<tbody> 
-										<c:forEach items="${list}" var="Accom" >
 											<tr>
-										        <td>${Accom.accomBuildingNo}</td>
-										        <td>${Accom.accomBuildingName}</td>
-										        <td>${Accom.accomBuildingDescription}</td>
-										        <td>${Accom.accomBuildingState}</td>
-										        <td>${Accom.accomBuildingStateAdmin}</td>
-										        <td><a href="${pageContext.request.contextPath}/admin/accomBuildingOne?accomBuildingNo=${Accom.accomBuildingNo}">상세 보기</a></td>
-										        </tr>
-									    </c:forEach>
+										        <td>${accomBuilding.accomBuildingNo}</td>
+										        <td>${accomBuilding.hostNo}</td>
+										        <td>${accomBuilding.accomBuildingName}</td>
+										        <td>${accomBuilding.accomBuildingDescription}</td>
+										        <td>${accomBuilding.accomBuildingPhone}</td>
+										        <td>${accomBuilding.accomBuildingState}</td>
+										        <td>${accomBuilding.accomBuildingStateAdmin}</td>
+										        <td>${accomBuilding.createDate}</td>
+										        <td>${accomBuilding.updateDate}</td>
+										   </tr>
 									</tbody>
 								</table>
-								<ul class="paging">
-								    <c:if test="${paging.prev}">
-								        <span><a href='<c:url value="/accomBuildingList?page=${paging.startPage-1}"/>'>이전</a></span>
-								    </c:if>
-								    <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
-								        <span><a href='<c:url value="/accomBuildingList?page=${num}"/>'>${num}</a></span>
-								    </c:forEach>
-								    <c:if test="${paging.next && paging.endPage>0}">
-								        <span><a href='<c:url value="/accomBuildingList?page=${paging.endPage+1}"/>'>다음</a></span>
-								    </c:if>
-								</ul>
+							
 							</div>
 						</div>
 					</div>
@@ -92,16 +86,7 @@
 	</div>
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/admin/js/app.js"></script>
-	<script>
-    function accomBuildingStateAdminSelect(){ 
-        // accomBuildingStateAdmin 선택값을 가져와서 벨류 저장
-        let accomBuildingStateAdmin = document.getaccomBuildingStateAdmin("accomBuildingStateAdmin"); 
-        let selectAccomBuildingStateAdmin = accomBuildingStateAdmin.options[accomBuildingStateAdmin.selectedIndex].value; 
 
-        location.replace("${pageContext.request.contextPath}/admin/accomBuildingList?accomBuildingStateAdmin="+selectAccomBuildingStateAdmin);
-    }
-</script>
-	
 </body>
 
 </html>

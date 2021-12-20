@@ -115,4 +115,12 @@ public class AccomController {
 		return "redirect:/admin/accomBuildingOne?accomBuildingNo=" +accomBuilding.getAccomBuildingNo();
 	}
 	
+	// 승인완료된 accomBuilding 상세목록 조회
+	@GetMapping("/admin/accessAccomBuilding")
+	public String selectAccessAccomBuilding(Model model, int accomBuildingNo) {
+		System.out.println("accessAccomBuilding 실행!!");
+		AccomBuilding accomBuilding = accomBuildingService.selectAccessAccomBuilding(accomBuildingNo);
+		model.addAttribute("accomBuilding", accomBuilding);
+		return "/admin/accessAccomBuilding";
+	}
 }

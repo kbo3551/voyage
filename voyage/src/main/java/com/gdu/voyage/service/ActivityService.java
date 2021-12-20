@@ -62,6 +62,12 @@ public class ActivityService {
 		activityMapper.activityUpdate(activity);
 		return activity;
 	}
+	
+	// 체험 등록 목록 상세 조회 One
+	public Activity selectAccessActivity(int activityNo) {
+		log.debug(activityMapper.selectAccessActivity(activityNo) + "***********[상훈] activityService One");
+		return activityMapper.selectAccessActivity(activityNo);
+	}
 
 	// 페이징
 	public int[] countPage(int currentPage) {

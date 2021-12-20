@@ -216,4 +216,18 @@
     	WHERE activity_no = #{activityNo}
     </update>
     
+    <!-- 등록된 체험을 불러옴 -->
+	<select id="selectAccessActivity" resultType="com.gdu.voyage.vo.Activity">
+            SELECT 
+            activity_no as activityNo,
+            activity_name as activityName,
+            activity_open_date as activityOpenDate,
+            activity_close_date as activityCloseDate,
+            activity_description as activityDescription,
+            activity_state as activityState,
+            create_date as createDate,
+            update_date as updateDate
+            FROM activity
+            WHERE activity_state_admin = '승인완료'
+    </select>
 </mapper>

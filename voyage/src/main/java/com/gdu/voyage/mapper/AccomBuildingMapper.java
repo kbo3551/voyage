@@ -43,4 +43,7 @@ public interface AccomBuildingMapper {
 	
 	// 숙소 공개,승인여부 수정
 	int accomBuildingUpdate(AccomBuilding accomBuilding);
+	
+	// 등록된 숙소 목록
+	AccomBuilding selectAccessAccomBuilding(int accomBuildingNo);
 }

@@ -19,6 +19,9 @@ public interface ActivityMapper {
 	// 체험 조회 one
 	Activity selectActivityOne(int activityNo);
 	
+	// 승인완료된 체험 목록
+	Activity selectAccessActivity(int activityNo);
+	
 	// 사업자별 체험리스트
 	List<Activity> selectActivityListByHost(int hostNo);
 	

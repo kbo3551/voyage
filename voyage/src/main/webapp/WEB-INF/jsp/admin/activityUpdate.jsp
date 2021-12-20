@@ -71,6 +71,7 @@
 											<input class="form-control" type="text" readonly="readonly" value="${activity.activityCloseHour}">
 										</div>
 									</div>
+									
           	             			<div class="col-sm-5">
 										<div class="form-group">
 											<label>Activity Max T</label>
