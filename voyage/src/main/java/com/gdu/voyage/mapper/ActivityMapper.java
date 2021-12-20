@@ -20,7 +20,7 @@ public interface ActivityMapper {
 	Activity selectActivityOne(int activityNo);
 	
 	// 사업자별 체험리스트
-	Activity selectActivityListByHost(int hostNo);
+	List<Activity> selectActivityListByHost(int hostNo);
 		
 	// 숙소 공개,승인여부 수정
 	int activityUpdate(Activity activity);

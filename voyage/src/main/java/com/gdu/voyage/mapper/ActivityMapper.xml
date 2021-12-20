@@ -127,14 +127,21 @@
 	
 	<!-- 사업자별 등록된 체험 리스트 -->
 	<select id="selectActivityListByHost" resultType="com.gdu.voyage.vo.Activity">
-		SELECT 
-		   activity_name activityName,
-		   create_date createDate,
-		   activity_state activityState
-		FROM
-			activity
-		WHERE
-			host_no = #{hostNo}
+		SELECT
+				activity_no activityNo,
+				activity_name activityName,
+				activity_state activityState,
+				create_date createDate
+			FROM
+				activity
+			WHERE
+				host_no = #{hostNo}
+				AND
+				NOT activity_state_admin = "승인대기"
+				AND
+				NOT activity_state_admin = "삭제"
+			ORDER BY
+				activity_name ASC
 	</select>
 	
 	<!-- 관리자 -->

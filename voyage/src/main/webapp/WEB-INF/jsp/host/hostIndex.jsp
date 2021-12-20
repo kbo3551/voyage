@@ -114,7 +114,7 @@
                         </div>
                         <div class="clear"> 
                             <div class="col-sm-12">
-                            &nbsp;&nbsp;<label>운영 숙소</label><span>&nbsp;&nbsp;<a class="btn" style="background: rgb(40,180,240);">신청조회</a></span>
+                            &nbsp;&nbsp;<label>운영 숙소</label><span>&nbsp;&nbsp;<a class="btn" style="background: rgb(40,180,240); color: white;">신청조회</a></span>
 								<div>
 									<c:choose>
 										<c:when test="${AccomBuildingList ne null}">
@@ -129,9 +129,42 @@
 													<c:forEach var="ab" items="${AccomBuildingList}">
 														<tr>
 															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${ab.key}</small></td>
-															<fmt:parseDate var="createDateString" value="${ab.value.getCreateDate()}" pattern="yyyy-MM-dd HH:mm:ss.S" />
-															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><fmt:formatDate value="${createDateString}" pattern="yyyy-MM-dd" /></small></td>
+															<fmt:parseDate var="abCreateDateString" value="${ab.value.getCreateDate()}" pattern="yyyy-MM-dd HH:mm:ss.S" />
+															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><fmt:formatDate value="${abCreateDateString}" pattern="yyyy-MM-dd" /></small></td>
 															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${ab.value.getAccomBuildingState()}</small></td>
+															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="#" class="btn" style="background: rgb(130,130,130);">수정</a></small></td>
+														</tr>
+													</c:forEach>
+												</table>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<small>&nbsp;&nbsp;목록이 비어있습니다.</small>
+										</c:otherwise>
+									</c:choose>
+								</div>
+							</div>
+							
+							<div class="clear"> 
+                            <div class="col-sm-12">
+                            &nbsp;&nbsp;<label>운영 체험</label><span>&nbsp;&nbsp;<a class="btn" style="background: rgb(40,180,240); color: white;">신청조회</a></span>
+								<div>
+									<c:choose>
+										<c:when test="${ActivityList ne null}">
+											<div>
+												<table class="table" style="text-align: center; vertical-align: middle; display:table;">
+													<tr>
+														<td style="font-weight: bold; display:table-cell;vertical-align:middle;">이름</td>
+														<td style="font-weight: bold; display:table-cell;vertical-align:middle;">생성일</td>
+														<td style="font-weight: bold; display:table-cell;vertical-align:middle;">공개여부</td>
+														<td style="font-weight: bold; display:table-cell;vertical-align:middle;"><a class="btn" style="background: rgb(40,180,240); color: white;">숙소추가</a></td>
+													</tr>
+													<c:forEach var="al" items="${ActivityList}">
+														<tr>
+															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${al.getActivityName()}</small></td>
+															<fmt:parseDate var="alCreateDateString" value="${al.getCreateDate()}" pattern="yyyy-MM-dd HH:mm:ss.S" />
+															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><fmt:formatDate value="${alCreateDateString}" pattern="yyyy-MM-dd" /></small></td>
+															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${al.getActivityState()}</small></td>
 															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="#" class="btn" style="background: rgb(130,130,130);">수정</a></small></td>
 														</tr>
 													</c:forEach>

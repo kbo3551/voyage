@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.gdu.voyage.service.AccomBuildingService;
+import com.gdu.voyage.service.ActivityService;
 import com.gdu.voyage.service.HostService;
 import com.gdu.voyage.vo.AccomBuilding;
+import com.gdu.voyage.vo.Activity;
 import com.gdu.voyage.vo.Host;
 import com.gdu.voyage.vo.HostAsk;
 import com.gdu.voyage.vo.Member;
@@ -28,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 public class HostController {
 	@Autowired private HostService hostService;
 	@Autowired private AccomBuildingService accomBuildingService;
+	@Autowired private ActivityService activityService;
 	
 	// 사업자 myPage
 	@GetMapping("/host/hostIndex")
@@ -40,7 +43,6 @@ public class HostController {
     	// hostNo 추출
     	int hostNo = hostSession.getHostNo();
     	
-    	
     	// 정렬을 위한 TreeMap 선언
     	TreeMap<String,AccomBuilding> abMap = new TreeMap<>();
     	
@@ -52,7 +54,11 @@ public class HostController {
     		index++;
     	}
     	
+    	// 체험 목록 받아옴. 정렬은 쿼리문 내에서.
+    	List<Activity> ActivityList = activityService.selectActivityListByHost(hostNo);
+    	
     	model.addAttribute("AccomBuildingList", abMap);
+    	model.addAttribute("ActivityList", ActivityList);
 
     	return "/host/hostIndex";
     }

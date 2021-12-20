@@ -28,6 +28,11 @@ import lombok.extern.slf4j.Slf4j;
 public class ActivityService {
 	@Autowired
 	private ActivityMapper activityMapper;
+	
+	// 사업자별 체험 조회
+	public List<Activity> selectActivityListByHost(int hostNo) {
+		return activityMapper.selectActivityListByHost(hostNo);
+	}
 
 	// 숙소 등록 목록 조회
 	public List<Activity> getActivityList(int pageNo) {
