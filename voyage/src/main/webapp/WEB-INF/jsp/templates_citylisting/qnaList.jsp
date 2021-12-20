@@ -372,11 +372,22 @@
                                     <div class="col-xl-12">
                                         <div class="single-wrap d-flex justify-content-center">
                                             <nav aria-label="Page navigation example">
+                                            	<!-- 페이징 -->
                                                 <ul class="pagination justify-content-start">
-                                                    <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">03</a></li>
-                                                <li class="page-item"><a class="page-link" href="#"><span class="ti-angle-right"></span></a></li>
+                                                	<li class="page-item"><a class="page-link" href="qnaList?pageNo=${pageNo-10}"><span class="ti-angle-left"></span></a></li>
+                                                    <c:forEach items="${navArray}" var="n">
+                                                    	<c:if test="${n != 0}">
+                                                    		<c:choose>
+                                                    			<c:when test="${n eq pageNo}">
+                                                    				<li class="page-item active"><a  class="page-link" href="qnaList?pageNo=${n}">${n}</a></li>
+                                                    			</c:when>
+                                                    			<c:otherwise>
+                                                    				<li class="page-item active"><a  class="page-link" href="qnaList?pageNo=${n}">${n}</a></li>
+                                                    			</c:otherwise>
+                                                    		</c:choose>
+                                                    	</c:if>
+                                                    </c:forEach>
+                                                	<li class="page-item"><a class="page-link" href="qnaList?pageNo=${pageNo+10}"><span class="ti-angle-right"></span></a></li>
                                                 </ul>
                                             </nav>
                                         </div>

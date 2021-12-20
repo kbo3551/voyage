@@ -36,7 +36,9 @@ public class QnaController {
 			@RequestParam(required = false) String qnaCategory) {
 		System.out.println("qnaListController() 실행");
 		Map<String, Object> map = qnaService.getQnaListByCategory(qnaCategory, currentPage, ROW_PER_PAGE);
+		int[] navArray = qnaService.countPage(currentPage);
 		model.addAttribute("qnaList", map.get("qnaList"));
+		model.addAttribute("navArray", navArray);
 		model.addAttribute("lastPage", map.get("lastPage"));
 		model.addAttribute("currentPage", map.get("currentPage"));
 		return "/templates_citylisting/qnaList";

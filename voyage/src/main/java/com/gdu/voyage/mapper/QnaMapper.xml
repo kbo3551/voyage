@@ -107,6 +107,7 @@
 	<delete id="removeQ" parameterType="com.gdu.voyage.vo.Qna">
 		DELETE FROM qna 
 		WHERE qna_no = #{qnaNo}
+		AND member_nickname = #{memberNickname}
 	</delete>
 	<!-- 이미지 등록 -->
 	<insert id="addQImg" parameterType="com.gdu.voyage.vo.QnaImg">
