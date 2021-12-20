@@ -1,41 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html class="no-js">
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>VOYAGE | addAccomRoom</title>
-		<meta name="description" content="GARO is a real-estate template">
-		<meta name="author" content="Kimarotec">
-	   	<meta name="keyword" content="html5, css, bootstrap, property, real-estate theme , bootstrap template">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
-	    
-	    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
-		
-		<link rel="manifest" href="site.webmanifest">
-		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-		
-		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-		<link rel="icon" href="favicon.ico" type="image/x-icon">
-		
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/normalize.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/font-awesome.min.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/fontello.css">
-		<link href="${pageContext.request.contextPath}/accom/fonts/icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
-		<link href="${pageContext.request.contextPath}/accom/fonts/icon-7-stroke/css/helper.css" rel="stylesheet">
-		<link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet" media="screen">
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
+
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/bootstrap-select.min.css"> 
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/icheck.min_all.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/price-range.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/owl.carousel.css">  
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/owl.theme.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/owl.transitions.css"> 
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/wizard.css"> 
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/wizard.css">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/style.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/responsive.css">
 		
 		<!-- CSS here -->
             <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
@@ -66,14 +45,56 @@
 				font-family: 'SpoqaHanSansNeo-Regular';
 			}
 			
+			.container{
+				font-size: 18px;
+			}
+			.form-control {
+				font-size: 13px;
+			}
+			
+			.header-area {
+			    border-bottom: 0px;
+			}
+			
+			.profiel-container {
+			    border: 0px;
+			}
 		</style>
+		
     </head>
     
     <body>
-    <!-- 배너 : 시작 -->
-    	<c:import url="../partial\\banner.jsp"/>
-    <!-- 배너 : 끝 -->
-    <div style="height:130px; background-color: black;"></div>
+    <!-- Preloader Start -->
+    <!-- <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="${pageContext.request.contextPath}/assets/img/logo/loder.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>  -->
+    
+    
+   	<c:import url="/WEB-INF/jsp/partial/banner.jsp"/>
+   	
+	<main>
+	
+	<div class="page-head hero-overly" style="background-image: url('${pageContext.request.contextPath}/assets/img/page-header.jpg'); background-repeat : no-repeat;"> 
+	    <div class=" container">
+	        <div class="row">
+	            <div class="col-sm-10 col-sm-offset-1 profiel-container" style="line-height:125%">
+	            <br>
+	            <br>                
+	            <br>
+	            <br>
+	            <br>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+    <!-- End page header --> 
     <!-- property area -->
 	<div class="content-area submit-property">
 		<div class="container" style="background-color: #FCFCFC;">
@@ -193,18 +214,19 @@
 													
 													<div class="form-group" id="itemPlace">
 														<div id="itemForm">
-															<label>Name</label>
+															<label><small>Name</small></label>
 				                                    		<input type="text" class="form-control" id="accomBuildingSpotName" name="accomRoomItem[0].accomRoomItemName" placeholder="ex) 칫솔" style="height:34px;">
-															<label>Quantity</label>
+															<label><small>Quantity</small></label>
 															<div class="input-group">
 															    <input type="number" class="form-control" name="accomRoomItem[0].accomRoomItemQnt" placeholder="ex) 2" style="height:34px;">
 																<span class="input-group-text">개</span>
 															</div>
-															<label>Price</label>
+															<label><small>Price</small></label>
 															<div class="input-group">
 															    <input type="number" class="form-control" name="accomRoomItem[0].accomRoomItemPrice" placeholder="ex) 2000" style="height:34px;">
 																<span class="input-group-text">원</span>
 															</div>
+															<hr>
 														</div>
 													</div>
 												</div>
@@ -221,7 +243,7 @@
 		    													color: #fff; font-weight: 500;" id="delHashtag" value="삭제">
 			                                    		</span>
 		                                    		</h4>
-		                                    		<label>* 입력 폼 하나당, 해시태그 하나씩 입력해주세요.</label>
+		                                    		<h4><small>* 입력 폼 하나당, 해시태그 하나씩 입력해주세요.</small></h4>
 		                                    		<div class="form-group" id="hashtagPlace">
 														<div class="input-group">
 														    <span class="input-group-addon"><i class="fas fa-hashtag"></i></span>
@@ -281,9 +303,15 @@
 		</div>
 	</div>
 	
+	</main>
 	<!--footer.jsp 시작  -->
-    	<c:import url="../partial\\footer.jsp"/>
+    	<c:import url="/WEB-INF/jsp/partial/footer.jsp"/>
     <!--footer.jsp 끝  -->
+    
+    <!-- Scroll Up -->
+    <div id="back-top" >
+        <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+    </div>
 	
 	<script src="${pageContext.request.contextPath}/accom/js/vendor/modernizr-2.6.2.min.js"></script>
     <script src="${pageContext.request.contextPath}/accom/js//jquery-1.10.2.min.js"></script>
@@ -311,18 +339,19 @@
 	$('#addItem').click(function(){
 		numItem = numItem + 1;
 		let inputItem = '<div id="itemForm">';
-		inputItem += '<label>Name</label>';
+		inputItem += '<label><small>Name</small></label>';
 		inputItem += '<input type="text" class="form-control" id="accomRommItemName" name="accomRoomItem[0].accomRoomItemName" placeholder="ex) 칫솔" style="height:34px;">';
-		inputItem += '<label>Quantity</label>';
+		inputItem += '<label><small>Quantity</small></label>';
 		inputItem += '<div class="input-group">';
 		inputItem += '<input type="number" class="form-control" name="accomRoomItem[0].accomRoomItemQnt" placeholder="ex) 2" style="height:34px;">';
 		inputItem += '<span class="input-group-text">개</span>';
 		inputItem += '</div>';
-		inputItem += '<label>Price</label>';
+		inputItem += '<label><small>Price</small></label>';
 		inputItem += '<div class="input-group">';
 		inputItem += '<input type="number" class="form-control" name="accomRoomItem[0].accomRoomItemPrice" placeholder="ex) 2000" style="height:34px;">';
 		inputItem += '<span class="input-group-text">원</span>';
 		inputItem += '</div>';
+		inputItem += '<hr>';
 		inputItem += '</div>';
 		$('#itemPlace').append(inputItem);
 	});
@@ -332,6 +361,7 @@
 		if($('div[id=itemForm]').length>1){
 			numItem = numItem - 1;
 			$('div[id=itemForm]:last').remove();
+			$('hr:last').remove();
 		} else {
 			alert("한 가지 이상의 물품을 입력해주세요!");
 		}
