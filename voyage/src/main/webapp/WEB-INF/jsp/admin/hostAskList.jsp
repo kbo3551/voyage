@@ -49,14 +49,15 @@
          <main class="content">
             <div class="container-fluid p-0">
                <h1 class="h3 mb-3">
-                  <strong>회원 관리</strong>
+                  <strong>사업자 신청 관리</strong>
                </h1>
                <div class="row">
                   <div>
                      <div class="card flex-fill">
                         <div class="card-header">
-                           <h5 class="card-title mb-0">회원 리스트</h5>
+                           <h5 class="card-title mb-0">사업자 신청 관리 현화</h5>
                         </div>
+                        <form class="form-contact contact_form mb-80" action="${pageContext.request.contextPath}/admin/updateHostAsk" method="post" name="updateHostAsk" id="updateHostAsk">
                         <table class="table table-hover my-0">
                            <thead>
                               <tr>
@@ -65,6 +66,8 @@
                                  <th>사업자 번호</th>
                                  <th>처리 상태</th>
                                  <th>사업자 신청일</th>
+                                 <th></th>
+                                 <th></th>
                                  <th></th>
                               </tr>
                            </thead>
@@ -76,11 +79,19 @@
                                     <td>${v.hostReg}</td>
                                     <td>${v.askState}</td>
                                     <td>${v.createDate}</td>
-                                    <td><a href="${pageContext.request.contextPath}/}">?</a></td>
+                                    <td><label>처리 여부</label>
+                                    <br>
+                                  		<select name="askState" id="askState">
+				                            <option value="승인완료">승인</option>
+				                            <option value="승인거부">거부</option>
+										</select>
+									</td>
+									<td><button class="btn btn-finish btn-primary" type="submit">수정</button></td>
                                  </tr>
                               </c:forEach>
                            </tbody>
                         </table>
+                        </form>
                      </div>
                   </div>
                </div>
