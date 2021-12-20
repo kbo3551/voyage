@@ -41,6 +41,8 @@
 				
 				<!-- 입력공간 -->
 				<form method="post" action="${pageContext.request.contextPath}/admin/addNotice">
+					<!-- 작성자 -->
+					<input type="hidden" name="adminId" value="${session.adminId}">
 					<!-- 공지 제목 -->
 					<div class="row">
 						<div class="card">

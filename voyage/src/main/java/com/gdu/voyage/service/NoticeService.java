@@ -8,8 +8,10 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gdu.voyage.mapper.NoticeMapper;
@@ -61,7 +63,7 @@ public class NoticeService {
 	}
 	
 	//insert(내용+사진 입력)
-	public Map<String, Object> insertNoticeOne(Notice notice,NoticeFile noticeFile,NoticeForm noticeForm) {
+	public Map<String, Object> insertNoticeOne(Notice notice,@RequestParam @Nullable NoticeFile noticeFile, @RequestParam @Nullable NoticeForm noticeForm) {
 		Map<String, Object> insertNoticeMap = new HashMap<>();
 		
 		Notice insertNotice = noticeMapper.inserNotice(notice);
@@ -83,7 +85,7 @@ public class NoticeService {
 	
 	
 	//삭제(내용+사진 삭제)
-	public Map<String, Object> deleteNoticeOne(Notice notice,NoticeFile noticeFile) {
+	public Map<String, Object> deleteNoticeOne(Notice notice, @RequestParam @Nullable NoticeFile noticeFile) {
 		Map<String, Object> deleteNoticeMap = new HashMap<>();
 		
 		log.debug(notice.toString()+"☆☆☆[DoHun] Notice notice + delete Map ,Service☆☆☆");
@@ -103,7 +105,7 @@ public class NoticeService {
 	}
 	
 	//수정
-	public Notice updateNoticeOne(Notice notice, NoticeFile noticeFile, NoticeForm noticeForm) {
+	public Notice updateNoticeOne(Notice notice,@RequestParam @Nullable NoticeFile noticeFile ,@RequestParam @Nullable NoticeForm noticeForm) {
 		log.debug(notice.toString()+"☆☆☆[DoHun] Notice notice + update Map ,Service☆☆☆");
 		noticeMapper.updateNotice(notice);
 		log.debug(notice.toString()+"☆☆☆[DoHun] Notice update + update Map ,Service☆☆☆");

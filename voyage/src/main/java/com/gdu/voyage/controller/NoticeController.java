@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,7 +57,7 @@ public class NoticeController {
 	}
 	
 	@PostMapping("/admin/addNotice")
-	public String addNoticeOne(Notice notice,NoticeFile noticeFile, NoticeForm noticeForm) {
+	public String addNoticeOne(Notice notice,@RequestParam @Nullable NoticeFile noticeFile,@RequestParam @Nullable NoticeForm noticeForm) {
 		log.debug(notice+"★★★ [DoHun] Notice insert Controller 실행, notice ★★★");
 		log.debug(noticeFile+"★★★ [DoHun] Notice insert Controller 실행, notice File ★★★");
 		noticeService.insertNoticeOne(notice, noticeFile, noticeForm);
@@ -70,7 +71,7 @@ public class NoticeController {
 	}
 	
 	@PostMapping("/admin/removeNotice")
-	public String deleteNoticeOne(Notice notice, NoticeFile noticeFile) {
+	public String deleteNoticeOne(Notice notice,@RequestParam @Nullable NoticeFile noticeFile) {
 		log.debug(notice.toString()+"★★★ [DoHun] Notice delete Controller 실행, notice ★★★");
 		log.debug(noticeFile+"★★★ [DoHun] Notice delete Controller 실행, notice File ★★★");
 		noticeService.deleteNoticeOne(notice, noticeFile);
@@ -84,7 +85,7 @@ public class NoticeController {
 	}
 	
 	@PostMapping("/admin/modifyNotice")
-	public String modifyNoticeOne(Notice notice,NoticeFile noticeFile, NoticeForm noticeForm) {
+	public String modifyNoticeOne(Notice notice,@RequestParam @Nullable NoticeFile noticeFile,@RequestParam @Nullable NoticeForm noticeForm) {
 		log.debug(notice.toString()+"★★★ [DoHun] Notice update Controller 실행, notice ★★★");
 		noticeService.updateNoticeOne(notice, noticeFile, noticeForm);
 		log.debug(notice.toString()+"★★★ [DoHun] Notice update Controller 실행, notice ★★★");
