@@ -73,11 +73,11 @@ public class QnaService {
 		return null;
 	}
 	// Qna 게시판 질문 삭제
-	public void removeQ(Qna qna) {
-		log.debug(qna.toString() + "☆☆☆☆☆☆☆☆☆☆[다원] QnaService_removeQ_Qna debug");	
+	public int removeQ(Qna qna) {
+		log.debug(qna.toString() + "☆☆☆☆☆☆☆☆☆☆[다원] QnaService_removeQ_Qna debug");
+		return qnaMapper.removeQ(qna);
 	}
 	// Qna 게시판 질문 작성
-	// qnaCategory에 null값 들어옴... 수정 중
 	public Map<String, Object> addQ(QnaForm qnaForm, Qna qna, QnaImg qnaImg) throws Exception {
 		Map<String, Object> addQMap = new HashMap<>();
 		

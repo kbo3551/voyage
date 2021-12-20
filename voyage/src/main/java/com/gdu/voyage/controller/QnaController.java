@@ -61,10 +61,26 @@ public class QnaController {
 	}
 	// 질문 작성 post
 	@PostMapping("/addQ")
-	public String addQ(QnaForm qnaForm, Qna qna, QnaImg qnaImg) throws Exception {
-		log.debug(qna.toString());
+	public String addQ(HttpServletRequest request, QnaForm qnaForm, Qna qna, QnaImg qnaImg) throws Exception {
+		// 세션 가져옴
+		Member loginMember = (Member) request.getSession().getAttribute("loginMember");
+		String memberId = loginMember.getMemberId();
+		String memberNickname = request.getParameter("memberNickname");
+		String qnaCategory = request.getParameter("qnaCategory");
+		String qnaTitle = request.getParameter("qnaTitle");
+		String qnaContent = request.getParameter("qnaContent");
+		String qnaSecret = request.getParameter("qnaSecret");
+		
+		Qna q = new Qna();
+		q.setMemberId(memberId);
+		q.setMemberNickname(memberNickname);
+		q.setQnaCategory(qnaCategory);
+		q.setQnaTitle(qnaTitle);
+		q.setQnaContent(qnaContent);
+		q.setQnaSecret(qnaSecret);
+		log.debug(q.toString());
 		log.debug(qnaImg.toString());
-		qnaService.addQ(qnaForm, qna, qnaImg);
+		qnaService.addQ(qnaForm, q, qnaImg);
 		return "redirect:/qnaList?pageNo=1";
 	}
 	// 질문 수정
@@ -77,18 +93,19 @@ public class QnaController {
 	}
 	@PostMapping("/modifyQ")
 	public String modifyQ(Qna qna, QnaImg qnaImg) {
+		log.debug("★★★★★★★★★★★ [다원] qna_modifyQ_Controller() debug" + qnaService.modifyQ(qna, qnaImg));
 		qnaService.modifyQ(qna, qnaImg);
 		return "redirect:/getQnaOne?qnaNo=" + qna.getQnaNo();
 	}
 	// 질문 삭제
-	@GetMapping
+	@GetMapping("/removeQ")
 	public String removeQ(Model model, int qnaNo) {
 		System.out.println("removeQuestionController() 실행");
 		Qna qna = qnaService.getQnaOneAndAnswer(qnaNo);
 		model.addAttribute("qna", qna);
 		return ("/templates_citylisting/removeQ");
 	}
-	@PostMapping
+	@PostMapping("removeQ")
 	public String removeQ(Qna qna) {
 		qnaService.removeQ(qna);
 		return "redirect:/qnaList?pageNo=1";

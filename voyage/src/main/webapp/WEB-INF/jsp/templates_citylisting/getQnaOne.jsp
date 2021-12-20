@@ -12,6 +12,7 @@
         	// 버튼 눌렀을 때, 이동 경로 설정
         	$(function(){
         		// 변수 ck 생성
+        		var ck = ${memberNickname} ;
         		// 관리자 답변 여부 체크 용도로 사용
         		// false : 수정, 삭제 가능 / true : 수정, 삭제 불가
         		var ck;

@@ -21,7 +21,7 @@
         		});
         		// send 버튼 눌렀을 때
         		$('#sendQBtn').click(function(){
-					if("memberNickname")
+					
         			let ck = true;
         			// index : 이미지 파일명, item : 파일 경로
         			$('#qnaImg').each(function(index, item){
@@ -196,7 +196,7 @@
                                 	<table class="form-group">
                                 		<tr>
                                 			<td>
-                                				<select name="selectAdd" id="selectQnaCategoryAdd">
+                                				<select name="qnaCategory" id="qnaCategory">
 				                            		<option value="예약문의">예약</option>
 				                                	<option value="결제문의">결제</option>
 				                                	<option value="기타">기타</option>
