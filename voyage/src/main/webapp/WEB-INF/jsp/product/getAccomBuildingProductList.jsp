@@ -185,7 +185,7 @@
                             <div class="container">
                                 <div class="row">
                                 	<c:forEach items="${accomBuildingList}" var="ab">
-	                                    <div class="col-lg-6 ">
+	                                    <div class="col-lg-6 " class="accomBox">
 	                                        <div class="single-listing mb-30">
 	                                            <div class="list-img">
 	                                                <img src="resources/image/accom_building/jang.jpg" alt="">
@@ -195,11 +195,40 @@
 	                                                <span>Open</span>
 	                                                <h3><a href="/getReviewOne">${ab.accomBuildingName}</a></h3>
 <!-- 	                                                <p>700/D, Kings road, Green lane, 85/ London</p> -->
-<%-- 	                                                <p>${ab.accomBuildingFacilityName }</p> --%>
-<%-- 	                                                <c:forEach items="${accomBuildingList.accomBuildingFacilityList}" var="abf"> --%>
-<%-- 	                                                	<p>${abf.accomBuildingFacilityName }, </p> --%>
-<%-- 	                                                </c:forEach> --%>
-													<input type="hidden" name="${ab.accomBuildingNo }" id="abn">
+													<input type="hidden" name="${ab.accomBuildingNo }" class="abn">
+<!-- 	                                    			<script>getFacility(${ab.accomBuildingNo })</script>	 -->
+														<script type="text/javascript">
+// 												     	$('.accomBox').ready(function(){
+												// 		    start Ajax
+														    var id_name = $('.abn').attr('name');
+												//      	function getFacility(id_name){
+														    $.ajax({
+														        type : 'GET',
+														        dataType : 'json',
+														        url : "http://localhost/getAccomProductFacilityList?"
+														            + "accomBuildingNo="
+														            + id_name,
+														            error : function(err) {
+														                console.log("실행중 오류가 발생하였습니다.");
+														            },
+														            success : function(data) {
+														            	
+																		let facility = '<p>';
+																		$(data).each(function(index, item){ // each : JSON의 반복문
+																			if(index != 0){			
+																				facility += ', ';				
+																			}	
+																			facility += item.accomBuildingFacilityName;
+																		});
+																		facility += '</p>';
+																		$('#facility').append(facility);
+												// 						var id_name = '';
+														        	} 
+														     });
+														     // end Ajax
+												//      	}
+// 												     	});
+												        </script>
 	                                                <div class="form-group" id="facility">
 													</div>
 	                                                <div class="list-footer">
@@ -294,10 +323,12 @@
         
         <script type="text/javascript">
      	// 검색 제시어 이벤트
-		    // start Ajax
+     	
+     	$('.accomBox').ready(function(){
+// 		    start Ajax
 		    
 		    var id_name = $('#abn').attr('name');
-     	
+//      	function getFacility(id_name){
 		    $.ajax({
 		        type : 'GET',
 		        dataType : 'json',
@@ -308,19 +339,22 @@
 		                console.log("실행중 오류가 발생하였습니다.");
 		            },
 		            success : function(data) {
-
+		            	
+						let facility = '<p>';
 						$(data).each(function(index, item){ // each : JSON의 반복문
-// 							
-							let inputFacility = '<p>';
-							inputFacility += item.accomBuildingFacilityName;
-							inputFacility += '</p>';
-							$('#facility').append(inputFacility);
-							
+							if(index != 0){			
+								facility += ', ';				
+							}	
+							facility += item.accomBuildingFacilityName;
 						});
-		
+						facility += '</p>';
+						$('#facility').append(facility);
+// 						var id_name = '';
 		        	} 
 		     });
 		     // end Ajax
+//      	}
+     	});
         </script>
         
     </body>
