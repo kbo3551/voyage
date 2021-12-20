@@ -29,6 +29,11 @@ public class ActivityService {
 	@Autowired
 	private ActivityMapper activityMapper;
 	
+	// 사업자별 신청중 체험 갯수
+	public int selectReqActivityCountByHost(int hostNo) {
+		return activityMapper.selectReqActivityCountByHost(hostNo);
+	}
+	
 	// 사업자별 신청중인 체험 조회
 	public List<Activity> selectReqActivityListByHost(int hostNo) {
 		return activityMapper.selectReqActivityListByHost(hostNo);

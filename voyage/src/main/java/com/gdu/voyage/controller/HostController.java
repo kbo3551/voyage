@@ -32,6 +32,29 @@ public class HostController {
 	@Autowired private AccomBuildingService accomBuildingService;
 	@Autowired private ActivityService activityService;
 	
+	// 신청 대기중인 체험 목록
+	@GetMapping("/host/activityReqState")
+	public String getActivityReqState(HttpServletRequest request,Model model) {
+		System.out.println("HostController() 실행");
+		
+		// host세션
+    	Host hostSession = (Host)request.getSession().getAttribute("hostSession");
+    	
+    	// hostNo 추출
+    	int hostNo = hostSession.getHostNo();
+    	
+    	// 신청 대기중인 숙소 리스트
+    	List<Activity> activityReqState = activityService.selectReqActivityListByHost(hostNo);
+    	
+    	// 신청 대기중인 목록 갯수
+    	int activityReqCount = activityService.selectReqActivityCountByHost(hostNo);
+    	
+    	model.addAttribute("activityReqState", activityReqState);
+    	model.addAttribute("activityReqCount", activityReqCount);
+    	
+    	return "/host/activityReqState";
+	}
+	
 	// 신청 대기중인 숙소 목록
 	@GetMapping("/host/accomReqState")
 	public String getAccomReqState(HttpServletRequest request,Model model) {

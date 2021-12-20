@@ -116,8 +116,8 @@
                             <div class="col-sm-12">
 								<div>
 									<c:choose>
-										<c:when test="${accomReqState ne null}">
-											${accomReqCount}개의 대기목록이 있습니다.
+										<c:when test="${activityReqState ne null}">
+											${activityReqCount}개의 대기목록이 있습니다.
 											<div>
 												<table class="table" style="text-align: center; vertical-align: middle; display:table;">
 													<tr>
@@ -126,12 +126,12 @@
 														<td style="font-weight: bold; display:table-cell;vertical-align:middle;"></td>
 														<td style="font-weight: bold; display:table-cell;vertical-align:middle;"></td>
 													</tr>
-													<c:forEach var="as" items="${accomReqState}">
+													<c:forEach var="as" items="${activityReqState}">
 														<tr>
-															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${as.getAccomBuildingName()}</small></td>
+															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${as.getActivityName()}</small></td>
 															<fmt:parseDate var="asCreateDateString" value="${as.getCreateDate()}" pattern="yyyy-MM-dd HH:mm:ss.S" />
 															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><fmt:formatDate value="${asCreateDateString}" pattern="yyyy-MM-dd" /></small></td>
-															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${as.getAccomBuildingStateAdmin()}</small></td>
+															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${as.getActivityStateAdmin()}</small></td>
 															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="#" class="btn" style="background: rgb(130,130,130);">상세</a></small></td>
 														</tr>
 													</c:forEach>
