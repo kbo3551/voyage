@@ -63,10 +63,10 @@ public class ActivityService {
 		return activity;
 	}
 	
-	// 체험 등록 목록 상세 조회 One
-	public Activity selectAccessActivity(int activityNo) {
-		log.debug(activityMapper.selectAccessActivity(activityNo) + "***********[상훈] activityService One");
-		return activityMapper.selectAccessActivity(activityNo);
+	// 승인완료된 체험 목록 조회 list
+	public List<Activity> selectAccessActivity() {
+		log.debug(activityMapper.selectAccessActivity() + "***********[상훈] activityService Access");
+		return activityMapper.selectAccessActivity();
 	}
 
 	// 페이징

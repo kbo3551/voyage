@@ -213,7 +213,7 @@
     </update>
     
     <!-- 관리자 -->
-	<!-- 승인된 숙소 목록 출력 -->
+	<!-- 승인완료된 숙소 목록 출력 -->
 	<select id="selectAccessAccomBuilding" resultType="com.gdu.voyage.vo.AccomBuilding">
             SELECT
             accom_building_no as accomBuildingNo,
@@ -222,6 +222,7 @@
             accom_building_description as accomBuildingDescription,
             accom_building_phone as accomBuildingPhone,
             accom_building_state as accomBuildingState,
+            accom_building_state_admin as accomBuildingStateAdmin,
             create_date as createDate,
             update_date as updateDate
 			FROM accom_building

@@ -116,11 +116,11 @@ public class AccomController {
 	}
 	
 	// 승인완료된 accomBuilding 상세목록 조회
-	@GetMapping("/admin/accessAccomBuilding")
-	public String selectAccessAccomBuilding(Model model, int accomBuildingNo) {
-		System.out.println("accessAccomBuilding 실행!!");
-		AccomBuilding accomBuilding = accomBuildingService.selectAccessAccomBuilding(accomBuildingNo);
-		model.addAttribute("accomBuilding", accomBuilding);
-		return "/admin/accessAccomBuilding";
-	}
+		@GetMapping("/admin/accessAccomBuilding")
+		public String getAccessAccomBuilding(Model model) {
+			System.out.println("accessAccomBuilding 실행!!");
+			List<AccomBuilding> list = accomBuildingService.selectAccessAccomBuilding();
+			model.addAttribute("list", list);
+			return "/admin/accessAccomBuilding";
+		}
 }

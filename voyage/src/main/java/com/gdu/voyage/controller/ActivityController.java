@@ -89,10 +89,10 @@ public class ActivityController {
 	
 	// 승인완료된 activity 목록
 	@GetMapping("/admin/accessActivity")
-	public String selectAccessActivity(Model model, int activityNo) {
+	public String selectAccessActivity(Model model) {
 		System.out.println("accessActivity 실행!!");
-		Activity activity = activityService.selectAccessActivity(activityNo);
-		model.addAttribute("activity", activity);
+		List<Activity> list = activityService.selectAccessActivity();
+		model.addAttribute("list", list);
 		return "/admin/accessActivity";
 	}
 }

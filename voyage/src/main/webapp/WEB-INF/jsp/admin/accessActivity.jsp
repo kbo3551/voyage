@@ -48,20 +48,26 @@
 											<th>Activity OpenDate</th>
 											<th>Activity CloseDate</th>
 											<th>Activity Description</th>
+											<th>Activity State</th>
+											<th>Activity State Admin</th>
 											<th>Create Date</th>
 											<th>Update Date</th>
 										</tr>
 									</thead>
 									<tbody>
+										<c:forEach items="${list}" var="a">
 											<tr>
-										        <td>${activity.activityNo}</td>
-										        <td>${activity.activityName}</td>
-										        <td>${activity.activityOpenDate}</td>
-										        <td>${activity.activityCloseDate}</td>
-										        <td>${activity.activityDescription}</td>
-										        <td>${activity.createDate}</td>
-										        <td>${activity.updateDate}</td>
+										        <td>${a.activityNo}</td>
+										        <td>${a.activityName}</td>
+										        <td>${a.activityOpenDate}</td>
+										        <td>${a.activityCloseDate}</td>
+										        <td>${a.activityDescription}</td>
+										        <td>${a.activityState}</td>
+										        <td>${a.activityStateAdmin}</td>
+										        <td>${a.createDate}</td>
+										        <td>${a.updateDate}</td>
 											</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>

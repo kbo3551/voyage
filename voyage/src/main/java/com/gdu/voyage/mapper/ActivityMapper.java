@@ -20,7 +20,7 @@ public interface ActivityMapper {
 	Activity selectActivityOne(int activityNo);
 	
 	// 승인완료된 체험 목록
-	Activity selectAccessActivity(int activityNo);
+	List<Activity> selectAccessActivity();
 	
 	// 사업자별 체험리스트
 	List<Activity> selectActivityListByHost(int hostNo);

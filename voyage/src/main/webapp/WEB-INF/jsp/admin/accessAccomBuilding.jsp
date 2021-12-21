@@ -59,17 +59,19 @@
 										</tr>
 									</thead>
 									<tbody> 
+											<c:forEach items="${list}" var="A">
 											<tr>
-										        <td>${accomBuilding.accomBuildingNo}</td>
-										        <td>${accomBuilding.hostNo}</td>
-										        <td>${accomBuilding.accomBuildingName}</td>
-										        <td>${accomBuilding.accomBuildingDescription}</td>
-										        <td>${accomBuilding.accomBuildingPhone}</td>
-										        <td>${accomBuilding.accomBuildingState}</td>
-										        <td>${accomBuilding.accomBuildingStateAdmin}</td>
-										        <td>${accomBuilding.createDate}</td>
-										        <td>${accomBuilding.updateDate}</td>
+										        <td>${A.accomBuildingNo}</td>
+										        <td>${A.hostNo}</td>
+										        <td>${A.accomBuildingName}</td>
+										        <td>${A.accomBuildingDescription}</td>
+										        <td>${A.accomBuildingPhone}</td>
+										        <td>${A.accomBuildingState}</td>
+										        <td>${A.accomBuildingStateAdmin}</td>
+										        <td>${A.createDate}</td>
+										        <td>${A.updateDate}</td>
 										   </tr>
+										   </c:forEach>
 									</tbody>
 								</table>
 							
