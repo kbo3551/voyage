@@ -3,6 +3,7 @@ package com.gdu.voyage.controller;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -149,7 +150,7 @@ public class AdminController {
 	}*/
 	// 멤버 관리 리스트
 	@GetMapping("/admin/memberList")
-	public String getMemberList(HttpServletRequest request, Model model,@RequestParam(defaultValue = "1") int currentPage) {
+	public String getMemberList(Model model,@RequestParam(defaultValue = "1") int currentPage) {
 		System.out.println("AdminController()_memberList실행");
 		log.debug("★★★[boryeong]AdminController★★★"+currentPage);
 		
@@ -193,7 +194,7 @@ public class AdminController {
 	}
 	// 사업자 신청 리스트
 	@GetMapping("/admin/hostAskList")
-	public String getHostAskList(HttpServletRequest request, Model model,@RequestParam(defaultValue = "1") int currentPage){
+	public String getHostAskList(Model model,@RequestParam(defaultValue = "1") int currentPage){
 		System.out.println("AdminController()_hostAsk실행");
 		log.debug("★★★[boryeong]AdminController★★★"+currentPage);
 		
@@ -214,8 +215,8 @@ public class AdminController {
 	}
 	// 사업자 등록 승인/거부
 	@PostMapping("/admin/updateHostAsk")
-	public String postUpdateHostAsk(HostAsk hostAsk,HttpServletRequest request) {
-		Admin adminSession = (Admin) request.getSession().getAttribute("adminSession");
+	public String postUpdateHostAsk(HostAsk hostAsk,HttpSession session) {
+		Admin adminSession = (Admin) session.getAttribute("adminSession");
 		// 어드민 세션 정보
 		String adminId = adminSession.getAdminId(); 
 		String memberId = hostAsk.getMemberId();
