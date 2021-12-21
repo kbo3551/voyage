@@ -32,11 +32,11 @@ public class MemberController {
 	
 	// PW 변경
 	@PostMapping("/member/updatePw")
-	public String postUpdatePw(HttpServletRequest request, Model model){
+	public String postUpdatePw(HttpServletRequest request, Model model,HttpSession session){
 		System.out.println("MemberController() 실행");
 		
 		// 우선 세션을 가져옴
-		Member loginMember = (Member) request.getSession().getAttribute("loginMember");
+		Member loginMember = (Member)session.getAttribute("loginMember");
 		// PW 변경 전 우선 로그아웃
 	    request.getSession().invalidate();
 		
@@ -75,7 +75,7 @@ public class MemberController {
 	
 	// 닉네임 변경
 	@PostMapping("/member/updateNickname")
-	public String postUpdateNickname(HttpServletRequest request, RedirectAttributes redirect, Model model) {
+	public String postUpdateNickname(HttpServletRequest request, RedirectAttributes redirect, Model model,HttpSession session) {
 		System.out.println("MemberController() 실행");
 		Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 		
@@ -115,7 +115,6 @@ public class MemberController {
 	    
 	    // 재로그인
 	    Member reLoginMember = loginService.login(m);
-	    HttpSession session = request.getSession();
 	    session.setAttribute("loginMember", reLoginMember);
 	    
 	    if(reLoginMember.getMemberLevel()==2) {
@@ -192,7 +191,7 @@ public class MemberController {
 	
 	// 회원정보 수정
 	@PostMapping("member/myPage")
-	public String postUpdateMember(HttpServletRequest request, RedirectAttributes redirect, Model model) {
+	public String postUpdateMember(HttpServletRequest request, RedirectAttributes redirect, Model model,HttpSession session) {
 		System.out.println("MemberController() 실행");
 		Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 
@@ -241,7 +240,6 @@ public class MemberController {
 	    
 	    // 재로그인
 	    Member reLoginMember = loginService.login(m);
-	    HttpSession session = request.getSession();
 	    session.setAttribute("loginMember", reLoginMember);
 	    
 	    if(reLoginMember.getMemberLevel()==2) {

@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,11 +35,11 @@ public class HostController {
 	
 	// 신청 대기중인 체험 목록
 	@GetMapping("/host/activityReqState")
-	public String getActivityReqState(HttpServletRequest request,Model model) {
+	public String getActivityReqState(HttpServletRequest request,Model model,HttpSession session) {
 		System.out.println("HostController() 실행");
 		
 		// host세션
-    	Host hostSession = (Host)request.getSession().getAttribute("hostSession");
+    	Host hostSession = (Host)session.getAttribute("hostSession");
     	
     	// hostNo 추출
     	int hostNo = hostSession.getHostNo();
@@ -57,11 +58,11 @@ public class HostController {
 	
 	// 신청 대기중인 숙소 목록
 	@GetMapping("/host/accomReqState")
-	public String getAccomReqState(HttpServletRequest request,Model model) {
+	public String getAccomReqState(HttpServletRequest request,Model model,HttpSession session) {
 		System.out.println("HostController() 실행");
 		
 		// host세션
-    	Host hostSession = (Host)request.getSession().getAttribute("hostSession");
+    	Host hostSession = (Host)session.getAttribute("hostSession");
     	
     	// hostNo 추출
     	int hostNo = hostSession.getHostNo();
@@ -80,11 +81,11 @@ public class HostController {
 	
 	// 사업자 myPage
 	@GetMapping("/host/hostIndex")
-	public String getHostIndex(HttpServletRequest request,Model model) {
+	public String getHostIndex(HttpServletRequest request,Model model,HttpSession session) {
     	System.out.println("HostController() 실행");
     	
     	// host세션
-    	Host hostSession = (Host)request.getSession().getAttribute("hostSession");
+    	Host hostSession = (Host)session.getAttribute("hostSession");
     	
     	// hostNo 추출
     	int hostNo = hostSession.getHostNo();

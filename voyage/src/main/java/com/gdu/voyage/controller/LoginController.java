@@ -41,7 +41,7 @@ public class LoginController {
 	
 	// 로그인
 	@PostMapping("/login")
-	public String postLogin(HttpServletRequest request, RedirectAttributes redirect,Model model) {
+	public String postLogin(HttpServletRequest request,HttpSession session, RedirectAttributes redirect,Model model) {
 		System.out.println("LoginController() 실행");
 		
 		String memberId = request.getParameter("id");
@@ -74,7 +74,6 @@ public class LoginController {
 	    }
 	    
 	    // 회원 로그인, 관리자,사업자 가입이 되어있다면 관리자(사업자) 세션까지 한번에 받아옴
-	    HttpSession session = request.getSession();
 	    session.setAttribute("loginMember", loginMember);
 	    if(loginMember.getMemberLevel()==2) {
 	    	Admin adminSession = loginService.adminLogin(memberId);
