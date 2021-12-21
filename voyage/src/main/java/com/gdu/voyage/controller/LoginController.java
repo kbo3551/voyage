@@ -26,9 +26,9 @@ public class LoginController {
 	
 	//로그아웃
 	@GetMapping("/logout")
-	public String logout(HttpServletRequest request) {
+	public String logout(HttpServletRequest request, HttpSession session) {
 		System.out.println("LoginController() 실행 - logout");
-		request.getSession().invalidate();
+		session.invalidate();
 		return "redirect:index";
 	}
 	

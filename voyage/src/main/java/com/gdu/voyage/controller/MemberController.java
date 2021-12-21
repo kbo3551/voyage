@@ -38,7 +38,7 @@ public class MemberController {
 		// 우선 세션을 가져옴
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		// PW 변경 전 우선 로그아웃
-	    request.getSession().invalidate();
+	    session.invalidate();
 		
 	    // 방어코드
 		int updatePwCheck = Integer.parseInt(request.getParameter("updatePwCheck"));
@@ -77,7 +77,7 @@ public class MemberController {
 	@PostMapping("/member/updateNickname")
 	public String postUpdateNickname(HttpServletRequest request, RedirectAttributes redirect, Model model,HttpSession session) {
 		System.out.println("MemberController() 실행");
-		Member loginMember = (Member) request.getSession().getAttribute("loginMember");
+		Member loginMember = (Member) session.getAttribute("loginMember");
 		
 		String memberId = loginMember.getMemberId();
 		String memberPw = request.getParameter("password");
@@ -111,10 +111,11 @@ public class MemberController {
 	  	memberService.updateMemberNickname(m);
 
 	  	// 재반환(로그인)을 위해 일단 로그아웃
-	    request.getSession().invalidate();
+	    session.invalidate();
 	    
 	    // 재로그인
 	    Member reLoginMember = loginService.login(m);
+	    session = request.getSession();
 	    session.setAttribute("loginMember", reLoginMember);
 	    
 	    if(reLoginMember.getMemberLevel()==2) {
@@ -144,9 +145,9 @@ public class MemberController {
 	
 	// 분기
 	@PostMapping("/member/pwCheck")
-	public String postPwCheck(HttpServletRequest request, RedirectAttributes redirect, String password, Model model) {
+	public String postPwCheck(HttpServletRequest request, RedirectAttributes redirect, String password, Model model,HttpSession session) {
 		System.out.println("MemberController() 실행");
-		Member loginMember = (Member) request.getSession().getAttribute("loginMember");
+		Member loginMember = (Member) session.getAttribute("loginMember");
 		
 		String memberId = loginMember.getMemberId();
 		String route = request.getParameter("route");
@@ -179,7 +180,7 @@ public class MemberController {
 			return "/member/updatePw";
 		} else if (route.equals("4")) {
 			// 회원 탈퇴(delete는 아니고 active를 탈퇴로 변경)
-			request.getSession().invalidate();
+			session.invalidate();
 			memberService.deleteMember(m);
 			model.addAttribute("msg", "탈퇴되었습니다.\n이용해주셔서 감사합니다.");
 		    model.addAttribute("url", "redirect:/login");
@@ -193,7 +194,7 @@ public class MemberController {
 	@PostMapping("member/myPage")
 	public String postUpdateMember(HttpServletRequest request, RedirectAttributes redirect, Model model,HttpSession session) {
 		System.out.println("MemberController() 실행");
-		Member loginMember = (Member) request.getSession().getAttribute("loginMember");
+		Member loginMember = (Member) session.getAttribute("loginMember");
 
 	    String memberId = loginMember.getMemberId();
 	    String memberPw = request.getParameter("password");
@@ -236,10 +237,11 @@ public class MemberController {
 	    memberService.updateMemberAddress(addr);
 	    
 	    // 재반환(로그인)을 위해 일단 로그아웃
-	    request.getSession().invalidate();
+	    session.invalidate();
 	    
 	    // 재로그인
 	    Member reLoginMember = loginService.login(m);
+	    session = request.getSession();
 	    session.setAttribute("loginMember", reLoginMember);
 	    
 	    if(reLoginMember.getMemberLevel()==2) {
