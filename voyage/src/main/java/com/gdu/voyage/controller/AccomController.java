@@ -52,7 +52,7 @@ public class AccomController {
 		
 		// accomBuildingForm과 realPath를 매개변수로 하여 같이 service에 전달
 		accomBuildingService.addAccomBuilding(accomBuildingForm, realPath);
-		return "redirect:/accomBuildingList";
+		return "redirect:/host/hostIndex";
 	}
 	
 	// 숙소_객실 등록

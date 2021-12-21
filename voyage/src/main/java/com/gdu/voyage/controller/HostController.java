@@ -103,8 +103,14 @@ public class HostController {
     	// 체험 목록 받아옴. 정렬은 쿼리문 내에서.
     	List<Activity> ActivityList = activityService.selectActivityListByHost(hostNo);
     	
+    	// 숙소, 체험 신청목록이 있나 확인
+    	int accomReqCount = accomBuildingService.selectReqAccomBuildingCountByHost(hostNo);
+    	int activityReqCount = activityService.selectReqActivityCountByHost(hostNo);
+    	
     	model.addAttribute("AccomBuildingList", abMap);
     	model.addAttribute("ActivityList", ActivityList);
+    	model.addAttribute("accomReqCount", accomReqCount);
+    	model.addAttribute("activityReqCount", activityReqCount);
 
     	return "/host/hostIndex";
     }

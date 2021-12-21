@@ -117,10 +117,13 @@
                         
                         <div class="clear"> 
                             <div class="col-sm-12">
-                            &nbsp;&nbsp;<label>운영 숙소</label><span>&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/host/accomReqState" class="btn" style="background: rgb(40,180,240); color: white;">신청조회</a></span>
+	                            &nbsp;&nbsp;<label>운영 숙소</label>
+	                            <c:if test="${accomReqCount > 0}">
+	                            	<span>&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/host/accomReqState" class="btn" style="background: rgb(40,180,240); color: white;">신청조회</a></span>
+	                            </c:if>
 								<div>
 									<c:choose>
-										<c:when test="${AccomBuildingList ne null}">
+										<c:when test="${!empty AccomBuildingList}">
 											<div>
 												<table class="table" style="text-align: center; vertical-align: middle; display:table;">
 													<tr>
@@ -135,14 +138,14 @@
 															<fmt:parseDate var="abCreateDateString" value="${ab.value.getCreateDate()}" pattern="yyyy-MM-dd HH:mm:ss.S" />
 															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><fmt:formatDate value="${abCreateDateString}" pattern="yyyy-MM-dd" /></small></td>
 															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${ab.value.getAccomBuildingState()}</small></td>
-															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="#" class="btn" style="background: rgb(130,130,130);">수정</a></small></td>
+															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="#" class="btn" style="background: rgb(130,130,130);">상세</a></small></td>
 														</tr>
 													</c:forEach>
 												</table>
 											</div>
 										</c:when>
 										<c:otherwise>
-											<small>&nbsp;&nbsp;목록이 비어있습니다.</small>
+											<small>&nbsp;&nbsp;목록이 비어있습니다.</small> <a class="btn" href="${pageContext.request.contextPath}/host/addAccomBuilding" style="background: rgb(40,180,240); color: white;">숙소추가</a>
 										</c:otherwise>
 									</c:choose>
 								</div>
@@ -150,7 +153,11 @@
 							
 							<div class="clear"> 
 	                            <div class="col-sm-12">
-	                            &nbsp;&nbsp;<label>운영 체험</label><span>&nbsp;&nbsp;<a class="btn" href="${pageContext.request.contextPath}/host/activityReqState" style="background: rgb(40,180,240); color: white;">신청조회</a></span>
+	                            	&nbsp;&nbsp;<label>운영 체험</label>
+	                            	<c:if test="${activityReqCount > 0}">
+	                            		<span>&nbsp;&nbsp;<a class="btn" href="${pageContext.request.contextPath}/host/activityReqState" style="background: rgb(40,180,240); color: white;">신청조회</a></span>
+	                            	</c:if>
+	                            	
 									<div>
 										<c:choose>
 											<c:when test="${ActivityList ne '[]'}">
@@ -168,14 +175,14 @@
 																<fmt:parseDate var="alCreateDateString" value="${al.getCreateDate()}" pattern="yyyy-MM-dd HH:mm:ss.S" />
 																<td style="display:table-cell;vertical-align:middle;" width="25%"><small><fmt:formatDate value="${alCreateDateString}" pattern="yyyy-MM-dd" /></small></td>
 																<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${al.getActivityState()}</small></td>
-																<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="#" class="btn" style="background: rgb(130,130,130);">수정</a></small></td>
+																<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="#" class="btn" style="background: rgb(130,130,130);">상세</a></small></td>
 															</tr>
 														</c:forEach>
 													</table>
 												</div>
 											</c:when>
 											<c:otherwise>
-												<small>&nbsp;&nbsp;목록이 비어있습니다.</small>
+												<small>&nbsp;&nbsp;목록이 비어있습니다.</small> <a class="btn" style="background: rgb(40,180,240); color: white;">체험추가</a>
 											</c:otherwise>
 										</c:choose>
 									</div>
