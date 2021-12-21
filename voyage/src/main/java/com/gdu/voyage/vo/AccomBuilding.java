@@ -20,6 +20,8 @@ public class AccomBuilding {
 	
 	// 1:N - AccomBuildingImage
 	private List<AccomBuildingImage> accomBuildingImageList;
+	// 1:1 - AccomAddress
+	private AccomAddress accomAddress;
 	// 1:N - AccomBuildingFacility
 	private List<AccomBuildingFacility> accomBuildingFacilityList;
 	// 1:N - AccomBuildingSpot

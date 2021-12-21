@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.gdu.voyage.service.ProductService;
+import com.gdu.voyage.vo.AccomBuilding;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,6 +47,15 @@ public class ProductController {
 		log.debug("ProductController.setProductCategory 실행");
 	      
 		return "/product/setProductCategory";
+	}
+	
+	@GetMapping("/accomBuildingOne")
+	public String getAccombuildingOne(Model model) {
+		log.debug("ProductController.getAccombuildingOne 실행");
+		int accomBuildingNo = 34;
+		AccomBuilding accomBuilding = productService.getAccombuildingOne(accomBuildingNo);
+		model.addAttribute("accomBuilding", accomBuilding);
+		return "/product/testAccomOne";
 	}
 	
 }

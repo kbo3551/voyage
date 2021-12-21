@@ -51,4 +51,10 @@ public class ProductService {
 			
 			return accomBuildingFacilityList;
 		}
+		
+		
+		// [사용자] 숙소_건물 상세 페이지 출력
+		public AccomBuilding getAccombuildingOne (int accomBuildingNo) {
+			return productMapper.selectAccomBuildingOne(accomBuildingNo);
+		}
 }

@@ -5,7 +5,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>VOYAGE | addAccomBuilding</title>
+		<title>VOYAGE | AccomBuilding</title>
 		<meta name="description" content="GARO is a real-estate template">
 		<meta name="author" content="Kimarotec">
 	   	<meta name="keyword" content="html5, css, bootstrap, property, real-estate theme , bootstrap template">
@@ -76,10 +76,8 @@
     <div style="height:130px; background-color: black;"></div>
     
     
-    
-    
-    	<!--footer.jsp 시작  -->
-    	<c:import url="../partial\\footer.jsp"/>
+   	<!--footer.jsp 시작  -->
+   	<c:import url="../partial\\footer.jsp"/>
     <!--footer.jsp 끝  -->
 	
 	<script src="${pageContext.request.contextPath}/accom/js/vendor/modernizr-2.6.2.min.js"></script>
