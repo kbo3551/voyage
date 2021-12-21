@@ -3,25 +3,26 @@
 <!DOCTYPE html>
 <html>
 <head>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <title>로그인</title>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="${contextPath}/assets/img/favicon.ico">
 
 <!-- CSS here -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/slicknav.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/flaticon.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/animate.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/themify-icons.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/slick.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/nice-select.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <link rel="stylesheet" href="${contextPath}/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${contextPath}/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="${contextPath}/assets/css/slicknav.css">
+    <link rel="stylesheet" href="${contextPath}/assets/css/flaticon.css">
+    <link rel="stylesheet" href="${contextPath}/assets/css/animate.min.css">
+    <link rel="stylesheet" href="${contextPath}/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="${contextPath}/assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="${contextPath}/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="${contextPath}/assets/css/slick.css">
+    <link rel="stylesheet" href="${contextPath}/assets/css/nice-select.css">
+    <link rel="stylesheet" href="${contextPath}/assets/css/style.css">
 </head>
 
 <!-- 눈누 - 한산스네오 레귤러 폰트 -->
@@ -62,7 +63,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="${pageContext.request.contextPath}/assets/img/logo/loder.jpg" alt="">
+                    <img src="${contextPath}/assets/img/logo/loder.jpg" alt="">
                 </div>
             </div>
         </div>
@@ -97,7 +98,7 @@
  									</c:choose>
  									
 		                            <h2>Login</h2> 
-		                            <form id="login" action="${pageContext.request.contextPath}/login" method="post">
+		                            <form id="login" action="${contextPath}/login" method="post">
 			                                	<label for="id">User ID</label>
 		                                <div class="form-group">
 			                                    <input type="text" class="form-control" id="id" name="id">
@@ -127,7 +128,7 @@
 		                        </div>
 		                        
 		                        <div class="text-center">
-                                    <a href="${pageContext.request.contextPath}/addMember"><button type="submit" class="btn" style="background: rgb(0,172,238);
+                                    <a href="${contextPath}/addMember"><button type="submit" class="btn" style="background: rgb(0,172,238);
                                     background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
                                     ">sign up</button></a>
                                 </div>
@@ -166,36 +167,36 @@
 
     <!-- JS here -->
 	<!-- All JS Custom Plugins Link Here here -->
-       <script src="${pageContext.request.contextPath}/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+       <script src="${contextPath}/assets/js/vendor/modernizr-3.5.0.min.js"></script>
 	<!-- Jquery, Popper, Bootstrap -->
-	<script src="${pageContext.request.contextPath}/assets/js/vendor/jquery-1.12.4.min.js"></script>
-       <script src="${pageContext.request.contextPath}/assets/js/popper.min.js"></script>
-       <script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
+	<script src="${contextPath}/assets/js/vendor/jquery-1.12.4.min.js"></script>
+       <script src="${contextPath}/assets/js/popper.min.js"></script>
+       <script src="${contextPath}/assets/js/bootstrap.min.js"></script>
     <!-- Jquery Mobile Menu -->
-       <script src="${pageContext.request.contextPath}/assets/js/jquery.slicknav.min.js"></script>
+       <script src="${contextPath}/assets/js/jquery.slicknav.min.js"></script>
 
 	<!-- Jquery Slick , Owl-Carousel Plugins -->
-       <script src="${pageContext.request.contextPath}/assets/js/owl.carousel.min.js"></script>
-       <script src="${pageContext.request.contextPath}/assets/js/slick.min.js"></script>
+       <script src="${contextPath}/assets/js/owl.carousel.min.js"></script>
+       <script src="${contextPath}/assets/js/slick.min.js"></script>
 	<!-- One Page, Animated-HeadLin -->
-       <script src="${pageContext.request.contextPath}/assets/js/wow.min.js"></script>
-	<script src="${pageContext.request.contextPath}/assets/js/animated.headline.js"></script>
-       <script src="${pageContext.request.contextPath}/assets/js/jquery.magnific-popup.js"></script>
+       <script src="${contextPath}/assets/js/wow.min.js"></script>
+	<script src="${contextPath}/assets/js/animated.headline.js"></script>
+       <script src="${contextPath}/assets/js/jquery.magnific-popup.js"></script>
 
 	<!-- Nice-select, sticky -->
-       <script src="${pageContext.request.contextPath}/assets/js/jquery.nice-select.min.js"></script>
-	<script src="${pageContext.request.contextPath}/assets/js/jquery.sticky.js"></script>
+       <script src="${contextPath}/assets/js/jquery.nice-select.min.js"></script>
+	<script src="${contextPath}/assets/js/jquery.sticky.js"></script>
        
        <!-- contact js -->
-       <script src="${pageContext.request.contextPath}/assets/js/contact.js"></script>
-       <script src="${pageContext.request.contextPath}/assets/js/jquery.form.js"></script>
-       <script src="${pageContext.request.contextPath}/assets/js/jquery.validate.min.js"></script>
-       <script src="${pageContext.request.contextPath}/assets/js/mail-script.js"></script>
-       <script src="${pageContext.request.contextPath}/assets/js/jquery.ajaxchimp.min.js"></script>
+       <script src="${contextPath}/assets/js/contact.js"></script>
+       <script src="${contextPath}/assets/js/jquery.form.js"></script>
+       <script src="${contextPath}/assets/js/jquery.validate.min.js"></script>
+       <script src="${contextPath}/assets/js/mail-script.js"></script>
+       <script src="${contextPath}/assets/js/jquery.ajaxchimp.min.js"></script>
        
 	<!-- Jquery Plugins, main Jquery -->	
-       <script src="${pageContext.request.contextPath}/assets/js/plugins.js"></script>
-       <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+       <script src="${contextPath}/assets/js/plugins.js"></script>
+       <script src="${contextPath}/assets/js/main.js"></script>
         
 </body>
 </html>

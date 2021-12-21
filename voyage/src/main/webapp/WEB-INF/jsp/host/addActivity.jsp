@@ -3,33 +3,34 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html class="no-js">
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>VOYAGE | addActivity</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
+		<link rel="shortcut icon" type="image/x-icon" href="${contextPath}/assets/img/favicon.ico">
 
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/bootstrap-select.min.css"> 
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/wizard.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/style.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/icheck.min_all.css">
+		<link rel="stylesheet" href="${contextPath}/accom/css/bootstrap-select.min.css"> 
+		<link rel="stylesheet" href="${contextPath}/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="${contextPath}/accom/css/wizard.css">
+		<link rel="stylesheet" href="${contextPath}/accom/css/style.css">
+		<link rel="stylesheet" href="${contextPath}/accom/css/icheck.min_all.css">
 		
 		<!-- CSS here -->
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/owl.carousel.min.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/slicknav.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/flaticon.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/price_rangs.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/animate.min.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/magnific-popup.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/fontawesome-all.min.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/themify-icons.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/slick.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/nice-select.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+            <link rel="stylesheet" href="${contextPath}/assets/css/bootstrap.min.css">
+            <link rel="stylesheet" href="${contextPath}/assets/css/owl.carousel.min.css">
+            <link rel="stylesheet" href="${contextPath}/assets/css/slicknav.css">
+            <link rel="stylesheet" href="${contextPath}/assets/css/flaticon.css">
+            <link rel="stylesheet" href="${contextPath}/assets/css/price_rangs.css">
+            <link rel="stylesheet" href="${contextPath}/assets/css/animate.min.css">
+            <link rel="stylesheet" href="${contextPath}/assets/css/magnific-popup.css">
+            <link rel="stylesheet" href="${contextPath}/assets/css/fontawesome-all.min.css">
+            <link rel="stylesheet" href="${contextPath}/assets/css/themify-icons.css">
+            <link rel="stylesheet" href="${contextPath}/assets/css/slick.css">
+            <link rel="stylesheet" href="${contextPath}/assets/css/nice-select.css">
+            <link rel="stylesheet" href="${contextPath}/assets/css/style.css">
 		
 		<!-- 눈누 - 한산스네오 레귤러 폰트 -->
 		<style type="text/css">
@@ -71,7 +72,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="${pageContext.request.contextPath}/assets/img/logo/loder.jpg" alt="">
+                    <img src="${contextPath}/assets/img/logo/loder.jpg" alt="">
                 </div>
             </div>
         </div>
@@ -82,7 +83,7 @@
    	
 	<main>
 	
-	<div class="page-head hero-overly" style="background-image: url('${pageContext.request.contextPath}/assets/img/page-header.jpg'); background-repeat : no-repeat;"> 
+	<div class="page-head hero-overly" style="background-image: url('${contextPath}/assets/img/page-header.jpg'); background-repeat : no-repeat;"> 
 	    <div class=" container">
 	        <div class="row">
 	            <div class="col-sm-10 col-sm-offset-1 profiel-container" style="line-height:125%">
@@ -103,7 +104,7 @@
 				<div class="wizard-container">
 	
 					<div class="wizard-card ct-wizard-orange" id="wizardProperty">
-						<form action="${pageContext.request.contextPath}/host/addActivity" method="post" enctype="multipart/form-data" id="activityForm">
+						<form action="${contextPath}/host/addActivity" method="post" enctype="multipart/form-data" id="activityForm">
 							<div class="wizard-header">
 								<h3>
 									<b>Activity</b><br>
@@ -126,25 +127,25 @@
 										<div class="col-sm-offset-1" style="margnin:0 auto;">
 											<div class="picture-container" style="float:left; margin-left:20px;">
 												<div class="picture">
-													<img src="${pageContext.request.contextPath}/assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview" title="" />
+													<img src="${contextPath}/assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview" title="" />
 													<input type="file" name="activityImage" id="wizard-picture">
 												</div>
 											</div>
 											<div class="picture-container" style="float:left; margin-left:20px;">
 												<div class="picture">
-													<img src="${pageContext.request.contextPath}/assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview2" title="" />
+													<img src="${contextPath}/assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview2" title="" />
 													<input type="file" name="activityImage" id="wizard-picture2">
 												</div>
 											</div>
 											<div class="picture-container" style="float:left; margin-left:20px;">
 												<div class="picture">
-													<img src="${pageContext.request.contextPath}/assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview3" title="" />
+													<img src="${contextPath}/assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview3" title="" />
 													<input type="file" name="activityImage" id="wizard-picture3">
 												</div>
 											</div>
 											<div class="picture-container" style="float:left; margin-left:20px;">
 												<div class="picture">
-													<img src="${pageContext.request.contextPath}/assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview4" title="" />
+													<img src="${contextPath}/assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview4" title="" />
 													<input type="file" name="activityImage" id="wizard-picture4">
 												</div>
 											</div>
@@ -350,25 +351,25 @@
     </div>
     
     <!-- [최지혜] addAccomBuilding의 유효성 검사를 진행하는 js -->
-	<script src="${pageContext.request.contextPath}/accom/js/jeje.js"></script>
+	<script src="${contextPath}/accom/js/jeje.js"></script>
 	
-	<script src="${pageContext.request.contextPath}/accom/js/vendor/modernizr-2.6.2.min.js"></script>
-    <script src="${pageContext.request.contextPath}/accom/js//jquery-1.10.2.min.js"></script>
-    <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/accom/js/bootstrap-select.min.js"></script>
-    <script src="${pageContext.request.contextPath}/accom/js/bootstrap-hover-dropdown.js"></script>
-    <script src="${pageContext.request.contextPath}/accom/js/easypiechart.min.js"></script>
-    <script src="${pageContext.request.contextPath}/accom/js/jquery.easypiechart.min.js"></script>
-    <script src="${pageContext.request.contextPath}/accom/js/owl.carousel.min.js"></script>
-    <script src="${pageContext.request.contextPath}/accom/js/wow.js"></script>
-    <script src="${pageContext.request.contextPath}/accom/js/icheck.min.js"></script>
+	<script src="${contextPath}/accom/js/vendor/modernizr-2.6.2.min.js"></script>
+    <script src="${contextPath}/accom/js//jquery-1.10.2.min.js"></script>
+    <script src="${contextPath}/bootstrap/js/bootstrap.min.js"></script>
+    <script src="${contextPath}/accom/js/bootstrap-select.min.js"></script>
+    <script src="${contextPath}/accom/js/bootstrap-hover-dropdown.js"></script>
+    <script src="${contextPath}/accom/js/easypiechart.min.js"></script>
+    <script src="${contextPath}/accom/js/jquery.easypiechart.min.js"></script>
+    <script src="${contextPath}/accom/js/owl.carousel.min.js"></script>
+    <script src="${contextPath}/accom/js/wow.js"></script>
+    <script src="${contextPath}/accom/js/icheck.min.js"></script>
 
-    <script src="${pageContext.request.contextPath}/accom/js/price-range.js"></script> 
-    <script src="${pageContext.request.contextPath}/accom/js/jquery.bootstrap.wizard.js" type="text/javascript"></script>
-    <script src="${pageContext.request.contextPath}/accom/js/jquery.validate.min.js"></script>
-    <script src="${pageContext.request.contextPath}/accom/js/wizard.js"></script>
+    <script src="${contextPath}/accom/js/price-range.js"></script> 
+    <script src="${contextPath}/accom/js/jquery.bootstrap.wizard.js" type="text/javascript"></script>
+    <script src="${contextPath}/accom/js/jquery.validate.min.js"></script>
+    <script src="${contextPath}/accom/js/wizard.js"></script>
 
-    <script src="${pageContext.request.contextPath}/accom/js/main.js"></script>
+    <script src="${contextPath}/accom/js/main.js"></script>
     
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>

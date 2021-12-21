@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -18,7 +19,7 @@
                                 <div class="single-footer-caption mb-30">
                                     <!-- logo -->
                                     <div class="footer-logo">
-                                        <a href="index.html"><img src="${pageContext.request.contextPath}/assets/img/logo/logo2_footer.png" alt=""></a>
+                                        <a href="index.html"><img src="${contextPath}/assets/img/logo/logo2_footer.png" alt=""></a>
                                     </div>
                                 </div>
                             </div>
@@ -28,10 +29,10 @@
                                 <div class="footer-tittle">
                                     <h4>Quick Link</h4>
                                     <ul>
-                                        <li><a href="${pageContext.request.contextPath}/index">메인</a></li>
-                                        <li><a href="${pageContext.request.contextPath}/about">설명</a></li>
-                                        <li><a href="${pageContext.request.contextPath}/noticeList">공지사항</a></li>
-                                        <li><a href="${pageContext.request.contextPath}/qnaList">Q&A</a></li>
+                                        <li><a href="${contextPath}/index">메인</a></li>
+                                        <li><a href="${contextPath}/about">설명</a></li>
+                                        <li><a href="${contextPath}/noticeList">공지사항</a></li>
+                                        <li><a href="${contextPath}/qnaList">Q&A</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -41,8 +42,8 @@
                                 <div class="footer-tittle">
                                     <h4>Categories</h4>
                                     <ul>
-                                        <li><a href="${pageContext.request.contextPath}/templates_citylisting/getActivityProduct">체험</a></li>
-                                        <li><a href="${pageContext.request.contextPath}/templates_citylisting/getAccomProduct">숙소</a></li>
+                                        <li><a href="${contextPath}/templates_citylisting/getActivityProduct">체험</a></li>
+                                        <li><a href="${contextPath}/templates_citylisting/getAccomProduct">숙소</a></li>
                                         <li><a href="#hashtag">해시태그</a></li>
                                         <li><a href="#">후기</a></li>     
                                     </ul>
@@ -54,8 +55,8 @@
                                 <div class="footer-tittle">
                                     <h4>Download App</h4>
                                     <ul>
-                                        <li class="app-log"><a href="#"><img src="${pageContext.request.contextPath}/assets/img/gallery/app-logo.png" alt=""></a></li>
-                                        <li><a href="#"><img src="${pageContext.request.contextPath}/assets/img/gallery/app-logo2.png" alt=""></a></li>
+                                        <li class="app-log"><a href="#"><img src="${contextPath}/assets/img/gallery/app-logo.png" alt=""></a></li>
+                                        <li><a href="#"><img src="${contextPath}/assets/img/gallery/app-logo2.png" alt=""></a></li>
                                     </ul>
                                 </div>
                             </div>

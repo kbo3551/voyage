@@ -4,28 +4,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <title>사업자페이지</title>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="${contextPath}/assets/img/favicon.ico">
 
 		<!-- CSS here -->
-			<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/bootstrap-select.min.css"> 
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/owl.carousel.min.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/slicknav.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/flaticon.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/price_rangs.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/animate.min.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/magnific-popup.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/fontawesome-all.min.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/themify-icons.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/slick.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/nice-select.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
-            <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
+			<link rel="stylesheet" href="${contextPath}/accom/css/bootstrap-select.min.css"> 
+            <link rel="stylesheet" href="${contextPath}/assets/css/bootstrap.min.css">
+            <link rel="stylesheet" href="${contextPath}/assets/css/owl.carousel.min.css">
+            <link rel="stylesheet" href="${contextPath}/assets/css/slicknav.css">
+            <link rel="stylesheet" href="${contextPath}/assets/css/flaticon.css">
+            <link rel="stylesheet" href="${contextPath}/assets/css/price_rangs.css">
+            <link rel="stylesheet" href="${contextPath}/assets/css/animate.min.css">
+            <link rel="stylesheet" href="${contextPath}/assets/css/magnific-popup.css">
+            <link rel="stylesheet" href="${contextPath}/assets/css/fontawesome-all.min.css">
+            <link rel="stylesheet" href="${contextPath}/assets/css/themify-icons.css">
+            <link rel="stylesheet" href="${contextPath}/assets/css/slick.css">
+            <link rel="stylesheet" href="${contextPath}/assets/css/nice-select.css">
+            <link rel="stylesheet" href="${contextPath}/assets/css/style.css">
+            <link rel="stylesheet" href="${contextPath}/bootstrap/css/bootstrap.min.css">
             
     
 </head>
@@ -67,7 +68,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="${pageContext.request.contextPath}/assets/img/logo/loder.jpg" alt="">
+                    <img src="${contextPath}/assets/img/logo/loder.jpg" alt="">
                 </div>
             </div>
         </div>
@@ -84,7 +85,7 @@
 	
 
 
-        <div class="page-head hero-overly" style="background-image: url('${pageContext.request.contextPath}/assets/img/page-header.jpg'); background-repeat : no-repeat;"> 
+        <div class="page-head hero-overly" style="background-image: url('${contextPath}/assets/img/page-header.jpg'); background-repeat : no-repeat;"> 
             <div class=" container">
                 <div class="row">
                     <div class="col-sm-10 col-sm-offset-1 profiel-container" style="line-height:125%">
@@ -119,7 +120,7 @@
                             <div class="col-sm-12">
 	                            &nbsp;&nbsp;<label>운영 숙소</label>
 	                            <c:if test="${accomReqCount > 0}">
-	                            	<span>&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/host/accomReqState" class="btn" style="background: rgb(40,180,240); color: white;">신청조회</a></span>
+	                            	<span>&nbsp;&nbsp;<a href="${contextPath}/host/accomReqState" class="btn" style="background: rgb(40,180,240); color: white;">신청조회</a></span>
 	                            </c:if>
 								<div>
 									<c:choose>
@@ -130,7 +131,7 @@
 														<td style="font-weight: bold; display:table-cell;vertical-align:middle;">이름</td>
 														<td style="font-weight: bold; display:table-cell;vertical-align:middle;">생성일</td>
 														<td style="font-weight: bold; display:table-cell;vertical-align:middle;">공개여부</td>
-														<td style="font-weight: bold; display:table-cell;vertical-align:middle;"><a class="btn" href="${pageContext.request.contextPath}/host/addAccomBuilding" style="background: rgb(40,180,240); color: white;">숙소추가</a></td>
+														<td style="font-weight: bold; display:table-cell;vertical-align:middle;"><a class="btn" href="${contextPath}/host/addAccomBuilding" style="background: rgb(40,180,240); color: white;">숙소추가</a></td>
 													</tr>
 													<c:forEach var="ab" items="${AccomBuildingList}">
 														<tr>
@@ -145,7 +146,7 @@
 											</div>
 										</c:when>
 										<c:otherwise>
-											<small>&nbsp;&nbsp;목록이 비어있습니다.</small> <a class="btn" href="${pageContext.request.contextPath}/host/addAccomBuilding" style="background: rgb(40,180,240); color: white;">숙소추가</a>
+											<small>&nbsp;&nbsp;목록이 비어있습니다.</small> <a class="btn" href="${contextPath}/host/addAccomBuilding" style="background: rgb(40,180,240); color: white;">숙소추가</a>
 										</c:otherwise>
 									</c:choose>
 								</div>
@@ -155,7 +156,7 @@
 	                            <div class="col-sm-12">
 	                            	&nbsp;&nbsp;<label>운영 체험</label>
 	                            	<c:if test="${activityReqCount > 0}">
-	                            		<span>&nbsp;&nbsp;<a class="btn" href="${pageContext.request.contextPath}/host/activityReqState" style="background: rgb(40,180,240); color: white;">신청조회</a></span>
+	                            		<span>&nbsp;&nbsp;<a class="btn" href="${contextPath}/host/activityReqState" style="background: rgb(40,180,240); color: white;">신청조회</a></span>
 	                            	</c:if>
 	                            	
 									<div>
@@ -216,36 +217,36 @@
 
     <!-- JS here -->
 	<!-- All JS Custom Plugins Link Here here -->
-       <script src="${pageContext.request.contextPath}/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+       <script src="${contextPath}/assets/js/vendor/modernizr-3.5.0.min.js"></script>
 	<!-- Jquery, Popper, Bootstrap -->
-	<script src="${pageContext.request.contextPath}/assets/js/vendor/jquery-1.12.4.min.js"></script>
-       <script src="${pageContext.request.contextPath}/assets/js/popper.min.js"></script>
-       <script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
+	<script src="${contextPath}/assets/js/vendor/jquery-1.12.4.min.js"></script>
+       <script src="${contextPath}/assets/js/popper.min.js"></script>
+       <script src="${contextPath}/assets/js/bootstrap.min.js"></script>
     <!-- Jquery Mobile Menu -->
-       <script src="${pageContext.request.contextPath}/assets/js/jquery.slicknav.min.js"></script>
+       <script src="${contextPath}/assets/js/jquery.slicknav.min.js"></script>
 
 	<!-- Jquery Slick , Owl-Carousel Plugins -->
-       <script src="${pageContext.request.contextPath}/assets/js/owl.carousel.min.js"></script>
-       <script src="${pageContext.request.contextPath}/assets/js/slick.min.js"></script>
+       <script src="${contextPath}/assets/js/owl.carousel.min.js"></script>
+       <script src="${contextPath}/assets/js/slick.min.js"></script>
 	<!-- One Page, Animated-HeadLin -->
-       <script src="${pageContext.request.contextPath}/assets/js/wow.min.js"></script>
-	<script src="${pageContext.request.contextPath}/assets/js/animated.headline.js"></script>
-       <script src="${pageContext.request.contextPath}/assets/js/jquery.magnific-popup.js"></script>
+       <script src="${contextPath}/assets/js/wow.min.js"></script>
+	<script src="${contextPath}/assets/js/animated.headline.js"></script>
+       <script src="${contextPath}/assets/js/jquery.magnific-popup.js"></script>
 
 	<!-- Nice-select, sticky -->
-       <script src="${pageContext.request.contextPath}/assets/js/jquery.nice-select.min.js"></script>
-	<script src="${pageContext.request.contextPath}/assets/js/jquery.sticky.js"></script>
+       <script src="${contextPath}/assets/js/jquery.nice-select.min.js"></script>
+	<script src="${contextPath}/assets/js/jquery.sticky.js"></script>
        
        <!-- contact js -->
-       <script src="${pageContext.request.contextPath}/assets/js/contact.js"></script>
-       <script src="${pageContext.request.contextPath}/assets/js/jquery.form.js"></script>
-       <script src="${pageContext.request.contextPath}/assets/js/jquery.validate.min.js"></script>
-       <script src="${pageContext.request.contextPath}/assets/js/mail-script.js"></script>
-       <script src="${pageContext.request.contextPath}/assets/js/jquery.ajaxchimp.min.js"></script>
+       <script src="${contextPath}/assets/js/contact.js"></script>
+       <script src="${contextPath}/assets/js/jquery.form.js"></script>
+       <script src="${contextPath}/assets/js/jquery.validate.min.js"></script>
+       <script src="${contextPath}/assets/js/mail-script.js"></script>
+       <script src="${contextPath}/assets/js/jquery.ajaxchimp.min.js"></script>
        
 	<!-- Jquery Plugins, main Jquery -->	
-       <script src="${pageContext.request.contextPath}/assets/js/plugins.js"></script>
-       <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+       <script src="${contextPath}/assets/js/plugins.js"></script>
+       <script src="${contextPath}/assets/js/main.js"></script>
         
 </body>
 </html>
