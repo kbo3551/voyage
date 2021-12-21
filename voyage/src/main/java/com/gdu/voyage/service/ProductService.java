@@ -22,39 +22,36 @@ public class ProductService {
 	@Autowired ProductMapper productMapper;
 	
 	// 숙소-건물 목록 조회
-	public List<Map<String, Object>> getAccomBuildingList(){
+	public List<AccomBuilding> getAccomBuildingList(int currentPage, int ROW_PER_PAGE) {
+		log.debug("[debug] ProductService.getAccomBuildingList currentPage : " );
+		log.debug("[debug] ProductService.getAccomBuildingList ROW_PER_PAGE : " );
 		
-		List<Map<String, Object>> accomBuildingList = productMapper.selectAccomBuilding();
-//		List<AccomBuildingFacility> accomBuildingFacility = productMapper.selectAccomBuildingFacility();
-//		List<AccomBuildingImage> accomBuildingImage = productMapper.selectAccomBuildingImage();
+		int beginRow = (currentPage-1) * ROW_PER_PAGE;
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("beginRow", beginRow);
+		paramMap.put("ROW_PER_PAGE", ROW_PER_PAGE);
 		
-//		Map<String, Object> accomBuildingList = new HashMap<>();
-//		accomBuildingList.put("accomBuilding", accomBuilding);
+		List<AccomBuilding> accomBuildingList = productMapper.selectAccomBuildingList();
 		
 		log.debug("[debug] ProductService.getAccomBuildingList accomBuildingList : " + accomBuildingList);
-		
 		return accomBuildingList;
 	}
-	
-	// 숙소-건물 시설 목록 조회
-		public List<Map<String, Object>> getAccomBuildingFacilityList(int accomBuildingNo){
-			
-//			List<Map<String, Object>> accomBuildingFacilityList = productMapper.selectAccomBuildingFacility(accomBuildingNo);
-			List<Map<String, Object>> accomBuildingFacilityList = productMapper.selectAccomBuildingFacility(accomBuildingNo);
-//			List<AccomBuildingFacility> accomBuildingFacility = productMapper.selectAccomBuildingFacility();
-//			List<AccomBuildingImage> accomBuildingImage = productMapper.selectAccomBuildingImage();
-			
-//			Map<String, Object> accomBuildingList = new HashMap<>();
-//			accomBuildingList.put("accomBuilding", accomBuilding);
-			
-			log.debug("[debug] ProductService.getAccomBuildingList accomBuildingFacilityList : " + accomBuildingFacilityList);
-			
-			return accomBuildingFacilityList;
-		}
+	// 숙소-건물 시설 인기 조회
+	public List<Map<String, Object>> getAccomBuildingFacilityByBest() {
+		List<Map<String, Object>> facilityByBest = productMapper.selectAccomBuildingFacilityByBest();
+		log.debug("[debug] ProductService.getAccomBuildingFacilityByBest facilityByBest : " + facilityByBest);
+		return facilityByBest;
+	}
+	// 숙소-건물 지역 인기 조회
+	public List<Map<String, Object>> getAccomAddressByBest() {
+		List<Map<String, Object>> addressZipByBest = productMapper.selectAccomAddressByBest();
+		log.debug("[debug] ProductService.getAccomAddressByBest addressZipByBest : " + addressZipByBest);
+		return addressZipByBest;
+	}
 		
 		
-		// [사용자] 숙소_건물 상세 페이지 출력
-		public AccomBuilding getAccombuildingOne (int accomBuildingNo) {
-			return productMapper.selectAccomBuildingOne(accomBuildingNo);
-		}
+	// [사용자] 숙소_건물 상세 페이지 출력
+	public AccomBuilding getAccombuildingOne (int accomBuildingNo) {
+		return productMapper.selectAccomBuildingOne(accomBuildingNo);
+	}
 }

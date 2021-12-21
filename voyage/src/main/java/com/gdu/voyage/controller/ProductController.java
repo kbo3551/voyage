@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.ProductService;
 import com.gdu.voyage.vo.AccomBuilding;
+import com.gdu.voyage.vo.AccomBuildingFacility;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,18 +20,27 @@ import lombok.extern.slf4j.Slf4j;
 public class ProductController {
 	@Autowired ProductService productService;
 	
+	private final int ROW_PER_PAGE = 6;
+	
 	@GetMapping("/getAccomProductList")
-	public String getAccomBuildingProduct(Model model) {
-		log.debug("ProductController.getAccomBuildingProduct 실행");
+	public String getAccomBuildingProduct(Model model, @RequestParam(defaultValue = "1") int currentPage) {
+		log.debug("[debug] ProductController.getAccomBuildingProduct 실행");
+
+		// 숙소-건물 목록 조회
+		List<AccomBuilding> accomBuilding = productService.getAccomBuildingList(currentPage, ROW_PER_PAGE);
+//		log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
+		model.addAttribute("accomBuilding", accomBuilding);
+		log.debug("accomBuilding ProductController.getAccomBuildingProduct accomBuilding : " + accomBuilding);
 		
-		List<Map<String, Object>> accomBuildingList = productService.getAccomBuildingList();
-		model.addAttribute("accomBuildingList", accomBuildingList);
-		log.debug("[debug] ProductController.getAccomBuildingProduct accomBuildingList " + accomBuildingList);
+		// 숙소-건물 시설 인기 조회
+		List<Map<String, Object>> facilityByBest = productService.getAccomBuildingFacilityByBest();
+		model.addAttribute("facilityByBest", facilityByBest);
+		log.debug("accomBuilding ProductController.getAccomBuildingProduct facilityByBest : " + facilityByBest);
+		// 숙소-건물 시설 인기 조회
+		List<Map<String, Object>> addressZipByBest = productService.getAccomAddressByBest();
+		model.addAttribute("addressZipByBest", addressZipByBest);
+		log.debug("accomBuilding ProductController.getAccomBuildingProduct addressZipByBest : " + addressZipByBest);
 		
-//		List<Map<String, Object>> accomBuildingFacilityList = productService.getAccomBuildingFacilityList(accomBuildingList.get(0).get("accomBuildingNo").toString());
-//		model.addAttribute("accomBuildingFacilityList", accomBuildingFacilityList);
-//		log.debug("[debug] ProductController.getAccomBuildingProduct accomBuildingFacilityList " + accomBuildingFacilityList);
-	    
 		return "/product/getAccomBuildingProductList";
 	}
 	
