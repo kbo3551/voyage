@@ -16,9 +16,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.gdu.voyage.service.AdminService;
 import com.gdu.voyage.vo.Admin;
 import com.gdu.voyage.vo.AdminAddress;
+import com.gdu.voyage.vo.HostAsk;
 import com.gdu.voyage.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
+
+
 @Slf4j
 @Transactional
 @Controller
@@ -178,7 +181,7 @@ public class AdminController {
 	}
 	// 멤버 정보 수정
 	@GetMapping("admin/updateMember")
-	public String getUpdateMember(Model model,String memberId) {
+	public String getUpdateMember(Model model, String memberId) {
 		Member member = adminService.getMemberOne(memberId);
 		model.addAttribute("member",member);
 		return "/admin/updateMember";
@@ -208,5 +211,21 @@ public class AdminController {
 		model.addAttribute("pageNo",pageNo);
 		
 		return "admin/hostAskList";
+	}
+	// 사업자 등록 승인/거부
+	@PostMapping("/admin/updateHostAsk")
+	public String postUpdateHostAsk(HostAsk hostAsk,HttpServletRequest request) {
+		Admin adminSession = (Admin) request.getSession().getAttribute("adminSession");
+		// 어드민 세션 정보
+		String adminId = adminSession.getAdminId(); 
+		String memberId = hostAsk.getMemberId();
+		adminService.updateHostAsk(hostAsk);
+		// 승인거부시 insert,update x
+		if(!(hostAsk.getAskState().equals("승인거부"))) {
+			adminService.insertHost(memberId, adminId);
+			adminService.updateMemberLv(memberId);
+		};
+		log.debug("★★★[boryeong]AdminController_hostAsk★★★"+hostAsk.toString());
+		return "redirect:/admin/hostAskList";
 	}
 }

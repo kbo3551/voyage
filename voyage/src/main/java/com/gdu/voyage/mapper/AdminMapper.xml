@@ -162,8 +162,15 @@
 	<id column="create_date" property="createDate"></id>
 	<id column="ask_state" property="askState"></id>
 	</resultMap>
-
-<!-- 사업자 등록한 LIst -->
+	
+	<resultMap type="com.gdu.voyage.vo.Host" id="Host">
+	<id column="host_no" property="hostNo"></id>
+	<id column="member_id" property="memberId"></id>
+	<id column="admin_id" property="adminId"></id>
+	<id column="host_state" property="hostState"></id>
+	<id column="create_date" property="createDate"></id>
+	</resultMap>
+<!-- 사업자 등록한 List -->
 <select id="selectHostAskList" parameterType="com.gdu.voyage.vo.HostAsk" resultMap="HostAsk">
    SELECT 
       host_ask_no,
@@ -173,8 +180,8 @@
       ask_state
    FROM 
       host_ask      
-   ORDER BY
-      ask_state='승인대기' DESC
+   WHERE
+	  ask_state = '승인대기'
    LIMIT 
       #{beginRow}, #{rowPerPage}
 </select>
@@ -193,4 +200,42 @@
       WHERE
          host_ask_no = #{hostAskNo}
 </update>
+<!-- 승인후 사업자 생성 -->
+<insert id="insertHost" parameterType="com.gdu.voyage.vo.Host">
+	INSERT INTO
+		host(
+		member_id,
+		admin_id,
+		host_state,
+		create_date
+		)
+	VALUES(
+		#{memberId},
+		#{adminId},
+		'활동',
+		NOW()
+		)
+</insert>
+<!-- 승인후 멤버 레벨 조절 -->
+<update id="updateMemberLv" parameterType="com.gdu.voyage.vo.Member">
+   UPDATE member
+	set
+		member_level = '1',
+		update_date = Now()
+	WHERE
+		member_id = #{memberId}
+</update>
+<!-- 사업자 신청 상세보기 -->
+<!-- <select id="selectHostAskOne" parameterType="com.gdu.voyage.vo.HostAsk" resultMap="HostAsk"> -->
+<!--    SELECT  -->
+<!--       host_ask_no, -->
+<!--       member_id, -->
+<!--       host_reg, -->
+<!--       create_date, -->
+<!--       ask_state -->
+<!--    FROM  -->
+<!--       host_ask -->
+<!--    WHERE  -->
+<!--    host_ask_no = #{hostAskNo} -->
+<!-- </select> -->
 </mapper>

@@ -7,5 +7,6 @@ public class Host {
 	private int hostNo;
 	private String memberId;
 	private String adminId;
+	private String hostState;
 	private String createDate;
 }

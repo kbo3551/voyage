@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.gdu.voyage.mapper.AdminMapper;
 import com.gdu.voyage.vo.Admin;
 import com.gdu.voyage.vo.AdminAddress;
+import com.gdu.voyage.vo.Host;
 import com.gdu.voyage.vo.HostAsk;
 import com.gdu.voyage.vo.Member;
 
@@ -120,5 +121,18 @@ public class AdminService {
 		returnMap.put("lastPage", lastPage);
 		return returnMap;
 	}
-		
+	// 사업자 신청 승인/거부 
+	public void updateHostAsk(HostAsk hostAsk) {
+		log.debug("☆☆☆[bryeong]AdminService 사업자 등급 수정☆☆☆"+hostAsk.toString());
+		adminMapper.updateHostAsk(hostAsk);
+	}
+	// 승인후 사업자 생성
+	public void insertHost(String memberId,String adminId) {
+		adminMapper.insertHost(memberId,adminId);
+	}
+	// 승인후 회원 등급 수정
+	public void updateMemberLv(String memberId) {
+		log.debug("☆☆☆[bryeong]AdminService 사업자 등급 수정☆☆☆");
+		adminMapper.updateMemberLv(memberId);
+	}
 }
