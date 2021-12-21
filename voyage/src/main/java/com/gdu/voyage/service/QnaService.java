@@ -36,6 +36,9 @@ public class QnaService {
 	// mapper까지는 출력했을 때 문제 없었고, service부터 null값 들어옴...
 	public Qna getQnaOneAndAnswer(int qnaNo) {
 		Qna qna = new Qna();
+		qna.setQnaNo(qnaNo);
+		qna.setMemberNickname(qnaMapper.selectQnaOneAndAnswer(qnaNo).getMemberNickname());
+		
 		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] selectQnaOne debug" + qnaMapper.selectQnaOneAndAnswer(qnaNo));
 		return qnaMapper.selectQnaOneAndAnswer(qnaNo);
 	}

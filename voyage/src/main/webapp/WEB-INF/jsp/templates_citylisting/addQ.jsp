@@ -10,7 +10,14 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
         	$(function(){
-        		// 이미지 추가 버튼 눌렀을 때
+        		var ck = false;
+        		
+        		// 유효성 검사를 위한 변수 생성
+        		var valMemberId = $('#memberId').val();
+        		var valMemberNickname = $('#memberNickname').val();
+        		var valQnaTitle = $('#qnaTitle').val();
+        		var valQnaContent = $('#qnaContent').val();
+	       		// 이미지 추가 버튼 눌렀을 때
         		$('#addImgBtn').click(function(){
         			let html = '<div><input type="file" name="qnaImg" id="qnaImg"></div>';
         			$('#Imginput').append(html);
@@ -21,8 +28,33 @@
         		});
         		// send 버튼 눌렀을 때
         		$('#sendQBtn').click(function(){
+					if(valMemberId == null || valMemberId == undefined || valMemberId == ""){
+						alert('ID가 존재하지 않습니다. 로그인 해주세요.');
+						location.href = '/login';
+						return;
+					}
+					if(valMemberNickname == null || valMemberNickname == undifined || valMemberNickname == ""){
+						alert('닉네임을 찾을 수가 없습니다. 다시 로그인 해주세요.');
+						location.href = '/login';
+						return;
+					}
+					if(valQnaTitle == null || valQnaTitle == undifined || valQnaTitle == ""){
+						alert('제목이 입력되지 않았습니다. 제목을 입력해주세요.');
+						$('#qnaTitle').focus();
+						return;
+					}
+					// qnaCategory 유효성 검사
+					/*if($('#qnaCategory').val() == null || ){
+						return;
+					}*/
+					// qnaSecret 유효성 검사
 					
-        			let ck = true;
+					if(valQnaContent == null || valQnaContent == defined || valQnaContent == ""){
+						alert('내용이 입력되지 않았습니다. 내용을 입력해주세요.');
+						$('#qnaContent').focus();
+						return;
+					}
+        		 	ck = true;
         			// index : 이미지 파일명, item : 파일 경로
         			$('#qnaImg').each(function(index, item){
         				console.log($(item).val());
@@ -33,9 +65,8 @@
         			// 만약 이미지 파일을 선택하지 않았다면...
         			if(ck == false){
         				alert('이미지 파일을 선택해주세요');
-        			} else {
-        				$('#addQForm').submit();
         			}
+        			$('#addQForm').submit();
         		});
         	});
         </script>

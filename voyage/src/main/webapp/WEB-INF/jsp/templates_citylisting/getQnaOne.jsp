@@ -11,26 +11,57 @@
         <script>
         	// 버튼 눌렀을 때, 이동 경로 설정
         	$(function(){
-        		// 변수 ck 생성
-        		var ck = ${memberNickname} ;
-        		// 관리자 답변 여부 체크 용도로 사용
-        		// false : 수정, 삭제 가능 / true : 수정, 삭제 불가
-        		var ck;
+        		// 관리자의 답변 여부를 확인할 변수 valAnswerDate, valAnswerContent 생성
+        		var valAnswerDate = $('#answerCreateDate').val();
+        		var valAnswerContent = $('#answerContent').val();
+        		
         		// Back 버튼 눌렀을 때
         		$('#goBackBtn').click(function(){
         			location.href = '/qnaList';
         		});
         		// Edit 버튼 눌렀을 때
         		$('#moveModQBtn').click(function(){
-        			// ck = true -> 페이지 이동
-        			// ck = false -> 안내메시지 띄우고, 페이지 이동 불가
-					location.href = '/modifyQ?qnaNo=' + $('#qnaNo').val();
+        			// 관리자 답변 여부에 따라 페이지 이동 여부 결정
+        			// 답변 없음 => 수정 가능
+        			// 답변 존재 => 수정 불가
+        			if(valAnswerDate == null || valAnswerDate == undefined || valAnswerDate == ""){
+     					if(valAnswerContent == null || valAnswerContent == undefined || valAnswerContent == ""){
+     						alert('문의글 수정 페이지로 이동합니다.');
+     						location.href = '/modifyQ?qnaNo=' + $('#qnaNo').val();
+     						return;
+     					} else {
+     						alert('해당 문의글은 관리자의 답변 내용이 존재해 수정할 수 없습니다.');
+     						$('#answerContent').focus();
+     						return;
+     					}  				
+        			} else {
+        				alert('해당 문의글은 관리자의 답변 날짜가 존재해 수정할 수 없습니다.');
+        				$('#answerCreateDate').focus();
+        				return;
+        			}
+        			// 수정하려는 회원이 해당 문의글을 단 회원이 아니면 이동 불가
+        			if()
         		});
         		// Del 버튼 눌렀을 때
         		$('#moveRemQBtn').click(function(){
-        			// ck = true -> 페이지 이동
-        			// ck = false -> 안내메시지 띄우고, 페이지 이동 불가
-        			location.href = '/romoveQ?qnaNo=' + $('#qnaNo').val();
+        			// 관리자 답변 여부에 따라 페이지 이동 여부 결정
+        			// 답변 없음 => 수정 가능
+        			// 답변 존재 => 수정 불가
+        			if(valAnswerDate == null || valAnswerDate == undefined || valAnswerDate == ""){
+     					if(valAnswerContent == null || valAnswerContent == undefined || valAnswerContent == ""){
+     						alert('문의글 삭제 페이지로 이동합니다.');
+     						location.href = '/romoveQ?qnaNo=' + $('#qnaNo').val();
+     						return;
+     					} else {
+     						alert('해당 문의글은 관리자의 답변 내용이 존재해 수정할 수 없습니다.');
+     						$('#answerContent').focus();
+     						return;
+     					}  				
+        			} else {
+        				alert('해당 문의글은 관리자의 답변 날짜가 존재해 수정할 수 없습니다.');
+        				$('#answerCreateDate').focus();
+        				return;
+        			}
         		});
         	});
         </script>

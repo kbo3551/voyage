@@ -45,12 +45,14 @@ public class QnaController {
 	}
 	// Qna 상세 내용
 	@GetMapping("/getQnaOne") 
-	public String getQnaOne(HttpServletRequest request, Model model, int qnaNo) {
+	public String getQnaOne(HttpSession session, Model model, int qnaNo) {
 		System.out.println("getQnaOneController() 실행");
+		Member loginMember = (Member)session.getAttribute("loginMember");
 		log.debug(qnaNo + "★★★★★★★★★★★ [다원] qnaNo_Controller() debug");
 		Qna qna = qnaService.getQnaOneAndAnswer(qnaNo);
 	    log.debug(qna + "★★★★★★★★★★★ [다원] qna_Controller() debug");
 	    model.addAttribute("qna", qna);
+	    model.addAttribute("loginMember", loginMember);
 		return "/templates_citylisting/getQnaOne";
 	}
 	// 질문 작성 get
@@ -61,9 +63,9 @@ public class QnaController {
 	}
 	// 질문 작성 post
 	@PostMapping("/addQ")
-	public String addQ(HttpServletRequest request, QnaForm qnaForm, Qna qna, QnaImg qnaImg) throws Exception {
+	public String addQ(HttpServletRequest request, HttpSession session, QnaForm qnaForm, Qna qna, QnaImg qnaImg) throws Exception {
 		// 세션 가져옴
-		Member loginMember = (Member) request.getSession().getAttribute("loginMember");
+		Member loginMember = (Member) session.getAttribute("loginMember");
 		String memberId = loginMember.getMemberId();
 		String memberNickname = request.getParameter("memberNickname");
 		String qnaCategory = request.getParameter("qnaCategory");
