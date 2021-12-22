@@ -164,7 +164,17 @@ public class AdminService {
    }
    // 사업자 상태 수정
    public void updateHost(Host host) {
-      log.debug("☆☆☆[bryeong]AdminService 사업자 등급 수정☆☆☆"+host.toString());
+      log.debug("☆☆☆[bryeong]AdminService 사업자 상태 수정☆☆☆"+host.toString());
       adminMapper.updateHost(host);
+   }
+   // 사업자 상태가 차단이면 숙소 비공개
+   public void updateAccom(int hostNo) {
+      log.debug("☆☆☆[bryeong]AdminService 사업자 상태 차단_숙소☆☆☆"+hostNo);
+      adminMapper.updateAccom(hostNo);
+   }
+   // 사업자 상태가 차단이면 체험 비공개
+   public void updateActivity(int hostNo) {
+      log.debug("☆☆☆[bryeong]AdminService 사업자 상태 차단_체험☆☆☆"+hostNo);
+      adminMapper.updateActivity(hostNo);
    }
 }

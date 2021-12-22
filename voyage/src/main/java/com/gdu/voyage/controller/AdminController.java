@@ -222,7 +222,7 @@ public class AdminController {
       String adminId = adminSession.getAdminId(); 
       String memberId = hostAsk.getMemberId();
       adminService.updateHostAsk(hostAsk);
-      // 승인거부시 insert,update x
+      // 승인거부시 사업자 추가x, 회원Lv상승x
       if(!(hostAsk.getAskState().equals("승인거부"))) {
          adminService.insertHost(memberId, adminId);
          adminService.updateMemberLv(memberId);
@@ -254,7 +254,13 @@ public class AdminController {
    // 사업자 등록 승인/거부
    @PostMapping("/admin/updateHost")
    public String postUpdateHost(Host host) {
+	  int hostNo = host.getHostNo();
       adminService.updateHost(host);
+      // 사업자 상태 차단 클릭시 ->호스트no받아와서 숙소/체험 비공개 처리
+      if(host.getHostState().equals("차단")) {
+          adminService.updateAccom(hostNo);
+          adminService.updateActivity(hostNo);
+       };
       log.debug("★★★[boryeong]AdminController_host★★★"+host.toString());
       return "redirect:/admin/hostList";
    }

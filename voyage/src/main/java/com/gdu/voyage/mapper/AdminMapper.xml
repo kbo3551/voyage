@@ -269,4 +269,20 @@
    WHERE
       host_no = #{hostNo}
    </update>
+   <!-- 사업자 활동 상태가 차단으로 수정시 숙소 비공개 처리 -->
+	<update id="updateAccom" parameterType="com.gdu.voyage.vo.AccomBuilding">
+	UPDATE accom_building
+	SET 
+		accom_building_state = '비공개'
+	WHERE
+		host_no = #{hostNo}
+	</update>
+	<!-- 사업자 활동 상태가 차단으로 수정시 체험 비공개 처리 -->
+	<update id="updateActivity" parameterType="com.gdu.voyage.vo.Activity">
+	UPDATE activity
+	SET 
+		activity_state = '비공개'
+	WHERE
+		host_no = #{hostNo}
+	</update>
 </mapper>

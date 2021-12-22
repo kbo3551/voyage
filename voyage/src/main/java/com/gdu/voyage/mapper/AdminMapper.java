@@ -48,4 +48,8 @@ public interface AdminMapper {
    int hostTotalCount();
    // 사업자 활동상태 수정
    void updateHost(Host Host);
+   // 사업자 활동상태가 차단으로 변경 되었을때 숙소 비공개
+   void updateAccom(int hostNo);
+   // 사업자 활동상태가 차단으로 변경 되었을때 체험 비공개
+   void updateActivity(int hostNo);
 }
