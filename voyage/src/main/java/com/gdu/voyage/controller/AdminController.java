@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.gdu.voyage.service.AdminService;
 import com.gdu.voyage.vo.Admin;
 import com.gdu.voyage.vo.AdminAddress;
+import com.gdu.voyage.vo.Host;
 import com.gdu.voyage.vo.HostAsk;
 import com.gdu.voyage.vo.Member;
 
@@ -249,5 +250,12 @@ public class AdminController {
       model.addAttribute("pageNo",pageNo);
       
       return "admin/hostList";
+   }
+   // 사업자 등록 승인/거부
+   @PostMapping("/admin/updateHost")
+   public String postUpdateHost(Host host) {
+      adminService.updateHost(host);
+      log.debug("★★★[boryeong]AdminController_host★★★"+host.toString());
+      return "redirect:/admin/hostList";
    }
 }

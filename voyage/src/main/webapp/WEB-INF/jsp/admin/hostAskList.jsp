@@ -55,7 +55,7 @@
                   <div>
                      <div class="card flex-fill">
                         <div class="card-header">
-                           <h5 class="card-title mb-0">사업자 신청 관리 현화</h5>
+                           <h5 class="card-title mb-0">사업자 신청 관리 현황</h5>
                         </div>
                         <table class="table table-hover my-0">
                            <thead>
@@ -72,8 +72,8 @@
                            <tbody>
                               <c:forEach items="${hostAskList}" var="v">
                                  <tr>
-                                 	<td>${v.hostAskNo}</td>
-                                    <td>${v.memberId}</td>
+                                 	<td width="10%">${v.hostAskNo}</td>
+                                    <td width="15%">${v.memberId}</td>
                                     <td>${v.hostReg}</td>
                                     <td>${v.askState}</td>
                                     <td>${v.createDate}</td>
@@ -94,7 +94,7 @@
 									</td>
 									</c:when>
 									<c:otherwise>
-									<td>&emsp;&emsp;처리완료</td>
+									<td style=" height: 77px; text-align:left;">&emsp;&emsp;처리완료</td>
 									</c:otherwise>
 								</c:choose>
                                  </tr>

@@ -46,4 +46,6 @@ public interface AdminMapper {
    List<Host> selectHostList(Map<String, Object> map);
    // 사업자 수
    int hostTotalCount();
+   // 사업자 활동상태 수정
+   void updateHost(Host Host);
 }

@@ -162,4 +162,9 @@ public class AdminService {
       
       return returnMap;
    }
+   // 사업자 상태 수정
+   public void updateHost(Host host) {
+      log.debug("☆☆☆[bryeong]AdminService 사업자 등급 수정☆☆☆"+host.toString());
+      adminMapper.updateHost(host);
+   }
 }

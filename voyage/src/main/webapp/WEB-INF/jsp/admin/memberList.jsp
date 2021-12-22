@@ -80,7 +80,7 @@
                                     <td>${am.memberNickname}</td>
                                     <td>${am.memberLevel}</td>
                                     <td>${am.memberActive}</td>
-                                    <td><a href="${pageContext.request.contextPath}/admin/selectMemberOne?memberId=${am.memberId}">상세보기</a></td>
+                                    <td style=" height: 60px; text-align:left;"><a href="${pageContext.request.contextPath}/admin/selectMemberOne?memberId=${am.memberId}">상세보기</a></td>
                                  </tr>
                               </c:forEach>
                            </tbody>

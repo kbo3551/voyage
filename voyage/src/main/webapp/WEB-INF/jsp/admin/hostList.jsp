@@ -49,13 +49,13 @@
          <main class="content">
             <div class="container-fluid p-0">
                <h1 class="h3 mb-3">
-                  <strong>사업자 신청 관리</strong>
+                  <strong>사업자 관리</strong>
                </h1>
                <div class="row">
                   <div>
                      <div class="card flex-fill">
                         <div class="card-header">
-                           <h5 class="card-title mb-0">사업자 신청 관리 현화</h5>
+                           <h5 class="card-title mb-0">사업자 관리 현황</h5>
                         </div>
                         <table class="table table-hover my-0">
                            <thead>
@@ -65,19 +65,29 @@
                                  <th>승인 관리자</th>
                                  <th>사업자 상태</th>
                                  <th>사업자 신청일</th>
-                                 <th></th>
+                                 <th>상태관리</th>
                                  <th></th>
                               </tr>
                            </thead>
                            <tbody>
                               <c:forEach items="${hostList}" var="h">
                                  <tr>
-                                    <td>${h.hostNo}</td>
+                                    <td width="10%" >${h.hostNo}</td>
                                     <td>${h.memberId}</td>
                                     <td>${h.adminId}</td>
                                     <td>${h.hostState}</td>
                                     <td>${h.createDate}</td>
-                                    <td></td>
+                                    <td style="text-align:left;"><label></label>    
+                                    <form class="form-contact contact_form mb-80" name="updateHost" id="updateHost" action="${pageContext.request.contextPath}/admin/updateHost?hostNo=${h.hostNo}" method="post">
+                                  		<select name="hostState" id="hostState">
+				                            <option value="활동">활동</option>
+				                            <option value="차단">차단</option>
+										</select>
+										&emsp;
+									<button class="btn btn-finish btn-primary" type="submit">수정</button>
+										&emsp;
+								    </form>
+									</td>
                                     <td><a href="${pageContext.request.contextPath}/">상세보기</a></td>
                                  </tr>
                               </c:forEach>
