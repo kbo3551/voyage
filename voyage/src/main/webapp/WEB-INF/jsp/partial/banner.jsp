@@ -44,7 +44,7 @@
                                                     <li><a href="${contextPath}/getAccomProductList">숙소</a></li>
                                                 </ul>
                                             </li>
-										 	<li><a href="#">후기</a>
+										 	<li><a href="${contextPath}/setReviewCategory">후기</a>
                                                 <ul class="submenu">
                                                     <li><a href="${contextPath}/getActivityReviewList">체험</a></li>
                                                     <li><a href="${contextPath}/getAccomReviewList">숙소</a></li>

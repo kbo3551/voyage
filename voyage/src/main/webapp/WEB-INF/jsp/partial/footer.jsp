@@ -42,8 +42,8 @@
                                 <div class="footer-tittle">
                                     <h4>Categories</h4>
                                     <ul>
-                                        <li><a href="${contextPath}/templates_citylisting/setProductCategory">예약</a></li>
-                                        <li><a href="${contextPath}/templates_citylisting/setReviewCategory">후기</a></li>  
+                                        <li><a href="${contextPath}/setProductCategory">예약</a></li>
+                                        <li><a href="${contextPath}/setReviewCategory">후기</a></li>  
                                         <li><a href="#hashtag">해시태그</a></li>
                                     </ul>
                                 </div>

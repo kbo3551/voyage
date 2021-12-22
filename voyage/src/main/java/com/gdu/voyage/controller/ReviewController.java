@@ -13,6 +13,12 @@ public class ReviewController {
 		return "/templates_citylisting/getActivityReviewList";
 	}
 	
+	@GetMapping("/setReviewCategory")
+	public String setProductCategory() {
+		System.out.println("ActivityReviewController() 실행");	      
+		return "/product/setReviewCategory";
+	}
+	
 	@GetMapping("/getAccomReviewList")
 	public String getAccomReviewList() {
 		System.out.println("AccomReviewController() 실행");

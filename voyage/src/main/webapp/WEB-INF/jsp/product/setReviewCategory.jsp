@@ -6,25 +6,24 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>숙소</title>
+        <title>후기</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="site.webmanifest">
 		<link rel="shortcut icon" type="image/x-icon" href="${contextPath}/assets/img/favicon.ico">
 
 		<!-- CSS here -->
-            <link rel="stylesheet" href="${contextPath}/assets/css/bootstrap.min.css">
-            <link rel="stylesheet" href="${contextPath}/assets/css/owl.carousel.min.css">
-            <link rel="stylesheet" href="${contextPath}/assets/css/slicknav.css">
-            <link rel="stylesheet" href="${contextPath}/assets/css/flaticon.css">
-            <link rel="stylesheet" href="${contextPath}/assets/css/price_rangs.css">
-            <link rel="stylesheet" href="${contextPath}/assets/css/animate.min.css">
-            <link rel="stylesheet" href="${contextPath}/assets/css/magnific-popup.css">
-            <link rel="stylesheet" href="${contextPath}/assets/css/fontawesome-all.min.css">
-            <link rel="stylesheet" href="${contextPath}/assets/css/themify-icons.css">
-            <link rel="stylesheet" href="${contextPath}/assets/css/slick.css">
-            <link rel="stylesheet" href="${contextPath}/assets/css/nice-select.css">
-            <link rel="stylesheet" href="${contextPath}/assets/css/style.css">
+          <link rel="stylesheet" href="${contextPath}/assets/css/bootstrap.min.css">
+		  <link rel="stylesheet" href="${contextPath}/assets/css/owl.carousel.min.css">
+		  <link rel="stylesheet" href="${contextPath}/assets/css/slicknav.css">
+		  <link rel="stylesheet" href="${contextPath}/assets/css/flaticon.css">
+		  <link rel="stylesheet" href="${contextPath}/assets/css/animate.min.css">
+		  <link rel="stylesheet" href="${contextPath}/assets/css/magnific-popup.css">
+		  <link rel="stylesheet" href="${contextPath}/assets/css/fontawesome-all.min.css">
+		  <link rel="stylesheet" href="${contextPath}/assets/css/themify-icons.css">
+		  <link rel="stylesheet" href="${contextPath}/assets/css/slick.css">
+		  <link rel="stylesheet" href="${contextPath}/assets/css/nice-select.css">
+		  <link rel="stylesheet" href="${contextPath}/assets/css/style.css">
    </head>
 	
 	<!-- 눈누 - 한산스네오 레귤러 폰트 -->
@@ -56,9 +55,9 @@
     </div>
 	
    <body>
-    <!-- banner.jsp 시작 -->
+    <!-- 배너 : 시작 -->
     <c:import url="/WEB-INF/jsp/partial/banner.jsp"/>
-    <!-- banner.jsp 끝 -->
+    <!-- 배너 : 끝 -->
 
     <main>
 
@@ -87,7 +86,7 @@
 	                            </div>
 	                            <div class="cat-cap">
 	                                <h5>체험</h5>
-	                                <p>인생의 전환점을 찾아보세요</p>
+	                                <p>체험 후기</p>
 	                                View Details
 	                            </div>
                             </a>
@@ -101,7 +100,7 @@
 	                            </div>
 	                            <div class="cat-cap">
 	                                <h5>숙소</h5>
-	                                <p>휴식이 필요하지 않으신가요?</p>
+	                                <p>숙소 후기</p>
 	                                View Details
 	                            </div>
                             </a>
@@ -113,11 +112,9 @@
         <!-- Categories Area End -->
 
     </main>
-    
     <!--footer.jsp 시작  -->
     <c:import url="/WEB-INF/jsp/partial/footer.jsp"/>
     <!--footer.jsp 끝  -->
-    
     <!-- Scroll Up -->
     <div id="back-top" >
         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
@@ -139,7 +136,6 @@
         <script src="${contextPath}/assets/js/slick.min.js"></script>
 		<!-- One Page, Animated-HeadLin -->
         <script src="${contextPath}/assets/js/wow.min.js"></script>
-        <script src="${contextPath}/assets/js/price-range.js"></script>
 		<script src="${contextPath}/assets/js/animated.headline.js"></script>
         <script src="${contextPath}/assets/js/jquery.magnific-popup.js"></script>
 
