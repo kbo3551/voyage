@@ -80,7 +80,7 @@
                 <div class="row">
                 	<div class="col-lg-30 col-md-6 col-sm-6">
                         <div class="single-cat text-center mb-50">
-                            <a href="${contextPath}/getActivityProductList">
+                            <a href="${contextPath}/getActivityReviewList">
 	                            <div class="cat-icon">
 	                                <span class="flaticon-drink"></span>
 	                            </div>
@@ -94,7 +94,7 @@
                     </div>
                     <div class="col-lg-30 col-md-6 col-sm-6">
                         <div class="single-cat text-center mb-50">
-                        	<a href="${contextPath}/getAccomProductList">
+                        	<a href="${contextPath}/getAccomReviewList">
 	                            <div class="cat-icon">
 	                                <span class="flaticon-bed"></span>
 	                            </div>
