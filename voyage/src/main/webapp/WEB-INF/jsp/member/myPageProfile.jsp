@@ -99,77 +99,75 @@
         </div>
         <!-- End page header --> 
 
-        <!-- property area -->
-        <div class="content-area user-profiel" style="background-color: #FCFCFC;">&nbsp;
-            <div class="container">   
-                <div class="row">
-                    <div class="col-sm-10 col-sm-offset-1 profiel-container">
-                   		<h1 class="page-title">Hello!  <span class="orange strong" style="color: olive;">${loginMember.getMemberNickname()}</span></h1>
-						<br>
-                        <div class="profiel-header">
-                            <h2>
-                                YOUR PROFILE <br>
-                            </h2>
-                            <hr>
-                        </div>
-                        <div class="clear"> 
-                            <div class="col-sm-5">
-                                <div class="form-group">
-                                    <label>First Name</label>
-                                    <input name="firstname" type="text" class="form-control" id="firstname" name="firstname" placeholder="성" value="${loginMember.memberFirstName}" readonly="readonly">
-                                </div>
-                                <div class="form-group">
-                                    <label>Last Name </label>
-                                    <input name="lastname" type="text" class="form-control" id="lastname" name="lastname" placeholder="이름" value="${loginMember.memberLastName}" readonly="readonly">
-                                </div> 
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input name="email" type="email" id="email" name="email" class="form-control" placeholder="이메일" value="${loginMember.memberEmail}" readonly="readonly">
-                                </div> 
-                                <div class="form-group">
-                                    <label>Phone</label>
-                                    <input name="phone" type="number" class="form-control" id="phone" name="phone" placeholder="전화번호" value="${loginMember.memberPhone}" readonly="readonly">
-                                </div> 
-                            </div>
-                            <div class="col-sm-5">
-                                <div class="form-group">
-                                  <label>우편번호</label>
-                                  <input type="number" class="form-control" id="postalCode" name="postalCode" placeholder="우편번호" value="${loginMember.memberAddress.memberAddressPostalCode}" readonly="readonly">
-                             	</div>
-                            	<div class="form-group" style="line-height:168%">
-                             		<br> 
-                                  <input type="text" class="form-control" id="roadAddress" name="roadAddress" placeholder="도로명주소" value="${loginMember.memberAddress.memberAddressZip}" readonly="readonly">
-                            	</div>
-                            	<div class="form-group" style="line-height:169%">
-                            	 	<br> 
-                                  <input type="text" class="form-control" id="detailAddress" name="detailAddress" placeholder="상세주소" value="${loginMember.memberAddress.memberAddressDetail}" readonly="readonly">
-                              </div>
-                            </div>  
-
-                        </div>
-                        	<div class="clear">
-                        		<div class="col-sm-20">
-                             	<hr>
-                                 <div class="form-group">
-                                     <label>Description</label>
-                                     <textarea rows="5" style="width: 78.7%;" id="description" name="description" placeholder="자기소개" readonly="readonly">${loginMember.memberDescription }</textarea>
-                                 </div>
-                            	</div>
-                        	</div>
-                        	<div class="col-sm-20 col-sm-offset-1" style="text-align: right;">
-                             <br>
-                             <a href="${contextPath}/member/pwCheck?route=1" class='btn btn-finish btn-primary'>수정</a>
-                         </div>
-                         <br>
-		            </div>
-                </div>
-                <br>
-                <div><a href="${contextPath}/member/pwCheck?route=2" class="btn">닉네임변경</a></div>
-   				<div><a href="${contextPath}/member/pwCheck?route=3" class="btn">비밀번호변경</a></div>
-   				<div><a href="${contextPath}/member/pwCheck?route=4" class="btn">회원탈퇴</a></div>
-            </div>
-    	</div>
-     
+	        <div class="content-area user-profiel" style="background-color: #FCFCFC;">&nbsp;
+	            <div class="container">   
+	                <div class="row">
+	                    <div class="col-sm-10 col-sm-offset-1 profiel-container">
+	                   		<h1 class="page-title">Hello!  <span class="orange strong" style="color: olive;">${loginMember.getMemberNickname()}</span></h1>
+							<br>
+	                        <div class="profiel-header">
+	                            <h2>
+	                                YOUR PROFILE <br>
+	                            </h2>
+	                            <hr>
+	                        </div>
+	                        <div class="clear"> 
+	                            <div class="col-sm-5">
+	                                <div class="form-group">
+	                                    <label>First Name</label>
+	                                    <input name="firstname" type="text" class="form-control" id="firstname" name="firstname" placeholder="성" value="${loginMember.memberFirstName}" readonly="readonly">
+	                                </div>
+	                                <div class="form-group">
+	                                    <label>Last Name </label>
+	                                    <input name="lastname" type="text" class="form-control" id="lastname" name="lastname" placeholder="이름" value="${loginMember.memberLastName}" readonly="readonly">
+	                                </div> 
+	                                <div class="form-group">
+	                                    <label>Email</label>
+	                                    <input name="email" type="email" id="email" name="email" class="form-control" placeholder="이메일" value="${loginMember.memberEmail}" readonly="readonly">
+	                                </div> 
+	                                <div class="form-group">
+	                                    <label>Phone</label>
+	                                    <input name="phone" type="number" class="form-control" id="phone" name="phone" placeholder="전화번호" value="${loginMember.memberPhone}" readonly="readonly">
+	                                </div> 
+	                            </div>
+	                            <div class="col-sm-5">
+	                                <div class="form-group">
+	                                  <label>우편번호</label>
+	                                  <input type="number" class="form-control" id="postalCode" name="postalCode" placeholder="우편번호" value="${loginMember.memberAddress.memberAddressPostalCode}" readonly="readonly">
+	                             	</div>
+	                            	<div class="form-group" style="line-height:168%">
+	                             		<br> 
+	                                  <input type="text" class="form-control" id="roadAddress" name="roadAddress" placeholder="도로명주소" value="${loginMember.memberAddress.memberAddressZip}" readonly="readonly">
+	                            	</div>
+	                            	<div class="form-group" style="line-height:169%">
+	                            	 	<br> 
+	                                  <input type="text" class="form-control" id="detailAddress" name="detailAddress" placeholder="상세주소" value="${loginMember.memberAddress.memberAddressDetail}" readonly="readonly">
+	                              </div>
+	                            </div>  
+	
+	                        </div>
+	                       	<div class="clear">
+	                       		<div class="col-sm-20">
+	                            	<hr>
+	                                <div class="form-group">
+	                                    <label>Description</label>
+	                                    <textarea rows="5" style="width: 78.7%;" id="description" name="description" placeholder="자기소개" readonly="readonly">${loginMember.memberDescription }</textarea>
+	                                </div>
+	                           	</div>
+	                       	</div>
+	                       	<div class="col-sm-20 col-sm-offset-1" style="text-align: right;">
+	                            <br>
+	                            <a href="${contextPath}/member/pwCheck?route=1" class='btn btn-finish btn-primary'>수정</a>
+	                        </div>
+	                        <br>
+		            	</div>
+	                </div>
+	                <br>
+	                <div><a href="${contextPath}/member/pwCheck?route=2" class="btn">닉네임변경</a></div>
+	   				<div><a href="${contextPath}/member/pwCheck?route=3" class="btn">비밀번호변경</a></div>
+	   				<div><a href="${contextPath}/member/pwCheck?route=4" class="btn">회원탈퇴</a></div>
+	            </div>
+	    	</div>
 
 
 	
