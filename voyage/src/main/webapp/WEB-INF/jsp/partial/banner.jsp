@@ -82,8 +82,10 @@
                                            		<c:when test="${loginMember.getMemberLevel() == 0}">
                                            			<li><a href="${contextPath}/member/myPage"><i class="ti-user">${loginMember.getMemberNickname()}</i></a>
 			                                           	<ul class="submenu">
-				                                            <li><a href="${contextPath}/member/myPageIndex">마이페이지</a></li>
+				                                            <li><a href="${contextPath}/member/selectMyProfile">회원정보</a></li>
+				                                            <li><a href="${contextPath}/member/selectMyOrderList">주문목록</a></li>
 				                                            <li><a href="${contextPath}/member/coupon">쿠폰</a></li>
+				                                            <li><a href="${contextPath}/member/chat">채팅</a></li>
 				                                            <li><a href="${contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
@@ -92,9 +94,11 @@
                                            		<c:when test="${loginMember.getMemberLevel() == 1}">
                                            			<li><a href="${contextPath}/member/myPage"><i class="ti-user">${loginMember.getMemberNickname()}</i></a>
 			                                           	<ul class="submenu">
-				                                            <li><a href="${contextPath}/member/myPageIndex">마이페이지</a></li>
-				                                            <li><a href="${contextPath}/host/hostIndex">사업자페이지</a></li>
+			                                           		<li><a href="${contextPath}/host/hostIndex">사업자페이지</a></li>
+				                                            <li><a href="${contextPath}/member/selectMyProfile">회원정보</a></li>
+				                                            <li><a href="${contextPath}/member/selectMyOrderList">주문목록</a></li>
 				                                            <li><a href="${contextPath}/member/coupon">쿠폰</a></li>
+				                                            <li><a href="${contextPath}/member/chat">채팅</a></li>
 				                                            <li><a href="${contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
@@ -103,9 +107,11 @@
                                            		<c:when test="${loginMember.getMemberLevel() == 2 && empty adminSession}">
                                            			<li><a href="${contextPath}/member/myPage"><i class="ti-user">${loginMember.getMemberNickname()}</i></a>
 			                                           	<ul class="submenu">
-				                                            <li><a href="${contextPath}/member/myPageIndex">마이페이지</a></li>
-				                                            <li><a href="${contextPath}/addAdmin">관리자회원가입</a></li>
+			                                           		<li><a href="${contextPath}/addAdmin">관리자회원가입</a></li>
+				                                            <li><a href="${contextPath}/member/selectMyProfile">회원정보</a></li>
+				                                            <li><a href="${contextPath}/member/selectMyOrderList">주문목록</a></li>
 				                                            <li><a href="${contextPath}/member/coupon">쿠폰</a></li>
+				                                            <li><a href="${contextPath}/member/chat">채팅</a></li>
 				                                            <li><a href="${contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
@@ -114,9 +120,11 @@
                                            		<c:when test="${loginMember.getMemberLevel() == 2 && !empty adminSession}">
                                            			<li><a href="${contextPath}/member/myPage"><i class="ti-user">${loginMember.getMemberNickname()}</i></a>
 			                                           	<ul class="submenu">
-				                                            <li><a href="${contextPath}/member/myPageIndex">마이페이지</a></li>
-				                                            <li><a href="${contextPath}/admin/adminIndex">관리자페이지</a></li>
+			                                           		<li><a href="${contextPath}/admin/adminIndex">관리자페이지</a></li>
+				                                            <li><a href="${contextPath}/member/selectMyProfile">회원정보</a></li>
+				                                            <li><a href="${contextPath}/member/selectMyOrderList">주문목록</a></li>
 				                                            <li><a href="${contextPath}/member/coupon">쿠폰</a></li>
+				                                            <li><a href="${contextPath}/member/chat">채팅</a></li>
 				                                            <li><a href="${contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
