@@ -30,6 +30,26 @@ public class MemberController {
 	@Autowired MemberService memberService;
 	@Autowired LoginService loginService;
 	
+	// 채팅
+	@GetMapping("member/chat")
+	public String getChat() {
+		log.trace("MemberController() 실행");
+		return "member/chat";
+	}
+	
+	// 관심상품목록
+	@GetMapping("member/selectCoupon")
+	public String getSelectCoupon() {
+		log.trace("MemberController() 실행");
+		return "member/selectCoupon";
+	}
+	
+	// 관심상품목록
+	@GetMapping("member/selectMyInterest")
+	public String getSelectMyInterestList() {
+		log.trace("MemberController() 실행");
+		return "member/selectMyInterest";
+	}
 	
 	// 주문목록
 	@GetMapping("member/selectMyOrderList")

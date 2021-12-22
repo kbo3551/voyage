@@ -13,7 +13,7 @@ public class AlertController {
 	
 	@RequestMapping("/alert")
 	public String postAlert(String url) {
-    	System.out.println("AlertController() 실행");
+    	log.trace("AlertController() 실행");
     	return url;
     }
 }
