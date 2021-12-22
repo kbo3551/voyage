@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -23,20 +22,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
   <!-- 눈누 - 한산스네오 레귤러 폰트 -->
-	<style type="text/css">
-	
-		@font-face {
-		    font-family: 'SpoqaHanSansNeo-Regular';
-		    	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff');
-		    font-weight: normal;
-		    font-style: normal;
-		}
-		
-		body {
-			font-family: 'SpoqaHanSansNeo-Regular';
-		}
+   <style type="text/css">
+   
+      @font-face {
+          font-family: 'SpoqaHanSansNeo-Regular';
+             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff');
+          font-weight: normal;
+          font-style: normal;
+      }
+      
+      body {
+         font-family: 'SpoqaHanSansNeo-Regular';
+      }
+      
+   </style>
 
-	</style>
 <body>
    <div class="wrapper">
       <!-- adminKit : 시작 -->
@@ -60,43 +60,25 @@
                         <table class="table table-hover my-0">
                            <thead>
                               <tr>
-                             	 <th>사업자 신청 번호</th>
-                                 <th>사업자 신청ID</th>
                                  <th>사업자 번호</th>
-                                 <th>처리 상태</th>
+                                 <th>사업자 ID</th>
+                                 <th>승인 관리자</th>
+                                 <th>사업자 상태</th>
                                  <th>사업자 신청일</th>
                                  <th></th>
-                                 <th>처리여부</th>
+                                 <th></th>
                               </tr>
                            </thead>
                            <tbody>
-                              <c:forEach items="${hostAskList}" var="v">
+                              <c:forEach items="${hostList}" var="h">
                                  <tr>
-                                 	<td>${v.hostAskNo}</td>
-                                    <td>${v.memberId}</td>
-                                    <td>${v.hostReg}</td>
-                                    <td>${v.askState}</td>
-                                    <td>${v.createDate}</td>
+                                    <td>${h.hostNo}</td>
+                                    <td>${h.memberId}</td>
+                                    <td>${h.adminId}</td>
+                                    <td>${h.hostState}</td>
+                                    <td>${h.createDate}</td>
                                     <td></td>
-                                <c:choose>
-                                <c:when test="${v.askState == '승인대기'}">  
-                                    <td style="text-align:left;"><label></label>    
-                                    <form class="form-contact contact_form mb-80" name="updateHostAsk" id="updateHostAsk" action="${pageContext.request.contextPath}/admin/updateHostAsk?hostAskNo=${v.hostAskNo}" method="post">
-                                  		<input type="hidden" name="memberId" value="${v.memberId}">
-                                  		<select name="askState" id="askState">
-				                            <option value="승인완료">승인</option>
-				                            <option value="승인거부">거부</option>
-										</select>
-										&emsp;
-									<button class="btn btn-finish btn-primary" type="submit">수정</button>
-										&emsp;
-								    </form>
-									</td>
-									</c:when>
-									<c:otherwise>
-									<td>&emsp;&emsp;처리완료</td>
-									</c:otherwise>
-								</c:choose>
+                                    <td><a href="${pageContext.request.contextPath}/">상세보기</a></td>
                                  </tr>
                               </c:forEach>
                            </tbody>
@@ -110,7 +92,7 @@
              <div class="container">
                 <ul class="nav justify-content-center bg-light">
                    <c:if test="${beginRow > (ROW_PER_PAGE * 10)}">
-                      <li><a href="/admin/hostAskList?currentPage=${pageNo-1}">&lt;</a></li>
+                      <li><a href="/admin/hostList?currentPage=${pageNo-1}">&lt;</a></li>
                    </c:if>
                    <c:set var="doneLoop" value="false"></c:set>
                    <c:forEach var="f" begin="${pageNo}" end="${pageNo + 9}">
@@ -120,7 +102,7 @@
                                <li class="active"><span>${f}</span></li>
                             </c:when>
                             <c:otherwise>
-                               <li><a class="nav-link active" href="/admin/hostAskList?currentPage=${f}">${f}</a></li>
+                               <li><a class="nav-link active" href="/admin/hostList?currentPage=${f}">${f}</a></li>
                             </c:otherwise>
                          </c:choose>
                          <c:if test="${f == lastPage}">
@@ -129,7 +111,7 @@
                       </c:if>
                    </c:forEach>
                    <c:if test="${currentPage + 10 <= lastPage}">
-                      <li><a class="nav-link active" href="/admin/hostAskList?currentPage=${pageNo+10}">&gt;</a></li>
+                      <li><a class="nav-link active" href="/admin/hostList?currentPage=${pageNo+10}">&gt;</a></li>
                    </c:if>
                 </ul>
           </div> 

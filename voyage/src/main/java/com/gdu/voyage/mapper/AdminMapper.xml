@@ -1,73 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.AdminMapper">
-<!-- 어드민회원가입 (주소) -->
-<insert id="insertAdminAddress" parameterType="com.gdu.voyage.vo.AdminAddress">
+
+   <!-- 어드민회원가입 (주소) -->
+   <insert id="insertAdminAddress" parameterType="com.gdu.voyage.vo.AdminAddress">
    INSERT INTO
       admin_address(
-         admin_id,
-         admin_address_postal_code,
-         admin_address_zip,
-         admin_address_detail,
-         create_date
-         update_date
+      admin_id,
+      admin_address_postal_code,
+      admin_address_zip,
+      admin_address_detail,
+      create_date
+      update_date
       )
-      VALUES(
-         #{adminId},
-         #{adminAddressPostalCode},
-         #{adminAddressZip},
-         #{adminAddressDetail},
-         NOW(),
-         NOW()
-         );
-</insert>
-<!-- 어드민 회원가입 -->
-<insert id="insertAdmin" parameterType="com.gdu.voyage.vo.Admin">
+   VALUES(
+      #{adminId},
+      #{adminAddressPostalCode},
+      #{adminAddressZip},
+      #{adminAddressDetail},
+      NOW(),
+      NOW()
+      );
+   </insert>
+   <!-- 어드민 회원가입 -->
+   <insert id="insertAdmin" parameterType="com.gdu.voyage.vo.Admin">
    INSERT INTO
       admin(
-         admin_id,
-         admin_first_name,
-         admin_last_name,
-         admin_phone,
-         admin_email,
-         admin_active,
-         create_date,
-         update_date
-         )   
-      VALUES(
-         #{adminId},
-         #{adminFirstName},
-         #{adminLastName},
-         #{adminPhone},
-         #{adminEmail},
-         #{adminActive},
-         NOW(),
-         NOW()
-         );
-</insert>
-<!-- 어드민 정보 수정 -->
-<update id="updateAdmin">
+      admin_id,
+      admin_first_name,
+      admin_last_name,
+      admin_phone,
+      admin_email,
+      admin_active,
+      create_date,
+      update_date
+      )
+   VALUES(
+      #{adminId},
+      #{adminFirstName},
+      #{adminLastName},
+      #{adminPhone},
+      #{adminEmail},
+      #{adminActive},
+      NOW(),
+      NOW()
+      );
+   </insert>
+   <!-- 어드민 정보 수정 -->
+   <update id="updateAdmin">
    UPDATE admin
-      set
-         admin_first_name = #{adminFirstName},
-         admin_last_name = #{adminLastName},
-         admin_phone = #{adminPhone},
-         admin_email = #{adminEmail},
-         update_date = NOW()
-      WHERE 
-         admin_id = #{adminId}
-</update>
-<!-- 어드민 주소 정보 수정 -->
-<update id="updateAdminAddress">
+   set
+      admin_first_name = #{adminFirstName},
+      admin_last_name = #{adminLastName},
+      admin_phone = #{adminPhone},
+      admin_email = #{adminEmail},
+      update_date = NOW()
+   WHERE
+      admin_id = #{adminId}
+   </update>
+   <!-- 어드민 주소 정보 수정 -->
+   <update id="updateAdminAddress">
    UPDATE admin_address
-      set
-         admin_address_postal_code = #{adminAddressPostalCode},
-         admin_address_zip = #{adminAddressZip},
-         admin_address_detail = #{adminAddressDetail},
-         update_date = NOW()
-      WHERE 
-         admin_id = #{adminId}
-</update>
+   set
+      admin_address_postal_code = #{adminAddressPostalCode},
+      admin_address_zip = #{adminAddressZip},
+      admin_address_detail = #{adminAddressDetail},
+      update_date = NOW()
+   WHERE
+      admin_id = #{adminId}
+   </update>
    <resultMap type="com.gdu.voyage.vo.MemberAddress" id="memberAddress">
       <result column="member_address_postal_code" property="memberAddressPostalCode" />
       <result column="member_address_zip" property="memberAddressZip" />
@@ -75,7 +76,7 @@
       <result column="create_date" property="createDate" />
       <result column="update_date" property="updateDate" />
    </resultMap>
- 
+
    <resultMap type="com.gdu.voyage.vo.Member" id="member">
       <result column="member_id" property="memberId" />
       <result column="member_first_name" property="memberFirstName" />
@@ -92,10 +93,10 @@
       <result column="last_login" property="lastLogin" />
       <collection property="memberAddress" resultMap="memberAddress" />
    </resultMap>
-   
-<!-- 멤버 리스트 출력 -->
-<select id="selectMemberList" parameterType="com.gdu.voyage.vo.Member" resultMap="member">
-   SELECT 
+
+   <!-- 멤버 리스트 출력 -->
+   <select id="selectMemberList" parameterType="com.gdu.voyage.vo.Member" resultMap="member">
+   SELECT
       member_id,
       member_pw,
       member_first_name,
@@ -103,14 +104,14 @@
       member_nickname,
       member_level,
       member_active
-   FROM 
-      member 
-   LIMIT 
+   FROM
+      member
+   LIMIT
       #{beginRow}, #{rowPerPage}
-</select>
-<!-- 멤버 상세보기 -->
-<select id="selectMemberOne" parameterType="com.gdu.voyage.vo.Member" resultMap="member">
-   SELECT 
+   </select>
+   <!-- 멤버 상세보기 -->
+   <select id="selectMemberOne" parameterType="com.gdu.voyage.vo.Member" resultMap="member">
+   SELECT
       m.member_id,
       m.member_pw,
       m.member_first_name,
@@ -130,113 +131,133 @@
       a.member_address_detail,
       a.create_date,
       a.update_date
-   FROM 
+   FROM
       member m
-   INNER JOIN 
+   INNER JOIN
       member_address a
    ON
       m.member_id = a.member_id
-   WHERE m.member_id = #{memberId}
-</select>
-<!-- 회원수 -->
-<select id="memberTotalCount" resultType="int" parameterType="com.gdu.voyage.vo.Member">
-    SELECT
+      WHERE m.member_id = #{memberId}
+   </select>
+   <!-- 회원수 -->
+   <select id="memberTotalCount" resultType="int" parameterType="com.gdu.voyage.vo.Member">
+   SELECT
       COUNT(*)
-    FROM 
-       member
-</select>
-<!-- 회원 등급/상태 수정 -->
-<update id="updateMember" parameterType="com.gdu.voyage.vo.Member">
+   FROM
+      member
+   </select>
+   <!-- 회원 등급/상태 수정 -->
+   <update id="updateMember" parameterType="com.gdu.voyage.vo.Member">
    UPDATE member
-      set
-         member_level = #{memberLevel},
-         member_active = #{memberActive},
-         update_date = Now()
-      WHERE
-         member_id = #{memberId}
-</update>   
-	<resultMap type="com.gdu.voyage.vo.HostAsk" id="HostAsk">
-	<id column="host_ask_no" property="hostAskNo"></id>
-	<id column="member_id" property="memberId"></id>
-	<id column="host_reg" property="hostReg"></id>
-	<id column="create_date" property="createDate"></id>
-	<id column="ask_state" property="askState"></id>
-	</resultMap>
-	
-	<resultMap type="com.gdu.voyage.vo.Host" id="Host">
-	<id column="host_no" property="hostNo"></id>
-	<id column="member_id" property="memberId"></id>
-	<id column="admin_id" property="adminId"></id>
-	<id column="host_state" property="hostState"></id>
-	<id column="create_date" property="createDate"></id>
-	</resultMap>
-<!-- 사업자 등록한 List -->
-<select id="selectHostAskList" parameterType="com.gdu.voyage.vo.HostAsk" resultMap="HostAsk">
-   SELECT 
+   set
+      member_level = #{memberLevel},
+      member_active = #{memberActive},
+      update_date = Now()
+   WHERE
+      member_id = #{memberId}
+   </update>
+   <resultMap type="com.gdu.voyage.vo.HostAsk" id="HostAsk">
+      <id column="host_ask_no" property="hostAskNo"></id>
+      <id column="member_id" property="memberId"></id>
+      <id column="host_reg" property="hostReg"></id>
+      <id column="create_date" property="createDate"></id>
+      <id column="ask_state" property="askState"></id>
+   </resultMap>
+
+   <resultMap type="com.gdu.voyage.vo.Host" id="Host">
+      <id column="host_no" property="hostNo"></id>
+      <id column="member_id" property="memberId"></id>
+      <id column="admin_id" property="adminId"></id>
+      <id column="host_state" property="hostState"></id>
+      <id column="create_date" property="createDate"></id>
+   </resultMap>
+   <!-- 사업자 등록한 List -->
+   <select id="selectHostAskList" parameterType="com.gdu.voyage.vo.HostAsk" resultMap="HostAsk">
+   SELECT
       host_ask_no,
       member_id,
       host_reg,
       create_date,
       ask_state
-   FROM 
-      host_ask      
-   ORDER BY 
-	 	ask_state = '승인완료',
-		ask_state = '승인거부'		<!-- WHERE ask_state = '승인대기'  승인된 목록or 거부 목록도 봐야하는지 고민?-->
-   LIMIT 
+   FROM
+      host_ask
+      ORDER BY
+      ask_state = '승인거부',
+      ask_state = '승인완료'      <!-- WHERE ask_state = '승인대기' 승인된 목록or 거부 목록도 봐야하는지 고민? -->
+   LIMIT
       #{beginRow}, #{rowPerPage}
-</select>
-<!-- 사업자 신청수-->
-<select id="hostAskTotalCount" resultType="int" parameterType="com.gdu.voyage.vo.HostAsk">
+   </select>
+   <!-- 사업자 신청수 -->
+   <select id="hostAskTotalCount" resultType="int" parameterType="com.gdu.voyage.vo.HostAsk">
    SELECT
       COUNT(*)
-    FROM 
-       host_ask
-</select>
-<!-- 사업자 신청 승인/거절 -->
-<update id="updateHostAsk" parameterType="com.gdu.voyage.vo.HostAsk">
+   FROM
+      host_ask
+   </select>
+   <!-- 사업자 신청 승인/거절 -->
+   <update id="updateHostAsk" parameterType="com.gdu.voyage.vo.HostAsk">
    UPDATE host_ask
-      set
-         ask_state = #{askState}
-      WHERE
-         host_ask_no = #{hostAskNo}
-</update>
-<!-- 승인후 사업자 생성 -->
-<insert id="insertHost" parameterType="com.gdu.voyage.vo.Host">
-	INSERT INTO
-		host(
-		member_id,
-		admin_id,
-		host_state,
-		create_date
-		)
-	VALUES(
-		#{memberId},
-		#{adminId},
-		'활동',
-		NOW()
-		)
-</insert>
-<!-- 승인후 멤버 레벨 조절 -->
-<update id="updateMemberLv" parameterType="com.gdu.voyage.vo.Member">
+   set
+      ask_state = #{askState}
+   WHERE
+      host_ask_no = #{hostAskNo}
+   </update>
+   <!-- 승인후 사업자 생성 -->
+   <insert id="insertHost" parameterType="com.gdu.voyage.vo.Host">
+   INSERT INTO
+      host(
+      member_id,
+      admin_id,
+      host_state,
+      create_date
+      )
+   VALUES(
+      #{memberId},
+      #{adminId},
+      '활동',
+      NOW()
+      )
+   </insert>
+   <!-- 승인후 멤버 레벨 조절 -->
+   <update id="updateMemberLv" parameterType="com.gdu.voyage.vo.Member">
    UPDATE member
-	set
-		member_level = '1',
-		update_date = Now()
-	WHERE
-		member_id = #{memberId}
-</update>
-<!-- 사업자 신청 상세보기 -->
-<!-- <select id="selectHostAskOne" parameterType="com.gdu.voyage.vo.HostAsk" resultMap="HostAsk"> -->
-<!--    SELECT  -->
-<!--       host_ask_no, -->
-<!--       member_id, -->
-<!--       host_reg, -->
-<!--       create_date, -->
-<!--       ask_state -->
-<!--    FROM  -->
-<!--       host_ask -->
-<!--    WHERE  -->
-<!--    host_ask_no = #{hostAskNo} -->
-<!-- </select> -->
+   set
+      member_level = '1',
+      update_date = Now()
+   WHERE
+      member_id = #{memberId}
+   </update>
+   <!-- 사업자 신청 상세보기 -->
+   <!-- <select id="selectHostAskOne" parameterType="com.gdu.voyage.vo.HostAsk" 
+      resultMap="HostAsk"> -->
+   <!-- SELECT -->
+   <!-- host_ask_no, -->
+   <!-- member_id, -->
+   <!-- host_reg, -->
+   <!-- create_date, -->
+   <!-- ask_state -->
+   <!-- FROM -->
+   <!-- host_ask -->
+   <!-- WHERE -->
+   <!-- host_ask_no = #{hostAskNo} -->
+   <!-- </select> -->
+   
+   <select id="selectHostList" parameterType="com.gdu.voyage.vo.Host"  resultMap="Host">
+   SELECT
+      host_no,
+      member_id,
+      admin_id,
+      host_state,
+      create_date
+   FROM
+      host
+   ORDER BY
+      host_state = '차단'
+   </select>
+   <select id="hostTotalCount" resultType="int" parameterType="com.gdu.voyage.vo.Host">
+   SELECT
+      COUNT(*)
+   FROM
+      host
+   </select>
 </mapper>

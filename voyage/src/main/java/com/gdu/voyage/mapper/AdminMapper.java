@@ -42,5 +42,8 @@ public interface AdminMapper {
    void insertHost(String memberId, String adminId);
    // 승인후 멤버 레벨 조정
    void updateMemberLv(String memberId);
+   //  사업자 List
+   List<Host> selectHostList(Map<String, Object> map);
+   // 사업자 수
+   int hostTotalCount();
 }
-
