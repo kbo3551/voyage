@@ -34,19 +34,13 @@ public class AdminFilter implements Filter {
 		HttpServletResponse res = (HttpServletResponse) response;
 		
 	    HttpSession session = req.getSession();
-	    if(session.getAttribute("loginMember") == null) {
-	    	res.sendRedirect(req.getContextPath()+"/login");
-			return;
-	    }
 	    Member loginMember = (Member)session.getAttribute("loginMember");
-	    if(loginMember.getMemberLevel() != 2) {
-	    	res.sendRedirect(req.getContextPath()+"/index");
-			return;
-	    }
 	    Admin adminSession = (Admin)session.getAttribute("adminSession");
-	    if(adminSession == null) {
-	    	res.sendRedirect(req.getContextPath()+"/index");
-			return;
+	    
+	    if(session.getAttribute("loginMember") == null || loginMember.getMemberLevel() != 2 || adminSession == null) {
+	    	req.setAttribute("msg", "관리자만이 접근 가능합니다.");
+	    	req.setAttribute("url", "redirect:/index");
+	    	req.getRequestDispatcher(req.getContextPath()+"/alert").forward(req, res);
 	    }
 	      
 	    chain.doFilter(req, res); 

@@ -137,7 +137,8 @@
 	<!-- host 로그인 -->
 	<select id="hostLogin" resultType="com.gdu.voyage.vo.Host">
 		SELECT
-			host_no hostNo
+			host_no hostNo,
+			host_state hostState
 		FROM
 			host
 		WHERE

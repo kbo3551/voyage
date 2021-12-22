@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.gdu.voyage.vo.Host;
 import com.gdu.voyage.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,20 +27,26 @@ public class HostFilter implements Filter {
 	 }
 	
 	
-	// MemberLevel이 1일때만 접근가능
+	// MemberLevel이 1이고 상태가 활동일 때만 접근가능
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {		
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		
 	    HttpSession session = req.getSession();
-	    if(session.getAttribute("loginMember") == null) {
-	    	res.sendRedirect(req.getContextPath()+"/login");
-	    	return;
-	    }
 	    Member loginMember = (Member)session.getAttribute("loginMember");
-	    if(loginMember.getMemberLevel() != 1) {
-	    	res.sendRedirect(req.getContextPath()+"/index"); 
+	    if(session.getAttribute("loginMember") == null || loginMember.getMemberLevel() != 1) {
+	    	req.setAttribute("msg", "사업자만이 접근 가능합니다.");
+	    	req.setAttribute("url", "redirect:/index");
+	    	req.getRequestDispatcher(req.getContextPath()+"/alert").forward(req, res);
+	    }
+	    
+	    Host hostSession = (Host)session.getAttribute("hostSession");
+	    System.out.println(hostSession.getHostState());
+	    if(hostSession.getHostState().equals("차단")) {
+	    	req.setAttribute("msg", "차단된 사업자입니다.");
+	    	req.setAttribute("url", "redirect:/index");
+	    	req.getRequestDispatcher(req.getContextPath()+"/alert").forward(req, res);
 	    	return;
 	    }
 	      

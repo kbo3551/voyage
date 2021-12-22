@@ -27,7 +27,7 @@ public class LoginController {
 	//로그아웃
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request, HttpSession session) {
-		System.out.println("LoginController() 실행 - logout");
+		log.trace("LoginController() 실행 - logout");
 		session.invalidate();
 		return "redirect:index";
 	}
@@ -35,14 +35,14 @@ public class LoginController {
 	// 로그인 페이지
 	@GetMapping("/login")
     public String getLogin() {
-       System.out.println("LoginController() 실행");
+       log.trace("LoginController() 실행");
        return "login";
 	}
 	
 	// 로그인
 	@PostMapping("/login")
 	public String postLogin(HttpServletRequest request,HttpSession session, RedirectAttributes redirect,Model model) {
-		System.out.println("LoginController() 실행");
+		log.trace("LoginController() 실행");
 		
 		String memberId = request.getParameter("id");
 		String memberPw = request.getParameter("password");
@@ -107,20 +107,20 @@ public class LoginController {
 	// 어드민 로그아웃
 	@GetMapping("/adminlogout")
 	public String adminLogout(HttpServletRequest request) {
-		System.out.println("LoginController()_adminLogOut 실행");
+		log.trace("LoginController()_adminLogOut 실행");
 		request.getSession().invalidate();
 		return "redirect:/index";
 	}
 	// 어드민 로그인 페이지 이동
 	@GetMapping("/adminLogin")
 	public String getAdminLogin() {
-		System.out.println("LoginController()_adminLogin 실행");
+		log.trace("LoginController()_adminLogin 실행");
 		return "adminLogin";
 	}
 	// 어드민 로그인
 	@PostMapping("/adminLogin")
 	public String postAdminLogin(HttpServletRequest request, RedirectAttributes redirect) {
-		System.out.println("★★★[boryeong]postAdminloginController★★★");
+		log.trace("★★★[boryeong]postAdminloginController★★★");
 		
 		String adminId = request.getParameter("id");
 		String adminPw = request.getParameter("password");

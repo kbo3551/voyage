@@ -33,8 +33,9 @@ public class MemberFilter implements Filter {
 		
 		 HttpSession session = req.getSession();
 		 if(session.getAttribute("loginMember") == null) { 
-				  res.sendRedirect(req.getContextPath()+"/login");
-				  return;
+			 req.setAttribute("msg", "로그인을 먼저 진행해주세요.");
+	    	 req.setAttribute("url", "redirect:/login");
+	    	 req.getRequestDispatcher(req.getContextPath()+"/alert").forward(req, res);
 		 }
 		
 		 chain.doFilter(req, res); 
