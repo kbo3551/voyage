@@ -26,7 +26,7 @@
         			// 답변 존재 => 수정 불가
         			if(valAnswerDate == null || valAnswerDate == undefined || valAnswerDate == ""){
      					if(valAnswerContent == null || valAnswerContent == undefined || valAnswerContent == ""){
-     						alert('문의글 수정 페이지로 이동합니다.');
+  							// 수정 페이지로 이동
      						location.href = '/modifyQ?qnaNo=' + $('#qnaNo').val();
      						return;
      					} else {
@@ -40,7 +40,7 @@
         				return;
         			}
         			// 수정하려는 회원이 해당 문의글을 단 회원이 아니면 이동 불가
-        			if()
+        			
         		});
         		// Del 버튼 눌렀을 때
         		$('#moveRemQBtn').click(function(){
@@ -49,7 +49,7 @@
         			// 답변 존재 => 수정 불가
         			if(valAnswerDate == null || valAnswerDate == undefined || valAnswerDate == ""){
      					if(valAnswerContent == null || valAnswerContent == undefined || valAnswerContent == ""){
-     						alert('문의글 삭제 페이지로 이동합니다.');
+     						// 삭제 페이지로 이동
      						location.href = '/romoveQ?qnaNo=' + $('#qnaNo').val();
      						return;
      					} else {
@@ -194,7 +194,7 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
                     	<!-- 원본 : Massage -->
-                        <h3 class="mb-40">Question </h3>
+                        <h3 class="mb-40">Question</h3>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">

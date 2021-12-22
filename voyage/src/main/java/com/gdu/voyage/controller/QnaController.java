@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.gdu.voyage.service.QnaService;
 import com.gdu.voyage.vo.Member;
 import com.gdu.voyage.vo.Qna;
+import com.gdu.voyage.vo.QnaAnswer;
 import com.gdu.voyage.vo.QnaForm;
 import com.gdu.voyage.vo.QnaImg;
 
@@ -31,27 +32,40 @@ public class QnaController {
 	
 	// Qna 게시판 목록 조회
 	@GetMapping("/qnaList")
-	public String qnaList(Model model, 
+	public String qnaList(Model model, HttpSession session,
 			@RequestParam(defaultValue="1") int currentPage,
 			@RequestParam(required = false) String qnaCategory) {
 		System.out.println("qnaListController() 실행");
 		Map<String, Object> map = qnaService.getQnaListByCategory(qnaCategory, currentPage, ROW_PER_PAGE);
+		// 로그인한 회원의 아이디, 닉네임을 가져오기 위해 해당 값을 세션에서 가져옴
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		// 디버그 코드
+		log.debug("★★★★★★★★★★★ [다원] qnaList_loginMember_Controller() debug" + loginMember.toString());
 		int[] navArray = qnaService.countPage(currentPage);
 		model.addAttribute("qnaList", map.get("qnaList"));
 		model.addAttribute("navArray", navArray);
 		model.addAttribute("lastPage", map.get("lastPage"));
 		model.addAttribute("currentPage", map.get("currentPage"));
+		model.addAttribute("totalCount", map.get("totalCount"));
+		model.addAttribute("loginMember", loginMember);
 		return "/templates_citylisting/qnaList";
 	}
 	// Qna 상세 내용
 	@GetMapping("/getQnaOne") 
-	public String getQnaOne(HttpSession session, Model model, int qnaNo) {
+	public String getQnaOne(HttpSession session, Model model, int qnaNo, String memberId) {
+		
 		System.out.println("getQnaOneController() 실행");
 		Member loginMember = (Member)session.getAttribute("loginMember");
-		log.debug(qnaNo + "★★★★★★★★★★★ [다원] qnaNo_Controller() debug");
+		log.debug(qnaNo + "★★★★★★★★★★★ [다원] getQnaOne_qnaNo_Controller() debug");
 		Qna qna = qnaService.getQnaOneAndAnswer(qnaNo);
-	    log.debug(qna + "★★★★★★★★★★★ [다원] qna_Controller() debug");
-	    model.addAttribute("qna", qna);
+		
+		QnaAnswer qnaAnswer = null;
+		
+	    log.debug(qna + "★★★★★★★★★★★ [다원] getQnaOne_qna_Controller() debug");
+	    model.addAttribute("memberId", memberId);
+	    model.addAttribute("qnaNo", qnaNo);
+	    
+	    
 	    model.addAttribute("loginMember", loginMember);
 		return "/templates_citylisting/getQnaOne";
 	}
@@ -63,26 +77,18 @@ public class QnaController {
 	}
 	// 질문 작성 post
 	@PostMapping("/addQ")
-	public String addQ(HttpServletRequest request, HttpSession session, QnaForm qnaForm, Qna qna, QnaImg qnaImg) throws Exception {
-		// 세션 가져옴
+	public String addQ(HttpSession session, QnaForm qnaForm, Qna qna, QnaImg qnaImg) throws Exception {
+		// memberId, memberNickname값을 세션에서 가져옴
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		String memberId = loginMember.getMemberId();
-		String memberNickname = request.getParameter("memberNickname");
-		String qnaCategory = request.getParameter("qnaCategory");
-		String qnaTitle = request.getParameter("qnaTitle");
-		String qnaContent = request.getParameter("qnaContent");
-		String qnaSecret = request.getParameter("qnaSecret");
-		
-		Qna q = new Qna();
-		q.setMemberId(memberId);
-		q.setMemberNickname(memberNickname);
-		q.setQnaCategory(qnaCategory);
-		q.setQnaTitle(qnaTitle);
-		q.setQnaContent(qnaContent);
-		q.setQnaSecret(qnaSecret);
-		log.debug(q.toString());
-		log.debug(qnaImg.toString());
-		qnaService.addQ(qnaForm, q, qnaImg);
+		String memberNickname = loginMember.getMemberNickname();
+		// qna에 받아온 값 셋팅
+		qna.setMemberId(memberId);
+		qna.setMemberNickname(memberNickname);
+		// 디버그 코드
+		log.debug("★★★★★★★★★★★ [다원] qna_Controller() debug" + qna.toString());
+		log.debug("★★★★★★★★★★★ [다원] qnaImg_Controller() debug" + qnaImg.toString());
+		qnaService.addQ(qnaForm, qna, qnaImg);
 		return "redirect:/qnaList?pageNo=1";
 	}
 	// 질문 수정

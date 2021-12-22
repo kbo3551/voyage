@@ -15,6 +15,12 @@
 			<id column="qna_answer_no" property="qnaAnswerNo"/>
 			<result column="answer_content" property="answerContent"/>
 		</collection>
+		<collection property="qnaImg" ofType="com.gdu.voyage.vo.QnaImg">
+			<id column="qna_image_no" property="qnaImgNo"/>
+			<result column="qna_image_name" property="qnaImgName"/>
+			<result column="qna_image_ext" property="qnaImgExt"/>
+			<result column="qna_image_size" property="qnaImgSize"/>
+		</collection>
 	</resultMap>
 	<!--  -->
 	<select id="selectMemberNickname" parameterType="String" resultType="String">
@@ -22,13 +28,14 @@
 			member_nickname
 		FROM qna
 		<where>
-			member_id = ${memberId}
+			member_id = #{memberId}
 		</where>
 	</select>
 	<!-- 질문 목록 조회 -->
 	<select id="selectQnaListByCategory" parameterType="com.gdu.voyage.vo.Qna" resultMap="resultQna">
 		SELECT
 			qna_no,
+			member_id,
 			member_nickname,
 			qna_category,
 			qna_title,
@@ -47,6 +54,7 @@
 	<!-- ISSUE : service에서 모든 값이 null로 찍힘-->
 	<select id="selectQnaOneAndAnswer" parameterType="int" resultMap="resultQna">
 		SELECT
+			member_id,
 			qna_no,
 			member_nickname,
 			qna_category,
@@ -58,8 +66,14 @@
 			a.qna_answer_no,
 			a.answer_content
 			-->
-		FROM qna<!-- LEFT JOIN qna_answer a 
-		ON q.qna_no = a.qna_no
+		FROM qna
+		<!-- 
+			LEFT JOIN qna_answer a 
+			ON q.qna_no = a.qna_no
+		-->
+		<!--
+			LEFT JOIN qna_image i
+			ON q.qna_no = i.qna_no 
 		-->
 		<where>
 			<!--  
@@ -100,6 +114,7 @@
 			qna_content = #{qnaContent},
 			update_date = NOW()
 		WHERE qna_no = #{qnaNo}
+		AND member_id = #{memberId}
 		AND member_nickname = #{memberNickname} 
 	</update>
 	
@@ -123,6 +138,14 @@
 			#{qnaImgSize}
 		)
 	</insert>
+	<!-- 이미지 삭제 -->
+	<delete id="removeQImg" parameterType="com.gdu.voyage.vo.QnaImg">
+		DELETE FROM qna_image(
+			WHERE qna_image_no = #{qnaImgNo} 
+			AND qna_no = #{qnaNo}
+		)
+	</delete>
+	
 	<!-- 페이징 -->
 	<select id="selectCountPage" resultType="int">
 		SELECT COUNT(*)FROM qna

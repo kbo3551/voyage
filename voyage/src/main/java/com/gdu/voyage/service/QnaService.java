@@ -35,10 +35,6 @@ public class QnaService {
 	// qnaContent, qnaSecret value => null...
 	// mapper까지는 출력했을 때 문제 없었고, service부터 null값 들어옴...
 	public Qna getQnaOneAndAnswer(int qnaNo) {
-		Qna qna = new Qna();
-		qna.setQnaNo(qnaNo);
-		qna.setMemberNickname(qnaMapper.selectQnaOneAndAnswer(qnaNo).getMemberNickname());
-		
 		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] selectQnaOne debug" + qnaMapper.selectQnaOneAndAnswer(qnaNo));
 		return qnaMapper.selectQnaOneAndAnswer(qnaNo);
 	}
@@ -46,7 +42,8 @@ public class QnaService {
 	public Map<String, Object> getQnaListByCategory(String qnaCategory, int currentPage, int rowPerPage){
 		// 매개변수 값 가공 
 		Map<String, Object> paramMap = new HashMap<>();
-
+		
+		
 		int beginRow = (currentPage - 1) * rowPerPage;
 		
 		paramMap.put("qnaCategory", qnaCategory);
@@ -66,14 +63,14 @@ public class QnaService {
 		}
 		returnMap.put("qnaList", qnaList);
 		returnMap.put("lastPage", lastPage);
+		returnMap.put("totalCount", totalCount);
 		return returnMap;
 	}
 	
 	// Qna 게시판 질문 수정
-	public Qna modifyQ(Qna qna, QnaImg qnaImg) {
-		log.debug(qna.toString() + "☆☆☆☆☆☆☆☆☆☆[다원] QnaService_modifyQ_Qna debug");
-		qnaMapper.modifyQ(qna);
-		return null;
+	public int modifyQ(Qna qna, QnaImg qnaImg) {
+		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_modifyQ_Qna debug" + qnaMapper.modifyQ(qna));
+		return qnaMapper.modifyQ(qna);
 	}
 	// Qna 게시판 질문 삭제
 	public int removeQ(Qna qna) {
