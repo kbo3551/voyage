@@ -187,7 +187,7 @@
 												<div class="form-group">
 													<h4>Price <small>(required)</small></h4>
 													<div class="input-group">
-													    <input type="number" class="form-control" name="accomRoom.accomPrice" id="accomPrice" style="height:34px;">
+													    <input type="number" class="form-control" name="accomRoom.accomRoomPrice" id="accomPrice" style="height:34px;">
 														<span class="input-group-text">원</span>
 													</div>
 												</div>
