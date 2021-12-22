@@ -42,10 +42,9 @@
                                 <div class="footer-tittle">
                                     <h4>Categories</h4>
                                     <ul>
-                                        <li><a href="${contextPath}/templates_citylisting/getActivityProduct">체험</a></li>
-                                        <li><a href="${contextPath}/templates_citylisting/getAccomProduct">숙소</a></li>
+                                        <li><a href="${contextPath}/templates_citylisting/setProductCategory">예약</a></li>
+                                        <li><a href="${contextPath}/templates_citylisting/setReviewCategory">후기</a></li>  
                                         <li><a href="#hashtag">해시태그</a></li>
-                                        <li><a href="#">후기</a></li>     
                                     </ul>
                                 </div>
                             </div>

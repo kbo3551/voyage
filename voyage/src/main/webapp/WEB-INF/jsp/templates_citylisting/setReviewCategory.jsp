@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>예약</title>
+        <title>후기</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="site.webmanifest">
@@ -84,9 +84,9 @@
                                 <span class="flaticon-drink"></span>
                             </div>
                             <div class="cat-cap">
-                                <h5><a href="${contextPath}/templates_citylisting/getActivityProduct">체험</a></h5>
-                                <p>인생의 전환점을 찾아보세요</p>
-                                <a href="${contextPath}/templates_citylisting/getActivityProduct">View Details</a>
+                                <h5><a href="${contextPath}/templates_citylisting/getActivityReview">체험</a></h5>
+                                <p>체험 후기</p>
+                                <a href="${contextPath}/templates_citylisting/getActivityReview">View Details</a>
                             </div>
                         </div>
                     </div>
@@ -96,9 +96,9 @@
                                 <span class="flaticon-bed"></span>
                             </div>
                             <div class="cat-cap">
-                                <h5><a href="${contextPath}/templates_citylisting/getAccomProduct">숙소</a></h5>
-                                <p>휴식이 필요하지 않으신가요?</p>
-                                <a href="${contextPath}/templates_citylisting/getAccomProduct">View Details</a>
+                                <h5><a href="${contextPath}/templates_citylisting/getAccomReview">숙소</a></h5>
+                                <p>숙소 후기</p>
+                                <a href="${contextPath}/templates_citylisting/getAccomReview">View Details</a>
                             </div>
                         </div>
                     </div>
