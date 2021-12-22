@@ -17,18 +17,25 @@
             <li class="sidebar-header">
                Pages
             </li>
+            <!-- 사용자 페이지 홈으로 -->
+            <li class="sidebar-item">
+               <a class="sidebar-link" href="${pageContext.request.contextPath}/index">
+                   	 <i class="align-middle" data-feather="home"></i> <span class="align-middle">사용자 페이지</span>
+                  </a>
+            </li>
+            <!-- 프로필 수정 -->
+            <li class="sidebar-item">
+               <a class="sidebar-link" href="${pageContext.request.contextPath}/admin/adminUpdate">
+                       <i class="align-middle" data-feather="user"></i> <span class="align-middle">정보&nbsp;수정</span>
+                  </a>
+            </li>
             <!-- 대시보드(차트표) -->
             <li class="sidebar-item active">
                <a class="sidebar-link" href="index.html">
                      <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                  </a>
             </li>
-            <!-- 프로필 -->
-            <li class="sidebar-item">
-               <a class="sidebar-link" href="pages-profile.html">
-                       <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
-                  </a>
-            </li>
+
          
          <!--    <li class="sidebar-item">
                <a class="sidebar-link" href="pages-sign-in.html">
