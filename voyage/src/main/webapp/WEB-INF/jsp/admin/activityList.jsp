@@ -17,6 +17,21 @@
 	<link href="${pageContext.request.contextPath}/admin/css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
+<!-- 눈누 - 한산스네오 레귤러 폰트 -->
+	<style type="text/css">
+	
+		@font-face {
+		    font-family: 'SpoqaHanSansNeo-Regular';
+		    	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		
+		body {
+			font-family: 'SpoqaHanSansNeo-Regular';
+		}
+
+	</style>
 <body>
 	<div class="wrapper">
     <!-- adminKit : 시작 -->
