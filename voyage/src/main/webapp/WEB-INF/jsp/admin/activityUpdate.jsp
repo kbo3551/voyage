@@ -39,35 +39,35 @@
 								<div class="clear"> 
                             		<div class="col-sm-5">
                                 		<div class="form-group">
-											<label>Activity No</label>
+											<label>체험 번호</label>
 											<input class="form-control" type="text" readonly="readonly" name="activityNo" value="${activity.activityNo}">
 										</div>
 										<div class="form-group">
-											<label>Host No</label>
+											<label>사업자 번호</label>
 											<input class="form-control" type="text" readonly="readonly" value="${activity.hostNo}">
 										</div>
 										<div class="form-group">
-											<label>Activity Name</label>
+											<label>체험 이름</label>
 											<input class="form-control" type="text" readonly="readonly" value="${activity.activityName}">
 										</div>
 										<div class="form-group">
-											<label>Activity Open Date</label>
+											<label>체험 여는 날짜</label>
 											<input class="form-control" type="text" readonly="readonly" value="${activity.activityOpenDate}">
 										</div>
 										<div class="form-group">
-											<label>Activity Close Date</label>
+											<label>체험 닫는 날짜</label>
 											<input class="form-control" type="text" readonly="readonly" value="${activity.activityCloseDate}">
 										</div>
 										<div class="form-group">
-											<label>Activity Price</label>
+											<label>체험 가격</label>
 											<input class="form-control" type="text" readonly="readonly" value="${activity.activityPrice}">
 										</div>
 										<div class="form-group">
-											<label>Activity Open Hour</label>
+											<label>체험 여는 시간</label>
 											<input class="form-control" type="text" readonly="readonly" value="${activity.activityOpenHour}">
 										</div>
 										<div class="form-group">
-											<label>Activity Close Hour</label>
+											<label>체험 닫는 시간</label>
 											<input class="form-control" type="text" readonly="readonly" value="${activity.activityCloseHour}">
 										</div>
 									</div>
@@ -82,18 +82,18 @@
 											<input class="form-control" type="text" readonly="readonly" value="${activity.activityMaxP}">
 										</div>
 										<div class="form-group">
-											<label>Activity Description</label>
+											<label>체험 내용</label>
 											<input class="form-control" type="text" readonly="readonly" value="${activity.activityDescription}">
 										</div>
 										<div class="form-group">
-											<label>Activity State</label>
+											<label>공개 여부</label>
 											<select name="activityState" id="activityState">
 					                            <option value="공개">공개</option>
 					                            <option value="비공개">비공개</option>
 											</select>
 										</div>
 										<div class="form-group">
-											<label>Activity State Admin</label>
+											<label>승인 여부</label>
 											<select name="activityStateAdmin" id="activityStateAdmin">
 					                           	<option value="승인대기">승인대기</option>
 					                          	<option value="승인완료">승인완료</option>
@@ -109,9 +109,11 @@
 											<label>Update Date</label>
 											<input class="form-control" type="text" readonly="readonly" value="${activity.updateDate}">
 										</div>
+										<br>
 										<div style="text-align: center;">
 	                                		<button class="btn btn-info" type="submit">수정하기</button>
 										</div>
+										<br>
 										</div>
 									</div>
 								</div>

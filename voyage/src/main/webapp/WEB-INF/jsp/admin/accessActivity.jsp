@@ -43,13 +43,13 @@
 								<table class="table table-hover my-0">
 									<thead>
 										<tr>
-											<th>Activity No</th>
-											<th>Activity Name</th>
-											<th>Activity OpenDate</th>
-											<th>Activity CloseDate</th>
-											<th>Activity Description</th>
-											<th>Activity State</th>
-											<th>Activity State Admin</th>
+											<th>체험 번호</th>
+											<th>체험 이름</th>
+											<th>체험 여는 날짜</th>
+											<th>체험 닫는 날짜</th>
+											<th>체험 내용</th>
+											<th>공개 여부</th>
+											<th>승인 여부</th>
 											<th>Create Date</th>
 											<th>Update Date</th>
 										</tr>

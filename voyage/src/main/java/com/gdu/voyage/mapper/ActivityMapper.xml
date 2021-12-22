@@ -177,34 +177,48 @@
 	<!-- 등록된 체험을 불러옴 list -->
 	<select id="selectActivityList" resultType="com.gdu.voyage.vo.Activity">
             SELECT 
-            activity_no as activityNo,
-            activity_name as activityName,
-            activity_open_date as activityOpenDate,
-            activity_close_date as activityCloseDate,
-            activity_description as activityDescription,
-            create_date as createDate,
-            update_date as updateDate
-            FROM activity
+	            activity_no as activityNo,
+	            activity_name as activityName,
+	            activity_open_date as activityOpenDate,
+	            activity_close_date as activityCloseDate,
+	            activity_description as activityDescription,
+	            create_date as createDate,
+	            update_date as updateDate
+            FROM 
+            	activity
+            LIMIT 
+      			#{beginRow}, #{rowPerPage}
     </select>
+    
+    <!-- 페이징 -->
+	<select id="selectCountPage" resultType="int"  parameterType="com.gdu.voyage.vo.Activity">
+		SELECT
+			COUNT(*)
+		FROM 
+			activity
+	</select>
     <!-- 체험번호에따른 체험 상세 목록 출력 One -->
     <select id="selectActivityOne" resultType="com.gdu.voyage.vo.Activity">
-            SELECT activity_no as activityNo,
-            host_no as HostNo,
-            activity_name as activityName,
-            activity_open_date as activityOpenDate,
-            activity_close_date as activityCloseDate,
-            activity_price as activityPrice,
-            activity_open_hour as activityOpenHour,
-            activity_close_hour as activityCloseHour,
-            activity_max_t as activityMaxT,
-            activity_max_p as activityMaxP,
-            activity_description as activityDescription,
-            activity_state as activityState,
-            activity_state_admin as activityStateAdmin,
-            create_date as createDate,
-            update_date as updateDate
-            FROM activity
-            WHERE activity_no = #{activity_no}
+            SELECT 
+            	activity_no as activityNo,
+	            host_no as HostNo,
+	            activity_name as activityName,
+	            activity_open_date as activityOpenDate,
+	            activity_close_date as activityCloseDate,
+	            activity_price as activityPrice,
+	            activity_open_hour as activityOpenHour,
+	            activity_close_hour as activityCloseHour,
+	            activity_max_t as activityMaxT,
+	            activity_max_p as activityMaxP,
+	            activity_description as activityDescription,
+	            activity_state as activityState,
+	            activity_state_admin as activityStateAdmin,
+	            create_date as createDate,
+	            update_date as updateDate
+            FROM 
+            	activity
+            WHERE
+           		activity_no = #{activity_no}
     </select>
     
     <!-- 등록된 체험 승인여부 수정 -->
@@ -219,17 +233,19 @@
     <!-- 승인완료된 체험을 불러옴 list -->
 	<select id="selectAccessActivity" resultType="com.gdu.voyage.vo.Activity">
             SELECT 
-            activity_no as activityNo,
-            host_no as hostNo,
-            activity_name as activityName,
-            activity_open_date as activityOpenDate,
-            activity_close_date as activityCloseDate,
-            activity_description as activityDescription,
-            activity_state as activityState,
-            activity_state_admin as activityStateAdmin,
-            create_date as createDate,
-            update_date as updateDate
-            FROM activity
-            WHERE activity_state_admin = '승인완료'
+	            activity_no as activityNo,
+	            host_no as hostNo,
+	            activity_name as activityName,
+	            activity_open_date as activityOpenDate,
+	            activity_close_date as activityCloseDate,
+	            activity_description as activityDescription,
+	            activity_state as activityState,
+	            activity_state_admin as activityStateAdmin,
+	            create_date as createDate,
+	            update_date as updateDate
+            FROM
+            	activity
+            WHERE
+            	activity_state_admin = '승인완료'
     </select>
 </mapper>

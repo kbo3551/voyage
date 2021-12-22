@@ -47,13 +47,13 @@
 								<table class="table table-hover my-0">
 									<thead>
 										<tr>
-											<th>Building No</th>
-											<th>Host No</th>
-											<th>Building Name</th>
-											<th>Building Description</th>
-											<th>Building Phone</th>
-											<th>Building State</th>
-											<th>Building State Admin</th>
+											<th>건물 번호</th>
+											<th>사업자 번호</th>
+											<th>건물 이름</th>
+											<th>건물 내용</th>
+											<th>건물 전화번호</th>
+											<th>공개 여부</th>
+											<th>승인 여부</th>
 											<th>create Date</th>
 											<th>update Date</th>
 										</tr>

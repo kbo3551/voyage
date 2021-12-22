@@ -36,56 +36,58 @@
 	
 									<h5 class="card-title mb-0">Update AccomBuilding</h5>
 								</div>
-								
-									<table class="table table-hover my-0">
-										<thead>
-											<tr>
-												<th>Building No</th>
-												<th>Host No</th>
-												<th>Building Name</th>
-												<th>Building Description</th>
-												<th>Building Phone</th>
-												<th>Building State</th>
-												<th>Building State Admin</th>
-												<th>create Date</th>
-												<th>update Date</th>
-											</tr>
-										</thead>
-									
-									<tbody>
-									<tr>
-									<td><input name="accomBuildingNo" id="accomBuildingNo" type="text" value="${accomBuilding.accomBuildingNo}" readonly="readonly"/></td>
-	                                
-	                                <td><input name="hostNo" id="hostNo" type="text" value="${accomBuilding.hostNo}" readonly="readonly"/></td>
-	                                
-	                                <td><input name="accomBuildingName" id="accomBuildingName" type="text" value="${accomBuilding.accomBuildingName}" readonly="readonly"/></td>
-	                                
-	                                <td><input name="accomBuildingDescription" id="accomBuildingDescription" type="text" value="${accomBuilding.accomBuildingDescription}" readonly="readonly"/></td>
-	                                
-	                                <td><input name="accomBuildingPhone" id="accomBuildingPhone" type="text" value="${accomBuilding.accomBuildingPhone}" readonly="readonly"/></td>
-	                                <td>
-                                		<select name="accomBuildingState" id="accomBuildingState">
-				                            <option value="공개">공개</option>
-				                            <option value="비공개">비공개</option>
-										</select>
-                                	</td>
-                                			
-                                	<td>
-                                		<select name="accomBuildingStateAdmin" id="accomBuildingStateAdmin">
-				                           	<option value="승인대기">승인대기</option>
-				                          	<option value="승인완료">승인완료</option>
-				                            <option value="점검">점검</option>
-				                            <option value="삭제">삭제</option>
-										</select>
-                                	</td>
-	                                <td><input name="createDate" id="createDate" type="text" value="${accomBuilding.createDate}" readonly="readonly"/></td>
-	                                
-	                                <td><input name="updateDate" id="updateDate" type="text" value="${accomBuilding.updateDate}" readonly="readonly"/></td>
-	                                </tr>
-									</tbody>
-									</table>
-									<div style="text-align: center;">
-	                                	<button class="btn btn-info" type="submit">수정하기</button>
+								<div class="clear"> 
+                            		<div class="col-sm-5">
+                                		<div class="form-group">
+											<label>건물 번호</label>
+											<input class="form-control" type="text" readonly="readonly" name="accomBuildingNo" value="${accomBuilding.accomBuildingNo}">
+										</div>
+										<div class="form-group">
+											<label>사업자 번호</label>
+											<input class="form-control" type="text" readonly="readonly" value="${accomBuilding.hostNo}">
+										</div>
+										<div class="form-group">
+											<label>건물 이름</label>
+											<input class="form-control" type="text" readonly="readonly" value="${accomBuilding.accomBuildingName}">
+										</div>
+										<div class="form-group">
+											<label>체험 내용</label>
+											<input class="form-control" type="text" readonly="readonly" value="${accomBuilding.accomBuildingDescription}">
+										</div>
+										<div class="form-group">
+											<label>건물 전화번호</label>
+											<input class="form-control" type="text" readonly="readonly" value="${accomBuilding.accomBuildingPhone}">
+										</div>
+										<div class="form-group">
+											<label>공개 여부</label>
+											<select name="accomBuildingState" id="accomBuildingState">
+					                            <option value="공개">공개</option>
+					                            <option value="비공개">비공개</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label>승인 여부</label>
+											<select name="accomBuildingStateAdmin" id="accomBuildingStateAdmin">
+					                           	<option value="승인대기">승인대기</option>
+					                          	<option value="승인완료">승인완료</option>
+					                            <option value="점검">점검</option>
+					                            <option value="삭제">삭제</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label>Create Date</label>
+											<input class="form-control" type="text" readonly="readonly" value="${accomBuilding.createDate}">
+										</div>
+										<div class="form-group">										
+											<label>Update Date</label>
+											<input class="form-control" type="text" readonly="readonly" value="${accomBuilding.updateDate}">
+										</div>
+										<br>
+										<div style="text-align: center;">
+	                                		<button class="btn btn-info" type="submit">수정하기</button>
+										</div>
+										<br>
+									</div>
 								</div>
 							</div>
 						</div>

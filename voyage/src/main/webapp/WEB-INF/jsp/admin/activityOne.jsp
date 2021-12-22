@@ -49,11 +49,11 @@
 								<table class="table table-hover my-0">
 									<thead>
 										<tr>
-											<th>ActivityNo</th>
-											<th>Host No</th>
-											<th>ActivityName</th>
-											<th>ActivityOpenDate</th>
-											<th>ActivityCloseDate</th>
+											<th>체험 번호</th>
+											<th>사업자 번호</th>
+											<th>체험 이름</th>
+											<th>체험 시작 날짜</th>
+											<th>체험 끝 날짜</th>
 										</tr>
 									</thead>
 										<tr>
@@ -66,9 +66,9 @@
 										
 									<thead>
 										<tr>
-											<th>ActivityPrice</th>
-											<th>ActivityOpenHour</th>
-											<th>ActivityCloseHour</th>
+											<th>체험 가격</th>
+											<th>체험 여는시간</th>
+											<th>체험 닫는시간</th>
 											<th>ActivityMaxT</th>
 											<th>ActivityMaxP</th>
 										<tr>
@@ -83,9 +83,9 @@
 									
 									<thead>
 										<tr>
-											<th>ActivityDescription</th>
-											<th>ActivityState</th>
-											<th>ActivityStateAdmin</th>
+											<th>체험 설명</th>
+											<th>공개 여부</th>
+											<th>승인 여부</th>
 											<th>CreateDate</th>
 											<th>UpdateDate</th>
 										</tr>

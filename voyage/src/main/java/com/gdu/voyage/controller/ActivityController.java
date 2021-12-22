@@ -1,6 +1,7 @@
 package com.gdu.voyage.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.ActivityService;
@@ -23,9 +23,9 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Transactional
 public class ActivityController {
+	private final int ROW_PER_PAGE = 10;
 	@Autowired
 	ActivityService activityService;
-	private Integer currentPage = 1;
 
 	// 사업자
 	@GetMapping("/host/addActivity")
@@ -52,13 +52,26 @@ public class ActivityController {
 
 	// 관리자
 	// activity 목록 조회
-	@RequestMapping("/admin/activityList")
-	public String getActivityList(Model model, @RequestParam(value = "pageNo", defaultValue = "1") int pageNo) {
-		currentPage = pageNo;
+	@GetMapping("/admin/activityList")
+	public String getActivityList(Model model,  @RequestParam(defaultValue = "1") int currentPage) {
+
 		log.debug("activityList 실행!!");
-		List<Activity> list = activityService.getActivityList(currentPage);
-		model.addAttribute("list", list);
-		return "/admin/activityList";
+		log.debug("**********[상훈]ActivityController"+currentPage);
+		
+		int beginRow = (currentPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
+		
+		Map<String, Object> map = activityService.getActivityList(currentPage, ROW_PER_PAGE);
+		// 값
+		model.addAttribute("beginRow", beginRow);
+		model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
+		model.addAttribute("activityList", map.get("activityList"));
+		model.addAttribute("lastPage", map.get("lastPage"));
+		model.addAttribute("currentPage", currentPage);
+		int pageNo = ((beginRow / 100) * 10 + 1);
+		log.debug("**********[상훈]ActivityController_pageNo" + pageNo);
+		model.addAttribute("pageNo", pageNo);
+		
+		return "admin/activityList";
 	}
 
 	// activity 상세목록 조회

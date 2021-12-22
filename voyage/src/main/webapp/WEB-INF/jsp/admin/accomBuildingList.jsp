@@ -42,25 +42,23 @@
 							<div class="card flex-fill">
 								<div class="card-header">
 	
-									<h5 class="card-title mb-0">Latest AccomBuilding</h5>
+									<h5 class="card-title mb-0">최근 숙소 목록</h5>
 								</div>
 								<table class="table table-hover my-0">
 									<thead>
 										<tr>
-											<th>Building No</th>
-											<th>Building Name</th>
-											<th>Building Description</th>
-											<th>Building State</th>
-											<th>Building State Admin</th>
-											<th>View Details</th>
+											<th>건물 번호</th>
+											<th>건물 이름</th>
+											<th>공개 여부</th>
+											<th>승인 여부</th>
+											<th>상세 내역</th>
 										</tr>
 									</thead>
 									<tbody> 
-										<c:forEach items="${list}" var="Accom" >
+										<c:forEach items="${accomBuildingList}" var="Accom" >
 											<tr>
 										        <td>${Accom.accomBuildingNo}</td>
 										        <td>${Accom.accomBuildingName}</td>
-										        <td>${Accom.accomBuildingDescription}</td>
 										        <td>${Accom.accomBuildingState}</td>
 										        <td>${Accom.accomBuildingStateAdmin}</td>
 										        <td><a href="${pageContext.request.contextPath}/admin/accomBuildingOne?accomBuildingNo=${Accom.accomBuildingNo}">상세 보기</a></td>
@@ -68,23 +66,39 @@
 									    </c:forEach>
 									</tbody>
 								</table>
-								<ul class="paging">
-								    <c:if test="${paging.prev}">
-								        <span><a href='<c:url value="/accomBuildingList?page=${paging.startPage-1}"/>'>이전</a></span>
-								    </c:if>
-								    <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
-								        <span><a href='<c:url value="/accomBuildingList?page=${num}"/>'>${num}</a></span>
-								    </c:forEach>
-								    <c:if test="${paging.next && paging.endPage>0}">
-								        <span><a href='<c:url value="/accomBuildingList?page=${paging.endPage+1}"/>'>다음</a></span>
-								    </c:if>
-								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
 			</main>
-	
+						<!-- 페이징 -->
+                        <div class="container">
+                           <ul class="nav justify-content-center bg-light">
+                              <c:if test="${beginRow > (ROW_PER_PAGE * 10)}">
+                                 <li><a href="/admin/accomBuildingList?currentPage=${pageNo-1}">&lt;</a></li>
+                              </c:if>
+                              <c:set var="doneLoop" value="false"></c:set>
+                              <c:forEach var="f" begin="${pageNo}" end="${pageNo + 9}">
+                                 <c:if test="${not doneLoop}">
+                                    <c:choose>
+                                       <c:when test="${currentPage == f}">
+                                          <li class="active"><span>${f}</span></li>
+                                       </c:when>
+                                       <c:otherwise>
+                                          <li><a class="nav-link active" href="/admin/accomBuildingList?currentPage=${f}">${f}</a></li>
+                                       </c:otherwise>
+                                    </c:choose>
+
+                                    <c:if test="${f == lastPage}">
+                                       <c:set var="doneLoop" value="true"></c:set>
+                                    </c:if>
+                                 </c:if>
+                              </c:forEach>
+                              <c:if test="${currentPage + 10 <= lastPage}">
+                                 <li><a class="nav-link active" href="/admin/accomBuildingList?currentPage=${pageNo+10}">&gt;</a></li>
+                              </c:if>
+                           </ul>
+                     </div>
     <!-- adminFooter : 시작 -->
     	<c:import url="partial\\\\adminFooter.jsp"/>
     <!-- adminFooter : 끝 -->
@@ -92,16 +106,6 @@
 	</div>
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/admin/js/app.js"></script>
-	<script>
-    function accomBuildingStateAdminSelect(){ 
-        // accomBuildingStateAdmin 선택값을 가져와서 벨류 저장
-        let accomBuildingStateAdmin = document.getaccomBuildingStateAdmin("accomBuildingStateAdmin"); 
-        let selectAccomBuildingStateAdmin = accomBuildingStateAdmin.options[accomBuildingStateAdmin.selectedIndex].value; 
-
-        location.replace("${pageContext.request.contextPath}/admin/accomBuildingList?accomBuildingStateAdmin="+selectAccomBuildingStateAdmin);
-    }
-</script>
-	
 </body>
 
 </html>

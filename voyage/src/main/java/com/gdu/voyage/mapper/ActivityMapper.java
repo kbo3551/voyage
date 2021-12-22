@@ -1,6 +1,7 @@
 package com.gdu.voyage.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,7 +14,7 @@ import com.gdu.voyage.vo.SpotAddress;
 @Mapper
 public interface ActivityMapper {
 	// 체험 조회 list
-	List<Activity> selectActivityList(int pageNo);
+	List<Activity> selectActivityList(Map<String, Object> map);
 	int selectCountPage();
 		
 	// 체험 조회 one

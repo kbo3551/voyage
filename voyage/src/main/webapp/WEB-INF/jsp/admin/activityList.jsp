@@ -38,29 +38,27 @@
 							<div class="d-flex align-content-start flex-wrap">
 								<div class="card-header">
 
-									<h5 class="card-title my-0">Latest Activity</h5>
+									<h5 class="card-title my-0">최근 체험 목록</h5>
 								</div>
 								<table class="table table-hover my-0">
 									<thead>
 										<tr>
-											<th>Activity No</th>
-											<th>Activity Name</th>
-											<th>Activity OpenDate</th>
-											<th>Activity CloseDate</th>
-											<th>Activity Description</th>
+											<th>체험 번호</th>
+											<th>체험 이름</th>
+											<th>체험 여는날짜</th>
+											<th>체험 닫는날짜</th>
 											<th>Create Date</th>
 											<th>Update Date</th>
 											<th>상세보기</th>
 										</tr>
 									</thead>
 									<tbody> 
-										<c:forEach items="${list}" var="Ac" >
+										<c:forEach items="${activityList}" var="Ac" >
 											<tr>
 										        <td>${Ac.activityNo}</td>
 										        <td>${Ac.activityName}</td>
 										        <td>${Ac.activityOpenDate}</td>
 										        <td>${Ac.activityCloseDate}</td>
-										        <td>${Ac.activityDescription}</td>
 										        <td>${Ac.createDate}</td>
 										        <td>${Ac.updateDate}</td>
 										        <td><a href="${pageContext.request.contextPath}/admin/activityOne?activityNo=${Ac.activityNo}">상세보기</a></td>
@@ -75,7 +73,34 @@
 					</div>
 				</div>
 			</main>
-	
+						<!-- 페이징 -->
+                        <div class="container">
+                           <ul class="nav justify-content-center bg-light">
+                              <c:if test="${beginRow > (ROW_PER_PAGE * 10)}">
+                                 <li><a href="/admin/accomBuildingList?currentPage=${pageNo-1}">&lt;</a></li>
+                              </c:if>
+                              <c:set var="doneLoop" value="false"></c:set>
+                              <c:forEach var="f" begin="${pageNo}" end="${pageNo + 9}">
+                                 <c:if test="${not doneLoop}">
+                                    <c:choose>
+                                       <c:when test="${currentPage == f}">
+                                          <li class="active"><span>${f}</span></li>
+                                       </c:when>
+                                       <c:otherwise>
+                                          <li><a class="nav-link active" href="/admin/accomBuildingList?currentPage=${f}">${f}</a></li>
+                                       </c:otherwise>
+                                    </c:choose>
+
+                                    <c:if test="${f == lastPage}">
+                                       <c:set var="doneLoop" value="true"></c:set>
+                                    </c:if>
+                                 </c:if>
+                              </c:forEach>
+                              <c:if test="${currentPage + 10 <= lastPage}">
+                                 <li><a class="nav-link active" href="/admin/accomBuildingList?currentPage=${pageNo+10}">&gt;</a></li>
+                              </c:if>
+                           </ul>
+                     </div>
     <!-- adminFooter : 시작 -->
     	<c:import url="partial\\\\adminFooter.jsp"/>
     <!-- adminFooter : 끝 -->

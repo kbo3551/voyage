@@ -2,7 +2,9 @@ package com.gdu.voyage.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,10 +47,32 @@ public class AccomBuildingService {
 	}
 	
 	// 숙소 등록 목록 조회
-		public List<AccomBuilding> getAccomBuildingList(int pageNo) {
-			pageNo = (pageNo - 1) * 10;
-			log.debug(accomBuildingMapper.selectAccomBuildingList(pageNo) + "***********[상훈] accomBuildingService");
-			return accomBuildingMapper.selectAccomBuildingList(pageNo);
+		public Map<String, Object> getAccomBuildingList(int currentPage, int rowPerPage){
+			
+			Map<String, Object> paraMap = new HashMap<>();
+			int beginRow = (currentPage-1) * rowPerPage;
+			
+			paraMap.put("beginRow", beginRow);
+			paraMap.put("rowPerPage", rowPerPage);
+			
+			List<AccomBuilding> accomBuildingList = accomBuildingMapper.selectAccomBuildingList(paraMap);
+			
+			Map<String, Object> returnMap = new HashMap<>();
+			
+			int lastPage = 0;
+			int totalCount = accomBuildingMapper.selectCountPage();
+			
+			lastPage = totalCount / rowPerPage;
+			
+			if(totalCount % rowPerPage !=0) {
+				lastPage += 1;
+			}
+			
+			returnMap.put("accomBuildingList", accomBuildingList);
+			returnMap.put("lastPage", lastPage);
+			
+			return returnMap;
+			
 		}
 	// 숙소 등록 목록 상세 조회 One
 		public AccomBuilding getAccomBuildingOne(int accomBuildingNo) {
@@ -221,23 +245,5 @@ public class AccomBuildingService {
 				accomBuildingMapper.insertAccomBuildingHashtag(hashtag);
 			}
 		}
-	}
-
-	// 페이징
-	public int[] countPage(int currentPage) {
-		int[] num = new int[10];
-		int listNum = accomBuildingMapper.selectCountPage();
-		listNum = (listNum / 10) + (listNum % 10);
-		for(int i=1; i<=10; i++) {
-			if(currentPage <= 10) {
-				num[i-1] = (currentPage / 10) + i;
-			} else {
-				if(listNum == ((currentPage / 10) * 10) + i) {
-					break;
-				}
-				num[i-1] = ((currentPage / 10) * 10) + i;
-			}
-		}
-		return num;
 	}
 }
