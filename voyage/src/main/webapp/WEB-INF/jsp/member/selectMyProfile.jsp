@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>마이페이지</title>
+<title>회원정보</title>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">

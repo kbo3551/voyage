@@ -36,7 +36,7 @@ public class HostController {
 	// 신청 대기중인 체험 목록
 	@GetMapping("/host/activityReqState")
 	public String getActivityReqState(HttpServletRequest request,Model model,HttpSession session) {
-		System.out.println("HostController() 실행");
+		log.trace("HostController() 실행");
 		
 		// host세션
     	Host hostSession = (Host)session.getAttribute("hostSession");
@@ -59,7 +59,7 @@ public class HostController {
 	// 신청 대기중인 숙소 목록
 	@GetMapping("/host/accomReqState")
 	public String getAccomReqState(HttpServletRequest request,Model model,HttpSession session) {
-		System.out.println("HostController() 실행");
+		log.trace("HostController() 실행");
 		
 		// host세션
     	Host hostSession = (Host)session.getAttribute("hostSession");
@@ -82,7 +82,7 @@ public class HostController {
 	// 사업자 myPage
 	@GetMapping("/host/hostIndex")
 	public String getHostIndex(HttpServletRequest request,Model model,HttpSession session) {
-    	System.out.println("HostController() 실행");
+    	log.trace("HostController() 실행");
     	
     	// host세션
     	Host hostSession = (Host)session.getAttribute("hostSession");
@@ -119,7 +119,7 @@ public class HostController {
 	// 사업자 신청 페이지 get
 	@GetMapping("/member/requestHost")
 	public String getRequestHost(HttpServletRequest request, Model model) {
-    	System.out.println("HostController() 실행");
+    	log.trace("HostController() 실행");
     	
     	Member loginMember = (Member) request.getSession().getAttribute("loginMember");
     	String memberId = loginMember.getMemberId();
@@ -136,7 +136,7 @@ public class HostController {
 	// 사업자 신청 페이지 post
 	@PostMapping("/member/requestHost")
 	public String postRequestHost(HttpServletRequest request, Model model) {
-    	System.out.println("HostController() 실행");
+    	log.trace("HostController() 실행");
     	
     	Member loginMember = (Member) request.getSession().getAttribute("loginMember");
     	String memberId = loginMember.getMemberId();

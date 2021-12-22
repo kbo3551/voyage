@@ -4,7 +4,7 @@
 <html>
 <head>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<title>프로필 수정</title>
+<title>프로필수정</title>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="">
@@ -100,7 +100,7 @@
         <!-- End page header --> 
 
         <!-- property area -->
-        <form name="UpdateMember" method="post" action="${contextPath}/member/myPage">
+        <form name="UpdateMember" method="post" action="${contextPath}/member/updateMyProfile">
 	        <div class="content-area user-profiel" style="background-color: #FCFCFC;">&nbsp;
 	            <div class="container">   
 	                <div class="row">

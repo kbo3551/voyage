@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gdu.voyage.service.LoginService;
@@ -17,7 +18,7 @@ import com.gdu.voyage.vo.Admin;
 import com.gdu.voyage.vo.Host;
 import com.gdu.voyage.vo.Member;
 import com.gdu.voyage.vo.MemberAddress;
- 
+
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -30,10 +31,18 @@ public class MemberController {
 	@Autowired LoginService loginService;
 	
 	
+	// 주문목록
+	@GetMapping("member/selectMyOrderList")
+	public String getSelectMyOrderList(Model model, @RequestParam(name = "category", defaultValue = "all") String category) {
+		log.trace("MemberController() 실행");
+		return "member/selectMyOrderList";
+	}
+	
+	
 	// PW 변경
 	@PostMapping("/member/updatePw")
 	public String postUpdatePw(HttpServletRequest request, Model model,HttpSession session){
-		System.out.println("MemberController() 실행");
+		log.trace("MemberController() 실행");
 		
 		// 우선 세션을 가져옴
 		Member loginMember = (Member)session.getAttribute("loginMember");
@@ -69,14 +78,13 @@ public class MemberController {
 	
 	@GetMapping("/member/updateNickname")
 	public String getUpdateNickname() {
-    	System.out.println("MemberController() 실행");
     	return "/member/updateNickname";
     }
 	
 	// 닉네임 변경
 	@PostMapping("/member/updateNickname")
 	public String postUpdateNickname(HttpServletRequest request, RedirectAttributes redirect, Model model,HttpSession session) {
-		System.out.println("MemberController() 실행");
+		log.trace("MemberController() 실행");
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		
 		String memberId = loginMember.getMemberId();
@@ -131,14 +139,14 @@ public class MemberController {
 	    	}
 	    }
 	    
-	    return "redirect:/member/myPage";
+	    return "redirect:/member/selectMyProfile";
 	}
 	
 	
 	// 비밀번호 체크
 	@GetMapping("/member/pwCheck")
 	public String getPwCheck(HttpServletRequest request,String route,Model model) {
-		System.out.println("MemberController() 실행");
+		log.trace("MemberController() 실행");
 		model.addAttribute("route", route);
 		return "/member/pwCheck";
 	}
@@ -146,7 +154,7 @@ public class MemberController {
 	// 분기
 	@PostMapping("/member/pwCheck")
 	public String postPwCheck(HttpServletRequest request, RedirectAttributes redirect, String password, Model model,HttpSession session) {
-		System.out.println("MemberController() 실행");
+		log.trace("MemberController() 실행");
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		
 		String memberId = loginMember.getMemberId();
@@ -169,7 +177,7 @@ public class MemberController {
 		
 		if(route.equals("1")) {
 			model.addAttribute("m", m);
-			return "/member/updateMyPage";
+			return "/member/updateMyProfile";
 		} else if (route.equals("2")) {
 			model.addAttribute("m", m);
 			model.addAttribute("route", route);
@@ -191,9 +199,9 @@ public class MemberController {
 	}
 	
 	// 회원정보 수정
-	@PostMapping("member/myPage")
+	@PostMapping("member/updateMyProfile")
 	public String postUpdateMember(HttpServletRequest request, RedirectAttributes redirect, Model model,HttpSession session) {
-		System.out.println("MemberController() 실행");
+		log.trace("MemberController() 실행");
 		Member loginMember = (Member) session.getAttribute("loginMember");
 
 	    String memberId = loginMember.getMemberId();
@@ -257,18 +265,18 @@ public class MemberController {
 	    	}
 	    }
 	    
-	    return "redirect:/member/myPage";
+	    return "redirect:/member/selectMyProfile";
 	 }
 	
-	@GetMapping("/member/myPage")
-	public String myPage() {
-    	System.out.println("MemberController() 실행");
-    	return "/member/myPage";
+	@GetMapping("/member/selectMyProfile")
+	public String selectMyProfile() {
+    	log.trace("MemberController() 실행");
+    	return "/member/selectMyProfile";
     }
 	
 	@GetMapping("/addMember")
 	public String getAddMember() {
-    	System.out.println("MemberController() 실행");
+    	log.trace("MemberController() 실행");
     	return "addMember";
     }
 
@@ -276,7 +284,7 @@ public class MemberController {
 	// 회원가입
 	@PostMapping("/addMember")
 	public String postAddMember(HttpServletRequest request, RedirectAttributes redirect) {
-		System.out.println("MemberController() 실행");
+		log.trace("MemberController() 실행");
 	    String memberId = request.getParameter("id");
 	    String memberPw = request.getParameter("password");
 	    String memberFirstName = request.getParameter("firstname");
