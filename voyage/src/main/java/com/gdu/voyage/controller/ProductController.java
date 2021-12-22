@@ -4,13 +4,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.ProductService;
 import com.gdu.voyage.vo.AccomBuilding;
+import com.gdu.voyage.vo.AccomBuildingSearch;
 import com.gdu.voyage.vo.Activity;
 
 import lombok.extern.slf4j.Slf4j;
@@ -45,7 +48,16 @@ public class ProductController {
 		return "/product/getAccomBuildingProductList";
 	}
 	
-	
+	@PostMapping("/getAccomProductList")
+	public String getAccomBuildingProduct(Model model, 
+										@RequestParam @Nullable String searchWord, 
+										@RequestParam @Nullable String searchAccomAddress, 
+										@RequestParam @Nullable List<String> searchFacility, 
+										@RequestParam @Nullable int searchReviewScore, 
+										@RequestParam @Nullable int searchPrice) {
+		
+		return "redirect:/getAccomBuildingProductList";
+	}
 	
 	@GetMapping("/getActivityProductList")
 	public String getActivityProduct(Model model, @RequestParam(defaultValue = "1") int currentPage) {

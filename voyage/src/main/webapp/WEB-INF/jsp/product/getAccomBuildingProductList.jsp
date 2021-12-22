@@ -90,89 +90,82 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Job Category Listing start -->
-                        <div class="category-listing mb-50">
-                            <!-- single one -->
-                            <div class="single-listing">
-                                <!-- input -->
-                                <div class="input-form">
-                                    <input type="text" placeholder="What are you finding?">
-                                </div>
-                                <!-- Select job items start -->
-                                <!-- Location -->
-                                <div class="small-section-tittle2 pt-15 pb-8">
-                                    <h4>Location</h4>
-                                </div>
-                                <div class="select-job-items1">
-                                    <select name="select1">
-                                        <option value="">인기 지역으로 떠나보세요!</option>
-                                    	<c:forEach items="${addressZipByBest }" var="aa">
-                                    		<option value="">${aa.accomAddressZip }</option>
-                                    	</c:forEach>
-                                    </select>
-                                </div>
-                                <!--  Select job items End-->
-                                <!-- Select job items start -->
-                                
-                                <!--  Select job items End-->
-                                <!-- select-Categories start -->
-                                <!-- Facilities -->
-                                <div class="small-section-tittle2 pt-80">
-                                    <h4>Facilities</h4>
-                                </div>
-                                <div class="select-Categories pt-10 pb-30" style="width: 50%; float: left;">
-                                	<c:forEach items="${facilityByBest}" var="af" varStatus="status">
-                                		<label class="container">${af.accomBuildingFacilityName }<span style="font-size: 0.8em; color: #03B92B; padding-left: 5%;">${af.accomBuildingFacilityBest }</span>
-	                                        <input type="checkbox" >
-	                                        <span class="checkmark"></span>
-	                                    </label>
-	                                    <c:if test="${status.count == 3 }">
-		                                    </div>
-		                                    <div class="select-Categories pt-10 pb-30" style="width: 50%; float: left;">
-	                                    </c:if>
-                                	</c:forEach>
-                                </div>
-                                <!-- select-Categories End -->
-                                <!-- Select job items start -->
-                                <div class="select-job-items2">
-                                    <select name="select2">
-                                        <option value="">별점</option>
-                                        <option value="">Dhaka- 1km</option>
-                                        <option value="">Dinajpur- 2km</option>
-                                        <option value="">Chittagong - 3km</option>
-                                    </select>
-                                </div>
-                                <!--  Select job items End-->
-                            </div>
-
-                            <div class="single-listing">
-                                <!-- Range Slider Start -->
-                                <aside class="left_widgets p_filter_widgets price_rangs_aside sidebar_box_shadow">
-                                    <div class="small-section-tittle2">
-                                        <h4 style="line-height: 2.1em; margin-bottom: -7%;">Price range</h4>
-                                    </div>
-                                    <div class="widgets_inner">
-                                        <div class="range_item">
-                                            <!-- <div id="slider-range"></div> -->
-                                            <input type="text" class="js-range-slider" value="" />
-                                            <div class="d-flex align-items-center">
-                                                <div class="price_text">
-                                                    <p>Price :</p>
-                                                </div>
-                                                <div class="price_value d-flex justify-content-center">
-                                                    <input type="text" class="js-input-from" id="amount" readonly />
-                                                    <span>to</span>
-                                                    <input type="text" class="js-input-to" id="amount" readonly />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </aside>
-                              <!-- Range Slider End -->
-                                 <a href="#" class="btn list-btn mt-20">Reset</a>
-                            </div>
-                        </div>
-                        <!-- Job Category Listing End -->
+                        
+                        <!-- selectAccomProductBySearch -->
+                        <form action="">
+	                        <div class="category-listing mb-50">
+	                            <div class="single-listing">
+	                                <!-- input -->
+	                                <div class="input-form">
+	                                    <input type="text" name="searchWord" placeholder="What are you finding?">
+	                                </div>
+	                                <!-- Location -->
+	                                <div class="small-section-tittle2 pt-15 pb-8">
+	                                    <h4>Location</h4>
+	                                </div>
+	                                <div class="select-job-items1">
+	                                    <select name="searchAccomAddress">
+	                                        <option value="">인기 지역으로 떠나보세요!</option>
+	                                    	<c:forEach items="${addressZipByBest }" var="aa">
+	                                    		<option value="${aa.accomAddressZip }">${aa.accomAddressZip }</option>
+	                                    	</c:forEach>
+	                                    </select>
+	                                </div> 
+	                                <!-- Facilities -->
+	                                <div class="small-section-tittle2 pt-80">
+	                                    <h4>Facilities</h4>
+	                                </div>
+	                                <div class="select-Categories pt-10 pb-30" style="width: 50%; float: left;">
+	                                	<c:forEach items="${facilityByBest}" var="af" varStatus="status">
+	                                		<label class="container">${af.accomBuildingFacilityName }<span style="font-size: 0.8em; color: #03B92B; padding-left: 5%;">${af.accomBuildingFacilityBest }</span>
+		                                        <input type="checkbox" name="searchFacility${status.count }" value="${af.accomBuildingFacilityName }">
+		                                        <span class="checkmark"></span>
+		                                    </label>
+		                                    <c:if test="${status.count == 3 }">
+			                                    </div>
+			                                    <div class="select-Categories pt-10 pb-30" style="width: 50%; float: left;">
+		                                    </c:if>
+	                                	</c:forEach>
+	                                </div>
+	                                <!-- Review -->
+	                                <div class="select-job-items2">
+	                                    <select name="searchReviewScore">
+	                                        <option value="">별점</option>
+	                                        <option value="">Dhaka- 1km</option>
+	                                        <option value="">Dinajpur- 2km</option>
+	                                        <option value="">Chittagong - 3km</option>
+	                                    </select>
+	                                </div>
+	                            </div>
+	
+	                            <div class="single-listing">
+	                                <!-- Price range -->
+	                                <aside class="left_widgets p_filter_widgets price_rangs_aside sidebar_box_shadow">
+	                                    <div class="small-section-tittle2">
+	                                        <h4 style="line-height: 2.1em; margin-bottom: -7%;">Price range</h4>
+	                                    </div>
+	                                    <div class="widgets_inner">
+	                                        <div class="range_item">
+	                                            <!-- <div id="slider-range"></div> -->
+	                                            <input type="text" class="js-range-slider" value="" name="searchPrice"/>
+	                                            <div class="d-flex align-items-center">
+	                                                <div class="price_text">
+	                                                    <p>Price :</p>
+	                                                </div>
+	                                                <div class="price_value d-flex justify-content-center">
+	                                                    <input type="text" class="js-input-from" id="amount" readonly />
+	                                                    <span>to</span>
+	                                                    <input type="text" class="js-input-to" id="amount" readonly />
+	                                                </div>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                </aside>
+<!-- 	                                 <a href="#" class="btn list-btn mt-20">Reset</a> -->
+									<button type="submit" class="btn list-btn mt-20">Search</button>
+	                            </div>
+	                        </div>
+                        </form>
                     </div>
                     
                     <!-- Right content -->
