@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.ProductService;
 import com.gdu.voyage.vo.AccomBuilding;
-import com.gdu.voyage.vo.AccomBuildingFacility;
+import com.gdu.voyage.vo.Activity;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,20 +26,21 @@ public class ProductController {
 	public String getAccomBuildingProduct(Model model, @RequestParam(defaultValue = "1") int currentPage) {
 		log.debug("[debug] ProductController.getAccomBuildingProduct 실행");
 
-		// 숙소-건물 목록 조회
+		// [사용자] 숙소-건물 목록 조회
 		List<AccomBuilding> accomBuilding = productService.getAccomBuildingList(currentPage, ROW_PER_PAGE);
 //		log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
 		model.addAttribute("accomBuilding", accomBuilding);
-		log.debug("accomBuilding ProductController.getAccomBuildingProduct accomBuilding : " + accomBuilding);
+		log.debug("[debug] ProductController.getAccomBuildingProduct accomBuilding : " + accomBuilding);
 		
-		// 숙소-건물 시설 인기 조회
+		// [사용자] 숙소-건물 시설 인기 조회
 		List<Map<String, Object>> facilityByBest = productService.getAccomBuildingFacilityByBest();
 		model.addAttribute("facilityByBest", facilityByBest);
-		log.debug("accomBuilding ProductController.getAccomBuildingProduct facilityByBest : " + facilityByBest);
-		// 숙소-건물 시설 인기 조회
+		log.debug("[debug] ProductController.getAccomBuildingProduct facilityByBest : " + facilityByBest);
+		
+		// [사용자] 숙소-건물 지역 인기 조회
 		List<Map<String, Object>> addressZipByBest = productService.getAccomAddressByBest();
 		model.addAttribute("addressZipByBest", addressZipByBest);
-		log.debug("accomBuilding ProductController.getAccomBuildingProduct addressZipByBest : " + addressZipByBest);
+		log.debug("[debug] ProductController.getAccomBuildingProduct addressZipByBest : " + addressZipByBest);
 		
 		return "/product/getAccomBuildingProductList";
 	}
@@ -47,9 +48,19 @@ public class ProductController {
 	
 	
 	@GetMapping("/getActivityProductList")
-	public String getActivityProduct() {
-		log.debug("ProductController.getActivityProduct 실행");
-	    
+	public String getActivityProduct(Model model, @RequestParam(defaultValue = "1") int currentPage) {
+		log.debug("[debug] ProductController.getActivityProduct 실행");
+		
+		// [사용자] 체험 목록 조회
+		List<Activity> activity = productService.getActivityList(currentPage, ROW_PER_PAGE);
+		model.addAttribute("activity", activity);
+		log.debug("[debug] ProductController.getActivityProduct activity : " + activity);
+
+		// [사용자] 체험 지역 인기 조회
+		List<Map<String, Object>> addressZipByBest = productService.getActivityAddressByBest();
+		model.addAttribute("addressZipByBest", addressZipByBest);
+		log.debug("[debug] ProductController.getActivityProduct addressZipByBest : " + addressZipByBest);
+		
 		return "/product/getActivityProductList";
 	}
 	

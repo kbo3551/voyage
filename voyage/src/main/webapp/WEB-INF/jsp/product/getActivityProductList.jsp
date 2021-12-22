@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
     <head>
@@ -70,7 +71,7 @@
                             <h2>체험 목록</h2>
                         </div>
                         <!--Hero form -->
-
+                    
                     </div>
                 </div>
             </div>
@@ -85,7 +86,7 @@
                         <div class="row">
                             <div class="col-12">
                                     <div class="small-section-tittle2 mb-45">
-                                    <h4>상세검색 옵션</h4>
+                                    <h4>Advanced Filter</h4>
                                 </div>
                             </div>
                         </div>
@@ -98,41 +99,44 @@
                                     <input type="text" placeholder="What are you finding?">
                                 </div>
                                 <!-- Select job items start -->
+                                <!-- Location -->
+                                <div class="small-section-tittle2 pt-15 pb-8">
+                                    <h4>Location</h4>
+                                </div>
                                 <div class="select-job-items1">
                                     <select name="select1">
-                                        <option value="">Choose categories</option>
-                                        <option value="">Category 1</option>
-                                        <option value="">Category 2</option>
-                                        <option value="">Category 3</option>
+                                        <option value="">인기 지역으로 떠나보세요!</option>
+                                    	<c:forEach items="${addressZipByBest }" var="aa">
+                                    		<option value="">${aa.activityAddressZip }</option>
+                                    	</c:forEach>
                                     </select>
                                 </div>
                                 <!--  Select job items End-->
                                 <!-- Select job items start -->
-                                <div class="select-job-items2">
-                                    <select name="select2">
-                                        <option value="">Location</option>
-                                        <option value="">Dhaka</option>
-                                        <option value="">Mirpur</option>
-                                        <option value="">Dannondi</option>
-                                    </select>
-                                </div>
+                                
                                 <!--  Select job items End-->
                                 <!-- select-Categories start -->
-                                <div class="select-Categories pt-140 pb-20">
-                                    <label class="container">Full Time
-                                        <input type="checkbox" >
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="container">Ratings
-                                        <input type="checkbox" checked="checked active">
-                                        <span class="checkmark"></span>
-                                    </label>
+                                <!-- Facilities -->
+                                <div class="small-section-tittle2 pt-80">
+                                    <h4>Facilities</h4>
                                 </div>
+<!--                                 <div class="select-Categories pt-10 pb-30" style="width: 50%; float: left;"> -->
+<%--                                 	<c:forEach items="${facilityByBest}" var="af" varStatus="status"> --%>
+<%--                                 		<label class="container">${af.accomBuildingFacilityName }<span style="font-size: 0.8em; color: #03B92B; padding-left: 5%;">${af.accomBuildingFacilityBest }</span> --%>
+<!-- 	                                        <input type="checkbox" > -->
+<!-- 	                                        <span class="checkmark"></span> -->
+<!-- 	                                    </label> -->
+<%-- 	                                    <c:if test="${status.count == 3 }"> --%>
+<!-- 		                                    </div> -->
+<!-- 		                                    <div class="select-Categories pt-10 pb-30" style="width: 50%; float: left;"> -->
+<%-- 	                                    </c:if> --%>
+<%--                                 	</c:forEach> --%>
+<!--                                 </div> -->
                                 <!-- select-Categories End -->
                                 <!-- Select job items start -->
                                 <div class="select-job-items2">
                                     <select name="select2">
-                                        <option value="">Area (km)</option>
+                                        <option value="">별점</option>
                                         <option value="">Dhaka- 1km</option>
                                         <option value="">Dinajpur- 2km</option>
                                         <option value="">Chittagong - 3km</option>
@@ -145,7 +149,7 @@
                                 <!-- Range Slider Start -->
                                 <aside class="left_widgets p_filter_widgets price_rangs_aside sidebar_box_shadow">
                                     <div class="small-section-tittle2">
-                                        <h4>Price range</h4>
+                                        <h4 style="line-height: 2.1em; margin-bottom: -7%;">Price range</h4>
                                     </div>
                                     <div class="widgets_inner">
                                         <div class="range_item">
@@ -170,6 +174,7 @@
                         </div>
                         <!-- Job Category Listing End -->
                     </div>
+                    
                     <!-- Right content -->
                     <div class="col-xl-8 col-lg-8 col-md-6">
                         <div class="row">
@@ -183,120 +188,48 @@
                         <div class="listing-details-area">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-lg-6 ">
-                                        <div class="single-listing mb-30">
-                                            <div class="list-img">
-                                                <img src="assets/img/gallery/list1.png" alt="">
-                                                <!-- <span>Open</span> -->
-                                            </div>
-                                            <div class="list-caption">
-                                                <span>Open</span>
-                                                <h3><a href="/getReviewOne">Saintmartine</a></h3>
-                                                <p>700/D, Kings road, Green lane, 85/ London</p>
-                                                <div class="list-footer">
-                                                    <ul>
-                                                        <li>+10 278 367 9823</li>
-                                                        <li>contact@midnight.com</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 ">
-                                        <div class="single-listing mb-30">
-                                            <div class="list-img">
-                                                <img src="assets/img/gallery/list2.png" alt="">
-                                                <!-- <span>Open</span> -->
-                                            </div>
-                                            <div class="list-caption">
-                                                <span>Open</span>
-                                                 <h3><a href="/getReviewOne">Saintmartine</a></h3>
-                                                <p>700/D, Kings road, Green lane, 85/ London</p>
-                                                <div class="list-footer">
-                                                    <ul>
-                                                        <li>+10 278 367 9823</li>
-                                                        <li>contact@midnight.com</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 ">
-                                        <div class="single-listing mb-30">
-                                            <div class="list-img">
-                                                <img src="assets/img/gallery/list3.png" alt="">
-                                                <!-- <span>Open</span> -->
-                                            </div>
-                                            <div class="list-caption">
-                                                <span>Open</span>
-                                                 <h3><a href="/getReviewOne">Saintmartine</a></h3>
-                                                <p>700/D, Kings road, Green lane, 85/ London</p>
-                                                <div class="list-footer">
-                                                    <ul>
-                                                        <li>+10 278 367 9823</li>
-                                                        <li>contact@midnight.com</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 ">
-                                        <div class="single-listing mb-30">
-                                            <div class="list-img">
-                                                <img src="assets/img/gallery/list4.png" alt="">
-                                                <!-- <span>Open</span> -->
-                                            </div>
-                                            <div class="list-caption">
-                                                <span>Open</span>
-                                                 <h3><a href="/getReviewOne">Saintmartine</a></h3>
-                                                <p>700/D, Kings road, Green lane, 85/ London</p>
-                                                <div class="list-footer">
-                                                    <ul>
-                                                        <li>+10 278 367 9823</li>
-                                                        <li>contact@midnight.com</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 ">
-                                        <div class="single-listing mb-30">
-                                            <div class="list-img">
-                                                <img src="assets/img/gallery/list5.png" alt="">
-                                                <!-- <span>Open</span> -->
-                                            </div>
-                                            <div class="list-caption">
-                                                <span>Open</span>
-                                                 <h3><a href="/getReviewOne">Saintmartine</a></h3>
-                                                <p>700/D, Kings road, Green lane, 85/ London</p>
-                                                <div class="list-footer">
-                                                    <ul>
-                                                        <li>+10 278 367 9823</li>
-                                                        <li>contact@midnight.com</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 ">
-                                        <div class="single-listing mb-30">
-                                            <div class="list-img">
-                                                <img src="assets/img/gallery/list6.png" alt="">
-                                                <!-- <span>Open</span> -->
-                                            </div>
-                                            <div class="list-caption">
-                                                <span>Open</span>
-                                                 <h3><a href="/getReviewOne">Saintmartine</a></h3>
-                                                <p>700/D, Kings road, Green lane, 85/ London</p>
-                                                <div class="list-footer">
-                                                    <ul>
-                                                        <li>+10 278 367 9823</li>
-                                                        <li>contact@midnight.com</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                	<c:forEach items="${activity}" var="ac">
+	                                    <div class="col-lg-6 " class="accomBox">
+	                                        <div class="single-listing mb-30">
+	                                            <div class="list-img">
+	                                                <img src="resources/image/accom_building/jang.jpg" alt="">
+	                                                <!-- <span>Open</span> -->
+	                                            </div>
+	                                            <div class="list-caption">
+	                                                <span>Open</span>
+	                                                <h3><a href="/getReviewOne">${ac.getActivityName()}</a></h3>
+														<p>
+<%-- 															<c:forEach items="${ab.accomBuildingFacilityList }" var="abf" varStatus="status"> --%>
+<%-- 																<c:choose> --%>
+<%-- 																 	<c:when test="${status.last}"> --%>
+<%-- 															            ${abf.getAccomBuildingFacilityName()} --%>
+<%-- 															        </c:when> --%>
+<%-- 															        <c:otherwise> --%>
+<%-- 															            ${abf.getAccomBuildingFacilityName()}, --%>
+<%-- 															        </c:otherwise> --%>
+<%-- 															    </c:choose> --%>
+<%-- 															</c:forEach> --%>
+														</p>
+	                                                <div class="list-footer">
+	                                                    <ul>
+	                                                        <li style="width: 60%; text-align: left;">
+		                                                        <c:choose>
+															        <c:when test="${fn:length(ac.getActivityDescription()) gt 35}">
+															        	<c:out value="${fn:substring(ac.getActivityDescription(), 0, 34)}···"></c:out>
+															        </c:when>
+															        <c:otherwise>
+																        <c:out value="${ac.getActivityDescription()}">
+																        </c:out>
+															        </c:otherwise>
+																</c:choose>
+															</li>
+	                                                        <li style="width: 40%; text-align: right;">${ac.getActivityPhone() }</li>
+	                                                    </ul>
+	                                                </div>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+                                	</c:forEach>
                                 </div>
                             </div>
                         </div>
@@ -308,12 +241,17 @@
                                     <div class="col-xl-12">
                                         <div class="single-wrap d-flex justify-content-center">
                                             <nav aria-label="Page navigation example">
-                                                <ul class="pagination justify-content-start">
-                                                    <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">03</a></li>
-                                                <li class="page-item"><a class="page-link" href="#"><span class="ti-angle-right"></span></a></li>
-                                                </ul>
+<%--                                             	<c:choose> --%>
+<%--                                             		<c:when test=""> --%>
+	                                            		<ul class="pagination justify-content-start">
+		                                                    <li class="page-item active"><a class="page-link" href="#">01</a></li>
+		                                                    <li class="page-item"><a class="page-link" href="#">02</a></li>
+		                                                    <li class="page-item"><a class="page-link" href="#">03</a></li>
+		                                                	<li class="page-item"><a class="page-link" href="#"><span class="ti-angle-right"></span></a></li>
+	                                                	</ul>
+<%--                                             		</c:when> --%>
+<%--                                             	</c:choose> --%>
+                                                
                                             </nav>
                                         </div>
                                     </div>
@@ -326,9 +264,9 @@
             </div>
         </div>
         <!-- listing-area Area End -->
-
+        
     </main>
-    
+
     <!--footer.jsp 시작  -->
     <c:import url="/WEB-INF/jsp/partial/footer.jsp"/>
     <!--footer.jsp 끝  -->
@@ -340,6 +278,10 @@
 
 
     <!-- JS here -->
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
+    
 		<!-- All JS Custom Plugins Link Here here -->
         <script src="${pageContext.request.contextPath}/assets/js/vendor/modernizr-3.5.0.min.js"></script>
 		<!-- Jquery, Popper, Bootstrap -->
@@ -372,6 +314,6 @@
 		<!-- Jquery Plugins, main Jquery -->	
         <script src="${pageContext.request.contextPath}/assets/js/plugins.js"></script>
         <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
-        
+      
     </body>
 </html>

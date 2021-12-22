@@ -52,6 +52,45 @@
 		<result column="COUNT(accom_address_zip)" property="accomAddressZipBest"/>
 	</resultMap>
 	
+	<!-- 체험 전체 목록 조회를 위한 resultMap -->
+	<resultMap type="com.gdu.voyage.vo.Activity" id="resultActivity">
+		<!-- building -->
+		<id column="activity_no" property="activityNo"/>
+		<result column="host_no" property="hostNo"/>
+		<result column="activity_name" property="activityName"/>
+		<result column="activity_description" property="activityDescription"/>
+		<result column="activity_phone" property="activityPhone"/>
+		<result column="activity_state" property="activityState"/>
+		<result column="activity_state_admin" property="activityStateAdmin"/>
+		<result column="create_date" property="createDate"/>
+		<result column="update_date" property="updateDate"/>
+		<!-- image -->
+		<collection property="activityImageList" ofType="com.gdu.voyage.vo.ActivityImage">
+			<id column="activity_image_no" property="activityImageNo"/>
+			<result column="activity_image_name" property="activityImageName"/>
+			<result column="activity_image_ext" property="activityImageExt"/>
+		</collection>
+		<!-- spot -->
+		<collection property="activitySpotList" ofType="com.gdu.voyage.vo.ActivitySpot">
+			<id column="activity_spot_no" property="activitySpotNo"/>
+		</collection>
+		<!-- address -->
+		<collection property="activityAddress" ofType="com.gdu.voyage.vo.ActivityAddress">
+			<id column="activity_address_no" property="activityAddressNo"/>
+			<result column="activity_address_zip" property="activityAddressZip"/>
+		</collection>
+		<!-- hashtag -->
+		<collection property="hashtagList" ofType="com.gdu.voyage.vo.Hashtag">
+			<id column="hashtag_no" property="hashtagNo"/>
+		</collection>
+	</resultMap>
+	
+	<!-- 체험 인기 지역 조회를 위한 resultMap -->
+	<resultMap type="map" id="resultActivityAddressByBest">
+		<result column="SUBSTRING_INDEX(activity_address_zip, ' ', 1)" property="activityAddressZip"/>
+		<result column="COUNT(activity_address_zip)" property="activityAddressZipBest"/>
+	</resultMap>
+	
 	<!-- 숙소-건물 목록 조회 -->
 	<select id="selectAccomBuildingList" resultMap="resultAccomBuilding">
 		SELECT                                      
@@ -122,7 +161,55 @@
 			0, 8;
 	</select>
 	
+	<!-- 체험 목록 조회 -->
+	<select id="selectActivityList" resultMap="resultActivity">
+		SELECT                                      
+			ac.activity_no,
+			ac.host_no,
+			ac.activity_name,
+			ac.activity_description, 
+			ac.activity_phone,
+			ac.activity_state,
+			ac.activity_state_admin,
+			ac.create_date,
+			ac.update_date,
+			i.activity_image_no,
+			i.activity_image_name,
+			i.activity_image_ext,
+			s.activity_spot_no,
+			a.activity_address_no,
+			a.activity_address_zip,
+			h.hashtag_no
+		FROM      
+			activity ac
+			LEFT JOIN activity_address a
+				ON ac.activity_no = a.activity_no
+			LEFT JOIN activity_image i
+				ON ac.activity_no = i.activity_no
+			LEFT JOIN activity_spot s
+				ON ac.activity_no = s.activity_no
+			LEFT JOIN hashtag h
+				ON ac.activity_no = h.iden_no                                    
+		WHERE                                      
+			activity_state_admin = '승인완료' AND activity_state = '공개'
+		ORDER BY
+			ac.update_date DESC;
+	</select>
 	
+	<!-- 체험-주소 인기 지역 조회 -->
+	<select id="selectActivityAddressByBest" resultMap="resultActivityAddressByBest">
+		SELECT
+			SUBSTRING_INDEX(activity_address_zip, ' ', 1),
+			COUNT(activity_address_zip)
+		FROM
+			activity_address
+		GROUP BY
+			SUBSTRING_INDEX(activity_address_zip, ' ', 1)
+		ORDER BY
+			COUNT(activity_address_zip) DESC
+		LIMIT
+			0, 8;
+	</select>
 	
 		<!-- [사용자] 숙소_건물 상세 페이지 출력 -->
 	<resultMap type="com.gdu.voyage.vo.AccomBuilding" id="resuliAccomBuilding">
@@ -169,38 +256,38 @@
 	</resultMap>
 
 	<select id="selectAccomBuildingOne" parameterType="int" resultMap="resuliAccomBuilding">
-	SELECT
-		a.accom_building_no,
-		a.host_no,
-		a.accom_building_name,
-		a.accom_building_description,
-		a.accom_building_phone,
-		a.accom_building_state,
-		aa.accom_address_postal_code,
-		aa.accom_address_zip,
-		aa.accom_address_detail,
-		ai.accom_building_image_name,
-		ai.accom_building_image_ext,
-		af.accom_building_facility_name,
-		aspot.accom_building_spot_name,
-		aspot.accom_building_spot_category,
-		aspot.accom_building_spot_description,
-		ah.hashtag
-	FROM
-		accom_building a
-		LEFT JOIN accom_address aa
-			ON a.accom_building_no = aa.accom_building_no
-		LEFT JOIN accom_building_image ai
-			ON a.accom_building_no = ai.accom_building_no
-		LEFT JOIN accom_building_facility af
-			ON a.accom_building_no = af.accom_building_no
-		LEFT JOIN accom_building_spot aspot
-			ON a.accom_building_no = aspot.accom_building_no
-		LEFT JOIN hashtag ah
-			ON a.accom_building_no = ah.iden_no
-	WHERE 
-		ah.table_name = '건물' 
-		AND a.accom_building_state_admin = '승인완료'
-		AND a.accom_building_no = #{accomBuildingNo}
+		SELECT
+			a.accom_building_no,
+			a.host_no,
+			a.accom_building_name,
+			a.accom_building_description,
+			a.accom_building_phone,
+			a.accom_building_state,
+			aa.accom_address_postal_code,
+			aa.accom_address_zip,
+			aa.accom_address_detail,
+			ai.accom_building_image_name,
+			ai.accom_building_image_ext,
+			af.accom_building_facility_name,
+			aspot.accom_building_spot_name,
+			aspot.accom_building_spot_category,
+			aspot.accom_building_spot_description,
+			ah.hashtag
+		FROM
+			accom_building a
+			LEFT JOIN accom_address aa
+				ON a.accom_building_no = aa.accom_building_no
+			LEFT JOIN accom_building_image ai
+				ON a.accom_building_no = ai.accom_building_no
+			LEFT JOIN accom_building_facility af
+				ON a.accom_building_no = af.accom_building_no
+			LEFT JOIN accom_building_spot aspot
+				ON a.accom_building_no = aspot.accom_building_no
+			LEFT JOIN hashtag ah
+				ON a.accom_building_no = ah.iden_no
+		WHERE 
+			ah.table_name = '건물' 
+			AND a.accom_building_state_admin = '승인완료'
+			AND a.accom_building_no = #{accomBuildingNo}
 	</select>
 </mapper>

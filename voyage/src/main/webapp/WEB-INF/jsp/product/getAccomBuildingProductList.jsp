@@ -212,8 +212,18 @@
 														</p>
 	                                                <div class="list-footer">
 	                                                    <ul>
-	                                                        <li>${ab.getAccomBuildingDescription() }</li>
-	                                                        <li style="width: 45%; text-align: right; margin-left: 3%;">${ab.getAccomBuildingPhone() }</li>
+	                                                    	<li style="width: 60%; text-align: left;">
+		                                                        <c:choose>
+															        <c:when test="${fn:length(ab.getAccomBuildingDescription()) gt 35}">
+															        	<c:out value="${fn:substring(ab.getAccomBuildingDescription(), 0, 34)}···"></c:out>
+															        </c:when>
+															        <c:otherwise>
+																        <c:out value="${ab.getAccomBuildingDescription() }">
+																        </c:out>
+															        </c:otherwise>
+																</c:choose>
+															</li>
+	                                                        <li style="width: 40%; text-align: right;">${ab.getAccomBuildingPhone() }</li>
 	                                                    </ul>
 	                                                </div>
 	                                            </div>
