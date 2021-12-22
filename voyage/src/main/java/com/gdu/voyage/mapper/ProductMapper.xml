@@ -121,4 +121,86 @@
 		LIMIT
 			0, 8;
 	</select>
+	
+	
+	
+		<!-- [사용자] 숙소_건물 상세 페이지 출력 -->
+	<resultMap type="com.gdu.voyage.vo.AccomBuilding" id="resuliAccomBuilding">
+		<id column="accom_building_no" property="accomBuildingNo"/>
+		<result column="host_no" property="hostNo"/>
+		<result column="accom_building_name" property="accomBuildingName"/>
+		<result column="accom_building_description" property="accomBuildingDescription"/>
+		<result column="accom_building_phone" property="accomBuildingPhone"/>
+		<result column="accom_building_state" property="accomBuildingState"/>
+		<result column="accom_building_state_admin" property="accomBuildingStateAdmin"/>
+		<result column="create_date" property="createDate"/>
+		<result column="update_date" property="updateDate"/>
+		<association property="accomAddress" javaType="com.gdu.voyage.vo.AccomAddress">
+			<id column="accom_address_no" property="accomAddressNo"/>
+			<result column="accom_address_postal_code" property="accomAddressPotalCode"/>
+			<result column="accom_address_zip" property="accomAddressZip"/>
+			<result column="accom_address_detail" property="accomAddressDetail"/>
+			<result column="create_date" property="createDate"/>
+			<result column="update_date" property="updateDate"/>
+		</association>
+		<collection property="accomBuildingImageList" ofType="com.gdu.voyage.vo.AccomBuildingImage" javaType="list">
+			<id column="accom_building_image_no" property="accomBuildingImageNo"/>
+			<result column="accom_building_image_name" property="accomBuildingImageName"/>
+			<result column="accom_building_image_ext" property="accomBuildingImageExt"/>
+			<result column="accom_building_image_size" property="accomBuildingImageSize"/>
+		</collection>
+		<collection property="accomBuildingFacilityList" ofType="com.gdu.voyage.vo.AccomBuildingFacility">
+			<id column="accom_building_facility_no" property="accomBuildingFacilityNo"/>
+			<result column="accom_building_facility_name" property="accomBuildingFacilityName"/>
+		</collection>
+		<collection property="accomBuildingSpotList" ofType="com.gdu.voyage.vo.AccomBuildingSpot">
+			<id column="accom_building_spot_no" property="accomBuildingSpotNo"/>
+			<result column="accom_building_spot_name" property="accomBuildingSpotName"/>
+			<result column="accom_building_spot_category" property="accomBuildingSpotCategory"/>
+			<result column="accom_building_spot_description" property="accomBuildingSpotDescription"/>
+		</collection>
+		<collection property="hashtagList" ofType="com.gdu.voyage.vo.Hashtag">
+			<id column="hashtag_no" property="hashtagNo"/>
+			<result column="iden_no" property="idenNo"/>
+			<result column="table_name" property="tableName"/>
+			<result column="hashtag" property="hashtag"/>
+			<result column="create_date" property="createDate"/>
+		</collection>
+	</resultMap>
+
+	<select id="selectAccomBuildingOne" parameterType="int" resultMap="resuliAccomBuilding">
+	SELECT
+		a.accom_building_no,
+		a.host_no,
+		a.accom_building_name,
+		a.accom_building_description,
+		a.accom_building_phone,
+		a.accom_building_state,
+		aa.accom_address_postal_code,
+		aa.accom_address_zip,
+		aa.accom_address_detail,
+		ai.accom_building_image_name,
+		ai.accom_building_image_ext,
+		af.accom_building_facility_name,
+		aspot.accom_building_spot_name,
+		aspot.accom_building_spot_category,
+		aspot.accom_building_spot_description,
+		ah.hashtag
+	FROM
+		accom_building a
+		LEFT JOIN accom_address aa
+			ON a.accom_building_no = aa.accom_building_no
+		LEFT JOIN accom_building_image ai
+			ON a.accom_building_no = ai.accom_building_no
+		LEFT JOIN accom_building_facility af
+			ON a.accom_building_no = af.accom_building_no
+		LEFT JOIN accom_building_spot aspot
+			ON a.accom_building_no = aspot.accom_building_no
+		LEFT JOIN hashtag ah
+			ON a.accom_building_no = ah.iden_no
+	WHERE 
+		ah.table_name = '건물' 
+		AND a.accom_building_state_admin = '승인완료'
+		AND a.accom_building_no = #{accomBuildingNo}
+	</select>
 </mapper>
