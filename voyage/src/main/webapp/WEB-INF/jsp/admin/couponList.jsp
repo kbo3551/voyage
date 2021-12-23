@@ -75,12 +75,12 @@
                                  <tr>
                                  	<td width="10%">${c.couponNo}</td>
                                     <td width="15%">${c.couponName}</td>
-                                    <td>${c.couponTerms}</td>
+                                    <td >${c.couponTerms}</td>
                                     <td>${c.couponDiscount}</td>
                                     <td>${c.deadline}</td>
                                     <td>${c.couponState}</td>
                                     <td>${c.createDate}</td>
-									<td><a href="${pageContext.request.contextPath}/">상세보기</a></td>
+									<td style=" height: 60px; text-align:left;"><a href="${pageContext.request.contextPath}/">상세보기</a></td>
                                  </tr>
                               </c:forEach>
                            </tbody>
@@ -89,6 +89,7 @@
                   </div>
                </div>
             </div>
+            <div align="right" style="height: 100px;"><a class="btn btn-finish btn-primary" href="${pageContext.request.contextPath}/admin/addCoupon" class="btn">쿠폰 추가</a></div>
          </main>
            <!-- 페이징 -->
              <div class="container">
