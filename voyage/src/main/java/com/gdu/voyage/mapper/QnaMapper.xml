@@ -2,8 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.QnaMapper">
 
-	<!-- resultMap -->
+	<!-- resultMap Here-->
+	<!-- 전체 질문 목록 -->
 	<resultMap type="com.gdu.voyage.vo.Qna" id="resultQna">
+		<!-- Question -->
 		<id column="qna_no" property="qnaNo"/>
 		<result column="member_nickname" property="memberNickname"/>
 		<result column="qna_category" property="qnaCategory"/>
@@ -11,10 +13,7 @@
 		<result column="qna_secret" property="qnaSecret"/>
 		<result column="update_date" property="updateDate"/>
 		<result column="create_date" property="createDate"/>
-		<collection property="qnaAnswer" ofType="com.gdu.voyage.vo.QnaAnswer">
-			<id column="qna_answer_no" property="qnaAnswerNo"/>
-			<result column="answer_content" property="answerContent"/>
-		</collection>
+		<!-- Img -->
 		<collection property="qnaImg" ofType="com.gdu.voyage.vo.QnaImg">
 			<id column="qna_image_no" property="qnaImgNo"/>
 			<result column="qna_image_name" property="qnaImgName"/>
@@ -22,7 +21,31 @@
 			<result column="qna_image_size" property="qnaImgSize"/>
 		</collection>
 	</resultMap>
-	<!--  -->
+	<!-- 질문 내용 상세 조회 -->
+	<resultMap  type="com.gdu.voyage.vo.Qna" id="resultQnaOne">
+		<!-- Question -->
+		<id column="qna_no" property="qnaNo"/>
+		<result column="member_nickname" property="memberNickname"/>
+		<result column="qna_category" property="qnaCategory"/>
+		<result column="qna_title" property="qnaTitle"/>
+		<result column="qna_content" property="qnaContent"/>
+		<result column="qna_secret" property="qnaSecret"/>
+		<result column="update_date" property="updateDate"/>
+		<result column="create_date" property="createDate"/>
+		<!-- Answer -->
+		<association property="qnaAnswer" javaType="com.gdu.voyage.vo.QnaAnswer">
+			<id column="qna_answer_no" property="qnaAnswerNo"/>
+			<result column="answer_content" property="answerContent"/>
+		</association>
+		<!-- Img -->
+		<collection property="qnaImg" ofType="com.gdu.voyage.vo.QnaImg">
+			<id column="qna_image_no" property="qnaImgNo"/>
+			<result column="qna_image_name" property="qnaImgName"/>
+			<result column="qna_image_ext" property="qnaImgExt"/>
+			<result column="qna_image_size" property="qnaImgSize"/>
+		</collection>
+	</resultMap>
+	<!-- resultMap End -->
 	<select id="selectMemberNickname" parameterType="String" resultType="String">
 		SELECT
 			member_nickname
@@ -52,25 +75,22 @@
 	</select>
 	<!-- 질문 내용 상세 조회 -->
 	<!-- ISSUE : service에서 모든 값이 null로 찍힘-->
-	<select id="selectQnaOneAndAnswer" parameterType="int" resultMap="resultQna">
+	<select id="selectQnaOneAndAnswer" parameterType="int" resultMap="resultQnaOne">
 		SELECT
-			member_id,
-			qna_no,
-			member_nickname,
-			qna_category,
-			qna_title,
-			qna_content,
-			create_date,
-			update_date
-			<!--
+			q.qna_no,
+			q.member_id,
+			q.member_nickname,
+			q.qna_category,
+			q.qna_title,
+			q.qna_content,
+			q.create_date,
+			q.update_date
 			a.qna_answer_no,
 			a.answer_content
-			-->
-		FROM qna
-		<!-- 
+		FROM 
+			qna q
 			LEFT JOIN qna_answer a 
-			ON q.qna_no = a.qna_no
-		-->
+				ON q.qna_no = a.qna_no
 		<!--
 			LEFT JOIN qna_image i
 			ON q.qna_no = i.qna_no 
@@ -81,7 +101,7 @@
 				a.qna_answer_no = #{qnaAnswerNo}
 			</if>
 			-->
-			qna_no = #{qnaNo}
+			q.qna_no = #{qnaNo}
 		</where>
 	</select>
 	<!-- 질문 등록 -->

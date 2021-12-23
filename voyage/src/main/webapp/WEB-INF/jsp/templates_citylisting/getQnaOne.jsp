@@ -39,7 +39,6 @@
         				$('#answerCreateDate').focus();
         				return;
         			}
-        			// 수정하려는 회원이 해당 문의글을 단 회원이 아니면 이동 불가
         			
         		});
         		// Del 버튼 눌렀을 때
@@ -235,7 +234,7 @@
                     		<div class="row">
                     			<div class="col-sm-6">
                                     <div class="form-group">
-                                    	Date : <input class="form-control error" name="createDate" id="answerCreateDate" type="text" value="${qnaAnswer.createDate}"readonly="readonly">
+                                    	No : <input class="form-control error" name="qnaAnswerNo" id="qnaAnswerNo" type="text" value="${qnaAnswer.qnaAnswerNo}"readonly="readonly">
                                     </div>
                                 </div>
                                 <div class="col-12">

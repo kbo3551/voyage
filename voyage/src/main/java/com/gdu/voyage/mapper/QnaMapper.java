@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.gdu.voyage.vo.Qna;
 import com.gdu.voyage.vo.QnaAnswer;
+import com.gdu.voyage.vo.QnaForm;
 import com.gdu.voyage.vo.QnaImg;
 
 @Mapper
@@ -20,8 +21,6 @@ public interface QnaMapper {
 	int selectCountPage();
 	// 목록 상세 내용
 	Qna selectQnaOneAndAnswer(int qnaNo);
-	// memberId를 매개로 memberNickname select
-	String selectMemberNickname(Qna qna);
 	
 	//[Member] Only member part
 	// 질문 수정
@@ -29,13 +28,11 @@ public interface QnaMapper {
 	// 질문 삭제
 	int removeQ(Qna qna);
 	// 질문 추가
-	int addQ(Qna qna);
+	int addQ(QnaForm qnaForm);
 	
 	//[Member] Image part
 	// 이미지 추가
 	int addQImg(QnaImg qnaImg);
-	// 이미지 수정
-	int modifyQImg(QnaImg qnaImg);
 	// 이미지 삭제
 	int removeQImg(QnaImg qnaImg);
 	

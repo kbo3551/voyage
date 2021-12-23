@@ -35,7 +35,7 @@ public class QnaController {
 	public String qnaList(Model model, HttpSession session,
 			@RequestParam(defaultValue="1") int currentPage,
 			@RequestParam(required = false) String qnaCategory) {
-		System.out.println("qnaListController() 실행");
+		log.debug("qnaListController() 실행");
 		Map<String, Object> map = qnaService.getQnaListByCategory(qnaCategory, currentPage, ROW_PER_PAGE);
 		// 로그인한 회원의 아이디, 닉네임을 가져오기 위해 해당 값을 세션에서 가져옴
 		Member loginMember = (Member)session.getAttribute("loginMember");
@@ -60,7 +60,7 @@ public class QnaController {
 	@GetMapping("/getQnaOne") 
 	public String getQnaOne(HttpSession session, Model model, int qnaNo, String memberId) {
 		
-		System.out.println("getQnaOneController() 실행");
+		log.debug("getQnaOneController() 실행");
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		log.debug(qnaNo + "★★★★★★★★★★★ [다원] getQnaOne_qnaNo_Controller() debug");
 		Qna qna = qnaService.getQnaOneAndAnswer(qnaNo);
@@ -80,39 +80,64 @@ public class QnaController {
 	 	if(loginMember.getMemberLevel() == 2) {
 	 		return "/admin/adminQnaOne";
 	 	} else {
-	 		return "/templates_citylisting/getQnaOne";
+	 		// 비밀글 기능
+	 		// 비회원인 경우
+	 		if(loginMember == null && qna.getQnaSecret().equals("비밀글")) {
+	 			return "redirect:/login";
+	 			// 로그인했지만 작성자가 아닌 경우 
+	 		} else if(!qna.getMemberNickname().equals(loginMember.getMemberNickname())) {
+	 			return "redirect:/qnaList";
+	 			// 그 외...
+	 		} else {
+	 			return "/templates_citylisting/getQnaOne";
+	 		}
 	 	}
 	}
 	// [Member] 질문 작성 get
 	@GetMapping("/addQ")
 	public String addQ() {
-		System.out.println("addQuestionController() 실행");
+		log.debug("addQuestionController() 실행");
 		return "/templates_citylisting/addQ";
 	}
 	// [Member] 질문 작성 post
 	@PostMapping("/addQ")
-	public String addQ(HttpSession session, QnaForm qnaForm, Qna qna, QnaImg qnaImg) throws Exception {
+	public String addQ(HttpServletRequest request, QnaForm qnaForm) throws Exception {
 		// memberId, memberNickname값을 세션에서 가져옴
-		Member loginMember = (Member) session.getAttribute("loginMember");
+		Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 		String memberId = loginMember.getMemberId();
 		String memberNickname = loginMember.getMemberNickname();
 		// qna에 받아온 값 셋팅
-		qna.setMemberId(memberId);
-		qna.setMemberNickname(memberNickname);
+		qnaForm.getQna().setMemberId(memberId);
+		qnaForm.getQna().setMemberNickname(memberNickname);
 		// 디버그 코드
-		log.debug("★★★★★★★★★★★ [다원] qna_Controller() debug" + qna.toString());
-		log.debug("★★★★★★★★★★★ [다원] qnaImg_Controller() debug" + qnaImg.toString());
-		qnaService.addQ(qnaForm, qna, qnaImg);
+		log.debug("★★★★★★★★★★★ [다원] addQ_qnaForm_Controller() debug" + qnaForm.toString());
+		// 이미지 파일 절대 경로 설정
+		String realPath = request.getServletContext().getRealPath("resources/image/qna//");
+		
+		qnaService.addQ(qnaForm, realPath);
+		
 		return "redirect:/qnaList?pageNo=1";
 	}
 	// [Member] 질문 수정
 	@GetMapping("/modifyQ")
-	public String modifyQ(Model model, int qnaNo) {
-		System.out.println("modifyQuestionController() 실행");
+	public String modifyQ(HttpSession session, Model model, int qnaNo) {
+		log.debug("modifyQuestionController() 실행");
+		Member loginMember = (Member)session.getAttribute("loginMember");
 		Qna qna = qnaService.getQnaOneAndAnswer(qnaNo);
 		model.addAttribute("qna", qna);
-		return "/templates_citylisting/modifyQ";
+		// 비밀글 기능
+		// 비회원인 경우
+		if(loginMember == null && qna.getQnaSecret().equals("비밀글")) {
+			return "redirect:/login";
+		// 로그인했지만 작성자가 아닌 경우 
+		} else if(!qna.getMemberNickname().equals(loginMember.getMemberNickname())) {
+			return "redirect:/qnaList";
+		// 그 외...
+		} else {
+			return "/templates_citylisting/modifyQ";
+		}
 	}
+
 	@PostMapping("/modifyQ")
 	public String modifyQ(Qna qna, QnaImg qnaImg) {
 		log.debug("★★★★★★★★★★★ [다원] qna_modifyQ_Controller() debug" + qnaService.modifyQ(qna, qnaImg));
@@ -121,15 +146,38 @@ public class QnaController {
 	}
 	// [Member] 질문 삭제
 	@GetMapping("/removeQ")
-	public String removeQ(Model model, int qnaNo) {
-		System.out.println("removeQuestionController() 실행");
+	public String removeQ(HttpSession session, Model model, int qnaNo) {
+		log.debug("removeQuestionController() 실행");
+		Member loginMember = (Member)session.getAttribute("loginMember");
 		Qna qna = qnaService.getQnaOneAndAnswer(qnaNo);
 		model.addAttribute("qna", qna);
-		return ("/templates_citylisting/removeQ");
+		// 비밀글 기능
+		// 비회원인 경우
+		if(loginMember == null && qna.getQnaSecret().equals("비밀글")) {
+			return "redirect:/login";
+		// 로그인했지만 작성자가 아닌 경우 
+		} else if(!qna.getMemberNickname().equals(loginMember.getMemberNickname())) {
+			return "redirect:/qnaList";
+		// 그 외...
+		} else {
+			return ("/templates_citylisting/removeQ");
+		}
 	}
-	@PostMapping("removeQ")
+		
+	@PostMapping("/removeQ")
 	public String removeQ(Qna qna) {
 		qnaService.removeQ(qna);
+		return "redirect:/qnaList?pageNo=1";
+	}
+	// [Admin] 답변 작성
+	@GetMapping("/admin/addA")
+	public String addA(QnaAnswer qnaAnswer) {
+		log.debug("addAnswerController() 실행");
+		return "/admin/addA";
+	}
+	@PostMapping("/admin/addA")
+	public String addAnswer(QnaAnswer qnaAnswer) {
+		qnaService.addA(qnaAnswer);
 		return "redirect:/qnaList?pageNo=1";
 	}
 }
