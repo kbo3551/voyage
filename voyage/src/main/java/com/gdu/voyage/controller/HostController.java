@@ -53,7 +53,7 @@ public class HostController {
     	// 신청 대기중인 숙소 맵으로 받아옴
     	Map<String, Object> reqMap = activityService.selectReqActivityListByHost(page, ROW_PER_PAGE, hostNo);
     	
-    	
+    	model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
     	model.addAttribute("beginRow", beginRow);
 		model.addAttribute("activityReqList", reqMap.get("activityReqList"));
 		model.addAttribute("lastPage", reqMap.get("lastPage"));
@@ -81,8 +81,8 @@ public class HostController {
     	
     	// 신청 대기중인 숙소 맵으로 받아옴
     	Map<String, Object> reqMap = accomBuildingService.selectReqAccomBuildingListByHost(page, ROW_PER_PAGE,hostNo);
-
-
+    	
+    	model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
     	model.addAttribute("beginRow", beginRow);
 		model.addAttribute("accomBuildingReqList", reqMap.get("accomBuildingReqList"));
 		model.addAttribute("lastPage", reqMap.get("lastPage"));

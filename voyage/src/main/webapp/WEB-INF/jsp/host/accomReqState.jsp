@@ -185,8 +185,7 @@
 		                           </ul>
 		                        </div>
 							</c:if>
-							
-							
+
 							
                         	<div class="col-sm-20 col-sm-offset-1" style="text-align: right;">
                             	<br>
