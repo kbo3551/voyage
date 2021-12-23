@@ -86,7 +86,7 @@
 				                                            <li><a href="${contextPath}/member/selectMyOrderList">주문목록</a></li>
 				                                            <li><a href="${contextPath}/member/selectMyInterest">관심상품</a></li>
 				                                            <li><a href="${contextPath}/member/coupon">쿠폰</a></li>
-				                                            <li><a href="${contextPath}/member/chat">채팅</a></li>
+				                                            <li><a href="${contextPath}/member/chat" onClick="window.open(this.href, '', 'width=450px, height=750px'); return false;">채팅</a></li>
 				                                            <li><a href="${contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
@@ -100,7 +100,7 @@
 				                                            <li><a href="${contextPath}/member/selectMyOrderList">주문목록</a></li>
 				                                            <li><a href="${contextPath}/member/selectMyInterest">관심상품</a></li>
 				                                            <li><a href="${contextPath}/member/coupon">쿠폰</a></li>
-				                                            <li><a href="${contextPath}/member/chat">채팅</a></li>
+				                                            <li><a href="${contextPath}/member/chat" onClick="window.open(this.href, '', 'width=450px, height=750px'); return false;">채팅</a></li>
 				                                            <li><a href="${contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
@@ -114,7 +114,7 @@
 				                                            <li><a href="${contextPath}/member/selectMyOrderList">주문목록</a></li>
 				                                            <li><a href="${contextPath}/member/selectMyInterest">관심상품</a></li>
 				                                            <li><a href="${contextPath}/member/coupon">쿠폰</a></li>
-				                                            <li><a href="${contextPath}/member/chat">채팅</a></li>
+				                                            <li><a href="${contextPath}/member/chat" onClick="window.open(this.href, '', 'width=450px, height=750px'); return false;">채팅</a></li>
 				                                            <li><a href="${contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
@@ -128,7 +128,7 @@
 				                                            <li><a href="${contextPath}/member/selectMyOrderList">주문목록</a></li>
 				                                            <li><a href="${contextPath}/member/selectMyInterest">관심상품</a></li>
 				                                            <li><a href="${contextPath}/member/coupon">쿠폰</a></li>
-				                                            <li><a href="${contextPath}/member/chat">채팅</a></li>
+				                                            <li><a href="${contextPath}/member/chat" onClick="window.open(this.href, '', 'width=450px, height=750px'); return false;">채팅</a></li>
 				                                            <li><a href="${contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
