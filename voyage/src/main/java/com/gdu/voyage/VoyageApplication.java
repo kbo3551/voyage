@@ -18,7 +18,7 @@ public class VoyageApplication implements WebSocketMessageBrokerConfigurer{
 	public static void main(String[] args) {
 		SpringApplication.run(VoyageApplication.class, args);
 	}
-	// 클라이언트가 연결할 수 있도록 맵핑
+	// 클라이언트가 연결할 수 있도록 맵핑 
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 		// SockJS 연결주소 : "/websocket"
