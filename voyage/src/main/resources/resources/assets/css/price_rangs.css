@@ -65,6 +65,14 @@
         .irs-slider.type_last {
             z-index: 2;
         }
+        span.move {
+            position: absolute;
+            color: #FF3D1C;
+            font-size: 0.8em;
+            bottom: 100%;
+            padding-right: 0 !important;
+            left: -90% !important;
+        }
 
     .irs-min {
         position: absolute; display: block;

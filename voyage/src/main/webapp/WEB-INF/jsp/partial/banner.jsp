@@ -140,15 +140,17 @@
                                 <div id="hashtag">
                                     <div id="search__box">
                                         <div class="quest_box" >
-                                            <div class="search-box">
-                                                <div class="input-form">
-                                                    <input type="text" id="word" onkeyup="search(this);" placeholder="해시태그를 입력해주세요">
-                                                </div>
-                                                <div class="hashtag-search-form">
-                                                    <button type="button" id="btn_search">Search</button>
-                            						<button id="hashtagSearchParam" value="도넛맨 미안해 마이크 못줘서 미안해">돌 맞은 개구리</button>
-                                                </div>
-                                            </div>
+                                        	<form action="/getAccomProductList" method="post">
+	                                            <div class="search-box">
+	                                                <div class="input-form">
+	                                                    <input type="text" name="searchWord" id="word" onkeyup="search(this);" placeholder="해시태그를 입력해주세요">
+	                                                </div>
+	                                                <div class="hashtag-search-form">
+	                                                    <button type="submit" id="btn_search">Search</button>
+	                            						<button id="hashtagSearchParam" value="도넛맨 미안해 마이크 못줘서 미안해">돌 맞은 개구리</button>
+	                                                </div>
+	                                            </div>
+	                                        </form>
                                             <ul id="hashtagList"></ul> <!-- hashtag 검색 제시어가 나타나는 영역 -->
                                         </div>
                                     </div>

@@ -1,5 +1,7 @@
 package com.gdu.voyage.controller;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -48,14 +50,34 @@ public class ProductController {
 	}
 	
 	@PostMapping("/getAccomProductList")
-	public String getAccomBuildingProduct(Model model, 
+	public String getAccomBuildingProduct(Model model,
 										@RequestParam @Nullable String searchWord, 
-										@RequestParam @Nullable String searchAccomAddress, 
-										@RequestParam @Nullable List<String> searchFacility, 
-										@RequestParam @Nullable int searchReviewScore, 
-										@RequestParam @Nullable int searchPrice) {
+										@RequestParam @Nullable String searchAccomAddress,
+										@RequestParam @Nullable List<String> searchFacilityList,
+										@RequestParam (defaultValue = "1") int searchReviewScore,
+										@RequestParam (defaultValue = "1") String searchPrice
+										) {
+		List<String> searchPriceList = Arrays.asList(searchPrice.split(";"));
+		log.debug("[debug] ProductController.getAccomBuildingProduct searchWord : " + searchWord);
+		log.debug("[debug] ProductController.getAccomBuildingProduct searchAccomAddress : " + searchAccomAddress);
+		log.debug("[debug] ProductController.getAccomBuildingProduct searchFacilityList : " + searchFacilityList);
+		log.debug("[debug] ProductController.getAccomBuildingProduct searchReviewScore : " + searchReviewScore);
+		log.debug("[debug] ProductController.getAccomBuildingProduct searchPrice : " + searchPriceList);
 		
-		return "redirect:/getAccomBuildingProductList";
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("searchWord", searchWord);
+		paramMap.put("searchAccomAddress", searchAccomAddress);
+		paramMap.put("searchFacilityList", searchFacilityList);
+		paramMap.put("searchReviewScore", searchReviewScore);
+		paramMap.put("searchPriceList", searchPriceList);
+		
+		// [사용자] 숙소-건물 목록 검색 조회
+		List<AccomBuilding> accomBuilding = productService.getAccomBuildingListBySearch(paramMap);
+//				log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
+		model.addAttribute("accomBuilding", accomBuilding);
+		log.debug("[debug] ProductController.getAccomBuildingProduct accomBuilding : " + accomBuilding);
+				
+		return "/product/getAccomBuildingProductList";
 	}
 	
 	@GetMapping("/getActivityProductList")

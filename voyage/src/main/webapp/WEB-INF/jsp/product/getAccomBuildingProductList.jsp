@@ -92,7 +92,7 @@
                         </div>
                         
                         <!-- selectAccomProductBySearch -->
-                        <form action="">
+                        <form action="/getAccomProductList" method="post">
 	                        <div class="category-listing mb-50">
 	                            <div class="single-listing">
 	                                <!-- input -->
@@ -118,7 +118,7 @@
 	                                <div class="select-Categories pt-10 pb-30" style="width: 50%; float: left;">
 	                                	<c:forEach items="${facilityByBest}" var="af" varStatus="status">
 	                                		<label class="container">${af.accomBuildingFacilityName }<span style="font-size: 0.8em; color: #03B92B; padding-left: 5%;">${af.accomBuildingFacilityBest }</span>
-		                                        <input type="checkbox" name="searchFacility${status.count }" value="${af.accomBuildingFacilityName }">
+		                                        <input type="checkbox" name="searchFacility" value="${af.accomBuildingFacilityName }">
 		                                        <span class="checkmark"></span>
 		                                    </label>
 		                                    <c:if test="${status.count == 3 }">
@@ -130,10 +130,13 @@
 	                                <!-- Review -->
 	                                <div class="select-job-items2">
 	                                    <select name="searchReviewScore">
-	                                        <option value="">별점</option>
-	                                        <option value="">Dhaka- 1km</option>
-	                                        <option value="">Dinajpur- 2km</option>
-	                                        <option value="">Chittagong - 3km</option>
+	                                        <option>별점</option>
+	                                        <option value="0">0</option>
+	                                        <option value="1">1</option>
+	                                        <option value="2">2</option>
+	                                        <option value="3">3</option>
+	                                        <option value="4">4</option>
+	                                        <option value="5">5</option>
 	                                    </select>
 	                                </div>
 	                            </div>
@@ -307,6 +310,17 @@
 		<!-- Jquery Plugins, main Jquery -->	
         <script src="${pageContext.request.contextPath}/assets/js/plugins.js"></script>
         <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+        
+<!--          <script type="text/javascript"> --> -->
+       	
+//          var amount = $('.js-input-to').val();
+//          console.log("amount : " + amount);
+// //       	 $('[name="searchPrice"]').val().append(amount);
+     	
+//       	 $('input[name=searchPrice]').attr('value',amount);
+     	
+//          console.log("amount : " + amount);
+<!--          </script> --> -->
       
     </body>
 </html>

@@ -137,7 +137,7 @@
         '<span class="irs-shadow shadow-from"></span>' +
         '<span class="irs-shadow shadow-to"></span>' +
         '<span class="irs-slider from"></span>' +
-        '<span class="irs-slider to"></span>';
+        '<span class="irs-slider to"><span class="move">move!</span></span>';
 
     var disable_html =
         '<span class="irs-disable-mask"></span>';
@@ -1468,7 +1468,7 @@
                 if (this.labels.p_from_left + this.labels.p_from_fake >= this.labels.p_to_left) {
                     this.$cache.from[0].style.visibility = "hidden";
                     this.$cache.to[0].style.visibility = "hidden";
-                    this.$cache.single[0].style.visibility = "visible";
+                    this.$cache.single[0].style.visibility = "hidden";
 
                     if (this.result.from === this.result.to) {
                         if (this.target === "from") {
@@ -1483,7 +1483,7 @@
                     } else {
                         this.$cache.from[0].style.visibility = "hidden";
                         this.$cache.to[0].style.visibility = "hidden";
-                        this.$cache.single[0].style.visibility = "visible";
+                        this.$cache.single[0].style.visibility = "hidden";
                         max = Math.max(single_left, to_left);
                     }
                 } else {
@@ -2387,7 +2387,7 @@ $range.ionRangeSlider({
     min: min,
     max: max,
     from: 0,
-    to: 500,
+    to: 0,
   prefix: 'tk. ',
     onStart: updateInputs,
     onChange: updateInputs,

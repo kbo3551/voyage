@@ -48,6 +48,15 @@ public class ProductService {
 		return addressZipByBest;
 	}
 		
+	// [사용자] 숙소-건물 목록 검색 조회
+	public List<AccomBuilding> getAccomBuildingListBySearch(Map<String, Object> param) {
+		log.debug("[debug] ProductService.getAccomBuildingListBySearch param : " + param);
+		
+		List<AccomBuilding> accomBuildingList = productMapper.selectAccomBuildingListBySearch(param);
+		
+		log.debug("[debug] ProductService.getAccomBuildingList accomBuildingList : " + accomBuildingList);
+		return accomBuildingList;
+	}
 		
 	// [사용자] 숙소_건물 상세 페이지 출력
 	public AccomBuilding getAccombuildingOne (int accomBuildingNo) {

@@ -161,6 +161,53 @@
 			0, 8;
 	</select>
 	
+	<!-- 숙소-건물 목록 검색 조회 -->
+	<select id="selectAccomBuildingListBySearch" parameterType="Map" resultMap="resultAccomBuilding">
+		SELECT                                      
+			b.accom_building_no,
+			b.host_no,
+			b.accom_building_name,
+			b.accom_building_description, 
+			b.accom_building_phone,
+			b.accom_building_state,
+			b.accom_building_state_admin,
+			b.create_date,
+			b.update_date,
+			f.accom_building_facility_no,
+			f.accom_building_no,
+			f.accom_building_facility_name,
+			i.accom_building_image_no,
+			i.accom_building_image_name,
+			i.accom_building_image_ext,
+			s.accom_building_spot_no,
+			a.accom_address_no,
+			a.accom_address_zip,
+			h.hashtag_no,
+			h.hashtag
+		FROM      
+			accom_building b
+			LEFT JOIN accom_address a
+				ON b.accom_building_no = a.accom_building_no
+			LEFT JOIN accom_building_image i
+				ON b.accom_building_no = i.accom_building_no
+			LEFT JOIN accom_building_facility f
+				ON b.accom_building_no = f.accom_building_no
+			LEFT JOIN accom_building_spot s
+				ON b.accom_building_no = s.accom_building_no
+			LEFT JOIN hashtag h
+				ON b.accom_building_no = h.iden_no                                    
+		WHERE                                      
+			accom_building_state_admin = '승인완료' AND accom_building_state = '공개'
+			AND
+			<if test="#{searchWord} != null">
+				h.hashtag LIKE '%${searchWord}%' OR
+				b.accom_building_name LIKE '%${searchWord}%' OR
+				b.accom_building_description LIKE '%${searchWord}%'			
+			</if>			
+		ORDER BY
+			b.update_date DESC;
+	</select>
+	
 	<!-- 체험 목록 조회 -->
 	<select id="selectActivityList" resultMap="resultActivity">
 		SELECT                                      
