@@ -30,7 +30,7 @@ public class QnaController {
 	private Integer currentPage = 1;
 	private final int ROW_PER_PAGE = 10;
 	
-	// Qna 게시판 목록 조회
+	// [Member] Qna 게시판 목록 조회
 	@GetMapping("/qnaList")
 	public String qnaList(Model model, HttpSession session,
 			@RequestParam(defaultValue="1") int currentPage,
@@ -48,9 +48,15 @@ public class QnaController {
 		model.addAttribute("currentPage", map.get("currentPage"));
 		model.addAttribute("totalCount", map.get("totalCount"));
 		model.addAttribute("loginMember", loginMember);
-		return "/templates_citylisting/qnaList";
+		// 관리자 계정이면 관리자 Q&A 전체 목록 페이지로 이동
+		// 그 외 회원이면 일반 Q&A 전체 목록 페이지로 이동
+		if(loginMember.getMemberLevel() == 2) {
+			return "/admin/adminQnaList";
+		} else {
+			return "/templates_citylisting/qnaList";
+		}
 	}
-	// Qna 상세 내용
+	//[Member] Qna 상세 내용
 	@GetMapping("/getQnaOne") 
 	public String getQnaOne(HttpSession session, Model model, int qnaNo, String memberId) {
 		
@@ -62,20 +68,28 @@ public class QnaController {
 		QnaAnswer qnaAnswer = null;
 		
 	    log.debug(qna + "★★★★★★★★★★★ [다원] getQnaOne_qna_Controller() debug");
-	    model.addAttribute("memberId", memberId);
-	    model.addAttribute("qnaNo", qnaNo);
-	    
-	    
+	    /*
+	     * 	model.addAttribute("memberId", memberId);
+	    	model.addAttribute("qnaNo", qnaNo);
+	    */
+	    model.addAttribute("qna", qna);
 	    model.addAttribute("loginMember", loginMember);
-		return "/templates_citylisting/getQnaOne";
+	    
+	    // 관리자 계정이면 관리자 Q&A 내용 상세 보기 페이지로 이동
+	 	// 그 외 회원이면 일반 Q&A 내용 상세 보기 페이지로 이동
+	 	if(loginMember.getMemberLevel() == 2) {
+	 		return "/admin/adminQnaOne";
+	 	} else {
+	 		return "/templates_citylisting/getQnaOne";
+	 	}
 	}
-	// 질문 작성 get
+	// [Member] 질문 작성 get
 	@GetMapping("/addQ")
 	public String addQ() {
 		System.out.println("addQuestionController() 실행");
 		return "/templates_citylisting/addQ";
 	}
-	// 질문 작성 post
+	// [Member] 질문 작성 post
 	@PostMapping("/addQ")
 	public String addQ(HttpSession session, QnaForm qnaForm, Qna qna, QnaImg qnaImg) throws Exception {
 		// memberId, memberNickname값을 세션에서 가져옴
@@ -91,7 +105,7 @@ public class QnaController {
 		qnaService.addQ(qnaForm, qna, qnaImg);
 		return "redirect:/qnaList?pageNo=1";
 	}
-	// 질문 수정
+	// [Member] 질문 수정
 	@GetMapping("/modifyQ")
 	public String modifyQ(Model model, int qnaNo) {
 		System.out.println("modifyQuestionController() 실행");
@@ -105,7 +119,7 @@ public class QnaController {
 		qnaService.modifyQ(qna, qnaImg);
 		return "redirect:/getQnaOne?qnaNo=" + qna.getQnaNo();
 	}
-	// 질문 삭제
+	// [Member] 질문 삭제
 	@GetMapping("/removeQ")
 	public String removeQ(Model model, int qnaNo) {
 		System.out.println("removeQuestionController() 실행");

@@ -145,7 +145,41 @@
 			AND qna_no = #{qnaNo}
 		)
 	</delete>
-	
+	<!-- 관리자 페이지 Q&A 답변 : 답변 없는 질문 list 조회 -->
+	<select id="selectNoneAnswerQ" parameterType="com.gdu.voyage.vo.Qna" resultMap="resultQna">
+		SELECT
+			qna_no,
+			member_id,
+			member_nickname,
+			qna_category,
+			qna_title,
+			qna_content,
+			qna_secret,
+			create_date,
+			update_date
+		FROM qna ORDER BY update_date DESC
+		<where>
+			qna_no NOT IN (SELECT qna_no FROM qna_answer)
+			<if test="qnaCategory != null">
+				qna_category = #{qnaCategory}
+			</if>
+		</where>
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	<!-- 관리자 페이지 Q&A 답변 : Qna답변 작성 -->
+	<insert id="addA" parameterType="com.gdu.voyage.vo.QnaAnswer">
+		INSERT INTO qna_answer(
+			qna_no,
+			admin_id,
+			answer_content,
+			create_date,
+		) VALUES (
+			#{qnaNo},
+			#{adminId},
+			#{answerContent},
+			NOW()
+		)
+	</insert>
 	<!-- 페이징 -->
 	<select id="selectCountPage" resultType="int">
 		SELECT COUNT(*)FROM qna

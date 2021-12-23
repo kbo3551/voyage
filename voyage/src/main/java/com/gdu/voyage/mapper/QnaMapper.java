@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.gdu.voyage.vo.Qna;
+import com.gdu.voyage.vo.QnaAnswer;
 import com.gdu.voyage.vo.QnaImg;
 
 @Mapper
@@ -37,5 +38,10 @@ public interface QnaMapper {
 	int modifyQImg(QnaImg qnaImg);
 	// 이미지 삭제
 	int removeQImg(QnaImg qnaImg);
-
+	
+	// [Admin] Only Admin part
+	// 답변 없는 질문 list
+	List<Qna> selectNoneAnswerQ(Map<String, Object> param);
+	// 답변 추가
+	int addA(QnaAnswer qnaAnswer);
 }
