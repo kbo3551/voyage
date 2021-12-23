@@ -154,34 +154,36 @@
 							</div>
 							
 							<!-- 숙소 페이징 -->
-	                        <div class="clear">
-	                           <ul class="nav justify-content-center">
-	                              <c:if test="${accomBeginRow > (ROW_PER_PAGE * 10)}">
-	                                 <li><a href="${contextPath}/host/hostIndex?accomPage=${accomPageNo-1}&activityPage=${activityPage}">&lt;</a></li>
-	                              </c:if>
-	                              <c:set var="doneLoop" value="false"></c:set>
-	                              <c:forEach var="f" begin="${accomPageNo}" end="${accomPageNo + 9}">
-	                                 <c:if test="${not doneLoop}">
-	                                    <c:choose>
-	                                       <c:when test="${accomPage == f}">
-	                                          <li class="active"><span>${f}</span></li>
-	                                       </c:when>
-	                                       <c:otherwise>
-	                                          <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${f}&activityPage=${activityPage}">${f}</a></li>
-	                                       </c:otherwise>
-	                                    </c:choose>
-	
-	                                    <c:if test="${f == accomLastPage}">
-	                                       <c:set var="doneLoop" value="true"></c:set>
-	                                    </c:if>
-	                                 </c:if>
-	                              </c:forEach>
-	                              <c:if test="${accomPage + 10 <= accomLastPage}">
-	                                 <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${accomPage+10}&activityPage=${activityPage}">&gt;</a></li>
-	                              </c:if>
-	                           </ul>
-	                     </div>
-							
+							<c:if test="${accomCount > 0}">
+								<div class="clear">
+		                           <ul class="nav justify-content-center">
+		                              <c:if test="${accomBeginRow > (ROW_PER_PAGE * 10)}">
+		                                 <li><a href="${contextPath}/host/hostIndex?accomPage=${accomPageNo-1}&activityPage=${activityPage}">&lt;</a></li>
+		                              </c:if>
+		                              <c:set var="doneLoop" value="false"></c:set>
+		                              <c:forEach var="f" begin="${accomPageNo}" end="${accomPageNo + 9}">
+		                                 <c:if test="${not doneLoop}">
+		                                    <c:choose>
+		                                       <c:when test="${accomPage == f}">
+		                                          <li class="active"><span>${f}</span></li>
+		                                       </c:when>
+		                                       <c:otherwise>
+		                                          <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${f}&activityPage=${activityPage}">${f}</a></li>
+		                                       </c:otherwise>
+		                                    </c:choose>
+		
+		                                    <c:if test="${f == accomLastPage}">
+		                                       <c:set var="doneLoop" value="true"></c:set>
+		                                    </c:if>
+		                                 </c:if>
+		                              </c:forEach>
+		                              <c:if test="${accomPage + 10 <= accomLastPage}">
+		                                 <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${accomPage+10}&activityPage=${activityPage}">&gt;</a></li>
+		                              </c:if>
+		                           </ul>
+		                        </div>
+							</c:if>
+
 							<div class="clear"> 
 	                            <div class="col-sm-12">
 	                            	&nbsp;&nbsp;<label>운영 체험</label>
@@ -222,33 +224,37 @@
 							</div>
 							
 							<!-- 체험 페이징 -->
-	                        <div class="clear">
-	                           <ul class="nav justify-content-center">
-	                              <c:if test="${activityBeginRow > (ROW_PER_PAGE * 10)}">
-	                                 <li><a href="${contextPath}/host/hostIndex?accomPage=${accomPage}&activityPage=${activityPageNo-1}">&lt;</a></li>
-	                              </c:if>
-	                              <c:set var="doneLoop" value="false"></c:set>
-	                              <c:forEach var="f" begin="${activityPageNo}" end="${activityPageNo + 9}">
-	                                 <c:if test="${not doneLoop}">
-	                                    <c:choose>
-	                                       <c:when test="${activityPage == f}">
-	                                          <li class="active"><span>${f}</span></li>
-	                                       </c:when>
-	                                       <c:otherwise>
-	                                          <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${accomPage}&activityPage=${f}">${f}</a></li>
-	                                       </c:otherwise>
-	                                    </c:choose>
-	
-	                                    <c:if test="${f == activityLastPage}">
-	                                       <c:set var="doneLoop" value="true"></c:set>
-	                                    </c:if>
-	                                 </c:if>
-	                              </c:forEach>
-	                              <c:if test="${activityPage + 10 <= activityLastPage}">
-	                                 <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${accomPage}&activityPage=${activityPage+10}">&gt;</a></li>
-	                              </c:if>
-	                           </ul>
-	                     </div>
+							<c:if test="${activityCount > 0}">
+								<div class="clear">
+		                           <ul class="nav justify-content-center">
+		                              <c:if test="${activityBeginRow > (ROW_PER_PAGE * 10)}">
+		                                 <li><a href="${contextPath}/host/hostIndex?accomPage=${accomPage}&activityPage=${activityPageNo-1}">&lt;</a></li>
+		                              </c:if>
+		                              <c:set var="doneLoop" value="false"></c:set>
+		                              <c:forEach var="f" begin="${activityPageNo}" end="${activityPageNo + 9}">
+		                                 <c:if test="${not doneLoop}">
+		                                    <c:choose>
+		                                       <c:when test="${activityPage == f}">
+		                                          <li class="active"><span>${f}</span></li>
+		                                       </c:when>
+		                                       <c:otherwise>
+		                                          <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${accomPage}&activityPage=${f}">${f}</a></li>
+		                                       </c:otherwise>
+		                                    </c:choose>
+		
+		                                    <c:if test="${f == activityLastPage}">
+		                                       <c:set var="doneLoop" value="true"></c:set>
+		                                    </c:if>
+		                                 </c:if>
+		                              </c:forEach>
+		                              <c:if test="${activityPage + 10 <= activityLastPage}">
+		                                 <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${accomPage}&activityPage=${activityPage+10}">&gt;</a></li>
+		                              </c:if>
+		                           </ul>
+		                       </div>
+							</c:if>
+							
+	                        
 							
                         	<div class="col-sm-20 col-sm-offset-1" style="text-align: right;">
                             	<br>
