@@ -164,6 +164,8 @@
 			<where>
 				host_no = #{hostNo}
 				AND
+				NOT accom_building_state_admin = "승인대기"
+            	AND
 				NOT accom_building_state_admin = "삭제"
 			</where>
 		</if>

@@ -56,7 +56,7 @@ public class AccomBuildingService {
 		Map<String, Object> returnMap = new HashMap<>();
 		
 		int lastPage = 0;
-		int totalCount = accomBuildingMapper.selectCountPage();
+		int totalCount = accomBuildingMapper.selectCountPage(hostNo);
 		
 		lastPage = totalCount / rowPerPage;
 		
@@ -84,7 +84,7 @@ public class AccomBuildingService {
 			Map<String, Object> returnMap = new HashMap<>();
 			
 			int lastPage = 0;
-			int totalCount = accomBuildingMapper.selectCountPage();
+			int totalCount = accomBuildingMapper.selectCountPage(null);
 			
 			lastPage = totalCount / rowPerPage;
 			

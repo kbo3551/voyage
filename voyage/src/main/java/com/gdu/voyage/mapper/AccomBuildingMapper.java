@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.vo.AccomBuilding;
 import com.gdu.voyage.vo.AccomBuildingFacility;
@@ -25,16 +26,15 @@ public interface AccomBuildingMapper {
 	int insertAccomBuildingHashtag(Hashtag Hashtag);
 	
 	
-	// 사업자
-	// 개인별 신청중인 숙소 조회 list
+	// 관리자, 사업자
+	// 사업자별 신청중인 숙소 조회 list
 	List<AccomBuilding> selectReqAccomBuildingListByHost(int hostNo);
 	// 갯수
-		int selectReqAccomBuildingCountByHost(int hostNo);
+	int selectReqAccomBuildingCountByHost(int hostNo);
 	
-	// 관리자
 	// 숙소 조회 list
 	List<AccomBuilding> selectAccomBuildingList(Map<String, Object> map);
-	int selectCountPage();
+	int selectCountPage(@RequestParam(value = "hostNo" , required = false) Integer hostNo);
 	
 	// 숙소 상세 조회 one
 	AccomBuilding selectAccomBuildingOne(int accomBuildingNo);
