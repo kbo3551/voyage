@@ -130,7 +130,7 @@
 	                                <!-- Review -->
 	                                <div class="select-job-items2">
 	                                    <select name="searchReviewScore">
-	                                        <option>별점</option>
+	                                        <option value="">별점</option>
 	                                        <option value="0">0</option>
 	                                        <option value="1">1</option>
 	                                        <option value="2">2</option>

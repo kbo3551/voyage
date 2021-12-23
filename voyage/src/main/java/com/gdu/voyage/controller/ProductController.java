@@ -55,7 +55,7 @@ public class ProductController {
 										@RequestParam @Nullable String searchAccomAddress,
 										@RequestParam @Nullable List<String> searchFacilityList,
 										@RequestParam (defaultValue = "1") int searchReviewScore,
-										@RequestParam (defaultValue = "1") String searchPrice
+										@RequestParam @Nullable String searchPrice
 										) {
 		List<String> searchPriceList = Arrays.asList(searchPrice.split(";"));
 		log.debug("[debug] ProductController.getAccomBuildingProduct searchWord : " + searchWord);
@@ -76,6 +76,16 @@ public class ProductController {
 //				log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
 		model.addAttribute("accomBuilding", accomBuilding);
 		log.debug("[debug] ProductController.getAccomBuildingProduct accomBuilding : " + accomBuilding);
+		
+		// [사용자] 숙소-건물 시설 인기 조회
+		List<Map<String, Object>> facilityByBest = productService.getAccomBuildingFacilityByBest();
+		model.addAttribute("facilityByBest", facilityByBest);
+		log.debug("[debug] ProductController.getAccomBuildingProduct facilityByBest : " + facilityByBest);
+		
+		// [사용자] 숙소-건물 지역 인기 조회
+		List<Map<String, Object>> addressZipByBest = productService.getAccomAddressByBest();
+		model.addAttribute("addressZipByBest", addressZipByBest);
+		log.debug("[debug] ProductController.getAccomBuildingProduct addressZipByBest : " + addressZipByBest);
 				
 		return "/product/getAccomBuildingProductList";
 	}
