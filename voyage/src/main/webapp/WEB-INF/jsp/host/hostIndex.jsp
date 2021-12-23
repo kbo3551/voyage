@@ -222,7 +222,7 @@
 									</div>
 								</div>
 							</div>
-							
+							 
 							<!-- 체험 페이징 -->
 							<c:if test="${activityCount > 0}">
 								<div class="clear">
