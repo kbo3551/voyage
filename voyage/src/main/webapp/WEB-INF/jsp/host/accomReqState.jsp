@@ -132,7 +132,16 @@
 															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${ab.accomBuildingName}</small></td>
 															<fmt:parseDate var="abCreateDateString" value="${ab.createDate}" pattern="yyyy-MM-dd HH:mm:ss.S" />
 															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><fmt:formatDate value="${abCreateDateString}" pattern="yyyy-MM-dd" /></small></td>
-															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${ab.accomBuildingStateAdmin}</small></td>
+															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>
+															<c:choose>
+																<c:when test="${ab.accomBuildingStateAdmin == '승인대기'}">
+																	승인대기
+																</c:when>
+																<c:when test="${ab.accomBuildingStateAdmin == '삭제'}">
+																	승인거부
+																</c:when>
+															</c:choose>
+															</small></td>
 															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="#" class="btn" style="background: rgb(130,130,130);">상세</a></small></td>
 														</tr>
 													</c:forEach>

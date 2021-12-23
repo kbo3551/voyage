@@ -132,7 +132,16 @@
 															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${a.activityName}</small></td>
 															<fmt:parseDate var="aCreateDateString" value="${a.createDate}" pattern="yyyy-MM-dd HH:mm:ss.S" />
 															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><fmt:formatDate value="${aCreateDateString}" pattern="yyyy-MM-dd" /></small></td>
-															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${a.activityStateAdmin}</small></td>
+															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>
+															<c:choose>
+																<c:when test="${a.activityStateAdmin == '승인대기'}">
+																	승인대기
+																</c:when>
+																<c:when test="${a.activityStateAdmin == '삭제'}">
+																	승인거부
+																</c:when>
+															</c:choose>
+															</small></td>
 															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="#" class="btn" style="background: rgb(130,130,130);">상세</a></small></td>
 														</tr>
 													</c:forEach>
