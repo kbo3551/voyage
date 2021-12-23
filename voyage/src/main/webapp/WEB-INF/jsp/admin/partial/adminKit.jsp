@@ -106,6 +106,11 @@
                      <i class="align-middle" data-feather="grid"></i> <span class="align-middle">승인완료된 체험목록</span>
                   </a>
             </li>
+            <li class="sidebar-item">
+               <a class="sidebar-link" href="${pageContext.request.contextPath}/admin/couponList">
+                      <i class="align-middle" data-feather="book"></i> <span class="align-middle">쿠폰 관리</span>
+                    </a>
+            </li>
    
             <li class="sidebar-header">
                Plugins & Addons

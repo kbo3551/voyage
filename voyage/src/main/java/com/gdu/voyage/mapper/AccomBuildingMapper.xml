@@ -184,7 +184,9 @@
             WHERE
             	host_no = #{hostNo}
             	AND
-            	accom_building_state_admin = "승인대기"
+            	NOT accom_building_state_admin = "승인완료"
+            	AND
+            	NOT accom_building_state_admin = "점검"
 			ORDER BY
 				accom_building_name ASC
     </select>

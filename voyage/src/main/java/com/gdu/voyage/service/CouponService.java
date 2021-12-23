@@ -1,0 +1,46 @@
+package com.gdu.voyage.service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.gdu.voyage.mapper.CouponMapper;
+import com.gdu.voyage.vo.Coupon;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Service
+@Transactional
+@Slf4j
+public class CouponService {
+	 @Autowired CouponMapper couponMapper;
+	   public Map<String, Object> getCouponList(int currentPage, int rowPerPage){
+		      
+		      Map<String, Object> paraMap = new HashMap<>();
+		      int beginRow = (currentPage-1) * rowPerPage;
+		      
+		      paraMap.put("beginRow", beginRow);
+		      paraMap.put("rowPerPage", rowPerPage);
+		      
+		      List<Coupon> couponList = couponMapper.selectCouponList(paraMap);
+		      
+		      Map<String, Object> returnMap = new HashMap<>();
+		      
+		      int lastPage = 0;
+		      int totalCount = couponMapper.couponTotalCount();
+		   
+		      lastPage = totalCount / rowPerPage;
+		      
+		      if(totalCount % rowPerPage !=0) {
+		         lastPage += 1;
+		      }
+		      
+		      returnMap.put("couponList", couponList);
+		      returnMap.put("lastPage", lastPage);
+		      return returnMap;
+		   }
+}
