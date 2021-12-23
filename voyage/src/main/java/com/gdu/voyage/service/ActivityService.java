@@ -42,8 +42,32 @@ public class ActivityService {
 	}
 	
 	// 사업자별 체험 조회
-	public List<Activity> selectActivityListByHost(int hostNo) {
-		return activityMapper.selectActivityListByHost(hostNo);
+	public Map<String, Object> selectActivityListByHost(int currentPage, int rowPerPage,int hostNo) {
+		Map<String, Object> paraMap = new HashMap<>();
+		int beginRow = (currentPage-1) * rowPerPage;
+		
+		paraMap.put("beginRow", beginRow);
+		paraMap.put("rowPerPage", rowPerPage);
+		paraMap.put("hostNo", hostNo);
+		
+		List<Activity> activityList = activityMapper.selectActivityList(paraMap);
+		
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		int lastPage = 0;
+		int totalCount = activityMapper.selectCountPage(hostNo);
+		
+		lastPage = totalCount / rowPerPage;
+		
+		if(totalCount % rowPerPage !=0) {
+			lastPage += 1;
+		}
+		
+		returnMap.put("activityList", activityList);
+		returnMap.put("lastPage", lastPage);
+		returnMap.put("totalCount", totalCount);
+		
+		return returnMap;
 	}
 
 	// 숙소 등록 목록 조회
@@ -60,7 +84,7 @@ public class ActivityService {
 		Map<String, Object> returnMap = new HashMap<>();
 		
 		int lastPage = 0;
-		int totalCount = activityMapper.selectCountPage();
+		int totalCount = activityMapper.selectCountPage(null);
 		
 		lastPage = totalCount / rowPerPage;
 		

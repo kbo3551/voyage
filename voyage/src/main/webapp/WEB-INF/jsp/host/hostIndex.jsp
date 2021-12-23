@@ -157,7 +157,7 @@
 	                        <div class="clear">
 	                           <ul class="nav justify-content-center">
 	                              <c:if test="${accomBeginRow > (ROW_PER_PAGE * 10)}">
-	                                 <li><a href="${contextPath}/host/hostIndex?accomPage=${accomPageNo-1}">&lt;</a></li>
+	                                 <li><a href="${contextPath}/host/hostIndex?accomPage=${accomPageNo-1}&activityPage=${activityPage}">&lt;</a></li>
 	                              </c:if>
 	                              <c:set var="doneLoop" value="false"></c:set>
 	                              <c:forEach var="f" begin="${accomPageNo}" end="${accomPageNo + 9}">
@@ -167,7 +167,7 @@
 	                                          <li class="active"><span>${f}</span></li>
 	                                       </c:when>
 	                                       <c:otherwise>
-	                                          <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${f}">${f}</a></li>
+	                                          <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${f}&activityPage=${activityPage}">${f}</a></li>
 	                                       </c:otherwise>
 	                                    </c:choose>
 	
@@ -177,7 +177,7 @@
 	                                 </c:if>
 	                              </c:forEach>
 	                              <c:if test="${accomPage + 10 <= accomLastPage}">
-	                                 <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${accomPage+10}">&gt;</a></li>
+	                                 <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${accomPage+10}&activityPage=${activityPage}">&gt;</a></li>
 	                              </c:if>
 	                           </ul>
 	                     </div>
@@ -191,21 +191,22 @@
 	                            	
 									<div>
 										<c:choose>
-											<c:when test="${ActivityList ne '[]'}">
+											<c:when test="${!empty activityList}">
 												<div>
+													&nbsp;&nbsp;<small>현재 ${activityCount}개의 체험을 운영하고 있습니다.</small>
 													<table class="table" style="text-align: center; vertical-align: middle; display:table;">
 														<tr>
 															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">이름</td>
 															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">생성일</td>
 															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">공개여부</td>
-															<td style="font-weight: bold; display:table-cell;vertical-align:middle;"><a class="btn" style="background: rgb(40,180,240); color: white;">체험추가</a></td>
+															<td style="font-weight: bold; display:table-cell;vertical-align:middle;"><a class="btn" href="${contextPath}/host/addActivity" style="background: rgb(40,180,240); color: white;">체험추가</a></td>
 														</tr>
-														<c:forEach var="al" items="${ActivityList}">
+														<c:forEach var="al" items="${activityList}">
 															<tr>
-																<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${al.getActivityName()}</small></td>
-																<fmt:parseDate var="alCreateDateString" value="${al.getCreateDate()}" pattern="yyyy-MM-dd HH:mm:ss.S" />
+																<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${al.activityName}</small></td>
+																<fmt:parseDate var="alCreateDateString" value="${al.createDate}" pattern="yyyy-MM-dd HH:mm:ss.S" />
 																<td style="display:table-cell;vertical-align:middle;" width="25%"><small><fmt:formatDate value="${alCreateDateString}" pattern="yyyy-MM-dd" /></small></td>
-																<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${al.getActivityState()}</small></td>
+																<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${al.activityState}</small></td>
 																<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="#" class="btn" style="background: rgb(130,130,130);">상세</a></small></td>
 															</tr>
 														</c:forEach>
@@ -213,12 +214,41 @@
 												</div>
 											</c:when>
 											<c:otherwise>
-												<small>&nbsp;&nbsp;목록이 비어있습니다.</small> <a class="btn" style="background: rgb(40,180,240); color: white;">체험추가</a>
+												<small>&nbsp;&nbsp;목록이 비어있습니다.</small> <a class="btn" href="${contextPath}/host/addActivity" style="background: rgb(40,180,240); color: white;">체험추가</a>
 											</c:otherwise>
 										</c:choose>
 									</div>
 								</div>
 							</div>
+							
+							<!-- 체험 페이징 -->
+	                        <div class="clear">
+	                           <ul class="nav justify-content-center">
+	                              <c:if test="${activityBeginRow > (ROW_PER_PAGE * 10)}">
+	                                 <li><a href="${contextPath}/host/hostIndex?accomPage=${accomPage}&activityPage=${activityPageNo-1}">&lt;</a></li>
+	                              </c:if>
+	                              <c:set var="doneLoop" value="false"></c:set>
+	                              <c:forEach var="f" begin="${activityPageNo}" end="${activityPageNo + 9}">
+	                                 <c:if test="${not doneLoop}">
+	                                    <c:choose>
+	                                       <c:when test="${activityPage == f}">
+	                                          <li class="active"><span>${f}</span></li>
+	                                       </c:when>
+	                                       <c:otherwise>
+	                                          <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${accomPage}&activityPage=${f}">${f}</a></li>
+	                                       </c:otherwise>
+	                                    </c:choose>
+	
+	                                    <c:if test="${f == activityLastPage}">
+	                                       <c:set var="doneLoop" value="true"></c:set>
+	                                    </c:if>
+	                                 </c:if>
+	                              </c:forEach>
+	                              <c:if test="${activityPage + 10 <= activityLastPage}">
+	                                 <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${accomPage}&activityPage=${activityPage+10}">&gt;</a></li>
+	                              </c:if>
+	                           </ul>
+	                     </div>
 							
                         	<div class="col-sm-20 col-sm-offset-1" style="text-align: right;">
                             	<br>

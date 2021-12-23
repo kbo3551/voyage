@@ -86,7 +86,8 @@ public class HostController {
 	
 	// 사업자 myPage
 	@GetMapping("/host/hostIndex")
-	public String getHostIndex(HttpServletRequest request,Model model,HttpSession session, @RequestParam(defaultValue = "1") int accomPage) {
+	public String getHostIndex(HttpServletRequest request,Model model,HttpSession session,
+		   @RequestParam(defaultValue = "1") int accomPage, @RequestParam(defaultValue = "1") int activityPage) {
     	log.trace("HostController() 실행");
     	
     	// host세션
@@ -99,14 +100,13 @@ public class HostController {
     	int accomBeginRow = (accomPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
     	int accomPageNo = ((accomBeginRow / 100) * 10 + 1);
     	
-    	// hostNo에 따른 숙소목록 받아옴
+    	// 체험 페이징
+    	int activityBeginRow = (activityPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
+    	int activityPageNo = ((activityBeginRow / 100) * 10 + 1);
+    	
+    	// hostNo에 따른 숙소, 체험 목록+페이징
     	Map<String, Object> accomMap = accomBuildingService.selectAccomBuildingListByHost(accomPage, ROW_PER_PAGE,hostNo);
-    	
-    	
-
-    	
-    	// 체험 목록 받아옴. 정렬은 쿼리문 내에서.
-    	List<Activity> ActivityList = activityService.selectActivityListByHost(hostNo);
+    	Map<String, Object> activityMap = activityService.selectActivityListByHost(activityPage, ROW_PER_PAGE,hostNo);
     	
     	// 숙소, 체험 신청목록이 있나 확인
     	int accomReqCount = accomBuildingService.selectReqAccomBuildingCountByHost(hostNo);
@@ -116,6 +116,7 @@ public class HostController {
     	
     	model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
     	
+    	// 숙소
     	model.addAttribute("accomBeginRow", accomBeginRow);
 		model.addAttribute("accomBuildingList", accomMap.get("accomBuildingList"));
 		model.addAttribute("accomLastPage", accomMap.get("lastPage"));
@@ -123,7 +124,15 @@ public class HostController {
 		model.addAttribute("accomPage", accomPage);
 		model.addAttribute("accomPageNo", accomPageNo);
     	
-    	model.addAttribute("ActivityList", ActivityList);
+		// 체험
+		model.addAttribute("activityBeginRow", activityBeginRow);
+		model.addAttribute("activityList", activityMap.get("activityList"));
+		model.addAttribute("activityLastPage", activityMap.get("lastPage"));
+		model.addAttribute("activityCount", activityMap.get("totalCount"));
+		model.addAttribute("activityPage", activityPage);
+		model.addAttribute("activityPageNo", activityPageNo);
+		
+		// 신청
     	model.addAttribute("accomReqCount", accomReqCount);
     	model.addAttribute("activityReqCount", activityReqCount);
 

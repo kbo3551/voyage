@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.vo.Activity;
 import com.gdu.voyage.vo.ActivityAddress;
@@ -15,16 +16,14 @@ import com.gdu.voyage.vo.SpotAddress;
 public interface ActivityMapper {
 	// 체험 조회 list
 	List<Activity> selectActivityList(Map<String, Object> map);
-	int selectCountPage();
+	int selectCountPage(@RequestParam(value = "hostNo" , required = false) Integer hostNo);
 		
 	// 체험 조회 one
 	Activity selectActivityOne(int activityNo);
 	
 	// 승인완료된 체험 목록
 	List<Activity> selectAccessActivity();
-	
-	// 사업자별 체험리스트
-	List<Activity> selectActivityListByHost(int hostNo);
+
 	
 	// 사업자별 신청 대기중인 체험 리스트
 	List<Activity> selectReqActivityListByHost(int hostNo);
