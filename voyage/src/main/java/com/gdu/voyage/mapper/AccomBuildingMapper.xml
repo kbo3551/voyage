@@ -125,7 +125,7 @@
 	</insert>
 	
 	
-	<!-- 관리자 -->
+	<!-- 관리자, 사업자 -->
 	<!-- 숙소 목록 출력 -->
 	<select id="selectAccomBuildingList" resultType="com.gdu.voyage.vo.AccomBuilding">
         SELECT
@@ -139,6 +139,17 @@
             update_date as updateDate
         FROM
         	accom_building
+        <if test="hostNo != null">
+        	<where>
+        		host_no = #{hostNo}
+            	AND
+            	NOT accom_building_state_admin = "승인대기"
+            	AND
+            	NOT accom_building_state_admin = "삭제"
+        	</where>
+        	ORDER BY
+        		accom_building_name ASC
+        </if>
         LIMIT 
       		#{beginRow}, #{rowPerPage}
     </select>
@@ -149,6 +160,13 @@
 			COUNT(*)
 		FROM 
 			accom_building
+		<if test="hostNo != null">
+			<where>
+				host_no = #{hostNo}
+				AND
+				NOT accom_building_state_admin = "삭제"
+			</where>
+		</if>
 	</select>
     
     <!-- 사업자 -->
@@ -181,25 +199,7 @@
             	AND
             	accom_building_state_admin = "승인대기"
     </select>
-    
-    <!-- 사업자 -->
-	<!-- host_no에 따른 숙소 목록 출력 -->
-	<select id="selectAccomBuildingListByHost" resultType="com.gdu.voyage.vo.AccomBuilding">
-            SELECT
-            	accom_building_no accomBuildingNo,
-            	accom_building_name accomBuildingName,
-            	accom_building_state accomBuildingState,
-            	create_date createDate
-            FROM
-            	accom_building
-            WHERE
-            	host_no = #{hostNo}
-            	AND
-            	NOT accom_building_state_admin = "승인대기"
-            	AND
-            	NOT accom_building_state_admin = "삭제"
-    </select>
-    
+
     <!-- 건물번호에따른 숙소 상세 목록 출력 -->
     <select id="selectAccomBuildingOne" resultType="com.gdu.voyage.vo.AccomBuilding">
             SELECT

@@ -1,8 +1,8 @@
 package com.gdu.voyage.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
-import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.AccomBuildingService;
 import com.gdu.voyage.service.ActivityService;
@@ -29,9 +30,13 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 @Controller
 public class HostController {
+	
+	private final int ROW_PER_PAGE = 10;
+	
 	@Autowired private HostService hostService;
 	@Autowired private AccomBuildingService accomBuildingService;
 	@Autowired private ActivityService activityService;
+	
 	
 	// 신청 대기중인 체험 목록
 	@GetMapping("/host/activityReqState")
@@ -81,7 +86,7 @@ public class HostController {
 	
 	// 사업자 myPage
 	@GetMapping("/host/hostIndex")
-	public String getHostIndex(HttpServletRequest request,Model model,HttpSession session) {
+	public String getHostIndex(HttpServletRequest request,Model model,HttpSession session, @RequestParam(defaultValue = "1") int accomPage) {
     	log.trace("HostController() 실행");
     	
     	// host세션
@@ -90,16 +95,15 @@ public class HostController {
     	// hostNo 추출
     	int hostNo = hostSession.getHostNo();
     	
-    	// 정렬을 위한 TreeMap 선언
-    	TreeMap<String,AccomBuilding> abMap = new TreeMap<>();
+    	// 숙소 페이징
+    	int accomBeginRow = (accomPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
+    	int accomPageNo = ((accomBeginRow / 100) * 10 + 1);
     	
-    	// List로 받아온 목록 TreeMap으로 변환
-    	int index=0;
-    	List<AccomBuilding> AccomBuildingList = accomBuildingService.selectAccomBuildingListByHost(hostNo);
-    	for(AccomBuilding item : AccomBuildingList) {
-    		abMap.put(item.getAccomBuildingName(), AccomBuildingList.get(index));
-    		index++;
-    	}
+    	// hostNo에 따른 숙소목록 받아옴
+    	Map<String, Object> accomMap = accomBuildingService.selectAccomBuildingListByHost(accomPage, ROW_PER_PAGE,hostNo);
+    	
+    	
+
     	
     	// 체험 목록 받아옴. 정렬은 쿼리문 내에서.
     	List<Activity> ActivityList = activityService.selectActivityListByHost(hostNo);
@@ -108,7 +112,16 @@ public class HostController {
     	int accomReqCount = accomBuildingService.selectReqAccomBuildingCountByHost(hostNo);
     	int activityReqCount = activityService.selectReqActivityCountByHost(hostNo);
     	
-    	model.addAttribute("AccomBuildingList", abMap);
+    	
+    	
+    	model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
+    	
+    	model.addAttribute("accomBeginRow", accomBeginRow);
+		model.addAttribute("accomBuildingList", accomMap.get("accomBuildingList"));
+		model.addAttribute("accomLastPage", accomMap.get("lastPage"));
+		model.addAttribute("accomPage", accomPage);
+		model.addAttribute("accomPageNo", accomPageNo);
+    	
     	model.addAttribute("ActivityList", ActivityList);
     	model.addAttribute("accomReqCount", accomReqCount);
     	model.addAttribute("activityReqCount", activityReqCount);

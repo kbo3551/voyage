@@ -24,15 +24,12 @@ public interface AccomBuildingMapper {
 	int insertAccomSpotAddress(SpotAddress spotAddress);
 	int insertAccomBuildingHashtag(Hashtag Hashtag);
 	
-	// 사업자
-	// 개인별 숙소 조회 list
-	List<AccomBuilding> selectAccomBuildingListByHost(int hostNo);
-	// 갯수
-	int selectReqAccomBuildingCountByHost(int hostNo);
 	
 	// 사업자
 	// 개인별 신청중인 숙소 조회 list
 	List<AccomBuilding> selectReqAccomBuildingListByHost(int hostNo);
+	// 갯수
+		int selectReqAccomBuildingCountByHost(int hostNo);
 	
 	// 관리자
 	// 숙소 조회 list

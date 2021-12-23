@@ -124,7 +124,7 @@
 	                            </c:if>
 								<div>
 									<c:choose>
-										<c:when test="${!empty AccomBuildingList}">
+										<c:when test="${!empty accomBuildingList}">
 											<div>
 												<table class="table" style="text-align: center; vertical-align: middle; display:table;">
 													<tr>
@@ -133,12 +133,12 @@
 														<td style="font-weight: bold; display:table-cell;vertical-align:middle;">공개여부</td>
 														<td style="font-weight: bold; display:table-cell;vertical-align:middle;"><a class="btn" href="${contextPath}/host/addAccomBuilding" style="background: rgb(40,180,240); color: white;">숙소추가</a></td>
 													</tr>
-													<c:forEach var="ab" items="${AccomBuildingList}">
+													<c:forEach var="ab" items="${accomBuildingList}">
 														<tr>
-															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${ab.key}</small></td>
-															<fmt:parseDate var="abCreateDateString" value="${ab.value.getCreateDate()}" pattern="yyyy-MM-dd HH:mm:ss.S" />
+															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${ab.accomBuildingName}</small></td>
+															<fmt:parseDate var="abCreateDateString" value="${ab.createDate}" pattern="yyyy-MM-dd HH:mm:ss.S" />
 															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><fmt:formatDate value="${abCreateDateString}" pattern="yyyy-MM-dd" /></small></td>
-															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${ab.value.getAccomBuildingState()}</small></td>
+															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${ab.accomBuildingState}</small></td>
 															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="#" class="btn" style="background: rgb(130,130,130);">상세</a></small></td>
 														</tr>
 													</c:forEach>
@@ -151,6 +151,35 @@
 									</c:choose>
 								</div>
 							</div>
+							
+							<!-- 숙소 페이징 -->
+	                        <div class="clear">
+	                           <ul class="nav justify-content-center">
+	                              <c:if test="${accomBeginRow > (ROW_PER_PAGE * 10)}">
+	                                 <li><a href="${contextPath}/host/hostIndex?accomPage=${accomPageNo-1}">&lt;</a></li>
+	                              </c:if>
+	                              <c:set var="doneLoop" value="false"></c:set>
+	                              <c:forEach var="f" begin="${accomPageNo}" end="${accomPageNo + 9}">
+	                                 <c:if test="${not doneLoop}">
+	                                    <c:choose>
+	                                       <c:when test="${accomPage == f}">
+	                                          <li class="active"><span>${f}</span></li>
+	                                       </c:when>
+	                                       <c:otherwise>
+	                                          <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${f}">${f}</a></li>
+	                                       </c:otherwise>
+	                                    </c:choose>
+	
+	                                    <c:if test="${f == accomLastPage}">
+	                                       <c:set var="doneLoop" value="true"></c:set>
+	                                    </c:if>
+	                                 </c:if>
+	                              </c:forEach>
+	                              <c:if test="${accomPage + 10 <= accomLastPage}">
+	                                 <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${accomPage+10}">&gt;</a></li>
+	                              </c:if>
+	                           </ul>
+	                     </div>
 							
 							<div class="clear"> 
 	                            <div class="col-sm-12">
