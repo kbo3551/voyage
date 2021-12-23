@@ -248,4 +248,13 @@
             WHERE 
             	accom_building_state_admin = '승인완료'
     </select>
+    
+    <!-- 삭제 요청 처리. 마지막 체크인 날짜로부터 일주일이 되면 삭제 처리 -->
+	<update id="updateDormantAccomBuilding">
+		UPDATE accom_building
+		SET
+			accom_building_state_admin = "삭제"
+		WHERE
+			DATEDIFF(DAY,NOW(),) >= 7
+	</update>
 </mapper>

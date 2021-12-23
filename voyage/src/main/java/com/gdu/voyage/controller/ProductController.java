@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.ProductService;
 import com.gdu.voyage.vo.AccomBuilding;
-import com.gdu.voyage.vo.AccomBuildingSearch;
 import com.gdu.voyage.vo.Activity;
 
 import lombok.extern.slf4j.Slf4j;

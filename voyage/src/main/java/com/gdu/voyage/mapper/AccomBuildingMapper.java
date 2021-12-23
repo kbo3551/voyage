@@ -44,4 +44,7 @@ public interface AccomBuildingMapper {
 	
 	// 승인완료된 숙소 목록
 	List<AccomBuilding> selectAccessAccomBuilding();
+	
+	// 숙소 삭제 요청
+	int updateDormantAccomBuilding();
 }

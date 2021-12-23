@@ -31,6 +31,11 @@ public class ActivityService {
 	@Autowired
 	private ActivityMapper activityMapper;
 	
+	/* 삭제 요청 처리. 마지막 체험 예약 날짜로부터 일주일이 되면 삭제 처리 */
+	public int updateDormantActivity() {
+		return activityMapper.updateDormantActivity();
+	}
+	
 	// 사업자별 신청중 체험 갯수
 	public int selectReqActivityCountByHost(int hostNo) {
 		return activityMapper.selectReqActivityCountByHost(hostNo);

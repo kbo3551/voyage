@@ -32,6 +32,11 @@ public class AccomBuildingService {
 	@Autowired
 	private AccomBuildingMapper accomBuildingMapper;
 	
+	/* 삭제 요청 처리. 마지막 체크인 날짜로부터 일주일이 되면 삭제 처리 */
+	public int updateDormantAccomBuilding() {
+		return accomBuildingMapper.updateDormantAccomBuilding();
+	}
+	
 	// 사업자별 신청중인 숙소 목록 조회
 	public List<AccomBuilding> selectReqAccomBuildingListByHost(int hostNo){
 		return accomBuildingMapper.selectReqAccomBuildingListByHost(hostNo);

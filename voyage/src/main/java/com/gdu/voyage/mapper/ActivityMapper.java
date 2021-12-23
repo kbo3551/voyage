@@ -40,4 +40,7 @@ public interface ActivityMapper {
 	int insertActivitySpot(ActivitySpot activitySpot);
 	int insertActivitySpotAddress(SpotAddress spotAddress);
 	int insertActivityHashtag(Hashtag hashtag);
+	
+	// 체험 삭제 요청
+	int updateDormantActivity();
 }
