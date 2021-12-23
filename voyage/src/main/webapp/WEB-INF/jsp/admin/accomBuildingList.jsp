@@ -56,7 +56,10 @@
 							<div class="card flex-fill">
 								<div class="card-header">
 	
-									<h5 class="card-title mb-0">최근 숙소 목록</h5>
+									<h5 class="card-title mb-0">최근 숙소 목록</h5> 
+								</div>
+								<div align="right" style="padding-right: 3%; padding-bottom: 2%;">
+									<a href="${pageContext.request.contextPath}/admin/accessAccomBuilding" class="btn btn-secondary">승인완료된 숙소 목록</a>
 								</div>
 								<table class="table table-hover my-0">
 									<thead>

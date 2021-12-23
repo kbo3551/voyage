@@ -48,12 +48,13 @@
 				<h1 class="h3 mb-3"><strong>체험 관리</strong></h1>
 					<div class="row">
 						<div>
-						<div>
 							<div class="card flex-fill">
-							<div class="d-flex align-content-start flex-wrap">
-								<div class="card-header">
+									<div class="card-header">
 
 									<h5 class="card-title my-0">최근 체험 목록</h5>
+								</div>
+								<div align="right" style="padding-right: 3%; padding-bottom: 2%;">
+									<a href="${pageContext.request.contextPath}/admin/accessActivity" class="btn btn-secondary">승인완료된 체험 목록</a>
 								</div>
 								<table class="table table-hover my-0">
 									<thead>
@@ -82,8 +83,6 @@
 									</tbody>
 								</table>
 							</div>
-							</div>
-						</div>
 						</div>
 					</div>
 				</div>
