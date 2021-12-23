@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 public class CouponController {
 	 @Autowired CouponService couponService;
 	 private final int ROW_PER_PAGE = 10;
+	 // 쿠폰 list 출력
 	 @GetMapping("/admin/couponList")
 	 public String getCouponList(Model model,@RequestParam(defaultValue = "1") int currentPage) {
 		  System.out.println("CouponController()_coupon실행");
@@ -38,5 +39,11 @@ public class CouponController {
 	      model.addAttribute("pageNo",pageNo);
 	      
 	      return "admin/couponList";
+	 }
+	 // 쿠폰 생성
+	 @GetMapping("/admin/addCoupon")
+	 public String getAddCoupon() {
+		System.out.println("★★★[boryeong]CouponController_addCoupon실행★★★");
+		 return "admin/addCoupon";
 	 }
 }
