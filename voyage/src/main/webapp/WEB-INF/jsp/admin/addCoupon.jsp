@@ -86,7 +86,7 @@
                                 <br>
                                 <div class="form-group">
                                     <label for="tt">Coupon 기한&emsp;</label>
-                                     <input name="memberNickname" id="tt" class="form-control" type="text" value="">
+                                     <input name="memberNickname" id="tt" class="form-control" type="datetime-local" value="">
                                 </div> 
                             </div>
                                <br>
