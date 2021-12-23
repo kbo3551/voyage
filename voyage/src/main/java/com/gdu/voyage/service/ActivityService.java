@@ -36,14 +36,38 @@ public class ActivityService {
 		return activityMapper.updateDormantActivity();
 	}
 	
-	// 사업자별 신청중 체험 갯수
-	public int selectReqActivityCountByHost(int hostNo) {
-		return activityMapper.selectReqActivityCountByHost(hostNo);
+	// 사업자별 신청중인 체험 조회
+	public Map<String, Object> selectReqActivityListByHost(int currentPage, int rowPerPage,int hostNo) {
+		Map<String, Object> paraMap = new HashMap<>();
+		int beginRow = (currentPage-1) * rowPerPage;
+		
+		paraMap.put("beginRow", beginRow);
+		paraMap.put("rowPerPage", rowPerPage);
+		paraMap.put("hostNo", hostNo);
+		
+		List<Activity> activityReqList = activityMapper.selectReqActivityListByHost(paraMap);
+		
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		int lastPage = 0;
+		int totalCount = activityMapper.selectReqActivityCountByHost(hostNo);
+		
+		lastPage = totalCount / rowPerPage;
+		
+		if(totalCount % rowPerPage !=0) {
+			lastPage += 1;
+		}
+		
+		returnMap.put("activityReqList", activityReqList);
+		returnMap.put("lastPage", lastPage);
+		returnMap.put("totalCount", totalCount);
+		
+		return returnMap;
 	}
 	
-	// 사업자별 신청중인 체험 조회
-	public List<Activity> selectReqActivityListByHost(int hostNo) {
-		return activityMapper.selectReqActivityListByHost(hostNo);
+	// 사업자별 신청중 체험 갯수 확인용
+	public int selectReqActivityCountByHost(int hostNo) {
+		return activityMapper.selectReqActivityCountByHost(hostNo);
 	}
 	
 	// 사업자별 체험 조회

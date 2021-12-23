@@ -28,7 +28,7 @@ public interface AccomBuildingMapper {
 	
 	// 관리자, 사업자
 	// 사업자별 신청중인 숙소 조회 list
-	List<AccomBuilding> selectReqAccomBuildingListByHost(int hostNo);
+	List<AccomBuilding> selectReqAccomBuildingListByHost(Map<String, Object> map);
 	// 갯수
 	int selectReqAccomBuildingCountByHost(int hostNo);
 	

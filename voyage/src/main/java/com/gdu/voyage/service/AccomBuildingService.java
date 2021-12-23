@@ -38,10 +38,33 @@ public class AccomBuildingService {
 	}
 	
 	// 사업자별 신청중인 숙소 목록 조회
-	public List<AccomBuilding> selectReqAccomBuildingListByHost(int hostNo){
-		return accomBuildingMapper.selectReqAccomBuildingListByHost(hostNo);
+	public Map<String, Object> selectReqAccomBuildingListByHost(int currentPage, int rowPerPage,int hostNo){
+		Map<String, Object> paraMap = new HashMap<>();
+		int beginRow = (currentPage-1) * rowPerPage;
+		
+		paraMap.put("beginRow", beginRow);
+		paraMap.put("rowPerPage", rowPerPage);
+		paraMap.put("hostNo", hostNo);
+		
+		List<AccomBuilding> accomBuildingReqList = accomBuildingMapper.selectReqAccomBuildingListByHost(paraMap);
+		
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		int lastPage = 0;
+		int totalCount = accomBuildingMapper.selectReqAccomBuildingCountByHost(hostNo);
+		
+		if(totalCount % rowPerPage !=0) {
+			lastPage += 1;
+		}
+		
+		returnMap.put("accomBuildingReqList", accomBuildingReqList);
+		returnMap.put("lastPage", lastPage);
+		returnMap.put("totalCount", totalCount);
+		
+		return returnMap;
 	}
-	// 신청중인 숙소 갯수
+	
+	// 신청중인 숙소 갯수 확인용
 	public int selectReqAccomBuildingCountByHost(int hostNo) {
 		return accomBuildingMapper.selectReqAccomBuildingCountByHost(hostNo);
 	}

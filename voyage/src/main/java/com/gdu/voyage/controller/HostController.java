@@ -1,6 +1,5 @@
 package com.gdu.voyage.controller;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -18,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.gdu.voyage.service.AccomBuildingService;
 import com.gdu.voyage.service.ActivityService;
 import com.gdu.voyage.service.HostService;
-import com.gdu.voyage.vo.AccomBuilding;
-import com.gdu.voyage.vo.Activity;
 import com.gdu.voyage.vo.Host;
 import com.gdu.voyage.vo.HostAsk;
 import com.gdu.voyage.vo.Member;
@@ -40,7 +37,7 @@ public class HostController {
 	
 	// 신청 대기중인 체험 목록
 	@GetMapping("/host/activityReqState")
-	public String getActivityReqState(HttpServletRequest request,Model model,HttpSession session) {
+	public String getActivityReqState(HttpServletRequest request,Model model,HttpSession session, @RequestParam(defaultValue = "1") int page) {
 		log.trace("HostController() 실행");
 		
 		// host세션
@@ -49,21 +46,27 @@ public class HostController {
     	// hostNo 추출
     	int hostNo = hostSession.getHostNo();
     	
-    	// 신청 대기중인 숙소 리스트
-    	List<Activity> activityReqState = activityService.selectReqActivityListByHost(hostNo);
+    	// 페이징
+    	int beginRow = (page * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
+    	int pageNo = ((beginRow / 100) * 10 + 1);
     	
-    	// 신청 대기중인 목록 갯수
-    	int activityReqCount = activityService.selectReqActivityCountByHost(hostNo);
+    	// 신청 대기중인 숙소 맵으로 받아옴
+    	Map<String, Object> reqMap = activityService.selectReqActivityListByHost(page, ROW_PER_PAGE, hostNo);
     	
-    	model.addAttribute("activityReqState", activityReqState);
-    	model.addAttribute("activityReqCount", activityReqCount);
+    	
+    	model.addAttribute("beginRow", beginRow);
+		model.addAttribute("activityReqList", reqMap.get("activityReqList"));
+		model.addAttribute("lastPage", reqMap.get("lastPage"));
+		model.addAttribute("totalCount", reqMap.get("totalCount"));
+		model.addAttribute("page", page);
+		model.addAttribute("pageNo", pageNo);
     	
     	return "/host/activityReqState";
 	}
 	
 	// 신청 대기중인 숙소 목록
 	@GetMapping("/host/accomReqState")
-	public String getAccomReqState(HttpServletRequest request,Model model,HttpSession session) {
+	public String getAccomReqState(HttpServletRequest request,Model model,HttpSession session, @RequestParam(defaultValue = "1") int page) {
 		log.trace("HostController() 실행");
 		
 		// host세션
@@ -72,14 +75,20 @@ public class HostController {
     	// hostNo 추출
     	int hostNo = hostSession.getHostNo();
     	
-    	// 신청 대기중인 숙소 리스트
-    	List<AccomBuilding> accomReqState = accomBuildingService.selectReqAccomBuildingListByHost(hostNo);
+    	// 페이징
+    	int beginRow = (page * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
+    	int pageNo = ((beginRow / 100) * 10 + 1);
     	
-    	// 신청 대기중인 목록 갯수
-    	int accomReqCount = accomBuildingService.selectReqAccomBuildingCountByHost(hostNo);
-    	
-    	model.addAttribute("accomReqState", accomReqState);
-    	model.addAttribute("accomReqCount", accomReqCount);
+    	// 신청 대기중인 숙소 맵으로 받아옴
+    	Map<String, Object> reqMap = accomBuildingService.selectReqAccomBuildingListByHost(page, ROW_PER_PAGE,hostNo);
+
+
+    	model.addAttribute("beginRow", beginRow);
+		model.addAttribute("accomBuildingReqList", reqMap.get("accomBuildingReqList"));
+		model.addAttribute("lastPage", reqMap.get("lastPage"));
+		model.addAttribute("totalCount", reqMap.get("totalCount"));
+		model.addAttribute("page", page);
+		model.addAttribute("pageNo", pageNo);
     	
     	return "/host/accomReqState";
 	}

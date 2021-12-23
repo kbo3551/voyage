@@ -117,8 +117,8 @@
                             <div class="col-sm-12">
 								<div>
 									<c:choose>
-										<c:when test="${activityReqState ne '[]'}">
-											${activityReqCount}개의 대기목록이 있습니다.
+										<c:when test="${!empty activityReqList}">
+											${totalCount}개의 대기목록이 있습니다.
 											<div>
 												<table class="table" style="text-align: center; vertical-align: middle; display:table;">
 													<tr>
@@ -127,12 +127,12 @@
 														<td style="font-weight: bold; display:table-cell;vertical-align:middle;"></td>
 														<td style="font-weight: bold; display:table-cell;vertical-align:middle;"></td>
 													</tr>
-													<c:forEach var="as" items="${activityReqState}">
+													<c:forEach var="a" items="${activityReqList}">
 														<tr>
-															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${as.getActivityName()}</small></td>
-															<fmt:parseDate var="asCreateDateString" value="${as.getCreateDate()}" pattern="yyyy-MM-dd HH:mm:ss.S" />
-															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><fmt:formatDate value="${asCreateDateString}" pattern="yyyy-MM-dd" /></small></td>
-															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${as.getActivityStateAdmin()}</small></td>
+															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${a.activityName}</small></td>
+															<fmt:parseDate var="aCreateDateString" value="${a.createDate}" pattern="yyyy-MM-dd HH:mm:ss.S" />
+															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><fmt:formatDate value="${aCreateDateString}" pattern="yyyy-MM-dd" /></small></td>
+															<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${a.activityStateAdmin}</small></td>
 															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="#" class="btn" style="background: rgb(130,130,130);">상세</a></small></td>
 														</tr>
 													</c:forEach>
@@ -146,6 +146,36 @@
 								</div>
 							</div>
 							
+							<!-- 페이징 -->
+							<c:if test="${totalCount > 0}">
+								<div class="clear">
+		                           <ul class="nav justify-content-center">
+		                              <c:if test="${beginRow > (ROW_PER_PAGE * 10)}">
+		                                 <li><a href="${contextPath}/host/accomReqState?page=${pageNo-1}">&lt;</a></li>
+		                              </c:if>
+		                              <c:set var="doneLoop" value="false"></c:set>
+		                              <c:forEach var="f" begin="${pageNo}" end="${pageNo + 9}">
+		                                 <c:if test="${not doneLoop}">
+		                                    <c:choose>
+		                                       <c:when test="${page == f}">
+		                                          <li class="active"><span>${f}</span></li>
+		                                       </c:when>
+		                                       <c:otherwise>
+		                                          <li><a class="nav-link active" href="${contextPath}/host/accomReqState?page=${f}">${f}</a></li>
+		                                       </c:otherwise>
+		                                    </c:choose>
+		
+		                                    <c:if test="${f == lastPage}">
+		                                       <c:set var="doneLoop" value="true"></c:set>
+		                                    </c:if>
+		                                 </c:if>
+		                              </c:forEach>
+		                              <c:if test="${page + 10 <= lastPage}">
+		                                 <li><a class="nav-link active" href="${contextPath}/host/accomReqState?page=${page+10}">&gt;</a></li>
+		                              </c:if>
+		                           </ul>
+		                        </div>
+							</c:if>
 							
 							
                         	<div class="col-sm-20 col-sm-offset-1" style="text-align: right;">
