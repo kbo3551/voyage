@@ -183,7 +183,7 @@
       host_ask
       ORDER BY
       ask_state = '승인거부',
-      ask_state = '승인완료'      <!-- WHERE ask_state = '승인대기' 승인된 목록or 거부 목록도 봐야하는지 고민? -->
+      ask_state = '승인완료'    
    LIMIT
       #{beginRow}, #{rowPerPage}
    </select>

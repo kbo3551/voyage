@@ -7,7 +7,7 @@
 		<result column="coupon_name" property="couponName" />
 		<result column="coupon_terms" property="couponTerms" />
 		<result column="coupon_discount" property="couponDiscount" />
-		<result column="deadline" property="deadline" />
+		<result column="deadline" property="deadLine" />
 		<result column="coupon_state" property="couponState" />
 		<result column="create_date" property="createDate" />
 	</resultMap>
@@ -47,7 +47,7 @@
 	 	#{couponName},
 	 	#{couponTerms},
 	 	#{couponDiscount},
-	 	#{deadlise},
+	 	#{deadLine},
 	 	NOW()
 	 )
 	</insert>

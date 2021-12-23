@@ -77,7 +77,7 @@
                                     <td width="15%">${c.couponName}</td>
                                     <td >${c.couponTerms}</td>
                                     <td>${c.couponDiscount}</td>
-                                    <td>${c.deadline}</td>
+                                    <td>${c.deadLine}</td>
                                     <td>${c.couponState}</td>
                                     <td>${c.createDate}</td>
 									<td style=" height: 60px; text-align:left;"><a href="${pageContext.request.contextPath}/">상세보기</a></td>

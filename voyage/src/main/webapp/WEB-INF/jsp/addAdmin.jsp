@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
-
 <head>
 	<title>AddAdmin</title>
 	<meta charset="utf-8">
@@ -87,7 +85,7 @@
 		                             
                                 	<form name="AddAdmin" action="${pageContext.request.contextPath}/addAdmin" method="post">
                                 		<div class="form-group"> 
-		                                    <label for=id  >Admin ID</label>
+		                                    <label for="id">Admin ID</label>
 		                                    
 		                                    <input type="text" class="form-control" id="id" name="id" placeholder="아이디입력 *" readonly="readonly" value="${loginMember.getMemberId()}">
 		                                </div>
@@ -205,7 +203,6 @@
     </div>
 
 
-    <!-- JS here -->
 		<!-- All JS Custom Plugins Link Here here -->
         <script src="${pageContext.request.contextPath}/assets/js/vendor/modernizr-3.5.0.min.js"></script>
 		<!-- Jquery, Popper, Bootstrap -->

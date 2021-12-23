@@ -8,7 +8,7 @@ public class Coupon {
 	private String couponName;
 	private int couponTerms;
 	private int couponDiscount;
-	private String deadline;
+	private String deadLine;
 	private String couponState;
 	private String createDate;
 }
