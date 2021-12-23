@@ -119,6 +119,7 @@ public class HostController {
     	model.addAttribute("accomBeginRow", accomBeginRow);
 		model.addAttribute("accomBuildingList", accomMap.get("accomBuildingList"));
 		model.addAttribute("accomLastPage", accomMap.get("lastPage"));
+		model.addAttribute("accomCount", accomMap.get("totalCount"));
 		model.addAttribute("accomPage", accomPage);
 		model.addAttribute("accomPageNo", accomPageNo);
     	

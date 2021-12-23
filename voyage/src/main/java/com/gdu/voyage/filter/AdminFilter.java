@@ -41,6 +41,7 @@ public class AdminFilter implements Filter {
 	    	req.setAttribute("msg", "관리자만이 접근 가능합니다.");
 	    	req.setAttribute("url", "redirect:/index");
 	    	req.getRequestDispatcher(req.getContextPath()+"/alert").forward(req, res);
+	    	return;
 	    }
 	      
 	    chain.doFilter(req, res); 

@@ -35,10 +35,11 @@ public class HostFilter implements Filter {
 		
 	    HttpSession session = req.getSession();
 	    Member loginMember = (Member)session.getAttribute("loginMember");
-	    if(session.getAttribute("loginMember") == null || loginMember.getMemberLevel() != 1) {
+	    if(loginMember == null  || loginMember.getMemberLevel() != 1) {
 	    	req.setAttribute("msg", "사업자만이 접근 가능합니다.");
 	    	req.setAttribute("url", "redirect:/index");
 	    	req.getRequestDispatcher(req.getContextPath()+"/alert").forward(req, res);
+	    	return;
 	    }
 	    
 	    Host hostSession = (Host)session.getAttribute("hostSession");

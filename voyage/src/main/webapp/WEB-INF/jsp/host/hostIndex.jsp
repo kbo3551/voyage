@@ -126,6 +126,7 @@
 									<c:choose>
 										<c:when test="${!empty accomBuildingList}">
 											<div>
+												&nbsp;&nbsp;<small>현재 ${accomCount}개의 숙소를 운영하고 있습니다.</small>
 												<table class="table" style="text-align: center; vertical-align: middle; display:table;">
 													<tr>
 														<td style="font-weight: bold; display:table-cell;vertical-align:middle;">이름</td>

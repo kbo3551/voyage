@@ -66,6 +66,7 @@ public class AccomBuildingService {
 		
 		returnMap.put("accomBuildingList", accomBuildingList);
 		returnMap.put("lastPage", lastPage);
+		returnMap.put("totalCount", totalCount);
 		
 		return returnMap;
 	}

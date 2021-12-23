@@ -36,6 +36,7 @@ public class MemberFilter implements Filter {
 			 req.setAttribute("msg", "로그인을 먼저 진행해주세요.");
 	    	 req.setAttribute("url", "redirect:/login");
 	    	 req.getRequestDispatcher(req.getContextPath()+"/alert").forward(req, res);
+	    	 return;
 		 }
 		
 		 chain.doFilter(req, res); 
