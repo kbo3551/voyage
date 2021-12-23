@@ -137,7 +137,9 @@
 		WHERE
 			host_no = #{hostNo}
 			AND
-			activity_state_admin = "승인대기"
+			NOT activity_state_admin = "승인완료"
+			AND
+			NOT activity_state_admin = "점검"
 		ORDER BY
 			activity_name ASC
 	</select>
