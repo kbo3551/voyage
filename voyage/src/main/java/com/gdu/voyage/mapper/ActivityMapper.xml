@@ -141,10 +141,12 @@
 			AND
 			NOT activity_state_admin = "점검"
 		ORDER BY
-			activity_name ASC
+			create_date DESC
+		LIMIT 
+      		#{beginRow}, #{rowPerPage}
 	</select>
 	
-	<!-- 사업자별 따른 대기중인 숙소 신청 갯수 -->
+	<!-- 사업자별 따른 대기중인 체험 신청 갯수 -->
 	<select id="selectReqActivityCountByHost" resultType="int">
             SELECT
             	COUNT(*)
@@ -153,8 +155,11 @@
             WHERE
             	host_no = #{hostNo}
             	AND
-            	activity_state_admin = "승인대기"
+            	NOT activity_state_admin = "승인완료"
+				AND
+				NOT activity_state_admin = "점검"
     </select>
+	
 
 	
 	<!-- 관리자, 사업자 -->
@@ -202,6 +207,8 @@
 			</where>
 		</if>
 	</select>
+	
+	
     <!-- 체험번호에따른 체험 상세 목록 출력 One -->
     <select id="selectActivityOne" resultType="com.gdu.voyage.vo.Activity">
             SELECT 
@@ -253,13 +260,4 @@
             WHERE
             	activity_state_admin = '승인완료'
     </select>
-    
-    <!-- 삭제 요청 처리. 마지막 예약날짜로부터 일주일이 되면 삭제 처리 -->
-	<update id="updateDormantActivity">
-		UPDATE activity
-		SET
-			activity_state_admin = "삭제"
-		WHERE
-			DATEDIFF(DAY,NOW(),) >= 7
-	</update>
 </mapper>

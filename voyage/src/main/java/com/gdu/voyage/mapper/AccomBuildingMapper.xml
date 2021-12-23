@@ -188,7 +188,9 @@
             	AND
             	NOT accom_building_state_admin = "점검"
 			ORDER BY
-				accom_building_name ASC
+				create_date DESC
+			LIMIT 
+      			#{beginRow}, #{rowPerPage}
     </select>
     
     <!-- 사업자 -->
