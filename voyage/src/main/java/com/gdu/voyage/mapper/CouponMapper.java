@@ -13,4 +13,7 @@ public interface CouponMapper {
 	List<Coupon> selectCouponList(Map<String, Object> Map);
 	// 쿠폰 수
 	int couponTotalCount();
+	// 쿠폰 생성
+	void insertCoupon(Coupon coupon);
+	
 }
