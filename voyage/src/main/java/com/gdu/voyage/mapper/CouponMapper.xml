@@ -12,7 +12,7 @@
 		<result column="create_date" property="createDate" />
 	</resultMap>
 	<!-- 쿠폰list -->
-	<select id="selectCouponList" parameterType="com.gdu.voyage.mapper.CouponMapper" resultMap="coupon">
+	<select id="selectCouponList" parameterType="com.gdu.voyage.vo.Coupon" resultMap="coupon">
 	SELECT
 		coupon_no,
 		coupon_name,
@@ -27,11 +27,28 @@
 		#{beginRow}, #{rowPerPage}
 	</select>
 	<!-- 쿠폰 수 -->
-	<select id="couponTotalCount" resultType="int" parameterType="com.gdu.voyage.mapper.CouponMapper">
+	<select id="couponTotalCount" resultType="int" parameterType="com.gdu.voyage.vo.Coupon">
 	SELECT
 		COUNT(*)
 	FROM
 		coupon
 	</select>
-	
+	<!-- 쿠폰 생성 -->
+	<insert id="insertCoupon" parameterType="com.gdu.voyage.vo.Coupon">
+	INSERT INTO 
+		coupon(
+		coupon_name,
+		coupon_terms,
+		coupon_discount,
+		deadline,
+		create_date
+		)
+	 VALUES(
+	 	#{couponName},
+	 	#{couponTerms},
+	 	#{couponDiscount},
+	 	#{deadlise},
+	 	NOW()
+	 )
+	</insert>
 </mapper>
