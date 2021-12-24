@@ -23,18 +23,31 @@
 		SELECT 
 			notice_no, 
 			admin_id, 
+			notice_top,
 			notice_title, 
 			notice_view_cnt, 
 			create_date, 
 			update_date
 		FROM notice 
+			<where>
+				<if test="searchNotice != null">
+					notice_title LIKE '%'#(searchNotice)'%'
+				</if>
+			</where>
 		ORDER BY 
 			notice_top='Y' DESC, update_date DESC
+		Limit
+			#(currentPage), #(rowPerPage)
 	</select>
 	
 	<!-- 공지사항 카운트 -->
 	<select id="selectNoticeTotalCount" resultType="int">
 		SELECT COUNT(*) FROM notice
+		<where>
+			<if test="searchNotice != null">
+				notice_title LIKE '%'#(searchNotice)'%'
+			</if>
+		</where>
 	</select>
 	
 	

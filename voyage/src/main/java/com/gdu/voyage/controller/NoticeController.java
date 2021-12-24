@@ -25,17 +25,19 @@ public class NoticeController {
 	
 	private final int ROW_PER_PAGE = 10;
 	
+	//관리자
+	
 	//noticeList
 	@GetMapping("/admin/adminNoticeList")
 	public String notcieList(Model model,
-								@RequestParam(defaultValue = "1") int currentPage) {
+								@RequestParam(defaultValue = "1") int currentPage, String searchNotice) {
 		
-		Map<String, Object> noticeMap = noticeService.getNoticeListByTop(currentPage, ROW_PER_PAGE);
+		Map<String, Object> noticeMap = noticeService.getNoticeListByTop(currentPage, ROW_PER_PAGE, searchNotice);
 		log.debug(noticeMap.toString()+"★★★ [DoHun] Notice List Controller 실행, noticeMap ★★★");
 		
 		model.addAttribute("noticeList", noticeMap.get("noticeList"));
 		model.addAttribute("lastPage", noticeMap.get("lastPage"));
-		
+		model.addAttribute("searchNotice",searchNotice);
 		return "/admin/adminNoticeList";
 	}
 	//noticeOne
