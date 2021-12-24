@@ -53,6 +53,8 @@ public class AccomBuildingService {
 		int lastPage = 0;
 		int totalCount = accomBuildingMapper.selectReqAccomBuildingCountByHost(hostNo);
 		
+		lastPage = totalCount / rowPerPage;
+		
 		if(totalCount % rowPerPage !=0) {
 			lastPage += 1;
 		}

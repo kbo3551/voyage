@@ -159,22 +159,42 @@
 		                            &nbsp;&nbsp;<label>숙소</label>
 									<div>
 										<c:choose>
-											<c:when test="${!empty AccomPaymentList}">
+											<c:when test="${!empty accomPaymentList}">
 												<div>
 													<table class="table" style="text-align: center; vertical-align: middle; display:table;">
 														<tr>
-															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">이름</td>
-															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">생성일</td>
-															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">공개여부</td>
-															<td style="font-weight: bold; display:table-cell;vertical-align:middle;"><a class="btn" href="${contextPath}/host/addAccomBuilding" style="background: rgb(40,180,240); color: white;">숙소추가</a></td>
+															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">날짜</td>
+															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">상품정보</td>
+															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">상태</td>
+															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">확인</td>
 														</tr>
-														<c:forEach var="ab" items="${AccomPaymentList}">
+														<c:forEach var="ap" items="${accomPaymentList}">
 															<tr>
-																<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${ab.key}</small></td>
-																<fmt:parseDate var="abCreateDateString" value="${ab.value.getCreateDate()}" pattern="yyyy-MM-dd HH:mm:ss.S" />
-																<td style="display:table-cell;vertical-align:middle;" width="25%"><small><fmt:formatDate value="${abCreateDateString}" pattern="yyyy-MM-dd" /></small></td>
-																<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${ab.value.getAccomBuildingState()}</small></td>
-																<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="#" class="btn" style="background: rgb(130,130,130);">상세</a></small></td>
+																<fmt:parseDate var="apCreateDateString" value="${ap.createDate}" pattern="yyyy-MM-dd HH:mm:ss.S" />
+																<td style="display:table-cell;vertical-align:middle;" width="13%">
+																	<small><fmt:formatDate value="${apCreateDateString}" pattern="yyyy-MM-dd" /></small>
+																</td>
+																<fmt:parseDate var="apAccomCheckInString" value="${ap.accomCheckIn}" pattern="yyyy-MM-dd HH:mm:ss.S" />
+																<fmt:parseDate var="apAccomCheckOutString" value="${ap.accomCheckOut}" pattern="yyyy-MM-dd HH:mm:ss.S" />
+																<td style="display:table-cell;vertical-align:middle;" width="61%">
+																	<table frame="void">
+																		<td width="30%" style="vertical-align: middle;">
+																			<img width="80%" height="100&" src="${contextPath}/resources/image/accom_room/${ap.accomRoomImage.accomRoomImageName}.${ap.accomRoomImage.accomRoomImageExt}">
+																		</td>
+																		<td width="70%">
+																			<span style="float:right; text-align: left;">
+																			<p><small>${ap.accomRoom.accomRoomName}</small></p>
+																			<p><small>인원 : ${ap.accomUsePerson}명 / 기간 : 
+																			<fmt:formatDate value="${apAccomCheckInString}" pattern="yyyy-MM-dd HH:mm" /> ~ <fmt:formatDate value="${apAccomCheckOutString}" pattern="yyyy-MM-dd HH:mm" />
+																			</small></p>
+																			<p><b><fmt:formatNumber type="number" maxFractionDigits="3" value="${ap.accomAmount}" />원</b></p>
+																			</span>
+																		</td>
+																	</table>
+																	
+																</td>
+																<td style="display:table-cell;vertical-align:middle;" width="13%">${ap.accomPaymentState}</td>
+																<td style="display:table-cell;vertical-align:middle;" width="13%"><small>${ap.receipt}</small></td>
 															</tr>
 														</c:forEach>
 													</table>
@@ -186,6 +206,37 @@
 										</c:choose>
 									</div>
 								</div>
+								
+								<!-- 숙소 페이징 -->
+								<c:if test="${accomCount > 0}">
+									<div class="clear">
+			                           <ul class="nav justify-content-center">
+			                              <c:if test="${accomBeginRow > (ROW_PER_PAGE * 10)}">
+			                                 <li><a href="${contextPath}/member/selectMyOrderList?accomPage=${accomPageNo-1}&activityPage=${activityPage}">&lt;</a></li>
+			                              </c:if>
+			                              <c:set var="doneLoop" value="false"></c:set>
+			                              <c:forEach var="f" begin="${accomPageNo}" end="${accomPageNo + 9}">
+			                                 <c:if test="${not doneLoop}">
+			                                    <c:choose>
+			                                       <c:when test="${accomPage == f}">
+			                                          <li class="active"><span class="nav-link">${f}</span></li>
+			                                       </c:when>
+			                                       <c:otherwise>
+			                                          <li><a class="nav-link active" href="${contextPath}/member/selectMyOrderList?accomPage=${f}&activityPage=${activityPage}">${f}</a></li>
+			                                       </c:otherwise>
+			                                    </c:choose>
+			
+			                                    <c:if test="${f == accomLastPage}">
+			                                       <c:set var="doneLoop" value="true"></c:set>
+			                                    </c:if>
+			                                 </c:if>
+			                              </c:forEach>
+			                              <c:if test="${accomPage + 10 <= accomLastPage}">
+			                                 <li><a class="nav-link active" href="${contextPath}/member/selectMyOrderList?accomPage=${accomPage+5}&activityPage=${activityPage}">&gt;</a></li>
+			                              </c:if>
+			                           </ul>
+			                        </div>
+								</c:if>
                         	</c:if>
                         
                         	<c:if test="${param.category == null}">

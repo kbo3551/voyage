@@ -33,7 +33,7 @@
 	
 	<!-- 주문상품 목록 불러오기 -->
 	<select id="selectAccomPayment" resultMap="AccomPayment">
-		SELECT DISTINCT
+		SELECT
 			ap.accom_checkin,
 			ap.accom_checkout,
 			ap.accom_amount,
@@ -61,6 +61,11 @@
 			ap.accom_room_no = ai.accom_room_no
 		WHERE
 			member_id = #{memberId}
+		GROUP BY
+			ap.create_date
+		ORDER BY
+			ap.create_date DESC,
+			ai.accom_room_image_ext ASC
 		LIMIT
 			#{beginRow}, #{rowPerPage}
 	</select>

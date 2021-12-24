@@ -1,5 +1,7 @@
 package com.gdu.voyage.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gdu.voyage.service.LoginService;
 import com.gdu.voyage.service.MemberService;
+import com.gdu.voyage.service.PaymentService;
 import com.gdu.voyage.vo.Admin;
 import com.gdu.voyage.vo.Host;
 import com.gdu.voyage.vo.Member;
@@ -27,8 +30,13 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 @Controller
 public class MemberController {
+	
+	private final int ROW_PER_PAGE = 5;
+	
 	@Autowired MemberService memberService;
 	@Autowired LoginService loginService;
+	@Autowired PaymentService paymentService;
+
 	
 	// 채팅
 	@GetMapping("member/chat")
@@ -53,8 +61,35 @@ public class MemberController {
 	
 	// 주문목록
 	@GetMapping("member/selectMyOrderList")
-	public String getSelectMyOrderList(Model model, @RequestParam(name = "category", defaultValue = "all") String category) {
+	public String getSelectMyOrderList(Model model, @RequestParam(name = "category", defaultValue = "all") String category,
+				  @RequestParam(defaultValue = "1") int accomPage, @RequestParam(defaultValue = "1") int activityPage,
+				  HttpSession session) {
 		log.trace("MemberController() 실행");
+		
+		// memberId
+		String memberId = ((Member) session.getAttribute("loginMember")).getMemberId();
+		
+		// 숙소 페이징
+    	int accomBeginRow = (accomPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
+    	int accomPageNo = ((accomBeginRow / 100) * 10 + 1);
+    	
+    	// 체험 페이징
+    	int activityBeginRow = (activityPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
+    	int activityPageNo = ((activityBeginRow / 100) * 10 + 1);
+    	
+    	// hostNo에 따른 숙소, 체험 주문 목록+페이징
+    	Map<String, Object> accomMap = paymentService.selectAccomPayment(accomPage, ROW_PER_PAGE, memberId);
+		
+    	model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
+    	
+    	// 숙소
+    	model.addAttribute("accomBeginRow", accomBeginRow);
+		model.addAttribute("accomPaymentList", accomMap.get("accomPaymentList"));
+		model.addAttribute("accomLastPage", accomMap.get("lastPage"));
+		model.addAttribute("accomCount", accomMap.get("totalCount"));
+		model.addAttribute("accomPage", accomPage);
+		model.addAttribute("accomPageNo", accomPageNo);
+    	
 		return "member/selectMyOrderList";
 	}
 	

@@ -167,7 +167,7 @@
 		                                 <c:if test="${not doneLoop}">
 		                                    <c:choose>
 		                                       <c:when test="${page == f}">
-		                                          <li class="active"><span>${f}</span></li>
+		                                          <li class="active"><span class="nav-link">${f}</span></li>
 		                                       </c:when>
 		                                       <c:otherwise>
 		                                          <li><a class="nav-link active" href="${contextPath}/host/accomReqState?page=${f}">${f}</a></li>

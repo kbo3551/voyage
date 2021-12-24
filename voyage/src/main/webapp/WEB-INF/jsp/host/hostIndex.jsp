@@ -165,7 +165,7 @@
 		                                 <c:if test="${not doneLoop}">
 		                                    <c:choose>
 		                                       <c:when test="${accomPage == f}">
-		                                          <li class="active"><span>${f}</span></li>
+		                                          <li class="active"><span class="nav-link">${f}</span></li>
 		                                       </c:when>
 		                                       <c:otherwise>
 		                                          <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${f}&activityPage=${activityPage}">${f}</a></li>
@@ -235,7 +235,7 @@
 		                                 <c:if test="${not doneLoop}">
 		                                    <c:choose>
 		                                       <c:when test="${activityPage == f}">
-		                                          <li class="active"><span>${f}</span></li>
+		                                          <li class="active"><span class="nav-link">${f}</span></li>
 		                                       </c:when>
 		                                       <c:otherwise>
 		                                          <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${accomPage}&activityPage=${f}">${f}</a></li>

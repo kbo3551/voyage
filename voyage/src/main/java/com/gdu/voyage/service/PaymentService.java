@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @Transactional
-public class AccomPaymentService {
+public class PaymentService {
 	@Autowired private AccomPaymentMapper accomPaymentMapper;
 	
 	public Map<String, Object> selectAccomPayment(int currentPage, int rowPerPage,String memberId) {
@@ -35,6 +35,8 @@ public class AccomPaymentService {
 		
 		int lastPage = 0;
 		int totalCount = accomPaymentMapper.selectCountPage(memberId);
+		
+		lastPage = totalCount / rowPerPage;
 		
 		if(totalCount % rowPerPage !=0) {
 			lastPage += 1;
