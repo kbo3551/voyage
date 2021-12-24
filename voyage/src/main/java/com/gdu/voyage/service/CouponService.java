@@ -19,6 +19,11 @@ import lombok.extern.slf4j.Slf4j;
 public class CouponService {
 	@Autowired
 	CouponMapper couponMapper;
+	// 쿠폰 데드라인 기준으로 현재 일이 데드라인을 넘어서면 비활성화 처리
+	public int updateDormantCoupon() {
+		return couponMapper.updateDormantCoupon();
+	}
+	// 회원이 발급 받은 쿠폰이 데드라인을 넘기면 비활성화 처리
 
 	// 쿠폰 list 출력
 	public Map<String, Object> getCouponList(int currentPage, int rowPerPage) {
@@ -30,7 +35,6 @@ public class CouponService {
 		paraMap.put("rowPerPage", rowPerPage);
 
 		List<Coupon> couponList = couponMapper.selectCouponList(paraMap);
-
 		Map<String, Object> returnMap = new HashMap<>();
 
 		int lastPage = 0;
