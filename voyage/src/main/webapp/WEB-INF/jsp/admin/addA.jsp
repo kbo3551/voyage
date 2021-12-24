@@ -27,85 +27,47 @@
     <!-- adminKit : 시작 -->
     	<c:import url="partial\\adminKit.jsp"/>
     <!-- adminKit : 끝 -->
+	
 	<div class="main">
-    <!-- adminKit : 시작 -->
+    <!-- adminBanner : 시작 -->
     	<c:import url="partial\\adminBanner.jsp"/>
-    <!-- adminKit : 끝 -->
+    <!-- adminBanner : 끝 -->
 		
 		<!-- 메인(중앙) -->
 		<main class="content">
 			<div class="container-fluid p-0">
 	
-				<h1 class="h3 mb-3"><strong>관리자</strong> 문의 게시판</h1>
+				<h1 class="h3 mb-3"><strong>관리자</strong> 답변 작성</h1>
 				
-				<div class="row">
-					<div class="col-12 col-lg-8 col-xxl-9 d-flex">
-						<div class="card flex-fill">
-							<div class="card-header">
-								<h3 class="h3 mb-3">문의글 목록</h3>
+				<!-- 입력공간 -->
+				<form method="post" action="${pageContext.request.contextPath}/admin/addA">
+					<!-- 작성자 -->
+					<input type="hidden" name="adminId" value="${qnaAnswer.adminId}">			
+					
+					<!-- 답변 내용 -->
+					<div class="row">
+						<div class="card">
+							<!-- 질문 번호 -->
+							<div>
+								No : <input readonly="readonly" name="qnaNo" value="${qnaAnswer.qnaNo}">
 							</div>
-							<table class="table table-hover my-0">
-								<thead>
-									<tr>
-										<th>No</th>
-										<th>Nickname</th>
-										<th>Title</th>
-										<th>createDate</th>
-										<th>updateDate</th>
-										<th>Detail</th>
-									</tr>
-								</thead>
-								<tbody> 
-									<c:forEach items="${qnaList}" var="q" >
-										<tr>
-									        <td>${q.qnaNo}</td>
-									        <td>${q.memberNickname}</td>
-									        <td>${q.qnaTitle}</td>
-									        <td>${q.createDate}</td>
-									        <td>${q.updateDate}</td>
-									        <td><a href="${pageContext.request.contextPath}/admin/adminQnaOne?qnaNo=${q.qnaNo}" class="btn">상세 내용</a></td>
-									    </tr>
-								    </c:forEach>
-								</tbody>
-							</table>
-							
+							<div class="card-header">
+								<h5 class="card-title mb-0">Content</h5>
+							</div>
+							<div class="card-body">
+								<textarea class="form-control" rows="3" placeholder="답변 내용을 입력해주세요" name="answerContent"></textarea>
+							</div>
 						</div>
 					</div>
-				</div>
+					<!-- 답변 Insert -->
+					<button class="btn btn-primary btn-lg" type="submit" id="sendABtn">Send</button>
+				</form>
 			</div>
 		</main>
-   		<!-- 페이징 -->
-        <div class="container">
-        	<ul class="nav justify-content-center bg-light">
-	            <c:if test="${beginRow > (ROW_PER_PAGE * 10)}">
-	            	<li><a href="/admin/adminQnaList?currentPage=${pageNo-1}">&lt;</a></li>
-	            </c:if>
-	           	<c:set var="doneLoop" value="false"></c:set>
-	            <c:forEach var="f" begin="${pageNo}" end="${pageNo + 9}">
-	            	<c:if test="${not doneLoop}">
-			            <c:choose>
-				            <c:when test="${currentPage == f}">
-				            	<li class="active"><span>${f}</span></li>
-				            </c:when>
-				            <c:otherwise>
-				            	<li><a class="nav-link active" href="/admin/adminQnaList?currentPage=${f}">${f}</a></li>
-				            </c:otherwise>
-				        </c:choose>
-				        
-						<c:if test="${f == lastPage}">
-			            	<c:set var="doneLoop" value="true"></c:set>
-			            </c:if>
-	                </c:if>
-	          	</c:forEach>
-	            <c:if test="${currentPage + 10 <= lastPage}">
-	            	<li><a class="nav-link active" href="/admin/adminQnaList?currentPage=${pageNo+10}">&gt;</a></li>
-	            </c:if>
-         	</ul>
-         </div>
+			
     <!-- adminFooter : 시작 -->
     	<c:import url="partial\\adminFooter.jsp"/>
     <!-- adminFooter : 끝 -->
-
 		</div>
 	</div>
 	
@@ -113,7 +75,8 @@
 	
 	
 	
-	<!-- 원본 차트 가짜데이터 --> 
+	
+	<!-- 원본차트 가짜데이터 -->
 	<script>
 	document.addEventListener("DOMContentLoaded", function() {
 		var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
@@ -336,7 +299,7 @@
 	});
 	
 	</script>
-	
+ 
 </body>
 
 </html>

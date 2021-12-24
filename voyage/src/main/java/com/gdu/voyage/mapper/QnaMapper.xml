@@ -25,6 +25,7 @@
 	<resultMap  type="com.gdu.voyage.vo.Qna" id="resultQnaOne">
 		<!-- Question -->
 		<id column="qna_no" property="qnaNo"/>
+		<result column="member_id" property="memberId"/>
 		<result column="member_nickname" property="memberNickname"/>
 		<result column="qna_category" property="qnaCategory"/>
 		<result column="qna_title" property="qnaTitle"/>
@@ -76,6 +77,7 @@
 			q.qna_title,
 			q.qna_content,
 			q.qna_secret,
+			q.create_date,
 			q.update_date,
 			an.admin_id,
 			an.answer_content

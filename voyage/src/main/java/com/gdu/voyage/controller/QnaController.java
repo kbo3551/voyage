@@ -57,10 +57,10 @@ public class QnaController {
 	    model.addAttribute("qna", qna);
 	 	// 비밀글 기능
 	 	// 비회원인 경우
-	 	if(loginMember == null && qna.getQnaSecret().equals("비밀글")) {
+	 	if(qna.getQnaSecret().equals("비밀글") && loginMember == null) {
 	 		return "redirect:/login";
 	 		// 로그인했지만 작성자가 아닌 경우 
-	 	} else if(!qna.getMemberNickname().equals(loginMember.getMemberNickname())) {
+	 	} else if(qna.getQnaSecret().equals("비밀글") && !qna.getMemberNickname().equals(loginMember.getMemberNickname())) {
 	 		return "redirect:/qnaList";
 	 		// 그 외...
 	 	} else {
@@ -88,10 +88,8 @@ public class QnaController {
 		String memberId = loginMember.getMemberId();
 		String memberNickname = loginMember.getMemberNickname();
 		// 디버그 코드
-		log.debug("★★★★★★★★★★★ [다원] addQ_qnaForm_Controller() debug" + qnaForm.toString());
-		// qna에 받아온 값 셋팅
-		Qna qna = new Qna();
-		qna.setMemberId(memberId);
+		log.debug("★★★★★★★★★★★ [다원] addQ_loginMember_Controller() debug" + loginMember.toString());
+		// qnaForm에 받아온 값 셋팅
 		qnaForm.setMemberId(memberId);
 		qnaForm.setMemberNickname(memberNickname);
 		// 디버그 코드
@@ -214,6 +212,6 @@ public class QnaController {
 	@PostMapping("/admin/addA")
 	public String addAnswer(QnaAnswer qnaAnswer) {
 		qnaService.addA(qnaAnswer);
-		return "redirect:/qnaList?pageNo=1";
+		return "redirect:/admin/adminQnaList?pageNo=1";
 	}
 }
