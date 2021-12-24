@@ -101,11 +101,11 @@
 		                            <form id="login" action="${contextPath}/login" method="post">
 			                                	<label for="id">User ID</label>
 		                                <div class="form-group">
-			                                    <input type="text" class="form-control" id="id" name="id">
+			                                    <input type="text" class="form-control" id="id" name="id" onkeypress="enterLogin()">
 		                                </div>
 		                                <div class="form-group" style="clear: both;">
 		                                    <label for="password">Password</label>
-		                                    <input type="password" class="form-control" id="password" name="password">
+		                                    <input type="password" class="form-control" id="password" name="password" onkeypress="enterLogin()">
 		                                </div>
 		                                <div class="text-center">
 		                                    <button type="button" class="btn" style="background: rgb(0,172,238);
@@ -149,6 +149,12 @@
 									login.submit();
 								}
 							};
+							
+							function enterLogin() {
+								if(window.event.keyCode == 13){
+									loginAction();
+								}
+							}
 		                </script>
 		
 		            </div>
