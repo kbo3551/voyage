@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.voyage.mapper.ActivityPaymentMapper">
+	<resultMap type="com.gdu.voyage.vo.ActivityPayment" id="ActivityPayment">
+		<result column="activity_payment_no" property="activityPaymentNo" />
+		<result column="activity_no" property="activityNo" />
+		<result column="member_id" property="memberId" />
+		<result column="activity_booking_time" property="activityBookingTime" />
+		<result column="activity_use_person" property="activityUsePerson" />
+		<result column="activity_amount" property="activityAmount" />
+		<result column="activity_payment_state" property="activityPaymentState" />
+		<result column="receipt" property="receipt" />
+		<result column="create_date" property="createDate" />
+		<collection property="activity" resultMap="Activity" />
+		<collection property="activityImage" resultMap="ActivityImage" />
+	</resultMap>
+	
+	<resultMap type="com.gdu.voyage.vo.Activity" id="Activity">
+		<result column="activity_name" property="activityName" />
+	</resultMap>
+	
+	<resultMap type="com.gdu.voyage.vo.ActivityImage" id="ActivityImage">
+		<result column="activity_image_name" property="activityImageName" />
+		<result column="activity_image_ext" property="activityImageExt" />
+	</resultMap>
+	
+	
+	<!-- 주문상품 목록 불러오기 -->
+	<select id="selectActivityPayment" resultMap="ActivityPayment">
+		SELECT
+			ap.activity_booking_time,
+			ap.activity_amount,
+			ap.activity_use_person,
+			ap.activity_payment_state,
+			ap.receipt,
+			ap.create_date,
+			a.activity_name,
+			ai.activity_image_name,
+			ai.activity_image_ext
+		FROM
+			activity_payment ap
+		INNER JOIN
+			activity a
+		ON
+			ap.activity_no = a.activity_no
+		INNER JOIN
+			activity_image ai
+		ON
+			ap.activity_no = ai.activity_no
+		WHERE
+			member_id = #{memberId}
+			AND
+			ai.activity_image_name =
+			(SELECT activity_image_name
+			FROM activity_image
+			ORDER BY activity_no ASC
+			LIMIT 0,1)
+			AND
+			ai.activity_image_ext =
+			(SELECT activity_image_ext
+			FROM activity_image
+			ORDER BY activity_no ASC
+			LIMIT 0,1)
+		ORDER BY
+			ap.create_date DESC
+		LIMIT
+			#{beginRow}, #{rowPerPage}
+	</select>
+	
+	
+	<!-- 페이징 -->
+	<select id="selectCountPage" resultType="int"  parameterType="com.gdu.voyage.vo.AccomPayment">
+		SELECT
+			COUNT(*)
+		FROM 
+			activity_payment
+		WHERE
+			member_id = #{memberId}
+	</select>
+
+
+
+</mapper>

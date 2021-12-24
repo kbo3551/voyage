@@ -79,6 +79,7 @@ public class MemberController {
     	
     	// hostNo에 따른 숙소, 체험 주문 목록+페이징
     	Map<String, Object> accomMap = paymentService.selectAccomPayment(accomPage, ROW_PER_PAGE, memberId);
+    	Map<String, Object> activityMap = paymentService.selectActivityPayment(activityPage, ROW_PER_PAGE, memberId);
 		
     	model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
     	
@@ -89,6 +90,14 @@ public class MemberController {
 		model.addAttribute("accomCount", accomMap.get("totalCount"));
 		model.addAttribute("accomPage", accomPage);
 		model.addAttribute("accomPageNo", accomPageNo);
+		
+		// 체험
+    	model.addAttribute("activityBeginRow", activityBeginRow);
+		model.addAttribute("activityPaymentList", activityMap.get("activityPaymentList"));
+		model.addAttribute("activityLastPage", activityMap.get("lastPage"));
+		model.addAttribute("activityCount", activityMap.get("totalCount"));
+		model.addAttribute("activityPage", activityPage);
+		model.addAttribute("activityPageNo", activityPageNo);
     	
 		return "member/selectMyOrderList";
 	}

@@ -232,7 +232,7 @@
 			                                 </c:if>
 			                              </c:forEach>
 			                              <c:if test="${accomPage + 10 <= accomLastPage}">
-			                                 <li><a class="nav-link active" href="${contextPath}/member/selectMyOrderList?accomPage=${accomPage+5}&activityPage=${activityPage}">&gt;</a></li>
+			                                 <li><a class="nav-link active" href="${contextPath}/member/selectMyOrderList?accomPage=${accomPage+10}&activityPage=${activityPage}">&gt;</a></li>
 			                              </c:if>
 			                           </ul>
 			                        </div>
@@ -248,42 +248,87 @@
 							<c:if test="${param.category != 'accom'}">
 								<div class="clear"> 
 		                            <div class="col-sm-12">
-		                            	&nbsp;&nbsp;<label>체험</label>
-		                            	<c:if test="${ActivityPaymentList > 0}">
-		                            		<span>&nbsp;&nbsp;<a class="btn" href="${contextPath}/host/activityReqState" style="background: rgb(40,180,240); color: white;">신청조회</a></span>
-		                            	</c:if>
-		                            	
-										<div>
-											<c:choose>
-												<c:when test="${!empty ActivityPaymentList}"><!-- ne '[]' -->
-													<div>
-														<table class="table" style="text-align: center; vertical-align: middle; display:table;">
+		                            &nbsp;&nbsp;<label>체험</label>
+									<div>
+										<c:choose>
+											<c:when test="${!empty activityPaymentList}">
+												<div>
+													<table class="table" style="text-align: center; vertical-align: middle; display:table;">
+														<tr>
+															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">날짜</td>
+															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">상품정보</td>
+															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">상태</td>
+															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">확인</td>
+														</tr>
+														<c:forEach var="ac" items="${activityPaymentList}">
 															<tr>
-																<td style="font-weight: bold; display:table-cell;vertical-align:middle;">이름</td>
-																<td style="font-weight: bold; display:table-cell;vertical-align:middle;">생성일</td>
-																<td style="font-weight: bold; display:table-cell;vertical-align:middle;">공개여부</td>
-																<td style="font-weight: bold; display:table-cell;vertical-align:middle;"><a class="btn" style="background: rgb(40,180,240); color: white;">체험추가</a></td>
+																<fmt:parseDate var="acCreateDateString" value="${ac.createDate}" pattern="yyyy-MM-dd HH:mm:ss.S" />
+																<td style="display:table-cell;vertical-align:middle;" width="13%">
+																	<small><fmt:formatDate value="${acCreateDateString}" pattern="yyyy-MM-dd" /></small>
+																</td>
+																<fmt:parseDate var="acActivityBookingTimeString" value="${ac.activityBookingTime}" pattern="yyyy-MM-dd HH:mm:ss.S" />
+																<td style="display:table-cell;vertical-align:middle;" width="61%">
+																	<table frame="void">
+																		<td width="30%" style="vertical-align: middle;">
+																			<img width="80%" height="100&" src="${contextPath}/resources/image/activity/${ac.activityImage.activityImageName}.${ac.activityImage.activityImageExt}">
+																		</td>
+																		<td width="70%">
+																			<span style="float:right; text-align: left;">
+																			<p><small>${ac.activity.activityName}</small></p>
+																			<p><small>인원 : ${ac.activityUsePerson}명 / 예약시간 : 
+																			<fmt:formatDate value="${acActivityBookingTimeString}" pattern="yyyy-MM-dd HH:mm" />
+																			</small></p>
+																			<p><b><fmt:formatNumber type="number" maxFractionDigits="3" value="${ac.activityAmount}" />원</b></p>
+																			</span>
+																		</td>
+																	</table>
+																	
+																</td>
+																<td style="display:table-cell;vertical-align:middle;" width="13%">${ac.activityPaymentState}</td>
+																<td style="display:table-cell;vertical-align:middle;" width="13%"><small>${ac.receipt}</small></td>
 															</tr>
-															<c:forEach var="al" items="${ActivityList}">
-																<tr>
-																	<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${al.getActivityName()}</small></td>
-																	<fmt:parseDate var="alCreateDateString" value="${al.getCreateDate()}" pattern="yyyy-MM-dd HH:mm:ss.S" />
-																	<td style="display:table-cell;vertical-align:middle;" width="25%"><small><fmt:formatDate value="${alCreateDateString}" pattern="yyyy-MM-dd" /></small></td>
-																	<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${al.getActivityState()}</small></td>
-																	<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="#" class="btn" style="background: rgb(130,130,130);">상세</a></small></td>
-																</tr>
-															</c:forEach>
-														</table>
-													</div>
-												</c:when>
-												<c:otherwise>
-													<small>&nbsp;&nbsp;목록이 비어있습니다.</small>
-												</c:otherwise>
-											</c:choose>
-										</div>
+														</c:forEach>
+													</table>
+												</div>
+											</c:when>
+											<c:otherwise>
+												<small>&nbsp;&nbsp;목록이 비어있습니다.</small>
+											</c:otherwise>
+										</c:choose>
 									</div>
 								</div>
-							</c:if>
+								
+								<!-- 숙소 페이징 -->
+								<c:if test="${activityCount > 0}">
+									<div class="clear">
+			                           <ul class="nav justify-content-center">
+			                              <c:if test="${activityBeginRow > (ROW_PER_PAGE * 10)}">
+			                                 <li><a href="${contextPath}/member/selectMyOrderList?accomPage=${accomPage}&activityPage=${activityPageNo-1}">&lt;</a></li>
+			                              </c:if>
+			                              <c:set var="doneLoop" value="false"></c:set>
+			                              <c:forEach var="f" begin="${activityPageNo}" end="${activityPageNo + 9}">
+			                                 <c:if test="${not doneLoop}">
+			                                    <c:choose>
+			                                       <c:when test="${activityPage == f}">
+			                                          <li class="active"><span class="nav-link">${f}</span></li>
+			                                       </c:when>
+			                                       <c:otherwise>
+			                                          <li><a class="nav-link active" href="${contextPath}/member/selectMyOrderList?accomPage=${accomPage}&activityPage=${f}">${f}</a></li>
+			                                       </c:otherwise>
+			                                    </c:choose>
+			
+			                                    <c:if test="${f == activityLastPage}">
+			                                       <c:set var="doneLoop" value="true"></c:set>
+			                                    </c:if>
+			                                 </c:if>
+			                              </c:forEach>
+			                              <c:if test="${activityPage + 10 <= activityLastPage}">
+			                                 <li><a class="nav-link active" href="${contextPath}/member/selectMyOrderList?accomPage=${accomPage}&activityPage=${activityPage+10}">&gt;</a></li>
+			                              </c:if>
+			                           </ul>
+			                        </div>
+								</c:if>
+                        	</c:if>
 							
 							
                         	<div class="col-sm-20 col-sm-offset-1" style="text-align: right;">

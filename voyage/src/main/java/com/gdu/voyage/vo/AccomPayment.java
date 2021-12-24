@@ -16,7 +16,7 @@ public class AccomPayment {
 	private String createDate;
 	
 	// 결제내역 설명에 필요
-	AccomBuilding accomBuilding;
-	AccomRoom accomRoom;
-	AccomRoomImage accomRoomImage;
+	private AccomBuilding accomBuilding;
+	private AccomRoom accomRoom;
+	private AccomRoomImage accomRoomImage;
 }
