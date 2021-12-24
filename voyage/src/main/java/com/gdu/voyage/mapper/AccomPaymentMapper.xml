@@ -61,11 +61,20 @@
 			ap.accom_room_no = ai.accom_room_no
 		WHERE
 			member_id = #{memberId}
-		GROUP BY
-			ap.create_date
+			AND
+			ai.accom_room_image_name =
+			(SELECT accom_room_image_name
+			FROM accom_room_image
+			ORDER BY accom_room_no ASC
+			LIMIT 0,1)
+			AND
+			ai.accom_room_image_ext =
+			(SELECT accom_room_image_ext
+			FROM accom_room_image
+			ORDER BY accom_room_no ASC
+			LIMIT 0,1)
 		ORDER BY
-			ap.create_date DESC,
-			ai.accom_room_image_ext ASC
+			ap.create_date DESC
 		LIMIT
 			#{beginRow}, #{rowPerPage}
 	</select>
