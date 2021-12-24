@@ -105,10 +105,19 @@
 	                    <div class="col-sm-10 col-sm-offset-1 profiel-container">
 	                   		<h1 class="page-title">Hello!  <span class="orange strong" style="color: olive;">${loginMember.getMemberNickname()}</span></h1>
 							<br>
+							
 	                        <div class="profiel-header">
 	                            <h2>
 	                                YOUR PROFILE <br>
 	                            </h2>
+	                            <span>
+									<small>
+										<a href="${contextPath}/member/selectMyOrderList">주문내역</a>
+									</small> | 
+									<small>
+										<a href="${contextPath}/member/selectMyProfile">회원정보</a>
+									</small>
+								</span>
 	                            <hr>
 	                        </div>
 	                        <div class="clear"> 
@@ -160,12 +169,13 @@
 	                            <a href="${contextPath}/member/pwCheck?route=1" class='btn btn-finish btn-primary'>수정</a>
 	                        </div>
 	                        <br>
+	                        <br>
+	                        <br>
+			                <div><a href="${contextPath}/member/pwCheck?route=2" class="btn">닉네임변경</a></div>
+			   				<div><a href="${contextPath}/member/pwCheck?route=3" class="btn">비밀번호변경</a></div>
+			   				<div><a href="${contextPath}/member/pwCheck?route=4" class="btn">회원탈퇴</a></div>
 		            	</div>
 	                </div>
-	                <br>
-	                <div><a href="${contextPath}/member/pwCheck?route=2" class="btn">닉네임변경</a></div>
-	   				<div><a href="${contextPath}/member/pwCheck?route=3" class="btn">비밀번호변경</a></div>
-	   				<div><a href="${contextPath}/member/pwCheck?route=4" class="btn">회원탈퇴</a></div>
 	            </div>
 	    	</div>
 

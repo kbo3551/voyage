@@ -111,35 +111,47 @@
                             <h2>
                                 주문목록 <br>
                             </h2>
+                            <span style="float: left; margin-top: 0.7%">
+								<small>
+									<a href="${contextPath}/member/selectMyOrderList">주문내역</a>
+								</small> | 
+								<small>
+									<a href="${contextPath}/member/selectMyProfile">회원정보</a>
+								</small>
+							</span>
+							
+							<span style="float: left; padding-left: 3%">
+								<c:choose>
+	                        		<c:when test="${category == '숙소'}">
+	                        			<select id="category" name="category">
+			                        		<option value="all">모두보기</option>
+			                        		<option value="accom" selected="selected">숙소</option>
+			                        		<option value="activity">체험</option>
+			                        	</select>
+	                        		</c:when>
+	                        		<c:when test="${category == '체험'}">
+	                        			<select id="category" name="category">
+			                        		<option value="all">모두보기</option>
+			                        		<option value="accom">숙소</option>
+			                        		<option value="activity" selected="selected">체험</option>
+			                        	</select>
+	                        		</c:when>
+	                        		<c:otherwise>
+	                        			<select id="category" name="category">
+			                        		<option value="all" selected="selected">모두보기</option>
+			                        		<option value="accom">숙소</option>
+			                        		<option value="activity">체험</option>
+			                        	</select>
+	                        		</c:otherwise>
+	                        	</c:choose>
+							</span>
+							
+							<br>
                             <hr>
                         </div>
-                        <c:choose>
-                        		<c:when test="${category == '숙소'}">
-                        			<select id="category" name="category" >
-		                        		<option value="all">모두보기</option>
-		                        		<option value="accom" selected="selected">숙소</option>
-		                        		<option value="activity">체험</option>
-		                        	</select>
-                        		</c:when>
-                        		<c:when test="${category == '체험'}">
-                        			<select id="category" name="category" >
-		                        		<option value="all">모두보기</option>
-		                        		<option value="accom">숙소</option>
-		                        		<option value="activity" selected="selected">체험</option>
-		                        	</select>
-                        		</c:when>
-                        		<c:otherwise>
-                        			<select id="category" name="category" >
-		                        		<option value="all" selected="selected">모두보기</option>
-		                        		<option value="accom">숙소</option>
-		                        		<option value="activity">체험</option>
-		                        	</select>
-                        		</c:otherwise>
-                        	</c:choose>
+                        
                         	
-                        	<br>
-                        	<br>
-                        	<br>
+
                         
                         <div class="clear"> 
                         	<c:if test="${param.category != 'activity'}">
@@ -176,7 +188,7 @@
 								</div>
                         	</c:if>
                         
-                        	<c:if test="${category == all}">
+                        	<c:if test="${param.category == null}">
                         		<br>
                         		<br>
                         		<br>
