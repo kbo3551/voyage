@@ -33,7 +33,7 @@
 	
 	<!-- 주문상품 목록 불러오기 -->
 	<select id="selectAccomPayment" resultMap="AccomPayment">
-		SELECT
+		SELECT DISTINCT
 			ap.accom_checkin,
 			ap.accom_checkout,
 			ap.accom_amount,
@@ -62,7 +62,18 @@
 		WHERE
 			member_id = #{memberId}
 		LIMIT
-			0,1
+			#{beginRow}, #{rowPerPage}
+	</select>
+	
+	
+	<!-- 페이징 -->
+	<select id="selectCountPage" resultType="int"  parameterType="com.gdu.voyage.vo.AccomPayment">
+		SELECT
+			COUNT(*)
+		FROM 
+			accom_payment
+		WHERE
+			member_id = #{memberId}
 	</select>
 	
 </mapper>
