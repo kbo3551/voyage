@@ -55,7 +55,28 @@
 	.form-control {
 		font-size: 13px;
 	}
-
+	
+	.square {
+	  width: 20%;
+	  position: relative;
+	  
+	}
+	
+	.square:after {
+	  content: "";
+	  display: block;
+	  padding-bottom: 100%;
+	 
+	}
+	
+	.inner {
+	  position: absolute;
+	  width: 70%;
+	  height: 70%;
+	  top:13%;
+	  left:7%;
+	}
+	
 }
 </style>
 
@@ -121,42 +142,61 @@
 							</span>
 							
 							<span style="float: left; padding-left: 3%">
-								<c:choose>
-	                        		<c:when test="${category == '숙소'}">
-	                        			<select id="category" name="category">
+								<select id="category" name="category" onchange="categorySelect()">
+									<c:choose>
+		                        		<c:when test="${category == '숙소'}">
 			                        		<option value="all">모두보기</option>
 			                        		<option value="accom" selected="selected">숙소</option>
 			                        		<option value="activity">체험</option>
-			                        	</select>
-	                        		</c:when>
-	                        		<c:when test="${category == '체험'}">
-	                        			<select id="category" name="category">
+		                        		</c:when>
+		                        		<c:when test="${category == '체험'}">
 			                        		<option value="all">모두보기</option>
 			                        		<option value="accom">숙소</option>
 			                        		<option value="activity" selected="selected">체험</option>
-			                        	</select>
-	                        		</c:when>
-	                        		<c:otherwise>
-	                        			<select id="category" name="category">
+		                        		</c:when>
+		                        		<c:otherwise>
 			                        		<option value="all" selected="selected">모두보기</option>
 			                        		<option value="accom">숙소</option>
 			                        		<option value="activity">체험</option>
-			                        	</select>
-	                        		</c:otherwise>
-	                        	</c:choose>
+		                        		</c:otherwise>
+		                        	</c:choose>
+	                        	</select>
 							</span>
 							
 							<br>
                             <hr>
                         </div>
                         
-                        	
-
+                        <!-- 카테고리 선택하면 해당 카테고리값만 나오게 함 -->
+                        <script>
+	                        function categorySelect(){ 
+	                    		// 카테고리 선택값을 가져와서 벨류 저장
+	                    		let category = document.getElementById("category"); 
+	                    		let selectCategoryValue = category.options[category.selectedIndex].value; 
+	                    		
+	                    		// 페이징
+	                    		let accomPage = 1;
+	                    		let activityPage = 1;
+	                    		if('${accomPage}' != null){
+	                    			accomPage = '${accomPage}';
+	                    		}
+	                    		if('${activityPage}' != null){
+	                    			activityPage = '${activityPage}';
+	                    		}
+	                    		
+	                    		let contextPath = '${contextPath}';
+	                    		
+	                    		location.replace(contextPath+'/member/selectMyOrderList?accomPage='+accomPage+'&activityPage='+activityPage+'&category='+selectCategoryValue);
+	                    		
+	                        }
+                        
+                        </script>
+                        
                         
                         <div class="clear"> 
                         	<c:if test="${param.category != 'activity'}">
 	                            <div class="col-sm-12">
-		                            &nbsp;&nbsp;<label>숙소</label>
+		                            &nbsp;&nbsp;<label style="color: rgb(80,180,146);">숙소</label>
 									<div>
 										<c:choose>
 											<c:when test="${!empty accomPaymentList}">
@@ -178,10 +218,10 @@
 																<fmt:parseDate var="apAccomCheckOutString" value="${ap.accomCheckOut}" pattern="yyyy-MM-dd HH:mm:ss.S" />
 																<td style="display:table-cell;vertical-align:middle;" width="61%">
 																	<table frame="void">
-																		<td width="30%" style="vertical-align: middle;">
-																			<img width="80%" height="100&" src="${contextPath}/resources/image/accom_room/${ap.accomRoomImage.accomRoomImageName}.${ap.accomRoomImage.accomRoomImageExt}">
+																		<td class="square" style="clear:both; width: 30%">
+																			<img style="margin-right: 70%" class="inner" src="${contextPath}/resources/image/accom_room/${ap.accomRoomImage.accomRoomImageName}.${ap.accomRoomImage.accomRoomImageExt}">
 																		</td>
-																		<td width="70%">
+																		<td style="width: 100%" >
 																			<span style="float:right; text-align: left;">
 																			<p><small>${ap.accomRoom.accomRoomName}</small></p>
 																			<p><small>인원 : ${ap.accomUsePerson}명 / 기간 : 
@@ -212,7 +252,7 @@
 									<div class="clear">
 			                           <ul class="nav justify-content-center">
 			                              <c:if test="${accomBeginRow > (ROW_PER_PAGE * 10)}">
-			                                 <li><a href="${contextPath}/member/selectMyOrderList?accomPage=${accomPageNo-1}&activityPage=${activityPage}">&lt;</a></li>
+			                                 <li><a href="${contextPath}/member/selectMyOrderList?accomPage=${accomPageNo-1}&activityPage=${activityPage}&category=${param.category}">&lt;</a></li>
 			                              </c:if>
 			                              <c:set var="doneLoop" value="false"></c:set>
 			                              <c:forEach var="f" begin="${accomPageNo}" end="${accomPageNo + 9}">
@@ -222,7 +262,7 @@
 			                                          <li class="active"><span class="nav-link">${f}</span></li>
 			                                       </c:when>
 			                                       <c:otherwise>
-			                                          <li><a class="nav-link active" href="${contextPath}/member/selectMyOrderList?accomPage=${f}&activityPage=${activityPage}">${f}</a></li>
+			                                          <li><a class="nav-link active" href="${contextPath}/member/selectMyOrderList?accomPage=${f}&activityPage=${activityPage}&category=${param.category}">${f}</a></li>
 			                                       </c:otherwise>
 			                                    </c:choose>
 			
@@ -232,7 +272,7 @@
 			                                 </c:if>
 			                              </c:forEach>
 			                              <c:if test="${accomPage + 10 <= accomLastPage}">
-			                                 <li><a class="nav-link active" href="${contextPath}/member/selectMyOrderList?accomPage=${accomPage+10}&activityPage=${activityPage}">&gt;</a></li>
+			                                 <li><a class="nav-link active" href="${contextPath}/member/selectMyOrderList?accomPage=${accomPage+10}&activityPage=${activityPage}&category=${param.category}">&gt;</a></li>
 			                              </c:if>
 			                           </ul>
 			                        </div>
@@ -248,7 +288,7 @@
 							<c:if test="${param.category != 'accom'}">
 								<div class="clear"> 
 		                            <div class="col-sm-12">
-		                            &nbsp;&nbsp;<label>체험</label>
+		                            &nbsp;&nbsp;<label style="color: rgb(80,140,186);">체험</label>
 									<div>
 										<c:choose>
 											<c:when test="${!empty activityPaymentList}">
@@ -269,10 +309,10 @@
 																<fmt:parseDate var="acActivityBookingTimeString" value="${ac.activityBookingTime}" pattern="yyyy-MM-dd HH:mm:ss.S" />
 																<td style="display:table-cell;vertical-align:middle;" width="61%">
 																	<table frame="void">
-																		<td width="30%" style="vertical-align: middle;">
-																			<img width="80%" height="100&" src="${contextPath}/resources/image/activity/${ac.activityImage.activityImageName}.${ac.activityImage.activityImageExt}">
+																		<td class="square" style="width: 30%">
+																			<img class="inner" src="${contextPath}/resources/image/activity/${ac.activityImage.activityImageName}.${ac.activityImage.activityImageExt}">
 																		</td>
-																		<td width="70%">
+																		<td style="width: 100%">
 																			<span style="float:right; text-align: left;">
 																			<p><small>${ac.activity.activityName}</small></p>
 																			<p><small>인원 : ${ac.activityUsePerson}명 / 예약시간 : 
@@ -298,12 +338,12 @@
 									</div>
 								</div>
 								
-								<!-- 숙소 페이징 -->
+								<!-- 체험 페이징 -->
 								<c:if test="${activityCount > 0}">
 									<div class="clear">
 			                           <ul class="nav justify-content-center">
 			                              <c:if test="${activityBeginRow > (ROW_PER_PAGE * 10)}">
-			                                 <li><a href="${contextPath}/member/selectMyOrderList?accomPage=${accomPage}&activityPage=${activityPageNo-1}">&lt;</a></li>
+			                                 <li><a href="${contextPath}/member/selectMyOrderList?accomPage=${accomPage}&activityPage=${activityPageNo-1}&category=${param.category}">&lt;</a></li>
 			                              </c:if>
 			                              <c:set var="doneLoop" value="false"></c:set>
 			                              <c:forEach var="f" begin="${activityPageNo}" end="${activityPageNo + 9}">
@@ -313,7 +353,7 @@
 			                                          <li class="active"><span class="nav-link">${f}</span></li>
 			                                       </c:when>
 			                                       <c:otherwise>
-			                                          <li><a class="nav-link active" href="${contextPath}/member/selectMyOrderList?accomPage=${accomPage}&activityPage=${f}">${f}</a></li>
+			                                          <li><a class="nav-link active" href="${contextPath}/member/selectMyOrderList?accomPage=${accomPage}&activityPage=${f}&category=${param.category}">${f}</a></li>
 			                                       </c:otherwise>
 			                                    </c:choose>
 			
@@ -323,7 +363,7 @@
 			                                 </c:if>
 			                              </c:forEach>
 			                              <c:if test="${activityPage + 10 <= activityLastPage}">
-			                                 <li><a class="nav-link active" href="${contextPath}/member/selectMyOrderList?accomPage=${accomPage}&activityPage=${activityPage+10}">&gt;</a></li>
+			                                 <li><a class="nav-link active" href="${contextPath}/member/selectMyOrderList?accomPage=${accomPage}&activityPage=${activityPage+10}&category=${param.category}">&gt;</a></li>
 			                              </c:if>
 			                           </ul>
 			                        </div>
