@@ -80,46 +80,43 @@ public class QnaService {
 	public void addQ(QnaForm qnaForm, String realPath) throws Exception {
 		// qnaForm값 디버깅 코드
 		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_qnaForm debug" + qnaForm.toString());
-		Qna qna = qnaForm.getQna();
-		
 		qnaMapper.addQ(qnaForm);
 		// 이미지 추가
-		List<MultipartFile> qImgList = qnaForm.getQnaImg();
+		MultipartFile qImgList = qnaForm.getQnaImg();
 		// 이미지가 업로드 되었을 경우
-		if(qnaForm.getQnaImg() != null) {
-			for(MultipartFile mf : qImgList) {
-				QnaImg qnaImg = new QnaImg();
-				// qnaImg의 QnaNo 셋팅
-				qnaImg.setQnaNo(qna.getQnaNo());
-				// 원본 이미지 파일 이름
-				String originalImgname = mf.getOriginalFilename(); 
-				// 마지막 점의 위치
-				int p = originalImgname.lastIndexOf("."); 
-				String ext = originalImgname.substring(p+1);
-				// 중복되지 않는 문자 이름 생성
-				String prename = UUID.randomUUID().toString().replace("-", "");
-				String imgname = prename;
+		if(qImgList != null) {
+			QnaImg qnaImg = new QnaImg();
+			// qnaImg의 QnaNo 셋팅
+			qnaImg.setQnaNo(qnaForm.getQnaNo());
+			// 원본 이미지 파일 이름
+			String originalImgname = qImgList.getOriginalFilename(); 
+			// 마지막 점의 위치
+			int p = originalImgname.lastIndexOf("."); 
+			String ext = originalImgname.substring(p+1);
+			// 중복되지 않는 문자 이름 생성
+			String prename = UUID.randomUUID().toString().replace("-", "");
+			String imgname = prename;
 				
-				qnaImg.setQnaImgName(imgname);
-				qnaImg.setQnaImgExt(ext);
-				qnaImg.setQnaImgSize(mf.getSize());
-				// qnaImg 값 디버깅 코드
-				log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_qnaForm debug" + qnaImg);
-				// 테이블에 값 저장
-				qnaMapper.addQImg(qnaImg);
+			qnaImg.setQnaImgName(imgname);
+			qnaImg.setQnaImgExt(ext);
+			qnaImg.setQnaImgSize(qImgList.getSize());
+			// qnaImg 값 디버깅 코드
+			log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_qnaForm debug" + qnaImg);
+			// 테이블에 값 저장
+			qnaMapper.addQImg(qnaImg);
 				
-				File f = new File(realPath+imgname+"."+ext);
-				try {
-					mf.transferTo(f);
-				} catch (IllegalStateException | IOException e) {
-					e.printStackTrace();
-					// IllegalStateException | IOException e 예외처리를 무조건 해야하는 예외
-					// RuntimeException은 예외처리를 하지 않아도 됨
-					throw new RuntimeException();
-				}
+			File f = new File(realPath+imgname+"."+ext);
+			try {
+				qImgList.transferTo(f);
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+				// IllegalStateException | IOException e 예외처리를 무조건 해야하는 예외
+				// RuntimeException은 예외처리를 하지 않아도 됨
+				throw new RuntimeException();
 			}
 		}
 	}
+
 	// [Admin] 답변 없는 질문 목록
 	public Map<String, Object> getNoneAnswerQ(int currentPage, int rowPerPage, String qnaCategory){
 		int beginRow = (currentPage - 1) * rowPerPage; 

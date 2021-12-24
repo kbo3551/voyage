@@ -1,14 +1,20 @@
 package com.gdu.voyage.vo;
 
-import java.util.List;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
 @Data
 public class QnaForm {
-	private Qna qna;
+	private int qnaNo;
+	private String memberId;
+	private String memberNickname;
+	private String qnaCategory;
+	private String qnaTitle;
+	private String qnaContent;
+	private String qnaSecret;
+	private String updateDate;
+	private String createDate;
 	private QnaAnswer qnaAnswer;
-	private List<MultipartFile> qnaImg;
+	private MultipartFile qnaImg;
 }

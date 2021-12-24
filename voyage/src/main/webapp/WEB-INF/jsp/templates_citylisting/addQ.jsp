@@ -209,7 +209,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                 	<div class="form-group">
-                                		<input class="form-controle error" name="memberId" id="memberId" type="text" value="${memberId}" hidden="hidden">
+                                		<input class="form-controle error" name="memberId" id="memberId" type="text" value="${qnaForm.memberId}" placeholder="아이디를 입력해주세요">
                                 	</div>
                                     <div class="form-group">
                                     	<!-- 

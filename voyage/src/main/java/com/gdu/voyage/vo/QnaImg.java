@@ -1,5 +1,7 @@
 package com.gdu.voyage.vo;
 
+import java.io.File;
+
 import lombok.Data;
 
 @Data

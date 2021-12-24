@@ -34,7 +34,7 @@
 		<result column="create_date" property="createDate"/>
 		<!-- Answer -->
 		<association property="qnaAnswer" javaType="com.gdu.voyage.vo.QnaAnswer">
-			<id column="qna_answer_no" property="qnaAnswerNo"/>
+			<id column="admin_id" property="adminId"/>
 			<result column="answer_content" property="answerContent"/>
 		</association>
 		<!-- Img -->
@@ -57,7 +57,8 @@
 			qna_secret,
 			create_date,
 			update_date
-		FROM qna ORDER BY update_date DESC
+		FROM 
+			qna ORDER BY update_date DESC
 		<where>
 			<if test="qnaCategory != null">
 				qna_category = #{qnaCategory}
@@ -66,7 +67,6 @@
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	<!-- 질문 내용 상세 조회 -->
-	<!-- ISSUE : service에서 모든 값이 null로 찍힘-->
 	<select id="selectQnaOneAndAnswer" parameterType="int" resultMap="resultQnaOne">
 		SELECT
 			q.qna_no,
@@ -77,7 +77,7 @@
 			q.qna_content,
 			q.qna_secret,
 			q.update_date,
-			an.qna_answer_no,
+			an.admin_id,
 			an.answer_content
 		FROM 
 			qna q LEFT JOIN qna_answer an

@@ -53,39 +53,31 @@ public class QnaController {
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		log.debug(qnaNo + "★★★★★★★★★★★ [다원] getQnaOne_qnaNo_Controller() debug");
 		Qna qna = qnaService.getQnaOneAndAnswer(qnaNo);
-		
-		QnaAnswer qnaAnswer = null;
-		
 	    log.debug(qna + "★★★★★★★★★★★ [다원] getQnaOne_qna_Controller() debug");
-	    /*
-	     * 	model.addAttribute("memberId", memberId);
-	    	model.addAttribute("qnaNo", qnaNo);
-	    */
 	    model.addAttribute("qna", qna);
-	    model.addAttribute("loginMember", loginMember);
-	    
-	    // 관리자 계정이면 관리자 Q&A 내용 상세 보기 페이지로 이동
-	 	// 그 외 회원이면 일반 Q&A 내용 상세 보기 페이지로 이동
-	 	if(loginMember.getMemberLevel() == 2) {
-	 		return "/admin/adminQnaOne";
+	 	// 비밀글 기능
+	 	// 비회원인 경우
+	 	if(loginMember == null && qna.getQnaSecret().equals("비밀글")) {
+	 		return "redirect:/login";
+	 		// 로그인했지만 작성자가 아닌 경우 
+	 	} else if(!qna.getMemberNickname().equals(loginMember.getMemberNickname())) {
+	 		return "redirect:/qnaList";
+	 		// 그 외...
 	 	} else {
-	 		// 비밀글 기능
-	 		// 비회원인 경우
-	 		if(loginMember == null && qna.getQnaSecret().equals("비밀글")) {
-	 			return "redirect:/login";
-	 			// 로그인했지만 작성자가 아닌 경우 
-	 		} else if(!qna.getMemberNickname().equals(loginMember.getMemberNickname())) {
-	 			return "redirect:/qnaList";
-	 			// 그 외...
-	 		} else {
-	 			return "/templates_citylisting/getQnaOne";
-	 		}
+	 		return "/templates_citylisting/getQnaOne";
 	 	}
 	}
+
 	// [Member] 질문 작성 get
 	@GetMapping("/addQ")
-	public String addQ() {
+	public String addQ(HttpSession session) {
 		log.debug("addQuestionController() 실행");
+		// session에서 로그인한 회원 정보 가져옴
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		// 비회원일 경우, 로그인 후 이용 가능
+		if(loginMember == null) {
+			return "redirect:/login";
+		}
 		return "/templates_citylisting/addQ";
 	}
 	// [Member] 질문 작성 post
@@ -95,9 +87,13 @@ public class QnaController {
 		Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 		String memberId = loginMember.getMemberId();
 		String memberNickname = loginMember.getMemberNickname();
+		// 디버그 코드
+		log.debug("★★★★★★★★★★★ [다원] addQ_qnaForm_Controller() debug" + qnaForm.toString());
 		// qna에 받아온 값 셋팅
-		qnaForm.getQna().setMemberId(memberId);
-		qnaForm.getQna().setMemberNickname(memberNickname);
+		Qna qna = new Qna();
+		qna.setMemberId(memberId);
+		qnaForm.setMemberId(memberId);
+		qnaForm.setMemberNickname(memberNickname);
 		// 디버그 코드
 		log.debug("★★★★★★★★★★★ [다원] addQ_qnaForm_Controller() debug" + qnaForm.toString());
 		// 이미지 파일 절대 경로 설정
@@ -159,7 +155,6 @@ public class QnaController {
 		return "redirect:/qnaList?pageNo=1";
 	}
 	// [Admin] 전체 Q&A 게시판 목록 출력
-	// [Member] Qna 게시판 목록 조회
 	@GetMapping("/admin/adminQnaList")
 	public String adminQnaList(Model model, HttpSession session,
 			@RequestParam(defaultValue="1") int currentPage,
@@ -185,7 +180,29 @@ public class QnaController {
 			return "/templates_citylisting/qnaList";
 		}
 	}
-	// [Admin] Q&A 
+	// [Admin] Q&A 내용 상세 조회
+	@GetMapping("/admin/adminQnaOne") 
+	public String getAdminQnaOne(HttpSession session, Model model, int qnaNo, String memberId) {
+		
+		log.debug("getQnaOneController() 실행");
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		log.debug(qnaNo + "★★★★★★★★★★★ [다원] getQnaOne_qnaNo_Controller() debug");
+		Qna qna = qnaService.getQnaOneAndAnswer(qnaNo);
+		
+		QnaAnswer qnaAnswer = null;
+		
+	    log.debug(qna + "★★★★★★★★★★★ [다원] getQnaOne_qna_Controller() debug");
+	    model.addAttribute("qna", qna);
+	    model.addAttribute("loginMember", loginMember);
+	    
+	    // 관리자 계정이면 관리자 Q&A 내용 상세 보기 페이지로 이동
+	 	// 그 외 회원이면 일반 Q&A 내용 상세 보기 페이지로 이동
+	 	if(loginMember.getMemberLevel() == 2) {
+	 		return "/admin/adminQnaOne";
+	 	} else {
+	 		return "/templates_citylisting/getQnaOne";
+	 	}
+	}
 	// [Admin] 답변 없는 질문 목록
 	
 	// [Admin] 답변 작성

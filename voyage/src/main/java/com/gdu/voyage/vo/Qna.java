@@ -15,6 +15,6 @@ public class Qna {
 	private String qnaSecret;
 	private String updateDate;
 	private String createDate;
-	private List<QnaAnswer> qnaAnswer;
+	private QnaAnswer qnaAnswer;
 	private List<QnaImg> qnaImg;
 }

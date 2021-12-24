@@ -12,7 +12,7 @@
         	// 버튼 눌렀을 때, 이동 경로 설정
         	$(function(){
         		// 관리자의 답변 여부를 확인할 변수 valAnswerDate, valAnswerContent 생성
-        		var valAnswerDate = $('#answerCreateDate').val();
+        		var valAdminId = $('#adminId').val();
         		var valAnswerContent = $('#answerContent').val();
         		
         		// Back 버튼 눌렀을 때
@@ -24,7 +24,7 @@
         			// 관리자 답변 여부에 따라 페이지 이동 여부 결정
         			// 답변 없음 => 수정 가능
         			// 답변 존재 => 수정 불가
-        			if(valAnswerDate == null || valAnswerDate == undefined || valAnswerDate == ""){
+        			if(valAdminId == null || valAdminId == undefined || valAdminId == ""){
      					if(valAnswerContent == null || valAnswerContent == undefined || valAnswerContent == ""){
   							// 수정 페이지로 이동
      						location.href = '/modifyQ?qnaNo=' + $('#qnaNo').val();
@@ -35,8 +35,8 @@
      						return;
      					}  				
         			} else {
-        				alert('해당 문의글은 관리자의 답변 날짜가 존재해 수정할 수 없습니다.');
-        				$('#answerCreateDate').focus();
+        				alert('해당 문의글은 관리자의 답변 기록이 존재해 수정할 수 없습니다.');
+        				$('#adminId').focus();
         				return;
         			}
         			
@@ -46,19 +46,19 @@
         			// 관리자 답변 여부에 따라 페이지 이동 여부 결정
         			// 답변 없음 => 수정 가능
         			// 답변 존재 => 수정 불가
-        			if(valAnswerDate == null || valAnswerDate == undefined || valAnswerDate == ""){
+        			if(valAdminId == null || valAdminId == undefined || valAdminId == ""){
      					if(valAnswerContent == null || valAnswerContent == undefined || valAnswerContent == ""){
      						// 삭제 페이지로 이동
      						location.href = '/romoveQ?qnaNo=' + $('#qnaNo').val();
      						return;
      					} else {
-     						alert('해당 문의글은 관리자의 답변 내용이 존재해 수정할 수 없습니다.');
+     						alert('해당 문의글은 관리자의 답변 내용이 존재해 삭제할 수 없습니다.');
      						$('#answerContent').focus();
      						return;
      					}  				
         			} else {
-        				alert('해당 문의글은 관리자의 답변 날짜가 존재해 수정할 수 없습니다.');
-        				$('#answerCreateDate').focus();
+        				alert('해당 문의글은 관리자의 답변 기록이 존재해 삭제할 수 없습니다.');
+        				$('#adminId').focus();
         				return;
         			}
         		});
@@ -234,12 +234,12 @@
                     		<div class="row">
                     			<div class="col-sm-6">
                                     <div class="form-group">
-                                    	No : <input class="form-control error" name="qnaAnswerNo" id="qnaAnswerNo" type="text" value="${qnaAnswer.qnaAnswerNo}"readonly="readonly">
+                                    	ID : <input class="form-control error" name="adminId" id="adminId" type="text" value="${qna.qnaAnswer.adminId}"readonly="readonly">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                 	<div class="form-group">
-                                        Content : <textarea class="form-control w-100 error" name="answerContent" id="answerContent" cols="30" rows="9" readonly="readonly">${qnaAnswer.answerContent}</textarea>
+                                        Content : <textarea class="form-control w-100 error" name="answerContent" id="answerContent" cols="30" rows="9" readonly="readonly">${qna.qnaAnswer.answerContent}</textarea>
                                     </div>
                                 </div>
                     		</div>
