@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.voyage.mapper.AccomPaymentMapper">
+	<resultMap type="com.gdu.voyage.vo.AccomPayment" id="AccomPayment">
+		<result column="accom_payment_no" property="accomPaymentNo" />
+		<result column="accom_room_no" property="accomRoomNo" />
+		<result column="member_id" property="memberId" />
+		<result column="accom_checkin" property="accomCheckIn" />
+		<result column="accom_checkout" property="accomCheckOut" />
+		<result column="accom_amount" property="accomAmount" />
+		<result column="accom_use_person" property="accomUsePerson" />
+		<result column="accom_payment_state" property="accomPaymentState" />
+		<result column="receipt" property="receipt" />
+		<result column="create_date" property="createDate" />
+		<collection property="accomBuilding" resultMap="AccomBuilding" />
+		<collection property="accomRoom" resultMap="AccomRoom" />
+		<collection property="accomRoomImage" resultMap="AccomRoomImage" />
+	</resultMap>
+	
+	<resultMap type="com.gdu.voyage.vo.AccomBuilding" id="AccomBuilding">
+		<result column="accom_building_name" property="accomBuildingName" />
+	</resultMap>
+	
+	<resultMap type="com.gdu.voyage.vo.AccomRoom" id="AccomRoom">
+		<result column="accom_room_name" property="accomRoomName" />
+	</resultMap>
+	
+	<resultMap type="com.gdu.voyage.vo.AccomRoomImage" id="AccomRoomImage">
+		<result column="accom_room_image_name" property="accomRoomImageName" />
+		<result column="accom_room_image_ext" property="accomRoomImageExt" />
+	</resultMap>
+	
+	
+	<!-- 주문상품 목록 불러오기 -->
+	<select id="selectAccomPayment" resultMap="AccomPayment">
+		SELECT
+			ap.accom_checkin,
+			ap.accom_checkout,
+			ap.accom_amount,
+			ap.accom_use_person,
+			ap.accom_payment_state,
+			ap.receipt,
+			ap.create_date,
+			ar.accom_room_name,
+			ab.accom_building_name,
+			ai.accom_room_image_name,
+			ai.accom_room_image_ext
+		FROM
+			accom_payment ap
+		INNER JOIN
+			accom_room ar
+		ON
+			ap.accom_room_no = ar.accom_room_no
+		INNER JOIN
+			accom_building ab
+		ON
+			ar.accom_building_no = ab.accom_building_no
+		INNER JOIN
+			accom_room_image ai
+		ON
+			ap.accom_room_no = ai.accom_room_no
+		WHERE
+			member_id = #{memberId}
+		LIMIT
+			0,1
+	</select>
+	
+</mapper>
