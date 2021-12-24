@@ -95,40 +95,8 @@
 		</div>
 	</form>
 	<script>
-/*	$(function() {
-		  var $input = $("#couponTerms");
-		  $input.on('blur', function() {
-		    // 입력 값 알아내기
-		    var _$self = $(this);
-		    var value = _$self.val();
-
-		    // 원단위로 변경하기
-		    var result = AddComma(value);
-
-		    _$self.val(result);
-		  })
-
-		});
-
-		function AddComma(dataValue) {
-		  isNumber(dataValue);
-		  var separateValue = Number(dataValue).toLocaleString('en');
-		  if (separateValue == 'NaN') {
-		    return '';
-		  }
-		  return separateValue;
-		}
-
-		function isNumber(checkValue) {
-		    checkValue = '' + checkValue;
-		    if (isNaN(checkValue) || checkValue == "") {
-		      alert('숫자만 입력해 주세요!!!');
-		      return;
-		    }
-		}
-	*/
     // 유효성 검사
-    function addCoupon(){
+    function addCoupon(){		
 		if($("#couponName").val() == ""){
 			alert('쿠폰 이름을 입력해주세요.');
 			return;
@@ -147,8 +115,11 @@
 		} else if($("#couponDiscount").val().length > 11){
 			alert('할인 금액의 크기가 너무 큽니다.');
 			return;
-		} else if($("#couponDiscount").val() == ""){
+		} else if($("#deadLine").val() == ""){
 			alert('쿠폰의 유효기간을 입력해주세요');
+			return;
+		} else if($("#couponTerms").val() < $("#couponDiscount").val()){
+			alert('할인 금액이 조건금액 보다 큽니다.');
 			return;
 		} else {
 			AddCoupon.submit();
