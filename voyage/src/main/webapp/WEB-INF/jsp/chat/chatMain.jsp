@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>VOYAGE - CHAT</title>
 
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script src="/webjars/sockjs-client/sockjs.min.js"></script>
@@ -16,14 +17,12 @@
 		<h2 class="m-3">채팅</h2>
 		<div class="m-3 p-3" style="background-color:white; border-radius:10px;">
 			<table class="table table-hover">
-				<tr>
-					<td>사진or이미지 </td>
-					<td>내용</td>
-				</tr>
-				<tr>
-					<td>사진or이미지 </td>
-					<td>내용</td>
-				</tr>
+				<c:forEach var="list" items="${chatList}">
+					<tr>
+						<td>${list.member.memberNickname} - ${list.member.memberLevel}</td>
+						<td>${list.chatContent} - ${list.createDate}</td>
+					</tr>
+				</c:forEach>
 			</table>
 		</div>
 	</div>
