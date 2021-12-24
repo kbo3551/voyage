@@ -17,14 +17,14 @@
 		<result column="coupon_use" property="couponUse" />
 		<result column="create_date" property="createDate" />
 	</resultMap>
-	<!-- 회원이 발급한 쿠폰 스케쥴러 처리 -->
-	<update id="updateDormantMemberCoupon" >
-		   	UPDATE coupon_member
-	   	SET 
-	   		coupon_use = '사용불가'
-	   	WHERE 
-	   		coupon_no >= #{couponNo} 
-	</update>
+	<!-- 회원이 발급한 쿠폰 스케쥴러 처리 --> 
+<!-- 	<update id="updateDormantMemberCoupon" > -->
+<!-- 		   	UPDATE coupon_member -->
+<!-- 	   	SET  -->
+<!-- 	   		coupon_use = '사용불가' -->
+<!-- 	   	WHERE  -->
+<!-- 	   		coupon_no >= #{couponNo}  -->
+<!-- 	</update> -->
 	<!-- 관리자가 발급한 쿠폰 스케쥴러 처리 -->
 	<update id="updateDormantCoupon">
 	UPDATE coupon
