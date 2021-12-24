@@ -8,35 +8,6 @@
         <title>Directory HTML-5 Template </title>
         <!-- jquery here -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script>
-        	// 비밀글은 작성자가 아니면 못 읽게 설정
-        	// 관리자는 관리자 페이지에서 따로 보기...
-        	/*
-        	$(function(){
-        		// qnaTitle을 클릭했을 때
-        		$('#moveToQnaOneBtn').click(function(){
-        			if(('#qnaSecret').val() == "비밀글"){
-        				if(('#memberNickname').val() == ('#loginMemberNickname').val()){
-        					location.href = "/getQnaOne?qnaNo=" + $('#qnaNo').val();
-        					return;
-        				} 
-        				
-        				if(('#memberNickname').val() != ('#loginMemberNickname').val()){
-        					alert('해당 문의글은 비밀글로 설정되어 있습니다. 규정 상, 문의글 작성자가 아닌 회원 분은 해당 문의글의 내용을 조회할 수 없으니 이 점 양해바랍니다.');
-        					location.href = '/qnaList?pageNo=' + $('#pageNo').val();
-        					return;
-        				}
-        				return;
-        			} 
-        			location.href = "/getQnaOne?qnaNo=" + $('#qnaNo').val();
-        			return;
-        			}
-        		});
-        	});
-        	*/
-        </script>
-        <!-- jquery end -->
-        
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- <link rel="manifest" href="site.webmanifest"> -->
@@ -246,7 +217,6 @@
                                     <div class="form-group mt-3">
                                     	<a type="button" href="${pageContext.request.contextPath}/addQ" class="button button-contactForm boxed-btn">Write</a>
                                     </div>
-                                    <!-- <span hidden="hidden" id="loginMemberNickname">${loginMember.memberNickname}</span> -->
                                 </div>
                             </div>
                         </div>
@@ -264,15 +234,7 @@
 		                                        </div>
 		                                   		<div class="list-caption">
 		                                        	<span>${qna.qnaCategory}</span>
-		                                        	<c:if test="${qna.qnaSecret eq '공개글'}">
-		                                        		<h3><a href="${pageContext.request.contextPath}/getQnaOne?qnaNo=${qna.qnaNo}">${qna.qnaTitle}</a></h3>
-		                                        	</c:if>
-		                                        	<c:if test="${qna.qnaSecret eq '비밀글'}">
-		                                        		<c:if test="${qna.memberId eq 'loginMember.memberId'}">
-		                                        			<h3><a href="${pageContext.request.contextPath}/getQnaOne?qnaNo=${qna.qnaNo}">${qna.qnaTitle}</a></h3>
-		                                        		</c:if>
-		                                        		<h3>비밀글입니다.</h3>
-		                                        	</c:if>
+		                                        	<h3><a href="${pageContext.request.contextPath}/getQnaOne?qnaNo=${qna.qnaNo}">${qna.qnaTitle}</a></h3>
 		                                            <p>${qna.qnaNo}</p>
 		                                            <div class="list-footer">
 		                                            	<ul>

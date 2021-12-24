@@ -32,29 +32,18 @@ public class QnaController {
 	
 	// [Member] Qna 게시판 목록 조회
 	@GetMapping("/qnaList")
-	public String qnaList(Model model, HttpSession session,
+	public String qnaList(Model model, 
 			@RequestParam(defaultValue="1") int currentPage,
 			@RequestParam(required = false) String qnaCategory) {
 		log.debug("qnaListController() 실행");
 		Map<String, Object> map = qnaService.getQnaListByCategory(qnaCategory, currentPage, ROW_PER_PAGE);
-		// 로그인한 회원의 아이디, 닉네임을 가져오기 위해 해당 값을 세션에서 가져옴
-		Member loginMember = (Member)session.getAttribute("loginMember");
-		// 디버그 코드
-		log.debug("★★★★★★★★★★★ [다원] qnaList_loginMember_Controller() debug" + loginMember.toString());
 		int[] navArray = qnaService.countPage(currentPage);
 		model.addAttribute("qnaList", map.get("qnaList"));
 		model.addAttribute("navArray", navArray);
 		model.addAttribute("lastPage", map.get("lastPage"));
 		model.addAttribute("currentPage", map.get("currentPage"));
 		model.addAttribute("totalCount", map.get("totalCount"));
-		model.addAttribute("loginMember", loginMember);
-		// 관리자 계정이면 관리자 Q&A 전체 목록 페이지로 이동
-		// 그 외 회원이면 일반 Q&A 전체 목록 페이지로 이동
-		if(loginMember.getMemberLevel() == 2) {
-			return "/admin/adminQnaList";
-		} else {
-			return "/templates_citylisting/qnaList";
-		}
+		return "/templates_citylisting/qnaList";
 	}
 	//[Member] Qna 상세 내용
 	@GetMapping("/getQnaOne") 
@@ -169,6 +158,36 @@ public class QnaController {
 		qnaService.removeQ(qna);
 		return "redirect:/qnaList?pageNo=1";
 	}
+	// [Admin] 전체 Q&A 게시판 목록 출력
+	// [Member] Qna 게시판 목록 조회
+	@GetMapping("/admin/adminQnaList")
+	public String adminQnaList(Model model, HttpSession session,
+			@RequestParam(defaultValue="1") int currentPage,
+			@RequestParam(required = false) String qnaCategory) {
+		log.debug("adminQnaList_Controller() 실행");
+		Map<String, Object> map = qnaService.getQnaListByCategory(qnaCategory, currentPage, ROW_PER_PAGE);
+		// 로그인한 회원의 아이디, 닉네임을 가져오기 위해 해당 값을 세션에서 가져옴
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		// 디버그 코드
+		log.debug("★★★★★★★★★★★ [다원] adminQnaList_loginMember_Controller() debug" + loginMember.toString());
+		int[] navArray = qnaService.countPage(currentPage);
+		model.addAttribute("qnaList", map.get("qnaList"));
+		model.addAttribute("navArray", navArray);
+		model.addAttribute("lastPage", map.get("lastPage"));
+		model.addAttribute("currentPage", map.get("currentPage"));
+		model.addAttribute("totalCount", map.get("totalCount"));
+		model.addAttribute("loginMember", loginMember);
+		// 관리자 계정이면 관리자 Q&A 전체 목록 페이지로 이동
+		// 그 외 회원이면 일반 Q&A 전체 목록 페이지로 이동
+		if(loginMember.getMemberLevel() == 2) {
+			return "/admin/adminQnaList";
+		} else {
+			return "/templates_citylisting/qnaList";
+		}
+	}
+	// [Admin] Q&A 
+	// [Admin] 답변 없는 질문 목록
+	
 	// [Admin] 답변 작성
 	@GetMapping("/admin/addA")
 	public String addA(QnaAnswer qnaAnswer) {

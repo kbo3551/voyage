@@ -46,14 +46,6 @@
 		</collection>
 	</resultMap>
 	<!-- resultMap End -->
-	<select id="selectMemberNickname" parameterType="String" resultType="String">
-		SELECT
-			member_nickname
-		FROM qna
-		<where>
-			member_id = #{memberId}
-		</where>
-	</select>
 	<!-- 질문 목록 조회 -->
 	<select id="selectQnaListByCategory" parameterType="com.gdu.voyage.vo.Qna" resultMap="resultQna">
 		SELECT
@@ -83,26 +75,16 @@
 			q.qna_category,
 			q.qna_title,
 			q.qna_content,
-			q.create_date,
-			q.update_date
-			a.qna_answer_no,
-			a.answer_content
+			q.qna_secret,
+			q.update_date,
+			an.qna_answer_no,
+			an.answer_content
 		FROM 
-			qna q
-			LEFT JOIN qna_answer a 
-				ON q.qna_no = a.qna_no
-		<!--
-			LEFT JOIN qna_image i
-			ON q.qna_no = i.qna_no 
-		-->
-		<where>
-			<!--  
-			<if test="a.qna_answer_no != null">
-				a.qna_answer_no = #{qnaAnswerNo}
-			</if>
-			-->
+			qna q LEFT JOIN qna_answer an
+		ON 
+			q.qna_no = an.qna_no
+		WHERE
 			q.qna_no = #{qnaNo}
-		</where>
 	</select>
 	<!-- 질문 등록 -->
 	<insert id="addQ" parameterType="com.gdu.voyage.vo.Qna">
