@@ -51,4 +51,11 @@
 	 	NOW()
 	 )
 	</insert>
+	<update id="updateCoupon" parameterType="com.gdu.voyage.vo.Coupon">
+	UPDATE coupon
+	set
+	   coupon_state = #{couponState}
+	WHERE
+	   coupon_no = #{couponNo}
+	</update>
 </mapper>

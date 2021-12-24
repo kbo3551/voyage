@@ -46,9 +46,15 @@ public class CouponService {
 		returnMap.put("lastPage", lastPage);
 		return returnMap;
 	}
+
 	// 쿠폰 생성
 	public void addCoupon(Coupon coupon) {
-		log.debug("☆☆☆[bryeong]CouponService 쿠폰 생성☆☆☆"+coupon.toString());
+		log.debug("☆☆☆[bryeong]CouponService 쿠폰 생성☆☆☆" + coupon.toString());
 		couponMapper.insertCoupon(coupon);
+	}
+	// 쿠폰 활성화/비활성화
+	public void updateCoupon(Coupon coupon) {
+		log.debug("☆☆☆[bryeong]CouponService 쿠폰 생성☆☆☆");
+		couponMapper.updateCoupon(coupon);
 	}
 }

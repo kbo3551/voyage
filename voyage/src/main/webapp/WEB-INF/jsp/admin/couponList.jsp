@@ -80,7 +80,16 @@
                                     <td>${c.deadLine}</td>
                                     <td>${c.couponState}</td>
                                     <td>${c.createDate}</td>
-									<td style=" height: 60px; text-align:left;"><a href="${pageContext.request.contextPath}/">상세보기</a></td>
+                                    <td style="text-align:left;"><label></label>    
+                                    <form class="form-contact contact_form mb-80" name="updateCoupon" id="updateCoupon" action="${pageContext.request.contextPath}/admin/updateCoupon?couponNo=${c.couponNo}" method="post">
+                                  		<select style=" height: 30px; text-align:left;" name="couponState" id="couponState">
+				                            <option value="활성화">활성화</option>
+				                            <option value="비활성화">비활성화</option>
+										</select>
+										&emsp;
+									<button class="btn btn-finish btn-primary" type="submit">수정</button>
+										&emsp;
+										</form>
                                  </tr>
                               </c:forEach>
                            </tbody>

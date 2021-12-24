@@ -15,5 +15,6 @@ public interface CouponMapper {
 	int couponTotalCount();
 	// 쿠폰 생성
 	void insertCoupon(Coupon coupon);
-	
+	// 쿠폰 활성/비활성
+	void updateCoupon(Coupon coupon);
 }

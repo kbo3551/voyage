@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.CouponService;
 import com.gdu.voyage.vo.Coupon;
+import com.gdu.voyage.vo.Host;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,18 +45,23 @@ public class CouponController {
 
 		return "admin/couponList";
 	}
-
 	// 쿠폰 생성
 	@GetMapping("/admin/addCoupon")
 	public String getAddCoupon() {
 		System.out.println("★★★[boryeong]CouponController_GETaddCoupon실행★★★");
 		return "admin/addCoupon";
 	}
-
 	@PostMapping("/admin/addCoupon")
 	public String postAddCoupon(Coupon coupon) {
 		System.out.println("★★★[boryeong]CouponController_POSTaddCoupon실행★★★");
 		couponService.addCoupon(coupon);
+		return "redirect:/admin/couponList";
+	}
+	// 쿠폰 활성화/비활성화
+	@PostMapping("/admin/updateCoupon")
+	public String postUpdateCoupon(Coupon coupon) {
+		System.out.println("★★★[boryeong]CouponController_POSTUpdateCoupon실행★★★");
+		couponService.updateCoupon(coupon);
 		return "redirect:/admin/couponList";
 	}
 }
