@@ -146,16 +146,16 @@
                             </div>
 
                             <div class="single-listing">
-                                <!-- Range Slider Start -->
+                                <!-- Price range -->
                                 <aside class="left_widgets p_filter_widgets price_rangs_aside sidebar_box_shadow">
                                     <div class="small-section-tittle2">
-                                        <h4 style="line-height: 2.1em; margin-bottom: -7%;">Price range</h4>
+                                        <h4 style="line-height: 2.1em; margin-bottom: -3%;">Price range</h4>
                                     </div>
                                     <div class="widgets_inner">
                                         <div class="range_item">
                                             <!-- <div id="slider-range"></div> -->
-                                            <input type="text" class="js-range-slider" value="" />
-                                            <div class="d-flex align-items-center">
+                                            <input type="text" class="js-range-slider" value="" name="searchPrice"/>
+                                            <div class="d-flex align-items-center pb-30">
                                                 <div class="price_text">
                                                     <p>Price :</p>
                                                 </div>
@@ -168,8 +168,8 @@
                                         </div>
                                     </div>
                                 </aside>
-                              <!-- Range Slider End -->
-                                 <a href="#" class="btn list-btn mt-20">Reset</a>
+<!-- 	                                 <a href="#" class="btn list-btn mt-20">Reset</a> -->
+								<button type="submit" class="btn list-btn mt-20">Search</button>
                             </div>
                         </div>
                         <!-- Job Category Listing End -->

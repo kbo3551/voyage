@@ -118,7 +118,7 @@
 	                                <div class="select-Categories pt-10 pb-30" style="width: 50%; float: left;">
 	                                	<c:forEach items="${facilityByBest}" var="af" varStatus="status">
 	                                		<label class="container">${af.accomBuildingFacilityName }<span style="font-size: 0.8em; color: #03B92B; padding-left: 5%;">${af.accomBuildingFacilityBest }</span>
-		                                        <input type="checkbox" name="searchFacility" value="${af.accomBuildingFacilityName }">
+		                                        <input type="checkbox" name="searchFacilityList" value="${af.accomBuildingFacilityName }">
 		                                        <span class="checkmark"></span>
 		                                    </label>
 		                                    <c:if test="${status.count == 3 }">
@@ -145,13 +145,13 @@
 	                                <!-- Price range -->
 	                                <aside class="left_widgets p_filter_widgets price_rangs_aside sidebar_box_shadow">
 	                                    <div class="small-section-tittle2">
-	                                        <h4 style="line-height: 2.1em; margin-bottom: -7%;">Price range</h4>
+	                                        <h4 style="line-height: 2.1em; margin-bottom: -3%;">Price range</h4>
 	                                    </div>
 	                                    <div class="widgets_inner">
 	                                        <div class="range_item">
 	                                            <!-- <div id="slider-range"></div> -->
 	                                            <input type="text" class="js-range-slider" value="" name="searchPrice"/>
-	                                            <div class="d-flex align-items-center">
+	                                            <div class="d-flex align-items-center pb-30">
 	                                                <div class="price_text">
 	                                                    <p>Price :</p>
 	                                                </div>

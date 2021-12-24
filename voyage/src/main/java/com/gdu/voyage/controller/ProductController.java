@@ -1,5 +1,6 @@
 package com.gdu.voyage.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -54,10 +55,13 @@ public class ProductController {
 										@RequestParam @Nullable String searchWord, 
 										@RequestParam @Nullable String searchAccomAddress,
 										@RequestParam @Nullable List<String> searchFacilityList,
-										@RequestParam (defaultValue = "1") int searchReviewScore,
+										@RequestParam @Nullable Integer searchReviewScore,
 										@RequestParam @Nullable String searchPrice
 										) {
-		List<String> searchPriceList = Arrays.asList(searchPrice.split(";"));
+		List<String> searchPriceList = new ArrayList<>();
+		if(searchPrice != null) {
+			searchPriceList = Arrays.asList(searchPrice.split(";"));
+		}
 		log.debug("[debug] ProductController.getAccomBuildingProduct searchWord : " + searchWord);
 		log.debug("[debug] ProductController.getAccomBuildingProduct searchAccomAddress : " + searchAccomAddress);
 		log.debug("[debug] ProductController.getAccomBuildingProduct searchFacilityList : " + searchFacilityList);

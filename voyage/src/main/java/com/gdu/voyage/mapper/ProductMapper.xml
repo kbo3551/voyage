@@ -199,11 +199,31 @@
 		WHERE                                      
 			accom_building_state_admin = '승인완료' AND accom_building_state = '공개'
 			AND
+			<!-- 입렵(해시태그, 건물 이름, 건물 소개글) 검색 -->
 			<if test="#{searchWord} != null">
-				h.hashtag LIKE '%${searchWord}%' OR
+				(h.hashtag LIKE '%${searchWord}%' OR
 				b.accom_building_name LIKE '%${searchWord}%' OR
-				b.accom_building_description LIKE '%${searchWord}%'			
-			</if>			
+				b.accom_building_description LIKE '%${searchWord}%'	OR
+				f.accom_building_facility_name LIKE '%${searchWord}%' OR
+				a.accom_address_zip LIKE '%${searchWord}%')			
+			</if>
+			AND
+			<!-- 지역 검색 -->
+			<if test="#{searchAccomAddress} != null">
+				(a.accom_address_zip LIKE '%${searchAccomAddress}%')		
+			</if>
+<!-- 			AND -->
+<!-- 				f.accom_building_facility_name  -->
+<!-- 				시설 검색 -->
+<!-- 				<if test="#{searchFacilityList} != null"> -->
+<!-- 					<foreach collection="searchFacilityList" item="facility" open="LIKE '%" close="%'" separator="%' LIKE '%"> -->
+<!-- 						${searchFacilityList} -->
+<!-- 						<foreach collection="facility" item="f" open="(" close=")" separator=","> -->
+<!-- 							${f.searchFacilityList} -->
+<!-- 						</foreach> -->
+<!-- 					</foreach> -->
+<!-- 				</if>	 -->
+			
 		ORDER BY
 			b.update_date DESC;
 	</select>
@@ -337,4 +357,45 @@
 			AND a.accom_building_state_admin = '승인완료'
 			AND a.accom_building_no = #{accomBuildingNo}
 	</select>
+
+	<!-- 숙소-건물 상세 조회 -->
+<!-- 	<select id="selectAccomBuildingList" resultMap="resultAccomBuilding"> -->
+<!-- 		SELECT                                       -->
+<!-- 			b.accom_building_no, -->
+<!-- 			b.host_no, -->
+<!-- 			b.accom_building_name, -->
+<!-- 			b.accom_building_description,  -->
+<!-- 			b.accom_building_phone, -->
+<!-- 			b.accom_building_state, -->
+<!-- 			b.accom_building_state_admin, -->
+<!-- 			b.create_date, -->
+<!-- 			b.update_date, -->
+<!-- 			f.accom_building_facility_no, -->
+<!-- 			f.accom_building_no, -->
+<!-- 			f.accom_building_facility_name, -->
+<!-- 			i.accom_building_image_no, -->
+<!-- 			i.accom_building_image_name, -->
+<!-- 			i.accom_building_image_ext, -->
+<!-- 			s.accom_building_spot_no, -->
+<!-- 			a.accom_address_no, -->
+<!-- 			a.accom_address_zip, -->
+<!-- 			h.hashtag_no -->
+<!-- 		FROM       -->
+<!-- 			accom_building b -->
+<!-- 			LEFT JOIN accom_address a -->
+<!-- 				ON b.accom_building_no = a.accom_building_no -->
+<!-- 			LEFT JOIN accom_building_image i -->
+<!-- 				ON b.accom_building_no = i.accom_building_no -->
+<!-- 			LEFT JOIN accom_building_facility f -->
+<!-- 				ON b.accom_building_no = f.accom_building_no -->
+<!-- 			LEFT JOIN accom_building_spot s -->
+<!-- 				ON b.accom_building_no = s.accom_building_no -->
+<!-- 			LEFT JOIN hashtag h -->
+<!-- 				ON b.accom_building_no = h.iden_no                                     -->
+<!-- 		WHERE                                       -->
+<!-- 			accom_building_state_admin = '승인완료' AND accom_building_state = '공개' -->
+<!-- 			AND a.accom_building_no = #{accomBuildingNo} -->
+<!-- 		ORDER BY -->
+<!-- 			b.update_date DESC; -->
+<!-- 	</select> -->
 </mapper>

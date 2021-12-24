@@ -22,6 +22,7 @@ public interface ProductMapper {
 	
 	/* 숙소-건물 상세 */
 	// [사용자] 숙소_건물 상세 페이지 출력
+//	AccomBuilding selectAccomBuildingOne(int accomBuildingNo);
 	AccomBuilding selectAccomBuildingOne(int accomBuildingNo);
 
 	/* 체험 목록 */
