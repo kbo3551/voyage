@@ -25,9 +25,27 @@
 	</resultMap>
 	
 	
+	<select id="selectActivityPaymentOne" resultType="com.gdu.voyage.vo.ActivityPayment">
+		SELECT
+			activity_payment_no activityPaymentNo,
+			activity_no activityNo,
+			member_id memberId,
+			activity_booking_time activityBookingTime,
+			activity_amount activityAmount,
+			activity_use_person activityUsePerson,
+			activity_payment_state activityPaymentState,
+			receipt receipt,
+			create_date createDate
+		FROM
+			activity_payment
+		WHERE
+			activity_payment_no = #{activityPaymentNo}
+	</select>
+	
 	<!-- 주문상품 목록 불러오기 -->
 	<select id="selectActivityPayment" resultMap="ActivityPayment">
 		SELECT
+			ap.activity_payment_no,
 			ap.activity_booking_time,
 			ap.activity_amount,
 			ap.activity_use_person,

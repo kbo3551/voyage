@@ -9,6 +9,8 @@ import com.gdu.voyage.vo.ActivityPayment;
 
 @Mapper
 public interface ActivityPaymentMapper {
+	// 상세
+	ActivityPayment selectActivityPaymentOne(int activityPaymentNo);
 	// 체험 결제 목록
 	List<ActivityPayment> selectActivityPayment(Map<String, Object> map);
 	int selectCountPage(String memberId);

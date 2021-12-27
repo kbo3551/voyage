@@ -22,6 +22,16 @@ public class PaymentService {
 	@Autowired private AccomPaymentMapper accomPaymentMapper;
 	@Autowired private ActivityPaymentMapper activityPaymentMapper;
 	
+	// 체험 주문 상세
+	public ActivityPayment selActivityPaymentOne(int activityPaymentNo) {
+		return activityPaymentMapper.selectActivityPaymentOne(activityPaymentNo);
+	}
+	
+	// 숙소 주문 상세
+	public AccomPayment selectAccomPaymentOne(int accomPaymentNo) {
+		return accomPaymentMapper.selectAccomPaymentOne(accomPaymentNo);
+	}
+	
 	// 체험 주문 내역
 	public Map<String, Object> selectActivityPayment(int currentPage, int rowPerPage,String memberId) {
 		Map<String, Object> paraMap = new HashMap<>();

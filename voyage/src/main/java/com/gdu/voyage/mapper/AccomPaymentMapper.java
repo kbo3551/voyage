@@ -9,6 +9,8 @@ import com.gdu.voyage.vo.AccomPayment;
 
 @Mapper
 public interface AccomPaymentMapper {
+	
+	AccomPayment selectAccomPaymentOne(int accomPaymentNo);
 	// 숙소 결제 목록
 	List<AccomPayment> selectAccomPayment(Map<String, Object> map);
 	// 페이징을 위한 갯수

@@ -30,10 +30,28 @@
 		<result column="accom_room_image_ext" property="accomRoomImageExt" />
 	</resultMap>
 	
+	<select id="selectAccomPaymentOne" resultType="com.gdu.voyage.vo.AccomPayment">
+		SELECT
+			accom_payment_no accomPaymentNo,
+			accom_room_no accomRoomNo,
+			member_id memberId,
+			accom_checkin accomCheckIn,
+			accom_checkout accomCheckOut,
+			accom_amount accomAmount,
+			accom_use_person accomUsePerson,
+			accom_payment_state accomPaymentState,
+			receipt receipt,
+			create_date createDate
+		FROM
+			accom_payment
+		WHERE
+			accom_payment_no = #{accomPaymentNo}
+	</select>
 	
 	<!-- 주문상품 목록 불러오기 -->
 	<select id="selectAccomPayment" resultMap="AccomPayment">
 		SELECT
+			ap.accom_payment_no,
 			ap.accom_checkin,
 			ap.accom_checkout,
 			ap.accom_amount,

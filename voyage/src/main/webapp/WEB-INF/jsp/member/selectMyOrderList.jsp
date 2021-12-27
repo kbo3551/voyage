@@ -77,6 +77,56 @@
 	  left:7%;
 	}
 	
+	@media (min-width:992px) and (max-width:1199px){
+		.inner {
+		  position: absolute;
+		  width: 70%;
+		  height: 60%;
+		  top:17%;
+		  left:7%;
+		}
+	}
+	
+	@media (min-width:768px) and (max-width:991px){
+		.inner {
+		  position: absolute;
+		  width: 70%;
+		  height: 50%;
+		  top:24%;
+		  left:7%;
+		}
+	}
+	
+	@media (min-width:570px) and (max-width:767px){
+		.inner {
+		  position: absolute;
+		  width: 70%;
+		  height: 30%;
+		  top:30%;
+		  left:7%;
+		}
+	}
+	
+	@media (min-width:570px) and (max-width:767px){
+		.inner {
+		  position: absolute;
+		  width: 70%;
+		  height: 30%;
+		  top:30%;
+		  left:7%;
+		}
+	}
+	
+	@media(max-width:570px){
+		.inner {
+		  position: absolute;
+		  width: 70%;
+		  height: 30%;
+		  top:40%;
+		  left:7%;
+		}
+	}
+	
 }
 </style>
 
@@ -201,18 +251,21 @@
 										<c:choose>
 											<c:when test="${!empty accomPaymentList}">
 												<div>
-													<table class="table" style="text-align: center; vertical-align: middle; display:table;">
+													<table class="table" style=" text-align: center; vertical-align: middle; display:table;">
 														<tr>
 															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">날짜</td>
 															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">상품정보</td>
 															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">상태</td>
 															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">확인</td>
 														</tr>
+														<c:set var="acmModalNo" value="1" />
 														<c:forEach var="ap" items="${accomPaymentList}">
 															<tr>
 																<fmt:parseDate var="apCreateDateString" value="${ap.createDate}" pattern="yyyy-MM-dd HH:mm:ss.S" />
 																<td style="display:table-cell;vertical-align:middle;" width="13%">
 																	<small><fmt:formatDate value="${apCreateDateString}" pattern="yyyy-MM-dd" /></small>
+																	<br>
+																	<small><button class="btn" type="button" style="background: silver;">취소신청</button></small>
 																</td>
 																<fmt:parseDate var="apAccomCheckInString" value="${ap.accomCheckIn}" pattern="yyyy-MM-dd HH:mm:ss.S" />
 																<fmt:parseDate var="apAccomCheckOutString" value="${ap.accomCheckOut}" pattern="yyyy-MM-dd HH:mm:ss.S" />
@@ -234,8 +287,34 @@
 																	
 																</td>
 																<td style="display:table-cell;vertical-align:middle;" width="13%">${ap.accomPaymentState}</td>
-																<td style="display:table-cell;vertical-align:middle;" width="13%"><small>${ap.receipt}</small></td>
+																<td style="display:table-cell;vertical-align:middle;" width="13%"><small><a href="#" data-toggle="modal" data-target="#acmModal${acmModalNo}" >명세</a></small>
+																<!-- The Modal -->
+																  <div class="modal" id="acmModal${acmModalNo}">
+																    <div class="modal-dialog">
+																      <div class="modal-content">
+																      
+																        <!-- Modal Header -->
+																        <div class="modal-header">
+																          <h4 class="modal-title">${ap.accomRoom.accomRoomName} 명세</h4>
+																          <button type="button" class="close" data-dismiss="modal">&times;</button>
+																        </div>
+																        
+																        <!-- Modal body -->
+																        <div class="modal-body">
+																          ${ap.receipt}
+																        </div>
+																        
+																        <!-- Modal footer -->
+																        <div class="modal-footer">
+																          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+																        </div>
+																        
+																      </div>
+																    </div>
+																  </div>
+																</td>
 															</tr>
+															<c:set var="acmModalNo" value="${acmModalNo+1}" />
 														</c:forEach>
 													</table>
 												</div>
@@ -300,11 +379,14 @@
 															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">상태</td>
 															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">확인</td>
 														</tr>
+														<c:set var="actModalNo" value="1" />
 														<c:forEach var="ac" items="${activityPaymentList}">
 															<tr>
 																<fmt:parseDate var="acCreateDateString" value="${ac.createDate}" pattern="yyyy-MM-dd HH:mm:ss.S" />
 																<td style="display:table-cell;vertical-align:middle;" width="13%">
 																	<small><fmt:formatDate value="${acCreateDateString}" pattern="yyyy-MM-dd" /></small>
+																	<br>
+																	<small><button class="btn" type="button" style="background: silver;">취소신청</button></small>
 																</td>
 																<fmt:parseDate var="acActivityBookingTimeString" value="${ac.activityBookingTime}" pattern="yyyy-MM-dd HH:mm:ss.S" />
 																<td style="display:table-cell;vertical-align:middle;" width="61%">
@@ -325,8 +407,35 @@
 																	
 																</td>
 																<td style="display:table-cell;vertical-align:middle;" width="13%">${ac.activityPaymentState}</td>
-																<td style="display:table-cell;vertical-align:middle;" width="13%"><small>${ac.receipt}</small></td>
+																<td style="display:table-cell;vertical-align:middle;" width="13%"><small><a href="#" data-toggle="modal" data-target="#actModal${actModalNo}" >명세</a></small>
+																
+																<!-- The Modal -->
+																  <div class="modal" id="actModal${actModalNo}">
+																    <div class="modal-dialog">
+																      <div class="modal-content">
+																      
+																        <!-- Modal Header -->
+																        <div class="modal-header">
+																          <h4 class="modal-title">${ac.activity.activityName} 명세</h4>
+																          <button type="button" class="close" data-dismiss="modal">&times;</button>
+																        </div>
+																        
+																        <!-- Modal body -->
+																        <div class="modal-body">
+																          ${ac.receipt}
+																        </div>
+																        
+																        <!-- Modal footer -->
+																        <div class="modal-footer">
+																          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+																        </div>
+																        
+																      </div>
+																    </div>
+																  </div>
+																</td>
 															</tr>
+															<c:set var="actModalNo" value="${actModalNo+1}" />
 														</c:forEach>
 													</table>
 												</div>
@@ -381,8 +490,6 @@
                 <br>
             </div>
     	</div>
-     
-
 
 	
 	</main>

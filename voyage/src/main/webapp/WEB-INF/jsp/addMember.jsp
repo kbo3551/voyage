@@ -145,7 +145,7 @@
 		                                </div>
 		                                <div class="form-group">
 		                                    <label for="address">Post Code</label>
-		                                    <input type="button" class="btn" style="background: rgb(0,172,238);
+		                                    <input type="button" class="btn" style="
 	                                   			   background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);"
 		                                    onclick="execDaumPostcode()" value="우편번호">
 		                                    <input type="number" class="form-control" id="postalCode" name="postalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" readonly="readonly">
