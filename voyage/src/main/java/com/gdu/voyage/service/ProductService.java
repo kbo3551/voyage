@@ -78,10 +78,20 @@ public class ProductService {
 		log.debug("[debug] ProductService.getActivityList activityList : " + activityList);
 		return activityList;
 	}
-	// [사용자] 숙소-건물 지역 인기 조회
+	// [사용자] 체험 지역 인기 조회
 	public List<Map<String, Object>> getActivityAddressByBest() {
 		List<Map<String, Object>> addressZipByBest = productMapper.selectActivityAddressByBest();
 		log.debug("[debug] ProductService.getActivityAddressByBest addressZipByBest : " + addressZipByBest);
 		return addressZipByBest;
+	}
+	
+	// [사용자] 체험 목록 검색 조회
+	public List<Activity> getActivityListBySearch(Map<String, Object> param) {
+		log.debug("[debug] ProductService.getActivityListBySearch param : " + param);
+		
+		List<Activity> activityList = productMapper.selectActivityListBySearch(param);
+		
+		log.debug("[debug] ProductService.getActivityList activityList : " + activityList);
+		return activityList;
 	}
 }

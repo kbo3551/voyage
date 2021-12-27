@@ -17,6 +17,7 @@ public interface ProductMapper {
 	List<Map<String, Object>> selectAccomBuildingFacilityByBest();
 	// [사용자] 숙소-건물 지역 인기 조회
 	List<Map<String, Object>> selectAccomAddressByBest();
+	
 	// [사용자] 숙소-건물 목록 검색 조회
 	List<AccomBuilding> selectAccomBuildingListBySearch(Map<String, Object> param);
 	
@@ -30,4 +31,7 @@ public interface ProductMapper {
 	List<Activity> selectActivityList();
 	// [사용자] 체험 지역 인기 조회
 	List<Map<String, Object>> selectActivityAddressByBest();
+
+	// [사용자] 숙소-건물 목록 검색 조회
+	List<Activity> selectActivityListBySearch(Map<String, Object> param);
 }

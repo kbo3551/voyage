@@ -14,29 +14,25 @@
 		<result column="accom_building_state_admin" property="accomBuildingStateAdmin"/>
 		<result column="create_date" property="createDate"/>
 		<result column="update_date" property="updateDate"/>
+		<!-- address -->
+		<collection property="accomAddress" ofType="com.gdu.voyage.vo.AccomAddress">
+			<result column="accom_address_zip" property="accomAddressZip"/>
+		</collection>
 		<!-- facility -->
 		<collection property="accomBuildingFacilityList" ofType="com.gdu.voyage.vo.AccomBuildingFacility">
-			<id column="accom_building_facility_no" property="accomBuildingFacilityNo"/>
 			<result column="accom_building_facility_name" property="accomBuildingFacilityName"/>
 		</collection>
 		<!-- image -->
 		<collection property="accomBuildingImageList" ofType="com.gdu.voyage.vo.AccomBuildingImage">
-			<id column="accom_building_image_no" property="accomBuildingImageNo"/>
-			<result column="accom_building_image_name" property="accomBuildingImageName"/>
-			<result column="accom_building_image_ext" property="accomBuildingImageExt"/>
+			<result column="accom_building_image" property="accomBuildingImageName"/>
 		</collection>
 		<!-- spot -->
 		<collection property="accomBuildingSpotList" ofType="com.gdu.voyage.vo.AccomBuildingSpot">
-			<id column="accom_building_spot_no" property="accomBuildingSpotNo"/>
-		</collection>
-		<!-- address -->
-		<collection property="accomAddress" ofType="com.gdu.voyage.vo.AccomAddress">
-			<id column="accom_address_no" property="accomAddressNo"/>
-			<result column="accom_address_zip" property="accomAddressZip"/>
+			<result column="accom_building_spot_name" property="accomBuildingSpotName"/>
 		</collection>
 		<!-- hashtag -->
 		<collection property="hashtagList" ofType="com.gdu.voyage.vo.Hashtag">
-			<id column="hashtag_no" property="hashtagNo"/>
+			<result column="hashtag" property="hashtag"/>
 		</collection>
 	</resultMap>
 	
@@ -64,20 +60,17 @@
 		<result column="activity_state_admin" property="activityStateAdmin"/>
 		<result column="create_date" property="createDate"/>
 		<result column="update_date" property="updateDate"/>
+		<!-- address -->
+		<collection property="activityAddress" ofType="com.gdu.voyage.vo.ActivityAddress">
+			<result column="activity_address_zip" property="activityAddressZip"/>
+		</collection>
 		<!-- image -->
 		<collection property="activityImageList" ofType="com.gdu.voyage.vo.ActivityImage">
-			<id column="activity_image_no" property="activityImageNo"/>
-			<result column="activity_image_name" property="activityImageName"/>
-			<result column="activity_image_ext" property="activityImageExt"/>
+			<result column="activity_image" property="activityImageName"/>
 		</collection>
 		<!-- spot -->
 		<collection property="activitySpotList" ofType="com.gdu.voyage.vo.ActivitySpot">
-			<id column="activity_spot_no" property="activitySpotNo"/>
-		</collection>
-		<!-- address -->
-		<collection property="activityAddress" ofType="com.gdu.voyage.vo.ActivityAddress">
-			<id column="activity_address_no" property="activityAddressNo"/>
-			<result column="activity_address_zip" property="activityAddressZip"/>
+			<id column="activity_spot_name" property="activitySpotName"/>
 		</collection>
 		<!-- hashtag -->
 		<collection property="hashtagList" ofType="com.gdu.voyage.vo.Hashtag">
@@ -93,42 +86,25 @@
 	
 	<!-- 숙소-건물 목록 조회 -->
 	<select id="selectAccomBuildingList" resultMap="resultAccomBuilding">
-		SELECT                                      
-			b.accom_building_no,
-			b.host_no,
-			b.accom_building_name,
-			b.accom_building_description, 
-			b.accom_building_phone,
-			b.accom_building_state,
-			b.accom_building_state_admin,
-			b.create_date,
-			b.update_date,
-			f.accom_building_facility_no,
-			f.accom_building_no,
-			f.accom_building_facility_name,
-			i.accom_building_image_no,
-			i.accom_building_image_name,
-			i.accom_building_image_ext,
-			s.accom_building_spot_no,
-			a.accom_address_no,
-			a.accom_address_zip,
-			h.hashtag_no
-		FROM      
-			accom_building b
-			LEFT JOIN accom_address a
-				ON b.accom_building_no = a.accom_building_no
-			LEFT JOIN accom_building_image i
-				ON b.accom_building_no = i.accom_building_no
-			LEFT JOIN accom_building_facility f
-				ON b.accom_building_no = f.accom_building_no
-			LEFT JOIN accom_building_spot s
-				ON b.accom_building_no = s.accom_building_no
-			LEFT JOIN hashtag h
-				ON b.accom_building_no = h.iden_no                                    
-		WHERE                                      
-			accom_building_state_admin = '승인완료' AND accom_building_state = '공개'
-		ORDER BY
-			b.update_date DESC;
+		SELECT 
+			ab.*, aba.*, abf.*, abi.*, abs.*, h.*
+		FROM 
+			(SELECT * FROM accom_building) ab,
+			(SELECT accom_building_no, GROUP_CONCAT(accom_address_zip) accom_address_zip FROM accom_address GROUP BY accom_building_no) aba,
+			(SELECT accom_building_no, GROUP_CONCAT(accom_building_facility_name SEPARATOR ', ') accom_building_facility_name FROM accom_building_facility GROUP BY accom_building_no) abf,
+			(SELECT accom_building_no, GROUP_CONCAT(CONCAT_WS('.',accom_building_image_name,accom_building_image_ext)) accom_building_image FROM accom_building_image GROUP BY accom_building_no) abi,
+			(SELECT accom_building_no, GROUP_CONCAT(accom_building_spot_name SEPARATOR ', ') accom_building_spot_name FROM accom_building_spot GROUP BY accom_building_no) abs,
+			(SELECT iden_no, GROUP_CONCAT(hashtag) hashtag FROM hashtag GROUP BY iden_no) h
+		WHERE 
+			accom_building_state_admin = '승인완료' AND
+			accom_building_state = '공개' AND
+			ab.accom_building_no = aba.accom_building_no AND
+			ab.accom_building_no = abf.accom_building_no AND
+			ab.accom_building_no = abi.accom_building_no AND
+			ab.accom_building_no = abs.accom_building_no AND
+			ab.accom_building_no = h.iden_no
+		ORDER BY 
+			update_date DESC;
 	</select>
 	
 	<!-- 숙소-시설 인기 시설 조회 -->
@@ -163,54 +139,36 @@
 	
 	<!-- 숙소-건물 목록 검색 조회 -->
 	<select id="selectAccomBuildingListBySearch" parameterType="Map" resultMap="resultAccomBuilding">
-		SELECT                                      
-			b.accom_building_no,
-			b.host_no,
-			b.accom_building_name,
-			b.accom_building_description, 
-			b.accom_building_phone,
-			b.accom_building_state,
-			b.accom_building_state_admin,
-			b.create_date,
-			b.update_date,
-			f.accom_building_facility_no,
-			f.accom_building_no,
-			f.accom_building_facility_name,
-			i.accom_building_image_no,
-			i.accom_building_image_name,
-			i.accom_building_image_ext,
-			s.accom_building_spot_no,
-			a.accom_address_no,
-			a.accom_address_zip,
-			h.hashtag_no,
-			h.hashtag
-		FROM      
-			accom_building b
-			LEFT JOIN accom_address a
-				ON b.accom_building_no = a.accom_building_no
-			LEFT JOIN accom_building_image i
-				ON b.accom_building_no = i.accom_building_no
-			LEFT JOIN accom_building_facility f
-				ON b.accom_building_no = f.accom_building_no
-			LEFT JOIN accom_building_spot s
-				ON b.accom_building_no = s.accom_building_no
-			LEFT JOIN hashtag h
-				ON b.accom_building_no = h.iden_no                                    
-		WHERE                                      
-			accom_building_state_admin = '승인완료' AND accom_building_state = '공개'
+		SELECT 
+			ab.*, aba.*, abf.*, abi.*, abs.*, h.*
+		FROM 
+			(SELECT * FROM accom_building) ab,
+			(SELECT accom_building_no, GROUP_CONCAT(accom_address_zip) accom_address_zip FROM accom_address GROUP BY accom_building_no) aba,
+			(SELECT accom_building_no, GROUP_CONCAT(accom_building_facility_name SEPARATOR ', ') accom_building_facility_name FROM accom_building_facility GROUP BY accom_building_no) abf,
+			(SELECT accom_building_no, GROUP_CONCAT(CONCAT_WS('.',accom_building_image_name,accom_building_image_ext)) accom_building_image FROM accom_building_image GROUP BY accom_building_no) abi,
+			(SELECT accom_building_no, GROUP_CONCAT(accom_building_spot_name SEPARATOR ', ') accom_building_spot_name FROM accom_building_spot GROUP BY accom_building_no) abs,
+			(SELECT iden_no, GROUP_CONCAT(hashtag) hashtag FROM hashtag GROUP BY iden_no) h
+		WHERE 
+			accom_building_state_admin = '승인완료' AND
+			accom_building_state = '공개' AND
+			ab.accom_building_no = aba.accom_building_no AND
+			ab.accom_building_no = abf.accom_building_no AND
+			ab.accom_building_no = abi.accom_building_no AND
+			ab.accom_building_no = abs.accom_building_no AND
+			ab.accom_building_no = h.iden_no
 			AND
 			<!-- 입렵(해시태그, 건물 이름, 건물 소개글) 검색 -->
 			<if test="#{searchWord} != null">
 				(h.hashtag LIKE '%${searchWord}%' OR
-				b.accom_building_name LIKE '%${searchWord}%' OR
-				b.accom_building_description LIKE '%${searchWord}%'	OR
-				f.accom_building_facility_name LIKE '%${searchWord}%' OR
-				a.accom_address_zip LIKE '%${searchWord}%')			
+				ab.accom_building_name LIKE '%${searchWord}%' OR
+				ab.accom_building_description LIKE '%${searchWord}%' OR
+				aba.accom_address_zip LIKE '%${searchWord}%' OR	
+				abf.accom_building_facility_name LIKE '%${searchWord}%')
 			</if>
 			AND
 			<!-- 지역 검색 -->
 			<if test="#{searchAccomAddress} != null">
-				(a.accom_address_zip LIKE '%${searchAccomAddress}%')		
+				(aba.accom_address_zip LIKE '%${searchAccomAddress}%')		
 			</if>
 <!-- 			AND -->
 <!-- 				f.accom_building_facility_name  -->
@@ -223,44 +181,29 @@
 <!-- 						</foreach> -->
 <!-- 					</foreach> -->
 <!-- 				</if>	 -->
-			
 		ORDER BY
-			b.update_date DESC;
+			update_date DESC;
 	</select>
 	
 	<!-- 체험 목록 조회 -->
 	<select id="selectActivityList" resultMap="resultActivity">
-		SELECT                                      
-			ac.activity_no,
-			ac.host_no,
-			ac.activity_name,
-			ac.activity_description, 
-			ac.activity_phone,
-			ac.activity_state,
-			ac.activity_state_admin,
-			ac.create_date,
-			ac.update_date,
-			i.activity_image_no,
-			i.activity_image_name,
-			i.activity_image_ext,
-			s.activity_spot_no,
-			a.activity_address_no,
-			a.activity_address_zip,
-			h.hashtag_no
-		FROM      
-			activity ac
-			LEFT JOIN activity_address a
-				ON ac.activity_no = a.activity_no
-			LEFT JOIN activity_image i
-				ON ac.activity_no = i.activity_no
-			LEFT JOIN activity_spot s
-				ON ac.activity_no = s.activity_no
-			LEFT JOIN hashtag h
-				ON ac.activity_no = h.iden_no                                    
-		WHERE                                      
-			activity_state_admin = '승인완료' AND activity_state = '공개'
+		SELECT 
+			ac.*, aca.*, aci.*, acs.*, h.*
+		FROM 
+			(SELECT * FROM activity) ac,
+			(SELECT activity_no, GROUP_CONCAT(activity_address_zip) activity_address_zip FROM activity_address GROUP BY activity_no) aca,
+			(SELECT activity_no, GROUP_CONCAT(CONCAT_WS('.',activity_image_name,activity_image_ext)) activity_image FROM activity_image GROUP BY activity_no) aci,
+			(SELECT activity_no, GROUP_CONCAT(activity_spot_name SEPARATOR ', ') activity_spot_name FROM activity_spot GROUP BY activity_no) acs,
+			(SELECT iden_no, GROUP_CONCAT(hashtag) hashtag FROM hashtag GROUP BY iden_no) h
+		WHERE 
+			activity_state_admin = '승인완료' AND
+			activity_state = '공개' AND
+			ac.activity_no = aca.activity_no AND
+			ac.activity_no = aci.activity_no AND
+			ac.activity_no = acs.activity_no AND
+			ac.activity_no = h.iden_no
 		ORDER BY
-			ac.update_date DESC;
+			update_date DESC;
 	</select>
 	
 	<!-- 체험-주소 인기 지역 조회 -->
@@ -278,7 +221,41 @@
 			0, 8;
 	</select>
 	
-		<!-- [사용자] 숙소_건물 상세 페이지 출력 -->
+	<!-- 체험 목록 검색 조회 -->
+	<select id="selectActivityListBySearch" parameterType="Map" resultMap="resultActivity">
+		SELECT 
+			ac.*, aca.*, aci.*, acs.*, h.*
+		FROM 
+			(SELECT * FROM activity) ac,
+			(SELECT activity_no, GROUP_CONCAT(activity_address_zip) activity_address_zip FROM activity_address GROUP BY activity_no) aca,
+			(SELECT activity_no, GROUP_CONCAT(CONCAT_WS('.',activity_image_name,activity_image_ext)) activity_image FROM activity_image GROUP BY activity_no) aci,
+			(SELECT activity_no, GROUP_CONCAT(activity_spot_name SEPARATOR ', ') activity_spot_name FROM activity_spot GROUP BY activity_no) acs,
+			(SELECT iden_no, GROUP_CONCAT(hashtag) hashtag FROM hashtag GROUP BY iden_no) h
+		WHERE 
+			activity_state_admin = '승인완료' AND
+			activity_state = '공개' AND
+			ac.activity_no = aca.activity_no AND
+			ac.activity_no = aci.activity_no AND
+			ac.activity_no = acs.activity_no AND
+			ac.activity_no = h.iden_no
+			AND
+			<!-- 입렵(해시태그, 체험 이름, 체험 소개글) 검색 -->
+			<if test="#{searchWord} != null">
+				(h.hashtag LIKE '%${searchWord}%' OR
+				ac.activity_name LIKE '%${searchWord}%' OR
+				ac.activity_description LIKE '%${searchWord}%' OR
+				aca.activity_address_zip LIKE '%${searchWord}%')
+			</if>
+			AND
+			<!-- 지역 검색 -->
+			<if test="#{searchAccomAddress} != null">
+				(aca.activity_address_zip LIKE '%${searchAddress}%')		
+			</if>
+		ORDER BY
+			update_date DESC;
+	</select>
+	
+	<!-- 숙소-건물 상세 조회를 위한 resultMap (AccomBuilding)-->
 	<resultMap type="com.gdu.voyage.vo.AccomBuilding" id="resuliAccomBuilding">
 		<id column="accom_building_no" property="accomBuildingNo"/>
 		<result column="host_no" property="hostNo"/>
@@ -322,6 +299,7 @@
 		</collection>
 	</resultMap>
 
+	<!-- 숙소-건물 상세 조회 (AccomBuilding)-->
 	<select id="selectAccomBuildingOne" parameterType="int" resultMap="resuliAccomBuilding">
 		SELECT
 			a.accom_building_no,
@@ -357,45 +335,4 @@
 			AND a.accom_building_state_admin = '승인완료'
 			AND a.accom_building_no = #{accomBuildingNo}
 	</select>
-
-	<!-- 숙소-건물 상세 조회 -->
-<!-- 	<select id="selectAccomBuildingList" resultMap="resultAccomBuilding"> -->
-<!-- 		SELECT                                       -->
-<!-- 			b.accom_building_no, -->
-<!-- 			b.host_no, -->
-<!-- 			b.accom_building_name, -->
-<!-- 			b.accom_building_description,  -->
-<!-- 			b.accom_building_phone, -->
-<!-- 			b.accom_building_state, -->
-<!-- 			b.accom_building_state_admin, -->
-<!-- 			b.create_date, -->
-<!-- 			b.update_date, -->
-<!-- 			f.accom_building_facility_no, -->
-<!-- 			f.accom_building_no, -->
-<!-- 			f.accom_building_facility_name, -->
-<!-- 			i.accom_building_image_no, -->
-<!-- 			i.accom_building_image_name, -->
-<!-- 			i.accom_building_image_ext, -->
-<!-- 			s.accom_building_spot_no, -->
-<!-- 			a.accom_address_no, -->
-<!-- 			a.accom_address_zip, -->
-<!-- 			h.hashtag_no -->
-<!-- 		FROM       -->
-<!-- 			accom_building b -->
-<!-- 			LEFT JOIN accom_address a -->
-<!-- 				ON b.accom_building_no = a.accom_building_no -->
-<!-- 			LEFT JOIN accom_building_image i -->
-<!-- 				ON b.accom_building_no = i.accom_building_no -->
-<!-- 			LEFT JOIN accom_building_facility f -->
-<!-- 				ON b.accom_building_no = f.accom_building_no -->
-<!-- 			LEFT JOIN accom_building_spot s -->
-<!-- 				ON b.accom_building_no = s.accom_building_no -->
-<!-- 			LEFT JOIN hashtag h -->
-<!-- 				ON b.accom_building_no = h.iden_no                                     -->
-<!-- 		WHERE                                       -->
-<!-- 			accom_building_state_admin = '승인완료' AND accom_building_state = '공개' -->
-<!-- 			AND a.accom_building_no = #{accomBuildingNo} -->
-<!-- 		ORDER BY -->
-<!-- 			b.update_date DESC; -->
-<!-- 	</select> -->
 </mapper>

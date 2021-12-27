@@ -104,7 +104,7 @@
 	                                    <h4>Location</h4>
 	                                </div>
 	                                <div class="select-job-items1">
-	                                    <select name="searchAccomAddress">
+	                                    <select name="searchAddress">
 	                                        <option value="">인기 지역으로 떠나보세요!</option>
 	                                    	<c:forEach items="${addressZipByBest }" var="aa">
 	                                    		<option value="${aa.accomAddressZip }">${aa.accomAddressZip }</option>
@@ -311,16 +311,6 @@
         <script src="${pageContext.request.contextPath}/assets/js/plugins.js"></script>
         <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
         
-<!--          <script type="text/javascript"> --> -->
-       	
-//          var amount = $('.js-input-to').val();
-//          console.log("amount : " + amount);
-// //       	 $('[name="searchPrice"]').val().append(amount);
-     	
-//       	 $('input[name=searchPrice]').attr('value',amount);
-     	
-//          console.log("amount : " + amount);
-<!--          </script> --> -->
       
     </body>
 </html>
