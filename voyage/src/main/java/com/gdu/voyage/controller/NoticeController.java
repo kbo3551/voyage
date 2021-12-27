@@ -45,6 +45,11 @@ public class NoticeController {
 		
 		model.addAttribute("pageNo", pageNo);
 		
+		if(searchNotice != null & searchNotice == "") {
+			return "/admin/adminNoticeList?searchNotice"+searchNotice;
+		}
+		
+		
 		return "/admin/adminNoticeList";
 	}
 	//noticeOne
