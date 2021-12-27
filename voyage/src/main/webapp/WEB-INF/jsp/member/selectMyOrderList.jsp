@@ -144,12 +144,12 @@
 							<span style="float: left; padding-left: 3%">
 								<select id="category" name="category" onchange="categorySelect()">
 									<c:choose>
-		                        		<c:when test="${category == '숙소'}">
+		                        		<c:when test="${param.category == 'accom'}">
 			                        		<option value="all">모두보기</option>
 			                        		<option value="accom" selected="selected">숙소</option>
 			                        		<option value="activity">체험</option>
 		                        		</c:when>
-		                        		<c:when test="${category == '체험'}">
+		                        		<c:when test="${param.category == 'activity'}">
 			                        		<option value="all">모두보기</option>
 			                        		<option value="accom">숙소</option>
 			                        		<option value="activity" selected="selected">체험</option>
