@@ -47,14 +47,6 @@ public class MemberController {
 		return "member/selectMyInterest";
 	}
 	
-	// 명세 표시
-	@RequestMapping("member/receiptModal")
-	public String getSelectMyOrderOneReceipt(Model model,@Nullable String receipt) {
-		
-		model.addAttribute("receipt", receipt);
-		return "member/receiptModal";
-	}
-	
 	// 주문목록
 	@GetMapping("member/selectMyOrderList")
 	public String getSelectMyOrderList(Model model, @RequestParam(name = "category", defaultValue = "all") String category,
