@@ -53,7 +53,7 @@ public class ProductController {
 	@PostMapping("/getAccomProductList")
 	public String getAccomBuildingProduct(Model model,
 										@RequestParam @Nullable String searchWord, 
-										@RequestParam @Nullable String searchAccomAddress,
+										@RequestParam @Nullable String searchAddress,
 										@RequestParam @Nullable List<String> searchFacilityList,
 										@RequestParam @Nullable Integer searchReviewScore,
 										@RequestParam @Nullable String searchPrice
@@ -63,14 +63,14 @@ public class ProductController {
 			searchPriceList = Arrays.asList(searchPrice.split(";"));
 		}
 		log.debug("[debug] ProductController.getAccomBuildingProduct searchWord : " + searchWord);
-		log.debug("[debug] ProductController.getAccomBuildingProduct searchAccomAddress : " + searchAccomAddress);
+		log.debug("[debug] ProductController.getAccomBuildingProduct searchAddress : " + searchAddress);
 		log.debug("[debug] ProductController.getAccomBuildingProduct searchFacilityList : " + searchFacilityList);
 		log.debug("[debug] ProductController.getAccomBuildingProduct searchReviewScore : " + searchReviewScore);
 		log.debug("[debug] ProductController.getAccomBuildingProduct searchPrice : " + searchPriceList);
 		
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("searchWord", searchWord);
-		paramMap.put("searchAccomAddress", searchAccomAddress);
+		paramMap.put("searchAddress", searchAddress);
 		paramMap.put("searchFacilityList", searchFacilityList);
 		paramMap.put("searchReviewScore", searchReviewScore);
 		paramMap.put("searchPriceList", searchPriceList);
@@ -108,6 +108,45 @@ public class ProductController {
 		model.addAttribute("addressZipByBest", addressZipByBest);
 		log.debug("[debug] ProductController.getActivityProduct addressZipByBest : " + addressZipByBest);
 		
+		return "/product/getActivityProductList";
+	}
+	
+	@PostMapping("/getActivityProductList")
+	public String getActivityProduct(Model model,
+										@RequestParam @Nullable String searchWord, 
+										@RequestParam @Nullable String searchAddress,
+										@RequestParam @Nullable List<String> searchFacilityList,
+										@RequestParam @Nullable Integer searchReviewScore,
+										@RequestParam @Nullable String searchPrice
+										) {
+		List<String> searchPriceList = new ArrayList<>();
+		if(searchPrice != null) {
+			searchPriceList = Arrays.asList(searchPrice.split(";"));
+		}
+		log.debug("[debug] ProductController.getActivityProduct searchWord : " + searchWord);
+		log.debug("[debug] ProductController.getActivityProduct searchAddress : " + searchAddress);
+		log.debug("[debug] ProductController.getActivityProduct searchFacilityList : " + searchFacilityList);
+		log.debug("[debug] ProductController.getActivityProduct searchReviewScore : " + searchReviewScore);
+		log.debug("[debug] ProductController.getActivityProduct searchPrice : " + searchPriceList);
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("searchWord", searchWord);
+		paramMap.put("searchAddress", searchAddress);
+		paramMap.put("searchFacilityList", searchFacilityList);
+		paramMap.put("searchReviewScore", searchReviewScore);
+		paramMap.put("searchPriceList", searchPriceList);
+		
+		// [사용자] 체험 목록 검색 조회
+		List<Activity> activity = productService.getActivityListBySearch(paramMap);
+//				log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
+		model.addAttribute("activity", activity);
+		log.debug("[debug] ProductController.getActivityProduct activity : " + activity);
+		
+		// [사용자] 체험 지역 인기 조회
+		List<Map<String, Object>> addressZipByBest = productService.getActivityAddressByBest();
+		model.addAttribute("addressZipByBest", addressZipByBest);
+		log.debug("[debug] ProductController.getActivityProduct addressZipByBest : " + addressZipByBest);
+				
 		return "/product/getActivityProductList";
 	}
 	
