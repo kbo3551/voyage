@@ -19,5 +19,6 @@ public interface CouponMapper {
 	void updateCoupon(Coupon coupon);
 	// 관리자가 쿠폰 생성후 생성일이 데드라인을 지나면 비활성화 처리
 	int updateDormantCoupon();
-
+	// 회원이 가지고 있는 쿠폰중 데드라인이 넘어간 쿠폰을 사용불가 처리
+	int updateDormantMemberCoupon();
 }

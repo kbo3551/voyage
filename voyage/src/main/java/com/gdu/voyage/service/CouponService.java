@@ -19,6 +19,10 @@ import lombok.extern.slf4j.Slf4j;
 public class CouponService {
 	@Autowired
 	CouponMapper couponMapper;
+	// 회원이 발급 받는 쿠폰중 데드라인을 넘어서면 사용불가 처리
+	public int updateDormantMemberCoupon() {
+		return couponMapper.updateDormantMemberCoupon();
+	}
 	// 쿠폰 데드라인 기준으로 현재 일이 데드라인을 넘어서면 비활성화 처리
 	public int updateDormantCoupon() {
 		return couponMapper.updateDormantCoupon();
@@ -53,12 +57,12 @@ public class CouponService {
 
 	// 쿠폰 생성
 	public void addCoupon(Coupon coupon) {
-		log.debug("☆☆☆[bryeong]CouponService 쿠폰 생성☆☆☆" + coupon.toString());
+		log.debug("☆☆☆[boryeong]CouponService 쿠폰 생성☆☆☆" + coupon.toString());
 		couponMapper.insertCoupon(coupon);
 	}
 	// 쿠폰 활성화/비활성화
 	public void updateCoupon(Coupon coupon) {
-		log.debug("☆☆☆[bryeong]CouponService 쿠폰 생성☆☆☆");
+		log.debug("☆☆☆[boryeong]CouponService 쿠폰 생성☆☆☆");
 		couponMapper.updateCoupon(coupon);
 	}
 }
