@@ -27,8 +27,6 @@ public class CouponService {
 	public int updateDormantCoupon() {
 		return couponMapper.updateDormantCoupon();
 	}
-	// 회원이 발급 받은 쿠폰이 데드라인을 넘기면 비활성화 처리
-
 	// 쿠폰 list 출력
 	public Map<String, Object> getCouponList(int currentPage, int rowPerPage) {
 
@@ -64,5 +62,33 @@ public class CouponService {
 	public void updateCoupon(Coupon coupon) {
 		log.debug("☆☆☆[boryeong]CouponService 쿠폰 생성☆☆☆");
 		couponMapper.updateCoupon(coupon);
+	}
+	// 회원이 발급받은 쿠폰 list
+	public Map<String, Object> getMemberCouponList(int currentPage, int rowPerPage,String memberId) {
+
+		Map<String, Object> paraMap = new HashMap<>();
+		int beginRow = (currentPage - 1) * rowPerPage;
+
+		paraMap.put("beginRow", beginRow);
+		paraMap.put("rowPerPage", rowPerPage);
+		paraMap.put("memberId", memberId);
+
+		List<Coupon> memberCouponList = couponMapper.selectMemberCouponList(paraMap);
+		Map<String, Object> returnMap = new HashMap<>();
+
+		int lastPage = 0;
+		int totalCount = couponMapper.memberCouponTotalCount(memberId);
+
+		lastPage = totalCount / rowPerPage;
+
+		if (totalCount % rowPerPage != 0) {
+			lastPage += 1;
+		}
+
+		returnMap.put("memberCouponList", memberCouponList);
+		returnMap.put("lastPage", lastPage);
+		returnMap.put("totalCount",totalCount);
+		
+		return returnMap;
 	}
 }

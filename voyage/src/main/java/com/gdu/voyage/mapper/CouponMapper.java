@@ -21,4 +21,8 @@ public interface CouponMapper {
 	int updateDormantCoupon();
 	// 회원이 가지고 있는 쿠폰중 데드라인이 넘어간 쿠폰을 사용불가 처리
 	int updateDormantMemberCoupon();
+	// 회원이 가지고 있는 쿠폰 list
+	List<Coupon> selectMemberCouponList(Map<String, Object>Map);
+	// 회원이 가지고있는 쿠폰의 수
+	int memberCouponTotalCount(String memberId);
 }

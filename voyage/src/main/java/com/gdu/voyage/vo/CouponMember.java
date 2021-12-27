@@ -9,5 +9,5 @@ public class CouponMember {
 	private int couponNo;
 	private String couponUse;
 	private String createDate;
-
+	private String deadLine;
 }
