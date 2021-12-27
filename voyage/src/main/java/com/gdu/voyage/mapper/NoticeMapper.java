@@ -10,9 +10,9 @@ import com.gdu.voyage.vo.NoticeFile;
 
 @Mapper
 public interface NoticeMapper {
-	int selectNoticeTotalCount();
+	int selectNoticeTotalCount(String searchNotice);
 	// 리스트 가져오기
-	List<Notice> selectNoticeList(Map<String, Object> param);
+	List<Notice> selectNoticeList(Map<String, Object> map);
 	// 공지사항 작성
 	Notice inserNotice(Notice notice);
 	// 공지사항 삭제

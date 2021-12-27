@@ -31,13 +31,13 @@
 		FROM notice 
 			<where>
 				<if test="searchNotice != null">
-					notice_title LIKE '%'#(searchNotice)'%'
+					notice_title LIKE '%${searchNotice}%'
 				</if>
 			</where>
 		ORDER BY 
 			notice_top='Y' DESC, update_date DESC
-		Limit
-			#(currentPage), #(rowPerPage)
+		LIMIT
+			#{beginRow}, #{rowPerPage}
 	</select>
 	
 	<!-- 공지사항 카운트 -->
@@ -45,7 +45,7 @@
 		SELECT COUNT(*) FROM notice
 		<where>
 			<if test="searchNotice != null">
-				notice_title LIKE '%'#(searchNotice)'%'
+				notice_title LIKE '%${searchNotice}%'
 			</if>
 		</where>
 	</select>

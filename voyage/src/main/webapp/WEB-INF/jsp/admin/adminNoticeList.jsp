@@ -53,7 +53,7 @@
 										<th>조회수</th>
 										<th>생성일</th>
 										<th>수정일</th>
-										<th>상세보기</th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody> 
@@ -65,17 +65,49 @@
 									        <td>${n.noticeViewCnt}</td>
 									        <td>${n.createDate}</td>
 									        <td>${n.updateDate}</td>
-									        <td><a href="${pageContext.request.contextPath}/admin/adminNoticeOne?noticeNo=${n.noticeNo}" class="btn">상세 보기</a></td>
+									        <td><a href="${pageContext.request.contextPath}/admin/adminNoticeOne?noticeNo=${n.noticeNo}" class="btn btn-primary">상세 보기</a></td>
 									    </tr>
 								    </c:forEach>
 								</tbody>
 							</table>
-							
+							<form method="get" action="${pageContext.request.contextPath}/admin/adminNoticeList">
+								<div>
+									<input type="text" class="form-control" placeholder="search" name="searchNotice">
+									<button type="submit" class="btn btn-primary">검색</button>
+								</div>
+							</form>
 						</div>
 					</div>
+					<!-- 페이징 -->
+					<div class="container">
+						<ul class="nav justify-content-center bg-light">
+						 	<c:if test="${beginRow > (ROW_PER_PAGE * 10)}">
+								<li><a href="/admin/adminNoticeList?currentPage=${pageNo-1}&searchNotice=${searchNotice}">&lt;</a></li>
+							</c:if>
+							<c:set var="doneLoop" value="false"></c:set>
+							<c:forEach var="f" begin="${pageNo}" end="${pageNo + 9}">
+							<c:if test="${not doneLoop}">
+								<c:choose>
+								<c:when test="${currentPage == f}">
+									<li class="active"><span>${f}</span></li>
+								</c:when>
+								<c:otherwise>
+									<li><a class="nav-link active" href="/admin/adminNoticeList?currentPage=${f}&searchNotice=${searchNotice}">${f}</a></li>
+								</c:otherwise>
+								</c:choose>
+								<c:if test="${f == lastPage}">
+									<c:set var="doneLoop" value="true"></c:set>
+								</c:if>
+							</c:if>
+							</c:forEach>
+								<c:if test="${currentPage + 10 <= lastPage}">
+							<li><a class="nav-link active" href="/admin/adminNoticeList?currentPage=${pageNo+10}&searchNotice=${searchNotice}">&gt;</a></li>
+							</c:if>
+						</ul>
+					</div> 
 				</div>
 			</div>
-			<div><a href="${pageContext.request.contextPath}/admin/addNotice" class="btn">공지사항 작성</a></div>
+			<div><a href="${pageContext.request.contextPath}/admin/addNotice" class="btn btn-primary">공지사항 작성</a></div>
 		</main>
    
     <!-- adminFooter : 시작 -->

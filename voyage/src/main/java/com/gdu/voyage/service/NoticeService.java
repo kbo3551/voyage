@@ -37,13 +37,14 @@ public class NoticeService {
 		
 		paramMap.put("beginRow",beginRow);
 		paramMap.put("rowPerPage", rowPerPage);
+		paramMap.put("searchNotice",searchNotice);
 		
 		List<Notice> noticeList = noticeMapper.selectNoticeList(paramMap);
 		log.debug(noticeList.toString()+"☆☆☆[DoHun] NoticeList , Service☆☆☆");
 		
 		Map<String,Object> returnMap = new HashMap<>();
 		int lastPage = 0;
-		int totalCount = noticeMapper.selectNoticeTotalCount();
+		int totalCount = noticeMapper.selectNoticeTotalCount(searchNotice);
 		
 		lastPage = totalCount/rowPerPage;
 		if(totalCount%rowPerPage != 0) {

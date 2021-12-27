@@ -63,8 +63,8 @@
 								</select>
 								<!-- 사진 -->
 								<input type="file" name="noticeFile">			
-								<c:forEach items="${NoticeFileList}" var="noticeFileList">
-									<c:if test="${noticeFile eq null}">
+								<c:forEach items="${notice.NoticeFileList}" var="noticeFileList">
+									<c:if test="${noticeFile.noticeFileNo eq null}">
 										<input type="file" name="noticeFile">
 									</c:if>
 								</c:forEach>

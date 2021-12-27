@@ -41,40 +41,42 @@
 				<div class="col-12 col-lg-8 col-xxl-9 d-flex">
 					<div class="card flex-fill">
 						<div class="card-header">
-							<h3 class="h3 mb-3"> ${noticeNo}. 공지사항 상세항목</h3>
+							<h3 class="h3 mb-3"> ${notice.noticeTitle} </h3>
 						</div>
 						<div class="card">
 							<div class="card-header">
 								<div>
-									${noticeNo()}
+									${notice.noticeNo()}
 								</div>
 								<div>
-									<h5 class="card_title mb-0">${noticeTitle()}</h5>
+									조회수 : <input type="text" readonly="readonly" value=" ${notice.noticeViewCnt()}">
 								</div>
 								<div>
-									조회수 : <input type="text" readonly="readonly" value=" ${noticeViewCnt()}">
+									작성자 : <input type="text" readonly="readonly" value=" ${notice.adminId}">
 								</div>
 							</div>
 							<div class="card_body">
 								<div>
-									<textarea cols="5" rows="5" readonly="readonly">${noticeContent()}</textarea>
+									<textarea cols="5" rows="5" readonly="readonly">${notice.noticeContent()}</textarea>
 								</div>
 								<div>
-									<img class="card-img-top" src="${pageContext.request.contextPath}image/${noticeFileName+'.'+noticeFileExt}" alt="unplash">
-									${noticeFileNo()}
+									<c:if test="${noticeFile.noticeNo==notice.noticeNo && noticeFile != null}">
+										<img class="card-img-top" src="${pageContext.request.contextPath}image/${noticeFile.noticeFileName+'.'+noticeFile.noticeFileExt}" alt="unplash">
+										${notice.noticeFileNo()}
+									</c:if>
 								</div>
 							</div>
 							<div>
-								생성일 : <input type="text" readonly="readonly" value="${craetDate()}">
+								생성일 : <input type="text" readonly="readonly" value="${notice.craetDate()}">
 							</div>
 							<div>
-								수정일 : <input type="text" readonly="readonly" value="${updateDate()}">
+								수정일 : <input type="text" readonly="readonly" value="${notice.updateDate()}">
 							</div>
 							<div>
-								<a href="${pageContext.request.contextPath}/admin/modfiyNotice?noticeNo=${noticeNo}" class="btn">수정</a>
+								<a href="${pageContext.request.contextPath}/admin/modfiyNotice?noticeNo=${notice.noticeNo}" class="btn">수정</a>
 							</div>
 							<div>
-								<a href="${pageContext.request.contextPath}/admin/removeNotice?noticeNo=${noticeNo}" class="btn">삭제</a>
+								<a href="${pageContext.request.contextPath}/admin/removeNotice?noticeNo=${notice.noticeNo}" class="btn">삭제</a>
 							</div>
 						</div>
 					</div>

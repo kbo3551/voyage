@@ -29,15 +29,22 @@ public class NoticeController {
 	
 	//noticeList
 	@GetMapping("/admin/adminNoticeList")
-	public String notcieList(Model model,
-								@RequestParam(defaultValue = "1") int currentPage, String searchNotice) {
-		
+	public String notcieList(Model model, @RequestParam(defaultValue = "1") int currentPage, @RequestParam @Nullable String searchNotice) {
 		Map<String, Object> noticeMap = noticeService.getNoticeListByTop(currentPage, ROW_PER_PAGE, searchNotice);
 		log.debug(noticeMap.toString()+"★★★ [DoHun] Notice List Controller 실행, noticeMap ★★★");
 		
+		int controllPage = (currentPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
+		
+		model.addAttribute("controllPage", controllPage);
+		model.addAttribute("searchnotice", searchNotice);
 		model.addAttribute("noticeList", noticeMap.get("noticeList"));
 		model.addAttribute("lastPage", noticeMap.get("lastPage"));
-		model.addAttribute("searchNotice",searchNotice);
+		model.addAttribute("currentPage", currentPage);
+		
+		int pageNo = ((controllPage / 100) * 10 + 1);
+		
+		model.addAttribute("pageNo", pageNo);
+		
 		return "/admin/adminNoticeList";
 	}
 	//noticeOne
