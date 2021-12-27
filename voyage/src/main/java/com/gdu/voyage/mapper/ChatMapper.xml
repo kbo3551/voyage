@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.ChatMapper">
 	<!-- [사용자] 나의 채팅 목록 조회를 위한 resultMap -->
+	<!-- 1. 채팅번호와 채팅방 번호를 조회하기 위한 resultMap -->
+	<resultMap type="com.gdu.voyage.vo.Chat" id="resultChatNo">
+		<id column="max_no" property="chatNo"/>
+		<result column="chat_room" property="chatRoom"/>
+		<result column="max_date" property="createDate"/>
+	</resultMap>
+	
 	<resultMap type="com.gdu.voyage.vo.Chat" id="resultChat">
 		<!-- Chat -->
 		<id column="chat_no" property="chatNo"/>
@@ -19,10 +26,29 @@
 	</resultMap>
 	
 	<!-- [사용자] 나의 채팅 목록 조회  -->
-	<!-- 보낸 사람의 닉네임도 같이 조회  -->
-	<select id="selectChatListById" parameterType="String" resultMap="resultChat">
+	<!-- 1. 채팅번호와 채팅방 번호를 조회해줌 -->
+	<select id="selectChatNumListById" parameterType="String" resultMap="resultChatNo">
+		SELECT t.*
+		FROM (
+			SELECT
+				MAX(chat_no) max_no,
+				chat_room,
+				MAX(create_date) max_date
+			FROM
+				chat
+			WHERE
+				to_member_id = #{memberId} OR from_member_id = #{memberId}
+			GROUP BY 
+				chat_room
+		) t
+		ORDER BY t.max_date DESC
+	</select>
+	<!-- 2. 해당 번호를 가지고 있는 채팅을 조회 -->
+	<!-- 해당 채팅 번호를 조회했을 때 얻을 수 있는 두개의 닉네임 중에 자신의 닉네임이 아닌 것을 출력  -->
+	<select id="selectChatListByNo" parameterType="Map" resultMap="resultChat">
 		SELECT
 			c.chat_no,
+			c.chat_room,
 			c.to_member_id,
 			c.from_member_id,
 			c.chat_content,
@@ -33,12 +59,8 @@
 		FROM
 			chat c
 			LEFT JOIN member m
-			ON c.to_member_id = m.member_id
+			ON c.to_member_id = m.member_id OR c.from_member_id = m.member_id
 		WHERE
-			c.from_member_id = #{memberId}
-		GROUP BY
-			c.to_member_id
-		ORDER BY
-			c.create_date DESC
+			c.chat_no = #{chatNo} AND (NOT m.member_nickname IN(#{memberNickname}))
 	</select>
 </mapper>

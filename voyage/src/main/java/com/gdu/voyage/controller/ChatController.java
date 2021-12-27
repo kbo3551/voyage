@@ -40,13 +40,15 @@ public class ChatController {
 	public String chatMain(HttpSession session ,Model model) {
 		log.debug("ChatController 실행");
 		
-		// memberId를 알기 위해 세션을 가져옴 
+		// memberId와 memberNickname을 알기 위해 세션을 가져옴 
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		
 		//가져온 memberId로 나의 채팅 목록을 조회함 
 		String memberId = loginMember.getMemberId();
+		String memberNickname = loginMember.getMemberNickname();
 		log.debug("★[지혜]controller★ memberId : " + memberId);
-		Map<String, Object> map = chatService.getChatListById(memberId);
+		log.debug("★[지혜]controller★ memberNickname : " + memberNickname);
+		Map<String, Object> map = chatService.getChatListById(loginMember);
 		log.debug("★[지혜]controller★ map" + map);
 		// 조회한 채팅 목록을 페이지로 보내줌 
 		model.addAttribute("chatList", map.get("chatList"));
