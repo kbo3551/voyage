@@ -184,6 +184,29 @@
 			NOW()
 		)
 	</insert>
+	<!-- Q&A 검색 -->
+	<select id="selectQnaListBySearch" parameterType="Map" resultMap="resultQna">
+		SELECT
+			q.qna_no,
+			q.member_nickname,
+			q.qna_category,
+			q.qna_title,
+			q.qna_secret,
+			q.create_date,
+			q.update_date,
+			i.qna_image_no,
+			i.qna_image_name,
+			i.qna_image_ext 
+		FROM
+			qna q
+			LEFT JOIN qna_image i
+				ON q.qna_no = i.qna_no
+		WHERE
+			q.qna_secret = '공개글'
+		ORDER BY 
+			q.update_date DESC
+	</select>
+	
 	<!-- 페이징 -->
 	<select id="selectCountPage" resultType="int">
 		SELECT COUNT(*)FROM qna

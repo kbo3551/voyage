@@ -43,7 +43,15 @@ public class QnaController {
 		model.addAttribute("lastPage", map.get("lastPage"));
 		model.addAttribute("currentPage", map.get("currentPage"));
 		model.addAttribute("totalCount", map.get("totalCount"));
+		
 		return "/templates_citylisting/qnaList";
+	}
+	@PostMapping("/qnaList")
+	public String qnaList() {
+		
+		// [Member] Q&A 검색 조회
+		
+		return null;
 	}
 	//[Member] Qna 상세 내용
 	@GetMapping("/getQnaOne") 
@@ -152,6 +160,7 @@ public class QnaController {
 		qnaService.removeQ(qna);
 		return "redirect:/qnaList?pageNo=1";
 	}
+	
 	// [Admin] 전체 Q&A 게시판 목록 출력
 	@GetMapping("/admin/adminQnaList")
 	public String adminQnaList(Model model, HttpSession session,
@@ -210,7 +219,12 @@ public class QnaController {
 		return "/admin/addA";
 	}
 	@PostMapping("/admin/addA")
-	public String addAnswer(QnaAnswer qnaAnswer) {
+	public String addAnswer(HttpSession session, QnaAnswer qnaAnswer) {
+		// 세션에서 관리자 계정 정보 불러옴
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		qnaAnswer.setAdminId(loginMember.getMemberId());
+		// 디버그 코드
+		log.debug("★★★★★★★★★★★ [다원] getQnaOne_qna_Controller() debug" + qnaAnswer.toString());
 		qnaService.addA(qnaAnswer);
 		return "redirect:/admin/adminQnaList?pageNo=1";
 	}

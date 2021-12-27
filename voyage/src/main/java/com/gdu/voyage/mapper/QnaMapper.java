@@ -36,6 +36,9 @@ public interface QnaMapper {
 	// 이미지 삭제
 	int removeQImg(QnaImg qnaImg);
 	
+	// [Member] Q&A 검색
+	List<Qna> selectQnaListBySearch(Map<String, Object> param);
+	
 	// [Admin] Only Admin part
 	// 답변 없는 질문 list
 	List<Qna> selectNoneAnswerQ(Map<String, Object> param);

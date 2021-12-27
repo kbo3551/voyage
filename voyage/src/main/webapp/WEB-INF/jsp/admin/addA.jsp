@@ -51,6 +51,9 @@
 							<div>
 								No : <input readonly="readonly" name="qnaNo" value="${qnaAnswer.qnaNo}">
 							</div>
+							<div>
+								<input hidden="hidden" name="adminId" value="${qnaAnswer.adminId}">
+							</div>
 							<div class="card-header">
 								<h5 class="card-title mb-0">Content</h5>
 							</div>

@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Transactional
 public class QnaService {
-	@Autowired private QnaMapper qnaMapper;
+	@Autowired QnaMapper qnaMapper;
 	
 	// Qna 게시판 목록 상세 내용
 	public Qna getQnaOneAndAnswer(int qnaNo) {
@@ -116,7 +116,17 @@ public class QnaService {
 			}
 		}
 	}
-
+	// [Member] Q&A 검색 조회
+	public List <Qna> selectQnaListBySearch(Map<String, Object> param){
+		// 매개변수 디버그 코드
+		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_selectQnaListBySearch_param_debug" + param);
+		List<Qna> QnaSearchList = qnaMapper.selectQnaListBySearch(param);
+		// 디버그 코드
+		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_qnaSearchList_debug" + QnaSearchList);
+		
+		return QnaSearchList;
+	}
+	
 	// [Admin] 답변 없는 질문 목록
 	public Map<String, Object> getNoneAnswerQ(int currentPage, int rowPerPage, String qnaCategory){
 		int beginRow = (currentPage - 1) * rowPerPage; 
@@ -147,6 +157,7 @@ public class QnaService {
 		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_addA_debug" + qnaMapper.addA(qnaAnswer));
 		qnaMapper.addA(qnaAnswer);
 	}
+	
 	// 페이징
 	public int[] countPage(int currentPage) {
 		int[] num = new int[10];
