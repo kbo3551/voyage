@@ -49,6 +49,8 @@
 		coupon_use = '사용불가'
 	WHERE 
 		NOW() >= deadline
+	AND
+		NOT coupon_use = '사용불가'
 	</update>
 	<!-- 관리자가 발급한 쿠폰 스케쥴러 처리 -->
 	<update id="updateDormantCoupon">
@@ -57,6 +59,8 @@
 		coupon_state = '비활성화'
 	WHERE 
 		NOW() >= deadline
+	AND
+		NOT coupon_state = '비활성화'
 	</update>
 	<!-- 쿠폰list -->
 	<select id="selectCouponList" parameterType="com.gdu.voyage.vo.Coupon" resultMap="coupon">
