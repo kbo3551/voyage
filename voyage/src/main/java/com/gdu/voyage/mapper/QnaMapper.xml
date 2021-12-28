@@ -176,7 +176,7 @@
 			qna_no,
 			admin_id,
 			answer_content,
-			create_date,
+			create_date
 		) VALUES (
 			#{qnaNo},
 			#{adminId},

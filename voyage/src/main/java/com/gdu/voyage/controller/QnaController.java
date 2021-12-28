@@ -1,5 +1,6 @@
 package com.gdu.voyage.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,12 +48,25 @@ public class QnaController {
 		
 		return "/templates_citylisting/qnaList";
 	}
+	// [Member] Q&A 검색 조회
 	@PostMapping("/qnaList")
-	public String qnaList() {
+	public String searchQnaList(Model model, 
+			@RequestParam(required = false) String qnaCategory,
+			@RequestParam @Nullable String searchWord) {
+		// 디버깅 코드
+		log.debug("★★★★★★★★★★★ [다원] searchQnaList_qnaCategory_Controller() debug" + qnaCategory);
+		log.debug("★★★★★★★★★★★ [다원] searchQnaList_searchWord_Controller() debug" + searchWord);
 		
-		// [Member] Q&A 검색 조회
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("qnaCategory", qnaCategory);
+		paramMap.put("searchWord", searchWord);
 		
-		return null;
+		List <Qna> qna = qnaService.selectQnaListBySearch(paramMap);
+		model.addAttribute(qna);
+		
+		log.debug("★★★★★★★★★★★ [다원] searchQnaList_qna_Controller() debug" + qna);
+		
+		return "/templates_citylisting/qnaList";
 	}
 	//[Member] Qna 상세 내용
 	@GetMapping("/getQnaOne") 
@@ -210,7 +225,6 @@ public class QnaController {
 	 		return "/templates_citylisting/getQnaOne";
 	 	}
 	}
-	// [Admin] 답변 없는 질문 목록
 	
 	// [Admin] 답변 작성
 	@GetMapping("/admin/addA")

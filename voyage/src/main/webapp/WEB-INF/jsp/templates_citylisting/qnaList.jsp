@@ -77,7 +77,7 @@
                             	<!-- 
                             	 <input type="text" placeholder="What are you looking for?">
                             	 -->
-                               	 <input type="text" placeholder="문의사항을 검색해보세요" id="qnaSearchKeyword" value="">
+                               	 <input type="text" placeholder="문의사항을 검색해보세요" id="searchWord" value="${qna.searchWord}">
                             </div>
                             <div class="select-form">
                                 <div class="select-itms">
