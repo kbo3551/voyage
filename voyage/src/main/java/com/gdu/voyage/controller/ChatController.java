@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.gdu.voyage.service.ChatService;
 import com.gdu.voyage.vo.Chat;
@@ -20,7 +21,7 @@ import com.gdu.voyage.vo.Member;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Controller
+@RestController
 public class ChatController {
 	@Autowired ChatService chatService;
 	
@@ -35,8 +36,9 @@ public class ChatController {
 		return formClientMsg;
 	}*/
 	
+	/*
 	// [사용자] 나의 채팅 목록 조회 
-	@GetMapping("chat")
+	@GetMapping("/chat")
 	public String chatMain(HttpSession session ,Model model) {
 		log.debug("ChatController 실행");
 		
@@ -53,6 +55,25 @@ public class ChatController {
 		// 조회한 채팅 목록을 페이지로 보내줌 
 		model.addAttribute("chatList", map.get("chatList"));
 		
-		return "chat/chatMain";
+		return "/chat/chatMain";
+	}
+	*/
+	
+	@GetMapping("/chat")
+	public Map<String, Object> getChatList(HttpSession session) {
+		log.debug("ChatController 실행");
+		
+		// memberId와 memberNickname을 알기 위해 세션을 가져옴 
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		
+		//가져온 memberId로 나의 채팅 목록을 조회함 
+		String memberId = loginMember.getMemberId();
+		String memberNickname = loginMember.getMemberNickname();
+		log.debug("★[지혜]controller★ memberId : " + memberId);
+		log.debug("★[지혜]controller★ memberNickname : " + memberNickname);
+		Map<String, Object> map = chatService.getChatListById(loginMember);
+		log.debug("★[지혜]controller★ map" + map);
+		
+		return map;
 	}
 }
