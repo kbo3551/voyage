@@ -1,42 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
-<html class="no-js">
-	<head>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>VOYAGE | addAccomBuilding</title>
-		<meta name="description" content="GARO is a real-estate template">
-		<meta name="author" content="Kimarotec">
-	   	<meta name="keyword" content="html5, css, bootstrap, property, real-estate theme , bootstrap template">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
-	    
-	    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
-		
-		<link rel="manifest" href="site.webmanifest">
-		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-		
-		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-		<link rel="icon" href="favicon.ico" type="image/x-icon">
-		
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/normalize.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/font-awesome.min.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/fontello.css">
-		<link href="${pageContext.request.contextPath}/accom/fonts/icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
-		<link href="${pageContext.request.contextPath}/accom/fonts/icon-7-stroke/css/helper.css" rel="stylesheet">
-		<link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet" media="screen">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/bootstrap-select.min.css"> 
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/icheck.min_all.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/price-range.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/owl.carousel.css">  
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/owl.theme.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/owl.transitions.css"> 
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/wizard.css"> 
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/style.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/accom/css/responsive.css">
-		
+<html class="no-js" lang="zxx">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Directory HTML-5 Template </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="manifest" href="site.webmanifest">
+		<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
+
 		<!-- CSS here -->
             <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
             <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/owl.carousel.min.css">
@@ -50,57 +25,513 @@
             <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/slick.css">
             <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/nice-select.css">
             <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
-		
-		<!-- 눈누 - 한산스네오 레귤러 폰트 -->
-		<style type="text/css">
-		
-			@font-face {
-			    font-family: 'SpoqaHanSansNeo-Regular';
-			    	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff');
-			    font-weight: normal;
-			    font-style: normal;
-			}
-			
-			body {
-				background-color:black;
-				font-family: 'SpoqaHanSansNeo-Regular';
-			}
-			
-		</style>
-    </head>
-    
-    <body>
-    <!-- 배너 : 시작 -->
-    	<c:import url="../partial\\banner.jsp"/>
-    <!-- 배너 : 끝 -->
-    <div style="height:130px; background-color: black;"></div>
-    
-    
-    
-    
-    	<!--footer.jsp 시작  -->
-    	<c:import url="../partial\\footer.jsp"/>
-    <!--footer.jsp 끝  -->
+   </head>
+   
+   <!-- 눈누 - 한산스네오 레귤러 폰트 -->
+	<style type="text/css">
 	
-	<script src="${pageContext.request.contextPath}/accom/js/vendor/modernizr-2.6.2.min.js"></script>
-    <script src="${pageContext.request.contextPath}/accom/js//jquery-1.10.2.min.js"></script>
-    <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/accom/js/bootstrap-select.min.js"></script>
-    <script src="${pageContext.request.contextPath}/accom/js/bootstrap-hover-dropdown.js"></script>
-    <script src="${pageContext.request.contextPath}/accom/js/easypiechart.min.js"></script>
-    <script src="${pageContext.request.contextPath}/accom/js/jquery.easypiechart.min.js"></script>
-    <script src="${pageContext.request.contextPath}/accom/js/owl.carousel.min.js"></script>
-    <script src="${pageContext.request.contextPath}/accom/js/wow.js"></script>
-    <script src="${pageContext.request.contextPath}/accom/js/icheck.min.js"></script>
+		@font-face {
+		    font-family: 'SpoqaHanSansNeo-Regular';
+		    	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		
+		body {
+			font-family: 'SpoqaHanSansNeo-Regular';
+		}
+		
+	</style>
+	
+	<!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="assets/img/logo/loder.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <script src="${pageContext.request.contextPath}/accom/js/price-range.js"></script> 
-    <script src="${pageContext.request.contextPath}/accom/js/jquery.bootstrap.wizard.js" type="text/javascript"></script>
-    <script src="${pageContext.request.contextPath}/accom/js/jquery.validate.min.js"></script>
-    <script src="${pageContext.request.contextPath}/accom/js/wizard.js"></script>
+   <body>
+    <!-- banner.jsp 시작 -->
+    <c:import url="/WEB-INF/jsp/partial/banner.jsp"/>
+    <!-- banner.jsp 끝 -->
 
-    <script src="${pageContext.request.contextPath}/accom/js/main.js"></script>
+    <main>
+
+        <!-- Hero Start-->
+        <div class="hero-area3 hero-overly2 d-flex align-items-center ">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-8 col-lg-9">
+                        <div class="hero-cap text-center pt-50 pb-20">
+                            <h2>체험 상세</h2>
+                        </div>
+                        <!--Hero form -->
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Hero End -->
+        <!--================Blog Area =================-->
+      <section class="blog_area single-post-area section-padding">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-8 posts-list">
+                  <div class="single-post">
+                     <div class="feature-img">
+                        <img class="img-fluid" src="assets/img/blog/single_blog_1.png" alt="">
+                     </div>
+                     <div class="blog_details">
+                        <h2>NAME : ${activity.activityName}</h2>
+                        <ul class="blog-info-link mt-3 mb-4">
+                           <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
+                           <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                        </ul>
+                        <p class="excert">
+                           DESCRIPTION : ${activity.activityDescription}
+                        </p>
+                        <p>
+                           MCSE boot camps have its supporters and its detractors. Some people do not understand why you
+                           should have to spend money on boot camp when you can get the MCSE study materials yourself at a
+                           fraction of the camp price. However, who has the willpower to actually sit through a
+                           self-imposed MCSE training. who has the willpower to actually
+                        </p>
+                        <div class="quote-wrapper">
+                           <div class="quotes">
+                              MCSE boot camps have its supporters and its detractors. Some people do not understand why you
+                              should have to spend money on boot camp when you can get the MCSE study materials yourself at
+                              a fraction of the camp price. However, who has the willpower to actually sit through a
+                              self-imposed MCSE training.
+                           </div>
+                        </div>
+                        <p>
+                           MCSE boot camps have its supporters and its detractors. Some people do not understand why you
+                           should have to spend money on boot camp when you can get the MCSE study materials yourself at a
+                           fraction of the camp price. However, who has the willpower
+                        </p>
+                        <p>
+                           MCSE boot camps have its supporters and its detractors. Some people do not understand why you
+                           should have to spend money on boot camp when you can get the MCSE study materials yourself at a
+                           fraction of the camp price. However, who has the willpower to actually sit through a
+                           self-imposed MCSE training. who has the willpower to actually
+                        </p>
+                     </div>
+                  </div>
+                  <div class="navigation-top">
+                     <div class="d-sm-flex justify-content-between text-center">
+                        <p class="like-info"><span class="align-middle"><i class="fa fa-heart"></i></span> Lily and 4
+                           people like this</p>
+                        <div class="col-sm-4 text-center my-2 my-sm-0">
+                           <!-- <p class="comment-count"><span class="align-middle"><i class="fa fa-comment"></i></span> 06 Comments</p> -->
+                        </div>
+                        <ul class="social-icons">
+                           <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                           <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                           <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
+                           <li><a href="#"><i class="fab fa-behance"></i></a></li>
+                        </ul>
+                     </div>
+                     <div class="navigation-area">
+                        <div class="row">
+                           <div
+                              class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+                              <div class="thumb">
+                                 <a href="#">
+                                    <img class="img-fluid" src="assets/img/post/preview.png" alt="">
+                                 </a>
+                              </div>
+                              <div class="arrow">
+                                 <a href="#">
+                                    <span class="lnr text-white ti-arrow-left"></span>
+                                 </a>
+                              </div>
+                              <div class="detials">
+                                 <p>Prev Post</p>
+                                 <a href="#">
+                                    <h4>Space The Final Frontier</h4>
+                                 </a>
+                              </div>
+                           </div>
+                           <div
+                              class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+                              <div class="detials">
+                                 <p>Next Post</p>
+                                 <a href="#">
+                                    <h4>Telescopes 101</h4>
+                                 </a>
+                              </div>
+                              <div class="arrow">
+                                 <a href="#">
+                                    <span class="lnr text-white ti-arrow-right"></span>
+                                 </a>
+                              </div>
+                              <div class="thumb">
+                                 <a href="#">
+                                    <img class="img-fluid" src="assets/img/post/next.png" alt="">
+                                 </a>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="blog-author">
+                     <div class="media align-items-center">
+                        <img src="assets/img/blog/author.png" alt="">
+                        <div class="media-body">
+                           <a href="#">
+                              <h4>Harvard milan</h4>
+                           </a>
+                           <p>Second divided from form fish beast made. Every of seas all gathered use saying you're, he
+                              our dominion twon Second divided from</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="comments-area">
+                     <h4>05 Comments</h4>
+                     <div class="comment-list">
+                        <div class="single-comment justify-content-between d-flex">
+                           <div class="user justify-content-between d-flex">
+                              <div class="thumb">
+                                 <img src="assets/img/comment/comment_1.png" alt="">
+                              </div>
+                              <div class="desc">
+                                 <p class="comment">
+                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
+                                    Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                 </p>
+                                 <div class="d-flex justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                       <h5>
+                                          <a href="#">Emilly Blunt</a>
+                                       </h5>
+                                       <p class="date">December 4, 2017 at 3:12 pm </p>
+                                    </div>
+                                    <div class="reply-btn">
+                                       <a href="#" class="btn-reply text-uppercase">reply</a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="comment-list">
+                        <div class="single-comment justify-content-between d-flex">
+                           <div class="user justify-content-between d-flex">
+                              <div class="thumb">
+                                 <img src="assets/img/comment/comment_2.png" alt="">
+                              </div>
+                              <div class="desc">
+                                 <p class="comment">
+                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
+                                    Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                 </p>
+                                 <div class="d-flex justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                       <h5>
+                                          <a href="#">Emilly Blunt</a>
+                                       </h5>
+                                       <p class="date">December 4, 2017 at 3:12 pm </p>
+                                    </div>
+                                    <div class="reply-btn">
+                                       <a href="#" class="btn-reply text-uppercase">reply</a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="comment-list">
+                        <div class="single-comment justify-content-between d-flex">
+                           <div class="user justify-content-between d-flex">
+                              <div class="thumb">
+                                 <img src="assets/img/comment/comment_3.png" alt="">
+                              </div>
+                              <div class="desc">
+                                 <p class="comment">
+                                    Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
+                                    Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                 </p>
+                                 <div class="d-flex justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                       <h5>
+                                          <a href="#">Emilly Blunt</a>
+                                       </h5>
+                                       <p class="date">December 4, 2017 at 3:12 pm </p>
+                                    </div>
+                                    <div class="reply-btn">
+                                       <a href="#" class="btn-reply text-uppercase">reply</a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="comment-form">
+                     <h4>Leave a Reply</h4>
+                     <form class="form-contact comment_form" action="#" id="commentForm">
+                        <div class="row">
+                           <div class="col-12">
+                              <div class="form-group">
+                                 <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
+                                    placeholder="Write Comment"></textarea>
+                              </div>
+                           </div>
+                           <div class="col-sm-6">
+                              <div class="form-group">
+                                 <input class="form-control" name="name" id="name" type="text" placeholder="Name">
+                              </div>
+                           </div>
+                           <div class="col-sm-6">
+                              <div class="form-group">
+                                 <input class="form-control" name="email" id="email" type="email" placeholder="Email">
+                              </div>
+                           </div>
+                           <div class="col-12">
+                              <div class="form-group">
+                                 <input class="form-control" name="website" id="website" type="text" placeholder="Website">
+                              </div>
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <button type="submit" class="button button-contactForm btn_1 boxed-btn">Send Message</button>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+               <div class="col-lg-4">
+                  <div class="blog_right_sidebar">
+                     <aside class="single_sidebar_widget search_widget">
+                        <form action="#">
+                           <div class="form-group">
+                              <div class="input-group mb-3">
+                                 <input type="text" class="form-control" placeholder='Search Keyword'
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
+                                 <div class="input-group-append">
+                                    <button class="btns" type="button"><i class="ti-search"></i></button>
+                                 </div>
+                              </div>
+                           </div>
+                           <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                              type="submit">Search</button>
+                        </form>
+                     </aside>
+                     <aside class="single_sidebar_widget post_category_widget">
+                        <h4 class="widget_title">Category</h4>
+                        <ul class="list cat-list">
+                           <li>
+                              <a href="#" class="d-flex">
+                                 <p>Resaurant food</p>
+                                 <p>(37)</p>
+                              </a>
+                           </li>
+                           <li>
+                              <a href="#" class="d-flex">
+                                 <p>Travel news</p>
+                                 <p>(10)</p>
+                              </a>
+                           </li>
+                           <li>
+                              <a href="#" class="d-flex">
+                                 <p>Modern technology</p>
+                                 <p>(03)</p>
+                              </a>
+                           </li>
+                           <li>
+                              <a href="#" class="d-flex">
+                                 <p>Product</p>
+                                 <p>(11)</p>
+                              </a>
+                           </li>
+                           <li>
+                              <a href="#" class="d-flex">
+                                 <p>Inspiration</p>
+                                 <p>(21)</p>
+                              </a>
+                           </li>
+                           <li>
+                              <a href="#" class="d-flex">
+                                 <p>Health Care</p>
+                                 <p>(21)</p>
+                              </a>
+                           </li>
+                        </ul>
+                     </aside>
+                     <aside class="single_sidebar_widget popular_post_widget">
+                        <h3 class="widget_title">Recent Post</h3>
+                        <div class="media post_item">
+                           <img src="assets/img/post/post_1.png" alt="post">
+                           <div class="media-body">
+                              <a href="blog_details.html">
+                                 <h3>From life was you fish...</h3>
+                              </a>
+                              <p>January 12, 2019</p>
+                           </div>
+                        </div>
+                        <div class="media post_item">
+                           <img src="assets/img/post/post_2.png" alt="post">
+                           <div class="media-body">
+                              <a href="blog_details.html">
+                                 <h3>The Amazing Hubble</h3>
+                              </a>
+                              <p>02 Hours ago</p>
+                           </div>
+                        </div>
+                        <div class="media post_item">
+                           <img src="assets/img/post/post_3.png" alt="post">
+                           <div class="media-body">
+                              <a href="blog_details.html">
+                                 <h3>Astronomy Or Astrology</h3>
+                              </a>
+                              <p>03 Hours ago</p>
+                           </div>
+                        </div>
+                        <div class="media post_item">
+                           <img src="assets/img/post/post_4.png" alt="post">
+                           <div class="media-body">
+                              <a href="blog_details.html">
+                                 <h3>Asteroids telescope</h3>
+                              </a>
+                              <p>01 Hours ago</p>
+                           </div>
+                        </div>
+                     </aside>
+                     <aside class="single_sidebar_widget tag_cloud_widget">
+                        <h4 class="widget_title">Tag Clouds</h4>
+                        <ul class="list">
+                           <li>
+                              <a href="#">project</a>
+                           </li>
+                           <li>
+                              <a href="#">love</a>
+                           </li>
+                           <li>
+                              <a href="#">technology</a>
+                           </li>
+                           <li>
+                              <a href="#">travel</a>
+                           </li>
+                           <li>
+                              <a href="#">restaurant</a>
+                           </li>
+                           <li>
+                              <a href="#">life style</a>
+                           </li>
+                           <li>
+                              <a href="#">design</a>
+                           </li>
+                           <li>
+                              <a href="#">illustration</a>
+                           </li>
+                        </ul>
+                     </aside>
+                     <aside class="single_sidebar_widget instagram_feeds">
+                        <h4 class="widget_title">Instagram Feeds</h4>
+                        <ul class="instagram_row flex-wrap">
+                           <li>
+                              <a href="#">
+                                 <img class="img-fluid" src="assets/img/post/post_5.png" alt="">
+                              </a>
+                           </li>
+                           <li>
+                              <a href="#">
+                                 <img class="img-fluid" src="assets/img/post/post_6.png" alt="">
+                              </a>
+                           </li>
+                           <li>
+                              <a href="#">
+                                 <img class="img-fluid" src="assets/img/post/post_7.png" alt="">
+                              </a>
+                           </li>
+                           <li>
+                              <a href="#">
+                                 <img class="img-fluid" src="assets/img/post/post_8.png" alt="">
+                              </a>
+                           </li>
+                           <li>
+                              <a href="#">
+                                 <img class="img-fluid" src="assets/img/post/post_9.png" alt="">
+                              </a>
+                           </li>
+                           <li>
+                              <a href="#">
+                                 <img class="img-fluid" src="assets/img/post/post_10.png" alt="">
+                              </a>
+                           </li>
+                        </ul>
+                     </aside>
+                     <aside class="single_sidebar_widget newsletter_widget">
+                        <h4 class="widget_title">Newsletter</h4>
+                        <form action="#">
+                           <div class="form-group">
+                              <input type="email" class="form-control" onfocus="this.placeholder = ''"
+                                 onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
+                           </div>
+                           <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                              type="submit">Subscribe</button>
+                        </form>
+                     </aside>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!--================ Blog Area end =================-->
+        
+    </main>
+
+    <!--footer.jsp 시작  -->
+    <c:import url="/WEB-INF/jsp/partial/footer.jsp"/>
+    <!--footer.jsp 끝  -->
     
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <!-- Scroll Up -->
+    <div id="back-top" >
+        <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+    </div>
 
-</body>
+
+    <!-- JS here -->
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
+    
+		<!-- All JS Custom Plugins Link Here here -->
+        <script src="${pageContext.request.contextPath}/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+		<!-- Jquery, Popper, Bootstrap -->
+		<script src="${pageContext.request.contextPath}/assets/js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/popper.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
+	    <!-- Jquery Mobile Menu -->
+        <script src="${pageContext.request.contextPath}/assets/js/jquery.slicknav.min.js"></script>
+
+		<!-- Jquery Slick , Owl-Carousel Plugins -->
+        <script src="${pageContext.request.contextPath}/assets/js/owl.carousel.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/slick.min.js"></script>
+		<!-- One Page, Animated-HeadLin -->
+        <script src="${pageContext.request.contextPath}/assets/js/wow.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/price-range.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/animated.headline.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/jquery.magnific-popup.js"></script>
+
+		<!-- Nice-select, sticky -->
+        <script src="${pageContext.request.contextPath}/assets/js/jquery.nice-select.min.js"></script>
+		<script src="${pageContext.request.contextPath}/assets/js/jquery.sticky.js"></script>
+        
+        <!-- contact js -->
+        <script src="${pageContext.request.contextPath}/assets/js/contact.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/jquery.form.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/jquery.validate.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/mail-script.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/jquery.ajaxchimp.min.js"></script>
+        
+		<!-- Jquery Plugins, main Jquery -->	
+        <script src="${pageContext.request.contextPath}/assets/js/plugins.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+      
+    </body>
 </html>

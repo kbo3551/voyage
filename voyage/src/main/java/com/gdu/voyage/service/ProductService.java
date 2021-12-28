@@ -1,5 +1,7 @@
 package com.gdu.voyage.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.gdu.voyage.mapper.ProductMapper;
 import com.gdu.voyage.vo.AccomBuilding;
 import com.gdu.voyage.vo.Activity;
+import com.gdu.voyage.vo.Hashtag;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,10 +34,39 @@ public class ProductService {
 		paramMap.put("ROW_PER_PAGE", ROW_PER_PAGE);
 		
 		List<AccomBuilding> accomBuildingList = productMapper.selectAccomBuildingList();
+		// accomBuildingList 가공 - 해시태그 링크 연결을 위해 accomBuildingList 에서 Hahstag 분리
+//		List<String> hashtagList = new ArrayList<>();
+//		for(int i=0; i<accomBuildingList.size(); i++) {
+//			hashtagList.add(accomBuildingList.get(i).getHashtagList().get(0).getHashtag());
+//		}
 		
+//		Map<String, Object> returnMap = new HashMap<>();
+//		returnMap.put("accomBuildingList", accomBuildingList);
+//		returnMap.put("hashtagList", hashtagList);
 		log.debug("[debug] ProductService.getAccomBuildingList accomBuildingList : " + accomBuildingList);
+//		log.debug("[debug] ProductService.getAccomBuildingList hashtagList : " + hashtagList);
+		
 		return accomBuildingList;
 	}
+	// [사용자] 숙소-건물 해시태그 조회
+//	public List<String> getAccomBuildingHashtagList() {
+//		
+//		List<AccomBuilding> accomBuildingList = productMapper.selectAccomBuildingList();
+//		// accomBuildingList 가공 - 해시태그 링크 연결을 위해 accomBuildingList 에서 Hahstag 분리
+//		List<String> hashtagList = new ArrayList<>();
+//		for(int i=0; i<accomBuildingList.size(); i++) {
+//			hashtagList.add(accomBuildingList.get(i).getHashtagList().get(0).getHashtag());
+//		}
+//		log.debug("[debug] ProductService.getAccomBuildingHashtagList hashtagList : " + hashtagList);
+//		
+//		Map<String, Object> hashtag = new HashMap<>();
+//		for(int i=0; i<hashtagList.size(); i++) {
+//			hashtag.put("hashtag[i]", Arrays.asList(hashtagList.get(i).split(" ")));
+//		}
+//		log.debug("[debug] ProductService.getAccomBuildingHashtagList hashtag : " + hashtag);
+//		
+//		return hashtagList;
+//	}
 	// [사용자] 숙소-건물 시설 인기 조회
 	public List<Map<String, Object>> getAccomBuildingFacilityByBest() {
 		List<Map<String, Object>> facilityByBest = productMapper.selectAccomBuildingFacilityByBest();
@@ -58,10 +90,11 @@ public class ProductService {
 		return accomBuildingList;
 	}
 		
-	// [사용자] 숙소_건물 상세 페이지 출력
+	// [사용자] 숙소-건물 상세 조회
 	public AccomBuilding getAccombuildingOne (int accomBuildingNo) {
 		return productMapper.selectAccomBuildingOne(accomBuildingNo);
 	}
+	
 	
 	// [사용자] 체험 목록 조회
 	public List<Activity> getActivityList(int currentPage, int ROW_PER_PAGE) {
@@ -93,5 +126,10 @@ public class ProductService {
 		
 		log.debug("[debug] ProductService.getActivityList activityList : " + activityList);
 		return activityList;
+	}
+
+	// [사용자] 체험 상세 조회
+	public Activity getActivityOne (int activityNo) {
+		return productMapper.selectActivityOne(activityNo);
 	}
 }

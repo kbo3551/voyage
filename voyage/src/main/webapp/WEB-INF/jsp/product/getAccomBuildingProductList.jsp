@@ -188,12 +188,22 @@
 	                                    <div class="col-lg-6 " class="accomBox">
 	                                        <div class="single-listing mb-30">
 	                                            <div class="list-img">
-	                                                <img src="resources/image/accom_building/jang.jpg" alt="">
+	                                            	<a href="/accomBuildingOne?accomBuildingNo=${ab.accomBuildingNo }">
+	                                                	<img src="resources/image/accom_building/jang.jpg" alt="">
+	                                               	</a>
 	                                                <!-- <span>Open</span> -->
 	                                            </div>
 	                                            <div class="list-caption">
-	                                                <span>Open</span>
-	                                                <h3><a href="/getReviewOne">${ab.getAccomBuildingName()}</a></h3>
+	                                                <span>
+	                                                	<a href="/accomBuildingOne?accomBuildingNo=${ab.accomBuildingNo }">
+	                                                		Open
+	                                                	</a>
+	                                                </span>
+	                                                <h3>
+	                                                	<a href="/accomBuildingOne?accomBuildingNo=${ab.accomBuildingNo }">
+	                                                		${ab.getAccomBuildingName()}
+	                                                	</a>
+	                                                </h3>
 														<p>
 															<c:forEach items="${ab.accomBuildingFacilityList }" var="abf" varStatus="status">
 																<c:choose>
@@ -207,6 +217,20 @@
 															</c:forEach>
 														</p>
 	                                                <div class="list-footer">
+	                                                    <ul class="pb-15">
+	                                                    	<li>
+																<c:forEach items="${ab.hashtagList }" var="abh" varStatus="status">
+																	<c:choose>
+																	 	<c:when test="${status.last}">
+																            ${abh.getHashtag()}
+																        </c:when>
+																        <c:otherwise>
+																            ${abh.getHashtag()},
+																        </c:otherwise>
+																    </c:choose>
+																</c:forEach>
+															</li>	                                                    
+	                                                    </ul>
 	                                                    <ul>
 	                                                    	<li style="width: 60%; text-align: left;">
 		                                                        <c:choose>
