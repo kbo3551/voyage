@@ -387,7 +387,7 @@
 								</c:if>
                         	</c:if>
                         
-                        	<c:if test="${param.category == null}">
+                        	<c:if test="${param.category == null || param.category == 'all'}">
                         		<br>
                         		<br>
                         		<br>

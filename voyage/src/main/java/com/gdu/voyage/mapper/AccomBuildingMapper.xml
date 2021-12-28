@@ -187,6 +187,8 @@
             	NOT accom_building_state_admin = "승인완료"
             	AND
             	NOT accom_building_state_admin = "점검"
+            	AND
+            	NOT accom_building_state_admin = "삭제대기"
 			ORDER BY
 				create_date DESC
 			LIMIT 
@@ -206,6 +208,8 @@
             	NOT accom_building_state_admin = "승인완료"
             	AND
             	NOT accom_building_state_admin = "점검"
+            	AND
+            	NOT accom_building_state_admin = "삭제대기"
     </select>
 
     <!-- 건물번호에따른 숙소 상세 목록 출력 -->

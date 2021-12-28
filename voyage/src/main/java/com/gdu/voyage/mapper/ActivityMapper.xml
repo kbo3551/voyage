@@ -140,6 +140,8 @@
 			NOT activity_state_admin = "승인완료"
 			AND
 			NOT activity_state_admin = "점검"
+			AND
+            NOT activity_state_admin = "삭제대기"
 		ORDER BY
 			create_date DESC
 		LIMIT 
@@ -158,6 +160,8 @@
             	NOT activity_state_admin = "승인완료"
 				AND
 				NOT activity_state_admin = "점검"
+				AND
+            	NOT activity_state_admin = "삭제대기"
     </select>
 	
 
