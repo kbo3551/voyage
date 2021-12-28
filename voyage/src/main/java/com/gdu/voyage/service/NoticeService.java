@@ -38,7 +38,7 @@ public class NoticeService {
 		paramMap.put("beginRow",beginRow);
 		paramMap.put("rowPerPage", rowPerPage);
 		paramMap.put("searchNotice",searchNotice);
-		
+	
 		List<Notice> noticeList = noticeMapper.selectNoticeList(paramMap);
 		log.debug(noticeList.toString()+"☆☆☆[DoHun] NoticeList , Service☆☆☆");
 		
@@ -53,7 +53,7 @@ public class NoticeService {
 		
 		returnMap.put("noticeList", noticeList);
 		returnMap.put("lastPage", lastPage);
-	
+		
 		return returnMap;
 	}
 	

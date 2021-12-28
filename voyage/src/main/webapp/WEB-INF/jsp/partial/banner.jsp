@@ -52,7 +52,7 @@
                                             </li>
                                             <li><a href="#">고객지원</a>
                                                 <ul class="submenu">
-                                                    <li><a href="${contextPath}/noticeList">공지사항</a></li>
+                                                    <li><a href="${contextPath}/notice/noticeList">공지사항</a></li>
                                                     <li><a href="${contextPath}/qnaList">Q&A</a></li>
                                                     <c:if test="${loginMember.getMemberLevel() == 0}">
                                                     	<!-- 필터를 먹여야하기 때문에 member에 집어넣음 -->

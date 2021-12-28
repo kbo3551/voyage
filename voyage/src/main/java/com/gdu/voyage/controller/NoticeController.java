@@ -24,7 +24,6 @@ public class NoticeController {
 	@Autowired NoticeService noticeService;
 	
 	private final int ROW_PER_PAGE = 10;
-	
 	//관리자
 	
 	//noticeList
@@ -32,6 +31,7 @@ public class NoticeController {
 	public String notcieList(Model model, @RequestParam(defaultValue = "1") int currentPage, @RequestParam @Nullable String searchNotice) {
 		Map<String, Object> noticeMap = noticeService.getNoticeListByTop(currentPage, ROW_PER_PAGE, searchNotice);
 		log.debug(noticeMap.toString()+"★★★ [DoHun] Notice List Controller 실행, noticeMap ★★★");
+
 		
 		int controllPage = (currentPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
 		
@@ -44,14 +44,10 @@ public class NoticeController {
 		int pageNo = ((controllPage / 100) * 10 + 1);
 		
 		model.addAttribute("pageNo", pageNo);
-		
-		if(searchNotice != null & searchNotice == "") {
-			return "/admin/adminNoticeList?searchNotice"+searchNotice;
-		}
-		
-		
+			
 		return "/admin/adminNoticeList";
 	}
+	
 	//noticeOne
 	@GetMapping("/admin/adminNoticeOne")
 	public String noticeOne(Model model, int noticeNo) {
@@ -107,6 +103,42 @@ public class NoticeController {
 		return "/admin/adminNoticeList";
 	}
 	
+	//일반사용자
+	
+	//noticeList
+	@GetMapping("/notice/noticeList")
+	public String notcieListByAll(Model model, @RequestParam(defaultValue = "1") int currentPage, @RequestParam @Nullable String searchNotice) {
+		Map<String, Object> noticeMap = noticeService.getNoticeListByTop(currentPage, ROW_PER_PAGE, searchNotice);
+		log.debug(noticeMap.toString()+"★★★ [DoHun] Notice List Controller 실행, noticeMap ★★★");
+
+		
+		int controllPage = (currentPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
+		
+		model.addAttribute("controllPage", controllPage);
+		model.addAttribute("searchnotice", searchNotice);
+		model.addAttribute("noticeList", noticeMap.get("noticeList"));
+		model.addAttribute("lastPage", noticeMap.get("lastPage"));
+		model.addAttribute("currentPage", currentPage);
+		
+		int pageNo = ((controllPage / 100) * 10 + 1);
+		
+		model.addAttribute("pageNo", pageNo);
+			
+		return "/notice/noticeList";
+	}
+	
+	//noticeOne
+	@GetMapping("notice/noticeOne")
+	public String noticeOneByAll(Model model, int noticeNo) {
+		log.debug(noticeNo+"★★★ [DoHun] Notice One Controller 실행, noticeNo ★★★");
+		Notice notice = noticeService.getNoticeOne(noticeNo);
+		log.debug(notice+"★★★ [DoHun] Notice One Controller 실행, notice ★★★");
+		
+		model.addAttribute("notice", notice);
+		log.debug(model+"★★★ [DoHun] Notice One Controller 실행, notice model ★★★");
+		
+		return "/notice/noticeOne";
+	}
 	/*
 	@GetMapping("/noticeList") // 공지사항 게시판 리스트
 	public String getAccomProduct() {
