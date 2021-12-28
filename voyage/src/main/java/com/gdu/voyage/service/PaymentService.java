@@ -22,6 +22,16 @@ public class PaymentService {
 	@Autowired private AccomPaymentMapper accomPaymentMapper;
 	@Autowired private ActivityPaymentMapper activityPaymentMapper;
 	
+	// 체험 결제 취소
+	public int cancelActivityPayment(int activityPaymentNo) {
+		return activityPaymentMapper.cancelActivityPayment(activityPaymentNo);
+	}
+	
+	// 숙소 결제 취소
+	public int cancelAccomPayment(int accomPaymentNo) {
+		return accomPaymentMapper.cancelAccomPayment(accomPaymentNo);
+	}
+	
 	// 체험 주문 상세
 	public ActivityPayment selActivityPaymentOne(int activityPaymentNo) {
 		return activityPaymentMapper.selectActivityPaymentOne(activityPaymentNo);

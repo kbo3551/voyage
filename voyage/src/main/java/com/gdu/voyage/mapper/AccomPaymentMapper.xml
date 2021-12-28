@@ -30,6 +30,18 @@
 		<result column="accom_room_image_ext" property="accomRoomImageExt" />
 	</resultMap>
 	
+	
+	<!-- 결제 취소 -->
+	<update id="cancelAccomPayment">
+		UPDATE accom_payment
+		SET
+			accom_payment_state = '결제취소',
+			update_date = NOW()
+		WHERE
+			accom_payment_no = #{accomPaymentNo}
+	</update>
+	
+	<!-- 결제 상세(예비) -->
 	<select id="selectAccomPaymentOne" resultType="com.gdu.voyage.vo.AccomPayment">
 		SELECT
 			accom_payment_no accomPaymentNo,
@@ -52,6 +64,7 @@
 	<select id="selectAccomPayment" resultMap="AccomPayment">
 		SELECT
 			ap.accom_payment_no,
+			ap.member_id,
 			ap.accom_checkin,
 			ap.accom_checkout,
 			ap.accom_amount,

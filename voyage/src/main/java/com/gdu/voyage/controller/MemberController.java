@@ -38,7 +38,7 @@ public class MemberController {
 	@Autowired MemberService memberService;
 	@Autowired LoginService loginService;
 	@Autowired PaymentService paymentService;
-
+	
 	
 	// 관심상품목록
 	@GetMapping("member/selectMyInterest")

@@ -265,7 +265,36 @@
 																<td style="display:table-cell;vertical-align:middle;" width="13%">
 																	<small><fmt:formatDate value="${apCreateDateString}" pattern="yyyy-MM-dd" /></small>
 																	<br>
-																	<small><button class="btn" type="button" style="background: silver;">취소신청</button></small>
+																	<c:if test="${ap.accomPaymentState != '결제취소' && ap.accomPaymentState != '사용완료'}">
+																		<small><a href="#" data-toggle="modal" data-target="#accomCancle${acmModalNo}"  class="btn" style="background: silver;">취소신청</a></small>
+																		<!-- The Modal -->
+																		  <div class="modal" id="accomCancle${acmModalNo}">
+																		    <div class="modal-dialog">
+																		      <div class="modal-content">
+																		      
+																		        <!-- Modal Header -->
+																		        <div class="modal-header">
+																		          <h4 class="modal-title">${ap.accomRoom.accomRoomName}</h4>
+																		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+																		        </div>
+																		        
+																		        <!-- Modal body -->
+																		        <div class="modal-body">
+																		        	정말로 결제를 취소하시겠습니까?
+																		          <small><a href="${contextPath}/payment/paymentCancel?memberId=${ap.memberId}&accomPaymentNo=${ap.accomPaymentNo}" class="btn" style="background: silver;">결제취소</a></small>
+																		        </div>
+																		        
+																		        <!-- Modal footer -->
+																		        <div class="modal-footer">
+																		          <button type="button" class="btn" data-dismiss="modal">Close</button>
+																		        </div>
+																		        
+																		      </div>
+																		    </div>
+																		  </div>
+																	</c:if>
+																	
+																
 																</td>
 																<fmt:parseDate var="apAccomCheckInString" value="${ap.accomCheckIn}" pattern="yyyy-MM-dd HH:mm:ss.S" />
 																<fmt:parseDate var="apAccomCheckOutString" value="${ap.accomCheckOut}" pattern="yyyy-MM-dd HH:mm:ss.S" />
@@ -386,7 +415,36 @@
 																<td style="display:table-cell;vertical-align:middle;" width="13%">
 																	<small><fmt:formatDate value="${acCreateDateString}" pattern="yyyy-MM-dd" /></small>
 																	<br>
-																	<small><button class="btn" type="button" style="background: silver;">취소신청</button></small>
+																	<c:if test="${ac.activityPaymentState != '결제취소' && ac.activityPaymentState != '사용완료'}">
+																		<small><a href="#" data-toggle="modal" data-target="#activityCancle${actModalNo}"  class="btn" style="background: silver;">취소신청</a></small>
+																		<!-- The Modal -->
+																		  <div class="modal" id="activityCancle${actModalNo}">
+																		    <div class="modal-dialog">
+																		      <div class="modal-content">
+																		      
+																		        <!-- Modal Header -->
+																		        <div class="modal-header">
+																		          <h4 class="modal-title">${ac.activity.activityName}</h4>
+																		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+																		        </div>
+																		        
+																		        <!-- Modal body -->
+																		        <div class="modal-body">
+																		        	정말로 결제를 취소하시겠습니까?
+																		          <small><a href="${contextPath}/payment/paymentCancel?memberId=${ac.memberId}&activityPaymentNo=${ac.activityPaymentNo}" class="btn" style="background: silver;">결제취소</a></small>
+																		        </div>
+																		        
+																		        <!-- Modal footer -->
+																		        <div class="modal-footer">
+																		          <button type="button" class="btn" data-dismiss="modal">Close</button>
+																		        </div>
+																		        
+																		      </div>
+																		    </div>
+																		  </div>
+																	</c:if>
+																	
+																	
 																</td>
 																<fmt:parseDate var="acActivityBookingTimeString" value="${ac.activityBookingTime}" pattern="yyyy-MM-dd HH:mm:ss.S" />
 																<td style="display:table-cell;vertical-align:middle;" width="61%">
@@ -490,7 +548,6 @@
                 <br>
             </div>
     	</div>
-
 	
 	</main>
 

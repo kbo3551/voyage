@@ -9,7 +9,11 @@ import com.gdu.voyage.vo.AccomPayment;
 
 @Mapper
 public interface AccomPaymentMapper {
+	// 결제 취소
+	int cancelAccomPayment(int accomPaymentNo);
 	
+	
+	// 숙소 결제 상세(예비용)
 	AccomPayment selectAccomPaymentOne(int accomPaymentNo);
 	// 숙소 결제 목록
 	List<AccomPayment> selectAccomPayment(Map<String, Object> map);

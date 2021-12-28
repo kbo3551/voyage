@@ -24,7 +24,17 @@
 		<result column="activity_image_ext" property="activityImageExt" />
 	</resultMap>
 	
+	<!-- 결제 취소 -->
+	<update id="cancelActivityPayment">
+		UPDATE activity_payment
+		SET
+			activity_payment_state = '결제취소',
+			update_date = NOW()
+		WHERE
+			activity_payment_no = #{activityPaymentNo}
+	</update>
 	
+	<!-- 결제 상세(예비) -->
 	<select id="selectActivityPaymentOne" resultType="com.gdu.voyage.vo.ActivityPayment">
 		SELECT
 			activity_payment_no activityPaymentNo,
@@ -46,6 +56,7 @@
 	<select id="selectActivityPayment" resultMap="ActivityPayment">
 		SELECT
 			ap.activity_payment_no,
+			ap.member_id,
 			ap.activity_booking_time,
 			ap.activity_amount,
 			ap.activity_use_person,

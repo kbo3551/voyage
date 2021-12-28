@@ -9,7 +9,10 @@ import com.gdu.voyage.vo.ActivityPayment;
 
 @Mapper
 public interface ActivityPaymentMapper {
-	// 상세
+	// 결제 취소
+		int cancelActivityPayment(int activityPaymentNo);
+	
+	// 상세(예비용)
 	ActivityPayment selectActivityPaymentOne(int activityPaymentNo);
 	// 체험 결제 목록
 	List<ActivityPayment> selectActivityPayment(Map<String, Object> map);
