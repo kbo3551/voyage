@@ -74,6 +74,9 @@
 		create_date
 	FROM
 		coupon
+	ORDER BY
+		coupon_state = '삭제',
+		coupon_state = '비활성화'
 	LIMIT	
 		#{beginRow}, #{rowPerPage}
 	</select>

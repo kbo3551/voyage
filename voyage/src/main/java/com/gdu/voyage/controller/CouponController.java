@@ -26,8 +26,30 @@ public class CouponController {
 	@Autowired
 	CouponService couponService;
 	private final int ROW_PER_PAGE = 10;
+	// 회원이 발급받은 쿠폰 list
+		@GetMapping("/member/coupon")
+		public String getMemberCouponList(Model model, @RequestParam(defaultValue = "1") int currentPage, HttpSession session) {
+			System.out.println("CouponController()_coupon실행");
+			log.debug("★★★[boryeong]CouponController★★★" + currentPage);
+			// 회원 ID
+			String memberId = ((Member) session.getAttribute("loginMember")).getMemberId();
+			
+			int beginRow = (currentPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
 
-	// 쿠폰 list 출력
+			Map<String, Object> map = couponService.getMemberCouponList(currentPage, ROW_PER_PAGE, memberId);
+			// 값
+			model.addAttribute("beginRow", beginRow);
+			model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
+			model.addAttribute("memberCouponList", map.get("memberCouponList"));
+			model.addAttribute("lastPage", map.get("lastPage"));
+			model.addAttribute("currentPage", currentPage);
+			int pageNo = ((beginRow / 100) * 10 + 1);
+			log.debug("★★★[boryeong]CouponController_pageNo★★★" + pageNo);
+			model.addAttribute("pageNo", pageNo);
+
+			return "member/coupon";
+		}
+	// 관리자 쿠폰 list 출력
 	@GetMapping("/admin/couponList")
 	public String getCouponList(Model model, @RequestParam(defaultValue = "1") int currentPage) {
 		System.out.println("CouponController()_coupon실행");
@@ -67,27 +89,5 @@ public class CouponController {
 		couponService.updateCoupon(coupon);
 		return "redirect:/admin/couponList";
 	}
-	// 회원 쿠폰 list
-	@GetMapping("/member/coupon")
-	public String getMemberCouponList(Model model, @RequestParam(defaultValue = "1") int currentPage, HttpSession session) {
-		System.out.println("CouponController()_coupon실행");
-		log.debug("★★★[boryeong]CouponController★★★" + currentPage);
-		// 회원 ID
-		String memberId = ((Member) session.getAttribute("loginMember")).getMemberId();
-		
-		int beginRow = (currentPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
-
-		Map<String, Object> map = couponService.getMemberCouponList(currentPage, ROW_PER_PAGE, memberId);
-		// 값
-		model.addAttribute("beginRow", beginRow);
-		model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
-		model.addAttribute("memberCouponList", map.get("memberCouponList"));
-		model.addAttribute("lastPage", map.get("lastPage"));
-		model.addAttribute("currentPage", currentPage);
-		int pageNo = ((beginRow / 100) * 10 + 1);
-		log.debug("★★★[boryeong]CouponController_pageNo★★★" + pageNo);
-		model.addAttribute("pageNo", pageNo);
-
-		return "member/coupon";
-	}
+	
 }

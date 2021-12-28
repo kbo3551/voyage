@@ -68,10 +68,12 @@
                                  <th>쿠폰 상태</th>
                                  <th>쿠폰 생성일</th>
                                  <th></th>
+                                 <th></th>
                               </tr>
                            </thead>
                            <tbody>
                               <c:forEach items="${couponList}" var="c">
+
                                  <tr>
                                  	<td width="10%">${c.couponNo}</td>
                                     <td width="15%">${c.couponName}</td>
@@ -80,16 +82,24 @@
                                     <td>${c.deadLine}</td>
                                     <td>${c.couponState}</td>
                                     <td>${c.createDate}</td>
+                                <c:choose>
+                                <c:when test="${c.couponState != '삭제'}">  
                                     <td style="text-align:left;"><label></label>    
                                     <form class="form-contact contact_form mb-80" name="updateCoupon" id="updateCoupon" action="${pageContext.request.contextPath}/admin/updateCoupon?couponNo=${c.couponNo}" method="post">
                                   		<select style=" height: 30px; text-align:left;" name="couponState" id="couponState">
 				                            <option value="활성화">활성화</option>
 				                            <option value="비활성화">비활성화</option>
+				                            <option value="삭제">삭제</option>
 										</select>
 										&emsp;
 									<button class="btn btn-finish btn-primary" type="submit">수정</button>
-										&emsp;
 										</form>
+										</td>
+										</c:when>
+									<c:otherwise>
+									<td style=" height: 77px; text-align:left;">&emsp;&emsp;삭제완료</td>
+								</c:otherwise>
+								</c:choose>
                                  </tr>
                               </c:forEach>
                            </tbody>
