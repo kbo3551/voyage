@@ -260,4 +260,26 @@
             WHERE
             	activity_state_admin = '승인완료'
     </select>
+    
+    <!-- 삭제 요청 처리. 마지막 체크인 날짜로부터 일주일이 되면 삭제 처리 -->
+	<update id="updateDormantActivity">
+		UPDATE activity
+		SET
+			activity_state_admin = "삭제"
+		WHERE
+			DATEDIFF(NOW(),update_date) >= 7
+		AND
+			activity_state_admin = "삭제대기"
+	</update>
+	
+	<!-- 삭제 요청 버튼 클릭시 삭제 대기 처리 -->
+	<update id="updateDeleteActivity">
+		UPDATE activity
+		SET
+			activity_state_admin = "삭제대기"
+		WHERE
+			activity_state_admin = "승인완료"
+		AND
+			activity_no = #{activityNo}
+	</update>
 </mapper>
