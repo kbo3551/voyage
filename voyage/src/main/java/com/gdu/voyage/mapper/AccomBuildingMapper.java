@@ -47,4 +47,7 @@ public interface AccomBuildingMapper {
 	
 	// 숙소 삭제 요청
 	int updateDormantAccomBuilding();
+	
+	// 숙소 삭제 대기 상태
+	int updateDeleteAccomBuilding();
 }

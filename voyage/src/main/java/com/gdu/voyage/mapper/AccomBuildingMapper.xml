@@ -228,7 +228,8 @@
     
     <!-- 등록된 숙소 승인여부 수정 -->
     <update id="accomBuildingUpdate" parameterType="com.gdu.voyage.vo.AccomBuilding">
-    	UPDATE accom_building SET
+    	UPDATE accom_building 
+    	SET
     		accom_building_state = #{accomBuildingState},
     		accom_building_state_admin = #{accomBuildingStateAdmin},
     		update_date = NOW()
@@ -261,6 +262,19 @@
 		SET
 			accom_building_state_admin = "삭제"
 		WHERE
-			DATEDIFF(DAY,NOW(),) >= 7
+			DATEDIFF(NOW(),update_date) >= 7
+		AND
+			accom_building_state_admin = "삭제대기"
+	</update>
+	
+	<!-- 삭제 요청 버튼 클릭시 삭제 대기 -->
+	<update id="updateDeleteAccomBuilding">
+		UPDATE accom_building
+		SET
+			accom_building_state_admin = "삭제대기"
+		WHERE
+			accom_building_state_admin = "승인완료"
+		AND
+			accom_building_no = #{accomBuildingNo}
 	</update>
 </mapper>

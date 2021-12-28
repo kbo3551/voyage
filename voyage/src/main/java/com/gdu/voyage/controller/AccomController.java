@@ -77,6 +77,7 @@ public class AccomController {
 		accomRoomService.addAccomRoom(accomRoomForm, realPath);
 		return "redirect:/accomRoomList";
 	}
+	
 
 	// 관리자
 	// accomBuilding 목록 조회
@@ -136,4 +137,5 @@ public class AccomController {
 			model.addAttribute("list", list);
 			return "/admin/accessAccomBuilding";
 		}
+	
 }
