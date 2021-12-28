@@ -52,7 +52,7 @@
                                             </li>
                                             <li><a href="#">고객지원</a>
                                                 <ul class="submenu">
-                                                    <li><a href="${contextPath}/notice/noticeList">공지사항</a></li>
+                                                    <li><a href="${contextPath}/noticeList">공지사항</a></li>
                                                     <li><a href="${contextPath}/qnaList">Q&A</a></li>
                                                     <c:if test="${loginMember.getMemberLevel() == 0}">
                                                     	<!-- 필터를 먹여야하기 때문에 member에 집어넣음 -->
@@ -86,7 +86,7 @@
 				                                            <li><a href="${contextPath}/member/selectMyOrderList">주문목록</a></li>
 				                                            <li><a href="${contextPath}/member/selectMyInterest">관심상품</a></li>
 				                                            <li><a href="${contextPath}/member/coupon">쿠폰</a></li>
-				                                            <li><a href="${contextPath}/chat" onClick="window.open(this.href, '', 'width=450px, height=700px'); return false;">채팅</a></li>
+				                                            <li><a id="chatBtn" data-toggle="modal" data-target="#chatMain">채팅</a></li>
 				                                            <li><a href="${contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
@@ -100,7 +100,7 @@
 				                                            <li><a href="${contextPath}/member/selectMyOrderList">주문목록</a></li>
 				                                            <li><a href="${contextPath}/member/selectMyInterest">관심상품</a></li>
 				                                            <li><a href="${contextPath}/member/coupon">쿠폰</a></li>
-				                                            <li><a href="${contextPath}/chat" onClick="window.open(this.href, '', 'width=450px, height=700px'); return false;">채팅</a></li>
+				                                            <li><a id="chatBtn" data-toggle="modal" data-target="#chatMain">채팅</a></li>
 				                                            <li><a href="${contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
@@ -114,7 +114,7 @@
 				                                            <li><a href="${contextPath}/member/selectMyOrderList">주문목록</a></li>
 				                                            <li><a href="${contextPath}/member/selectMyInterest">관심상품</a></li>
 				                                            <li><a href="${contextPath}/member/coupon">쿠폰</a></li>
-				                                            <li><a href="${contextPath}/chat" onClick="window.open(this.href, '', 'width=450px, height=700px'); return false;">채팅</a></li>
+				                                            <li><a id="chatBtn" data-toggle="modal" data-target="#chatMain">채팅</a></li>
 				                                            <li><a href="${contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
@@ -128,7 +128,7 @@
 				                                            <li><a href="${contextPath}/member/selectMyOrderList">주문목록</a></li>
 				                                            <li><a href="${contextPath}/member/selectMyInterest">관심상품</a></li>
 				                                            <li><a href="${contextPath}/member/coupon">쿠폰</a></li>
-				                                            <li><a href="${contextPath}/chat" onClick="window.open(this.href, '', 'width=450px, height=700px'); return false;">채팅</a></li>
+				                                            <li><a id="chatBtn" data-toggle="modal" data-target="#chatMain">채팅</a></li>
 				                                            <li><a href="${contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
@@ -176,10 +176,40 @@
         <!-- Header End -->
     </header>
     
-    <script type="text/javascript">
-	 
-    </script>
+    <!-- The Modal -->
+	 <div class="modal" id="chatMain">
+	 	<div class="modal-dialog modal-dialog-scrollable">
+	 		<div class="modal-content">
+	      
+	        <!-- Modal Header -->
+	        <div class="modal-header">
+				<h2 class="modal-title">채팅</h2>
+				<button type="button" class="close" data-dismiss="modal">×</button>
+	        </div>
+	        
+	        <!-- Modal body -->
+	        <div class="modal-body">
+				<div>
+				<table class="table table-hover">
+					<tbody id="chatList">
+					</tbody>
+				</table>
+				</div>
+				
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+			
+			</div>
+		</div>
+	</div>
+    
+	<script type="text/javascript">
+	</script>
   
+  	<script src="${contextPath}/assets/js/chat.js"></script>
   	<script src="${contextPath}/assets/js/hashtag.js"></script>
 </body>
 </html>
