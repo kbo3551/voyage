@@ -36,9 +36,10 @@ public class QnaController {
 	@GetMapping("/qnaList")
 	public String qnaList(Model model, 
 			@RequestParam(defaultValue="1") int currentPage,
-			@RequestParam(required = false) String qnaCategory) {
+			@RequestParam(required = false) String qnaCategory,
+			@RequestParam @Nullable String searchWord) {
 		log.debug("qnaListController() 실행");
-		Map<String, Object> map = qnaService.getQnaListByCategory(qnaCategory, currentPage, ROW_PER_PAGE);
+		Map<String, Object> map = qnaService.getQnaList(qnaCategory, searchWord, currentPage, ROW_PER_PAGE);
 		int[] navArray = qnaService.countPage(currentPage);
 		model.addAttribute("qnaList", map.get("qnaList"));
 		model.addAttribute("navArray", navArray);
@@ -48,26 +49,7 @@ public class QnaController {
 		
 		return "/templates_citylisting/qnaList";
 	}
-	// [Member] Q&A 검색 조회
-	@PostMapping("/qnaList")
-	public String searchQnaList(Model model, 
-			@RequestParam(required = false) String qnaCategory,
-			@RequestParam @Nullable String searchWord) {
-		// 디버깅 코드
-		log.debug("★★★★★★★★★★★ [다원] searchQnaList_qnaCategory_Controller() debug" + qnaCategory);
-		log.debug("★★★★★★★★★★★ [다원] searchQnaList_searchWord_Controller() debug" + searchWord);
-		
-		Map<String, Object> paramMap = new HashMap<>();
-		paramMap.put("qnaCategory", qnaCategory);
-		paramMap.put("searchWord", searchWord);
-		
-		List <Qna> qna = qnaService.selectQnaListBySearch(paramMap);
-		model.addAttribute(qna);
-		
-		log.debug("★★★★★★★★★★★ [다원] searchQnaList_qna_Controller() debug" + qna);
-		
-		return "/templates_citylisting/qnaList";
-	}
+
 	//[Member] Qna 상세 내용
 	@GetMapping("/getQnaOne") 
 	public String getQnaOne(HttpSession session, Model model, int qnaNo, String memberId) {
@@ -109,12 +91,10 @@ public class QnaController {
 		// memberId, memberNickname값을 세션에서 가져옴
 		Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 		String memberId = loginMember.getMemberId();
-		String memberNickname = loginMember.getMemberNickname();
 		// 디버그 코드
 		log.debug("★★★★★★★★★★★ [다원] addQ_loginMember_Controller() debug" + loginMember.toString());
 		// qnaForm에 받아온 값 셋팅
 		qnaForm.setMemberId(memberId);
-		qnaForm.setMemberNickname(memberNickname);
 		// 디버그 코드
 		log.debug("★★★★★★★★★★★ [다원] addQ_qnaForm_Controller() debug" + qnaForm.toString());
 		// 이미지 파일 절대 경로 설정
@@ -180,9 +160,10 @@ public class QnaController {
 	@GetMapping("/admin/adminQnaList")
 	public String adminQnaList(Model model, HttpSession session,
 			@RequestParam(defaultValue="1") int currentPage,
-			@RequestParam(required = false) String qnaCategory) {
+			@RequestParam(required = false) String qnaCategory,
+			@RequestParam @Nullable String searchWord) {
 		log.debug("adminQnaList_Controller() 실행");
-		Map<String, Object> map = qnaService.getQnaListByCategory(qnaCategory, currentPage, ROW_PER_PAGE);
+		Map<String, Object> map = qnaService.getQnaList(qnaCategory, searchWord, currentPage, ROW_PER_PAGE);
 		// 로그인한 회원의 아이디, 닉네임을 가져오기 위해 해당 값을 세션에서 가져옴
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		// 디버그 코드
@@ -190,6 +171,8 @@ public class QnaController {
 		int[] navArray = qnaService.countPage(currentPage);
 		model.addAttribute("qnaList", map.get("qnaList"));
 		model.addAttribute("navArray", navArray);
+		model.addAttribute("searchWord", searchWord);
+		model.addAttribute("qnaCategory", qnaCategory);
 		model.addAttribute("lastPage", map.get("lastPage"));
 		model.addAttribute("currentPage", map.get("currentPage"));
 		model.addAttribute("totalCount", map.get("totalCount"));
@@ -202,6 +185,20 @@ public class QnaController {
 			return "/templates_citylisting/qnaList";
 		}
 	}
+	// [Admin] 답변 없는 질문 목록 조회
+	/*
+	@GetMapping("/admin/adminIndex")
+	public String getQListNoneA(
+			@RequestParam(defaultValue="1") int currentPage,
+			@RequestParam(required = false) String qnaCategory) {
+		
+		log.debug("getQListNoneA_Controller() 실행");
+		
+		Map <String, Object> noneAMap = qnaService.getNoneAnswerQ(currentPage, ROW_PER_PAGE, qnaCategory);
+		
+		return "/admin/adminIndex";
+	}
+	*/
 	// [Admin] Q&A 내용 상세 조회
 	@GetMapping("/admin/adminQnaOne") 
 	public String getAdminQnaOne(HttpSession session, Model model, int qnaNo, String memberId) {
@@ -210,8 +207,6 @@ public class QnaController {
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		log.debug(qnaNo + "★★★★★★★★★★★ [다원] getQnaOne_qnaNo_Controller() debug");
 		Qna qna = qnaService.getQnaOneAndAnswer(qnaNo);
-		
-		QnaAnswer qnaAnswer = null;
 		
 	    log.debug(qna + "★★★★★★★★★★★ [다원] getQnaOne_qna_Controller() debug");
 	    model.addAttribute("qna", qna);

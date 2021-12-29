@@ -28,7 +28,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-@Transactional
 public class QnaService {
 	@Autowired QnaMapper qnaMapper;
 	
@@ -40,22 +39,29 @@ public class QnaService {
 		return qna;
 	}
 	// Qna 게시판 목록 카테고리 별 조회
-	public Map<String, Object> getQnaListByCategory(String qnaCategory, int currentPage, int rowPerPage){
+	public Map<String, Object> getQnaList(String qnaCategory,String searchWord,int currentPage, int rowPerPage){
 	
 		int beginRow = (currentPage - 1) * rowPerPage;
 		// 매개변수 값 가공 
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("qnaCategory", qnaCategory);
+		paramMap.put("searchWord", searchWord);
 		paramMap.put("beginRow", beginRow);
 		paramMap.put("rowPerPage", rowPerPage);
 		
-		List<Qna> qnaList = qnaMapper.selectQnaListByCategory(paramMap);
+		List<Qna> qnaList = qnaMapper.selectQnaList(paramMap);
 		// Mapper로부터 호출한 결과값 가공
 		Map<String, Object> returnMap = new HashMap<>();
 		returnMap.put("qnaList", qnaList);
 		// 마지막 페이지
 		int lastPage = 0;
-		int totalCount = qnaMapper.selectQnaTotalCount(qnaCategory);
+		int totalCount = 0;
+		if(searchWord != null) {
+			totalCount = qnaMapper.selectQnaTotalCount(searchWord);
+		} else if(qnaCategory != null) {
+			totalCount = qnaMapper.selectQnaTotalCount(qnaCategory);
+		}
+		
 		lastPage = (totalCount / rowPerPage);
 		if(totalCount % rowPerPage != 0) {
 			lastPage += 1;
@@ -63,6 +69,8 @@ public class QnaService {
 		returnMap.put("qnaList", qnaList);
 		returnMap.put("lastPage", lastPage);
 		returnMap.put("totalCount", totalCount);
+		
+		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_getQnaListByCategory_returnMap debug" + returnMap);		
 		return returnMap;
 	}
 	
@@ -77,10 +85,12 @@ public class QnaService {
 		return qnaMapper.removeQ(qna);
 	}
 	// [Member] Qna 게시판 질문 작성
+	@Transactional
 	public void addQ(QnaForm qnaForm, String realPath) throws Exception {
 		// qnaForm값 디버깅 코드
 		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_qnaForm debug" + qnaForm.toString());
 		qnaMapper.addQ(qnaForm);
+		/*
 		// 이미지 추가
 		MultipartFile qImgList = qnaForm.getQnaImg();
 		// 이미지가 업로드 되었을 경우
@@ -114,17 +124,9 @@ public class QnaService {
 				// RuntimeException은 예외처리를 하지 않아도 됨
 				throw new RuntimeException();
 			}
+			
 		}
-	}
-	// [Member] Q&A 검색 조회
-	public List <Qna> selectQnaListBySearch(Map<String, Object> param){
-		// 매개변수 디버그 코드
-		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_selectQnaListBySearch_param_debug" + param);
-		List<Qna> QnaSearchList = qnaMapper.selectQnaListBySearch(param);
-		// 디버그 코드
-		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_qnaSearchList_debug" + QnaSearchList);
-		
-		return QnaSearchList;
+		*/
 	}
 	
 	// [Admin] 답변 없는 질문 목록

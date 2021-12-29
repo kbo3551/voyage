@@ -21,7 +21,6 @@
         		});
         		// save 버튼 눌렀을 때
         		$('#saveQBtn').click(function(){
-					if("memberNickname")
         			let ck = true;
         			// index : 이미지 파일명, item : 파일 경로
         			$('#qnaImg').each(function(index, item){
@@ -34,7 +33,7 @@
         			if(ck == false){
         				alert('이미지 파일을 선택해주세요');
         			} else {
-        				$('#addQForm').submit();
+        				$('#modifyQForm').submit();
         			}
         		});
         	});

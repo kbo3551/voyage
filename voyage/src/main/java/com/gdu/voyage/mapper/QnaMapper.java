@@ -14,7 +14,7 @@ import com.gdu.voyage.vo.QnaImg;
 public interface QnaMapper {
 	// [Member&Admin] Q&A part
 	// Qna 전체 목록
-	List<Qna> selectQnaListByCategory(Map<String, Object> param);
+	List<Qna> selectQnaList(Map<String, Object> param);
 	// Qna 게시글 수
 	int selectQnaTotalCount(String qnaCategory);
 	// 페이지 수

@@ -8,6 +8,29 @@
         <title>Directory HTML-5 Template </title>
         <!-- jquery here -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+        	// 검색 part
+        	$(function(){
+        		$('#searchQBtn').click(function(){
+        			// 카테고리 값을 저장할 변수 category 생성 및 선택된 카테고리 값으로 초기화 
+        			var category = $('#qnaCategory' option:selected).val();
+        			var searchWord = $('#searchWord').val();
+        			
+        			if(category != null && searchWord != null ){
+        				// 이동 경로
+            			location.href = "/qnaList?qnaCategory=" + category + "&searchWord=" + searchWord;
+        			} else if(category != null && searchWord == null){
+        				location.href = "/qnaList?qnaCategory=" + category;
+        			} else if(searchWord != null && category == null){
+        				location.href = "/qnaList?searchWord=" + searchWord;
+        			} else {
+        				location.href = "/qnaList?pageNo=1";	
+        			}        		
+        		});
+        		
+        	});
+        </script>
+        <!-- jquery end -->
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- <link rel="manifest" href="site.webmanifest"> -->
@@ -72,24 +95,17 @@
                             <h2>문의 사항</h2>
                         </div>
                         <!--Hero form -->
-                        <form action="" id="searchQnaForm" class="search-box search-box2">
+                        <form method="get" action="${pageContext.request.contextPath}/qnaList" id="searchQnaForm" class="search-box search-box2">
                             <div class="input-form">
                             	<!-- 
                             	 <input type="text" placeholder="What are you looking for?">
                             	 -->
-                               	 <input type="text" placeholder="문의사항을 검색해보세요" id="searchWord" value="${qna.searchWord}">
+                               	 <input type="text" placeholder="문의사항을 검색해보세요" id="searchWord" onfocus="this.placeholder = '' " onblur="this.placeholder = 'search'">
                             </div>
                             <div class="select-form">
                                 <div class="select-itms">
-                                    <select name="select" id="selectQnaCategory">
-                                    	<!--  
-                                    	<option value="">All Catagories</option>
-                                        <option value="">Catagories One</option>
-                                        <option value="">Catagories Two</option>
-                                        <option value="">Catagories Three</option>
-                                        <option value="">Catagories Four</option>
-                                    	-->
-                                        <option value="">전체</option>
+                                    <select name="qnaCategory" id="qnaCategory">
+                                        <option value="#">전체</option>
                                         <option value="예약문의">예약</option>
                                         <option value="결제문의">결제</option>
                                         <option value="기타">기타</option>
@@ -98,7 +114,7 @@
                             </div>
                             <!-- Search box -->
                             <div class="search-form">
-                                <a type="button" id="qnaSearchBtn">Search</a>
+                                <a class="nav-link" href="#" id="searchQBtn">Search</a>
                             </div>	
                         </form>	
                     </div>
@@ -228,10 +244,10 @@
                                 	<c:forEach items="${qnaList}" var="qna">
                                     	<div class="col-lg-6 ">
                                         	<div class="single-listing mb-30" id = "qnaArrayList">
-	                                        	<div class="list-img">
-			                                    	<img src="assets/img/gallery/list1.png" alt="">
-				                                    	<!-- <span>Open</span> -->
-		                                        </div>
+		                                    	<div class="list-img">
+				                                    <img src="resources/image/qna/qna2.jpg" alt="">
+					                                <!-- <span>Open</span> -->
+			                                    </div>
 		                                   		<div class="list-caption">
 		                                        	<span>${qna.qnaCategory}</span>
 		                                        	<h3><a href="${pageContext.request.contextPath}/getQnaOne?qnaNo=${qna.qnaNo}">${qna.qnaTitle}</a></h3>
