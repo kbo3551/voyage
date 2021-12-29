@@ -80,12 +80,14 @@
 	LIMIT	
 		#{beginRow}, #{rowPerPage}
 	</select>
-	<!-- 쿠폰 수 -->
+	<!-- 삭제한 쿠폰을 제외한 쿠폰 수 -->
 	<select id="couponTotalCount" resultType="int" parameterType="com.gdu.voyage.vo.Coupon">
 	SELECT
 		COUNT(*)
 	FROM
 		coupon
+	WHERE
+		coupon_state !='삭제'
 	</select>
 	<!-- 쿠폰 생성 -->
 	<insert id="insertCoupon" parameterType="com.gdu.voyage.vo.Coupon">
