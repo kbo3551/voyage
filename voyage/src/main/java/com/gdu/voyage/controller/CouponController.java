@@ -51,13 +51,15 @@ public class CouponController {
 			model.addAttribute("memberCouponlastPage", memberCouponMap.get("lastPage"));
 			model.addAttribute("memberCouponPage", memberCouponPage);
 			model.addAttribute("memberCouponPageNo", memberCouponPageNo);
+			model.addAttribute("memberCouponCount", memberCouponMap.get("totalCount"));
 			log.debug("★★★[boryeong]CouponController_memberCouponPageNo★★★" + memberCouponPageNo);
 			// 쿠폰 발급가능 list
 			model.addAttribute("couponBeginRow", couponBeginRow);
 			model.addAttribute("couponList", couponMap.get("couponList"));
-			model.addAttribute("couponLastPage", memberCouponMap.get("lastPage"));
+			model.addAttribute("couponLastPage", couponMap.get("lastPage"));
 			model.addAttribute("couponPage", couponPage);
 			model.addAttribute("couponPageNo", couponPageNo);
+			model.addAttribute("couponCount", couponMap.get("totalCount"));
 			log.debug("★★★[boryeong]CouponController_couponPageNo★★★" + couponPageNo);
 			
 			

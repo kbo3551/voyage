@@ -141,6 +141,7 @@
                            </tbody>
                         </table>
                 <!-- 회운이 발급받은 쿠폰 페이징 -->
+                <c:if test="${memberCouponCount > 0}">
                 <div class="container">
                 <ul class="nav justify-content-center bg-light">
                    <c:if test="${memberCouponBeginRow > (ROW_PER_PAGE * 10)}">
@@ -167,7 +168,7 @@
                    </c:if>
                 </ul>
           </div> 
-          
+        </c:if>  
            <div class="container-fluid p-0">
                <h1 class="h3 mb-3">
                   <strong>발급가능 쿠폰 목록</strong>
@@ -211,6 +212,7 @@
                </div>
             </div>
                                               <!-- 발급가능한 쿠폰 페이징 -->
+           <c:if test="${couponCount > 0}">
                 <div class="container">
                 <ul class="nav justify-content-center bg-light">
                    <c:if test="${couponBeginRow > (ROW_PER_PAGE * 10)}">
@@ -236,7 +238,8 @@
                       <li><a class="nav-link active" href="/member/coupon?memberCouponPage=${memberCouponPage}&couponPage=${couponPage+10}">&gt;</a></li>
                    </c:if>
                 </ul>
-          </div> 
+         	 </div>
+          </c:if> 
 						</div>
 					</div>
 				</div>
