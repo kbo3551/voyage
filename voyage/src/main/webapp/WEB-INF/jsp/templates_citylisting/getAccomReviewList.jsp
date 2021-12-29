@@ -39,7 +39,47 @@
 		body {
 			font-family: 'SpoqaHanSansNeo-Regular';
 		}
+		.star-rating {
+		  border:solid 1px #ccc;
+		  display:flex;
+		  flex-direction: row-reverse;
+		  font-size:1.5em;
+		  justify-content:space-around;
+		  padding:0 .2em;
+		  text-align:center;
+		  width:5em;
+		}
 		
+		.star-rating input {
+		  display:none;
+		}
+		
+		.star-rating label {
+		  color:#ccc;
+		  cursor:pointer;
+		}
+		
+		.star-rating :checked ~ label {
+		  color:#f90;
+		}
+		
+		.star-rating label:hover,
+		.star-rating label:hover ~ label {
+		  color:#fc0;
+		}
+		
+		/* explanation */
+		
+		article {
+		  background-color:#ffe;
+		  box-shadow:0 0 1em 1px rgba(0,0,0,.25);
+		  color:#006;
+		  font-family:cursive;
+		  font-style:italic;
+		  margin:4em;
+		  max-width:30em;
+		  padding:2em;
+}
 	</style>
 	
 	<!-- Preloader Start -->
@@ -72,9 +112,13 @@
                         <!--Hero form -->
                         <form action="#" class="search-box search-box2">
                             <div class="input-form">
-                                <input type="text" placeholder="What are you looking for?">
+	                            <!--  
+	                            <input type="text" placeholder="What are you looking for?">
+	                            -->
+	                            <input type="text" placeholder="후기 검색">
                             </div>
                             <div class="select-form">
+                            <!--
                                 <div class="select-itms">
                                     <select name="select" id="select1">
                                         <option value="">All Catagories</option>
@@ -84,141 +128,78 @@
                                         <option value="">Catagories Four</option>
                                     </select>
                                 </div>
+                             -->
                             </div>
                             <!-- Search box -->
                             <div class="search-form">
-                                <a href="#">Search</a>
+                                <a type="button" id="reviewSearchBtn">Search</a>
                             </div>	
                         </form>	
                     </div>
                 </div>
             </div>
         </div>
-        <!--Hero End -->
-        <!-- listing Area Start -->
-        <div class="single-listing">
-       	 	<br>
-                        <!-- listing Details Stat-->
-                        <div class="listing-details-area">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-6 ">
-                                        <div class="single-listing mb-30">
-                                            <div class="list-img">
-                                                <img src="assets/img/gallery/list1.png" alt="">
-                                                <!-- <span>Open</span> -->
-                                            </div>
-                                            <div class="list-caption">
-                                                <span>Open</span>
-                                                <h3><a href="/getReviewOne">Saintmartine</a></h3>
-                                                <p>700/D, Kings road, Green lane, 85/ London</p>
-                                                <div class="list-footer">
-                                                    <ul>
-                                                        <li>+10 278 367 9823</li>
-                                                        <li>contact@midnight.com</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 ">
-                                        <div class="single-listing mb-30">
-                                            <div class="list-img">
-                                                <img src="assets/img/gallery/list2.png" alt="">
-                                                <!-- <span>Open</span> -->
-                                            </div>
-                                            <div class="list-caption">
-                                                <span>Open</span>
-                                                 <h3><a href="/getReviewOne">Saintmartine</a></h3>
-                                                <p>700/D, Kings road, Green lane, 85/ London</p>
-                                                <div class="list-footer">
-                                                    <ul>
-                                                        <li>+10 278 367 9823</li>
-                                                        <li>contact@midnight.com</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 ">
-                                        <div class="single-listing mb-30">
-                                            <div class="list-img">
-                                                <img src="assets/img/gallery/list3.png" alt="">
-                                                <!-- <span>Open</span> -->
-                                            </div>
-                                            <div class="list-caption">
-                                                <span>Open</span>
-                                                 <h3><a href="/getReviewOne">Saintmartine</a></h3>
-                                                <p>700/D, Kings road, Green lane, 85/ London</p>
-                                                <div class="list-footer">
-                                                    <ul>
-                                                        <li>+10 278 367 9823</li>
-                                                        <li>contact@midnight.com</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 ">
-                                        <div class="single-listing mb-30">
-                                            <div class="list-img">
-                                                <img src="assets/img/gallery/list4.png" alt="">
-                                                <!-- <span>Open</span> -->
-                                            </div>
-                                            <div class="list-caption">
-                                                <span>Open</span>
-                                                 <h3><a href="/getReviewOne">Saintmartine</a></h3>
-                                                <p>700/D, Kings road, Green lane, 85/ London</p>
-                                                <div class="list-footer">
-                                                    <ul>
-                                                        <li>+10 278 367 9823</li>
-                                                        <li>contact@midnight.com</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 ">
-                                        <div class="single-listing mb-30">
-                                            <div class="list-img">
-                                                <img src="assets/img/gallery/list5.png" alt="">
-                                                <!-- <span>Open</span> -->
-                                            </div>
-                                            <div class="list-caption">
-                                                <span>Open</span>
-                                                 <h3><a href="/getReviewOne">Saintmartine</a></h3>
-                                                <p>700/D, Kings road, Green lane, 85/ London</p>
-                                                <div class="list-footer">
-                                                    <ul>
-                                                        <li>+10 278 367 9823</li>
-                                                        <li>contact@midnight.com</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 ">
-                                        <div class="single-listing mb-30">
-                                            <div class="list-img">
-                                                <img src="assets/img/gallery/list6.png" alt="">
-                                                <!-- <span>Open</span> -->
-                                            </div>
-                                            <div class="list-caption">
-                                                <span>Open</span>
-                                                 <h3><a href="/getReviewOne">Saintmartine</a></h3>
-                                                <p>700/D, Kings road, Green lane, 85/ London</p>
-                                                <div class="list-footer">
-                                                    <ul>
-                                                        <li>+10 278 367 9823</li>
-                                                        <li>contact@midnight.com</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
+        	<div class="listing-area pt-120 pb-120">
+            <div class="container">
+                <div class="row">
+                   <!-- Left Content -->
+                    <!-- Right content -->
+                    <div class="col-xl-8 col-lg-8 col-md-6">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="count mb-35">
+                                    <span> + ${totalCount}개의 후기글이 존재합니다.</span>
+                                    <!-- 후기글을 작성하는 페이지 이동 버튼  -->
+                                    <div class="form-group mt-3">
+                                    	<a type="button" href="${pageContext.request.contextPath}/addAccomReview" class="button button-contactForm boxed-btn">Write</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- listing Details Stat-->
+                        <div class="listing-details-area">
+                            <div class="container">
+                                <div class="row">
+                                	<c:forEach items="${accomReviewList}" var="review">
+                                    	<div class="col-lg-6 ">
+                                        	<div class="single-listing mb-30" id = "reviewArrayList">
+	                                        	<div class="list-img">
+			                                    	<img src="assets/img/gallery/list1.png" alt="">
+				                                    	<!-- <span>Open</span> -->
+		                                        </div>
+		                                   		<div class="list-caption">
+		                                        	<span>${review.reviewStar}</span>
+		                                        	<h3><a href="${pageContext.request.contextPath}/getReviewOne?reivewNo=${review.reviewNo}">${review.reviewTitle}</a></h3>
+		                                            <p>${review.reviewNo}</p>
+		                                            <div class="list-footer">
+		                                            	<!--  
+		                                         		<ul>
+		                                                	<li>${review.paymentNo}</li>
+		                                               	</ul>
+		                                               	-->
+		                                            </div>
+		                                                <!-- 
+		                                                	<div class="list-footer">
+			                                                    <ul>
+			                                                        <li>+10 278 367 9823</li>
+			                                                        <li>contact@midnight.com</li>
+			                                                    </ul>
+		                                                	</div>
+		                                                 -->
+		                                          </div>
+		                                        </div>
+		                                      </div>
+                                        </c:forEach>
+                                   	</div>
+                                </div>
+                           	</div>
+                        </div>
+                    </div>
+            	</div>
+            </div>
+        <!--Hero End -->
+        <!-- listing Area Start -->
+       
                         <!-- listing Details End -->
                         <!--Pagination Start  -->
                         <div class="pagination-area pt-70 text-center">
@@ -227,11 +208,22 @@
                                     <div class="col-xl-12">
                                         <div class="single-wrap d-flex justify-content-center">
                                             <nav aria-label="Page navigation example">
+                                               <!-- 페이징 -->
                                                 <ul class="pagination justify-content-start">
-                                                    <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">03</a></li>
-                                                <li class="page-item"><a class="page-link" href="#"><span class="ti-angle-right"></span></a></li>
+                                                	<li class="page-item"><a class="page-link" href="getAccomReviewList?pageNo=${pageNo-10}"><span class="ti-angle-left"></span></a></li>
+                                                    <c:forEach items="${navArray}" var="n">
+                                                    	<c:if test="${n != 0}">
+                                                    		<c:choose>
+                                                    			<c:when test="${n eq pageNo}">
+                                                    				<li class="page-item active"><a  class="page-link" href="getAccomReviewList?pageNo=${n}">${n}</a></li>
+                                                    			</c:when>
+                                                    			<c:otherwise>
+                                                    				<li class="page-item active"><a  class="page-link" href="getAccomReviewList?pageNo=${n}">${n}</a></li>
+                                                    			</c:otherwise>
+                                                    		</c:choose>
+                                                    	</c:if>
+                                                    </c:forEach>
+                                                	<li class="page-item"><a class="page-link" href="getAccomReviewList?pageNo=${pageNo+10}"><span class="ti-angle-right"></span></a></li>
                                                 </ul>
                                             </nav>
                                         </div>
@@ -240,7 +232,6 @@
                             </div>
                         </div>
                         <!--Pagination End  -->
-                    </div>
         <!-- listing-area Area End -->
 
     </main>
