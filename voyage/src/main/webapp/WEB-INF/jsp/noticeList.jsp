@@ -109,12 +109,12 @@
 											<c:choose>
 												<c:when test="${currentPage == f}">
 													<li class="page-item active">
-														<a href="/noticeList?currentPage=${f}" class="page-link">${f}</a>
+														<a href="${pageContext.request.contextPath}/noticeList?currentPage=${f}" class="page-link">${f}</a>
 													</li>
 												</c:when>
 												<c:otherwise>
 													<li class="page-item">
-														<a href="/noticeList?currentPage=${f}" class="page-link">${f}</a>
+														<a href="${pageContext.request.contextPath}/noticeList?currentPage=${f}" class="page-link">${f}</a>
 													</li>
 												</c:otherwise>
 											</c:choose>
@@ -125,7 +125,7 @@
 									</c:forEach>
 									<c:if test="${currentPage + 10 <= lastPage}">
 										<li class="page-item">
-											<a href="/noticeList?currentPage=${pageNo+10}" class="page-link" aria-label="Next">
+											<a href="${pageContext.request.contextPath}/noticeList?currentPage=${pageNo+10}" class="page-link" aria-label="Next">
 												<i class="ti-angle-right">
 												</i>
 											</a>

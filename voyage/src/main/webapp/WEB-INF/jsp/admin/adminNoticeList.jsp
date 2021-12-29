@@ -82,7 +82,7 @@
 					<div class="container" id="page">
 						<ul class="nav justify-content-center bg-light">
 						 	<c:if test="${beginRow > (ROW_PER_PAGE * 10)}">
-					 				<li><a href="/admin/adminNoticeList?currentPage=${pageNo-1}">&lt;</a></li>
+					 				<li><a href="${pageContext.request.contextPath}/admin/adminNoticeList?currentPage=${pageNo-1}">&lt;</a></li>
 							</c:if>
 							<c:set var="doneLoop" value="false"></c:set>
 							<c:forEach var="f" begin="${pageNo}" end="${pageNo + 9}">
@@ -92,7 +92,7 @@
 											<li class="active"><span>${f}</span></li>
 										</c:when>
 										<c:otherwise>
-											<li><a class="nav-link active" href="/admin/adminNoticeList?currentPage=${f}">${f}</a></li>
+											<li><a class="nav-link active" href="${pageContext.request.contextPath}/admin/adminNoticeList?currentPage=${f}">${f}</a></li>
 										</c:otherwise>
 									</c:choose>
 									<c:if test="${f == lastPage}">
@@ -101,7 +101,7 @@
 								</c:if>
 							</c:forEach>
 							<c:if test="${currentPage + 10 <= lastPage}">
-				 				<li><a class="nav-link active" href="/admin/adminNoticeList?currentPage=${pageNo+10}">&gt;</a></li>
+				 				<li><a class="nav-link active" href="${pageContext.request.contextPath}/admin/adminNoticeList?currentPage=${pageNo+10}">&gt;</a></li>
 							</c:if>
 						</ul>
 					</div> 
