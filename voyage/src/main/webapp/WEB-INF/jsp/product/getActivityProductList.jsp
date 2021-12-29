@@ -204,6 +204,13 @@
 	                                                		${ac.getActivityName()}
 	                                                	</a>
                                                 	</h3>
+                                                	<ul class="blog-info-link mt-3 pt-4 mb-0">
+							                           <li><a href="#" style="color: #555555;"><i class="fa fa-user"></i> 최대인원 ${ac.activityMaxP }</a></li>
+							                           <li><a href="#" style="color: #555555;"><i class="fa fa-comments"></i> 최대이용시간 ${ac.activityMaxT }</a></li>
+							                        </ul>
+							                        <ul class="blog-info-link mt-3 mb-4">
+							                           <li style="font-size: 1.3em;"><a href="#" style="color: #555555;"><i class="fa fa-user"></i>₩ ${ac.activityPrice }</a></li>
+							                        </ul>
 														<p>
 <%-- 															<c:forEach items="${ab.accomBuildingFacilityList }" var="abf" varStatus="status"> --%>
 <%-- 																<c:choose> --%>

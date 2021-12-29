@@ -130,15 +130,17 @@ public class ProductService {
 	public Activity getActivityOne (int activityNo) {
 		log.debug("[debug] ProductService.getActivityOne activityNo : " + activityNo);
 		
-//		Activity activity = productMapper.selectActivityOne(activityNo);
-//		List<ActivitySpot> activitySpot = productMapper.selectActivityOneSpot(activityNo);
-		
 		Activity activity = productMapper.selectActivityOne(activityNo);
 
-//		Map<String, Object> returnMap = new HashMap<>();
-//		returnMap.put("activity", activity);
-//		returnMap.put("activitySpot", activitySpot);
-		
 		return activity;
 	}
+	
+	// [사용자] 체험 상세-목록 조회
+//	public List<Activity> getActivityOneList() {
+//		
+//		List<Activity> activityOneList = productMapper.selectActivityOneList();
+//		
+//		log.debug("[debug] ProductService.getActivityOneList activityOneList : " + activityOneList);
+//		return activityOneList;
+//	}
 }

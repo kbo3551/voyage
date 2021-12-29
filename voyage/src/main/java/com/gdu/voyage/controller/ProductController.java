@@ -177,11 +177,17 @@ public class ProductController {
 		log.debug("[debug] ProductController.getActivityOne 실행");
 		log.debug("[debug] ProductController.getActivityOne activityNo : " + activityNo);
 		
+		int currentPage = 0;
+		
 		// [사용자] 체험 상세 조회
-//		Map<String, Object> activityOne = productService.getActivityOne(activityNo);
-		Activity activity = productService.getActivityOne(activityNo);
-		model.addAttribute("activity", activity);
-		log.debug("[debug] ProductController.getActivityOne activity : " + activity);
+		Activity activityOne = productService.getActivityOne(activityNo);
+		model.addAttribute("activityOne", activityOne);
+		log.debug("[debug] ProductController.getActivityOne activityOne : " + activityOne);
+		
+		// [사용자] 체험 상세-목록 조회
+		List<Activity> activityOneList = productService.getActivityList(currentPage, ROW_PER_PAGE);
+		model.addAttribute("activityOneList", activityOneList);
+		log.debug("[debug] ProductController.getActivityOne activityOneList : " + activityOneList);
 		
 		return "/product/activityOne";
 	}

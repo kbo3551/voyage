@@ -35,8 +35,7 @@ public interface ProductMapper {
 	
 	/* 체험 상세 */
 	// [사용자] 체험 상세 조회
-//	Activity selectActivityOne(int activityNo);
-//	List<ActivitySpot> selectActivityOneSpot(int activityNo);
-	
 	Activity selectActivityOne(int activityNo);
+//	// [사용자] 체험 상세-목록 조회
+//	List<Activity> selectActivityOneList();
 }

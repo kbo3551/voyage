@@ -55,6 +55,9 @@
 		<result column="host_no" property="hostNo"/>
 		<result column="activity_name" property="activityName"/>
 		<result column="activity_description" property="activityDescription"/>
+		<result column="activity_price" property="activityPrice"/>
+		<result column="activity_max_t" property="activityMaxT"/>
+		<result column="activity_max_p" property="activityMaxP"/>
 		<result column="activity_phone" property="activityPhone"/>
 		<result column="activity_state" property="activityState"/>
 		<result column="activity_state_admin" property="activityStateAdmin"/>
@@ -104,6 +107,7 @@
 		<result column="update_date" property="updateDate"/>
 		<association property="activityAddress" javaType="com.gdu.voyage.vo.ActivityAddress">
 			<result column="activity_address_zip" property="activityAddressZip"/>
+			<result column="activity_address_detail" property="activityAddressDetail"/>
 		</association>
 		<collection property="activitySpotList" ofType="com.gdu.voyage.vo.ActivitySpot">
 			<result column="activity_spot_name" property="activitySpotName"/>
@@ -113,6 +117,9 @@
 		<collection property="activityImageList" ofType="com.gdu.voyage.vo.ActivityImage">
 			<result column="activity_image_name" property="activityImageName"/>
 			<result column="activity_image_ext" property="activityImageExt"/>
+		</collection>
+		<collection property="hashtagList" ofType="com.gdu.voyage.vo.Hashtag">
+			<result column="hashtag" property="hashtag"/>
 		</collection>
 	</resultMap>
 	
@@ -333,7 +340,7 @@
 <!-- 			update_date DESC; -->
 <!-- 	</select> -->
 
-	<!-- 체험 상세 조회 - 기본정보 -->
+	<!-- 체험 상세 조회 -->
 	<select id="selectActivityOne" parameterType="int" resultMap="resultActivityOne">
 		SELECT                                      
 			a.activity_no,
@@ -357,12 +364,15 @@
 			acs.activity_spot_description,
 			aci.activity_image_name,
 			aci.activity_image_ext,
-			aca.activity_address_zip		
+			aca.activity_address_zip,
+			aca.activity_address_detail,
+			h.hashtag	
 		FROM      
 			activity a,
 			(SELECT * FROM activity_spot WHERE activity_no = #{activityNo}) acs,
 			(SELECT * FROM activity_image WHERE activity_no = #{activityNo}) aci,
-			(SELECT * FROM activity_address WHERE activity_no = #{activityNo}) aca
+			(SELECT * FROM activity_address WHERE activity_no = #{activityNo}) aca,
+			(SELECT * FROM hashtag WHERE iden_no = #{activityNo}) h
 			                                     
 		WHERE                                      
 			a.activity_state_admin = '승인완료'
@@ -370,7 +380,31 @@
 			AND a.activity_no = acs.activity_no
 			AND a.activity_no = aci.activity_no
 			AND a.activity_no = aca.activity_no
+			AND a.activity_no = h.iden_no
 	</select>
+	
+	<!-- 체험 상세-목록 조회 -->
+<!-- 	<select id="selectActivityOneList" resultMap="resultActivityList"> -->
+<!-- 		SELECT  -->
+<!-- 			ac.*, aca.*, aci.*, acs.*, h.* -->
+<!-- 		FROM  -->
+<!-- 			(SELECT * FROM activity) ac, -->
+<!-- 			(SELECT activity_no, GROUP_CONCAT(activity_address_zip) activity_address_zip FROM activity_address GROUP BY activity_no) aca, -->
+<!-- 			(SELECT activity_no, GROUP_CONCAT(CONCAT_WS('.',activity_image_name,activity_image_ext)) activity_image FROM activity_image GROUP BY activity_no) aci, -->
+<!-- 			(SELECT activity_no, GROUP_CONCAT(activity_spot_name SEPARATOR ', ') activity_spot_name FROM activity_spot GROUP BY activity_no) acs, -->
+<!-- 			(SELECT iden_no, GROUP_CONCAT(hashtag SEPARATOR ' ') hashtag FROM hashtag GROUP BY iden_no) h -->
+<!-- 		WHERE  -->
+<!-- 			activity_state_admin = '승인완료' AND -->
+<!-- 			activity_state = '공개' AND -->
+<!-- 			ac.activity_no = aca.activity_no AND -->
+<!-- 			ac.activity_no = aci.activity_no AND -->
+<!-- 			ac.activity_no = acs.activity_no AND -->
+<!-- 			ac.activity_no = h.iden_no -->
+<!-- 		ORDER BY -->
+<!-- 			update_date DESC -->
+<!-- 		LIMIT -->
+<!-- 			0, 3; -->
+<!-- 	</select> -->
 	
 	<!-- 체험 상세 조회 - 추천장소 -->
 <!-- 	<select id="selectActivityOneSpot" parameterType="int" resultType="resultActivityOne"> -->

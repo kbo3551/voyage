@@ -88,10 +88,13 @@
                         <img class="img-fluid" src="assets/img/blog/single_blog_1.png" alt="">
                      </div>
                      <div class="blog_details">
-                        <h2> ${activity.activityName }</h2>
+                        <h2> ${activityOne.activityName }</h2>
+                        <ul class="blog-info-link mt-3 pt-4 mb-0">
+                           <li><a href="#" style="color: #555555;"><i class="fa fa-user"></i> 최대인원 ${activityOne.activityMaxP }</a></li>
+                           <li><a href="#" style="color: #555555;"><i class="fa fa-comments"></i> 최대이용시간 ${activityOne.activityMaxT }</a></li>
+                        </ul>
                         <ul class="blog-info-link mt-3 mb-4">
-                           <li><a href="#"><i class="fa fa-user"></i> 최대인원 ${activity.activityMaxP }</a></li>
-                           <li><a href="#"><i class="fa fa-comments"></i> 이용시간 ${activity.activityMaxT }</a></li>
+                           <li style="font-size: 1.3em;"><a href="#" style="color: #555555;"><i class="fa fa-user"></i>₩ ${activityOne.activityPrice }</a></li>
                         </ul>
 <!--                         <p class="excert"> -->
 <%--                            DESCRIPTION : ${activity.activityDescription } --%>
@@ -104,7 +107,9 @@
 <!--                         </p> -->
                         <div class="quote-wrapper">
                            <div class="quotes">
-                              DESCRIPTION : ${activity.activityDescription }
+                              DESCRIPTION : ${activityOne.activityDescription }
+                              <br><br>
+                              <small>오픈: ${activityOne.activityOpenHour } / 마감: ${activityOne.activityCloseHour }</small>
                            </div>
                         </div>
 <!--                         <p> -->
@@ -360,16 +365,27 @@
 <!--                            </li> -->
 <!--                         </ul> -->
 <!--                      </aside> -->
+					<aside class="single_sidebar_widget tag_cloud_widget">
+                        <h4 class="widget_title">해시태그</h4>
+                        <ul class="list">
+                        	<c:forEach items="${activityOne.getHashtagList()}" var="h">
+		                       <li>
+	                              <a href="#">${h.getHashtag() }</a>
+	                           </li>
+	                     	</c:forEach>	
+                        </ul>
+                     </aside>
                      <aside class="single_sidebar_widget popular_post_widget">
                         <h3 class="widget_title">Host 추천 장소</h3>
-                        <c:forEach items="${activity.getActivitySpotList()}" var="acs">
+                        <c:forEach items="${activityOne.getActivitySpotList()}" var="acs">
 	                        <div class="media post_item">
 	                           <img src="assets/img/post/post_1.png" alt="post">
 	                           <div class="media-body">
-	                              <a href="blog_details.html">
-	                                 <h3 style="margin-top: 0px !important;">SPOT NAME : ${acs.getActivitySpotName()}</h3>
+	                              <a>
+	                                 <h3 style="margin-top: 0px !important;">${acs.getActivitySpotName()}</h3>
 	                              </a>
-	                              <p>SPOT DESCRIPTION : ${acs.getActivitySpotDescription()}</p>
+	                              <small style="color: #EB566C;">${acs.getActivitySpotCategory()}</small>
+	                              <h5 style="margin-top: 2px !important;">${acs.getActivitySpotDescription()}</h5>
 	                           </div>
 	                        </div>
 	                     </c:forEach>
@@ -401,35 +417,7 @@
 <!--                            </div> -->
 <!--                         </div> -->
                      </aside>
-                     <aside class="single_sidebar_widget tag_cloud_widget">
-                        <h4 class="widget_title">Tag Clouds</h4>
-                        <ul class="list">
-                           <li>
-                              <a href="#">project</a>
-                           </li>
-                           <li>
-                              <a href="#">love</a>
-                           </li>
-                           <li>
-                              <a href="#">technology</a>
-                           </li>
-                           <li>
-                              <a href="#">travel</a>
-                           </li>
-                           <li>
-                              <a href="#">restaurant</a>
-                           </li>
-                           <li>
-                              <a href="#">life style</a>
-                           </li>
-                           <li>
-                              <a href="#">design</a>
-                           </li>
-                           <li>
-                              <a href="#">illustration</a>
-                           </li>
-                        </ul>
-                     </aside>
+                     
                      <aside class="single_sidebar_widget instagram_feeds">
                         <h4 class="widget_title">Instagram Feeds</h4>
                         <ul class="instagram_row flex-wrap">
@@ -492,27 +480,34 @@
 <!--                         <p class="mb-30">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or rannjdomised words which don't look even slightly believable. If you are going to use a passage of fhorem Ipvbsum, you need to orem Ipsum available, but the ma be sure there isvgnn't anything embarrassing.</p> -->
 <!--                         <p class="mb-30">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or rannjdomised words which don't look even slightly believable. If you are going to use a passage of fhorem Ipvbsum.</p> -->
 <!--                     </div> -->
-                    	<div class="row" style="justify-content: center;">
-                            <div class="col-sm-4">
-                                <h3><i class="fa fa-map-marker"></i> Address</h3>
-                                <p>
-                                    <small>${activity.activityAddress.activityAddressZip }</small>
-                                </p>
+                    	<div class="row" style="justify-content: center; flex-wrap: nowrap !important;">
+                            <div class="col-sm-5">
+                            	<div style="text-align: left; padding-right: 8%;">
+	                                <h3 style="letter-spacing: 0.1em;"><i class="fa fa-map-marker"></i> Address</h3>
+	                                <p>
+	                                    <small>${activityOne.activityAddress.activityAddressZip }</small><br>
+	                                    <small>${activityOne.activityAddress.activityAddressDetail }</small>
+	                                </p>
+                                </div>
                             </div>
                             <!-- /.col-sm-4 -->
-                            <div class="col-sm-4">
-                                <h3><i class="fa fa-phone"></i> Call center</h3>
-                                <p class="text-muted">전화문의</p>
-                                <p><strong>${activity.activityPhone }</strong></p>
+                            <div class="col-sm-5">
+                            	<div style="text-align: left; padding-left: 8%;">
+	                                <h3><i class="fa fa-phone"></i> Call center</h3>
+	                                <p class="text-muted">전화문의</p>
+	                                <p><strong>${activityOne.activityPhone }</strong></p>
+                                </div>
                             </div>
                             <!-- /.col-sm-4 -->
-                            <div class="col-sm-4">
-                                <h3><i class="fa fa-envelope"></i> Voyage E-mail</h3>
-                                <p class="text-muted"></p>
-                                <ul>
-                                    <li><strong><a href="mailto:">oliweq@naver.com</a></strong>   </li>
-                                    <li><strong><a href="${contextPath}/qnaList">Q&A</a></strong> - Q&A 문의</li>
-                                </ul>
+                            <div class="col-sm-5">
+                            	<div style="text-align: left;">
+	                                <h3><i class="fa fa-envelope"></i> Voyage E-mail</h3>
+	                                <p class="text-muted"></p>
+	                                <ul>
+	                                    <li><strong><a href="mailto:">oliweq@naver.com</a></strong>   </li>
+	                                    <li><strong><a href="${contextPath}/qnaList">Q&A</a></strong> - Q&A 문의</li>
+	                                </ul>
+                                </div>
                             </div>
                             <!-- /.col-sm-4 -->
                         </div>
@@ -598,63 +593,88 @@
                 <div class="listing-details-area pb-80">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-4 col-md-6">
-                                <div class="single-listing mb-30">
-                                    <div class="list-img">
-                                        <img src="assets/img/gallery/list1.png" alt="">
-                                        <!-- <span>Open</span> -->
-                                    </div>
-                                    <div class="list-caption">
-                                        <span>Open</span>
-                                         <h3><a href="listing_details.html">Saintmartine</a></h3>
-                                        <p>700/D, Kings road, Green lane, 85/ London</p>
-                                        <div class="list-footer">
-                                            <ul>
-                                                <li>+10 278 367 9823</li>
-                                                <li>contact@midnight.com</li>
-                                            </ul>
+                       		<c:forEach items="${activityOneList}" var="ac" varStatus="status" end="3">
+	                            <div class="col-lg-4 col-md-6">
+	                                <div class="single-listing mb-30">
+	                                    <div class="list-img">
+                                            <a href="/activityOnetest?activityNo=${ac.activityNo }">
+                                            	<div style="height: 260px; overflow: hidden;">
+                                            		<img src="resources/image/accom_building/jang.jpg" alt="" style=" top: 50%;">
+                                            	</div>
+                                            </a>
+                                            <!-- <span>Open</span> -->
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="single-listing mb-30">
-                                    <div class="list-img">
-                                        <img src="assets/img/gallery/list2.png" alt="">
-                                        <!-- <span>Open</span> -->
-                                    </div>
-                                    <div class="list-caption">
-                                        <span>Open</span>
-                                         <h3><a href="listing_details.html">Saintmartine</a></h3>
-                                        <p>700/D, Kings road, Green lane, 85/ London</p>
-                                        <div class="list-footer">
-                                            <ul>
-                                                <li>+10 278 367 9823</li>
-                                                <li>contact@midnight.com</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="single-listing mb-30">
-                                    <div class="list-img">
-                                        <img src="assets/img/gallery/list3.png" alt="">
-                                        <!-- <span>Open</span> -->
-                                    </div>
-                                    <div class="list-caption">
-                                        <span>Open</span>
-                                         <h3><a href="listing_details.html">Saintmartine</a></h3>
-                                        <p>700/D, Kings road, Green lane, 85/ London</p>
-                                        <div class="list-footer">
-                                            <ul>
-                                                <li>+10 278 367 9823</li>
-                                                <li>contact@midnight.com</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+	                                    <div class="list-caption">
+	                                        <span>
+   	                                        	<a href="/activityOne?activityNo=${ac.activityNo }" style="color: #fff; text-decoration: none;">
+   	                                        		Open
+   	                                        	</a>
+   	                                       	</span>
+	                                        <h3>
+                                              	<a href="/activityOne?activityNo=${ac.activityNo }">
+                                              		${ac.getActivityName()}
+                                              	</a>
+                                            </h3>
+	                                        <ul class="blog-info-link mt-3 pt-4 mb-0">
+					                           <li><a href="#" style="color: #555555;"><i class="fa fa-user"></i> 최대인원 ${activityOne.activityMaxP }</a></li>
+					                           <li><a href="#" style="color: #555555;"><i class="fa fa-comments"></i> 최대이용시간 ${activityOne.activityMaxT }</a></li>
+					                        </ul>
+					                        <ul class="blog-info-link mt-3 mb-4">
+					                           <li style="font-size: 1.3em;"><a href="#" style="color: #555555;"><i class="fa fa-user"></i>₩ ${activityOne.activityPrice }</a></li>
+					                        </ul>
+	                                        <div class="list-footer">
+                                                 <ul class="pb-15">
+		                                             <li>
+														<c:forEach items="${ab.hashtagList }" var="abh" varStatus="status">
+															<c:choose>
+															 	<c:when test="${status.last}">
+														            ${abh.getHashtag()}
+														        </c:when>
+														        <c:otherwise>
+														            ${abh.getHashtag()},
+														        </c:otherwise>
+														    </c:choose>
+														</c:forEach>
+													</li>	                                                    
+                                                 </ul>
+                                                 <ul>
+                                                     <li style="width: 60%; text-align: left;">
+		                                                <c:choose>
+													        <c:when test="${fn:length(ac.getActivityDescription()) gt 35}">
+													        	<c:out value="${fn:substring(ac.getActivityDescription(), 0, 34)}···"></c:out>
+													        </c:when>
+													        <c:otherwise>
+														        <c:out value="${ac.getActivityDescription()}">
+														        </c:out>
+													        </c:otherwise>
+														</c:choose>
+													</li>
+                                                     <li style="width: 40%; text-align: right;">${ac.getActivityPhone() }</li>
+                                                 </ul>
+                                             </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </c:forEach>
+<!--                             <div class="col-lg-4 col-md-6"> -->
+<!--                                 <div class="single-listing mb-30"> -->
+<!--                                     <div class="list-img"> -->
+<!--                                         <img src="assets/img/gallery/list3.png" alt=""> -->
+<!--                                         <span>Open</span> -->
+<!--                                     </div> -->
+<!--                                     <div class="list-caption"> -->
+<!--                                         <span>Open</span> -->
+<!--                                          <h3><a href="listing_details.html">Saintmartine</a></h3> -->
+<!--                                         <p>700/D, Kings road, Green lane, 85/ London</p> -->
+<!--                                         <div class="list-footer"> -->
+<!--                                             <ul> -->
+<!--                                                 <li>+10 278 367 9823</li> -->
+<!--                                                 <li>contact@midnight.com</li> -->
+<!--                                             </ul> -->
+<!--                                         </div> -->
+<!--                                     </div> -->
+<!--                                 </div> -->
+<!--                             </div> -->
                         </div>
                     </div>
                 </div>
