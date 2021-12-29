@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.AccomBuildingMapper">
+	<resultMap type="com.gdu.voyage.vo.AccomBuilding" id="AccomBuilding">
+		<result column="accom_building_no" property="accomBuildingNo" />
+		<result column="host_no" property="hostNo" />
+		<result column="accom_building_name" property="accomBuildingName" />
+		<result column="accom_building_description" property="accomBuildingDescription" />
+		<result column="accom_building_phone" property="accomBuildingPhone" />
+		<result column="accom_building_state" property="accomBuildingState" />
+		<result column="accom_building_state_admin" property="accomBuildingStateAdmin" />
+		<result column="create_date" property="createDate" />
+		<result column="update_date" property="updateDate" />
+		<collection property="accomBuildingImage" resultMap="AccomBuildingImage" />
+	</resultMap>
+	
+	<resultMap type="com.gdu.voyage.vo.AccomBuildingImage" id="AccomBuildingImage">
+		<result column="accom_building_image_no" property="accomBuildingImageNo" />
+		<result column="accom_building_image_name" property="accomBuildingImageName" />
+		<result column="accom_building_image_ext" property="accomBuildingImageExt" />
+		<result column="accom_building_image_size" property="accomBuildingImageSize" />
+	</resultMap>
+
 
 	<!-- 사업자 -->
 	<!-- 숙소-건물 입력 : selectKey를 사용하여 숙소건물의 식별번호를 받아온뒤 나머지 추가 정보들도 함께 insert -->
@@ -124,6 +144,60 @@
 		)
 	</insert>
 	
+	<!-- 회원 -->
+	<!-- 이미지가 포함된 관심상품목록 -->
+	<select id="selectAccomBuildingByInterest" resultMap="AccomBuilding">
+		SELECT
+			ab.accom_building_name,
+			ab.accom_building_description,
+			ab.accom_building_phone,
+			ab.accom_building_state,
+			ai.accom_building_image_name,
+			ai.accom_building_image_ext
+		FROM
+			accom_building_interest abi
+		INNER JOIN
+			accom_building ab
+		ON
+			abi.accom_building_no = ab.accom_building_no
+		INNER JOIN
+			accom_building_image ai
+		ON
+			ai.accom_building_no = abi.accom_building_no
+		WHERE
+			abi.member_id = #{memberId}
+			AND 
+			ab.accom_building_state = '공개'
+			AND
+			ai.accom_building_image_name =
+			(SELECT accom_building_image_name
+			FROM accom_building_image
+			WHERE accom_building_no = abi.accom_building_no
+			ORDER BY accom_building_image_no ASC
+			LIMIT 0,1
+			)
+			AND
+			ai.accom_building_image_ext = 
+			(SELECT accom_building_image_ext
+			FROM accom_building_image
+			WHERE accom_building_no = abi.accom_building_no
+			ORDER BY accom_building_image_no ASC
+			LIMIT 0,1
+			)
+		ORDER BY
+			abi.accom_building_interest_no desc
+		LIMIT
+			#{beginRow}, #{rowPerPage}
+	</select>
+	<!-- 관심상품 페이징 -->
+	<select id="selectInterestedAccomBuildingCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM 
+			accom_building_interest
+		WHERE
+			member_id = #{memberId}
+	</select>
 	
 	<!-- 관리자, 사업자 -->
 	<!-- 숙소 목록 출력 -->

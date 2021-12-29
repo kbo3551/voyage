@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.gdu.voyage.service.AccomBuildingService;
+import com.gdu.voyage.service.ActivityService;
 import com.gdu.voyage.service.LoginService;
 import com.gdu.voyage.service.MemberService;
 import com.gdu.voyage.service.PaymentService;
@@ -38,12 +40,43 @@ public class MemberController {
 	@Autowired MemberService memberService;
 	@Autowired LoginService loginService;
 	@Autowired PaymentService paymentService;
+	@Autowired AccomBuildingService accomBuildingService;
+	@Autowired ActivityService activityService;
 	
 	
 	// 관심상품목록
 	@GetMapping("member/selectMyInterest")
-	public String getSelectMyInterestList() {
+	public String getSelectMyInterestList(Model model, @RequestParam(name = "category", defaultValue = "all") String category,
+			  	@RequestParam(defaultValue = "1") int accomPage, @RequestParam(defaultValue = "1") int activityPage,
+			  	HttpSession session) {
 		log.trace("MemberController() 실행");
+		
+		// memberId
+		String memberId = ((Member) session.getAttribute("loginMember")).getMemberId();
+		
+		// 숙소 페이징
+    	int accomBeginRow = (accomPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
+    	int accomPageNo = ((accomBeginRow / 100) * 10 + 1);
+    	
+    	// 체험 페이징
+    	int activityBeginRow = (activityPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
+    	int activityPageNo = ((activityBeginRow / 100) * 10 + 1);
+    	
+    	// memberId에 따른 숙소, 체험 관심 목록+페이징
+    	Map<String, Object> accomMap = accomBuildingService.selectAccomBuildingByInterest(activityBeginRow, activityPageNo, memberId);
+    	
+    	model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
+    	
+    	log.trace("aaaaaaaaaaaaaaa"+accomMap.get("totalCount"));
+    	
+    	// 숙소
+    	model.addAttribute("accomBeginRow", accomBeginRow);
+		model.addAttribute("accomInterestedList", accomMap.get("interestedAccomBuildingList"));
+		model.addAttribute("accomLastPage", accomMap.get("lastPage"));
+		model.addAttribute("accomCount", accomMap.get("totalCount"));
+		model.addAttribute("accomPage", accomPage);
+		model.addAttribute("accomPageNo", accomPageNo);
+		
 		return "member/selectMyInterest";
 	}
 	
@@ -65,7 +98,7 @@ public class MemberController {
     	int activityBeginRow = (activityPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
     	int activityPageNo = ((activityBeginRow / 100) * 10 + 1);
     	
-    	// hostNo에 따른 숙소, 체험 주문 목록+페이징
+    	// memberId에 따른 숙소, 체험 주문 목록+페이징
     	Map<String, Object> accomMap = paymentService.selectAccomPayment(accomPage, ROW_PER_PAGE, memberId);
     	Map<String, Object> activityMap = paymentService.selectActivityPayment(activityPage, ROW_PER_PAGE, memberId);
 		

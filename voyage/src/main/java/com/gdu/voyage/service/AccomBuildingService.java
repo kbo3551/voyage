@@ -32,6 +32,35 @@ public class AccomBuildingService {
 	@Autowired
 	private AccomBuildingMapper accomBuildingMapper;
 	
+	// 이미지가 포함된 관심상품 목록
+	public Map<String, Object> selectAccomBuildingByInterest(int currentPage, int rowPerPage,String memberId) {
+		Map<String, Object> paraMap = new HashMap<>();
+		int beginRow = (currentPage-1) * rowPerPage;
+		
+		paraMap.put("beginRow", beginRow);
+		paraMap.put("rowPerPage", rowPerPage);
+		paraMap.put("memberId", memberId);
+		
+		List<AccomBuilding> interestedAccomBuildingList = accomBuildingMapper.selectAccomBuildingByInterest(paraMap);
+		
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		int lastPage = 0;
+		int totalCount = accomBuildingMapper.selectInterestedAccomBuildingCount(memberId);
+		
+		lastPage = totalCount / rowPerPage;
+		
+		if(totalCount % rowPerPage !=0) {
+			lastPage += 1;
+		}
+		
+		returnMap.put("interestedAccomBuildingList", interestedAccomBuildingList);
+		returnMap.put("lastPage", lastPage);
+		returnMap.put("totalCount", totalCount);
+		
+		return returnMap;
+	}
+	
 	/* 삭제 요청 처리. 마지막 체크인 날짜로부터 일주일이 되면 삭제 처리 */
 	public int updateDormantAccomBuilding() {
 		return accomBuildingMapper.updateDormantAccomBuilding();

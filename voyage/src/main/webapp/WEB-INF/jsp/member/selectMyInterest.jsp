@@ -55,7 +55,78 @@
 	.form-control {
 		font-size: 13px;
 	}
-
+	
+	.square {
+	  width: 20%;
+	  position: relative;
+	  
+	}
+	
+	.square:after {
+	  content: "";
+	  display: block;
+	  padding-bottom: 100%;
+	 
+	}
+	
+	.inner {
+	  position: absolute;
+	  width: 70%;
+	  height: 70%;
+	  top:13%;
+	  left:7%;
+	}
+	
+	@media (min-width:992px) and (max-width:1199px){
+		.inner {
+		  position: absolute;
+		  width: 70%;
+		  height: 60%;
+		  top:17%;
+		  left:7%;
+		}
+	}
+	
+	@media (min-width:768px) and (max-width:991px){
+		.inner {
+		  position: absolute;
+		  width: 70%;
+		  height: 50%;
+		  top:24%;
+		  left:7%;
+		}
+	}
+	
+	@media (min-width:570px) and (max-width:767px){
+		.inner {
+		  position: absolute;
+		  width: 70%;
+		  height: 30%;
+		  top:30%;
+		  left:7%;
+		}
+	}
+	
+	@media (min-width:570px) and (max-width:767px){
+		.inner {
+		  position: absolute;
+		  width: 70%;
+		  height: 30%;
+		  top:30%;
+		  left:7%;
+		}
+	}
+	
+	@media(max-width:570px){
+		.inner {
+		  position: absolute;
+		  width: 70%;
+		  height: 30%;
+		  top:40%;
+		  left:7%;
+		}
+	}
+	
 }
 </style>
 
@@ -109,61 +180,119 @@
 						<br>
                         <div class="profiel-header">
                             <h2>
-                                주문목록 <br>
+                                관심상품 <br>
                             </h2>
-                            <hr>
-                        </div>
-                        <c:choose>
-                        		<c:when test="${category == '숙소'}">
-                        			<select id="category" name="category" >
+                            
+							<select id="category" name="category" onchange="categorySelect()">
+								<c:choose>
+	                        		<c:when test="${param.category == 'accom'}">
 		                        		<option value="all">모두보기</option>
 		                        		<option value="accom" selected="selected">숙소</option>
 		                        		<option value="activity">체험</option>
-		                        	</select>
-                        		</c:when>
-                        		<c:when test="${category == '체험'}">
-                        			<select id="category" name="category" >
+	                        		</c:when>
+	                        		<c:when test="${param.category == 'activity'}">
 		                        		<option value="all">모두보기</option>
 		                        		<option value="accom">숙소</option>
 		                        		<option value="activity" selected="selected">체험</option>
-		                        	</select>
-                        		</c:when>
-                        		<c:otherwise>
-                        			<select id="category" name="category" >
+	                        		</c:when>
+	                        		<c:otherwise>
 		                        		<option value="all" selected="selected">모두보기</option>
 		                        		<option value="accom">숙소</option>
 		                        		<option value="activity">체험</option>
-		                        	</select>
-                        		</c:otherwise>
-                        	</c:choose>
-                        	
-                        	<br>
-                        	<br>
-                        	<br>
+	                        		</c:otherwise>
+	                        	</c:choose>
+                        	</select>
+							
+							<br>
+                            <hr>
+                        </div>
+                        
+                        <!-- 카테고리 선택하면 해당 카테고리값만 나오게 함 -->
+                        <script>
+	                        function categorySelect(){ 
+	                    		// 카테고리 선택값을 가져와서 벨류 저장
+	                    		let category = document.getElementById("category"); 
+	                    		let selectCategoryValue = category.options[category.selectedIndex].value; 
+	                    		
+	                    		// 페이징
+	                    		let accomPage = 1;
+	                    		let activityPage = 1;
+	                    		if('${accomPage}' != null){
+	                    			accomPage = '${accomPage}';
+	                    		}
+	                    		if('${activityPage}' != null){
+	                    			activityPage = '${activityPage}';
+	                    		}
+	                    		
+	                    		let contextPath = '${contextPath}';
+	                    		
+	                    		location.replace(contextPath+'/member/selectMyInterest?accomPage='+accomPage+'&activityPage='+activityPage+'&category='+selectCategoryValue);
+	                    		
+	                        }
+                        
+                        </script>
+                        
                         
                         <div class="clear"> 
                         	<c:if test="${param.category != 'activity'}">
 	                            <div class="col-sm-12">
-		                            &nbsp;&nbsp;<label>숙소</label>
+		                            &nbsp;&nbsp;<label style="color: rgb(80,180,146);">숙소</label>
 									<div>
 										<c:choose>
-											<c:when test="${!empty AccomPaymentList}">
+											<c:when test="${!empty accomInterestedList}">
 												<div>
-													<table class="table" style="text-align: center; vertical-align: middle; display:table;">
+													<table class="table" style=" text-align: center; vertical-align: middle; display:table;">
 														<tr>
-															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">이름</td>
-															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">생성일</td>
-															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">공개여부</td>
-															<td style="font-weight: bold; display:table-cell;vertical-align:middle;"><a class="btn" href="${contextPath}/host/addAccomBuilding" style="background: rgb(40,180,240); color: white;">숙소추가</a></td>
+															<td style="font-weight: bold; display:table-cell;vertical-align:middle; width: 15%"></td>
+															<td style="font-weight: bold; display:table-cell;vertical-align:middle; width:18%">이름</td>
+															<td style="font-weight: bold; display:table-cell;vertical-align:middle; width:13%">상태</td>
+															<td style="font-weight: bold; display:table-cell;vertical-align:middle; width:13%"></td>
 														</tr>
-														<c:forEach var="ab" items="${AccomPaymentList}">
+														<c:set var="acmModalNo" value="1" />
+														<c:forEach var="aci" items="${accomInterestedList}">
 															<tr>
-																<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${ab.key}</small></td>
-																<fmt:parseDate var="abCreateDateString" value="${ab.value.getCreateDate()}" pattern="yyyy-MM-dd HH:mm:ss.S" />
-																<td style="display:table-cell;vertical-align:middle;" width="25%"><small><fmt:formatDate value="${abCreateDateString}" pattern="yyyy-MM-dd" /></small></td>
-																<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${ab.value.getAccomBuildingState()}</small></td>
-																<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="#" class="btn" style="background: rgb(130,130,130);">상세</a></small></td>
+																<td class="square" style="clear:both;">
+																	<img style="margin-right: 70%" class="inner" src="${contextPath}/resources/image/accom_building/${aci.accomBuildingImage.accomBuildingImageName}.${aci.accomBuildingImage.accomBuildingImageExt}">
+																</td>
+																<td style="display:table-cell;vertical-align:middle;">
+																	${aci.accomBuildingName}
+																</td>
+																<td style="display:table-cell;vertical-align:middle;">${aci.accomBuildingState}</td>
+																<td style="display:table-cell;vertical-align:middle;"><small><a href="#" data-toggle="modal" data-target="#acmModal${acmModalNo}">상세</a></small>
+																<!-- The Modal -->
+																  <div class="modal" id="acmModal${acmModalNo}">
+																    <div class="modal-dialog">
+																      <div class="modal-content">
+																      
+																        <!-- Modal Header -->
+																        <div class="modal-header">
+																          <h4 class="modal-title">${aci.accomBuildingName} 상세</h4>
+																          <button type="button" class="close" data-dismiss="modal">&times;</button>
+																        </div>
+																        
+																        <!-- Modal body -->
+																        <div class="modal-body">
+																          <small>
+																          	전화번호 : ${aci.accomBuildingPhone}
+																          	<br>
+																          	<br>
+																          	상세 :
+																          	<br>
+																          	${aci.accomBuildingDescription}
+																          </small>
+																        </div>
+																        
+																        <!-- Modal footer -->
+																        <div class="modal-footer">
+																          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+																        </div>
+																        
+																      </div>
+																    </div>
+																  </div>
+																</td>
 															</tr>
+															<c:set var="acmModalNo" value="${acmModalNo+1}" />
 														</c:forEach>
 													</table>
 												</div>
@@ -174,9 +303,40 @@
 										</c:choose>
 									</div>
 								</div>
+								
+								<!-- 숙소 페이징 -->
+								<c:if test="${accomCount > 0}">
+									<div class="clear">
+			                           <ul class="nav justify-content-center">
+			                              <c:if test="${accomBeginRow > (ROW_PER_PAGE * 10)}">
+			                                 <li><a href="${contextPath}/member/selectMyOrderList?accomPage=${accomPageNo-1}&activityPage=${activityPage}&category=${param.category}">&lt;</a></li>
+			                              </c:if>
+			                              <c:set var="doneLoop" value="false"></c:set>
+			                              <c:forEach var="f" begin="${accomPageNo}" end="${accomPageNo + 9}">
+			                                 <c:if test="${not doneLoop}">
+			                                    <c:choose>
+			                                       <c:when test="${accomPage == f}">
+			                                          <li class="active"><span class="nav-link">${f}</span></li>
+			                                       </c:when>
+			                                       <c:otherwise>
+			                                          <li><a class="nav-link active" href="${contextPath}/member/selectMyOrderList?accomPage=${f}&activityPage=${activityPage}&category=${param.category}">${f}</a></li>
+			                                       </c:otherwise>
+			                                    </c:choose>
+			
+			                                    <c:if test="${f == accomLastPage}">
+			                                       <c:set var="doneLoop" value="true"></c:set>
+			                                    </c:if>
+			                                 </c:if>
+			                              </c:forEach>
+			                              <c:if test="${accomPage + 10 <= accomLastPage}">
+			                                 <li><a class="nav-link active" href="${contextPath}/member/selectMyOrderList?accomPage=${accomPage+10}&activityPage=${activityPage}&category=${param.category}">&gt;</a></li>
+			                              </c:if>
+			                           </ul>
+			                        </div>
+								</c:if>
                         	</c:if>
                         
-                        	<c:if test="${category == all}">
+                        	<c:if test="${param.category == null || param.category == 'all'}">
                         		<br>
                         		<br>
                         		<br>
@@ -185,42 +345,146 @@
 							<c:if test="${param.category != 'accom'}">
 								<div class="clear"> 
 		                            <div class="col-sm-12">
-		                            	&nbsp;&nbsp;<label>체험</label>
-		                            	<c:if test="${ActivityPaymentList > 0}">
-		                            		<span>&nbsp;&nbsp;<a class="btn" href="${contextPath}/host/activityReqState" style="background: rgb(40,180,240); color: white;">신청조회</a></span>
-		                            	</c:if>
-		                            	
-										<div>
-											<c:choose>
-												<c:when test="${!empty ActivityPaymentList}"><!-- ne '[]' -->
-													<div>
-														<table class="table" style="text-align: center; vertical-align: middle; display:table;">
+		                            &nbsp;&nbsp;<label style="color: rgb(80,140,186);">체험</label>
+									<div>
+										<c:choose>
+											<c:when test="${!empty activityPaymentList}">
+												<div>
+													<table class="table" style="text-align: center; vertical-align: middle; display:table;">
+														<tr>
+															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">날짜</td>
+															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">상품정보</td>
+															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">상태</td>
+															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">확인</td>
+														</tr>
+														<c:set var="actModalNo" value="1" />
+														<c:forEach var="ac" items="${activityPaymentList}">
 															<tr>
-																<td style="font-weight: bold; display:table-cell;vertical-align:middle;">이름</td>
-																<td style="font-weight: bold; display:table-cell;vertical-align:middle;">생성일</td>
-																<td style="font-weight: bold; display:table-cell;vertical-align:middle;">공개여부</td>
-																<td style="font-weight: bold; display:table-cell;vertical-align:middle;"><a class="btn" style="background: rgb(40,180,240); color: white;">체험추가</a></td>
+																<fmt:parseDate var="acCreateDateString" value="${ac.createDate}" pattern="yyyy-MM-dd HH:mm:ss.S" />
+																<td style="display:table-cell;vertical-align:middle;" width="13%">
+																	<small><fmt:formatDate value="${acCreateDateString}" pattern="yyyy-MM-dd" /></small>
+																	<br>
+																	<c:if test="${ac.activityPaymentState != '결제취소' && ac.activityPaymentState != '사용완료'}">
+																		<small><a href="#" data-toggle="modal" data-target="#activityCancle${actModalNo}"  class="btn" style="background: silver;">취소신청</a></small>
+																		<!-- The Modal -->
+																		  <div class="modal" id="activityCancle${actModalNo}">
+																		    <div class="modal-dialog">
+																		      <div class="modal-content">
+																		      
+																		        <!-- Modal Header -->
+																		        <div class="modal-header">
+																		          <h4 class="modal-title">${ac.activity.activityName}</h4>
+																		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+																		        </div>
+																		        
+																		        <!-- Modal body -->
+																		        <div class="modal-body">
+																		        	정말로 결제를 취소하시겠습니까?
+																		          <small><a href="${contextPath}/payment/paymentCancel?memberId=${ac.memberId}&activityPaymentNo=${ac.activityPaymentNo}" class="btn" style="background: silver;">결제취소</a></small>
+																		        </div>
+																		        
+																		        <!-- Modal footer -->
+																		        <div class="modal-footer">
+																		          <button type="button" class="btn" data-dismiss="modal">Close</button>
+																		        </div>
+																		        
+																		      </div>
+																		    </div>
+																		  </div>
+																	</c:if>
+																	
+																	
+																</td>
+																<fmt:parseDate var="acActivityBookingTimeString" value="${ac.activityBookingTime}" pattern="yyyy-MM-dd HH:mm:ss.S" />
+																<td style="display:table-cell;vertical-align:middle;" width="61%">
+																	<table frame="void">
+																		<td class="square" style="width: 30%">
+																			<img class="inner" src="${contextPath}/resources/image/activity/${ac.activityImage.activityImageName}.${ac.activityImage.activityImageExt}">
+																		</td>
+																		<td style="width: 100%">
+																			<span style="float:right; text-align: left;">
+																			<p><small>${ac.activity.activityName}</small></p>
+																			<p><small>인원 : ${ac.activityUsePerson}명 / 예약시간 : 
+																			<fmt:formatDate value="${acActivityBookingTimeString}" pattern="yyyy-MM-dd HH:mm" />
+																			</small></p>
+																			<p><b><fmt:formatNumber type="number" maxFractionDigits="3" value="${ac.activityAmount}" />원</b></p>
+																			</span>
+																		</td>
+																	</table>
+																	
+																</td>
+																<td style="display:table-cell;vertical-align:middle;" width="13%">${ac.activityPaymentState}</td>
+																<td style="display:table-cell;vertical-align:middle;" width="13%"><small><a href="#" data-toggle="modal" data-target="#actModal${actModalNo}" >명세</a></small>
+																
+																<!-- The Modal -->
+																  <div class="modal" id="actModal${actModalNo}">
+																    <div class="modal-dialog">
+																      <div class="modal-content">
+																      
+																        <!-- Modal Header -->
+																        <div class="modal-header">
+																          <h4 class="modal-title">${ac.activity.activityName} 명세</h4>
+																          <button type="button" class="close" data-dismiss="modal">&times;</button>
+																        </div>
+																        
+																        <!-- Modal body -->
+																        <div class="modal-body">
+																          ${ac.receipt}
+																        </div>
+																         
+																        <!-- Modal footer -->
+																        <div class="modal-footer">
+																          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+																        </div>
+																        
+																      </div>
+																    </div>
+																  </div>
+																</td>
 															</tr>
-															<c:forEach var="al" items="${ActivityList}">
-																<tr>
-																	<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${al.getActivityName()}</small></td>
-																	<fmt:parseDate var="alCreateDateString" value="${al.getCreateDate()}" pattern="yyyy-MM-dd HH:mm:ss.S" />
-																	<td style="display:table-cell;vertical-align:middle;" width="25%"><small><fmt:formatDate value="${alCreateDateString}" pattern="yyyy-MM-dd" /></small></td>
-																	<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${al.getActivityState()}</small></td>
-																	<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="#" class="btn" style="background: rgb(130,130,130);">상세</a></small></td>
-																</tr>
-															</c:forEach>
-														</table>
-													</div>
-												</c:when>
-												<c:otherwise>
-													<small>&nbsp;&nbsp;목록이 비어있습니다.</small>
-												</c:otherwise>
-											</c:choose>
-										</div>
+															<c:set var="actModalNo" value="${actModalNo+1}" />
+														</c:forEach>
+													</table>
+												</div>
+											</c:when>
+											<c:otherwise>
+												<small>&nbsp;&nbsp;목록이 비어있습니다.</small>
+											</c:otherwise>
+										</c:choose>
 									</div>
 								</div>
-							</c:if>
+								
+								<!-- 체험 페이징 -->
+								<c:if test="${activityCount > 0}">
+									<div class="clear">
+			                           <ul class="nav justify-content-center">
+			                              <c:if test="${activityBeginRow > (ROW_PER_PAGE * 10)}">
+			                                 <li><a href="${contextPath}/member/selectMyOrderList?accomPage=${accomPage}&activityPage=${activityPageNo-1}&category=${param.category}">&lt;</a></li>
+			                              </c:if>
+			                              <c:set var="doneLoop" value="false"></c:set>
+			                              <c:forEach var="f" begin="${activityPageNo}" end="${activityPageNo + 9}">
+			                                 <c:if test="${not doneLoop}">
+			                                    <c:choose>
+			                                       <c:when test="${activityPage == f}">
+			                                          <li class="active"><span class="nav-link">${f}</span></li>
+			                                       </c:when>
+			                                       <c:otherwise>
+			                                          <li><a class="nav-link active" href="${contextPath}/member/selectMyOrderList?accomPage=${accomPage}&activityPage=${f}&category=${param.category}">${f}</a></li>
+			                                       </c:otherwise>
+			                                    </c:choose>
+			
+			                                    <c:if test="${f == activityLastPage}">
+			                                       <c:set var="doneLoop" value="true"></c:set>
+			                                    </c:if>
+			                                 </c:if>
+			                              </c:forEach>
+			                              <c:if test="${activityPage + 10 <= activityLastPage}">
+			                                 <li><a class="nav-link active" href="${contextPath}/member/selectMyOrderList?accomPage=${accomPage}&activityPage=${activityPage+10}&category=${param.category}">&gt;</a></li>
+			                              </c:if>
+			                           </ul>
+			                        </div>
+								</c:if>
+                        	</c:if>
 							
 							
                         	<div class="col-sm-20 col-sm-offset-1" style="text-align: right;">
@@ -233,9 +497,6 @@
                 <br>
             </div>
     	</div>
-     
-
-
 	
 	</main>
 

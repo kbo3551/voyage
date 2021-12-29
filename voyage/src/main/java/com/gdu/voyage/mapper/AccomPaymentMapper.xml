@@ -96,12 +96,14 @@
 			ai.accom_room_image_name =
 			(SELECT accom_room_image_name
 			FROM accom_room_image
+			WHERE accom_room_no = ap.accom_room_no
 			ORDER BY accom_room_no ASC
 			LIMIT 0,1)
 			AND
 			ai.accom_room_image_ext =
 			(SELECT accom_room_image_ext
 			FROM accom_room_image
+			WHERE accom_room_no = ap.accom_room_no
 			ORDER BY accom_room_no ASC
 			LIMIT 0,1)
 		ORDER BY

@@ -25,6 +25,11 @@ public interface AccomBuildingMapper {
 	int insertAccomSpotAddress(SpotAddress spotAddress);
 	int insertAccomBuildingHashtag(Hashtag Hashtag);
 	
+	// 회원
+	// 이미지가 포함된 관심상품 목록
+	List<AccomBuilding> selectAccomBuildingByInterest(Map<String, Object> map);
+	//갯수
+	int selectInterestedAccomBuildingCount(String memberId);
 	
 	// 관리자, 사업자
 	// 사업자별 신청중인 숙소 조회 list
