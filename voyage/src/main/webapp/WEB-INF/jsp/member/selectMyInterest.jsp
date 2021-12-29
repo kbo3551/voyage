@@ -393,7 +393,7 @@
 									<div class="clear">
 			                           <ul class="nav justify-content-center">
 			                              <c:if test="${activityBeginRow > (ROW_PER_PAGE * 10)}">
-			                                 <li><a href="${contextPath}/member/selectMyOrderList?accomPage=${accomPage}&activityPage=${activityPageNo-1}&category=${param.category}">&lt;</a></li>
+			                                 <li><a href="${contextPath}/member/selectMyInterest?accomPage=${accomPage}&activityPage=${activityPageNo-1}&category=${param.category}">&lt;</a></li>
 			                              </c:if>
 			                              <c:set var="doneLoop" value="false"></c:set>
 			                              <c:forEach var="f" begin="${activityPageNo}" end="${activityPageNo + 9}">
@@ -403,7 +403,7 @@
 			                                          <li class="active"><span class="nav-link">${f}</span></li>
 			                                       </c:when>
 			                                       <c:otherwise>
-			                                          <li><a class="nav-link active" href="${contextPath}/member/selectMyOrderList?accomPage=${accomPage}&activityPage=${f}&category=${param.category}">${f}</a></li>
+			                                          <li><a class="nav-link active" href="${contextPath}/member/selectMyInterest?accomPage=${accomPage}&activityPage=${f}&category=${param.category}">${f}</a></li>
 			                                       </c:otherwise>
 			                                    </c:choose>
 			
@@ -413,7 +413,7 @@
 			                                 </c:if>
 			                              </c:forEach>
 			                              <c:if test="${activityPage + 10 <= activityLastPage}">
-			                                 <li><a class="nav-link active" href="${contextPath}/member/selectMyOrderList?accomPage=${accomPage}&activityPage=${activityPage+10}&category=${param.category}">&gt;</a></li>
+			                                 <li><a class="nav-link active" href="${contextPath}/member/selectMyInterest?accomPage=${accomPage}&activityPage=${activityPage+10}&category=${param.category}">&gt;</a></li>
 			                              </c:if>
 			                           </ul>
 			                        </div>
