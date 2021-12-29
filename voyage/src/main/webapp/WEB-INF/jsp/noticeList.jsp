@@ -67,49 +67,91 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-8 col-lg-9">
                         <div class="hero-cap text-center pt-50 pb-20">
-                            <h2>${notice.noticeTitle}</h2>
+                            <h2><a class="d-inline-block" href="${pageContext.request.contextPath}/noticeList" class="btn btn-primary">공지 사항</a></h2>
                         </div>
                         <!--Hero form -->
-                    	
-                    	<div>
-							<h3 class="h3 mb-3"> ${notice.noticeNo}. ${notice.noticeTitle} </h3>
-						</div>
-						<div>
-							<div>
-								<div>
-									조회수 : <input type="text" class="form-control" readonly="readonly" value=" ${notice.noticeViewCnt}">
-								</div>
-								<div>
-									작성자 : <input type="text" class="form-control" readonly="readonly" value=" ${notice.adminId}">
-								</div>
-								<div>
-									생성일 : <input type="text" class="form-control" readonly="readonly" value="${notice.createDate}">
-								</div>
-								<div>
-									수정일 : <input type="text" class="form-control" readonly="readonly" value="${notice.updateDate}">
-								</div>
-							</div>
-							<div class="card_body">
-								<div>
-									<textarea cols="100%" rows="5" readonly="readonly">${notice.noticeContent}</textarea>
-								</div>
-								<div>
-									<c:if test="${noticeFile.noticeNo==notice.noticeNo && NoticeFile != null}">
-										<img class="card-img-top" src="${pageContext.request.contextPath}image/${noticeFile.noticeFileName+'.'+noticeFile.noticeFileExt}" alt="unplash">
-										${notice.noticeFileNo}
-									</c:if>
-								</div>
-							</div>
-						</div>
+                     
                     </div>
                 </div>
             </div>
         </div>
         <!--Hero End -->
-       
-       
-       
-       
+        <section class="blog_area sectiong-padding">
+	       	<div class="container">
+		        <div class="row">
+		        	<div class="col-lg-8 mb-5 mb-lg-0">
+				        <div class="blog_left_sidebar">							
+							<c:forEach items="${noticeList}" var="n" >
+								<article class="blog_item">
+									<div class="blog_details">
+										<h2><a class="d-inline-block" href="${pageContext.request.contextPath}/noticeOne?noticeNo=${n.noticeNo}" class="btn btn-primary">${n.noticeTitle}</a></h2>
+								        <ul class="blog-info-link">
+								        	<li><i class="fa fa-user">${n.noticeViewCnt}</i></li>
+								        	<li>개시일 : ${n.createDate}</li>
+								        	<li>수정일 : ${n.updateDate}</li>
+								        </ul>
+							        </div>
+				  				 </article>
+						    </c:forEach>
+						    <nav class="blog-pagination justify-content-center d-flex">
+								<ul class="pagination">
+								 	<c:if test="${beginRow > (ROW_PER_PAGE * 10)}">
+						 				<li class="page-item">
+											<a href="/noticeList?currentPage=${pageNo-1}" class="page-link" aria-label="Previous">
+												<i class="ti-angle-left">
+												</i>
+											</a>
+										</li>
+									</c:if>
+									<c:set var="doneLoop" value="false"></c:set>
+									<c:forEach var="f" begin="${pageNo}" end="${pageNo + 9}">
+										<c:if test="${not doneLoop}">
+											<c:choose>
+												<c:when test="${currentPage == f}">
+													<li class="page-item active">
+														<a href="/noticeList?currentPage=${f}" class="page-link">${f}</a>
+													</li>
+												</c:when>
+												<c:otherwise>
+													<li class="page-item">
+														<a href="/noticeList?currentPage=${f}" class="page-link">${f}</a>
+													</li>
+												</c:otherwise>
+											</c:choose>
+											<c:if test="${f == lastPage}">
+												<c:set var="doneLoop" value="true"></c:set>
+											</c:if>
+										</c:if>
+									</c:forEach>
+									<c:if test="${currentPage + 10 <= lastPage}">
+										<li class="page-item">
+											<a href="/noticeList?currentPage=${pageNo+10}" class="page-link" aria-label="Next">
+												<i class="ti-angle-right">
+												</i>
+											</a>
+										</li>
+									</c:if>
+								</ul>
+							</nav>							    
+						</div>
+					</div>
+					<div class="col-lg-4">
+			        	<div class="blog_right_sidebar">
+			        		<aside class="single_sidebar_widget search_widget">
+					        	<form method="get" action="${pageContext.request.contextPath}/noticeList">
+									<div class="form-group">
+										<div class="input-group mb-3">
+											<input type="text" class="form-control" placeholder="search" name="searchNotice" onfocus="this.placeholder = '' " onblur="this.placeholder = 'search'">																	
+										</div>
+										<button type="submit" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn">검색</button>
+									</div>
+								</form> 
+							</aside> 
+						</div>
+					</div>	
+				</div>
+	        </div>    
+		</section>           
         <!-- listing-area Area End -->
         
     </main>

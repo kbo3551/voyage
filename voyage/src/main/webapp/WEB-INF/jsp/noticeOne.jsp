@@ -67,49 +67,42 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-8 col-lg-9">
                         <div class="hero-cap text-center pt-50 pb-20">
-                            <h2>공지 사항</h2>
+                            <h2><a class="d-inline-block" href="${pageContext.request.contextPath}/noticeList" class="btn btn-primary">공지 사항</a></h2>
                         </div>
                         <!--Hero form -->
-                        
-                        <table class="table table-hover my-0">
-							<thead>
-								<tr>
-									<th style="color: white">번호</th>
-									<th style="color: white">관리자 명</th>
-									<th style="color: white">제목</th>
-									<th style="color: white">조회수</th>
-									<th style="color: white">생성일</th>
-									<th style="color: white">수정일</th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody> 
-								<c:forEach items="${noticeList}" var="n" >
-									<tr>
-								        <td style="color: white">${n.noticeNo}</td>
-								        <td style="color: white">${n.adminId}</td>
-								        <td style="color: white">${n.noticeTitle}</td>
-								        <td style="color: white">${n.noticeViewCnt}</td>
-								        <td style="color: white">${n.createDate}</td>
-								        <td style="color: white">${n.updateDate}</td>
-								        <td><a href="${pageContext.request.contextPath}/notice/noticeOne?noticeNo=${n.noticeNo}" class="btn btn-primary">상세 보기</a></td>
-								    </tr>
-							    </c:forEach>
-							</tbody>
-						</table>
-						<form method="get" action="${pageContext.request.contextPath}/notice/noticeList">
-							<div>
-								<input type="text" class="form-control" placeholder="search" name="searchNotice">
-								<button type="submit" class="btn btn-primary">검색</button>
-							</div>
-						</form>
-                        
+                    	
                     </div>
                 </div>
             </div>
         </div>
         <!--Hero End -->
-        
+        <section class="blog_area single-post-area section-padding">
+        	<div class="container">
+        		<div class="row">
+       				<div class="single-post">
+       					<c:if test="${noticeFile.noticeNo==notice.noticeNo && NoticeFile != null}">
+							<div class="feature-img">
+								<img class="card-img-top" src="${pageContext.request.contextPath}image/${noticeFile.noticeFileName+'.'+noticeFile.noticeFileExt}" alt="unplash">
+								${notice.noticeFileNo}
+							</div>
+						</c:if>
+						<div class="blog-details">
+							<h2>${notice.noticeNo}. ${notice.noticeTitle}</h2>
+						</div>
+						<ul class="blog-info-link mt-3 mb-4">
+							<li>작성자 : ${notice.adminId}</li>
+				        	<li>조회수 : ${notice.noticeViewCnt}</li>
+				        	<li>개시일 : ${notice.createDate}</li>
+				        	<li>수정일 : ${notice.updateDate}</li>
+				        </ul>
+				        <p class="excert">
+				        	${notice.noticeContent}
+				        </p>	
+        			</div>
+        		</div>
+        	</div>    
+        </section>
+       
         <!-- listing-area Area End -->
         
     </main>
