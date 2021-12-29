@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.ActivityMapper">
+	<resultMap type="com.gdu.voyage.vo.Activity" id="Activity">
+		<result column="activity_no" property="activityNo" />
+		<result column="host_no" property="hostNo" />
+		<result column="activity_name" property="activityName" />
+		<result column="activity_open_date" property="activityOpenDate" />
+		<result column="activity_close_date" property="activityCloseDate" />
+		<result column="activity_price" property="activityPrice" />
+		<result column="activity_open_hour" property="activityOpenHour" />
+		<result column="activity_close_hour" property="activityCloseHour" />
+		<result column="activity_max_t" property="activityMaxT" />
+		<result column="activity_max_p" property="activityMaxP" />
+		<result column="activity_description" property="activityDescription" />
+		<result column="activity_phone" property="activityPhone" />
+		<result column="activity_state" property="activityState" />
+		<result column="activity_state_admin" property="activityStateAdmin" />
+		<result column="create_date" property="createDate" />
+		<result column="update_date" property="updateDate" />
+		<collection property="activityImage" resultMap="ActivityImage" />
+	</resultMap>
+	
+	<resultMap type="com.gdu.voyage.vo.ActivityImage" id="ActivityImage">
+		<result column="activity_no" property="activityImageNo" />
+		<result column="activity_image_name" property="activityImageName" />
+		<result column="activity_image_ext" property="activityImageExt" />
+		<result column="activity_image_size" property="activityImageSize" />
+	</resultMap>
+
 	<!-- 사업자 -->
     <!-- 체험 입력 : selectKey를 사용하여 체험의 식별번호를 받아온뒤 나머지 추가 정보들도 함께 insert  -->
     <insert id="insertActivity" parameterType="com.gdu.voyage.vo.Activity">
@@ -123,6 +150,62 @@
 			NOW()
 		)
 	</insert>
+	
+	<!-- 회원 -->
+	<!-- 이미지가 포함된 관심상품목록 -->
+	<select id="selectActivityByInterest" resultMap="Activity">
+		SELECT
+			a.activity_name,
+			a.activity_description,
+			a.activity_phone,
+			a.activity_state,
+			aim.activity_image_name,
+			aim.activity_image_ext
+		FROM
+			activity_interest ai
+		INNER JOIN
+			activity a
+		ON
+			a.activity_no = ai.activity_no
+		INNER JOIN
+			activity_image aim
+		ON
+			aim.activity_no = ai.activity_no
+		WHERE
+			ai.member_id = #{memberId}
+			AND 
+			a.activity_state = '공개'
+			AND
+			aim.activity_image_name =
+			(SELECT activity_image_name
+			FROM activity_image
+			WHERE activity_no = ai.activity_no
+			ORDER BY activity_image_no ASC
+			LIMIT 0,1
+			)
+			AND
+			aim.activity_image_ext =
+			(SELECT activity_image_ext
+			FROM activity_image
+			WHERE activity_no = ai.activity_no
+			ORDER BY activity_image_no ASC
+			LIMIT 0,1
+			)
+		ORDER BY
+			ai.activity_interest_no desc
+		LIMIT
+			#{beginRow}, #{rowPerPage}
+	</select>
+	<!-- 관심상품 페이징 -->
+	<select id="selectInterestedActivityCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM 
+			activity_interest
+		WHERE
+			member_id = #{memberId}
+	</select>
+	
 	
 	
 	<!-- 사업자별 대기중인 체험 신청 리스트 -->

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -125,6 +126,13 @@
 		  top:40%;
 		  left:7%;
 		}
+	}
+	
+	.modal{
+	  position: fixed;
+	  top: 50%;
+	  left: 50%;
+	  transform: translate(-50%, -50%);
 	}
 	
 }
@@ -305,7 +313,17 @@
 																		</td>
 																		<td style="width: 100%" >
 																			<span style="float:right; text-align: left;">
-																			<p><small>${ap.accomRoom.accomRoomName}</small></p>
+																			<p><small>
+																				<c:choose>
+																				        <c:when test="${fn:length(ap.accomRoom.accomRoomName) gt 18}">
+																				        	${fn:substring(ap.accomRoom.accomRoomName, 0, 17)}..
+																				        </c:when>
+																				        <c:otherwise>
+																				        	${ap.accomRoom.accomRoomName}
+																				        </c:otherwise>
+																				</c:choose>
+																			</small></p>
+																			
 																			<p><small>인원 : ${ap.accomUsePerson}명 / 기간 : 
 																			<fmt:formatDate value="${apAccomCheckInString}" pattern="yyyy-MM-dd HH:mm" /> ~ <fmt:formatDate value="${apAccomCheckOutString}" pattern="yyyy-MM-dd HH:mm" />
 																			</small></p>
@@ -454,7 +472,16 @@
 																		</td>
 																		<td style="width: 100%">
 																			<span style="float:right; text-align: left;">
-																			<p><small>${ac.activity.activityName}</small></p>
+																			<p><small>
+																				<c:choose>
+																				        <c:when test="${fn:length(ac.activity.activityName) gt 18}">
+																				        	${fn:substring(ac.activity.activityName, 0, 17)}..
+																				        </c:when>
+																				        <c:otherwise>
+																				        	${ac.activity.activityName}
+																				        </c:otherwise>
+																				</c:choose>
+																			</small></p>
 																			<p><small>인원 : ${ac.activityUsePerson}명 / 예약시간 : 
 																			<fmt:formatDate value="${acActivityBookingTimeString}" pattern="yyyy-MM-dd HH:mm" />
 																			</small></p>

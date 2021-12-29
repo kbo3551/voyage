@@ -51,6 +51,7 @@ public class MemberController {
 			  	HttpSession session) {
 		log.trace("MemberController() 실행");
 		
+		
 		// memberId
 		String memberId = ((Member) session.getAttribute("loginMember")).getMemberId();
 		
@@ -63,11 +64,10 @@ public class MemberController {
     	int activityPageNo = ((activityBeginRow / 100) * 10 + 1);
     	
     	// memberId에 따른 숙소, 체험 관심 목록+페이징
-    	Map<String, Object> accomMap = accomBuildingService.selectAccomBuildingByInterest(activityBeginRow, activityPageNo, memberId);
+    	Map<String, Object> accomMap = accomBuildingService.selectAccomBuildingByInterest(accomPage, ROW_PER_PAGE, memberId);
+    	Map<String, Object> activityMap = activityService.selectActivityByInterest(activityPage, ROW_PER_PAGE, memberId);
     	
     	model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
-    	
-    	log.trace("aaaaaaaaaaaaaaa"+accomMap.get("totalCount"));
     	
     	// 숙소
     	model.addAttribute("accomBeginRow", accomBeginRow);
@@ -76,6 +76,14 @@ public class MemberController {
 		model.addAttribute("accomCount", accomMap.get("totalCount"));
 		model.addAttribute("accomPage", accomPage);
 		model.addAttribute("accomPageNo", accomPageNo);
+		
+		// 체험
+    	model.addAttribute("activityBeginRow", activityBeginRow);
+		model.addAttribute("activityInterestedList", activityMap.get("interestedActivityList"));
+		model.addAttribute("activityLastPage", activityMap.get("lastPage"));
+		model.addAttribute("activityCount", activityMap.get("totalCount"));
+		model.addAttribute("activityPage", activityPage);
+		model.addAttribute("activityPageNo", activityPageNo);
 		
 		return "member/selectMyInterest";
 	}

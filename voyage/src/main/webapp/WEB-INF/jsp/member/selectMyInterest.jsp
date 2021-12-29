@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,56 +78,13 @@
 	  left:7%;
 	}
 	
-	@media (min-width:992px) and (max-width:1199px){
-		.inner {
-		  position: absolute;
-		  width: 70%;
-		  height: 60%;
-		  top:17%;
-		  left:7%;
-		}
+	.modal{
+	  position: fixed;
+	  top: 50%;
+	  left: 50%;
+	  transform: translate(-50%, -50%);
 	}
-	
-	@media (min-width:768px) and (max-width:991px){
-		.inner {
-		  position: absolute;
-		  width: 70%;
-		  height: 50%;
-		  top:24%;
-		  left:7%;
-		}
-	}
-	
-	@media (min-width:570px) and (max-width:767px){
-		.inner {
-		  position: absolute;
-		  width: 70%;
-		  height: 30%;
-		  top:30%;
-		  left:7%;
-		}
-	}
-	
-	@media (min-width:570px) and (max-width:767px){
-		.inner {
-		  position: absolute;
-		  width: 70%;
-		  height: 30%;
-		  top:30%;
-		  left:7%;
-		}
-	}
-	
-	@media(max-width:570px){
-		.inner {
-		  position: absolute;
-		  width: 70%;
-		  height: 30%;
-		  top:40%;
-		  left:7%;
-		}
-	}
-	
+
 }
 </style>
 
@@ -204,7 +162,9 @@
                         	</select>
 							
 							<br>
-                            <hr>
+                            <br>
+                            <br>
+                            
                         </div>
                         
                         <!-- 카테고리 선택하면 해당 카테고리값만 나오게 함 -->
@@ -232,7 +192,7 @@
                         
                         </script>
                         
-                        
+                        <!-- 숙소 -->
                         <div class="clear"> 
                         	<c:if test="${param.category != 'activity'}">
 	                            <div class="col-sm-12">
@@ -243,7 +203,7 @@
 												<div>
 													<table class="table" style=" text-align: center; vertical-align: middle; display:table;">
 														<tr>
-															<td style="font-weight: bold; display:table-cell;vertical-align:middle; width: 15%"></td>
+															<td style="font-weight: bold; display:table-cell;vertical-align:middle; width: 10%"></td>
 															<td style="font-weight: bold; display:table-cell;vertical-align:middle; width:18%">이름</td>
 															<td style="font-weight: bold; display:table-cell;vertical-align:middle; width:13%">상태</td>
 															<td style="font-weight: bold; display:table-cell;vertical-align:middle; width:13%"></td>
@@ -251,11 +211,18 @@
 														<c:set var="acmModalNo" value="1" />
 														<c:forEach var="aci" items="${accomInterestedList}">
 															<tr>
-																<td class="square" style="clear:both;">
-																	<img style="margin-right: 70%" class="inner" src="${contextPath}/resources/image/accom_building/${aci.accomBuildingImage.accomBuildingImageName}.${aci.accomBuildingImage.accomBuildingImageExt}">
+																<td class="square" style="clear:both; width: 10%" >
+																	<img style="margin-right: 70%;" class="inner" src="${contextPath}/resources/image/accom_building/${aci.accomBuildingImage.accomBuildingImageName}.${aci.accomBuildingImage.accomBuildingImageExt}">
 																</td>
 																<td style="display:table-cell;vertical-align:middle;">
-																	${aci.accomBuildingName}
+																	<c:choose>
+																	        <c:when test="${fn:length(aci.accomBuildingName) gt 13}">
+																	        	${fn:substring(aci.accomBuildingName, 0, 12)}...
+																	        </c:when>
+																	        <c:otherwise>
+																	        	${aci.accomBuildingName}
+																	        </c:otherwise>
+																	</c:choose>
 																</td>
 																<td style="display:table-cell;vertical-align:middle;">${aci.accomBuildingState}</td>
 																<td style="display:table-cell;vertical-align:middle;"><small><a href="#" data-toggle="modal" data-target="#acmModal${acmModalNo}">상세</a></small>
@@ -309,7 +276,7 @@
 									<div class="clear">
 			                           <ul class="nav justify-content-center">
 			                              <c:if test="${accomBeginRow > (ROW_PER_PAGE * 10)}">
-			                                 <li><a href="${contextPath}/member/selectMyOrderList?accomPage=${accomPageNo-1}&activityPage=${activityPage}&category=${param.category}">&lt;</a></li>
+			                                 <li><a href="${contextPath}/member/selectMyInterest?accomPage=${accomPageNo-1}&activityPage=${activityPage}&category=${param.category}">&lt;</a></li>
 			                              </c:if>
 			                              <c:set var="doneLoop" value="false"></c:set>
 			                              <c:forEach var="f" begin="${accomPageNo}" end="${accomPageNo + 9}">
@@ -319,7 +286,7 @@
 			                                          <li class="active"><span class="nav-link">${f}</span></li>
 			                                       </c:when>
 			                                       <c:otherwise>
-			                                          <li><a class="nav-link active" href="${contextPath}/member/selectMyOrderList?accomPage=${f}&activityPage=${activityPage}&category=${param.category}">${f}</a></li>
+			                                          <li><a class="nav-link active" href="${contextPath}/member/selectMyInterest?accomPage=${f}&activityPage=${activityPage}&category=${param.category}">${f}</a></li>
 			                                       </c:otherwise>
 			                                    </c:choose>
 			
@@ -329,7 +296,7 @@
 			                                 </c:if>
 			                              </c:forEach>
 			                              <c:if test="${accomPage + 10 <= accomLastPage}">
-			                                 <li><a class="nav-link active" href="${contextPath}/member/selectMyOrderList?accomPage=${accomPage+10}&activityPage=${activityPage}&category=${param.category}">&gt;</a></li>
+			                                 <li><a class="nav-link active" href="${contextPath}/member/selectMyInterest?accomPage=${accomPage+10}&activityPage=${activityPage}&category=${param.category}">&gt;</a></li>
 			                              </c:if>
 			                           </ul>
 			                        </div>
@@ -342,80 +309,40 @@
                         		<br>
                         	</c:if>
                         	
+                        	
+                        	<!-- 체험 -->
 							<c:if test="${param.category != 'accom'}">
-								<div class="clear"> 
-		                            <div class="col-sm-12">
+	                            <div class="col-sm-12">
 		                            &nbsp;&nbsp;<label style="color: rgb(80,140,186);">체험</label>
 									<div>
 										<c:choose>
-											<c:when test="${!empty activityPaymentList}">
+											<c:when test="${!empty activityInterestedList}">
 												<div>
-													<table class="table" style="text-align: center; vertical-align: middle; display:table;">
+													<table class="table" style=" text-align: center; vertical-align: middle; display:table;">
 														<tr>
-															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">날짜</td>
-															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">상품정보</td>
-															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">상태</td>
-															<td style="font-weight: bold; display:table-cell;vertical-align:middle;">확인</td>
+															<td style="font-weight: bold; display:table-cell;vertical-align:middle; width: 10%"></td>
+															<td style="font-weight: bold; display:table-cell;vertical-align:middle; width:18%">이름</td>
+															<td style="font-weight: bold; display:table-cell;vertical-align:middle; width:13%">상태</td>
+															<td style="font-weight: bold; display:table-cell;vertical-align:middle; width:13%"></td>
 														</tr>
 														<c:set var="actModalNo" value="1" />
-														<c:forEach var="ac" items="${activityPaymentList}">
+														<c:forEach var="aci" items="${activityInterestedList}">
 															<tr>
-																<fmt:parseDate var="acCreateDateString" value="${ac.createDate}" pattern="yyyy-MM-dd HH:mm:ss.S" />
-																<td style="display:table-cell;vertical-align:middle;" width="13%">
-																	<small><fmt:formatDate value="${acCreateDateString}" pattern="yyyy-MM-dd" /></small>
-																	<br>
-																	<c:if test="${ac.activityPaymentState != '결제취소' && ac.activityPaymentState != '사용완료'}">
-																		<small><a href="#" data-toggle="modal" data-target="#activityCancle${actModalNo}"  class="btn" style="background: silver;">취소신청</a></small>
-																		<!-- The Modal -->
-																		  <div class="modal" id="activityCancle${actModalNo}">
-																		    <div class="modal-dialog">
-																		      <div class="modal-content">
-																		      
-																		        <!-- Modal Header -->
-																		        <div class="modal-header">
-																		          <h4 class="modal-title">${ac.activity.activityName}</h4>
-																		          <button type="button" class="close" data-dismiss="modal">&times;</button>
-																		        </div>
-																		        
-																		        <!-- Modal body -->
-																		        <div class="modal-body">
-																		        	정말로 결제를 취소하시겠습니까?
-																		          <small><a href="${contextPath}/payment/paymentCancel?memberId=${ac.memberId}&activityPaymentNo=${ac.activityPaymentNo}" class="btn" style="background: silver;">결제취소</a></small>
-																		        </div>
-																		        
-																		        <!-- Modal footer -->
-																		        <div class="modal-footer">
-																		          <button type="button" class="btn" data-dismiss="modal">Close</button>
-																		        </div>
-																		        
-																		      </div>
-																		    </div>
-																		  </div>
-																	</c:if>
-																	
-																	
+																<td class="square" style="clear:both; width: 10%" >
+																	<img style="margin-right: 70%;" class="inner" src="${contextPath}/resources/image/activity/${aci.activityImage.activityImageName}.${aci.activityImage.activityImageExt}">
 																</td>
-																<fmt:parseDate var="acActivityBookingTimeString" value="${ac.activityBookingTime}" pattern="yyyy-MM-dd HH:mm:ss.S" />
-																<td style="display:table-cell;vertical-align:middle;" width="61%">
-																	<table frame="void">
-																		<td class="square" style="width: 30%">
-																			<img class="inner" src="${contextPath}/resources/image/activity/${ac.activityImage.activityImageName}.${ac.activityImage.activityImageExt}">
-																		</td>
-																		<td style="width: 100%">
-																			<span style="float:right; text-align: left;">
-																			<p><small>${ac.activity.activityName}</small></p>
-																			<p><small>인원 : ${ac.activityUsePerson}명 / 예약시간 : 
-																			<fmt:formatDate value="${acActivityBookingTimeString}" pattern="yyyy-MM-dd HH:mm" />
-																			</small></p>
-																			<p><b><fmt:formatNumber type="number" maxFractionDigits="3" value="${ac.activityAmount}" />원</b></p>
-																			</span>
-																		</td>
-																	</table>
-																	
+																<td style="display:table-cell;vertical-align:middle;">
+																	<c:choose>
+																	        <c:when test="${fn:length(aci.activityName) gt 13}">
+																	        	${fn:substring(aci.activityName, 0, 12)}...
+																	        </c:when>
+																	        <c:otherwise>
+																	        	${aci.activityName}
+																	        </c:otherwise>
+																	</c:choose>
 																</td>
-																<td style="display:table-cell;vertical-align:middle;" width="13%">${ac.activityPaymentState}</td>
-																<td style="display:table-cell;vertical-align:middle;" width="13%"><small><a href="#" data-toggle="modal" data-target="#actModal${actModalNo}" >명세</a></small>
-																
+																<td style="display:table-cell;vertical-align:middle;">${aci.activityState}</td>
+																<td style="display:table-cell;vertical-align:middle;"><small><a href="#" data-toggle="modal" data-target="#actModal${actModalNo}">상세</a></small>
 																<!-- The Modal -->
 																  <div class="modal" id="actModal${actModalNo}">
 																    <div class="modal-dialog">
@@ -423,15 +350,22 @@
 																      
 																        <!-- Modal Header -->
 																        <div class="modal-header">
-																          <h4 class="modal-title">${ac.activity.activityName} 명세</h4>
+																          <h4 class="modal-title">${aci.activityName} 상세</h4>
 																          <button type="button" class="close" data-dismiss="modal">&times;</button>
 																        </div>
 																        
 																        <!-- Modal body -->
 																        <div class="modal-body">
-																          ${ac.receipt}
+																          <small>
+																          	전화번호 : ${aci.activityPhone}
+																          	<br>
+																          	<br>
+																          	상세 :
+																          	<br>
+																          	${aci.activityDescription}
+																          </small>
 																        </div>
-																         
+																        
 																        <!-- Modal footer -->
 																        <div class="modal-footer">
 																          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>

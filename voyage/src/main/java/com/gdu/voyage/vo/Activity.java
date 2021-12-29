@@ -23,6 +23,8 @@ public class Activity {
 	private String createDate;
 	private String updateDate;
 
+	// 1:1 AccomBuildingImage (이미지 하나만 불러올때)
+	private ActivityImage activityImage;
 	// 1:N - ActivityImage
 	private List<ActivityImage> activityImageList;
 	// 1:1 - ActivityAddress

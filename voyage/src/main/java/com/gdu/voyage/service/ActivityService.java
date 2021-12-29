@@ -31,6 +31,35 @@ public class ActivityService {
 	@Autowired
 	private ActivityMapper activityMapper;
 	
+	// 이미지가 포함된 관심상품 목록
+	public Map<String, Object> selectActivityByInterest(int currentPage, int rowPerPage,String memberId) {
+		Map<String, Object> paraMap = new HashMap<>();
+		int beginRow = (currentPage-1) * rowPerPage;
+		
+		paraMap.put("beginRow", beginRow);
+		paraMap.put("rowPerPage", rowPerPage);
+		paraMap.put("memberId", memberId);
+		
+		List<Activity> interestedActivityList = activityMapper.selectActivityByInterest(paraMap);
+		
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		int lastPage = 0;
+		int totalCount = activityMapper.selectInterestedActivityCount(memberId);
+		
+		lastPage = totalCount / rowPerPage;
+		
+		if(totalCount % rowPerPage !=0) {
+			lastPage += 1;
+		}
+		
+		returnMap.put("interestedActivityList", interestedActivityList);
+		returnMap.put("lastPage", lastPage);
+		returnMap.put("totalCount", totalCount);
+		
+		return returnMap;
+	}
+	
 	/* 삭제 요청 처리. 마지막 체험 예약 날짜로부터 일주일이 되면 삭제 처리 */
 	public int updateDormantActivity() {
 		return activityMapper.updateDormantActivity();
