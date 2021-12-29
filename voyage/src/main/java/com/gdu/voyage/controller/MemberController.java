@@ -370,7 +370,7 @@ public class MemberController {
 	@GetMapping("/addMember")
 	public String getAddMember() {
     	log.trace("MemberController() 실행");
-    	return "addMember";
+    	return "/addMember";
     }
 
 	

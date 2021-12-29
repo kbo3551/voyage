@@ -263,7 +263,7 @@
 	
 	</main>
     
-    <c:import url="${contextPath}\\partial\\footer.jsp"/>
+    <c:import url="/WEB-INF/jsp/partial/footer.jsp"/>
     
     <!-- Scroll Up -->
     <div id="back-top" >
