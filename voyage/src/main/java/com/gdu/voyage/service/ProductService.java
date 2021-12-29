@@ -1,7 +1,5 @@
 package com.gdu.voyage.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.gdu.voyage.mapper.ProductMapper;
 import com.gdu.voyage.vo.AccomBuilding;
 import com.gdu.voyage.vo.Activity;
-import com.gdu.voyage.vo.Hashtag;
+import com.gdu.voyage.vo.ActivitySpot;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -130,6 +128,17 @@ public class ProductService {
 
 	// [사용자] 체험 상세 조회
 	public Activity getActivityOne (int activityNo) {
-		return productMapper.selectActivityOne(activityNo);
+		log.debug("[debug] ProductService.getActivityOne activityNo : " + activityNo);
+		
+//		Activity activity = productMapper.selectActivityOne(activityNo);
+//		List<ActivitySpot> activitySpot = productMapper.selectActivityOneSpot(activityNo);
+		
+		Activity activity = productMapper.selectActivityOne(activityNo);
+
+//		Map<String, Object> returnMap = new HashMap<>();
+//		returnMap.put("activity", activity);
+//		returnMap.put("activitySpot", activitySpot);
+		
+		return activity;
 	}
 }

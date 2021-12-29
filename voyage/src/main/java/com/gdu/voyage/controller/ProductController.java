@@ -178,6 +178,7 @@ public class ProductController {
 		log.debug("[debug] ProductController.getActivityOne activityNo : " + activityNo);
 		
 		// [사용자] 체험 상세 조회
+//		Map<String, Object> activityOne = productService.getActivityOne(activityNo);
 		Activity activity = productService.getActivityOne(activityNo);
 		model.addAttribute("activity", activity);
 		log.debug("[debug] ProductController.getActivityOne activity : " + activity);

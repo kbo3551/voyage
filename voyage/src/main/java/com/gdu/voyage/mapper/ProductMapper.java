@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.gdu.voyage.vo.AccomBuilding;
 import com.gdu.voyage.vo.Activity;
+import com.gdu.voyage.vo.ActivitySpot;
 
 @Mapper
 public interface ProductMapper {
@@ -34,5 +35,8 @@ public interface ProductMapper {
 	
 	/* 체험 상세 */
 	// [사용자] 체험 상세 조회
+//	Activity selectActivityOne(int activityNo);
+//	List<ActivitySpot> selectActivityOneSpot(int activityNo);
+	
 	Activity selectActivityOne(int activityNo);
 }

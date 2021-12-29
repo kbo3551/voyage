@@ -49,7 +49,7 @@
 	</resultMap>
 	
 	<!-- 체험 전체 목록 조회를 위한 resultMap -->
-	<resultMap type="com.gdu.voyage.vo.Activity" id="resultActivity">
+	<resultMap type="com.gdu.voyage.vo.Activity" id="resultActivityList">
 		<!-- building -->
 		<id column="activity_no" property="activityNo"/>
 		<result column="host_no" property="hostNo"/>
@@ -82,6 +82,38 @@
 	<resultMap type="map" id="resultActivityAddressByBest">
 		<result column="SUBSTRING_INDEX(activity_address_zip, ' ', 1)" property="activityAddressZip"/>
 		<result column="COUNT(activity_address_zip)" property="activityAddressZipBest"/>
+	</resultMap>
+	
+	<!-- 체험 상세 조회를 위한 resultMap -->
+	<resultMap type="com.gdu.voyage.vo.Activity" id="resultActivityOne">
+		<id column="activity_no" property="activityNo"/>
+		<result column="host_no" property="hostNo"/>
+		<result column="activity_name" property="activityName"/>
+		<result column="activity_open_date" property="activityOpenDate"/>
+		<result column="activity_close_date" property="activityCloseDate"/>
+		<result column="activity_price" property="activityPrice"/>
+		<result column="activity_open_hour" property="activityOpenHour"/>
+		<result column="activity_close_hour" property="activityCloseHour"/>
+		<result column="activity_max_t" property="activityMaxT"/>
+		<result column="activity_max_p" property="activityMaxP"/>
+		<result column="activity_description" property="activityDescription"/>
+		<result column="activity_phone" property="activityPhone"/>
+		<result column="activity_state" property="activityState"/>
+		<result column="activity_state_admin" property="activityStateAdmin"/>
+		<result column="create_date" property="createDate"/>
+		<result column="update_date" property="updateDate"/>
+		<association property="activityAddress" javaType="com.gdu.voyage.vo.ActivityAddress">
+			<result column="activity_address_zip" property="activityAddressZip"/>
+		</association>
+		<collection property="activitySpotList" ofType="com.gdu.voyage.vo.ActivitySpot">
+			<result column="activity_spot_name" property="activitySpotName"/>
+			<result column="activity_spot_category" property="activitySpotCategory"/>
+			<result column="activity_spot_description" property="activitySpotDescription"/>
+		</collection>
+		<collection property="activityImageList" ofType="com.gdu.voyage.vo.ActivityImage">
+			<result column="activity_image_name" property="activityImageName"/>
+			<result column="activity_image_ext" property="activityImageExt"/>
+		</collection>
 	</resultMap>
 	
 	<!-- 숙소-건물 목록 조회 -->
@@ -210,7 +242,7 @@
 	</select>
 	
 	<!-- 체험 목록 조회 -->
-	<select id="selectActivityList" resultMap="resultActivity">
+	<select id="selectActivityList" resultMap="resultActivityList">
 		SELECT 
 			ac.*, aca.*, aci.*, acs.*, h.*
 		FROM 
@@ -246,7 +278,7 @@
 	</select>
 	
 	<!-- 체험 목록 검색 조회 -->
-	<select id="selectActivityListBySearch" parameterType="Map" resultMap="resultActivity">
+	<select id="selectActivityListBySearch" parameterType="Map" resultMap="resultActivityList">
 		SELECT 
 			ac.*, aca.*, aci.*, acs.*, h.*
 		FROM 
@@ -280,26 +312,81 @@
 	</select>
 	
 	<!-- 체험 상세 조회 -->
-	<select id="selectActivityOne" parameterType="int" resultMap="resultActivity">
-		SELECT 
-			ac.*, aca.*, aci.*, acs.*, h.*
-		FROM 
-			(SELECT * FROM activity) ac,
-			(SELECT activity_no, GROUP_CONCAT(activity_address_zip) activity_address_zip FROM activity_address GROUP BY activity_no) aca,
-			(SELECT activity_no, GROUP_CONCAT(CONCAT_WS('.',activity_image_name,activity_image_ext)) activity_image FROM activity_image GROUP BY activity_no) aci,
-			(SELECT activity_no, GROUP_CONCAT(activity_spot_name SEPARATOR ', ') activity_spot_name FROM activity_spot GROUP BY activity_no) acs,
-			(SELECT iden_no, GROUP_CONCAT(hashtag SEPARATOR ' ') hashtag FROM hashtag GROUP BY iden_no) h
-		WHERE 
-			activity_state_admin = '승인완료' AND
-			activity_state = '공개' AND
-			ac.activity_no = #{activityNo} AND
-			ac.activity_no = aca.activity_no AND
-			ac.activity_no = aci.activity_no AND
-			ac.activity_no = acs.activity_no AND
-			ac.activity_no = h.iden_no
-		ORDER BY
-			update_date DESC;
+<!-- 	<select id="selectActivityOne" parameterType="int" resultMap="resultActivity"> -->
+<!-- 		SELECT  -->
+<!-- 			ac.*, aca.*, aci.*, acs.*, h.* -->
+<!-- 		FROM  -->
+<!-- 			(SELECT * FROM activity) ac, -->
+<!-- 			(SELECT activity_no, GROUP_CONCAT(activity_address_zip) activity_address_zip FROM activity_address GROUP BY activity_no) aca, -->
+<!-- 			(SELECT activity_no, GROUP_CONCAT(CONCAT_WS('.',activity_image_name,activity_image_ext)) activity_image FROM activity_image GROUP BY activity_no) aci, -->
+<!-- 			(SELECT activity_no, GROUP_CONCAT(activity_spot_name SEPARATOR ', ') activity_spot_name FROM activity_spot GROUP BY activity_no) acs, -->
+<!-- 			(SELECT iden_no, GROUP_CONCAT(hashtag SEPARATOR ' ') hashtag FROM hashtag GROUP BY iden_no) h -->
+<!-- 		WHERE  -->
+<!-- 			activity_state_admin = '승인완료' AND -->
+<!-- 			activity_state = '공개' AND -->
+<!-- 			ac.activity_no = #{activityNo} AND -->
+<!-- 			ac.activity_no = aca.activity_no AND -->
+<!-- 			ac.activity_no = aci.activity_no AND -->
+<!-- 			ac.activity_no = acs.activity_no AND -->
+<!-- 			ac.activity_no = h.iden_no -->
+<!-- 		ORDER BY -->
+<!-- 			update_date DESC; -->
+<!-- 	</select> -->
+
+	<!-- 체험 상세 조회 - 기본정보 -->
+	<select id="selectActivityOne" parameterType="int" resultMap="resultActivityOne">
+		SELECT                                      
+			a.activity_no,
+			a.host_no,
+			a.activity_name,
+			a.activity_open_date,
+			a.activity_close_date,
+			a.activity_price,
+			a.activity_open_hour,
+			a.activity_close_hour,
+			a.activity_max_t,
+			a.activity_max_p,
+			a.activity_description,
+			a.activity_phone,
+			a.activity_state,
+			a.activity_state_admin,
+			a.create_date,
+			a.update_date,
+			acs.activity_spot_name,
+			acs.activity_spot_category,
+			acs.activity_spot_description,
+			aci.activity_image_name,
+			aci.activity_image_ext,
+			aca.activity_address_zip		
+		FROM      
+			activity a,
+			(SELECT * FROM activity_spot WHERE activity_no = #{activityNo}) acs,
+			(SELECT * FROM activity_image WHERE activity_no = #{activityNo}) aci,
+			(SELECT * FROM activity_address WHERE activity_no = #{activityNo}) aca
+			                                     
+		WHERE                                      
+			a.activity_state_admin = '승인완료'
+			AND a.activity_state = '공개'
+			AND a.activity_no = acs.activity_no
+			AND a.activity_no = aci.activity_no
+			AND a.activity_no = aca.activity_no
 	</select>
+	
+	<!-- 체험 상세 조회 - 추천장소 -->
+<!-- 	<select id="selectActivityOneSpot" parameterType="int" resultType="resultActivityOne"> -->
+<!-- 		SELECT                                       -->
+<!-- 			a.activity_no activityNo, -->
+<!-- 			acs.activity_spot_name activitySpotName, -->
+<!-- 			acs.activity_spot_category activitySpotCategory, -->
+<!-- 			acs.activity_spot_description activitySpotDescription		 -->
+<!-- 		FROM       -->
+<!-- 			activity a, -->
+<!-- 			(SELECT * FROM activity_spot WHERE activity_no = #{activityNo}) acs                                 -->
+<!-- 		WHERE                                       -->
+<!-- 			a.activity_state_admin = '승인완료' -->
+<!-- 			AND a.activity_state = '공개' -->
+<!-- 			AND a.activity_no = acs.activity_no -->
+<!-- 	</select> -->
 	
 	<!-- 숙소-건물 상세 조회를 위한 resultMap (AccomBuilding) -->
 <!-- 	<resultMap type="com.gdu.voyage.vo.AccomBuilding" id="resuliAccomBuilding"> -->
