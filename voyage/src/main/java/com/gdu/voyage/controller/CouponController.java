@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.CouponService;
 import com.gdu.voyage.vo.Coupon;
-import com.gdu.voyage.vo.Host;
 import com.gdu.voyage.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,27 +25,42 @@ public class CouponController {
 	@Autowired
 	CouponService couponService;
 	private final int ROW_PER_PAGE = 10;
-	// 회원이 발급받은 쿠폰 list
+	// 회원이 발급받은 쿠폰 list, 발급할 쿠폰list
 		@GetMapping("/member/coupon")
-		public String getMemberCouponList(Model model, @RequestParam(defaultValue = "1") int currentPage, HttpSession session) {
+		public String getMemberCouponList(Model model, @RequestParam(defaultValue = "1") int memberCouponPage, HttpSession session,
+				@RequestParam(defaultValue = "1") int couponPage) {
 			System.out.println("CouponController()_coupon실행");
-			log.debug("★★★[boryeong]CouponController★★★" + currentPage);
+			log.debug("★★★[boryeong]CouponController★★★" + memberCouponPage);
 			// 회원 ID
 			String memberId = ((Member) session.getAttribute("loginMember")).getMemberId();
+			// 회원이 발급받은 쿠폰 페이징
+			int memberCouponBeginRow = (memberCouponPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
+			int memberCouponPageNo = ((memberCouponBeginRow / 100) * 10 + 1);
+			// 발급가능한 쿠폰 페이징
+			int couponBeginRow =  (couponPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
+			int couponPageNo = ((couponBeginRow / 100) * 10 + 1);
 			
-			int beginRow = (currentPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
-
-			Map<String, Object> map = couponService.getMemberCouponList(currentPage, ROW_PER_PAGE, memberId);
-			// 값
-			model.addAttribute("beginRow", beginRow);
+			// 쿠폰발급 list,회원이 발급받은 쿠폰 list
+			Map<String, Object> memberCouponMap = couponService.getMemberCouponList(memberCouponPage, ROW_PER_PAGE, memberId);
+			Map<String, Object> couponMap = couponService.getCouponList(couponPage, ROW_PER_PAGE);
+			
 			model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
-			model.addAttribute("memberCouponList", map.get("memberCouponList"));
-			model.addAttribute("lastPage", map.get("lastPage"));
-			model.addAttribute("currentPage", currentPage);
-			int pageNo = ((beginRow / 100) * 10 + 1);
-			log.debug("★★★[boryeong]CouponController_pageNo★★★" + pageNo);
-			model.addAttribute("pageNo", pageNo);
-
+			// 회원이 발급받은 쿠폰 list
+			model.addAttribute("memberCouponBeginRow", memberCouponBeginRow);
+			model.addAttribute("memberCouponList", memberCouponMap.get("memberCouponList"));
+			model.addAttribute("memberCouponlastPage", memberCouponMap.get("lastPage"));
+			model.addAttribute("memberCouponPage", memberCouponPage);
+			model.addAttribute("memberCouponPageNo", memberCouponPageNo);
+			log.debug("★★★[boryeong]CouponController_memberCouponPageNo★★★" + memberCouponPageNo);
+			// 쿠폰 발급가능 list
+			model.addAttribute("couponBeginRow", couponBeginRow);
+			model.addAttribute("couponList", couponMap.get("couponList"));
+			model.addAttribute("couponLastPage", memberCouponMap.get("lastPage"));
+			model.addAttribute("couponPage", couponPage);
+			model.addAttribute("couponPageNo", couponPageNo);
+			log.debug("★★★[boryeong]CouponController_couponPageNo★★★" + couponPageNo);
+			
+			
 			return "member/coupon";
 		}
 	// 관리자 쿠폰 list 출력

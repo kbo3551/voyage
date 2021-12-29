@@ -5,7 +5,7 @@
 <html>
 <head>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<title>관심상품</title>
+<title>쿠폰</title>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="">
@@ -120,7 +120,7 @@
                         <table class="table table-hover my-0">
                            <thead>
                               <tr>
-                                 <th>쿠폰발급 번호</th>                                 
+                                 <th>발급 번호</th>                                 
                                  <th>쿠폰 상태</th>
                                  <th>발급날짜</th>
                                  <th>사용가능기한</th>
@@ -136,11 +136,107 @@
                                     <td>${mc.deadLine}</td>
                                     <td style="text-align:left;"><label></label>    
 									</td>
-                                    <td><a href="${pageContext.request.contextPath}/">상세보기</a></td>
                                  </tr>
                               </c:forEach>
                            </tbody>
                         </table>
+                <!-- 회운이 발급받은 쿠폰 페이징 -->
+                <div class="container">
+                <ul class="nav justify-content-center bg-light">
+                   <c:if test="${memberCouponBeginRow > (ROW_PER_PAGE * 10)}">
+                      <li><a href="/member/coupon?memberCouponPage=${memberCouponPage-1}&couponPage=${couponPage}">&lt;</a></li>
+                   </c:if>
+                   <c:set var="doneLoop" value="false"></c:set>
+                   <c:forEach var="f" begin="${memberCouponPageNo}" end="${memberCouponPageNo + 9}">
+                      <c:if test="${not doneLoop}">
+                         <c:choose>
+                            <c:when test="${memberCouponPage == f}">
+                               <li class="active"class="nav-link"><span>${f}</span></li>
+                            </c:when>
+                            <c:otherwise>
+                               <li><a class="nav-link active" href="/member/coupon?memberCouponPage=${f}&couponPage=${couponPage}">${f}</a></li>
+                            </c:otherwise>
+                         </c:choose>
+                         <c:if test="${f == memberCouponlastPage}">
+                            <c:set var="doneLoop" value="true"></c:set>
+                         </c:if>
+                      </c:if>
+                   </c:forEach>
+                   <c:if test="${memberCouponPage + 10 <= memberCouponlastPage}">
+                      <li><a class="nav-link active" href="/member/coupon?memberCouponPage=${memberCouponPage+10}&couponPage=${couponPage}">&gt;</a></li>
+                   </c:if>
+                </ul>
+          </div> 
+          
+           <div class="container-fluid p-0">
+               <h1 class="h3 mb-3">
+                  <strong>발급가능 쿠폰 목록</strong>
+               </h1>
+               <div class="clear">
+                  <div>
+                     <div>
+                        <table class="table table-hover my-0">
+                           <thead>
+                              <tr>
+                             	 <th>쿠폰 번호</th>
+                                 <th>쿠폰 이름</th>
+                                 <th>조건 금액</th>
+                                 <th>할인 금액</th>
+                                 <th>만료 일자</th>
+                                 <th></th>
+                                 <th></th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <c:forEach items="${couponList}" var="c">
+						        <c:if test="${c.couponState == '활성화'}">
+                                 <tr>
+                                 	<td width="10%">${c.couponNo}</td>
+                                    <td width="15%">${c.couponName}</td>
+                                    <td>${c.couponTerms}</td>
+                                    <td>${c.couponDiscount}</td>
+                                    <td>${c.deadLine}</td>
+                                    <td style="text-align:left;"><label></label>    
+										&emsp;
+									<button class="btn btn-finish btn-primary" type="submit">발급</button>
+										</td>
+                                	 </tr>
+                                 </c:if>
+                              </c:forEach>
+                           </tbody>
+                        </table>
+                        
+                     </div>
+                  </div>
+               </div>
+            </div>
+                                              <!-- 발급가능한 쿠폰 페이징 -->
+                <div class="container">
+                <ul class="nav justify-content-center bg-light">
+                   <c:if test="${couponBeginRow > (ROW_PER_PAGE * 10)}">
+                      <li><a href="/member/coupon?memberCouponPage=${memberCouponPage}&couponPage=${couponPage-1}">&lt;</a></li>
+                   </c:if>
+                   <c:set var="doneLoop" value="false"></c:set>
+                   <c:forEach var="f" begin="${couponPageNo}" end="${couponPageNo + 9}">
+                      <c:if test="${not doneLoop}">
+                         <c:choose>
+                            <c:when test="${couponPage == f}">
+                               <li class="active"><span>${f}</span></li>
+                            </c:when>
+                            <c:otherwise>
+                               <li><a class="nav-link active" href="/member/coupon?memberCouponPage=${memberCouponPage}&couponPage=${f}">${f}</a></li>
+                            </c:otherwise>
+                         </c:choose>
+                         <c:if test="${f == couponLastPage}">
+                            <c:set var="doneLoop" value="true"></c:set>
+                         </c:if>
+                      </c:if>
+                   </c:forEach>
+                   <c:if test="${couponPage + 10 <= couponLastPage}">
+                      <li><a class="nav-link active" href="/member/coupon?memberCouponPage=${memberCouponPage}&couponPage=${couponPage+10}">&gt;</a></li>
+                   </c:if>
+                </ul>
+          </div> 
 						</div>
 					</div>
 				</div>

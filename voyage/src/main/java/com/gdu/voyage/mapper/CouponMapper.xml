@@ -32,6 +32,8 @@
 		coupon_member
 	WHERE
 		member_id = #{memberId}
+	LIMIT	
+		#{beginRow}, #{rowPerPage}
 	</select>
 	<!-- 회원이 발급받은 쿠폰의 수 -->
 	<select id="memberCouponTotalCount" resultType="int" parameterType="com.gdu.voyage.vo.CouponMember">
