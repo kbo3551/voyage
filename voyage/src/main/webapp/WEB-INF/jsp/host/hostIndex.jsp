@@ -114,7 +114,19 @@
                             <hr>
                         </div>
                         
-                        <!-- 숙소는 TreeMap으로, 체험은 List로 가져옴. Treemap은 null로 체크가 가능하지만 List는 '[]'로 체크를 해줘야함 -->
+                        
+                        <div class="clear">
+                        	<div class="col-sm-12">
+                        		&nbsp;&nbsp;<label>수익</label>
+                        		
+                        		
+                        	</div>
+                        </div>
+                        
+                        
+                        <br>
+                        <br>
+                        <br>
                         
                         <div class="clear"> 
                             <div class="col-sm-12">

@@ -78,11 +78,23 @@
 	  left:7%;
 	}
 	
-	.modal{
-	  position: fixed;
-	  top: 50%;
-	  left: 50%;
-	  transform: translate(-50%, -50%);
+	.modal {
+        text-align: center;
+	}
+	 
+	@media screen and (min-width: 768px) { 
+	        .modal:before {
+	                display: inline-block;
+	                vertical-align: middle;
+	                content: " ";
+	                height: 100%;
+	        }
+	}
+	 
+	.modal-dialog {
+	        display: inline-block;
+	        text-align: center;
+	        vertical-align: middle;
 	}
 
 }
@@ -243,7 +255,11 @@
 																          	전화번호 : ${aci.accomBuildingPhone}
 																          	<br>
 																          	<br>
-																          	상세 :
+																          	평균 방 가격 : <fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${aci.AVG}" />
+																          	
+																          	<br>
+																          	<br>
+																          	설명 :
 																          	<br>
 																          	${aci.accomBuildingDescription}
 																          </small>
@@ -360,7 +376,22 @@
 																          	전화번호 : ${aci.activityPhone}
 																          	<br>
 																          	<br>
-																          	상세 :
+																          	운영일 : ${aci.activityOpenDate} ~ ${aci.activityCloseDate}
+																          	<br>
+																          	<br>
+																          	운영 시간 : ${aci.activityOpenHour} ~ ${aci.activityCloseHour}
+																          	<br>
+																          	<br>
+																          	(1회)최대 이용 시간 : ${aci.activityMaxT}
+																          	<br>
+																          	<br>
+																          	최대 인원 : ${aci.activityMaxP}
+																          	<br>
+																          	<br>
+																          	가격 : ${aci.activityPrice}
+																          	<br>
+																          	<br>
+																          	설명 :
 																          	<br>
 																          	${aci.activityDescription}
 																          </small>

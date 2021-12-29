@@ -128,11 +128,23 @@
 		}
 	}
 	
-	.modal{
-	  position: fixed;
-	  top: 50%;
-	  left: 50%;
-	  transform: translate(-50%, -50%);
+	.modal {
+        text-align: center;
+	}
+	 
+	@media screen and (min-width: 768px) { 
+	        .modal:before {
+	                display: inline-block;
+	                vertical-align: middle;
+	                content: " ";
+	                height: 100%;
+	        }
+	}
+	 
+	.modal-dialog {
+	        display: inline-block;
+	        text-align: center;
+	        vertical-align: middle;
 	}
 	
 }

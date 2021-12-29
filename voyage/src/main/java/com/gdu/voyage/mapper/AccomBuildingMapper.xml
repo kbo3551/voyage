@@ -11,6 +11,7 @@
 		<result column="accom_building_state_admin" property="accomBuildingStateAdmin" />
 		<result column="create_date" property="createDate" />
 		<result column="update_date" property="updateDate" />
+		<result column="AVG" property="AVG" />
 		<collection property="accomBuildingImage" resultMap="AccomBuildingImage" />
 	</resultMap>
 	
@@ -153,7 +154,8 @@
 			ab.accom_building_phone,
 			ab.accom_building_state,
 			ai.accom_building_image_name,
-			ai.accom_building_image_ext
+			ai.accom_building_image_ext,
+			AVG(ar.accom_room_price) AVG
 		FROM
 			accom_building_interest abi
 		INNER JOIN
@@ -164,6 +166,10 @@
 			accom_building_image ai
 		ON
 			ai.accom_building_no = abi.accom_building_no
+		INNER JOIN
+			accom_room ar
+		ON
+			ar.accom_building_no = abi.accom_building_no
 		WHERE
 			abi.member_id = #{memberId}
 			AND 
@@ -184,6 +190,8 @@
 			ORDER BY accom_building_image_no ASC
 			LIMIT 0,1
 			)
+		GROUP BY
+			ab.accom_building_no
 		ORDER BY
 			abi.accom_building_interest_no desc
 		LIMIT

@@ -18,6 +18,8 @@ public class AccomBuilding {
 	private String createDate;
 	private String updateDate;
 	
+	// 평균값
+	private double AVG;
 	// 1:1 AccomBuildingImage (이미지 하나만 불러올때)
 	private AccomBuildingImage accomBuildingImage;
 	// 1:N - AccomBuildingImage

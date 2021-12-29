@@ -157,6 +157,13 @@
 		SELECT
 			a.activity_name,
 			a.activity_description,
+			a.activity_open_date,
+			a.activity_close_date,
+			a.activity_price,
+			a.activity_open_hour,
+			a.activity_close_hour,
+			a.activity_max_t,
+			a.activity_max_p,
 			a.activity_phone,
 			a.activity_state,
 			aim.activity_image_name,
