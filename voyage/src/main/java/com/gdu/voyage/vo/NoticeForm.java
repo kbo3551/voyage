@@ -8,6 +8,6 @@ import lombok.Data;
 
 @Data
 public class NoticeForm {
-	private String noticeContent;
+	private Notice notice;
 	private List<MultipartFile> noticefile;
 }

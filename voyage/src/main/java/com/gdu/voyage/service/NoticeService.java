@@ -64,102 +64,45 @@ public class NoticeService {
 	}
 	
 	//insert(내용+사진 입력)
-	public Map<String, Object> insertNoticeOne(Notice notice,@RequestParam @Nullable NoticeFile noticeFile, @RequestParam @Nullable NoticeForm noticeForm) {
-		Map<String, Object> insertNoticeMap = new HashMap<>();
+	public void insertNoticeOne(NoticeForm noticeForm, String realPath) {
+		log.debug(noticeForm+"☆☆☆[DoHun] NoticeInsert, Insert☆☆☆");
 		
-		Notice insertNotice = noticeMapper.inserNotice(notice);
-	
-		log.debug(insertNotice.toString()+"☆☆☆[DoHun] NoticeMapper insert + insert ,Service☆☆☆");
+		Notice notice = noticeForm.getNotice();
+		noticeMapper.inserNotice(notice);
 		
-		insertNoticeMap.put("insertNotice",insertNotice);
-		
-		//파일이 존재한다면 파일 추가
-		if(noticeForm.getNoticefile() != null) {
-			Notice insertNoticeFile = noticeMapper.insertNoticefile(noticeFile);
-			log.debug(insertNoticeMap.toString()+"☆☆☆[DoHun] NoticeFileMapper insert + insert ,Service☆☆☆");
-			insertNoticeMap.put("insertNoticeFile",insertNoticeFile);
+		List<MultipartFile> file=noticeForm.getNoticefile();
+		if(file != null) {
+			for(MultipartFile i : file) {
+				NoticeFile noticeFile = new NoticeFile();
+				noticeFile.setNoticeNo(notice.getNoticeNo());
+				String originalFileName=i.getOriginalFilename();
+				int pointPrevLength = originalFileName.lastIndexOf(".");
+				String ext = originalFileName.substring(pointPrevLength+1);
+				String prevName=UUID.randomUUID().toString().replace("-", "");
+				String fileName = prevName;
+				
+				noticeFile.setNoticeFileName(fileName);
+				noticeFile.setNoticeFileExt(ext);
+				noticeFile.setNoticeFileSize(i.getSize());
+				
+				noticeMapper.insertNoticefile(noticeFile);
+				
+				File f= new File(realPath+fileName+"."+ext);
+				
+			}
 		}
-		log.debug(insertNoticeMap.toString()+"☆☆☆[DoHun] Notice insert + insert Map ,Service☆☆☆");
-
-		return insertNoticeMap;
 	}
 	
 	
 	//삭제(내용+사진 삭제)
-	public Map<String, Object> deleteNoticeOne(Notice notice, @RequestParam @Nullable NoticeFile noticeFile) {
-		Map<String, Object> deleteNoticeMap = new HashMap<>();
+	public void deleteNoticeOne() {
 		
-		log.debug(notice.toString()+"☆☆☆[DoHun] Notice notice + delete Map ,Service☆☆☆");
-		Notice deleteNotice = noticeMapper.deleteNotice(notice);
-		log.debug(notice.toString()+"☆☆☆[DoHun] Notice delete + delete Map ,Service☆☆☆");
-		
-		//파일이 존재시 같이 삭제
-		if(noticeFile.getNoticeFileNo() >= 1) {
-			log.debug(notice.toString()+"☆☆☆[DoHun] NoticeFile notice + delete Map ,Service☆☆☆");
-			Notice deleteNoticeFile = noticeMapper.deleteNoticeFile(noticeFile);
-			log.debug(notice.toString()+"☆☆☆[DoHun] NoticeFile delete + delete Map ,Service☆☆☆");
-			deleteNoticeMap.put("deleteNoticeFile", deleteNoticeFile);
-		}
-		deleteNoticeMap.put("deleteNotice", deleteNotice);
-		
-		return deleteNoticeMap;
 	}
 	
 	//수정
-	public Notice updateNoticeOne(Notice notice,@RequestParam @Nullable NoticeFile noticeFile ,@RequestParam @Nullable NoticeForm noticeForm) {
-		log.debug(notice.toString()+"☆☆☆[DoHun] Notice notice + update Map ,Service☆☆☆");
-		noticeMapper.updateNotice(notice);
-		log.debug(notice.toString()+"☆☆☆[DoHun] Notice update + update Map ,Service☆☆☆");
+	public void updateNoticeOne() {
 		
-		//insert(파일 추가)
-		if(noticeMapper.insertNoticefile(noticeFile) != null) {
-			//보령님이 사용하셨던 코드
-			String noticeContent = noticeForm.getNoticeContent();
-			List<MultipartFile> file = noticeForm.getNoticefile();
-			
-			notice.setNoticeContent(noticeContent);
-			noticeMapper.inserNotice(notice);
-			log.debug(notice.getNoticeNo()+"☆☆☆[bryeong]NoticeService_noticeform☆☆☆");
-			
-			NoticeFile noticefile = new NoticeFile();
-			noticefile.setNoticeNo(notice.getNoticeNo());
-			
-			String fileName = UUID.randomUUID().toString();
-			noticefile.setNoticeFileName(fileName);
-			
-			
-			String originName = ((MultipartFile) file).getOriginalFilename();// 원본이름
-			int p = originName.lastIndexOf(".");	// .의 위치
-			String fileExt = originName.substring(p+1);
-			noticefile.setNoticeFileExt(fileExt); // 뒤에서 .까지
-			noticefile.setNoticeFileSize(file.size());
-			noticeMapper.insertNoticefile(noticefile);
-			// 파일 저장 
-			File f = new File("E:\\A1\\voyage\\voyage\\src\\main\\file\\notice"+fileName+"."+fileExt); // 임시 경로 
-			if(noticeFile.getNoticeNo() == notice.getNoticeNo()) {		
-				noticeMapper.insertNoticefile(noticeFile);
-			}
-			try {
-				((MultipartFile) file).transferTo(f);
-			} catch (IllegalStateException | IOException e) { //IllegalStateException, IOException는 예외처리를 꼭 해야하는데 
-															//RuntimeException을 사용해 예외 처리가 필요없는 예외를 던져서 처리
-				// TODO Auto-generated catch block
-				e.printStackTrace();	
-				throw new RuntimeException();// @Transactional이 구동되기 위해선 예외가 발생해야함
-			}
-		}
-			
-
-
-		//delete(파일 삭제)
-		if(noticeMapper.deleteNoticeFile(noticeFile) != null) {
-			
-			if(noticeFile.getNoticeNo() == notice.getNoticeNo()) {		
-				noticeMapper.deleteNoticeFile(noticeFile);
-			}
-		}
 		
-		return notice;
 	}
 	
 	/*

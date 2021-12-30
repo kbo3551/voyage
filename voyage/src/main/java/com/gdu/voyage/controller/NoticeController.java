@@ -3,6 +3,8 @@ package com.gdu.voyage.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.NoticeService;
+import com.gdu.voyage.vo.AccomRoomForm;
 import com.gdu.voyage.vo.Notice;
 import com.gdu.voyage.vo.NoticeFile;
 import com.gdu.voyage.vo.NoticeForm;
@@ -67,10 +70,12 @@ public class NoticeController {
 	}
 	
 	@PostMapping("/admin/addNotice")
-	public String addNoticeOne(Notice notice,@RequestParam @Nullable NoticeFile noticeFile,@RequestParam @Nullable NoticeForm noticeForm) {
-		log.debug(notice+"★★★ [DoHun] Notice insert Controller 실행, notice ★★★");
-		log.debug(noticeFile+"★★★ [DoHun] Notice insert Controller 실행, notice File ★★★");
-		noticeService.insertNoticeOne(notice, noticeFile, noticeForm);
+	public String addNoticeOne(NoticeForm noticeForm, HttpServletRequest request) {
+		log.debug(noticeForm+"★★★ [DoHun] Notice insert Controller 실행, notice ★★★");
+		
+		String realPath = request.getServletContext().getRealPath("resources/image/notice//");
+		
+		noticeService.insertNoticeOne(noticeForm, realPath);
 
 		return "/admin/adminNoticeList";
 	}
@@ -81,10 +86,8 @@ public class NoticeController {
 	}
 	
 	@PostMapping("/admin/removeNotice")
-	public String deleteNoticeOne(Notice notice,@RequestParam @Nullable NoticeFile noticeFile) {
-		log.debug(notice.toString()+"★★★ [DoHun] Notice delete Controller 실행, notice ★★★");
-		log.debug(noticeFile+"★★★ [DoHun] Notice delete Controller 실행, notice File ★★★");
-		noticeService.deleteNoticeOne(notice, noticeFile);
+	public String deleteNoticeOne() {
+		
 		
 		return "/admin/adminNoticeList";
 	}
@@ -95,12 +98,8 @@ public class NoticeController {
 	}
 	
 	@PostMapping("/admin/modifyNotice")
-	public String modifyNoticeOne(Notice notice,@RequestParam @Nullable NoticeFile noticeFile,@RequestParam @Nullable NoticeForm noticeForm) {
-		log.debug(notice.toString()+"★★★ [DoHun] Notice update Controller 실행, notice ★★★");
-		noticeService.updateNoticeOne(notice, noticeFile, noticeForm);
-		log.debug(notice.toString()+"★★★ [DoHun] Notice update Controller 실행, notice ★★★");
-		
-		return "/admin/adminNoticeList";
+	public String modifyNoticeOne() {
+		return "/admin/modifyNotice";
 	}
 	
 	//일반사용자
