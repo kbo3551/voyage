@@ -161,6 +161,10 @@
 												<textarea name="activity.activityDescription" id="activityDescription" class="form-control" placeholder="내 스타일의 그릇을 만들어보기 ..." rows="8"></textarea>
 											</div>
 											<div class="form-group">
+												<h4>Phone <small>(required)</small></h4>
+												<input name="activity.activityPhone" type="tel" id="activityPhone" class="form-control" placeholder="02-0000-0000" style="height:34px;">
+											</div>
+											<div class="form-group">
 												<h4>Start Date <small>(required)</small></h4>
 												<input name="activity.activityOpenDate" id="activityOpenDate" type="date" class="form-control" style="height:34px;">
 											</div>

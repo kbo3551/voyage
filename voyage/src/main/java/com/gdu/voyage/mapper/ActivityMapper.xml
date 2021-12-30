@@ -42,6 +42,7 @@
 			activity_max_t,
 			activity_max_p,
 			activity_description,
+			activity_phone,
 			create_date,
 			update_date
 		) VALUES (
@@ -55,6 +56,7 @@
 			#{activityMaxT},
 			#{activityMaxP},
 			#{activityDescription},
+			#{activityPhone},
 			NOW(),
 			NOW()
 		)
