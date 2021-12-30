@@ -117,7 +117,7 @@ public class QnaController {
 		model.addAttribute("qna", qna);
 		// 비밀글 기능
 		// 비회원인 경우
-		if(loginMember == null && qna.getQnaSecret().equals("비밀글")) {
+		if(qna.getQnaSecret().equals("비밀글") && loginMember == null) {
 			return "redirect:/login";
 		// 로그인했지만 작성자가 아닌 경우 
 		} else if(!qna.getMemberNickname().equals(loginMember.getMemberNickname())) {

@@ -17,7 +17,7 @@
         		
         		// Back 버튼 눌렀을 때
         		$('#goBackBtn').click(function(){
-        			location.href =	request.getContextPath() + '/qnaList';
+        			location.href ='${pageContext.request.contextPath}/qnaList';
         		});
         		// Edit 버튼 눌렀을 때
         		$('#moveModQBtn').click(function(){
@@ -27,7 +27,7 @@
         			if(valAdminId == null || valAdminId == undefined || valAdminId == ""){
      					if(valAnswerContent == null || valAnswerContent == undefined || valAnswerContent == ""){
   							// 수정 페이지로 이동
-     						location.href = '/modifyQ?qnaNo=' + $('#qnaNo').val();
+     						location.href =	'${pageContext.request.contextPath}/modifyQ?qnaNo=' + $('#qnaNo').val();
      						return;
      					} else {
      						alert('해당 문의글은 관리자의 답변 내용이 존재해 수정할 수 없습니다.');
@@ -49,7 +49,7 @@
         			if(valAdminId == null || valAdminId == undefined || valAdminId == ""){
      					if(valAnswerContent == null || valAnswerContent == undefined || valAnswerContent == ""){
      						// 삭제 페이지로 이동
-     						location.href = '/removeQ?qnaNo=' + $('#qnaNo').val();
+     						location.href ='${pageContext.request.contextPath}/removeQ?qnaNo=' + $('#qnaNo').val();
      						return;
      					} else {
      						alert('해당 문의글은 관리자의 답변 내용이 존재해 삭제할 수 없습니다.');
