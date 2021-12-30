@@ -8,16 +8,13 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import lombok.extern.slf4j.Slf4j;
 
-
 @Slf4j
-@WebFilter(urlPatterns = "/member/*")
 public class MemberFilter implements Filter {
 	 @Override
 	 public void init(FilterConfig filterConfig) throws ServletException {
@@ -35,7 +32,7 @@ public class MemberFilter implements Filter {
 		 if(session.getAttribute("loginMember") == null) { 
 			 req.setAttribute("msg", "로그인을 먼저 진행해주세요.");
 	    	 req.setAttribute("url", "redirect:/login");
-	    	 req.getRequestDispatcher(req.getContextPath()+"/alert").forward(req, res);
+	    	 req.getRequestDispatcher("/alert").forward(req, res);
 	    	 return;
 		 }
 		

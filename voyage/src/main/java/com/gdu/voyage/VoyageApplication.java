@@ -10,7 +10,6 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
 @EnableScheduling
-@ServletComponentScan
 @SpringBootApplication
 @EnableWebSocketMessageBroker
 public class VoyageApplication implements WebSocketMessageBrokerConfigurer{
@@ -32,4 +31,5 @@ public class VoyageApplication implements WebSocketMessageBrokerConfigurer{
 		// 해당 주소를 구독하고 있는 클라이언트들에게 메세지 전달
 		registry.enableSimpleBroker("/fromServer");
 	}
+
 }

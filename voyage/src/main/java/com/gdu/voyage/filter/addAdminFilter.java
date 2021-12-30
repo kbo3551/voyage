@@ -8,7 +8,6 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,7 +17,6 @@ import com.gdu.voyage.vo.Member;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@WebFilter(urlPatterns = "/addAdmin")
 public class addAdminFilter implements Filter {
 	@Override
 	 public void init(FilterConfig filterConfig) throws ServletException {
@@ -33,12 +31,12 @@ public class addAdminFilter implements Filter {
 		
 	    HttpSession session = req.getSession();
 	    if(session.getAttribute("loginMember") == null) {
-	    	res.sendRedirect(req.getContextPath()+"/login");
+	    	res.sendRedirect("/login");
 			return;
 	    }
 	    Member loginMember = (Member)session.getAttribute("loginMember");
 	    if(loginMember.getMemberLevel() != 2) {
-	    	res.sendRedirect(req.getContextPath()+"/index");
+	    	res.sendRedirect("/index");
 			return;
 	    }
 	      

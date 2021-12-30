@@ -7,10 +7,11 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
+
+import org.springframework.stereotype.Component;
 
 
-@WebFilter("/*")
+@Component
 public class EncodingFilter implements Filter {
 	
 	// 모든 페이지를 utf-8로 인코딩

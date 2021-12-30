@@ -8,7 +8,6 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,7 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j
-@WebFilter(urlPatterns = "/admin/*")
 public class AdminFilter implements Filter {
 	@Override
 	 public void init(FilterConfig filterConfig) throws ServletException {
@@ -40,7 +38,7 @@ public class AdminFilter implements Filter {
 	    if(session.getAttribute("loginMember") == null || loginMember.getMemberLevel() != 2 || adminSession == null) {
 	    	req.setAttribute("msg", "관리자만이 접근 가능합니다.");
 	    	req.setAttribute("url", "redirect:/index");
-	    	req.getRequestDispatcher(req.getContextPath()+"/alert").forward(req, res);
+	    	req.getRequestDispatcher("/alert").forward(req, res);
 	    	return;
 	    }
 	      
