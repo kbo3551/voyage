@@ -49,7 +49,7 @@
         			if(valAdminId == null || valAdminId == undefined || valAdminId == ""){
      					if(valAnswerContent == null || valAnswerContent == undefined || valAnswerContent == ""){
      						// 삭제 페이지로 이동
-     						location.href = '/romoveQ?qnaNo=' + $('#qnaNo').val();
+     						location.href = '/removeQ?qnaNo=' + $('#qnaNo').val();
      						return;
      					} else {
      						alert('해당 문의글은 관리자의 답변 내용이 존재해 삭제할 수 없습니다.');

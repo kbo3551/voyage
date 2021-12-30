@@ -28,11 +28,6 @@
         		});
         		// send 버튼 눌렀을 때
         		$('#sendQBtn').click(function(){
-					if(valMemberId == null || valMemberId == undefined || valMemberId == ""){
-						alert('ID가 존재하지 않습니다. 로그인 해주세요.');
-						location.href = '/login';
-						return;
-					}
 					if(valMemberNickname == null || valMemberNickname == undifined || valMemberNickname == ""){
 						alert('닉네임을 찾을 수가 없습니다. 다시 로그인 해주세요.');
 						location.href = '/login';
@@ -209,7 +204,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                 	<div class="form-group">
-                                		<input class="form-controle error" name="memberId" id="memberId" type="text" value="${qnaForm.memberId}" placeholder="아이디를 입력해주세요">
+                                		<input class="form-controle error"  hidden="hidden" name="memberId" id="memberId" type="text" value="${qnaForm.memberId}" placeholder="아이디를 입력해주세요">
                                 	</div>
                                     <div class="form-group">
                                     	<!-- 

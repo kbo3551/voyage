@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 public class QnaController {
 	@Autowired QnaService qnaService;
 	private int currentPage = 1;
-	private final int ROW_PER_PAGE = 10;
+	private final int ROW_PER_PAGE = 4;
 	
 	// [Member] Qna 게시판 목록 조회
 	@GetMapping("/qnaList")
@@ -143,7 +143,7 @@ public class QnaController {
 		model.addAttribute("qna", qna);
 		// 비밀글 기능
 		// 비회원인 경우
-		if(loginMember == null && qna.getQnaSecret().equals("비밀글")) {
+		if(qna.getQnaSecret().equals("비밀글") && loginMember == null) {
 			return "redirect:/login";
 		// 로그인했지만 작성자가 아닌 경우 
 		} else if(!qna.getMemberNickname().equals(loginMember.getMemberNickname())) {

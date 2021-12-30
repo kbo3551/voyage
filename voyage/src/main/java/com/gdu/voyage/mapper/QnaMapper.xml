@@ -113,7 +113,6 @@
 			qna_content = #{qnaContent},
 			update_date = NOW()
 		WHERE qna_no = #{qnaNo}
-		AND member_id = #{memberId}
 		AND member_nickname = #{memberNickname} 
 	</update>
 	
