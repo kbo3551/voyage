@@ -128,11 +128,7 @@ public class ProductService {
 
 	// [사용자] 체험 상세 조회
 	public Activity getActivityOne (int activityNo) {
-		log.debug("[debug] ProductService.getActivityOne activityNo : " + activityNo);
-		
-		Activity activity = productMapper.selectActivityOne(activityNo);
-
-		return activity;
+		return productMapper.selectActivityOne(activityNo);
 	}
 	
 	// [사용자] 체험 상세-목록 조회

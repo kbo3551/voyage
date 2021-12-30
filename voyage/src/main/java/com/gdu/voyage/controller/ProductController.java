@@ -38,12 +38,6 @@ public class ProductController {
 		model.addAttribute("accomBuilding", accomBuilding);
 		log.debug("[debug] ProductController.getAccomBuildingList accomBuilding : " + accomBuilding);
 		
-		// [사용자] 숙소-건물 해시태그 조회
-//		List<String> hashtag = productService.getAccomBuildingHashtagList();
-//		model.addAttribute("hashtag", hashtag);
-//		log.debug("[debug] ProductController.getAccomBuildingList hashtag : " + hashtag);
-		
-		
 		// [사용자] 숙소-건물 시설 인기 조회
 		List<Map<String, Object>> facilityByBest = productService.getAccomBuildingFacilityByBest();
 		model.addAttribute("facilityByBest", facilityByBest);
@@ -106,12 +100,19 @@ public class ProductController {
 		log.debug("[debug] ProductController.getAccomBuildingOne 실행");
 		log.debug("[debug] ProductController.getAccomBuildingOne accomBuildingNo : " + accomBuildingNo);
 		
-		// [사용자] 숙소-건물 상세 조회
-		AccomBuilding accomBuilding = productService.getAccombuildingOne(accomBuildingNo);
-		model.addAttribute("accomBuilding", accomBuilding);
-		log.debug("[debug] ProductController.getAccomBuildingOne accomBuilding : " + accomBuilding);
+		int currentPage = 0;
 		
-		return "/product/testAccomOne";
+		// [사용자] 숙소-건물 상세 조회
+		AccomBuilding accomBuildingOne = productService.getAccombuildingOne(accomBuildingNo);
+		model.addAttribute("accomBuildingOne", accomBuildingOne);
+		log.debug("[debug] ProductController.getAccomBuildingOne accomBuildingOne : " + accomBuildingOne);
+		
+		// [사용자] 숙소-건물 상세-목록 조회
+		List<AccomBuilding> accomBuildingOneList = productService.getAccomBuildingList(currentPage, ROW_PER_PAGE);
+		model.addAttribute("accomBuildingOneList", accomBuildingOneList);
+		log.debug("[debug] ProductController.getAccomBuildingOne accomBuildingOneList : " + accomBuildingOneList);
+		
+		return "/product/accomBuildingOne";
 	}
 
 	
@@ -172,7 +173,7 @@ public class ProductController {
 		return "/product/getActivityProductList";
 	}
 
-	@GetMapping("/activityOnetest")
+	@GetMapping("/activityOne")
 	public String getActivityOne(Model model, int activityNo) {
 		log.debug("[debug] ProductController.getActivityOne 실행");
 		log.debug("[debug] ProductController.getActivityOne activityNo : " + activityNo);

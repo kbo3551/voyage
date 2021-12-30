@@ -69,7 +69,7 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-8 col-lg-9">
                         <div class="hero-cap text-center pt-50 pb-20">
-                            <h2>체험 상세</h2>
+                            <h2>숙소 상세</h2>
                         </div>
                         <!--Hero form -->
                     
@@ -88,14 +88,14 @@
                         <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/blog/single_blog_1.png" alt="">
                      </div>
                      <div class="blog_details">
-                        <h2> ${activityOne.activityName }</h2>
+                        <h2> ${accomBuildingOne.accomBuildingName }</h2>
                         <ul class="blog-info-link mt-3 pt-4 mb-0">
-                           <li><a style="color: #555555;"><i class="fa fa-user"></i> 최대인원 ${activityOne.activityMaxP }</a></li>
-                           <li><a style="color: #555555;"><i class="fa fa-comments"></i> 최대이용시간 ${activityOne.activityMaxT }</a></li>
+                           <li><a style="color: #555555;"><i class="fa fa-user"></i> 객실 수 ${accomBuildingOne.roomCnt }</a></li>
+<%--                            <li><a style="color: #555555;"><i class="fa fa-comments"></i> 최대이용시간 ${activityOne.activityMaxT }</a></li> --%>
                         </ul>
-                        <ul class="blog-info-link mt-3 mb-4">
-                           <li style="font-size: 1.3em;"><a style="color: #555555;"><i class="fa fa-user"></i>₩ ${activityOne.activityPrice }</a></li>
-                        </ul>
+<!--                         <ul class="blog-info-link mt-3 mb-4"> -->
+<%--                            <li style="font-size: 1.3em;"><a style="color: #555555;"><i class="fa fa-user"></i>₩ ${activityOne.activityPrice }</a></li> --%>
+<!--                         </ul> -->
 <!--                         <p class="excert"> -->
 <%--                            DESCRIPTION : ${activity.activityDescription } --%>
 <!--                         </p> -->
@@ -107,9 +107,9 @@
 <!--                         </p> -->
                         <div class="quote-wrapper">
                            <div class="quotes">
-                              DESCRIPTION : ${activityOne.activityDescription }
+                              DESCRIPTION : ${accomBuildingOne.accomBuildingDescription }
                               <br><br>
-                              <small>오픈: ${activityOne.activityOpenHour } / 마감: ${activityOne.activityCloseHour }</small>
+<%--                               <small>오픈: ${activityOne.activityOpenHour } / 마감: ${activityOne.activityCloseHour }</small> --%>
                            </div>
                         </div>
 <!--                         <p> -->
@@ -324,51 +324,22 @@
 <!--                               type="submit">Search</button> -->
 <!--                         </form> -->
 <!--                      </aside> -->
-<!--                      <aside class="single_sidebar_widget post_category_widget"> -->
-<!--                         <h4 class="widget_title">Facilities</h4> -->
-<!--                         <ul class="list cat-list"> -->
-<!--                            <li> -->
-<!--                               <a href="#" class="d-flex"> -->
-<!--                                  <p>Resaurant food</p> -->
-<!--                                  <p>(37)</p> -->
-<!--                               </a> -->
-<!--                            </li> -->
-<!--                            <li> -->
-<!--                               <a href="#" class="d-flex"> -->
-<!--                                  <p>Travel news</p> -->
-<!--                                  <p>(10)</p> -->
-<!--                               </a> -->
-<!--                            </li> -->
-<!--                            <li> -->
-<!--                               <a href="#" class="d-flex"> -->
-<!--                                  <p>Modern technology</p> -->
-<!--                                  <p>(03)</p> -->
-<!--                               </a> -->
-<!--                            </li> -->
-<!--                            <li> -->
-<!--                               <a href="#" class="d-flex"> -->
-<!--                                  <p>Product</p> -->
-<!--                                  <p>(11)</p> -->
-<!--                               </a> -->
-<!--                            </li> -->
-<!--                            <li> -->
-<!--                               <a href="#" class="d-flex"> -->
-<!--                                  <p>Inspiration</p> -->
-<!--                                  <p>(21)</p> -->
-<!--                               </a> -->
-<!--                            </li> -->
-<!--                            <li> -->
-<!--                               <a href="#" class="d-flex"> -->
-<!--                                  <p>Health Care</p> -->
-<!--                                  <p>(21)</p> -->
-<!--                               </a> -->
-<!--                            </li> -->
-<!--                         </ul> -->
-<!--                      </aside> -->
+                     <aside class="single_sidebar_widget post_category_widget">
+                        <h4 class="widget_title">시설</h4>
+                        <ul class="list cat-list">
+          					<c:forEach items="${accomBuildingOne.accomBuildingFacilityList }" var="abf" varStatus="status">
+	          					<li style="color: #555555;">
+	                              <a href="#" class="d-flex">
+	                                 ${abf.getAccomBuildingFacilityName()}
+	                              </a>
+	                           </li>
+          					</c:forEach>
+                        </ul>
+                     </aside>
 					<aside class="single_sidebar_widget tag_cloud_widget">
                         <h4 class="widget_title">해시태그</h4>
                         <ul class="list">
-                        	<c:forEach items="${activityOne.getHashtagList()}" var="h">
+                        	<c:forEach items="${accomBuildingOne.getHashtagList()}" var="h">
 		                       <li>
 	                              <a href="${pageContext.request.contextPath}/#">${h.getHashtag() }</a>
 	                           </li>
@@ -377,15 +348,15 @@
                      </aside>
                      <aside class="single_sidebar_widget popular_post_widget">
                         <h3 class="widget_title">Host 추천 장소</h3>
-                        <c:forEach items="${activityOne.getActivitySpotList()}" var="acs">
+                        <c:forEach items="${accomBuildingOne.getAccomBuildingSpotList()}" var="abs">
 	                        <div class="media post_item">
 	                           <img src="${pageContext.request.contextPath}/assets/img/post/post_1.png" alt="post">
 	                           <div class="media-body">
 	                              <a>
-	                                 <h3 style="margin-top: 0px !important;">${acs.getActivitySpotName()}</h3>
+	                                 <h3 style="margin-top: 0px !important;">${abs.getAccomBuildingSpotName()}</h3>
 	                              </a>
-	                              <small style="color: #EB566C;">${acs.getActivitySpotCategory()}</small>
-	                              <h5 style="margin-top: 2px !important;">${acs.getActivitySpotDescription()}</h5>
+	                              <small style="color: #EB566C;">${abs.getAccomBuildingSpotCategory()}</small>
+	                              <h5 style="margin-top: 2px !important;">${abs.getAccomBuildingSpotDescription()}</h5>
 	                           </div>
 	                        </div>
 	                     </c:forEach>
@@ -485,8 +456,8 @@
                             	<div style="text-align: left; padding-right: 8%;">
 	                                <h3 style="letter-spacing: 0.1em;"><i class="fa fa-map-marker"></i> Address</h3>
 	                                <p>
-	                                    <small>${activityOne.activityAddress.activityAddressZip }</small><br>
-	                                    <small>${activityOne.activityAddress.activityAddressDetail }</small>
+	                                    <small>${accomBuildingOne.accomAddress.accomAddressZip }</small><br>
+	                                    <small>${accomBuildingOne.accomAddress.accomAddressDetail }</small>
 	                                </p>
                                 </div>
                             </div>
@@ -495,7 +466,7 @@
                             	<div style="text-align: left; padding-left: 8%;">
 	                                <h3><i class="fa fa-phone"></i> Call center</h3>
 	                                <p class="text-muted">전화문의</p>
-	                                <p><strong>${activityOne.activityPhone }</strong></p>
+	                                <p><strong>${accomBuildingOne.accomBuildingPhone }</strong></p>
                                 </div>
                             </div>
                             <!-- /.col-sm-4 -->
@@ -593,11 +564,11 @@
                 <div class="listing-details-area pb-80">
                     <div class="container">
                         <div class="row">
-                       		<c:forEach items="${activityOneList}" var="ac" varStatus="status" end="3">
+                       		<c:forEach items="${accomBuildingOneList}" var="ab" varStatus="status" end="3">
 	                            <div class="col-lg-4 col-md-6">
 	                                <div class="single-listing mb-30">
 	                                    <div class="list-img">
-                                            <a href="${pageContext.request.contextPath}/activityOne?activityNo=${ac.activityNo }">
+                                            <a href="${pageContext.request.contextPath}/accomBuildingOne?accomBuildingNo=${ab.accomBuildingNo }">
                                             	<div style="height: 260px; overflow: hidden;">
                                             		<img src="${pageContext.request.contextPath}/resources/image/accom_building/jang.jpg" alt="" style=" top: 50%;">
                                             	</div>
@@ -606,22 +577,27 @@
                                         </div>
 	                                    <div class="list-caption">
 	                                        <span>
-   	                                        	<a href="${pageContext.request.contextPath}/activityOne?activityNo=${ac.activityNo }" style="color: #fff; text-decoration: none;">
+   	                                        	<a href="${pageContext.request.contextPath}/accomBuildingOne?accomBuildingNo=${ab.accomBuildingNo }" style="color: #fff; text-decoration: none;">
    	                                        		Open
    	                                        	</a>
    	                                       	</span>
 	                                        <h3>
-                                              	<a href="${pageContext.request.contextPath}/activityOne?activityNo=${ac.activityNo }">
-                                              		${ac.getActivityName()}
+                                              	<a href="${pageContext.request.contextPath}/accomBuildingOne?accomBuildingNo=${ab.accomBuildingNo }">
+                                              		${ab.getAccomBuildingName()}
                                               	</a>
                                             </h3>
-	                                        <ul class="blog-info-link mt-3 pt-4 mb-0">
-					                           <li><a style="color: #555555;"><i class="fa fa-user"></i> 최대인원 ${activityOne.activityMaxP }</a></li>
-					                           <li><a style="color: #555555;"><i class="fa fa-comments"></i> 최대이용시간 ${activityOne.activityMaxT }</a></li>
+	                                        <ul class="blog-info-link mt-3 pt-4 mb-0 pb-2">
+					                           <li><a style="color: #555555;"><i class="fa fa-user"></i> 객실 수 ${accomBuildingOne.roomCnt }</a></li>
+<%-- 					                           <li><a style="color: #555555;"><i class="fa fa-comments"></i> 최대이용시간 ${activityOne.activityMaxT }</a></li> --%>
 					                        </ul>
-					                        <ul class="blog-info-link mt-3 mb-4">
-					                           <li style="font-size: 1.3em;"><a style="color: #555555;"><i class="fa fa-user"></i>₩ ${activityOne.activityPrice }</a></li>
-					                        </ul>
+<!-- 					                        <ul class="blog-info-link mt-3 mb-4"> -->
+<%-- 					                           <li style="font-size: 1.3em;"><a style="color: #555555;"><i class="fa fa-user"></i>₩ ${activityOne.activityPrice }</a></li> --%>
+<!-- 					                        </ul> -->
+											<ul>
+												<c:forEach items="${ab.accomBuildingFacilityList }" var="abf" varStatus="status">
+										            <li style="color: #555555; font-size: 1.2em;">${abf.getAccomBuildingFacilityName()}</li>
+												</c:forEach>
+											</ul>
 	                                        <div class="list-footer">
                                                  <ul class="pb-15">
 		                                             <li>
@@ -640,16 +616,16 @@
                                                  <ul>
                                                      <li style="width: 60%; text-align: left;">
 		                                                <c:choose>
-													        <c:when test="${fn:length(ac.getActivityDescription()) gt 35}">
-													        	<c:out value="${fn:substring(ac.getActivityDescription(), 0, 34)}···"></c:out>
+													        <c:when test="${fn:length(ab.getAccomBuildingDescription()) gt 35}">
+													        	<c:out value="${fn:substring(ab.getAccomBuildingDescription(), 0, 34)}···"></c:out>
 													        </c:when>
 													        <c:otherwise>
-														        <c:out value="${ac.getActivityDescription()}">
+														        <c:out value="${ab.getAccomBuildingDescription()}">
 														        </c:out>
 													        </c:otherwise>
 														</c:choose>
 													</li>
-                                                     <li style="width: 40%; text-align: right;">${ac.getActivityPhone() }</li>
+                                                     <li style="width: 40%; text-align: right;">${ab.getAccomBuildingPhone() }</li>
                                                  </ul>
                                              </div>
 	                                    </div>

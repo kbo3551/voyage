@@ -49,7 +49,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/loder.jpg" alt="">
+                    <img src="${pageContext.request.contextPath}/assets/img/logo/loder.jpg" alt="">
                 </div>
             </div>
         </div>
@@ -128,7 +128,7 @@
 <%-- 	                                	</c:forEach> --%>
 <!-- 	                                </div> -->
 	                                <!-- Review -->
-	                                <div class="select-job-items2 pt-80"">
+	                                <div class="select-job-items2 pt-80">
 	                                    <select name="searchReviewScore">
 	                                        <option value="">별점</option>
 	                                        <option value="0">0</option>
@@ -188,28 +188,28 @@
 	                                    <div class="col-lg-6 " class="accomBox">
 	                                        <div class="single-listing mb-30">
 	                                            <div class="list-img">
-	                                                <a href="/activityOnetest?activityNo=${ac.activityNo }">
-	                                                	<img src="resources/image/accom_building/jang.jpg" alt="">
+	                                                <a href="${pageContext.request.contextPath}/activityOne?activityNo=${ac.activityNo }">
+	                                                	<img src="${pageContext.request.contextPath}/resources/image/accom_building/jang.jpg" alt="">
 	                                                </a>
 	                                                <!-- <span>Open</span> -->
 	                                            </div>
 	                                            <div class="list-caption">
 	                                                <span>
-	       	                                        	<a href="/activityOne?activityNo=${ac.activityNo }">
+	       	                                        	<a href="${pageContext.request.contextPath}/activityOne?activityNo=${ac.activityNo }">
 	       	                                        		Open
 	       	                                        	</a>
 	       	                                       	</span>
                                                 	<h3>
-	                                                	<a href="/activityOne?activityNo=${ac.activityNo }">
+	                                                	<a href="${pageContext.request.contextPath}/activityOne?activityNo=${ac.activityNo }">
 	                                                		${ac.getActivityName()}
 	                                                	</a>
                                                 	</h3>
                                                 	<ul class="blog-info-link mt-3 pt-4 mb-0">
-							                           <li><a href="#" style="color: #555555;"><i class="fa fa-user"></i> 최대인원 ${ac.activityMaxP }</a></li>
-							                           <li><a href="#" style="color: #555555;"><i class="fa fa-comments"></i> 최대이용시간 ${ac.activityMaxT }</a></li>
+							                           <li><a style="color: #555555;"><i class="fa fa-user"></i> 최대인원 ${ac.activityMaxP }</a></li>
+							                           <li><a style="color: #555555;"><i class="fa fa-comments"></i> 최대이용시간 ${ac.activityMaxT }</a></li>
 							                        </ul>
 							                        <ul class="blog-info-link mt-3 mb-4">
-							                           <li style="font-size: 1.3em;"><a href="#" style="color: #555555;"><i class="fa fa-user"></i>₩ ${ac.activityPrice }</a></li>
+							                           <li style="font-size: 1.3em;"><a style="color: #555555;"><i class="fa fa-user"></i>₩ ${ac.activityPrice }</a></li>
 							                        </ul>
 														<p>
 <%-- 															<c:forEach items="${ab.accomBuildingFacilityList }" var="abf" varStatus="status"> --%>
@@ -226,13 +226,13 @@
 	                                                <div class="list-footer">
 	                                                    <ul class="pb-15">
 	                                                    	<li>
-																<c:forEach items="${ab.hashtagList }" var="abh" varStatus="status">
+																<c:forEach items="${ac.hashtagList }" var="ach" varStatus="status">
 																	<c:choose>
 																	 	<c:when test="${status.last}">
-																            ${abh.getHashtag()}
+																            ${ach.getHashtag()}
 																        </c:when>
 																        <c:otherwise>
-																            ${abh.getHashtag()},
+																            ${ach.getHashtag()},
 																        </c:otherwise>
 																    </c:choose>
 																</c:forEach>

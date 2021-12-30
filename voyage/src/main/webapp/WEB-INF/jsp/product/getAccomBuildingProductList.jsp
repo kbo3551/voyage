@@ -188,34 +188,30 @@
 	                                    <div class="col-lg-6 " class="accomBox">
 	                                        <div class="single-listing mb-30">
 	                                            <div class="list-img">
-	                                            	<a href="/accomBuildingOne?accomBuildingNo=${ab.accomBuildingNo }">
-	                                                	<img src="resources/image/accom_building/jang.jpg" alt="">
+	                                            	<a href="${pageContext.request.contextPath}/accomBuildingOne?accomBuildingNo=${ab.accomBuildingNo }">
+	                                                	<img src="${pageContext.request.contextPath}/resources/image/accom_building/jang.jpg" alt="">
 	                                               	</a>
 	                                                <!-- <span>Open</span> -->
 	                                            </div>
 	                                            <div class="list-caption">
 	                                                <span>
-	                                                	<a href="/accomBuildingOne?accomBuildingNo=${ab.accomBuildingNo }">
+	                                                	<a href="${pageContext.request.contextPath}/accomBuildingOne?accomBuildingNo=${ab.accomBuildingNo }">
 	                                                		Open
 	                                                	</a>
 	                                                </span>
 	                                                <h3>
-	                                                	<a href="/accomBuildingOne?accomBuildingNo=${ab.accomBuildingNo }">
+	                                                	<a href="${pageContext.request.contextPath}/accomBuildingOne?accomBuildingNo=${ab.accomBuildingNo }">
 	                                                		${ab.getAccomBuildingName()}
 	                                                	</a>
 	                                                </h3>
-														<p>
-															<c:forEach items="${ab.accomBuildingFacilityList }" var="abf" varStatus="status">
-																<c:choose>
-																 	<c:when test="${status.last}">
-															            ${abf.getAccomBuildingFacilityName()}
-															        </c:when>
-															        <c:otherwise>
-															            ${abf.getAccomBuildingFacilityName()},
-															        </c:otherwise>
-															    </c:choose>
-															</c:forEach>
-														</p>
+                                                	<ul class="blog-info-link mb-0 pb-1">
+							                           <li><a style="color: #555555;"><i class="fa fa-user"></i> 객실 수 ${ab.roomCnt}</a></li>
+							                        </ul>
+													<ul>
+														<c:forEach items="${ab.accomBuildingFacilityList }" var="abf" varStatus="status">
+												            <li style="color: #555555;">${abf.getAccomBuildingFacilityName()}</li>
+														</c:forEach>
+													</ul>
 	                                                <div class="list-footer">
 	                                                    <ul class="pb-15">
 	                                                    	<li>
