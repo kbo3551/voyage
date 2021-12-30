@@ -17,7 +17,7 @@
         		
         		// Back 버튼 눌렀을 때
         		$('#goBackBtn').click(function(){
-        			location.href = '/qnaList';
+        			location.href =	request.getContextPath() + '/qnaList';
         		});
         		// Edit 버튼 눌렀을 때
         		$('#moveModQBtn').click(function(){
