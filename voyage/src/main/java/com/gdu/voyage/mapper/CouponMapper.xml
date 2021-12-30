@@ -88,8 +88,13 @@
 		COUNT(*)
 	FROM
 		coupon
-	WHERE
+		<where>
 		coupon_state !='삭제'
+			<if test="memberId !=null">
+				AND
+				coupon_state !='비활성화'
+			</if>
+		</where>
 	</select>
 	<!-- 쿠폰 생성 -->
 	<insert id="insertCoupon" parameterType="com.gdu.voyage.vo.Coupon">
@@ -109,6 +114,7 @@
 	 	NOW()
 	 )
 	</insert>
+	<!-- 쿠폰 상태 변경 -->
 	<update id="updateCoupon" parameterType="com.gdu.voyage.vo.Coupon">
 	UPDATE coupon
 	set

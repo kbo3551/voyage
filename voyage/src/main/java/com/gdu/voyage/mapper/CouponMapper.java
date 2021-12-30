@@ -12,7 +12,7 @@ public interface CouponMapper {
 	// 쿠폰 list
 	List<Coupon> selectCouponList(Map<String, Object> Map);
 	// 쿠폰 수
-	int couponTotalCount();
+	int couponTotalCount(String memberId);
 	// 쿠폰 생성
 	void insertCoupon(Coupon coupon);
 	// 쿠폰 활성/비활성

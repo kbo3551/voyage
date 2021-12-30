@@ -28,7 +28,7 @@ public class CouponService {
 		return couponMapper.updateDormantCoupon();
 	}
 	// 쿠폰 list 출력
-	public Map<String, Object> getCouponList(int currentPage, int rowPerPage) {
+	public Map<String, Object> getCouponList(int currentPage, int rowPerPage,String memberId) {
 
 		Map<String, Object> paraMap = new HashMap<>();
 		int beginRow = (currentPage - 1) * rowPerPage;
@@ -40,7 +40,7 @@ public class CouponService {
 		Map<String, Object> returnMap = new HashMap<>();
 
 		int lastPage = 0;
-		int totalCount = couponMapper.couponTotalCount();
+		int totalCount = couponMapper.couponTotalCount(memberId);
 
 		lastPage = totalCount / rowPerPage;
 
@@ -50,6 +50,8 @@ public class CouponService {
 
 		returnMap.put("couponList", couponList);
 		returnMap.put("lastPage", lastPage);
+		returnMap.put("totalCount",totalCount);
+		paraMap.put("memberId", memberId);
 		return returnMap;
 	}
 

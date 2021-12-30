@@ -42,7 +42,7 @@ public class CouponController {
 			
 			// 쿠폰발급 list,회원이 발급받은 쿠폰 list
 			Map<String, Object> memberCouponMap = couponService.getMemberCouponList(memberCouponPage, ROW_PER_PAGE, memberId);
-			Map<String, Object> couponMap = couponService.getCouponList(couponPage, ROW_PER_PAGE);
+			Map<String, Object> couponMap = couponService.getCouponList(couponPage, ROW_PER_PAGE, memberId);
 			
 			model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
 			// 회원이 발급받은 쿠폰 list
@@ -67,13 +67,13 @@ public class CouponController {
 		}
 	// 관리자 쿠폰 list 출력
 	@GetMapping("/admin/couponList")
-	public String getCouponList(Model model, @RequestParam(defaultValue = "1") int currentPage) {
+	public String getCouponList(Model model, @RequestParam(defaultValue = "1") int currentPage,String memberId) {
 		System.out.println("CouponController()_coupon실행");
 		log.debug("★★★[boryeong]CouponController★★★" + currentPage);
 
 		int beginRow = (currentPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
 
-		Map<String, Object> map = couponService.getCouponList(currentPage, ROW_PER_PAGE);
+		Map<String, Object> map = couponService.getCouponList(currentPage, ROW_PER_PAGE, memberId);
 		// 값
 		model.addAttribute("beginRow", beginRow);
 		model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
