@@ -100,7 +100,7 @@
         <!-- End page header --> 
 
         <!-- property area -->
-        <form name="UpdateMember" method="post" action="${contextPath}/member/pwCheck">
+        <form id="updateMember" method="post" action="${contextPath}/member/pwCheck">
 	        <div class="content-area user-profiel" style="background-color: #FCFCFC;">&nbsp;
 	            <div class="container">   
 	                <div class="row">
@@ -132,10 +132,10 @@
 								</c:choose>
 	                            <c:choose>
 									<c:when test="${route == 4}">
-										<input type='button' onclick="updateMember()" class='btn btn-finish btn-primary' style="background-color: red" name='finish' value='탈퇴' />
+										<input type='button' onclick="updateMemberScript()" class='btn btn-finish btn-primary' style="background-color: red" name='finish' value='탈퇴' />
 									</c:when>
 									<c:otherwise>
-										<input type='button' onclick="updateMember()" class='btn btn-finish btn-primary' name='finish' value='확인' />
+										<input type='button' onclick="updateMemberScript()" class='btn btn-finish btn-primary' name='finish' value='확인' />
 									</c:otherwise>
 								</c:choose>
 	                             
@@ -156,12 +156,12 @@
          <script>
 
          // 유효성 검사
-            function updateMember(){
+            function updateMemberScript(){
 				if($("#password").val() == ""){
 					alert('패스워드를 입력해주세요');
 					return;
 				} else {
-					UpdateMember.submit();
+					$('#updateMember').submit();
 				}
 			};
      </script>

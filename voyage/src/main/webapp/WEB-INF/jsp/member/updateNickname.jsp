@@ -118,7 +118,7 @@
 	                                    <label>Nickname</label>
 	                                    <input type="text" class="form-control" id="nickname" name="nickname">
 	                                    <input name="route" type="hidden" value="${route}">
-	                                    <input name="password" type="hidden" value="${m.getMemberPw()}">
+	                                    <input name="password" type="hidden" value="${memberPw}">
 	                                </div>
 	                        	<div class="col-sm-20 col-sm-offset-1" style="text-align: right;">
 	                        	
@@ -153,6 +153,17 @@
 					UpdateNickname.submit();
 				}
 			};
+			
+			function noEvent() { // 새로 고침 방지
+	            if (event.keyCode == 116) {
+	                event.keyCode = 2;
+	                return false;
+	            } else if (event.ctrlKey
+	                    && (event.keyCode == 78 || event.keyCode == 82)) {
+	                return false;
+	            }
+	        }
+		    document.onkeydown = noEvent;
      </script>
 
 

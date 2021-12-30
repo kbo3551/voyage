@@ -115,7 +115,7 @@
 	                        </div>
 	                        <div class="clear"> 
 	                            <div class="col-sm-5">
-	                                <input name="password" type="hidden" value="${m.getMemberPw()}">
+	                                <input name="password" id="password" type="hidden" value="${memberPw}">
 	                            
 	                                <div class="form-group" style="line-height:90%">
 	                                	<br>
@@ -174,8 +174,7 @@
     	</form>
      
     
-    	
-    	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
          <script>
          	// 다음(카카오) 주소 api
@@ -227,6 +226,22 @@
 					UpdateMember.submit();
 				}
 			};
+			
+
+
+			
+			function noEvent() { // 새로 고침 방지
+	            if (event.keyCode == 116) {
+	                event.keyCode = 2;
+	                return false;
+	            } else if (event.ctrlKey
+	                    && (event.keyCode == 78 || event.keyCode == 82)) {
+	                return false;
+	            }
+	        }
+		    document.onkeydown = noEvent;
+
+		
      </script>
 
 

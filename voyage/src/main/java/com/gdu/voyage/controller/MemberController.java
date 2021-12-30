@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gdu.voyage.service.AccomBuildingService;
@@ -131,10 +132,15 @@ public class MemberController {
 		return "member/selectMyOrderList";
 	}
 	
+	@GetMapping("/member/updatePw")
+	public String getUpdatePw() {
+		log.trace("MemberController() 실행");
+    	return "/member/updatePw";
+    }
 	
 	// PW 변경
 	@PostMapping("/member/updatePw")
-	public String postUpdatePw(HttpServletRequest request, Model model,HttpSession session){
+	public String postUpdatePw(HttpServletRequest request,int updatePwCheck, Model model,HttpSession session){
 		log.trace("MemberController() 실행");
 		
 		// 우선 세션을 가져옴
@@ -143,7 +149,6 @@ public class MemberController {
 	    session.invalidate();
 		
 	    // 방어코드
-		int updatePwCheck = Integer.parseInt(request.getParameter("updatePwCheck"));
 		if(updatePwCheck != 1) {
 			return "redirect:/login";
 		}
@@ -171,6 +176,8 @@ public class MemberController {
 	
 	@GetMapping("/member/updateNickname")
 	public String getUpdateNickname() {
+		log.trace("MemberController() 실행");
+		
     	return "/member/updateNickname";
     }
 	
@@ -178,6 +185,7 @@ public class MemberController {
 	@PostMapping("/member/updateNickname")
 	public String postUpdateNickname(HttpServletRequest request, RedirectAttributes redirect, Model model,HttpSession session) {
 		log.trace("MemberController() 실행");
+		
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		
 		String memberId = loginMember.getMemberId();
@@ -246,12 +254,11 @@ public class MemberController {
 	
 	// 분기
 	@PostMapping("/member/pwCheck")
-	public String postPwCheck(HttpServletRequest request, RedirectAttributes redirect, String password, Model model,HttpSession session) {
+	public String postPwCheck(RedirectAttributes redirect, String password, String route, Model model,HttpSession session) {
 		log.trace("MemberController() 실행");
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		
 		String memberId = loginMember.getMemberId();
-		String route = request.getParameter("route");
 
 		Member m = new Member();
 		m.setMemberId(memberId);
@@ -269,16 +276,16 @@ public class MemberController {
 	    }
 		
 		if(route.equals("1")) {
-			model.addAttribute("m", m);
-			return "/member/updateMyProfile";
+			redirect.addFlashAttribute("memberPw", m.getMemberPw());
+			return "redirect:/member/updateMyProfile";
 		} else if (route.equals("2")) {
-			model.addAttribute("m", m);
-			model.addAttribute("route", route);
-			return "/member/updateNickname";
+			redirect.addFlashAttribute("memberPw", m.getMemberPw());
+			redirect.addFlashAttribute("route", route);
+			return "redirect:/member/updateNickname";
 		} else if (route.equals("3")) {
 			int updatePwCheck = 1;
-			model.addAttribute("updatePwCheck", updatePwCheck);
-			return "/member/updatePw";
+			redirect.addFlashAttribute("updatePwCheck", updatePwCheck);
+			return "redirect:/member/updatePw";
 		} else if (route.equals("4")) {
 			// 회원 탈퇴(delete는 아니고 active를 탈퇴로 변경)
 			session.invalidate();
@@ -288,17 +295,25 @@ public class MemberController {
 		    return "/alert";
 		}
 		
-		return "/member/pwCheck";
+		return "redirect:/index";
+	}
+	
+	// 회원정보 수정 페이지
+	@GetMapping("member/updateMyProfile")
+	public String getUpdateMember() {
+		log.trace("MemberController() 실행");
+		
+		return "/member/updateMyProfile";
 	}
 	
 	// 회원정보 수정
 	@PostMapping("member/updateMyProfile")
-	public String postUpdateMember(HttpServletRequest request, RedirectAttributes redirect, Model model,HttpSession session) {
+	public String postUpdateMember(HttpServletRequest request,String password, RedirectAttributes redirect, Model model,HttpSession session) {
 		log.trace("MemberController() 실행");
+		
 		Member loginMember = (Member) session.getAttribute("loginMember");
 
 	    String memberId = loginMember.getMemberId();
-	    String memberPw = request.getParameter("password");
 	    String memberFirstName = request.getParameter("firstname");
 	    String memberLastName = request.getParameter("lastname");
 	    String memberPhone = request.getParameter("phone");
@@ -311,7 +326,7 @@ public class MemberController {
 	    // 맴버 객체. 포함되지 않은 4개의 값은 Mapper에 존재
 	    Member m = new Member();
 	    m.setMemberId(memberId);
-	    m.setMemberPw(memberPw);
+	    m.setMemberPw(password);
 	    m.setMemberFirstName(memberFirstName);
 	    m.setMemberLastName(memberLastName);
 	    m.setMemberPhone(memberPhone);
