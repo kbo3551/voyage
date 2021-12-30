@@ -27,7 +27,6 @@ import lombok.extern.slf4j.Slf4j;
 public class NoticeService {
 	@Autowired NoticeMapper noticeMapper;
 	
-	//ISSUE : 들어오는 FILE의 확장자, 네임 분리 필요. FILE의 사이즈 식별 필요
 	//고민 사항 : 수정 시 추가로 들어올 파일의 중복 검사는 필요한가?
 	
 	//Map(notice 리스트,페이징)으로 묶어서 리턴
@@ -68,7 +67,7 @@ public class NoticeService {
 		log.debug(noticeForm+"☆☆☆[DoHun] NoticeInsert, Insert☆☆☆");
 		
 		Notice notice = noticeForm.getNotice();
-		noticeMapper.inserNotice(notice);
+		noticeMapper.insertNotice(notice);
 		
 		List<MultipartFile> file=noticeForm.getNoticefile();
 		if(file != null) {

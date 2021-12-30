@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.NoticeMapper">
 	<resultMap type="com.gdu.voyage.vo.Notice" id="notice">
-		<id column = "notice_no" property="noticeNo"/>
+		<result column = "notice_no" property="noticeNo"/>
 		<result column = "admin_id" property="adminId"/>
 		<result column = "notice_title" property="noticeTitle"/>
 		<result column = "notice_top" property="noticeTop"/>
@@ -10,7 +10,7 @@
 		<result column = "create_date" property="createDate"/>
 		<result column = "update_date" property="updateDate"/>
 		<collection property="noticeFileList" ofType="com.gdu.voyage.vo.NoticeFile">
-			<id column ="notice_file_no" property="noticeFileNo"/>
+			<result column ="notice_file_no" property="noticeFileNo"/>
 			<result column = "notice_file_name" property="noticeFileName"/>
 			<result column = "notice_file_ext" property="noticeFileExt"/>
 			<result column = "notice_file_size" property="noticeFileSize"/>
@@ -52,7 +52,7 @@
 	
 	
 	<!-- 공지사항 insert -->
-	<insert id="inserNotice" parameterType="com.gdu.voyage.vo.Notice">
+	<insert id="insertNotice" parameterType="com.gdu.voyage.vo.Notice">
 	   	INSERT INTO notice(
 			admin_id,
 			notice_title,

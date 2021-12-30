@@ -42,7 +42,7 @@
 				<!-- 입력공간 -->
 				<form method="post" action="${pageContext.request.contextPath}/admin/addNotice">
 					<!-- 작성자 -->
-					<input type="text" name="adminId" value="${loginMember.getMemberId()}">
+					<input type="hidden" name="notice.adminId" value="${loginMember.getMemberId()}">
 					<!-- 공지 제목 -->
 					<div class="row">
 						<div class="card">
@@ -50,12 +50,12 @@
 								<h5 class="card-title mb-0">공지사항 제목</h5>
 							</div>
 							<div class="card-body">
-								<input type="text" class="form-control" placeholder="제목" name="noticeTitle">
+								<input type="text" class="form-control" placeholder="제목" name="notice.noticeTitle">
 							</div>
 							<div class="card-body">
 								<!-- 상단고정(공지중요성)체크 -->
 								<h5 class="card-title mb-0">상단고정 여부</h5>
-								<select class="form-select mb-3" name="noticeTop">
+								<select class="form-select mb-3" name="notice.noticeTop">
 									<!-- 상단 비고정 -->
 									<option selected value="N">일반</option>
 									<!-- 상단 고정 -->
@@ -63,6 +63,7 @@
 								</select>
 								<!-- 사진 -->
 								<input type="file" name="noticeFile">			
+								<input type="file" name="noticeFile">
 								<input type="file" name="noticeFile">
 								<input type="file" name="noticeFile">
 							</div>
@@ -75,7 +76,7 @@
 								<h5 class="card-title mb-0">내용</h5>
 							</div>
 							<div class="card-body">
-								<textarea class="form-control" rows="3" placeholder="내용입력" name="noticeContent"></textarea>
+								<textarea class="form-control" rows="3" placeholder="내용입력" name="notice.noticeContent"></textarea>
 							</div>
 						</div>
 					</div>

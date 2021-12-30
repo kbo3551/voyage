@@ -14,19 +14,19 @@ public interface NoticeMapper {
 	// 리스트 가져오기
 	List<Notice> selectNoticeList(Map<String, Object> map);
 	// 공지사항 작성
-	Notice inserNotice(Notice notice);
+	void insertNotice(Notice notice);
 	// 공지사항 삭제
-	Notice deleteNotice(Notice notice);
+	void deleteNotice(Notice notice);
 	// 공지사항 수정
-	Notice updateNotice(Notice notice);
+	void updateNotice(Notice notice);
 	// 공지사항 One
 	Notice selectNoticeOne(int noticeNo);
 	// 공지사항 파일
 	List<NoticeFile> selectNoticeFileList();
 	//입력, 삭제 단계에서 사용되는 추가 삭제
-	Notice insertNoticefile(NoticeFile noticefile);
-	Notice deleteNoticeFile(NoticeFile noticefile);
+	void insertNoticefile(NoticeFile noticefile);
+	void deleteNoticeFile(NoticeFile noticefile);
 	//업데이트시 사용되는 파일 추가 삭제
-	Notice insertNoticefileUpdate(NoticeFile noticefile);
-	Notice deleteNoticeFileUpdate(NoticeFile noticefile);
+	void insertNoticefileUpdate(NoticeFile noticefile);
+	void deleteNoticeFileUpdate(NoticeFile noticefile);
 }
