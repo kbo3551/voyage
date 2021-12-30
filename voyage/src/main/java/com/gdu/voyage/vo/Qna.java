@@ -16,5 +16,8 @@ public class Qna {
 	private String updateDate;
 	private String createDate;
 	private QnaAnswer qnaAnswer;
+	// 이미지 파일 -> 1:N
 	private List<QnaImg> qnaImg;
+	// Q&A 검색용
+	private String searchWord;
 }

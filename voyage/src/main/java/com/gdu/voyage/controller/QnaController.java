@@ -45,6 +45,7 @@ public class QnaController {
 		int pageNo = ((controllPage / 100) * 10 + 1);
 		
 		model.addAttribute("controllPage", controllPage);
+		model.addAttribute("searchWord", searchWord);
 		model.addAttribute("qnaList", map.get("qnaList"));
 		model.addAttribute("lastPage", map.get("lastPage"));
 		model.addAttribute("currentPage", currentPage);
@@ -97,7 +98,7 @@ public class QnaController {
 		// 디버그 코드
 		log.debug("★★★★★★★★★★★ [다원] addQ_loginMember_Controller() debug" + loginMember.toString());
 		// qnaForm에 받아온 값 셋팅
-		qnaForm.setMemberId(memberId);
+		qnaForm.getQna().setMemberId(memberId);
 		// 디버그 코드
 		log.debug("★★★★★★★★★★★ [다원] addQ_qnaForm_Controller() debug" + qnaForm.toString());
 		// 이미지 파일 절대 경로 설정

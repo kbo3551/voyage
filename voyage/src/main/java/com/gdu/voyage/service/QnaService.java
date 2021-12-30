@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.gdu.voyage.mapper.MemberMapper;
 import com.gdu.voyage.mapper.QnaMapper;
+import com.gdu.voyage.vo.Activity;
 import com.gdu.voyage.vo.Member;
 import com.gdu.voyage.vo.Qna;
 import com.gdu.voyage.vo.QnaAnswer;
@@ -30,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class QnaService {
 	@Autowired QnaMapper qnaMapper;
-	
+		
 	// Qna 게시판 목록 상세 내용
 	public Qna getQnaOneAndAnswer(int qnaNo) {
 		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] selectQnaOne debug >>>" + qnaMapper.selectQnaOneAndAnswer(qnaNo));
@@ -38,16 +39,15 @@ public class QnaService {
 		qna = qnaMapper.selectQnaOneAndAnswer(qnaNo);
 		return qna;
 	}
-	// Qna 게시판 목록 검색어 별 조회
-	public Map<String, Object> getQnaList(String searchWord,int currentPage, int rowPerPage){
+	// Qna 게시판 목록 조회
+	public Map<String, Object> getQnaList(String searchWord, int currentPage, int rowPerPage){
 		// 매개변수 값 가공
 		Map<String, Object> paramMap = new HashMap<>();
 		int beginRow = (currentPage - 1) * rowPerPage;
 		
-		paramMap.put("searchWord", searchWord);
 		paramMap.put("beginRow", beginRow);
 		paramMap.put("rowPerPage", rowPerPage);
-		
+		paramMap.put("searchWord", searchWord);
 		List<Qna> qnaList = qnaMapper.selectQnaList(paramMap);
 		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_getQnaList_qnaList debug" + qnaList.toString());
 		// Mapper로부터 호출한 결과값 가공
