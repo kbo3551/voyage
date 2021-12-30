@@ -245,7 +245,7 @@
 			AND
 			<!-- 지역 검색 -->
 			<if test="#{searchAccomAddress} != null">
-				(aba.accom_address_zip LIKE '%${searchAccomAddress}%')		
+				(aba.accom_address_zip LIKE '%${searchAddress}%')		
 			</if>
 <!-- 			AND -->
 <!-- 				f.accom_building_facility_name  -->

@@ -92,7 +92,7 @@
                         </div>
                         
                         <!-- selectActivityProductBySearch -->
-                        <form action="/getActivityProductList" method="post">
+                        <form action="${pageContext.request.contextPath}/product/getActivityProductList" method="post">
 	                        <div class="category-listing mb-50">
 	                            <div class="single-listing">
 	                                <!-- input -->

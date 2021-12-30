@@ -267,7 +267,7 @@
                                        <p class="date">December 4, 2017 at 3:12 pm </p>
                                     </div>
                                     <div class="reply-btn">
-                                       <a href="${pageContext.request.contextPath}/#" class="btn-reply text-uppercase">reply</a>
+                                       <a href="${pageContext.request.contextPath}/#" class="btn-reply text-uppercase">chat</a>
                                     </div>
                                  </div>
                               </div>

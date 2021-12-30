@@ -51,7 +51,7 @@ public class ProductController {
 		return "/product/getAccomBuildingProductList";
 	}
 	
-	@PostMapping("/getAccomProductList")
+	@PostMapping("/product/getAccomProductList")
 	public String getAccomBuildingList(Model model,
 										@RequestParam @Nullable String searchWord, 
 										@RequestParam @Nullable String searchAddress,
@@ -92,7 +92,7 @@ public class ProductController {
 		model.addAttribute("addressZipByBest", addressZipByBest);
 		log.debug("[debug] ProductController.getAccomBuildingList addressZipByBest : " + addressZipByBest);
 				
-		return "/product/getAccomBuildingProductList";
+		return "redirect:/product/getAccomBuildingProductList";
 	}
 	
 	@GetMapping("/accomBuildingOne")
@@ -134,7 +134,7 @@ public class ProductController {
 		return "/product/getActivityProductList";
 	}
 	
-	@PostMapping("/getActivityProductList")
+	@PostMapping("/product/getActivityProductList")
 	public String getActivityProduct(Model model,
 										@RequestParam @Nullable String searchWord, 
 										@RequestParam @Nullable String searchAddress,
