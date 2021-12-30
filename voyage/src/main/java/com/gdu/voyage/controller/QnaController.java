@@ -29,26 +29,25 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class QnaController {
 	@Autowired QnaService qnaService;
-	private int currentPage = 1;
 	private final int ROW_PER_PAGE = 4;
 	
 	// [Member] Qna 게시판 목록 조회
 	@GetMapping("/qnaList")
 	public String qnaList(Model model, 
 			@RequestParam(defaultValue="1") int currentPage,
-			@RequestParam(required = false) String qnaCategory,
 			@RequestParam @Nullable String searchWord) {
 		log.debug("qnaListController() 실행");
 		
+		Map<String, Object> map = qnaService.getQnaList(searchWord, currentPage, ROW_PER_PAGE);
+		log.debug("★★★★★★★★★★★ [다원] qnaList_map_Controller() debug" + map.toString());
+		
 		int controllPage = (currentPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
 		int pageNo = ((controllPage / 100) * 10 + 1);
-		Map<String, Object> map = qnaService.getQnaList(qnaCategory, searchWord, currentPage, ROW_PER_PAGE);
 		
-		model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
 		model.addAttribute("controllPage", controllPage);
 		model.addAttribute("qnaList", map.get("qnaList"));
 		model.addAttribute("lastPage", map.get("lastPage"));
-		model.addAttribute("currentPage", map.get("currentPage"));
+		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("pageNo", pageNo);
 		
 		return "/templates_citylisting/qnaList";
@@ -175,7 +174,7 @@ public class QnaController {
 		int controllPage = (currentPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
 		int pageNo = ((controllPage / 100) * 10 + 1);
 		
-		Map<String, Object> map = qnaService.getQnaList(qnaCategory, searchWord, currentPage, ROW_PER_PAGE);
+		Map<String, Object> map = qnaService.getQnaList(searchWord, currentPage, ROW_PER_PAGE);
 		
 		model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
 		model.addAttribute("controllPage", controllPage);

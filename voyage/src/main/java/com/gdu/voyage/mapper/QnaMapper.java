@@ -16,7 +16,7 @@ public interface QnaMapper {
 	// Qna 전체 목록
 	List<Qna> selectQnaList(Map<String, Object> param);
 	// Qna 게시글 수
-	int selectQnaTotalCount(String qnaCategory);
+	int selectQnaTotalCount(String searchWord);
 	// 목록 상세 내용
 	Qna selectQnaOneAndAnswer(int qnaNo);
 	
@@ -33,9 +33,6 @@ public interface QnaMapper {
 	int addQImg(QnaImg qnaImg);
 	// 이미지 삭제
 	int removeQImg(QnaImg qnaImg);
-	
-	// [Member] Q&A 검색
-	List<Qna> selectQnaListBySearch(Map<String, Object> param);
 	
 	// [Admin] Only Admin part
 	// 답변 없는 질문 list
