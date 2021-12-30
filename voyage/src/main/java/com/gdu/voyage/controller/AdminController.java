@@ -78,7 +78,7 @@ public class AdminController {
 		// 로그아웃
 		request.getSession().invalidate();
 
-		return "/login";
+		return "redirect:/login";
 	}
 
 	// 어드민 회원가입
