@@ -135,12 +135,6 @@ public class AdminController {
 		return "redirect:/login";
 	}
 
-	@GetMapping("/admin/adminIndex")
-	public String index() {
-		System.out.println("AdminController() 실행");
-
-		return "admin/adminIndex";
-	}
 
 	/*
 	 * @Controller public class productManagementController {
@@ -273,5 +267,12 @@ public class AdminController {
 		;
 		log.debug("★★★[boryeong]AdminController_host★★★" + host.toString());
 		return "redirect:/admin/hostList";
+	}
+
+	@GetMapping("/admin/adminIndex")
+	public String index() {
+		System.out.println("AdminController() 실행");
+
+		return "admin/adminIndex";
 	}
 }
