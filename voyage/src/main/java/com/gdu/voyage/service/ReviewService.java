@@ -23,6 +23,7 @@ public class ReviewService {
 	 * public void addAccomReview(Review review) throws Exception { // qnaForm값 디버깅
 	 * 코드 log.debug("**********[상훈] ReviewService_ debug" + .toString());
 	 */
+	// 숙소 후기 목록
 	public Map<String, Object> getAccomReviewList(String Review, int currentPage, int rowPerPage) {
 
 		Map<String, Object> paraMap = new HashMap<>();
@@ -43,6 +44,33 @@ public class ReviewService {
 			lastPage += 1;
 		}
 		returnMap.put("accomReviewList", accomReviewList);
+		returnMap.put("lastPage", lastPage);
+		returnMap.put("totalCount", totalCount);
+		
+		return returnMap;
+
+	}
+	
+	public Map<String, Object> getActivityReviewList(String Review, int currentPage, int rowPerPage) {
+
+		Map<String, Object> paraMap = new HashMap<>();
+		int beginRow = (currentPage - 1) * rowPerPage;
+		
+		paraMap.put("beginRow", beginRow);
+		paraMap.put("rowPerPage", rowPerPage);
+
+		List<Review> activityReviewList = reviewMapper.selectActivityReviewList(paraMap);
+		
+		Map<String, Object> returnMap = new HashMap<>();
+		
+		int lastPage = 0;
+		int totalCount = reviewMapper.selectReviewTotalCount(Review);
+		
+		lastPage = (totalCount / rowPerPage);
+		if (totalCount % rowPerPage != 0) {
+			lastPage += 1;
+		}
+		returnMap.put("activityReviewList", activityReviewList);
 		returnMap.put("lastPage", lastPage);
 		returnMap.put("totalCount", totalCount);
 		

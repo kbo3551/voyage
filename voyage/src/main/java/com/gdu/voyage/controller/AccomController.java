@@ -137,5 +137,5 @@ public class AccomController {
 			model.addAttribute("list", list);
 			return "/admin/accessAccomBuilding";
 		}
-	
+		
 }

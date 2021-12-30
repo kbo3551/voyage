@@ -15,6 +15,9 @@ public interface ReviewMapper {
 	// 숙소 후기 전체 목록
 	List<Review> selectAccomReviewList (Map<String, Object> param);
 	
+	// 체험 후기 전체 목록
+	List<Review> selectActivityReviewList (Map<String, Object> param);
+	
 	// 숙소 후기 게시글 수
 	int selectReviewTotalCount(String Review);
 	

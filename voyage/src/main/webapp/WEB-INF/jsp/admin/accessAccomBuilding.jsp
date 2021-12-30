@@ -94,7 +94,34 @@
 					</div>
 				</div>
 			</main>
-	
+					<!-- 페이징 -->
+                        <div class="container">
+                           <ul class="nav justify-content-center bg-light">
+                              <c:if test="${beginRow > (ROW_PER_PAGE * 10)}">
+                                 <li><a href="${pageContext.request.contextPath}/admin/accessAccomBuilding?currentPage=${pageNo-1}">&lt;</a></li>
+                              </c:if>
+                              <c:set var="doneLoop" value="false"></c:set>
+                              <c:forEach var="f" begin="${pageNo}" end="${pageNo + 9}">
+                                 <c:if test="${not doneLoop}">
+                                    <c:choose>
+                                       <c:when test="${currentPage == f}">
+                                          <li class="active"><span>${f}</span></li>
+                                       </c:when>
+                                       <c:otherwise>
+                                          <li><a class="nav-link active" href="${pageContext.request.contextPath}/admin/accessAccomBuilding?currentPage=${f}">${f}</a></li>
+                                       </c:otherwise>
+                                    </c:choose>
+
+                                    <c:if test="${f == lastPage}">
+                                       <c:set var="doneLoop" value="true"></c:set>
+                                    </c:if>
+                                 </c:if>
+                              </c:forEach>
+                              <c:if test="${currentPage + 10 <= lastPage}">
+                                 <li><a class="nav-link active" href="${pageContext.request.contextPath}/admin/accessAccomBuilding?currentPage=${pageNo+10}">&gt;</a></li>
+                              </c:if>
+                           </ul>
+                     </div>
     <!-- adminFooter : 시작 -->
     	<c:import url="partial\\\\adminFooter.jsp"/>
     <!-- adminFooter : 끝 -->

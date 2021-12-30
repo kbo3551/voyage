@@ -66,4 +66,21 @@
 			NOW()
 		)
 	</insert>
+	
+	<!-- 체험 후기 목록 조회 -->
+	<select id="selectActivityReviewList" parameterType="com.gdu.voyage.vo.Review" resultMap="resultReview">
+		SELECT
+			review_no,
+			payment_no,
+			review_title,
+			review_star,
+			review_view_cnt,
+			create_date,
+			update_date
+		FROM
+			review
+		ORDER BY
+			update_date DESC
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
 </mapper>
