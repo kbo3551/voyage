@@ -17,8 +17,6 @@ public interface QnaMapper {
 	List<Qna> selectQnaList(Map<String, Object> param);
 	// Qna 게시글 수
 	int selectQnaTotalCount(String qnaCategory);
-	// 페이지 수
-	int selectCountPage();
 	// 목록 상세 내용
 	Qna selectQnaOneAndAnswer(int qnaNo);
 	

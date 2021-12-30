@@ -40,10 +40,11 @@ public class QnaService {
 	}
 	// Qna 게시판 목록 카테고리 별 조회
 	public Map<String, Object> getQnaList(String qnaCategory,String searchWord,int currentPage, int rowPerPage){
-	
-		int beginRow = (currentPage - 1) * rowPerPage;
-		// 매개변수 값 가공 
+		// 매개변수 값 가공
 		Map<String, Object> paramMap = new HashMap<>();
+		
+		int beginRow = (currentPage - 1) * rowPerPage;
+		
 		paramMap.put("qnaCategory", qnaCategory);
 		paramMap.put("searchWord", searchWord);
 		paramMap.put("beginRow", beginRow);
@@ -52,7 +53,6 @@ public class QnaService {
 		List<Qna> qnaList = qnaMapper.selectQnaList(paramMap);
 		// Mapper로부터 호출한 결과값 가공
 		Map<String, Object> returnMap = new HashMap<>();
-		returnMap.put("qnaList", qnaList);
 		// 마지막 페이지
 		int lastPage = 0;
 		int totalCount = 0;
@@ -68,7 +68,9 @@ public class QnaService {
 		}
 		returnMap.put("qnaList", qnaList);
 		returnMap.put("lastPage", lastPage);
-		returnMap.put("totalCount", totalCount);
+		returnMap.put("totalCount",totalCount);
+		returnMap.put("searchWord",searchWord);
+		returnMap.put("qnaCategory",qnaCategory);
 		
 		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_getQnaListByCategory_returnMap debug" + returnMap);		
 		return returnMap;
@@ -158,24 +160,6 @@ public class QnaService {
 	public void addA(QnaAnswer qnaAnswer) {
 		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_addA_debug" + qnaMapper.addA(qnaAnswer));
 		qnaMapper.addA(qnaAnswer);
-	}
-	
-	// 페이징
-	public int[] countPage(int currentPage) {
-		int[] num = new int[10];
-		int listNum = qnaMapper.selectCountPage();
-		listNum = (listNum / 10) + (listNum % 10);
-		for(int i=1; i<=10; i++) {
-			if(currentPage <= 10) {
-				num[i-1] = (currentPage / 10) + i;
-			} else {
-				if(listNum == ((currentPage / 10) * 10) + i) {
-					break;
-				}
-				num[i-1] = ((currentPage / 10) * 10) + i;
-			}
-		}
-		return num;
 	}
 }
 

@@ -212,9 +212,6 @@
 	</select>
 	
 	<!-- 페이징 -->
-	<select id="selectCountPage" resultType="int">
-		SELECT COUNT(*)FROM qna
-	</select>
 	<select id="selectQnaTotalCount" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM qna
 		<where>

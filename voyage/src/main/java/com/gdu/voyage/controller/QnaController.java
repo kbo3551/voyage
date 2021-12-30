@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class QnaController {
 	@Autowired QnaService qnaService;
-	private Integer currentPage = 1;
+	private int currentPage = 1;
 	private final int ROW_PER_PAGE = 10;
 	
 	// [Member] Qna 게시판 목록 조회
@@ -39,13 +39,17 @@ public class QnaController {
 			@RequestParam(required = false) String qnaCategory,
 			@RequestParam @Nullable String searchWord) {
 		log.debug("qnaListController() 실행");
+		
+		int controllPage = (currentPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
+		int pageNo = ((controllPage / 100) * 10 + 1);
 		Map<String, Object> map = qnaService.getQnaList(qnaCategory, searchWord, currentPage, ROW_PER_PAGE);
-		int[] navArray = qnaService.countPage(currentPage);
+		
+		model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
+		model.addAttribute("controllPage", controllPage);
 		model.addAttribute("qnaList", map.get("qnaList"));
-		model.addAttribute("navArray", navArray);
 		model.addAttribute("lastPage", map.get("lastPage"));
 		model.addAttribute("currentPage", map.get("currentPage"));
-		model.addAttribute("totalCount", map.get("totalCount"));
+		model.addAttribute("pageNo", pageNo);
 		
 		return "/templates_citylisting/qnaList";
 	}
@@ -163,20 +167,23 @@ public class QnaController {
 			@RequestParam(required = false) String qnaCategory,
 			@RequestParam @Nullable String searchWord) {
 		log.debug("adminQnaList_Controller() 실행");
-		Map<String, Object> map = qnaService.getQnaList(qnaCategory, searchWord, currentPage, ROW_PER_PAGE);
 		// 로그인한 회원의 아이디, 닉네임을 가져오기 위해 해당 값을 세션에서 가져옴
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		// 디버그 코드
 		log.debug("★★★★★★★★★★★ [다원] adminQnaList_loginMember_Controller() debug" + loginMember.toString());
-		int[] navArray = qnaService.countPage(currentPage);
+		
+		int controllPage = (currentPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
+		int pageNo = ((controllPage / 100) * 10 + 1);
+		
+		Map<String, Object> map = qnaService.getQnaList(qnaCategory, searchWord, currentPage, ROW_PER_PAGE);
+		
+		model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
+		model.addAttribute("controllPage", controllPage);
 		model.addAttribute("qnaList", map.get("qnaList"));
-		model.addAttribute("navArray", navArray);
-		model.addAttribute("searchWord", searchWord);
-		model.addAttribute("qnaCategory", qnaCategory);
 		model.addAttribute("lastPage", map.get("lastPage"));
 		model.addAttribute("currentPage", map.get("currentPage"));
-		model.addAttribute("totalCount", map.get("totalCount"));
 		model.addAttribute("loginMember", loginMember);
+		model.addAttribute("pageNo", pageNo);
 		// 관리자 계정이면 관리자 Q&A 전체 목록 페이지로 이동
 		// 그 외 회원이면 일반 Q&A 전체 목록 페이지로 이동
 		if(loginMember.getMemberLevel() == 2) {
