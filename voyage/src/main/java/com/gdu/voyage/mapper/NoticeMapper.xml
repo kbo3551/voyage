@@ -91,9 +91,9 @@
 	</delete>
 	
 	<delete id="deleteNoticeFile" parameterType="com.gdu.voyage.vo.NoticeFile">
-		DELETE FROM noticeFile 
+		DELETE FROM notice_file 
 		WHERE 
-			notice_file_no = #{noticeFileNo}
+			notice_no = #{noticeNo}
 	</delete>
 
 	<!-- 공지사항 update -->

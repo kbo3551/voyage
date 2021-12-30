@@ -94,8 +94,9 @@ public class NoticeService {
 	
 	
 	//삭제(내용+사진 삭제)
-	public void deleteNoticeOne() {
-		
+	public void deleteNoticeOne(int noticeNo) {
+		noticeMapper.deleteNoticeFile(noticeNo);
+		noticeMapper.deleteNotice(noticeNo);
 	}
 	
 	//수정

@@ -16,7 +16,7 @@ public interface NoticeMapper {
 	// 공지사항 작성
 	void insertNotice(Notice notice);
 	// 공지사항 삭제
-	void deleteNotice(Notice notice);
+	void deleteNotice(int noticeNo);
 	// 공지사항 수정
 	void updateNotice(Notice notice);
 	// 공지사항 One
@@ -25,7 +25,7 @@ public interface NoticeMapper {
 	List<NoticeFile> selectNoticeFileList();
 	//입력, 삭제 단계에서 사용되는 추가 삭제
 	void insertNoticefile(NoticeFile noticefile);
-	void deleteNoticeFile(NoticeFile noticefile);
+	void deleteNoticeFile(int noticeNo);
 	//업데이트시 사용되는 파일 추가 삭제
 	void insertNoticefileUpdate(NoticeFile noticefile);
 	void deleteNoticeFileUpdate(NoticeFile noticefile);

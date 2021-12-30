@@ -40,7 +40,7 @@
 				<h1 class="h3 mb-3"><strong>관리자</strong> 공지사항</h1>
 				
 				<!-- 입력공간 -->
-				<form method="post" action="${pageContext.request.contextPath}/admin/addNotice">
+				<form method="post" action="${pageContext.request.contextPath}/admin/addNotice"  enctype="multipart/form-data" id="accomBuildingForm">
 					<!-- 작성자 -->
 					<input type="hidden" name="notice.adminId" value="${loginMember.getMemberId()}">
 					<!-- 공지 제목 -->
@@ -62,10 +62,10 @@
 									<option value="Y">중요</option>
 								</select>
 								<!-- 사진 -->
-								<input type="file" name="noticeFile">			
-								<input type="file" name="noticeFile">
-								<input type="file" name="noticeFile">
-								<input type="file" name="noticeFile">
+								<input type="file" name="noticeForm.noticeFile">			
+								<input type="file" name="noticeForm.noticeFile">
+								<input type="file" name="noticeForm.noticeFile">
+								<input type="file" name="noticeForm.noticeFile">
 							</div>
 						</div>
 					</div>				

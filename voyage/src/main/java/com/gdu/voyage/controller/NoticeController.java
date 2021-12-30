@@ -81,14 +81,8 @@ public class NoticeController {
 	}
 	//delete
 	@GetMapping("/admin/removeNotice")
-	public String removeNoticeOne() {
-		return "/admin/removeNotice";
-	}
-	
-	@PostMapping("/admin/removeNotice")
-	public String deleteNoticeOne() {
-		
-		
+	public String removeNoticeOne(int noticeNo) {
+		noticeService.deleteNoticeOne(noticeNo);
 		return "/admin/adminNoticeList";
 	}
 	//update

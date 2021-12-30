@@ -71,8 +71,6 @@
 							</div>
 							<div>
 								<a href="${pageContext.request.contextPath}/admin/modfiyNotice?noticeNo=${notice.noticeNo}" class="btn btn-primary">수정</a>
-							</div>
-							<div>
 								<a href="${pageContext.request.contextPath}/admin/removeNotice?noticeNo=${notice.noticeNo}" class="btn btn-primary">삭제</a>
 							</div>
 						</div>
