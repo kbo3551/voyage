@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.voyage.mapper.ActivityReviewMapper">
+	<!-- resultMap -->
+	<resultMap type="com.gdu.voyage.vo.ActivityReview" id="resultReview">
+		<!-- Review -->
+		<id column="activity_review_no" property="activityReviewNo"/>
+		<result column="activity_review_title" property="activityReviewTitle"/>
+		<result column="activity_review_content" property="activityReviewContent"/>
+		<result column="activity_review_star" property="activityReviewStar"/>
+		<result column="activity_review_view_cnt" property="activityReviewViewCnt"/>
+		<result column="update_date" property="updateDate"/>
+		<result column="create_date" property="createDate"/>
+		<!-- Img -->
+		<collection property="activityReviewImage" ofType="com.gdu.voyage.vo.ActivityReviewImage">
+			<id column="activity_review_image_no" property="activityReviewImageNo"/>
+			<result column="activity_review_image_name" property="activityReviewImageName"/>
+			<result column="activity_review_image_ext" property="activityReviewImageExt"/>
+			<result column="activity_review_image_size" property="activityReviewImageSize"/>
+		</collection>
+	</resultMap>
+	
+	<!-- 체험 후기 목록 조회 -->
+	<select id="selectActivityReviewList" parameterType="com.gdu.voyage.vo.ActivityReview" resultMap="resultReview">
+		SELECT
+			activity_review_no,
+			activity_payment_details,
+			activity_review_title,
+			activity_review_content,
+			activity_review_star,
+			activity_review_view_cnt,
+			create_date,
+			update_date
+		FROM
+			activity_review
+		ORDER BY
+			update_date DESC
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	<!-- 페이징 -->
+	<select id="selectCountPage" resultType="int">
+		SELECT COUNT(*)FROM activity_review
+	</select>
+	<select id="selectReviewTotalCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM activity_review
+		<where>
+			<if test="payment_details != null">
+				payment_details = #{payment_details}
+			</if>
+		</where>
+	</select>
+</mapper>

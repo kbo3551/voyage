@@ -168,13 +168,13 @@
 				                                    	<!-- <span>Open</span> -->
 		                                        </div>
 		                                   		<div class="list-caption">
-		                                        	<span>${review.reviewStar}</span>
-		                                        	<h3><a href="${pageContext.request.contextPath}/getReviewOne?reivewNo=${review.reviewNo}">${review.reviewTitle}</a></h3>
-		                                            <p>${review.reviewNo}</p>
+		                                        	<span>${review.accomReviewStar}</span>
+		                                        	<h3><a href="${pageContext.request.contextPath}/getReviewOne?accomReivewNo=${review.accomReviewNo}">${review.accomReviewTitle}</a></h3>
+		                                            <p>${review.accomReviewNo}</p>
 		                                            <div class="list-footer">
 		                                            	<!--  
 		                                         		<ul>
-		                                                	<li>${review.paymentNo}</li>
+		                                                	<li>${review.accomPaymentDetails}</li>
 		                                               	</ul>
 		                                               	-->
 		                                            </div>
@@ -209,22 +209,30 @@
                                         <div class="single-wrap d-flex justify-content-center">
                                             <nav aria-label="Page navigation example">
                                                <!-- 페이징 -->
-                                                <ul class="pagination justify-content-start">
-                                                	<li class="page-item"><a class="page-link" href="getAccomReviewList?pageNo=${pageNo-10}"><span class="ti-angle-left"></span></a></li>
-                                                    <c:forEach items="${navArray}" var="n">
-                                                    	<c:if test="${n != 0}">
-                                                    		<c:choose>
-                                                    			<c:when test="${n eq pageNo}">
-                                                    				<li class="page-item active"><a  class="page-link" href="getAccomReviewList?pageNo=${n}">${n}</a></li>
-                                                    			</c:when>
-                                                    			<c:otherwise>
-                                                    				<li class="page-item active"><a  class="page-link" href="getAccomReviewList?pageNo=${n}">${n}</a></li>
-                                                    			</c:otherwise>
-                                                    		</c:choose>
-                                                    	</c:if>
-                                                    </c:forEach>
-                                                	<li class="page-item"><a class="page-link" href="getAccomReviewList?pageNo=${pageNo+10}"><span class="ti-angle-right"></span></a></li>
-                                                </ul>
+									                <ul class="pagination justify-content-start">
+									                   <c:if test="${beginRow > (ROW_PER_PAGE * 10)}">
+									                      <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/getAccomReviewList?pageNo=${pageNo-1}">&lt;</a></li>
+									                   </c:if>
+									                   <c:set var="doneLoop" value="false"></c:set>
+									                   <c:forEach var="f" begin="${pageNo}" end="${pageNo + 9}">
+									                      <c:if test="${not doneLoop}">
+									                         <c:choose>
+									                            <c:when test="${currentPage == f}">
+									                               <li class="page-item active"><a class="page-link">${f}</a></li>
+									                            </c:when>
+									                            <c:otherwise>
+									                               <li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/getAccomReviewList?currentPage=${f}">${f}</a></li>
+									                            </c:otherwise>
+									                         </c:choose>
+									                         <c:if test="${f == lastPage}">
+									                            <c:set var="doneLoop" value="true"></c:set>
+									                         </c:if>
+									                      </c:if>
+									                   </c:forEach>
+									                   <c:if test="${currentPage + 10 <= lastPage}">
+									                      <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/getAccomReviewList?currentPage=${pageNo+10}">&gt;</a></li>
+									                   </c:if>
+									                </ul>
                                             </nav>
                                         </div>
                                     </div>
