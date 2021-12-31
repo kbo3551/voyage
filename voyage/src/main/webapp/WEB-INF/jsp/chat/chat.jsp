@@ -73,7 +73,7 @@
 			// chatRoom을 누르면 목록 불러오는 부분
 			$('#chatRoom').click(function(){
 				$.ajax({
-					url:'/chatRoom?chatRoom=3',
+					url:'/voyage/chatRoom?chatRoom=3',
 					type:'GET',
 					datatype:'json',
 					success:function(result){

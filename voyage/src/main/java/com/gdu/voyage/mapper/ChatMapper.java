@@ -14,4 +14,7 @@ public interface ChatMapper {
 	List<Chat> selectChatNumListById(String memberId);
 	// 2. 해당 번호를 가지고 있는 채팅을 조회
 	Chat selectChatListByNo(Map<String, Object> map);
+	
+	// [사용자] 채팅방 접속 시 채팅 내용 조회 
+	List<Map<String, Object>> selectChatByToChatRoom(Map<String, Object> map);
 }
