@@ -217,7 +217,7 @@
 		    													color: #fff; font-weight: 500;" id="delItem" value="삭제">
 			                                    		</span>
 													</h4>
-													
+		                                    		<h4><small>* 입력 폼 하나당, 물품 하나씩 입력해주세요.</small></h4>
 													<div class="form-group" id="itemPlace">
 														<div id="itemForm">
 															<label><small>Name</small></label>
