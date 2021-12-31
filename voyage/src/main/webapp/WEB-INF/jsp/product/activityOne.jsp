@@ -181,8 +181,10 @@
 <!--                            </div> -->
 <!--                         </div> -->
 <!--                      </div> -->
-                  </div>
-                  <div class="blog-author">
+                  	</div>
+	                <!-- listing Details End -->
+                  <h4 class="pt-45">Host Comment</h4>
+                  <div class="blog-author mt-0">
                      <div class="media align-items-center">
                         <img src="${pageContext.request.contextPath}/assets/img/blog/author.png" alt="">
                         <div class="media-body">
@@ -195,7 +197,7 @@
                      </div>
                   </div>
                   <div class="comments-area">
-                     <h4>05 Comments</h4>
+                     <h4>Recent Review</h4>
                      <div class="comment-list">
                         <div class="single-comment justify-content-between d-flex">
                            <div class="user justify-content-between d-flex">
@@ -593,7 +595,7 @@
                 <div class="listing-details-area pb-80">
                     <div class="container">
                         <div class="row">
-                       		<c:forEach items="${activityOneList}" var="ac" varStatus="status" end="3">
+                       		<c:forEach items="${activityOneList}" var="ac" varStatus="status" end="2">
 	                            <div class="col-lg-4 col-md-6">
 	                                <div class="single-listing mb-30">
 	                                    <div class="list-img">

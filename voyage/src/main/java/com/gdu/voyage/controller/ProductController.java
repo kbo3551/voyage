@@ -29,36 +29,17 @@ public class ProductController {
 	
 	// [사용자] 숙소
 	@GetMapping("/getAccomProductList")
-	public String getAccomBuildingList(Model model, @RequestParam(defaultValue = "1") int currentPage) {
-		log.debug("[debug] ProductController.getAccomBuildingList 실행");
-
-		// [사용자] 숙소-건물 목록 조회
-		List<AccomBuilding> accomBuilding = productService.getAccomBuildingList(currentPage, ROW_PER_PAGE);
-//		log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
-		model.addAttribute("accomBuilding", accomBuilding);
-		log.debug("[debug] ProductController.getAccomBuildingList accomBuilding : " + accomBuilding);
-		
-		// [사용자] 숙소-건물 시설 인기 조회
-		List<Map<String, Object>> facilityByBest = productService.getAccomBuildingFacilityByBest();
-		model.addAttribute("facilityByBest", facilityByBest);
-		log.debug("[debug] ProductController.getAccomBuildingList facilityByBest : " + facilityByBest);
-		
-		// [사용자] 숙소-건물 지역 인기 조회
-		List<Map<String, Object>> addressZipByBest = productService.getAccomAddressByBest();
-		model.addAttribute("addressZipByBest", addressZipByBest);
-		log.debug("[debug] ProductController.getAccomBuildingList addressZipByBest : " + addressZipByBest);
-		
-		return "/product/getAccomBuildingProductList";
-	}
-	
-	@PostMapping("/product/getAccomProductList")
 	public String getAccomBuildingList(Model model,
+										@RequestParam(defaultValue = "1") int currentPage,
 										@RequestParam @Nullable String searchWord, 
 										@RequestParam @Nullable String searchAddress,
 										@RequestParam @Nullable List<String> searchFacilityList,
 										@RequestParam @Nullable Integer searchReviewScore,
 										@RequestParam @Nullable String searchPrice
 										) {
+		log.debug("[debug] ProductController.getAccomBuildingList 실행");
+
+		// 검색 시 사용할 매개변수 가공
 		List<String> searchPriceList = new ArrayList<>();
 		if(searchPrice != null) {
 			searchPriceList = Arrays.asList(searchPrice.split(";"));
@@ -76,12 +57,23 @@ public class ProductController {
 		paramMap.put("searchReviewScore", searchReviewScore);
 		paramMap.put("searchPriceList", searchPriceList);
 		
-		// [사용자] 숙소-건물 목록 검색 조회
-		List<AccomBuilding> accomBuilding = productService.getAccomBuildingListBySearch(paramMap);
-//				log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
-		model.addAttribute("accomBuilding", accomBuilding);
-		log.debug("[debug] ProductController.getAccomBuildingList accomBuilding : " + accomBuilding);
+		List<AccomBuilding> accomBuilding = new ArrayList<>();
 		
+		// 검색 조회와 일반 조회 분기
+		if(searchWord != null || searchAddress != null || searchFacilityList != null || searchReviewScore != null || searchPrice != null) {
+			// [사용자] 숙소-건물 목록 검색 조회
+			accomBuilding = productService.getAccomBuildingListBySearch(paramMap);
+//					log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
+			model.addAttribute("accomBuilding", accomBuilding);
+			log.debug("[debug] ProductController.getAccomBuildingList accomBuilding : " + accomBuilding);
+		} else {
+			// [사용자] 숙소-건물 목록 조회
+			accomBuilding = productService.getAccomBuildingList(currentPage, ROW_PER_PAGE);
+//			log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
+			model.addAttribute("accomBuilding", accomBuilding);
+			log.debug("[debug] ProductController.getAccomBuildingList accomBuilding : " + accomBuilding);
+		}
+				
 		// [사용자] 숙소-건물 시설 인기 조회
 		List<Map<String, Object>> facilityByBest = productService.getAccomBuildingFacilityByBest();
 		model.addAttribute("facilityByBest", facilityByBest);
@@ -92,7 +84,7 @@ public class ProductController {
 		model.addAttribute("addressZipByBest", addressZipByBest);
 		log.debug("[debug] ProductController.getAccomBuildingList addressZipByBest : " + addressZipByBest);
 				
-		return "redirect:/product/getAccomBuildingProductList";
+		return "/product/getAccomBuildingProductList";
 	}
 	
 	@GetMapping("/accomBuildingOne")
@@ -118,13 +110,46 @@ public class ProductController {
 	
 	// [사용자] 체험
 	@GetMapping("/getActivityProductList")
-	public String getActivityProduct(Model model, @RequestParam(defaultValue = "1") int currentPage) {
+	public String getActivityProduct(Model model,
+										@RequestParam(defaultValue = "1") int currentPage,
+										@RequestParam @Nullable String searchWord, 
+										@RequestParam @Nullable String searchAddress,
+										@RequestParam @Nullable Integer searchReviewScore,
+										@RequestParam @Nullable String searchPrice
+										) {
 		log.debug("[debug] ProductController.getActivityProduct 실행");
 		
-		// [사용자] 체험 목록 조회
-		List<Activity> activity = productService.getActivityList(currentPage, ROW_PER_PAGE);
-		model.addAttribute("activity", activity);
-		log.debug("[debug] ProductController.getActivityProduct activity : " + activity);
+		// 검색 시 사용할 매개변수 가공
+		List<String> searchPriceList = new ArrayList<>();
+		if(searchPrice != null) {
+			searchPriceList = Arrays.asList(searchPrice.split(";"));
+		}
+		log.debug("[debug] ProductController.getAccomBuildingList searchWord : " + searchWord);
+		log.debug("[debug] ProductController.getAccomBuildingList searchAddress : " + searchAddress);
+		log.debug("[debug] ProductController.getAccomBuildingList searchReviewScore : " + searchReviewScore);
+		log.debug("[debug] ProductController.getAccomBuildingList searchPrice : " + searchPriceList);
+
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("searchWord", searchWord);
+		paramMap.put("searchAddress", searchAddress);
+		paramMap.put("searchReviewScore", searchReviewScore);
+		paramMap.put("searchPriceList", searchPriceList);
+		
+		List<Activity> activity = new ArrayList<>();
+		
+		// 검색 조회와 일반 조회 분기
+		if(searchWord != null || searchAddress != null ||  searchReviewScore != null || searchPrice != null) {
+			// [사용자] 체험 목록 검색 조회
+			activity = productService.getActivityListBySearch(paramMap);
+//					log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
+			model.addAttribute("activity", activity);
+			log.debug("[debug] ProductController.getActivityProduct activity : " + activity);
+		} else {
+			// [사용자] 체험 목록 조회
+			activity = productService.getActivityList(currentPage, ROW_PER_PAGE);
+			model.addAttribute("activity", activity);
+			log.debug("[debug] ProductController.getActivityProduct activity : " + activity);
+		}
 
 		// [사용자] 체험 지역 인기 조회
 		List<Map<String, Object>> addressZipByBest = productService.getActivityAddressByBest();
@@ -134,45 +159,6 @@ public class ProductController {
 		return "/product/getActivityProductList";
 	}
 	
-	@PostMapping("/product/getActivityProductList")
-	public String getActivityProduct(Model model,
-										@RequestParam @Nullable String searchWord, 
-										@RequestParam @Nullable String searchAddress,
-										@RequestParam @Nullable List<String> searchFacilityList,
-										@RequestParam @Nullable Integer searchReviewScore,
-										@RequestParam @Nullable String searchPrice
-										) {
-		List<String> searchPriceList = new ArrayList<>();
-		if(searchPrice != null) {
-			searchPriceList = Arrays.asList(searchPrice.split(";"));
-		}
-		log.debug("[debug] ProductController.getActivityProduct searchWord : " + searchWord);
-		log.debug("[debug] ProductController.getActivityProduct searchAddress : " + searchAddress);
-		log.debug("[debug] ProductController.getActivityProduct searchFacilityList : " + searchFacilityList);
-		log.debug("[debug] ProductController.getActivityProduct searchReviewScore : " + searchReviewScore);
-		log.debug("[debug] ProductController.getActivityProduct searchPrice : " + searchPriceList);
-		
-		Map<String, Object> paramMap = new HashMap<>();
-		paramMap.put("searchWord", searchWord);
-		paramMap.put("searchAddress", searchAddress);
-		paramMap.put("searchFacilityList", searchFacilityList);
-		paramMap.put("searchReviewScore", searchReviewScore);
-		paramMap.put("searchPriceList", searchPriceList);
-		
-		// [사용자] 체험 목록 검색 조회
-		List<Activity> activity = productService.getActivityListBySearch(paramMap);
-//				log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
-		model.addAttribute("activity", activity);
-		log.debug("[debug] ProductController.getActivityProduct activity : " + activity);
-		
-		// [사용자] 체험 지역 인기 조회
-		List<Map<String, Object>> addressZipByBest = productService.getActivityAddressByBest();
-		model.addAttribute("addressZipByBest", addressZipByBest);
-		log.debug("[debug] ProductController.getActivityProduct addressZipByBest : " + addressZipByBest);
-				
-		return "/product/getActivityProductList";
-	}
-
 	@GetMapping("/activityOne")
 	public String getActivityOne(Model model, int activityNo) {
 		log.debug("[debug] ProductController.getActivityOne 실행");

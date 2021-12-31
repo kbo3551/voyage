@@ -26,6 +26,9 @@
             <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/nice-select.css">
             <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
             <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
+            
+      		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+      		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
    </head>
    
    <!-- 눈누 - 한산스네오 레귤러 폰트 -->
@@ -85,8 +88,37 @@
                <div class="col-lg-8 posts-list">
                   <div class="single-post">
                      <div class="feature-img">
-                        <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/blog/single_blog_1.png" alt="">
+<%--                         <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/blog/single_blog_1.png" alt=""> --%>
                      </div>
+                    <div class="fade">
+                     	<c:forEach items="${accomBuildingOne.accomBuildingImageList }" var="abi" varStatus="status">
+                     		<div>
+                   				<img class="img-fluid" style="height: 400px;" src="${pageContext.request.contextPath}/resources/image/accom_building/${abi.getAccomBuildingImageName() }.${abi.getAccomBuildingImageExt() }" alt="">
+                   			</div>
+                   		</c:forEach>
+                   	</div>
+                     <!-- slider -->
+<!--                      <div class="row"> -->
+<!--                            <div class="light-slide-item">             -->
+<!--                                <div class="clearfix"> -->
+<!--                                    <ul id="image-gallery" class="gallery list-unstyled cS-hidden"> -->
+<!--                                        <li data-thumb="assets/img/property-1/property1.jpg">  -->
+<!--                                            <img src="assets/img/property-1/property1.jpg" /> -->
+<!--                                        </li> -->
+<!--                                        <li data-thumb="assets/img/property-1/property2.jpg">  -->
+<!--                                            <img src="assets/img/property-1/property3.jpg" /> -->
+<!--                                        </li> -->
+<!--                                        <li data-thumb="assets/img/property-1/property3.jpg">  -->
+<!--                                            <img src="assets/img/property-1/property3.jpg" /> -->
+<!--                                        </li> -->
+<!--                                        <li data-thumb="assets/img/property-1/property4.jpg">  -->
+<!--                                            <img src="assets/img/property-1/property4.jpg" /> -->
+<!--                                        </li>                                          -->
+<!--                                    </ul> -->
+<!--                                </div> -->
+<!--                            </div> -->
+<!--                        </div> -->
+                     
                      <div class="blog_details">
                         <h2> ${accomBuildingOne.accomBuildingName }</h2>
                         <ul class="blog-info-link mt-3 pt-4 mb-0">
@@ -108,7 +140,7 @@
                         <div class="quote-wrapper">
                            <div class="quotes">
                               DESCRIPTION : ${accomBuildingOne.accomBuildingDescription }
-                              <br><br>
+<!--                               <br><br> -->
 <%--                               <small>오픈: ${activityOne.activityOpenHour } / 마감: ${activityOne.activityCloseHour }</small> --%>
                            </div>
                         </div>
@@ -183,7 +215,8 @@
 <!--                      </div> -->
                   </div>
 	              	<!-- listing Details Stat-->
-	                <div class="listing-details-area pb-80">
+                    <h4 class="pt-35 pb-20">Rooms</h4>
+	                <div class="listing-details-area pb-20" style="border-bottom: 1px solid #eee;">
 	                        <div class="row">
 	                       		<c:forEach items="${accomBuildingOneList}" var="ab" varStatus="status">
 		                            <div class="col-lg-4 col-md-6">
@@ -191,23 +224,25 @@
 		                                    <div class="list-img">
 	                                            <a href="${pageContext.request.contextPath}/accomBuildingOne?accomBuildingNo=${ab.accomBuildingNo }">
 	                                            	<div style="height: 200px; overflow: hidden;">
-	                                            		<img src="${pageContext.request.contextPath}/resources/image/accom_building/jang.jpg" alt="" style=" top: 50%;">
+	                                            		<c:forEach items="${ab.accomBuildingImageList }" var="abi" varStatus="status">
+	                                            			<img src="${pageContext.request.contextPath}/resources/image/accom_building/${abi.getAccomBuildingImageName() }" alt="">
+	                                            		</c:forEach>
 	                                            	</div>
 	                                            </a>
 	                                            <!-- <span>Open</span> -->
 	                                        </div>
-		                                    <div class="list-caption">
+		                                    <div class="list-caption" style="padding: 10px 18px 18px 18px;">
 		                                        <span>
 	   	                                        	<a href="${pageContext.request.contextPath}/accomBuildingOne?accomBuildingNo=${ab.accomBuildingNo }" style="color: #fff;">
 	   	                                        		Open
 	   	                                        	</a>
 	   	                                       	</span>
 		                                        <h3>
-	                                              	<a href="${pageContext.request.contextPath}/accomBuildingOne?accomBuildingNo=${ab.accomBuildingNo }" style="color: #fff;">
+	                                              	<a href="${pageContext.request.contextPath}/accomBuildingOne?accomBuildingNo=${ab.accomBuildingNo }" style="font-size: 0.8em;">
 	                                              		${ab.getAccomBuildingName()}
 	                                              	</a>
 	                                            </h3>
-		                                        <ul class="blog-info-link mt-3 pt-4 mb-0 pb-2">
+		                                        <ul class="blog-info-link mt-3 mb-0 pb-2">
 						                           <li><a style="color: #555555;"><i class="fa fa-user"></i> 객실 수 ${accomBuildingOne.roomCnt }</a></li>
 	<%-- 					                           <li><a style="color: #555555;"><i class="fa fa-comments"></i> 최대이용시간 ${activityOne.activityMaxT }</a></li> --%>
 						                        </ul>
@@ -221,7 +256,7 @@
 												</ul>
 		                                        <div class="list-footer">
 	                                                 <ul class="pb-15">
-			                                             <li style="">
+			                                             <li>
 															<c:forEach items="${ab.hashtagList }" var="abh" varStatus="status">
 																<c:choose>
 																 	<c:when test="${status.last}">
@@ -235,7 +270,7 @@
 														</li>	                                                    
 	                                                 </ul>
 	                                                 <ul>
-	                                                     <li style="width: 60%; text-align: left;">
+	                                                     <li style="width: 60%; text-align: left; font-size: 0.9em;">
 			                                                <c:choose>
 														        <c:when test="${fn:length(ab.getAccomBuildingDescription()) gt 35}">
 														        	<c:out value="${fn:substring(ab.getAccomBuildingDescription(), 0, 34)}···"></c:out>
@@ -246,7 +281,7 @@
 														        </c:otherwise>
 															</c:choose>
 														</li>
-	                                                     <li style="width: 40%; text-align: right;">${ab.getAccomBuildingPhone() }</li>
+	                                                     <li style="width: 40%; text-align: right; font-size: 0.9em;">${ab.getAccomBuildingPhone() }</li>
 	                                                 </ul>
 	                                             </div>
 		                                    </div>
@@ -256,7 +291,8 @@
 	                        </div>
 	                </div>
 	                <!-- listing Details End -->
-                  <div class="blog-author">
+                  <h4 class="pt-45">Host Comment</h4>
+                  <div class="blog-author mt-0">
                      <div class="media align-items-center">
                         <img src="${pageContext.request.contextPath}/assets/img/blog/author.png" alt="">
                         <div class="media-body">
@@ -269,7 +305,7 @@
                      </div>
                   </div>
                   <div class="comments-area">
-                     <h4>05 Comments</h4>
+                     <h4>Recent Review</h4>
                      <div class="comment-list">
                         <div class="single-comment justify-content-between d-flex">
                            <div class="user justify-content-between d-flex">
@@ -606,13 +642,15 @@
                 <div class="listing-details-area pb-80">
                     <div class="container">
                         <div class="row">
-                       		<c:forEach items="${accomBuildingOneList}" var="ab" varStatus="status" end="3">
+                       		<c:forEach items="${accomBuildingOneList}" var="ab" varStatus="status" end="2">
 	                            <div class="col-lg-4 col-md-6">
 	                                <div class="single-listing mb-30">
 	                                    <div class="list-img">
                                             <a href="${pageContext.request.contextPath}/accomBuildingOne?accomBuildingNo=${ab.accomBuildingNo }">
                                             	<div style="height: 260px; overflow: hidden;">
-                                            		<img src="${pageContext.request.contextPath}/resources/image/accom_building/jang.jpg" alt="" style=" top: 50%;">
+                                            		<c:forEach items="${ab.accomBuildingImageList }" var="abi" varStatus="status">
+                                            			<img src="${pageContext.request.contextPath}/resources/image/accom_building/${abi.getAccomBuildingImageName() }" alt="">
+                                            		</c:forEach>
                                             	</div>
                                             </a>
                                             <!-- <span>Open</span> -->
@@ -732,5 +770,15 @@
         <script src="${pageContext.request.contextPath}/assets/js/plugins.js"></script>
         <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
       
+      	<!-- 슬라이더 -->
+      	<script type="text/javascript">
+      	$('.fade').slick({
+      	  dots: true,
+      	  infinite: true,
+      	  speed: 500,
+      	  fade: true,
+      	  cssEase: 'linear'
+      	});
+      	</script>
     </body>
 </html>

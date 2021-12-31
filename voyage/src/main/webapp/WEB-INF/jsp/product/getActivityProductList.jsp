@@ -92,7 +92,7 @@
                         </div>
                         
                         <!-- selectActivityProductBySearch -->
-                        <form action="${pageContext.request.contextPath}/product/getActivityProductList" method="post">
+                        <form action="${pageContext.request.contextPath}/getActivityProductList" method="GET">
 	                        <div class="category-listing mb-50">
 	                            <div class="single-listing">
 	                                <!-- input -->
@@ -188,9 +188,11 @@
 	                                    <div class="col-lg-6 " class="accomBox">
 	                                        <div class="single-listing mb-30">
 	                                            <div class="list-img">
-	                                                <a href="${pageContext.request.contextPath}/activityOne?activityNo=${ac.activityNo }">
-	                                                	<img src="${pageContext.request.contextPath}/resources/image/accom_building/jang.jpg" alt="">
-	                                                </a>
+	                                            	<a href="${pageContext.request.contextPath}/activityOne?activityNo=${ac.activityNo }">
+	                                            		<c:forEach items="${ac.activityImageList }" var="aci" varStatus="status">
+	                                            			<img src="${pageContext.request.contextPath}/resources/image/activity/${aci.getActivityImageName() }" alt="">
+	                                            		</c:forEach>
+	                                               	</a>
 	                                                <!-- <span>Open</span> -->
 	                                            </div>
 	                                            <div class="list-caption">

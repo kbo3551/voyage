@@ -165,7 +165,7 @@
 			(SELECT * FROM accom_building) ab,
 			(SELECT accom_building_no, GROUP_CONCAT(accom_address_zip) accom_address_zip FROM accom_address GROUP BY accom_building_no) aba,
 			(SELECT accom_building_no, GROUP_CONCAT(accom_building_facility_name SEPARATOR ', ') accom_building_facility_name FROM accom_building_facility GROUP BY accom_building_no) abf,
-			(SELECT accom_building_no, GROUP_CONCAT(CONCAT_WS('.',accom_building_image_name,accom_building_image_ext)) accom_building_image FROM accom_building_image GROUP BY accom_building_no) abi,
+			(SELECT accom_building_no, CONCAT_WS('.',accom_building_image_name,accom_building_image_ext) accom_building_image FROM accom_building_image GROUP BY accom_building_no) abi,
 			(SELECT accom_building_no, GROUP_CONCAT(accom_building_spot_name SEPARATOR ', ') accom_building_spot_name FROM accom_building_spot GROUP BY accom_building_no) abs,
 			(SELECT iden_no, GROUP_CONCAT('#',hashtag SEPARATOR ' ') hashtag FROM hashtag GROUP BY iden_no) h,
 			(SELECT accom_building_no, COUNT(*) FROM accom_room GROUP BY accom_building_no) abr
@@ -220,7 +220,7 @@
 			(SELECT * FROM accom_building) ab,
 			(SELECT accom_building_no, GROUP_CONCAT(accom_address_zip) accom_address_zip FROM accom_address GROUP BY accom_building_no) aba,
 			(SELECT accom_building_no, GROUP_CONCAT(accom_building_facility_name SEPARATOR ', ') accom_building_facility_name FROM accom_building_facility GROUP BY accom_building_no) abf,
-			(SELECT accom_building_no, GROUP_CONCAT(CONCAT_WS('.',accom_building_image_name,accom_building_image_ext)) accom_building_image FROM accom_building_image GROUP BY accom_building_no) abi,
+			(SELECT accom_building_no, CONCAT_WS('.',accom_building_image_name,accom_building_image_ext) accom_building_image FROM accom_building_image GROUP BY accom_building_no) abi,
 			(SELECT accom_building_no, GROUP_CONCAT(accom_building_spot_name SEPARATOR ', ') accom_building_spot_name FROM accom_building_spot GROUP BY accom_building_no) abs,
 			(SELECT iden_no, GROUP_CONCAT('#',hashtag SEPARATOR ' ') hashtag FROM hashtag GROUP BY iden_no) h,
 			(SELECT accom_building_no, COUNT(*) FROM accom_room GROUP BY accom_building_no) abr
@@ -311,7 +311,7 @@
 		FROM 
 			(SELECT * FROM activity) ac,
 			(SELECT activity_no, GROUP_CONCAT(activity_address_zip) activity_address_zip FROM activity_address GROUP BY activity_no) aca,
-			(SELECT activity_no, GROUP_CONCAT(CONCAT_WS('.',activity_image_name,activity_image_ext)) activity_image FROM activity_image GROUP BY activity_no) aci,
+			(SELECT activity_no, CONCAT_WS('.',activity_image_name,activity_image_ext) activity_image FROM activity_image GROUP BY activity_no) aci,
 			(SELECT activity_no, GROUP_CONCAT(activity_spot_name SEPARATOR ', ') activity_spot_name FROM activity_spot GROUP BY activity_no) acs,
 			(SELECT iden_no, GROUP_CONCAT('#',hashtag SEPARATOR ' ') hashtag FROM hashtag GROUP BY iden_no) h
 		WHERE 
@@ -347,7 +347,7 @@
 		FROM 
 			(SELECT * FROM activity) ac,
 			(SELECT activity_no, GROUP_CONCAT(activity_address_zip) activity_address_zip FROM activity_address GROUP BY activity_no) aca,
-			(SELECT activity_no, GROUP_CONCAT(CONCAT_WS('.',activity_image_name,activity_image_ext)) activity_image FROM activity_image GROUP BY activity_no) aci,
+			(SELECT activity_no, CONCAT_WS('.',activity_image_name,activity_image_ext) activity_image FROM activity_image GROUP BY activity_no) aci,
 			(SELECT activity_no, GROUP_CONCAT(activity_spot_name SEPARATOR ', ') activity_spot_name FROM activity_spot GROUP BY activity_no) acs,
 			(SELECT iden_no, GROUP_CONCAT('#',hashtag SEPARATOR ' ') hashtag FROM hashtag GROUP BY iden_no) h
 		WHERE 
