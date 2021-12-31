@@ -88,8 +88,6 @@
 										&emsp;
 								    </form>
 									</td>
-                                    <td><a href="${pageContext.request.contextPath}/">상세보기</a></td>
-                                 </tr>
                               </c:forEach>
                            </tbody>
                         </table>
