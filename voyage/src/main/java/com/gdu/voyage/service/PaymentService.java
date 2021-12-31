@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gdu.voyage.mapper.AccomPaymentMapper;
-import com.gdu.voyage.mapper.ActivityPaymentMapper;
+import com.gdu.voyage.mapper.PaymentMapper;
 import com.gdu.voyage.vo.AccomPayment;
 import com.gdu.voyage.vo.ActivityPayment;
 
@@ -19,27 +18,26 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Transactional
 public class PaymentService {
-	@Autowired private AccomPaymentMapper accomPaymentMapper;
-	@Autowired private ActivityPaymentMapper activityPaymentMapper;
+	@Autowired private PaymentMapper paymentMapper;
 	
 	// 체험 결제 취소
 	public int cancelActivityPayment(int activityPaymentNo) {
-		return activityPaymentMapper.cancelActivityPayment(activityPaymentNo);
+		return paymentMapper.cancelActivityPayment(activityPaymentNo);
 	}
 	
 	// 숙소 결제 취소
 	public int cancelAccomPayment(int accomPaymentNo) {
-		return accomPaymentMapper.cancelAccomPayment(accomPaymentNo);
+		return paymentMapper.cancelAccomPayment(accomPaymentNo);
 	}
 	
 	// 체험 주문 상세
 	public ActivityPayment selActivityPaymentOne(int activityPaymentNo) {
-		return activityPaymentMapper.selectActivityPaymentOne(activityPaymentNo);
+		return paymentMapper.selectActivityPaymentOne(activityPaymentNo);
 	}
 	
 	// 숙소 주문 상세
 	public AccomPayment selectAccomPaymentOne(int accomPaymentNo) {
-		return accomPaymentMapper.selectAccomPaymentOne(accomPaymentNo);
+		return paymentMapper.selectAccomPaymentOne(accomPaymentNo);
 	}
 	
 	// 체험 주문 내역
@@ -53,12 +51,12 @@ public class PaymentService {
 		
 		log.trace("☆service☆"+paraMap);
 		
-		List<ActivityPayment> activityPaymentList = activityPaymentMapper.selectActivityPayment(paraMap);
+		List<ActivityPayment> activityPaymentList = paymentMapper.selectActivityPayment(paraMap);
 		
 		Map<String, Object> returnMap = new HashMap<>();
 		
 		int lastPage = 0;
-		int totalCount = activityPaymentMapper.selectCountPage(memberId);
+		int totalCount = paymentMapper.selectActivityCountPage(memberId);
 		
 		lastPage = totalCount / rowPerPage;
 		
@@ -87,12 +85,12 @@ public class PaymentService {
 		
 		log.trace("☆service☆"+paraMap);
 		
-		List<AccomPayment> accomPaymentList = accomPaymentMapper.selectAccomPayment(paraMap);
+		List<AccomPayment> accomPaymentList = paymentMapper.selectAccomPayment(paraMap);
 		
 		Map<String, Object> returnMap = new HashMap<>();
 		
 		int lastPage = 0;
-		int totalCount = accomPaymentMapper.selectCountPage(memberId);
+		int totalCount = paymentMapper.selectAccomCountPage(memberId);
 		
 		lastPage = totalCount / rowPerPage;
 		
