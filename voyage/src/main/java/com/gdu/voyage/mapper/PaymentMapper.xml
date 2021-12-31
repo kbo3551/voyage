@@ -207,12 +207,14 @@
 			ai.activity_image_name =
 			(SELECT activity_image_name
 			FROM activity_image
+			WHERE activity_no = ap.activity_no
 			ORDER BY activity_no ASC
 			LIMIT 0,1)
 			AND
 			ai.activity_image_ext =
 			(SELECT activity_image_ext
 			FROM activity_image
+			WHERE activity_no = ap.activity_no
 			ORDER BY activity_no ASC
 			LIMIT 0,1)
 		ORDER BY
