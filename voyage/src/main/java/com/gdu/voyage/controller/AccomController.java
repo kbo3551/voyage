@@ -71,8 +71,12 @@ public class AccomController {
 	
 	// 숙소_객실 등록
 	@GetMapping("/host/addAccomRoom")
-	public String addAccomRoom() {
+	public String addAccomRoom(Model model, @RequestParam int accomBuildingNo) {
 		log.debug("AccomController 실행");
+		log.debug("★[지혜]controller★ accomBuildingNo : " + accomBuildingNo);
+		
+		model.addAttribute("accomBuildingNo", accomBuildingNo);
+		
 		return "/host/addAccomRoom";
 	}
 

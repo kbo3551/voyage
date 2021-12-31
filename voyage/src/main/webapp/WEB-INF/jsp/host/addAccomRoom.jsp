@@ -106,8 +106,6 @@
 					<div class="wizard-card ct-wizard-orange" id="wizardProperty">
 						<form action="${contextPath}/host/addAccomRoom" method="post" enctype="multipart/form-data" id="accomRoomForm">
 							
-							<input type="hidden" name="accomBuildingNo" value="${accomBuildingNo}">
-							
 							<div class="wizard-header">
 								<h3>
 									<b>Accommodation</b> _room<br>
@@ -163,6 +161,9 @@
 												<h4>Description <small>(required)</small></h4>
 												<textarea name="accomRoom.accomRoomDescription" id="accomRoomDescription" class="form-control" placeholder="통유리창이 매력적인 ..." rows="8"></textarea>
 											</div>
+											
+											<input type="hidden" name="accomRoom.accomBuildingNo" value="${accomBuildingNo}">
+				
 										</div>
 									</div>
 								</div>
