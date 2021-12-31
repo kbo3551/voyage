@@ -31,7 +31,7 @@ public class HostService {
 	public int selectHostNo(String memberId) {
 		// 받아온 memberId 디버깅 
 		log.debug("☆[지혜]service☆ memberId : " + memberId);
-		
+		 
 		// 받아온 memberId로 hostNo 조회
 		int hostNo = hostMapper.selectHostNo(memberId);
 		return hostNo;
