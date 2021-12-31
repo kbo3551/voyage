@@ -1,5 +1,7 @@
 package com.gdu.voyage.vo;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -16,4 +18,10 @@ public class AccomRoom {
 	private String createDate;
 	private String updateDate;
 	
+	// 1:N - AccomRoomImage
+	private List<AccomRoomImage> accomRoomImageList;
+	// 1:N - AccomRoomItem
+	private List<AccomRoomItem> accomRoomItemList;
+	// 1:N - Hashtag
+	private List<Hashtag> hashtagList;
 }

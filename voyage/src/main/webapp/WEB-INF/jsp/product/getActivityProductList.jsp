@@ -206,12 +206,12 @@
 	                                                		${ac.getActivityName()}
 	                                                	</a>
                                                 	</h3>
-                                                	<ul class="blog-info-link mt-3 pt-4 mb-0">
+                                                	<ul class="blog-info-link mb-0 pb-1">
 							                           <li><a style="color: #555555;"><i class="fa fa-user"></i> 최대인원 ${ac.activityMaxP }</a></li>
 							                           <li><a style="color: #555555;"><i class="fa fa-comments"></i> 최대이용시간 ${ac.activityMaxT }</a></li>
 							                        </ul>
-							                        <ul class="blog-info-link mt-3 mb-4">
-							                           <li style="font-size: 1.3em;"><a style="color: #555555;"><i class="fa fa-user"></i>₩ ${ac.activityPrice }</a></li>
+							                        <ul class="blog-info-link mb-4">
+							                           <li style="font-size: 1.3em;"><a style="color: #555555;">₩ ${ac.activityPrice }</a></li>
 							                        </ul>
 														<p>
 <%-- 															<c:forEach items="${ab.accomBuildingFacilityList }" var="abf" varStatus="status"> --%>
@@ -229,14 +229,7 @@
 	                                                    <ul class="pb-15">
 	                                                    	<li>
 																<c:forEach items="${ac.hashtagList }" var="ach" varStatus="status">
-																	<c:choose>
-																	 	<c:when test="${status.last}">
-																            ${ach.getHashtag()}
-																        </c:when>
-																        <c:otherwise>
-																            ${ach.getHashtag()},
-																        </c:otherwise>
-																    </c:choose>
+														            ${ach.getHashtag()}
 																</c:forEach>
 															</li>	                                                    
 	                                                    </ul>

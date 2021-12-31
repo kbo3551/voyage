@@ -11,11 +11,11 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.ProductService;
 import com.gdu.voyage.vo.AccomBuilding;
+import com.gdu.voyage.vo.AccomRoom;
 import com.gdu.voyage.vo.Activity;
 
 import lombok.extern.slf4j.Slf4j;
@@ -99,6 +99,11 @@ public class ProductController {
 		model.addAttribute("accomBuildingOne", accomBuildingOne);
 		log.debug("[debug] ProductController.getAccomBuildingOne accomBuildingOne : " + accomBuildingOne);
 		
+		// [사용자] 숙소-건물-객실 목록 조회
+		List<AccomRoom> accomRoom = productService.getAccomRoomList(accomBuildingNo, currentPage, ROW_PER_PAGE);
+		model.addAttribute("accomRoom", accomRoom);
+		log.debug("[debug] ProductController.getAccomBuildingOne accomRoom : " + accomRoom);
+
 		// [사용자] 숙소-건물 상세-목록 조회
 		List<AccomBuilding> accomBuildingOneList = productService.getAccomBuildingList(currentPage, ROW_PER_PAGE);
 		model.addAttribute("accomBuildingOneList", accomBuildingOneList);
@@ -106,7 +111,7 @@ public class ProductController {
 		
 		return "/product/accomBuildingOne";
 	}
-
+	
 	
 	// [사용자] 체험
 	@GetMapping("/getActivityProductList")

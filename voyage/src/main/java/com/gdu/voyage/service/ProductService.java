@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gdu.voyage.mapper.ProductMapper;
 import com.gdu.voyage.vo.AccomBuilding;
+import com.gdu.voyage.vo.AccomRoom;
 import com.gdu.voyage.vo.Activity;
-import com.gdu.voyage.vo.ActivitySpot;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,31 +46,14 @@ public class ProductService {
 		
 		return accomBuildingList;
 	}
-	// [사용자] 숙소-건물 해시태그 조회
-//	public List<String> getAccomBuildingHashtagList() {
-//		
-//		List<AccomBuilding> accomBuildingList = productMapper.selectAccomBuildingList();
-//		// accomBuildingList 가공 - 해시태그 링크 연결을 위해 accomBuildingList 에서 Hahstag 분리
-//		List<String> hashtagList = new ArrayList<>();
-//		for(int i=0; i<accomBuildingList.size(); i++) {
-//			hashtagList.add(accomBuildingList.get(i).getHashtagList().get(0).getHashtag());
-//		}
-//		log.debug("[debug] ProductService.getAccomBuildingHashtagList hashtagList : " + hashtagList);
-//		
-//		Map<String, Object> hashtag = new HashMap<>();
-//		for(int i=0; i<hashtagList.size(); i++) {
-//			hashtag.put("hashtag[i]", Arrays.asList(hashtagList.get(i).split(" ")));
-//		}
-//		log.debug("[debug] ProductService.getAccomBuildingHashtagList hashtag : " + hashtag);
-//		
-//		return hashtagList;
-//	}
+	
 	// [사용자] 숙소-건물 시설 인기 조회
 	public List<Map<String, Object>> getAccomBuildingFacilityByBest() {
 		List<Map<String, Object>> facilityByBest = productMapper.selectAccomBuildingFacilityByBest();
 		log.debug("[debug] ProductService.getAccomBuildingFacilityByBest facilityByBest : " + facilityByBest);
 		return facilityByBest;
 	}
+	
 	// [사용자] 숙소-건물 지역 인기 조회
 	public List<Map<String, Object>> getAccomAddressByBest() {
 		List<Map<String, Object>> addressZipByBest = productMapper.selectAccomAddressByBest();
@@ -91,6 +74,32 @@ public class ProductService {
 	// [사용자] 숙소-건물 상세 조회
 	public AccomBuilding getAccombuildingOne (int accomBuildingNo) {
 		return productMapper.selectAccomBuildingOne(accomBuildingNo);
+	}
+	
+	// [사용자] 숙소-건물-객실 목록 조회
+	public List<AccomRoom> getAccomRoomList(int accomBuildingNo, int currentPage, int ROW_PER_PAGE) {
+		log.debug("[debug] ProductService.getAccomRoomList currentPage : " );
+		log.debug("[debug] ProductService.getAccomRoomList ROW_PER_PAGE : " );
+		
+		int beginRow = (currentPage-1) * ROW_PER_PAGE;
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("beginRow", beginRow);
+		paramMap.put("ROW_PER_PAGE", ROW_PER_PAGE);
+		
+		List<AccomRoom> accomRoomList = productMapper.selectAccomRoomList(accomBuildingNo);
+		// accomBuildingList 가공 - 해시태그 링크 연결을 위해 accomBuildingList 에서 Hahstag 분리
+//			List<String> hashtagList = new ArrayList<>();
+//			for(int i=0; i<accomBuildingList.size(); i++) {
+//				hashtagList.add(accomBuildingList.get(i).getHashtagList().get(0).getHashtag());
+//			}
+		
+//			Map<String, Object> returnMap = new HashMap<>();
+//			returnMap.put("accomBuildingList", accomBuildingList);
+//			returnMap.put("hashtagList", hashtagList);
+		log.debug("[debug] ProductService.getAccomRoomList accomRoomList : " + accomRoomList);
+//			log.debug("[debug] ProductService.getAccomBuildingList hashtagList : " + hashtagList);
+		
+		return accomRoomList;
 	}
 	
 	

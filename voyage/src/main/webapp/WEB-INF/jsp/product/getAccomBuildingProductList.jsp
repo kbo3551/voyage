@@ -218,14 +218,7 @@
 	                                                    <ul class="pb-15">
 	                                                    	<li>
 																<c:forEach items="${ab.hashtagList }" var="abh" varStatus="status">
-																	<c:choose>
-																	 	<c:when test="${status.last}">
-																            ${abh.getHashtag()}
-																        </c:when>
-																        <c:otherwise>
-																            ${abh.getHashtag()},
-																        </c:otherwise>
-																    </c:choose>
+														            ${abh.getHashtag()}
 																</c:forEach>
 															</li>	                                                    
 	                                                    </ul>

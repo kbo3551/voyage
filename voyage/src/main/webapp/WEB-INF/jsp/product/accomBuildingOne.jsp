@@ -218,70 +218,71 @@
                     <h4 class="pt-35 pb-20">Rooms</h4>
 	                <div class="listing-details-area pb-20" style="border-bottom: 1px solid #eee;">
 	                        <div class="row">
-	                       		<c:forEach items="${accomBuildingOneList}" var="ab" varStatus="status">
+	                       		<c:forEach items="${accomRoom}" var="ar" varStatus="status">
 		                            <div class="col-lg-4 col-md-6">
 		                                <div class="single-listing mb-30">
 		                                    <div class="list-img">
-	                                            <a href="${pageContext.request.contextPath}/accomBuildingOne?accomBuildingNo=${ab.accomBuildingNo }">
+	                                            <a href="${pageContext.request.contextPath}/accomRoomOne?accomRoomNo=${ar.accomRoomNo }">
 	                                            	<div style="height: 200px; overflow: hidden;">
-	                                            		<c:forEach items="${ab.accomBuildingImageList }" var="abi" varStatus="status">
-	                                            			<img src="${pageContext.request.contextPath}/resources/image/accom_building/${abi.getAccomBuildingImageName() }" alt="">
+	                                            		<c:forEach items="${ar.accomRoomImageList }" var="ari" varStatus="status">
+	                                            			<img src="${pageContext.request.contextPath}/resources/image/accom_room/${ari.getAccomRoomImageName() }" alt="">
 	                                            		</c:forEach>
 	                                            	</div>
 	                                            </a>
 	                                            <!-- <span>Open</span> -->
 	                                        </div>
-		                                    <div class="list-caption" style="padding: 10px 18px 18px 18px;">
-		                                        <span>
-	   	                                        	<a href="${pageContext.request.contextPath}/accomBuildingOne?accomBuildingNo=${ab.accomBuildingNo }" style="color: #fff;">
+		                                    <div class="list-caption" style="padding: 10px 15px 18px 15px;">
+		                                        <span style="right: 13px;">
+	   	                                        	<a href="${pageContext.request.contextPath}/accomRoomOne?accomRoomNo=${ar.accomRoomNo }" style="color: #fff;">
 	   	                                        		Open
 	   	                                        	</a>
 	   	                                       	</span>
 		                                        <h3>
-	                                              	<a href="${pageContext.request.contextPath}/accomBuildingOne?accomBuildingNo=${ab.accomBuildingNo }" style="font-size: 0.8em;">
-	                                              		${ab.getAccomBuildingName()}
+	                                              	<a href="${pageContext.request.contextPath}/accomRoomOne?accomRoomNo=${ar.accomRoomNo }" style="font-size: 0.8em;">
+	                                              		${ar.getAccomRoomName()} room
 	                                              	</a>
 	                                            </h3>
 		                                        <ul class="blog-info-link mt-3 mb-0 pb-2">
-						                           <li><a style="color: #555555;"><i class="fa fa-user"></i> 객실 수 ${accomBuildingOne.roomCnt }</a></li>
-	<%-- 					                           <li><a style="color: #555555;"><i class="fa fa-comments"></i> 최대이용시간 ${activityOne.activityMaxT }</a></li> --%>
+						                           <li><a style="color: #555555; font-size: 0.9em;"><i class="fa fa-user"></i> 기준인원 ${ar.accomRoomStan }</a></li>
+						                           <li><a style="color: #555555; font-size: 0.9em;"><i class="fa fa-user"></i> 최대인원 ${ar.accomRoomMax }</a></li>
 						                        </ul>
-	<!-- 					                        <ul class="blog-info-link mt-3 mb-4"> -->
-	<%-- 					                           <li style="font-size: 1.3em;"><a style="color: #555555;"><i class="fa fa-user"></i>₩ ${activityOne.activityPrice }</a></li> --%>
-	<!-- 					                        </ul> -->
-												<ul>
-													<c:forEach items="${ab.accomBuildingFacilityList }" var="abf" varStatus="status">
-											            <li style="color: #555555;">${abf.getAccomBuildingFacilityName()}</li>
+						                        <ul class="blog-info-link pt-2 mb-0">
+						                           <li style="font-size: 1.3em;"><a style="color: #555555;">₩ ${ar.accomRoomPrice }</a></li>
+						                        </ul>
+												<ul class="pt-1">
+													<c:forEach items="${ar.accomRoomItemList }" var="art" varStatus="status">
+											            <li style="color: #555555;">${art.getAccomRoomItemName()}</li>
 													</c:forEach>
 												</ul>
-		                                        <div class="list-footer">
-	                                                 <ul class="pb-15">
+		                                        <div class="list-footer mt-0 pt-0">
+	                                                 <ul class="pt-3">
 			                                             <li>
-															<c:forEach items="${ab.hashtagList }" var="abh" varStatus="status">
-																<c:choose>
-																 	<c:when test="${status.last}">
-															            ${abh.getHashtag()}
-															        </c:when>
-															        <c:otherwise>
-															            ${abh.getHashtag()},
-															        </c:otherwise>
-															    </c:choose>
+															<c:forEach items="${ar.hashtagList }" var="arh" varStatus="status">
+															        <c:choose>
+																        <c:when test="${fn:length(arh.getHashtag()) gt 35}">
+																        	<c:out value="${fn:substring(arh.getHashtag(), 0, 34)}···"></c:out>
+																        </c:when>
+																        <c:otherwise>
+																	        <c:out value="${arh.getHashtag()}">
+																	        </c:out>
+																        </c:otherwise>
+																	</c:choose>
 															</c:forEach>
 														</li>	                                                    
 	                                                 </ul>
 	                                                 <ul>
 	                                                     <li style="width: 60%; text-align: left; font-size: 0.9em;">
 			                                                <c:choose>
-														        <c:when test="${fn:length(ab.getAccomBuildingDescription()) gt 35}">
-														        	<c:out value="${fn:substring(ab.getAccomBuildingDescription(), 0, 34)}···"></c:out>
+														        <c:when test="${fn:length(ar.getAccomRoomDescription()) gt 35}">
+														        	<c:out value="${fn:substring(ar.getAccomRoomDescription(), 0, 34)}···"></c:out>
 														        </c:when>
 														        <c:otherwise>
-															        <c:out value="${ab.getAccomBuildingDescription()}">
+															        <c:out value="${ar.getAccomRoomDescription()}">
 															        </c:out>
 														        </c:otherwise>
 															</c:choose>
 														</li>
-	                                                     <li style="width: 40%; text-align: right; font-size: 0.9em;">${ab.getAccomBuildingPhone() }</li>
+<%-- 	                                                     <li style="width: 40%; text-align: right; font-size: 0.9em;">${ab.getAccomBuildingPhone() }</li> --%>
 	                                                 </ul>
 	                                             </div>
 		                                    </div>

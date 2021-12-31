@@ -82,6 +82,35 @@
 		</collection>
 	</resultMap>
 	
+	<!-- 숙소-건물-객실 전체 목록 조회를 위한 resultMap -->
+	<resultMap type="com.gdu.voyage.vo.AccomRoom" id="resultAccomRoom">
+		<!-- room -->
+		<id column="accom_room_no" property="accomRoomNo"/>
+		<result column="accom_building_no" property="accomBuildingNo"/>
+		<result column="host_no" property="hostNo"/>
+		<result column="accom_room_name" property="accomRoomName"/>
+		<result column="accom_room_price" property="accomRoomPrice"/>
+		<result column="accom_room_description" property="accomRoomDescription"/>
+		<result column="accom_room_stan" property="accomRoomStan"/>
+		<result column="accom_room_max" property="accomRoomMax"/>
+		<result column="accom_room_state" property="accomRoomState"/>
+		<result column="create_date" property="createDate"/>
+		<result column="update_date" property="updateDate"/>
+		<!-- image -->
+		<collection property="accomRoomImageList" ofType="com.gdu.voyage.vo.AccomRoomImage">
+			<result column="accom_room_image" property="accomRoomImageName"/>
+		</collection>
+		<!-- image -->
+		<collection property="accomRoomItemList" ofType="com.gdu.voyage.vo.AccomRoomItem">
+			<result column="accom_room_item" property="accomRoomItemName"/>
+		</collection>
+		<!-- hashtag -->
+		<collection property="hashtagList" ofType="com.gdu.voyage.vo.Hashtag">
+			<id column="hashtag" property="hashtag"/>
+		</collection>
+	</resultMap>
+	
+	
 	<!-- 체험 전체 목록 조회를 위한 resultMap -->
 	<resultMap type="com.gdu.voyage.vo.Activity" id="resultActivityList">
 		<!-- building -->
@@ -303,6 +332,27 @@
 			AND a.accom_building_no = h.iden_no
 			AND a.accom_building_no = abr.accom_building_no
 	</select>
+	
+	<!-- 숙소-건물-객실 목록 조회 -->
+	<select id="selectAccomRoomList" parameterType="int" resultMap="resultAccomRoom">
+		SELECT 
+			ar.*, ari.*, art.*, h.*
+		FROM 
+			(SELECT * FROM accom_room) ar,
+			(SELECT accom_room_no, CONCAT_WS('.',accom_room_image_name,accom_room_image_ext) accom_room_image FROM accom_room_image GROUP BY accom_room_no) ari,
+			(SELECT accom_room_no, GROUP_CONCAT(accom_room_item_name) accom_room_item FROM accom_room_item GROUP BY accom_room_no) art,
+			(SELECT iden_no, GROUP_CONCAT('#',hashtag SEPARATOR ' ') hashtag FROM hashtag GROUP BY iden_no) h
+		WHERE 
+			ar.accom_building_no = #{accomBuildingNo} AND
+			ar.accom_room_state = '공개' AND
+			ar.accom_room_no = ari.accom_room_no AND
+			ar.accom_room_no = art.accom_room_no AND
+			ar.accom_room_no = h.iden_no
+		ORDER BY 
+			ar.update_date DESC;
+	</select>
+	
+	
 	
 	<!-- 체험 목록 조회 -->
 	<select id="selectActivityList" resultMap="resultActivityList">
