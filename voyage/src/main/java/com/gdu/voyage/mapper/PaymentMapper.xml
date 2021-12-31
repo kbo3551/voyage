@@ -1,6 +1,178 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.PaymentMapper">
+
+	<!-- 최근 한달간 체험 일별 수익 -->
+	<select id="selectActivityProfitByMonthToDate" resultType="com.gdu.voyage.vo.ActivityPayment">
+		SELECT
+			DATE(update_date) updateDate,
+			activity_amount activityAmount
+		FROM
+			activity_payment
+		WHERE
+			host_no = '3'
+			AND
+			update_date BETWEEN
+			DATE_ADD(NOW(),INTERVAL -1 MONTH)
+			AND NOW()
+		GROUP BY
+			activityAmount
+		ORDER BY
+			activityAmount ASC
+	</select>
+
+	<!-- 최근 한달간 숙소 일별 수익 -->
+	<select id="selectAccomProfitByMonthToDate" resultType="com.gdu.voyage.vo.AccomPayment">
+		SELECT
+			DATE(update_date) updateDate,
+			accom_amount accomAmount
+		FROM
+			accom_payment
+		WHERE
+			host_no = '3'
+			AND
+			update_date BETWEEN
+			DATE_ADD(NOW(),INTERVAL -1 MONTH)
+			AND NOW()
+		GROUP BY
+			updateDate
+		ORDER BY
+			updateDate ASC
+	</select>
+
+	<!-- 해당 사업자의 분기별 가장 많은 수익을 벌어들인 체험 -->
+	<select id="selectActivityProfitByQuarterly" resultMap="ActivityPayment">
+		SELECT
+			a.activity_name,
+			SUM(ap.activity_amount) activity_amount
+		FROM
+			activity_payment ap
+		INNER JOIN
+			activity a
+			ON a.activity_no = ap.activity_no
+		WHERE
+			ap.host_no = #{hostNo}
+			AND
+			<![CDATA[
+			DATEDIFF(NOW(),ap.update_date) <= 90
+			]]>
+		GROUP BY
+			a.activity_name
+		ORDER BY
+			activity_amount DESC
+		LIMIT
+			0,1
+	</select>
+
+	<!-- 해당 사업자의 분기별 가장 많은 수익을 벌어들인 숙소 -->
+	<select id="selectAccomProfitByQuarterly" resultMap="AccomPayment">
+		SELECT
+			ab.accom_building_name,
+			SUM(ap.accom_amount) accom_amount
+		FROM
+			accom_payment ap
+		INNER JOIN
+			accom_room ar
+			ON ar.accom_room_no = ap.accom_room_no
+		INNER JOIN
+			accom_building ab
+			ON ab.accom_building_no = ar.accom_building_no
+		WHERE
+			ap.host_no = #{hostNo}
+			AND
+			<![CDATA[
+			DATEDIFF(NOW(),ap.update_date) <= 90
+			]]>
+		GROUP BY
+			ab.accom_building_name
+		ORDER BY
+			accom_amount DESC
+		LIMIT
+			0,1
+	</select>
+
+	<!-- 해당 사업자의 체험 총 수익, 월별 수익 -->
+	<select id="selectActivityProfitByHost" resultType="int">
+		SELECT
+			SUM(activity_amount)
+		FROM
+			activity_payment
+		WHERE
+			host_no = #{hostNo}
+			AND
+			NOT activity_payment_state = '결제취소'
+			AND
+			NOT activity_payment_state = '결제대기'
+			<if test="month == 1">
+				<![CDATA[
+				AND
+				DATEDIFF(NOW(),update_date) <= 30
+				]]>
+			</if>
+	</select>
+
+	<!-- 해당 사업자의 숙소 총 수익, 월별 수익 -->
+	<select id="selectAccomProfitByHost" resultType="int">
+		SELECT
+			SUM(accom_amount)
+		FROM
+			accom_payment
+		WHERE
+			host_no = #{hostNo}
+			AND
+			NOT accom_payment_state = '결제취소'
+			AND
+			NOT accom_payment_state = '결제대기'
+			<if test="month == 1">
+				<![CDATA[
+				AND
+				DATEDIFF(NOW(),update_date) <= 30
+				]]>
+			</if>
+	</select>
+
+	<!-- 해당 사업자의 총 수익, 월별 수익 -->
+	<select id="selectAllProfitByHost" resultType="int">
+		SELECT
+			SUM(
+			(SELECT
+				SUM(accom_amount)
+			FROM
+				accom_payment
+			WHERE
+				host_no = #{hostNo}
+				AND
+				NOT accom_payment_state = '결제취소'
+				AND
+				NOT accom_payment_state = '결제대기'
+				<if test="month == 1">
+					<![CDATA[
+					AND
+					DATEDIFF(NOW(),update_date) <= 30
+					]]>
+				</if>
+				)
+			+
+			(SELECT
+				SUM(activity_amount)
+			FROM
+				activity_payment
+			WHERE
+				host_no = #{hostNo}
+				AND
+				NOT activity_payment_state = '결제취소'
+				AND
+				NOT activity_payment_state = '결제대기'
+				<if test="month == 1">
+					<![CDATA[
+					AND
+					DATEDIFF(NOW(),update_date) <= 30
+					]]>
+				</if>
+				)
+			)
+	</select>
+
 	<!-- 숙소 -->
 	<resultMap type="com.gdu.voyage.vo.AccomPayment" id="AccomPayment">
 		<result column="accom_payment_no" property="accomPaymentNo" />
