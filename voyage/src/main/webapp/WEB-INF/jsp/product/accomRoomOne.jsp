@@ -379,8 +379,30 @@
 	                     	</c:forEach>	
                         </ul>
                      </aside>
-                     <aside class="single_sidebar_widget popular_post_widget">
-                        <h3 class="widget_title">Host 추천 장소</h3>
+<!--                      <aside class="single_sidebar_widget tag_cloud_widget"> -->
+<!--                         <h4 class="widget_title">Items</h4> -->
+<!--                         <ul class="list"> -->
+<%--                         	<c:forEach items="${accomRoomOne.getAccomRoomItemList()}" var="art"> --%>
+<!-- 		                       <li> -->
+<%-- 	                              <a href="${pageContext.request.contextPath}/#">${art.getAccomRoomItemName() }</a> --%>
+<!-- 	                           </li> -->
+<%-- 	                     	</c:forEach>	 --%>
+<!--                         </ul> -->
+<!--                      </aside> -->
+                     <aside class="single_sidebar_widget post_category_widget">
+                        <h4 class="widget_title">Items<span style="font-size: 0.6em; padding-left: 5%;">추가 가능한 물품 목록</span></h4>
+                        <ul class="list cat-list">
+          					<c:forEach items="${accomRoomOne.getAccomRoomItemList()}" var="art" varStatus="status">
+	          					<li style="color: #555555;">
+	                              <a href="#" class="d-flex">
+	                                 ${art.getAccomRoomItemName() } <span style="font-size: 0.9em; padding-left: 3%;">₩${art.getAccomRoomItemPrice() }</span>
+	                              </a>
+	                           </li>
+          					</c:forEach>
+                        </ul>
+                      </aside>
+<!--                      <aside class="single_sidebar_widget popular_post_widget"> -->
+<!--                         <h3 class="widget_title">Host 추천 장소</h3> -->
 <%--                         <c:forEach items="${accomRoomOne.getActivitySpotList()}" var="acs"> --%>
 <!-- 	                        <div class="media post_item"> -->
 <%-- 	                           <img src="${pageContext.request.contextPath}/assets/img/post/post_1.png" alt="post"> --%>
@@ -420,7 +442,7 @@
 <!--                               <p>01 Hours ago</p> -->
 <!--                            </div> -->
 <!--                         </div> -->
-                     </aside>
+<!--                      </aside> -->
                      
                      <aside class="single_sidebar_widget instagram_feeds">
                         <h4 class="widget_title">Instagram Feeds</h4>

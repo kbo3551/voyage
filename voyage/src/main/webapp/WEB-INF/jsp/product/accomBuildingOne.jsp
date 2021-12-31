@@ -223,7 +223,7 @@
 		                                <div class="single-listing mb-30">
 		                                    <div class="list-img">
 	                                            <a href="${pageContext.request.contextPath}/accomRoomOne?accomRoomNo=${ar.accomRoomNo }&accomBuildingNo=${accomBuildingOne.accomBuildingNo }">
-	                                            	<div style="height: 200px; overflow: hidden;">
+	                                            	<div style="overflow: hidden;">
 	                                            		<c:forEach items="${ar.accomRoomImageList }" var="ari" varStatus="status">
 	                                            			<img src="${pageContext.request.contextPath}/resources/image/accom_room/${ari.getAccomRoomImageName() }" alt="">
 	                                            		</c:forEach>
@@ -648,7 +648,7 @@
 	                                <div class="single-listing mb-30">
 	                                    <div class="list-img">
                                             <a href="${pageContext.request.contextPath}/accomBuildingOne?accomBuildingNo=${ab.accomBuildingNo }">
-                                            	<div style="height: 260px; overflow: hidden;">
+                                            	<div style="overflow: hidden;">
                                             		<c:forEach items="${ab.accomBuildingImageList }" var="abi" varStatus="status">
                                             			<img src="${pageContext.request.contextPath}/resources/image/accom_building/${abi.getAccomBuildingImageName() }" alt="">
                                             		</c:forEach>
