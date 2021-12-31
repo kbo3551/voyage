@@ -62,10 +62,10 @@
 									<option value="Y">중요</option>
 								</select>
 								<!-- 사진 -->
-								<input type="file" name="noticeForm.noticeFile">			
-								<input type="file" name="noticeForm.noticeFile">
-								<input type="file" name="noticeForm.noticeFile">
-								<input type="file" name="noticeForm.noticeFile">
+								<input type="file" name="noticeFile" id="noticeFile">			
+								<input type="file" name="noticeFile" id="noticeFile">
+								<input type="file" name="noticeFile" id="noticeFile">
+								<input type="file" name="noticeFile" id="noticeFile">
 							</div>
 						</div>
 					</div>				

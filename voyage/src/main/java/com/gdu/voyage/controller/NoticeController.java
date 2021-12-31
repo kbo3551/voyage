@@ -77,7 +77,7 @@ public class NoticeController {
 		
 		noticeService.insertNoticeOne(noticeForm, realPath);
 
-		return "/admin/adminNoticeList";
+		return "redirect:/adminNoticeList";
 	}
 	//delete
 	@GetMapping("/admin/removeNotice")
@@ -87,13 +87,13 @@ public class NoticeController {
 	}
 	//update
 	@GetMapping("/admin/modifyNotice")
-	public String updateNoticeOne() {
+	public String updateNoticeOne(int noticeNo) {
 		return "/admin/modifyNotice";
 	}
 	
 	@PostMapping("/admin/modifyNotice")
-	public String modifyNoticeOne() {
-		return "/admin/modifyNotice";
+	public String modifyNoticeOne(int noticeNo) {
+		return "redirect:/modifyNotice";
 	}
 	
 	//일반사용자

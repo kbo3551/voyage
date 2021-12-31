@@ -79,15 +79,16 @@
 							</div>
 						</div>
 					</div>
-					<!-- 사진 -->		
-					<c:forEach items="${NoticeFileList}" var="noticeFileList">
-						<c:if test="${noticeFile ne null}">
-							<input type="file" name="noticeFile" value="${noticeFileList}">
-						</c:if>
-						<c:if test="${noticeFile eq null}">
-							<input type="file" name="noticeFile">
-						</c:if>
-					</c:forEach>					
+					<!-- 사진 -->
+					<div>
+						<img class="card-img-top" src="${pageContext.request.contextPath}/resources/image/notice/${noticeFile.noticeFileName}.${noticeFile.noticeFileExt}" alt="Unsplash">					
+						<button type="submit" name="deleteNoticeFileBtn">삭제</button>
+					</div>
+					<br>
+					<div>
+						<button type="submit" name="addNoticeFileBtn">이미지 추가</button>
+					</div>
+					<br>
 					<!-- 공지내용 -->
 					<div class="row">
 						<div class="card">
