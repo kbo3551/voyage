@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.gdu.voyage.vo.Coupon;
+import com.gdu.voyage.vo.CouponMember;
 
 @Mapper
 public interface CouponMapper {
@@ -25,4 +26,6 @@ public interface CouponMapper {
 	List<Coupon> selectMemberCouponList(Map<String, Object>Map);
 	// 회원이 가지고있는 쿠폰의 수
 	int memberCouponTotalCount(String memberId);
+	// 회원 쿠폰 발급
+	void insertMemberCoupon(CouponMember couponMember);
 }

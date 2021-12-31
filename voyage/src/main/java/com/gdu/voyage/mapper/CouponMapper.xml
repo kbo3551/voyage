@@ -122,4 +122,22 @@
 	WHERE
 	   coupon_no = #{couponNo}
 	</update>
+	<!-- 회원 쿠폰 발급 -->
+	<insert id="insertMemberCoupon" parameterType="com.gdu.voyage.vo.CouponMember">
+	INSERT INTO
+		coupon_member(
+		member_id,
+		coupon_no,
+		coupon_use,
+		create_date,
+		deadline
+		)
+		VALUES(
+		#{memberId},
+		#{couponNo},
+		'사용가능',
+		NOW(),
+		#{deadLine}
+		)
+	</insert>
 </mapper>

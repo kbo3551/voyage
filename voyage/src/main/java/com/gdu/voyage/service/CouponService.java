@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gdu.voyage.mapper.CouponMapper;
 import com.gdu.voyage.vo.Coupon;
+import com.gdu.voyage.vo.CouponMember;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -93,4 +94,10 @@ public class CouponService {
 		
 		return returnMap;
 	}
+	// 회원 쿠폰 발급
+	public void addMemberCoupon(CouponMember couponMember) {
+		log.debug("☆☆☆[boryeong]CouponService회원 쿠폰 발급☆☆☆"+couponMember.toString());
+		couponMapper.insertMemberCoupon(couponMember);
+	}
+
 }

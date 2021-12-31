@@ -206,7 +206,11 @@
                                     <td>${c.deadLine}</td>
                                     <td style="text-align:left;"><label></label>    
 										&emsp;
+								<form name="addMemberCoupon" id="addMemberCoupon" action="${pageContext.request.contextPath}/member/addMemberCoupon" method="post">
+                             		<input type="hidden" name="couponNo" value="${c.couponNo}">
+                             		<input type="hidden" name="deadLine" value="${c.deadLine}">
 									<button class="btn btn-finish btn-primary" type="submit">발급</button>
+										</form>
 										</td>
                                 	 </tr>
                                  </c:if>
@@ -254,6 +258,10 @@
 	</div>
 	</div>
 	</div>
+	<script>
+	 function addCoupon(){		
+	
+	</script>
 	</main>
 
 

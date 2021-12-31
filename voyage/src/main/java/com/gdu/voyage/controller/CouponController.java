@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.CouponService;
 import com.gdu.voyage.vo.Coupon;
+import com.gdu.voyage.vo.CouponMember;
 import com.gdu.voyage.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +26,29 @@ public class CouponController {
 	@Autowired
 	CouponService couponService;
 	private final int ROW_PER_PAGE = 10;
+	// 회원 쿠폰 발급
+	@PostMapping("/member/addMemberCoupon")
+	public String postAddMemberCoupon(CouponMember couponMember,HttpSession session, Coupon coupon) {
+		System.out.println("★★★[boryeong]CouponController_postAddMemberCoupon실행★★★");
+		
+		// 회원 세션 정보
+		String memberId = ((Member) session.getAttribute("loginMember")).getMemberId();
+		String deadLine = coupon.getDeadLine();
+		int couponNo = coupon.getCouponNo();
+		
+		// 값
+		CouponMember cm = new CouponMember();
+		
+		cm.setCouponNo(couponNo);
+		cm.setDeadLine(deadLine);
+		cm.setMemberId(memberId);
+		
+		
+		couponService.addMemberCoupon(cm);
+		
+		
+		return "redirect:/member/coupon";
+	}
 	// 회원이 발급받은 쿠폰 list, 발급할 쿠폰list
 		@GetMapping("/member/coupon")
 		public String getMemberCouponList(Model model, @RequestParam(defaultValue = "1") int memberCouponPage, HttpSession session,
@@ -105,5 +129,4 @@ public class CouponController {
 		couponService.updateCoupon(coupon);
 		return "redirect:/admin/couponList";
 	}
-	
 }
