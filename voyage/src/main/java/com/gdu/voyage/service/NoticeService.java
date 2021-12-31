@@ -31,16 +31,17 @@ public class NoticeService {
 	
 	//Map(notice 리스트,페이징)으로 묶어서 리턴
 	public Map<String,Object> getNoticeListByTop(int currentPage,int rowPerPage, String searchNotice){
+		//페이징
 		Map<String,Object> paramMap = new HashMap<>();
 		int beginRow = (currentPage-1)*rowPerPage;
 		
 		paramMap.put("beginRow",beginRow);
 		paramMap.put("rowPerPage", rowPerPage);
 		paramMap.put("searchNotice",searchNotice);
-	
+		//리스트. 페이징에 필요한 값을 put
 		List<Notice> noticeList = noticeMapper.selectNoticeList(paramMap);
 		log.debug(noticeList.toString()+"☆☆☆[DoHun] NoticeList , Service☆☆☆");
-		
+		//페이징할 값을 가공(최종 페이지)
 		Map<String,Object> returnMap = new HashMap<>();
 		int lastPage = 0;
 		int totalCount = noticeMapper.selectNoticeTotalCount(searchNotice);
@@ -49,10 +50,10 @@ public class NoticeService {
 		if(totalCount%rowPerPage != 0) {
 			lastPage+=1;
 		}
-		
+		//마지막 페이지 페이징과 페이징에필요했던 put한 noticeList를 put
 		returnMap.put("noticeList", noticeList);
 		returnMap.put("lastPage", lastPage);
-		
+		//페이징값이 전부들어간 값 리턴
 		return returnMap;
 	}
 	
@@ -65,10 +66,11 @@ public class NoticeService {
 	//insert(내용+사진 입력)
 	public void insertNoticeOne(NoticeForm noticeForm, String realPath) {
 		log.debug(noticeForm+"☆☆☆[DoHun] NoticeInsert, Insert☆☆☆");
-		
+		//입력하는 코드
 		Notice notice = noticeForm.getNotice();
 		noticeMapper.insertNotice(notice);
 		
+		//사진파일을 가져오는 코드(사진파일 원본 이름을 분리하고 가공)
 		List<MultipartFile> file=noticeForm.getNoticefile();
 		if(file != null) {
 			for(MultipartFile i : file) {

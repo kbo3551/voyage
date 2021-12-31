@@ -86,7 +86,7 @@
 									<div class="blog_details">
 										<h2><a class="d-inline-block" href="${pageContext.request.contextPath}/noticeOne?noticeNo=${n.noticeNo}" class="btn btn-primary">${n.noticeTitle}</a></h2>
 								        <ul class="blog-info-link">
-								        	<li><i class="fa fa-user">${n.noticeViewCnt}</i></li>
+								        	<li><i class="fa fa-user"> ${n.noticeViewCnt}</i></li>
 								        	<li>개시일 : ${n.createDate}</li>
 								        	<li>수정일 : ${n.updateDate}</li>
 								        </ul>

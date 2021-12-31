@@ -32,18 +32,19 @@ public class NoticeController {
 	//noticeList
 	@GetMapping("/admin/adminNoticeList")
 	public String notcieList(Model model, @RequestParam(defaultValue = "1") int currentPage, @RequestParam @Nullable String searchNotice) {
+		//리스트를 불러오는 코드
 		Map<String, Object> noticeMap = noticeService.getNoticeListByTop(currentPage, ROW_PER_PAGE, searchNotice);
 		log.debug(noticeMap.toString()+"★★★ [DoHun] Notice List Controller 실행, noticeMap ★★★");
 
-		
+		//페이징
 		int controllPage = (currentPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
-		
+		//검색과 페이징
 		model.addAttribute("controllPage", controllPage);
 		model.addAttribute("searchnotice", searchNotice);
 		model.addAttribute("noticeList", noticeMap.get("noticeList"));
 		model.addAttribute("lastPage", noticeMap.get("lastPage"));
 		model.addAttribute("currentPage", currentPage);
-		
+		//페이징
 		int pageNo = ((controllPage / 100) * 10 + 1);
 		
 		model.addAttribute("pageNo", pageNo);
@@ -55,6 +56,7 @@ public class NoticeController {
 	@GetMapping("/admin/adminNoticeOne")
 	public String noticeOne(Model model, int noticeNo) {
 		log.debug(noticeNo+"★★★ [DoHun] Notice One Controller 실행, noticeNo ★★★");
+		//상세정보를 불러오는 코드
 		Notice notice = noticeService.getNoticeOne(noticeNo);
 		log.debug(notice+"★★★ [DoHun] Notice One Controller 실행, notice ★★★");
 		
@@ -72,12 +74,12 @@ public class NoticeController {
 	@PostMapping("/admin/addNotice")
 	public String addNoticeOne(NoticeForm noticeForm, HttpServletRequest request) {
 		log.debug(noticeForm+"★★★ [DoHun] Notice insert Controller 실행, notice ★★★");
-		
+		//사진
 		String realPath = request.getServletContext().getRealPath("resources/image/notice//");
-		
+		//입력하는 코드
 		noticeService.insertNoticeOne(noticeForm, realPath);
 
-		return "redirect:/adminNoticeList";
+		return "/admin/adminNoticeList";
 	}
 	//delete
 	@GetMapping("/admin/removeNotice")
@@ -93,7 +95,7 @@ public class NoticeController {
 	
 	@PostMapping("/admin/modifyNotice")
 	public String modifyNoticeOne(int noticeNo) {
-		return "redirect:/modifyNotice";
+		return "/admin/adminNoticeList";
 	}
 	
 	//일반사용자
@@ -101,18 +103,19 @@ public class NoticeController {
 	//noticeList
 	@GetMapping("/noticeList")
 	public String notcieListByAll(Model model, @RequestParam(defaultValue = "1") int currentPage, @RequestParam @Nullable String searchNotice) {
+		//리스트를 불러오는 코드
 		Map<String, Object> noticeMap = noticeService.getNoticeListByTop(currentPage, ROW_PER_PAGE, searchNotice);
 		log.debug(noticeMap.toString()+"★★★ [DoHun] Notice List Controller 실행, noticeMap ★★★");
 
-		
+		//페이징
 		int controllPage = (currentPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
-		
+		//검색과 페이징
 		model.addAttribute("controllPage", controllPage);
 		model.addAttribute("searchnotice", searchNotice);
 		model.addAttribute("noticeList", noticeMap.get("noticeList"));
 		model.addAttribute("lastPage", noticeMap.get("lastPage"));
 		model.addAttribute("currentPage", currentPage);
-		
+		//페이징
 		int pageNo = ((controllPage / 100) * 10 + 1);
 		
 		model.addAttribute("pageNo", pageNo);
@@ -124,10 +127,10 @@ public class NoticeController {
 	@GetMapping("/noticeOne")
 	public String noticeOneByAll(Model model, int noticeNo) {
 		log.debug(noticeNo+"★★★ [DoHun] Notice One Controller 실행, noticeNo ★★★");
-		
+		//상세정보를 불러오는 코드
 		Notice notice = new Notice();
 		notice = noticeService.getNoticeOne(noticeNo);
-		
+		//조회수를 증가시키는 코드, 모두가 사용하는 페이지는 페이지에 들어온다면 조회수가 증가한다.
 		int noticeViewCnt = notice.getNoticeViewCnt()+1;
 		notice.setNoticeViewCnt(noticeViewCnt);
 		noticeService.updateNoticeViewCnt(noticeNo, noticeViewCnt);
