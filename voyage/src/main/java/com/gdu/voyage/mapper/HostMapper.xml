@@ -30,4 +30,16 @@
 			AND 
 			ask_state = '승인대기'
 	</select>
+	
+	<!-- 상품 등록시 host_no 검색 -->
+	<select id="selectHostNo" resultType="int">
+	SELECT 
+		h.host_no hostNo
+	FROM 
+		host h
+		INNER JOIN member m
+		ON h.member_id = m.member_id
+	WHERE
+		m.member_id = #{memberId}
+	</select>
 </mapper>

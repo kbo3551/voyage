@@ -26,4 +26,14 @@ public class HostService {
 	public int selectRequestingHost(String memberId) {
 		return hostMapper.selectRequestingHost(memberId);
 	}
+	
+	// [사업자] 상품 등록시 host_no 검색
+	public int selectHostNo(String memberId) {
+		// 받아온 memberId 디버깅 
+		log.debug("☆[지혜]service☆ memberId : " + memberId);
+		
+		// 받아온 memberId로 hostNo 조회
+		int hostNo = hostMapper.selectHostNo(memberId);
+		return hostNo;
+	}
 }
