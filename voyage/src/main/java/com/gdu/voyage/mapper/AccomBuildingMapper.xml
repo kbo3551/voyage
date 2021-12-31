@@ -34,7 +34,7 @@
 			create_date,
 			update_date
 		) VALUES (
-			'3',
+			#{hostNO},
 			#{accomBuildingName},
 			#{accomBuildingDescription},
 			#{accomBuildingPhone},

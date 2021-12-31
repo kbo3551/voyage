@@ -105,6 +105,9 @@
 	
 					<div class="wizard-card ct-wizard-orange" id="wizardProperty">
 						<form action="${contextPath}/host/addAccomRoom" method="post" enctype="multipart/form-data" id="accomRoomForm">
+							
+							<input type="hidden" name="accomBuildingNo" value="${accomBuildingNo}">
+							
 							<div class="wizard-header">
 								<h3>
 									<b>Accommodation</b> _room<br>

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.ActivityService;
+import com.gdu.voyage.service.HostService;
 import com.gdu.voyage.vo.Activity;
 import com.gdu.voyage.vo.ActivityForm;
+import com.gdu.voyage.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,6 +29,8 @@ public class ActivityController {
 	private final int ROW_PER_PAGE = 10;
 	@Autowired
 	ActivityService activityService;
+	@Autowired
+	HostService hostService;
 
 	// 사업자
 	@GetMapping("/host/addActivity")
@@ -35,9 +40,18 @@ public class ActivityController {
 	}
 
 	@PostMapping("/host/addActivity")
-	public String addActivity(ActivityForm activityForm, HttpServletRequest request) {
+	public String addActivity(ActivityForm activityForm, HttpServletRequest request, HttpSession session) {
 		log.debug("ActivityController 실행");
-
+		
+		// 로그인한 호스트의 memberId를 알기 위해 세션을 가져옴
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		String memberId = loginMember.getMemberId();
+		log.debug("★[지혜]controller★ memberId : " + memberId);
+		
+		//가져온 memberId로 작성자의 host_no를 조회함
+		int hostNo = hostService.selectHostNo(memberId);
+		log.debug("★[지혜]controller★ hostNo : " + hostNo);
+		
 		// 참조타입 객체를 log.debug로 출력할 때는 toString()으로 출력함
 		log.debug("★[지혜]controller★ activityForm : " + activityForm.toString());
 
@@ -45,7 +59,7 @@ public class ActivityController {
 		String realPath = request.getServletContext().getRealPath("resources/image/activity//");
 
 		// accomBuildingForm과 realPath를 매개변수로 하여 같이 service에 전달
-		activityService.addActivity(activityForm, realPath);
+		activityService.addActivity(activityForm, realPath, hostNo);
 
 		return "redirect:/activityList";
 	}

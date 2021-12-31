@@ -177,13 +177,16 @@ public class AccomBuildingService {
 		}
 	
 	// 숙소-건물 입력
-	public void addAccomBuilding(AccomBuildingForm accomBuildingForm, String realPath) {
+	public void addAccomBuilding(AccomBuildingForm accomBuildingForm, String realPath, int hostNo) {
 		// 매개변수 디버깅 //accomBuildingForm  --> 숙소-건물정보 + 이미지 + 시설 + 추천장소 + 해시태그
 		log.debug("☆[지혜]service☆ accomBuildingForm : " + accomBuildingForm.toString());
 		
 		// 1) 숙소-건물 입력 : accomBuilding 입력
 		AccomBuilding accomBuilding = accomBuildingForm.getAccomBuilding();
+		// hostNo를 accomBuilding 객체에 추가
+		accomBuilding.setHostNo(hostNo);
 		accomBuildingMapper.insertAccomBuilding(accomBuilding);
+		
 		// 입력시 만들어진 key 값을 리턴 받아야 함 -> 매개변수 accomBuildingNo 값 입력해줌
 		// accomBuildingNo = auto increment로 입력된 값
 		log.debug("☆[지혜]service☆ accomBuildingNo : " + accomBuilding.getAccomBuildingNo());

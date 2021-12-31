@@ -176,12 +176,14 @@ public class ActivityService {
 	}
 	
 	// 체험 입력
-	public void addActivity(ActivityForm activityForm, String realPath) {
+	public void addActivity(ActivityForm activityForm, String realPath, int hostNo) {
 		// 매개변수 디버깅 //activityForm  --> 숙소-건물정보 + 이미지 + 시설 + 추천장소 + 해시태그
 		log.debug("☆[지혜]service☆ activityForm : " + activityForm.toString());
 		
 		// 1) 체험 입력 : activity 입력
 		Activity activity = activityForm.getActivity();
+		// hostNo를 accomRoom 객체에 추가
+		activity.setHostNo(hostNo);
 		activityMapper.insertActivity(activity);
 		// 입력시 만들어진 key 값을 리턴 받아야 함 -> 매개변수 activityNo 값 입력해줌
 		// activityNo = auto increment로 입력된 값

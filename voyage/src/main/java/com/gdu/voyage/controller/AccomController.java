@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.AccomBuildingService;
 import com.gdu.voyage.service.AccomRoomService;
+import com.gdu.voyage.service.HostService;
 import com.gdu.voyage.vo.AccomBuilding;
 import com.gdu.voyage.vo.AccomBuildingForm;
 import com.gdu.voyage.vo.AccomRoomForm;
+import com.gdu.voyage.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,6 +33,8 @@ public class AccomController {
 	AccomBuildingService accomBuildingService;
 	@Autowired
 	AccomRoomService accomRoomService;
+	@Autowired
+	HostService hostService;
 
 	// 사업자
 	// 숙소_건물 등록
@@ -41,8 +46,17 @@ public class AccomController {
 
 	// 숙소_건물 등록
 	@PostMapping("/host/addAccomBuilding")
-	public String addAccomBuilding(AccomBuildingForm accomBuildingForm, HttpServletRequest request) {
+	public String addAccomBuilding(AccomBuildingForm accomBuildingForm, HttpServletRequest request, HttpSession session) {
 		log.debug("AccomController 실행");
+		
+		// 로그인한 호스트의 memberId를 알기 위해 세션을 가져옴
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		String memberId = loginMember.getMemberId();
+		log.debug("★[지혜]controller★ memberId : " + memberId);
+		
+		//가져온 memberId로 작성자의 host_no를 조회함
+		int hostNo = hostService.selectHostNo(memberId);
+		log.debug("★[지혜]controller★ hostNo : " + hostNo);
 
 		// 참조타입 객체를 log.debug로 출력할 때는 toString()으로 출력함
 		log.debug("★[지혜]controller★ accomBuildingForm : " + accomBuildingForm.toString());
@@ -51,7 +65,7 @@ public class AccomController {
 		String realPath = request.getServletContext().getRealPath("resources/image/accom_building//");
 		
 		// accomBuildingForm과 realPath를 매개변수로 하여 같이 service에 전달
-		accomBuildingService.addAccomBuilding(accomBuildingForm, realPath);
+		accomBuildingService.addAccomBuilding(accomBuildingForm, realPath, hostNo);
 		return "redirect:/host/hostIndex";
 	}
 	
@@ -64,8 +78,17 @@ public class AccomController {
 
 	// 숙소_객실 등록
 	@PostMapping("/host/addAccomRoom")
-	public String addAccomRoom(AccomRoomForm accomRoomForm, HttpServletRequest request) {
+	public String addAccomRoom(AccomRoomForm accomRoomForm, HttpServletRequest request, HttpSession session) {
 		log.debug("AccomController 실행");
+		
+		// 로그인한 호스트의 memberId를 알기 위해 세션을 가져옴
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		String memberId = loginMember.getMemberId();
+		log.debug("★[지혜]controller★ memberId : " + memberId);
+		
+		//가져온 memberId로 작성자의 host_no를 조회함
+		int hostNo = hostService.selectHostNo(memberId);
+		log.debug("★[지혜]controller★ hostNo : " + hostNo);
 
 		// 참조타입 객체를 log.debug로 출력할 때는 toString()으로 출력함
 		log.debug("★[지혜]controller★ accomRoomForm : " + accomRoomForm.toString());
@@ -74,7 +97,7 @@ public class AccomController {
 		String realPath = request.getServletContext().getRealPath("resources/image/accom_room//");
 		
 		// accomRoomForm과 realPath를 매개변수로 하여 같이 service에 전달
-		accomRoomService.addAccomRoom(accomRoomForm, realPath);
+		accomRoomService.addAccomRoom(accomRoomForm, realPath, hostNo);
 		return "redirect:/accomRoomList";
 	}
 	

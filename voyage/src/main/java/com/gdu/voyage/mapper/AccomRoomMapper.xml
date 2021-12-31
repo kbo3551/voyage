@@ -15,8 +15,8 @@
 			create_date,
 			update_date
 		) VALUES (
-			'34',
-			'3',
+			#{accomBuildingNo},
+			#{hostNo},
 			#{accomRoomName},
 			#{accomRoomPrice},
 			#{accomRoomDescription},

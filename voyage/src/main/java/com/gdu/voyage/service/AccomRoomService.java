@@ -28,13 +28,16 @@ public class AccomRoomService {
 	
 	// 사업자
 	// 숙소-객실 입력
-	public void addAccomRoom(AccomRoomForm accomRoomForm, String realPath) {
+	public void addAccomRoom(AccomRoomForm accomRoomForm, String realPath, int hostNo) {
 		// 매개변수 디버깅 //accomRoomForm  --> 숙소-객실정보 + 이미지 + 아이템
 		log.debug("☆[지혜]service☆ accomRoomForm : " + accomRoomForm.toString());
 		
 		// 1) 숙소-객실 입력 : accomRoom 입력
 		AccomRoom accomRoom = accomRoomForm.getAccomRoom();
+		// hostNo를 accomRoom 객체에 추가
+		accomRoom.setHostNo(hostNo);
 		accomRoomMapper.insertAccomRoom(accomRoom);
+		
 		// 입력시 만들어진 key 값을 리턴 받아야 함 -> 매개변수 accomRoomNo 값 입력해줌
 		// accomRoomNo = auto increment로 입력된 값
 		log.debug("☆[지혜]service☆ accomRoomNo : " + accomRoom.getAccomRoomNo());
