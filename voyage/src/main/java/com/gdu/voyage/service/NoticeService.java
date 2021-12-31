@@ -105,6 +105,10 @@ public class NoticeService {
 		
 	}
 	
+	//조회수
+	public void updateNoticeViewCnt(int noticeNo, int noticeViewCnt) {
+		noticeMapper.updateNoticeViewCnt(noticeNo, noticeViewCnt);
+	}
 	/*
 	public List<NoticeFile> getNoticeFileList(){
 		return noticeMapper.selectNoticeFileList();

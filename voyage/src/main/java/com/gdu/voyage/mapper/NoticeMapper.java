@@ -29,4 +29,7 @@ public interface NoticeMapper {
 	//업데이트시 사용되는 파일 추가 삭제
 	void insertNoticefileUpdate(NoticeFile noticefile);
 	void deleteNoticeFileUpdate(NoticeFile noticefile);
+	
+	//조회수
+	void updateNoticeViewCnt(int noticeNo,int noticeViewCnt);
 }

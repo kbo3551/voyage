@@ -124,7 +124,15 @@ public class NoticeController {
 	@GetMapping("/noticeOne")
 	public String noticeOneByAll(Model model, int noticeNo) {
 		log.debug(noticeNo+"★★★ [DoHun] Notice One Controller 실행, noticeNo ★★★");
-		Notice notice = noticeService.getNoticeOne(noticeNo);
+		
+		Notice notice = new Notice();
+		notice = noticeService.getNoticeOne(noticeNo);
+		
+		int noticeViewCnt = notice.getNoticeViewCnt()+1;
+		notice.setNoticeViewCnt(noticeViewCnt);
+		noticeService.updateNoticeViewCnt(noticeNo, noticeViewCnt);
+		
+		
 		log.debug(notice+"★★★ [DoHun] Notice One Controller 실행, notice ★★★");
 		
 		model.addAttribute("notice", notice);

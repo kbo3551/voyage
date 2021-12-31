@@ -7,6 +7,7 @@
 		<result column = "notice_title" property="noticeTitle"/>
 		<result column = "notice_top" property="noticeTop"/>
 		<result column = "notice_content" property="noticeContent"/>
+		<result column = "notice_view_cnt" property="noticeViewCnt"/>
 		<result column = "create_date" property="createDate"/>
 		<result column = "update_date" property="updateDate"/>
 		<collection property="noticeFileList" ofType="com.gdu.voyage.vo.NoticeFile">
@@ -83,6 +84,7 @@
 			#{noticeFileSize}
 		)
 	</insert>
+	
 	<!-- 공지사항 delete -->
 	<delete id="deleteNotice" parameterType="com.gdu.voyage.vo.Notice">
 		DELETE FROM notice 
@@ -108,7 +110,15 @@
 		WHERE 
 			notice_no = #{noticeNo}
 	</update>
-
+	
+	<update id="updateNoticeViewCnt" parameterType="com.gdu.voyage.vo.Notice">
+		UPDATE notice 
+		SET 
+			notice_view_cnt = #{noticeViewCnt}
+		WHERE 
+			notice_no = #{noticeNo}
+	</update>
+	
 	<!-- 공지사항 One(상세보기) -->
 	<select id="selectNoticeOne" resultMap="notice" parameterType="com.gdu.voyage.vo.Notice">
 		SELECT
