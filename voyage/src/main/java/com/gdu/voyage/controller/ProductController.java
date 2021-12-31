@@ -112,6 +112,26 @@ public class ProductController {
 		return "/product/accomBuildingOne";
 	}
 	
+	@GetMapping("/accomRoomOne")
+	public String getAccomRoomOne(Model model, int accomBuildingNo, int accomRoomNo) {
+		log.debug("[debug] ProductController.getAccomRoomOne 실행");
+		log.debug("[debug] ProductController.getAccomRoomOne accomRoomNo : " + accomRoomNo);
+		
+		int currentPage = 0;
+		
+		// [사용자] 숙소-건물-객실 상세 조회
+		AccomRoom accomRoomOne = productService.getAccomRoomOne(accomRoomNo);
+		model.addAttribute("accomRoomOne", accomRoomOne);
+		log.debug("[debug] ProductController.getAccomRoomOne accomRoomOne : " + accomRoomOne);
+
+		// [사용자] 숙소-건물-객실 상세-목록 조회
+		List<AccomRoom> accomRoomOneList = productService.getAccomRoomList(accomBuildingNo, currentPage, ROW_PER_PAGE);
+		model.addAttribute("accomRoomOneList", accomRoomOneList);
+		log.debug("[debug] ProductController.getAccomBuildingOne accomRoomOneList : " + accomRoomOneList);
+		
+		return "/product/accomRoomOne";
+	}
+	
 	
 	// [사용자] 체험
 	@GetMapping("/getActivityProductList")

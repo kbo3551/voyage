@@ -29,6 +29,10 @@ public interface ProductMapper {
 	// [사용자] 숙소-건물-객실 목록 조회
 	List<AccomRoom> selectAccomRoomList(int accomBuildingNo);
 	
+	// 숙소-건물-객실 상세
+	// [사용자] 숙소-건물-객실 상세 조회
+	AccomRoom selectAccomRoomOne(int accomRoomNo);
+	
 	// 체험 목록
 	// [사용자] 체험 목록 조회
 	List<Activity> selectActivityList();

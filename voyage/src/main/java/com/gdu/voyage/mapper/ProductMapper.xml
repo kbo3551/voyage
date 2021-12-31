@@ -1,56 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.ProductMapper">
-	
-	<!-- 숙소-건물 전체 목록 조회를 위한 resultMap -->
+		
+	<!-- 숙소-건물 목록/상세 조회를 위한 resultMap -->
 	<resultMap type="com.gdu.voyage.vo.AccomBuilding" id="resultAccomBuilding">
-		<!-- building -->
-		<id column="accom_building_no" property="accomBuildingNo"/>
-		<result column="host_no" property="hostNo"/>
-		<result column="accom_building_name" property="accomBuildingName"/>
-		<result column="accom_building_description" property="accomBuildingDescription"/>
-		<result column="accom_building_phone" property="accomBuildingPhone"/>
-		<result column="accom_building_state" property="accomBuildingState"/>
-		<result column="accom_building_state_admin" property="accomBuildingStateAdmin"/>
-		<result column="create_date" property="createDate"/>
-		<result column="update_date" property="updateDate"/>
-		<result column="COUNT(*)" property="roomCnt"/>
-		<!-- address -->
-		<collection property="accomAddress" ofType="com.gdu.voyage.vo.AccomAddress">
-			<result column="accom_address_zip" property="accomAddressZip"/>
-		</collection>
-		<!-- facility -->
-		<collection property="accomBuildingFacilityList" ofType="com.gdu.voyage.vo.AccomBuildingFacility">
-			<result column="accom_building_facility_name" property="accomBuildingFacilityName"/>
-		</collection>
-		<!-- image -->
-		<collection property="accomBuildingImageList" ofType="com.gdu.voyage.vo.AccomBuildingImage">
-			<result column="accom_building_image" property="accomBuildingImageName"/>
-		</collection>
-		<!-- spot -->
-		<collection property="accomBuildingSpotList" ofType="com.gdu.voyage.vo.AccomBuildingSpot">
-			<result column="accom_building_spot_name" property="accomBuildingSpotName"/>
-		</collection>
-		<!-- hashtag -->
-		<collection property="hashtagList" ofType="com.gdu.voyage.vo.Hashtag">
-			<result column="hashtag" property="hashtag"/>
-		</collection>
-	</resultMap>
-	
-	<!-- 숙소-건물 인기 시설 조회를 위한 resultMap -->
-	<resultMap type="map" id="resultAccomFacilityByBest">
-		<result column="accom_building_facility_name" property="accomBuildingFacilityName"/>
-		<result column="COUNT(accom_building_facility_name)" property="accomBuildingFacilityBest"/>
-	</resultMap>
-	
-	<!-- 숙소-건물 인기 지역 조회를 위한 resultMap -->
-	<resultMap type="map" id="resultAccomAddressByBest">
-		<result column="SUBSTRING_INDEX(accom_address_zip, ' ', 1)" property="accomAddressZip"/>
-		<result column="COUNT(accom_address_zip)" property="accomAddressZipBest"/>
-	</resultMap>
-	
-	<!-- 숙소-건물 상세 조회를 위한 resultMap -->
-	<resultMap type="com.gdu.voyage.vo.AccomBuilding" id="resultAccomBuildingOne">
 		<id column="accom_building_no" property="accomBuildingNo"/>
 		<result column="host_no" property="hostNo"/>
 		<result column="accom_building_name" property="accomBuildingName"/>
@@ -81,8 +34,20 @@
 			<result column="hashtag" property="hashtag"/>
 		</collection>
 	</resultMap>
+
+	<!-- 숙소-건물 인기 시설 조회를 위한 resultMap -->
+	<resultMap type="map" id="resultAccomFacilityByBest">
+		<result column="accom_building_facility_name" property="accomBuildingFacilityName"/>
+		<result column="COUNT(accom_building_facility_name)" property="accomBuildingFacilityBest"/>
+	</resultMap>
 	
-	<!-- 숙소-건물-객실 전체 목록 조회를 위한 resultMap -->
+	<!-- 숙소-건물 인기 지역 조회를 위한 resultMap -->
+	<resultMap type="map" id="resultAccomAddressByBest">
+		<result column="SUBSTRING_INDEX(accom_address_zip, ' ', 1)" property="accomAddressZip"/>
+		<result column="COUNT(accom_address_zip)" property="accomAddressZipBest"/>
+	</resultMap>
+	
+	<!-- 숙소-건물-객실 목록/상세 조회를 위한 resultMap -->
 	<resultMap type="com.gdu.voyage.vo.AccomRoom" id="resultAccomRoom">
 		<!-- room -->
 		<id column="accom_room_no" property="accomRoomNo"/>
@@ -98,11 +63,14 @@
 		<result column="update_date" property="updateDate"/>
 		<!-- image -->
 		<collection property="accomRoomImageList" ofType="com.gdu.voyage.vo.AccomRoomImage">
-			<result column="accom_room_image" property="accomRoomImageName"/>
+			<result column="accom_room_image_name" property="accomRoomImageName"/>
+			<result column="accom_room_image_ext" property="accomRoomImageExt"/>
 		</collection>
 		<!-- image -->
 		<collection property="accomRoomItemList" ofType="com.gdu.voyage.vo.AccomRoomItem">
-			<result column="accom_room_item" property="accomRoomItemName"/>
+			<result column="accom_room_item_name" property="accomRoomItemName"/>
+			<result column="accom_room_item_qnt" property="accomRoomItemQnt"/>
+			<result column="accom_room_item_price" property="accomRoomItemPrice"/>
 		</collection>
 		<!-- hashtag -->
 		<collection property="hashtagList" ofType="com.gdu.voyage.vo.Hashtag">
@@ -111,47 +79,8 @@
 	</resultMap>
 	
 	
-	<!-- 체험 전체 목록 조회를 위한 resultMap -->
-	<resultMap type="com.gdu.voyage.vo.Activity" id="resultActivityList">
-		<!-- building -->
-		<id column="activity_no" property="activityNo"/>
-		<result column="host_no" property="hostNo"/>
-		<result column="activity_name" property="activityName"/>
-		<result column="activity_description" property="activityDescription"/>
-		<result column="activity_price" property="activityPrice"/>
-		<result column="activity_max_t" property="activityMaxT"/>
-		<result column="activity_max_p" property="activityMaxP"/>
-		<result column="activity_phone" property="activityPhone"/>
-		<result column="activity_state" property="activityState"/>
-		<result column="activity_state_admin" property="activityStateAdmin"/>
-		<result column="create_date" property="createDate"/>
-		<result column="update_date" property="updateDate"/>
-		<!-- address -->
-		<collection property="activityAddress" ofType="com.gdu.voyage.vo.ActivityAddress">
-			<result column="activity_address_zip" property="activityAddressZip"/>
-		</collection>
-		<!-- image -->
-		<collection property="activityImageList" ofType="com.gdu.voyage.vo.ActivityImage">
-			<result column="activity_image" property="activityImageName"/>
-		</collection>
-		<!-- spot -->
-		<collection property="activitySpotList" ofType="com.gdu.voyage.vo.ActivitySpot">
-			<id column="activity_spot_name" property="activitySpotName"/>
-		</collection>
-		<!-- hashtag -->
-		<collection property="hashtagList" ofType="com.gdu.voyage.vo.Hashtag">
-			<id column="hashtag" property="hashtag"/>
-		</collection>
-	</resultMap>
-	
-	<!-- 체험 인기 지역 조회를 위한 resultMap -->
-	<resultMap type="map" id="resultActivityAddressByBest">
-		<result column="SUBSTRING_INDEX(activity_address_zip, ' ', 1)" property="activityAddressZip"/>
-		<result column="COUNT(activity_address_zip)" property="activityAddressZipBest"/>
-	</resultMap>
-	
-	<!-- 체험 상세 조회를 위한 resultMap -->
-	<resultMap type="com.gdu.voyage.vo.Activity" id="resultActivityOne">
+	<!-- 체험 목록/상세 조회를 위한 resultMap -->
+	<resultMap type="com.gdu.voyage.vo.Activity" id="resultActivity">
 		<id column="activity_no" property="activityNo"/>
 		<result column="host_no" property="hostNo"/>
 		<result column="activity_name" property="activityName"/>
@@ -186,6 +115,13 @@
 		</collection>
 	</resultMap>
 	
+	<!-- 체험 인기 지역 조회를 위한 resultMap -->
+	<resultMap type="map" id="resultActivityAddressByBest">
+		<result column="SUBSTRING_INDEX(activity_address_zip, ' ', 1)" property="activityAddressZip"/>
+		<result column="COUNT(activity_address_zip)" property="activityAddressZipBest"/>
+	</resultMap>
+	
+	
 	<!-- 숙소-건물 목록 조회 -->
 	<select id="selectAccomBuildingList" resultMap="resultAccomBuilding">
 		SELECT 
@@ -194,7 +130,7 @@
 			(SELECT * FROM accom_building) ab,
 			(SELECT accom_building_no, GROUP_CONCAT(accom_address_zip) accom_address_zip FROM accom_address GROUP BY accom_building_no) aba,
 			(SELECT accom_building_no, GROUP_CONCAT(accom_building_facility_name SEPARATOR ', ') accom_building_facility_name FROM accom_building_facility GROUP BY accom_building_no) abf,
-			(SELECT accom_building_no, CONCAT_WS('.',accom_building_image_name,accom_building_image_ext) accom_building_image FROM accom_building_image GROUP BY accom_building_no) abi,
+			(SELECT accom_building_no, CONCAT_WS('.',accom_building_image_name,accom_building_image_ext) accom_building_image_name FROM accom_building_image GROUP BY accom_building_no) abi,
 			(SELECT accom_building_no, GROUP_CONCAT(accom_building_spot_name SEPARATOR ', ') accom_building_spot_name FROM accom_building_spot GROUP BY accom_building_no) abs,
 			(SELECT iden_no, GROUP_CONCAT('#',hashtag SEPARATOR ' ') hashtag FROM hashtag GROUP BY iden_no) h,
 			(SELECT accom_building_no, COUNT(*) FROM accom_room GROUP BY accom_building_no) abr
@@ -249,7 +185,7 @@
 			(SELECT * FROM accom_building) ab,
 			(SELECT accom_building_no, GROUP_CONCAT(accom_address_zip) accom_address_zip FROM accom_address GROUP BY accom_building_no) aba,
 			(SELECT accom_building_no, GROUP_CONCAT(accom_building_facility_name SEPARATOR ', ') accom_building_facility_name FROM accom_building_facility GROUP BY accom_building_no) abf,
-			(SELECT accom_building_no, CONCAT_WS('.',accom_building_image_name,accom_building_image_ext) accom_building_image FROM accom_building_image GROUP BY accom_building_no) abi,
+			(SELECT accom_building_no, CONCAT_WS('.',accom_building_image_name,accom_building_image_ext) accom_building_image_name FROM accom_building_image GROUP BY accom_building_no) abi,
 			(SELECT accom_building_no, GROUP_CONCAT(accom_building_spot_name SEPARATOR ', ') accom_building_spot_name FROM accom_building_spot GROUP BY accom_building_no) abs,
 			(SELECT iden_no, GROUP_CONCAT('#',hashtag SEPARATOR ' ') hashtag FROM hashtag GROUP BY iden_no) h,
 			(SELECT accom_building_no, COUNT(*) FROM accom_room GROUP BY accom_building_no) abr
@@ -292,7 +228,7 @@
 	</select>
 	
 	<!-- 숙소-건물 상세 조회 -->
-	<select id="selectAccomBuildingOne" parameterType="int" resultMap="resultAccomBuildingOne">
+	<select id="selectAccomBuildingOne" parameterType="int" resultMap="resultAccomBuilding">
 		SELECT                                      
 			a.accom_building_no,
 			a.host_no,
@@ -339,8 +275,8 @@
 			ar.*, ari.*, art.*, h.*
 		FROM 
 			(SELECT * FROM accom_room) ar,
-			(SELECT accom_room_no, CONCAT_WS('.',accom_room_image_name,accom_room_image_ext) accom_room_image FROM accom_room_image GROUP BY accom_room_no) ari,
-			(SELECT accom_room_no, GROUP_CONCAT(accom_room_item_name) accom_room_item FROM accom_room_item GROUP BY accom_room_no) art,
+			(SELECT accom_room_no, CONCAT_WS('.',accom_room_image_name,accom_room_image_ext) accom_room_image_name FROM accom_room_image GROUP BY accom_room_no) ari,
+			(SELECT accom_room_no, GROUP_CONCAT(accom_room_item_name) accom_room_item_name FROM accom_room_item GROUP BY accom_room_no) art,
 			(SELECT iden_no, GROUP_CONCAT('#',hashtag SEPARATOR ' ') hashtag FROM hashtag GROUP BY iden_no) h
 		WHERE 
 			ar.accom_building_no = #{accomBuildingNo} AND
@@ -352,16 +288,49 @@
 			ar.update_date DESC;
 	</select>
 	
+	<!-- 숙소-건물-객실 상세 조회 -->
+	<select id="selectAccomRoomOne" parameterType="int" resultMap="resultAccomRoom">
+		SELECT                                      
+			ar.accom_room_no,                     
+			ar.accom_building_no,
+			ar.host_no,
+			ar.accom_room_name,
+			ar.accom_room_price,
+			ar.accom_room_description,
+			ar.accom_room_stan,
+			ar.accom_room_max,
+			ar.accom_room_state,
+			ar.create_date,
+			ar.update_date,
+			ari.accom_room_image_name,
+			ari.accom_room_image_ext,
+			art.accom_room_item_name,
+			art.accom_room_item_qnt,
+			art.accom_room_item_price,
+			h.hashtag
+		FROM      
+			accom_room ar,
+			(SELECT * FROM accom_room_image WHERE accom_room_no = #{accomRoomNo}) ari,
+			(SELECT * FROM accom_room_item WHERE accom_room_no = #{accomRoomNo}) art,
+			(SELECT * FROM hashtag WHERE iden_no = #{accomRoomNo}) h
+			                                     
+		WHERE                                      
+			ar.accom_room_state = '공개' AND
+			ar.accom_room_no = ari.accom_room_no AND
+			ar.accom_room_no = art.accom_room_no AND
+			ar.accom_room_no = h.iden_no
+	</select>
+	
 	
 	
 	<!-- 체험 목록 조회 -->
-	<select id="selectActivityList" resultMap="resultActivityList">
+	<select id="selectActivityList" resultMap="resultActivity">
 		SELECT 
 			ac.*, aca.*, aci.*, acs.*, h.*
 		FROM 
 			(SELECT * FROM activity) ac,
 			(SELECT activity_no, GROUP_CONCAT(activity_address_zip) activity_address_zip FROM activity_address GROUP BY activity_no) aca,
-			(SELECT activity_no, CONCAT_WS('.',activity_image_name,activity_image_ext) activity_image FROM activity_image GROUP BY activity_no) aci,
+			(SELECT activity_no, CONCAT_WS('.',activity_image_name,activity_image_ext) activity_image_name FROM activity_image GROUP BY activity_no) aci,
 			(SELECT activity_no, GROUP_CONCAT(activity_spot_name SEPARATOR ', ') activity_spot_name FROM activity_spot GROUP BY activity_no) acs,
 			(SELECT iden_no, GROUP_CONCAT('#',hashtag SEPARATOR ' ') hashtag FROM hashtag GROUP BY iden_no) h
 		WHERE 
@@ -391,13 +360,13 @@
 	</select>
 	
 	<!-- 체험 목록 검색 조회 -->
-	<select id="selectActivityListBySearch" parameterType="Map" resultMap="resultActivityList">
+	<select id="selectActivityListBySearch" parameterType="Map" resultMap="resultActivity">
 		SELECT 
 			ac.*, aca.*, aci.*, acs.*, h.*
 		FROM 
 			(SELECT * FROM activity) ac,
 			(SELECT activity_no, GROUP_CONCAT(activity_address_zip) activity_address_zip FROM activity_address GROUP BY activity_no) aca,
-			(SELECT activity_no, CONCAT_WS('.',activity_image_name,activity_image_ext) activity_image FROM activity_image GROUP BY activity_no) aci,
+			(SELECT activity_no, CONCAT_WS('.',activity_image_name,activity_image_ext) activity_image_name FROM activity_image GROUP BY activity_no) aci,
 			(SELECT activity_no, GROUP_CONCAT(activity_spot_name SEPARATOR ', ') activity_spot_name FROM activity_spot GROUP BY activity_no) acs,
 			(SELECT iden_no, GROUP_CONCAT('#',hashtag SEPARATOR ' ') hashtag FROM hashtag GROUP BY iden_no) h
 		WHERE 
@@ -447,7 +416,7 @@
 <!-- 	</select> -->
 
 	<!-- 체험 상세 조회 -->
-	<select id="selectActivityOne" parameterType="int" resultMap="resultActivityOne">
+	<select id="selectActivityOne" parameterType="int" resultMap="resultActivity">
 		SELECT                                      
 			a.activity_no,
 			a.host_no,

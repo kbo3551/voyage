@@ -226,13 +226,21 @@
 <%-- 															</c:forEach> --%>
 														</p>
 	                                                <div class="list-footer">
-	                                                    <ul class="pb-15">
-	                                                    	<li>
+	                                                	<ul class="pb-15">
+		                                                 	<li>
 																<c:forEach items="${ac.hashtagList }" var="ach" varStatus="status">
-														            ${ach.getHashtag()}
+														            <c:choose>
+																        <c:when test="${fn:length(ach.getHashtag()) gt 35}">
+																        	<c:out value="${fn:substring(ach.getHashtag(), 0, 34)}···"></c:out>
+																        </c:when>
+																        <c:otherwise>
+																	        <c:out value="${ach.getHashtag()}">
+																	        </c:out>
+																        </c:otherwise>
+																	</c:choose>
 																</c:forEach>
 															</li>	                                                    
-	                                                    </ul>
+		                                                </ul>
 	                                                    <ul>
 	                                                        <li style="width: 60%; text-align: left;">
 		                                                        <c:choose>

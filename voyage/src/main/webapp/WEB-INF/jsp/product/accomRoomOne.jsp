@@ -69,7 +69,7 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-8 col-lg-9">
                         <div class="hero-cap text-center pt-50 pb-20">
-                            <h2>체험 상세</h2>
+                            <h2>객실 상세</h2>
                         </div>
                         <!--Hero form -->
                     
@@ -85,18 +85,18 @@
                <div class="col-lg-8 posts-list">
                   <div class="single-post">
                      <div class="feature-img">
-                        <c:forEach items="${activityOne.activityImageList }" var="aci" varStatus="status">
-                   			<img src="${pageContext.request.contextPath}/resources/image/activity/${aci.getActivityImageName() }" alt="">
+                        <c:forEach items="${accomRoomOne.accomRoomImageList }" var="ari" varStatus="status">
+                   			<img src="${pageContext.request.contextPath}/resources/image/accom_room/${ari.getAccomRoomImageName() }" alt="">
                    		</c:forEach>
                      </div>
                      <div class="blog_details">
-                        <h2> ${activityOne.activityName }</h2>
+                        <h2> ${accomRoomOne.accomRoomName } room</h2>
                         <ul class="blog-info-link mt-3 pt-4 mb-0">
-                           <li><a style="color: #555555;"><i class="fa fa-user"></i> 최대인원 ${activityOne.activityMaxP }</a></li>
-                           <li><a style="color: #555555;"><i class="fa fa-comments"></i> 최대이용시간 ${activityOne.activityMaxT }</a></li>
+                           <li><a style="color: #555555;"><i class="fa fa-user"></i> 기준인원 ${accomRoomOne.accomRoomStan }</a></li>
+                           <li><a style="color: #555555;"><i class="fa fa-comments"></i> 최대인원 ${accomRoomOne.accomRoomMax }</a></li>
                         </ul>
                         <ul class="blog-info-link mt-3 mb-4">
-                           <li style="font-size: 1.3em;"><a style="color: #555555;"><i class="fa fa-user"></i>₩ ${activityOne.activityPrice }</a></li>
+                           <li style="font-size: 1.3em;"><a style="color: #555555;">₩ ${accomRoomOne.accomRoomPrice }</a></li>
                         </ul>
 <!--                         <p class="excert"> -->
 <%--                            DESCRIPTION : ${activity.activityDescription } --%>
@@ -109,9 +109,9 @@
 <!--                         </p> -->
                         <div class="quote-wrapper">
                            <div class="quotes">
-                              DESCRIPTION : ${activityOne.activityDescription }
+                              DESCRIPTION : ${accomRoomOne.accomRoomDescription }
                               <br><br>
-                              <small>오픈: ${activityOne.activityOpenHour } / 마감: ${activityOne.activityCloseHour }</small>
+<%--                               <small>오픈: ${accomRoomOne.activityOpenHour } / 마감: ${accomRoomOne.activityCloseHour }</small> --%>
                            </div>
                         </div>
 <!--                         <p> -->
@@ -372,7 +372,7 @@
 					<aside class="single_sidebar_widget tag_cloud_widget">
                         <h4 class="widget_title">해시태그</h4>
                         <ul class="list">
-                        	<c:forEach items="${activityOne.getHashtagList()}" var="h">
+                        	<c:forEach items="${accomRoomOne.getHashtagList()}" var="h">
 		                       <li>
 	                              <a href="${pageContext.request.contextPath}/#">${h.getHashtag() }</a>
 	                           </li>
@@ -381,18 +381,18 @@
                      </aside>
                      <aside class="single_sidebar_widget popular_post_widget">
                         <h3 class="widget_title">Host 추천 장소</h3>
-                        <c:forEach items="${activityOne.getActivitySpotList()}" var="acs">
-	                        <div class="media post_item">
-	                           <img src="${pageContext.request.contextPath}/assets/img/post/post_1.png" alt="post">
-	                           <div class="media-body">
-	                              <a>
-	                                 <h3 style="margin-top: 0px !important;">${acs.getActivitySpotName()}</h3>
-	                              </a>
-	                              <small style="color: #EB566C;">${acs.getActivitySpotCategory()}</small>
-	                              <h5 style="margin-top: 2px !important;">${acs.getActivitySpotDescription()}</h5>
-	                           </div>
-	                        </div>
-	                     </c:forEach>
+<%--                         <c:forEach items="${accomRoomOne.getActivitySpotList()}" var="acs"> --%>
+<!-- 	                        <div class="media post_item"> -->
+<%-- 	                           <img src="${pageContext.request.contextPath}/assets/img/post/post_1.png" alt="post"> --%>
+<!-- 	                           <div class="media-body"> -->
+<!-- 	                              <a> -->
+<%-- 	                                 <h3 style="margin-top: 0px !important;">${acs.getActivitySpotName()}</h3> --%>
+<!-- 	                              </a> -->
+<%-- 	                              <small style="color: #EB566C;">${acs.getActivitySpotCategory()}</small> --%>
+<%-- 	                              <h5 style="margin-top: 2px !important;">${acs.getActivitySpotDescription()}</h5> --%>
+<!-- 	                           </div> -->
+<!-- 	                        </div> -->
+<%-- 	                     </c:forEach> --%>
 <!--                         <div class="media post_item"> -->
 <!--                            <img src="assets/img/post/post_2.png" alt="post"> -->
 <!--                            <div class="media-body"> -->
@@ -484,37 +484,37 @@
 <!--                         <p class="mb-30">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or rannjdomised words which don't look even slightly believable. If you are going to use a passage of fhorem Ipvbsum, you need to orem Ipsum available, but the ma be sure there isvgnn't anything embarrassing.</p> -->
 <!--                         <p class="mb-30">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or rannjdomised words which don't look even slightly believable. If you are going to use a passage of fhorem Ipvbsum.</p> -->
 <!--                     </div> -->
-                    	<div class="row pb-30" style="justify-content: center; flex-wrap: nowrap !important;">
-                            <div class="col-sm-5">
-                            	<div style="text-align: left; padding-right: 8%;">
-	                                <h3 style="letter-spacing: 0.1em;"><i class="fa fa-map-marker"></i> Address</h3>
-	                                <p>
-	                                    <small>${activityOne.activityAddress.activityAddressZip }</small><br>
-	                                    <small>${activityOne.activityAddress.activityAddressDetail }</small>
-	                                </p>
-                                </div>
-                            </div>
-                            <!-- /.col-sm-4 -->
-                            <div class="col-sm-5">
-                            	<div style="text-align: left; padding-left: 8%;">
-	                                <h3><i class="fa fa-phone"></i> Call center</h3>
-	                                <p class="text-muted">전화문의</p>
-	                                <p><strong>${activityOne.activityPhone }</strong></p>
-                                </div>
-                            </div>
-                            <!-- /.col-sm-4 -->
-                            <div class="col-sm-5">
-                            	<div style="text-align: left;">
-	                                <h3><i class="fa fa-envelope"></i> Voyage E-mail</h3>
-	                                <p class="text-muted"></p>
-	                                <ul>
-	                                    <li><strong><a href="mailto:">oliweq@naver.com</a></strong>   </li>
-	                                    <li><strong><a href="${pageContext.request.contextPath}/qnaList">Q&A</a></strong> - Q&A 문의</li>
-	                                </ul>
-                                </div>
-                            </div>
-                            <!-- /.col-sm-4 -->
-                        </div>
+<!--                     	<div class="row pb-30" style="justify-content: center; flex-wrap: nowrap !important;"> -->
+<!--                             <div class="col-sm-5"> -->
+<!--                             	<div style="text-align: left; padding-right: 8%;"> -->
+<!-- 	                                <h3 style="letter-spacing: 0.1em;"><i class="fa fa-map-marker"></i> Address</h3> -->
+<!-- 	                                <p> -->
+<%-- 	                                    <small>${activityOne.activityAddress.activityAddressZip }</small><br> --%>
+<%-- 	                                    <small>${activityOne.activityAddress.activityAddressDetail }</small> --%>
+<!-- 	                                </p> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<!--                             /.col-sm-4 -->
+<!--                             <div class="col-sm-5"> -->
+<!--                             	<div style="text-align: left; padding-left: 8%;"> -->
+<!-- 	                                <h3><i class="fa fa-phone"></i> Call center</h3> -->
+<!-- 	                                <p class="text-muted">전화문의</p> -->
+<%-- 	                                <p><strong>${activityOne.activityPhone }</strong></p> --%>
+<!--                                 </div> -->
+<!--                             </div> -->
+<!--                             /.col-sm-4 -->
+<!--                             <div class="col-sm-5"> -->
+<!--                             	<div style="text-align: left;"> -->
+<!-- 	                                <h3><i class="fa fa-envelope"></i> Voyage E-mail</h3> -->
+<!-- 	                                <p class="text-muted"></p> -->
+<!-- 	                                <ul> -->
+<!-- 	                                    <li><strong><a href="mailto:">oliweq@naver.com</a></strong>   </li> -->
+<%-- 	                                    <li><strong><a href="${pageContext.request.contextPath}/qnaList">Q&A</a></strong> - Q&A 문의</li> --%>
+<!-- 	                                </ul> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<!--                             /.col-sm-4 -->
+<!--                         </div> -->
                             <!-- /.row -->
                 </div>
                 <!-- Map -->
@@ -597,64 +597,69 @@
                 <div class="listing-details-area pb-80">
                     <div class="container">
                         <div class="row">
-                       		<c:forEach items="${activityOneList}" var="ac" varStatus="status" end="2">
+                       		<c:forEach items="${accomRoomOneList}" var="ar" varStatus="status" end="2">
 	                            <div class="col-lg-4 col-md-6">
 	                                <div class="single-listing mb-30">
 	                                    <div class="list-img">
-	                                    	<a href="${pageContext.request.contextPath}/activityOne?activityNo=${ac.activityNo }">
-						                        <c:forEach items="${ac.activityImageList }" var="aci" varStatus="status">
-						                   			<img src="${pageContext.request.contextPath}/resources/image/activity/${aci.getActivityImageName() }" alt="">
+	                                    	<a href="${pageContext.request.contextPath}/accomRoomOne?accomRoomNo=${ar.accomRoomNo }&accomBuildingNo=${ar.accomBuildingNo }">
+	                                            <c:forEach items="${ar.accomRoomImageList }" var="ari" varStatus="status">
+						                   			<img src="${pageContext.request.contextPath}/resources/image/accom_room/${ari.getAccomRoomImageName() }" alt="">
 						                   		</c:forEach>
 					                   		</a>
                                             <!-- <span>Open</span> -->
                                         </div>
 	                                    <div class="list-caption">
 	                                        <span>
-   	                                        	<a href="${pageContext.request.contextPath}/activityOne?activityNo=${ac.activityNo }" style="color: #fff; text-decoration: none;">
+   	                                        	<a href="${pageContext.request.contextPath}/activityOne?activityNo=${ar.accomRoomNo }" style="color: #fff; text-decoration: none;">
    	                                        		Open
    	                                        	</a>
    	                                       	</span>
 	                                        <h3>
-                                              	<a href="${pageContext.request.contextPath}/activityOne?activityNo=${ac.activityNo }">
-                                              		${ac.getActivityName()}
+                                              	<a href="${pageContext.request.contextPath}/activityOne?activityNo=${ar.accomRoomNo }">
+                                              		${ar.getAccomRoomName()} room
                                               	</a>
                                             </h3>
 	                                        <ul class="blog-info-link mt-3 pt-4 mb-0">
-					                           <li><a style="color: #555555;"><i class="fa fa-user"></i> 최대인원 ${activityOne.activityMaxP }</a></li>
-					                           <li><a style="color: #555555;"><i class="fa fa-comments"></i> 최대이용시간 ${activityOne.activityMaxT }</a></li>
+					                           <li><a style="color: #555555;"><i class="fa fa-user"></i> 기준인원 ${ar.accomRoomStan }</a></li>
+					                           <li><a style="color: #555555;"><i class="fa fa-user"></i> 최대인원 ${ar.accomRoomMax }</a></li>
 					                        </ul>
 					                        <ul class="blog-info-link mt-3 mb-4">
-					                           <li style="font-size: 1.3em;"><a style="color: #555555;"><i class="fa fa-user"></i>₩ ${activityOne.activityPrice }</a></li>
+					                           <li style="font-size: 1.3em;"><a style="color: #555555;">₩ ${ar.accomRoomPrice }</a></li>
 					                        </ul>
+					                        <ul class="pt-1">
+												<c:forEach items="${ar.accomRoomItemList }" var="art" varStatus="status">
+										            <li style="color: #555555;">${art.getAccomRoomItemName()}</li>
+												</c:forEach>
+											</ul>
 	                                        <div class="list-footer">
                                                  <ul class="pb-15">
-                                                 	<li>
-														<c:forEach items="${ac.hashtagList }" var="ach" varStatus="status">
-												            <c:choose>
-														        <c:when test="${fn:length(ach.getHashtag()) gt 35}">
-														        	<c:out value="${fn:substring(ach.getHashtag(), 0, 34)}···"></c:out>
-														        </c:when>
-														        <c:otherwise>
-															        <c:out value="${ach.getHashtag()}">
-															        </c:out>
-														        </c:otherwise>
-															</c:choose>
+		                                             <li>
+														<c:forEach items="${ar.hashtagList }" var="arh" varStatus="status">
+														        <c:choose>
+															        <c:when test="${fn:length(arh.getHashtag()) gt 35}">
+															        	<c:out value="${fn:substring(arh.getHashtag(), 0, 34)}···"></c:out>
+															        </c:when>
+															        <c:otherwise>
+																        <c:out value="${arh.getHashtag()}">
+																        </c:out>
+															        </c:otherwise>
+																</c:choose>
 														</c:forEach>
-													</li>	                                                    
+													 </li>	                                                    
                                                  </ul>
                                                  <ul>
                                                      <li style="width: 60%; text-align: left;">
 		                                                <c:choose>
-													        <c:when test="${fn:length(ac.getActivityDescription()) gt 35}">
-													        	<c:out value="${fn:substring(ac.getActivityDescription(), 0, 34)}···"></c:out>
+													        <c:when test="${fn:length(ar.getAccomRoomDescription()) gt 35}">
+													        	<c:out value="${fn:substring(ar.getAccomRoomDescription(), 0, 34)}···"></c:out>
 													        </c:when>
 													        <c:otherwise>
-														        <c:out value="${ac.getActivityDescription()}">
+														        <c:out value="${ar.getAccomRoomDescription()}">
 														        </c:out>
 													        </c:otherwise>
 														</c:choose>
 													</li>
-                                                     <li style="width: 40%; text-align: right;">${ac.getActivityPhone() }</li>
+<%--                                                      <li style="width: 40%; text-align: right;">${ac.getActivityPhone() }</li> --%>
                                                  </ul>
                                              </div>
 	                                    </div>

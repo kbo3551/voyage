@@ -222,7 +222,7 @@
 		                            <div class="col-lg-4 col-md-6">
 		                                <div class="single-listing mb-30">
 		                                    <div class="list-img">
-	                                            <a href="${pageContext.request.contextPath}/accomRoomOne?accomRoomNo=${ar.accomRoomNo }">
+	                                            <a href="${pageContext.request.contextPath}/accomRoomOne?accomRoomNo=${ar.accomRoomNo }&accomBuildingNo=${accomBuildingOne.accomBuildingNo }">
 	                                            	<div style="height: 200px; overflow: hidden;">
 	                                            		<c:forEach items="${ar.accomRoomImageList }" var="ari" varStatus="status">
 	                                            			<img src="${pageContext.request.contextPath}/resources/image/accom_room/${ari.getAccomRoomImageName() }" alt="">

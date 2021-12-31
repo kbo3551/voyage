@@ -102,6 +102,10 @@ public class ProductService {
 		return accomRoomList;
 	}
 	
+	// [사용자] 숙소-건물-객실 상세 조회
+	public AccomRoom getAccomRoomOne (int accomRoomNo) {
+		return productMapper.selectAccomRoomOne(accomRoomNo);
+	}	
 	
 	// [사용자] 체험 목록 조회
 	public List<Activity> getActivityList(int currentPage, int ROW_PER_PAGE) {
