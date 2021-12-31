@@ -10,7 +10,7 @@
 		FROM
 			activity_payment
 		WHERE
-			host_no = '3'
+			host_no = #{hostNo}
 			AND
 			update_date BETWEEN
 			DATE_ADD(NOW(),INTERVAL -1 MONTH)
@@ -29,7 +29,7 @@
 		FROM
 			accom_payment
 		WHERE
-			host_no = '3'
+			host_no = #{hostNo}
 			AND
 			update_date BETWEEN
 			DATE_ADD(NOW(),INTERVAL -1 MONTH)
@@ -92,7 +92,7 @@
 	</select>
 
 	<!-- 해당 사업자의 체험 총 수익, 월별 수익 -->
-	<select id="selectActivityProfitByHost" resultType="int">
+	<select id="selectActivityProfitByHost" resultType="long">
 		SELECT
 			SUM(activity_amount)
 		FROM
@@ -112,7 +112,7 @@
 	</select>
 
 	<!-- 해당 사업자의 숙소 총 수익, 월별 수익 -->
-	<select id="selectAccomProfitByHost" resultType="int">
+	<select id="selectAccomProfitByHost" resultType="long">
 		SELECT
 			SUM(accom_amount)
 		FROM
@@ -132,7 +132,7 @@
 	</select>
 
 	<!-- 해당 사업자의 총 수익, 월별 수익 -->
-	<select id="selectAllProfitByHost" resultType="int">
+	<select id="selectAllProfitByHost" resultType="long">
 		SELECT
 			SUM(
 			(SELECT

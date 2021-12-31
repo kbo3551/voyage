@@ -20,6 +20,56 @@ import lombok.extern.slf4j.Slf4j;
 public class PaymentService {
 	@Autowired private PaymentMapper paymentMapper;
 	
+	// 최근 한달간 체험 일별 수익
+	public List<ActivityPayment> selectActivityProfitByMonthToDate(int hostNo) {
+		return paymentMapper.selectActivityProfitByMonthToDate(hostNo);
+	}
+	
+	// 최근 한달간 숙소 일별 수익
+	public List<AccomPayment> selectAccomProfitByMonthToDate(int hostNo) {
+		return paymentMapper.selectAccomProfitByMonthToDate(hostNo);
+	}
+	
+	// 해당 사업자의 분기별(3개월) 가장 많은 수익을 벌어들인 체험
+	public ActivityPayment selectActivityProfitByQuarterly(int hostNo) {
+		return paymentMapper.selectActivityProfitByQuarterly(hostNo);
+	}
+	
+	// 해당 사업자의 분기별(3개월) 가장 많은 수익을 벌어들인 숙소
+	public AccomPayment selectAccomProfitByQuarterly(int hostNo) {
+		return paymentMapper.selectAccomProfitByQuarterly(hostNo);
+	}
+	
+	// 해당 사업자의 체험 월별 총 수익
+	public long selectActivityProfitByHostToMonth(int hostNo) {
+		return paymentMapper.selectActivityProfitByHost(hostNo, 1);
+	}
+	
+	// 해당 사업자의 체험 총 수익
+	public long selectActivityProfitByHost(int hostNo) {
+		return paymentMapper.selectActivityProfitByHost(hostNo, null);
+	}
+	
+	// 해당 사업자의 숙소 월별 총 수익
+	public long selectAccomProfitByHostToMonth(int hostNo) {
+		return paymentMapper.selectAccomProfitByHost(hostNo, 1);
+	}
+	
+	// 해당 사업자의 숙소 총 수익
+	public long selectAccomProfitByHost(int hostNo) {
+		return paymentMapper.selectAccomProfitByHost(hostNo, null);
+	}
+	
+	// 해당 사업자의 월별 총 수익
+	public long selectAllProfitByHostToMonth(int hostNo) {
+		return paymentMapper.selectAllProfitByHost(hostNo, 1);
+	}
+	
+	// 해당 사업자의 총 수익
+	public long selectAllProfitByHost(int hostNo) {
+		return paymentMapper.selectAllProfitByHost(hostNo, null);
+	}
+	
 	// 체험 결제 취소
 	public int cancelActivityPayment(int activityPaymentNo) {
 		return paymentMapper.cancelActivityPayment(activityPaymentNo);
