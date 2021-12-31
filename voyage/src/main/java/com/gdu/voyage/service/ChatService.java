@@ -52,4 +52,24 @@ public class ChatService {
 		}
 		return returnMap;
 	}
+	
+	// [사용자] 채팅방 접속 시 채팅 내용 조회 
+	public List<Map<String, Object>> getChatgetChatByToMember(Member loginMember, int chatRoom) {
+		// 받아온 memberId와 memberNickname 디버깅 
+		log.debug("☆[지혜]service☆ memberId : " + loginMember.getMemberId());
+		log.debug("☆[지혜]service☆ memberNickname : " + loginMember.getMemberNickname());
+		log.debug("☆[지혜]service☆ chatRoom : " + chatRoom);
+		
+		// 매개변수 가공
+		Map<String, Object> paramMap = new HashMap<>();
+		
+		paramMap.put("chatRoom", chatRoom);
+		paramMap.put("memberNickname", loginMember.getMemberNickname());
+		
+		// 채팅 내용 조회 
+		List<Map<String, Object>> chatListByToMember = chatMapper.selectChatByToChatRoom(paramMap);
+		log.debug("☆[지혜]service☆ getChatgetChatByToMember.chatListByToMember : " + chatListByToMember);
+
+		return chatListByToMember;
+	}
 }

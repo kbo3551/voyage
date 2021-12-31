@@ -63,4 +63,25 @@
 		WHERE
 			c.chat_no = #{chatNo} AND (NOT m.member_nickname IN(#{memberNickname}))
 	</select>
+	
+	
+	<!-- [사용자] 채팅방 접속 시 채팅 내용 조회  -->
+	<select id="selectChatByToChatRoom" parameterType="Map" resultType="java.util.Map">
+		SELECT
+			c.chat_no chatNo,
+			c.chat_room chatRoom,
+			c.to_member_id toMemberId,
+			c.from_member_id fromMemberId,
+			c.chat_content chatContent,
+			c.create_date createDate,
+			c.chat_read chatRead,
+			m.member_nickname memberNickname,
+			m.member_level memberLevel
+		FROM
+			chat c
+			LEFT JOIN member m
+			ON c.to_member_id = m.member_id OR c.from_member_id = m.member_id
+		WHERE
+			c.chat_room = #{chatRoom} AND (NOT m.member_nickname IN(#{memberNickname}))
+	</select>
 </mapper>
