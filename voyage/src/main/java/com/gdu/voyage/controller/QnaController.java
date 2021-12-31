@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.gdu.voyage.service.QnaService;
 import com.gdu.voyage.vo.Member;
@@ -91,20 +94,22 @@ public class QnaController {
 	}
 	// [Member] 질문 작성 post
 	@PostMapping("/addQ")
-	public String addQ(HttpServletRequest request, QnaForm qnaForm) throws Exception {
+	public String addQ(HttpServletRequest request, QnaForm qnaForm, 
+			HttpSession session) throws Exception {
 		// memberId, memberNickname값을 세션에서 가져옴
-		Member loginMember = (Member) request.getSession().getAttribute("loginMember");
-		String memberId = loginMember.getMemberId();
+		Member loginMember = (Member) session.getAttribute("loginMember");
 		// 디버그 코드
 		log.debug("★★★★★★★★★★★ [다원] addQ_loginMember_Controller() debug" + loginMember.toString());
-		// qnaForm에 받아온 값 셋팅
-		qnaForm.getQna().setMemberId(memberId);
-		// 디버그 코드
+		
+		String memberId = loginMember.getMemberId();
+		String memberNickname = loginMember.getMemberNickname();
+
+		//log.debug("★★★★★★★★★★★ [다원] addQ_qna_Controller() debug" + qna.toString());
 		log.debug("★★★★★★★★★★★ [다원] addQ_qnaForm_Controller() debug" + qnaForm.toString());
 		// 이미지 파일 절대 경로 설정
 		String realPath = request.getServletContext().getRealPath("resources/image/qna//");
 		
-		qnaService.addQ(qnaForm, realPath);
+		qnaService.addQ(qnaForm, realPath, memberId, memberNickname);
 		
 		return "redirect:/qnaList?pageNo=1";
 	}
@@ -155,8 +160,8 @@ public class QnaController {
 	}
 		
 	@PostMapping("/removeQ")
-	public String removeQ(Qna qna) {
-		qnaService.removeQ(qna);
+	public String removeQ(int qnaNo) {
+		qnaService.removeQ(qnaNo);
 		return "redirect:/qnaList?pageNo=1";
 	}
 	

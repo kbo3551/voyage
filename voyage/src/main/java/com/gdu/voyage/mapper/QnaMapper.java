@@ -24,15 +24,15 @@ public interface QnaMapper {
 	// 질문 수정
 	int modifyQ(Qna qna);
 	// 질문 삭제
-	int removeQ(Qna qna);
+	int removeQ(int qnaNo);
 	// 질문 추가
-	int addQ(QnaForm qnaForm);
+	int addQ(Qna qna);
 	
 	//[Member] Image part
 	// 이미지 추가
 	int addQImg(QnaImg qnaImg);
 	// 이미지 삭제
-	int removeQImg(QnaImg qnaImg);
+	int removeQImg(int qnaNo);
 	
 	// [Admin] Only Admin part
 	// 답변 없는 질문 list

@@ -200,29 +200,29 @@
                     	<!-- 원본 : Massage -->
                         <h3 class="mb-40">Question</h3>
                         <!-- Form -->
-                        <form class="form-contact contact_form mb-80" enctype="multipart/form-data" action="${pageContext.request.contextPath}/addQ" method="post" id="addQForm">
+                        <form method="post" class="form-contact contact_form mb-80" action="${pageContext.request.contextPath}/addQ" enctype="multipart/form-data" id="qnaForm">
                             <div class="row">
                                 <div class="col-sm-6">
                                 	<div class="form-group">
-                                		<input class="form-controle error"  hidden="hidden" name="memberId" id="memberId" type="text" value="${qnaForm.memberId}" placeholder="아이디를 입력해주세요">
+                                		<input class="form-controle error"  hidden="hidden" name="qna.memberId" id="memberId" type="text" value="${qna.memberId}" placeholder="아이디를 입력해주세요">
                                 	</div>
                                     <div class="form-group">
                                     	<!-- 
                                     		원본 : <input class="form-control error" name="name" id="name" type="text"  placeholder="Your Name">
                                     	 -->
-                                    	 <input class="form-control error" name="memberNickname" id="memberNickname" type="text" placeholder="닉네임을 입력해주세요">
+                                    	 <input class="form-control error" name="qna.memberNickname" id="memberNickname" type="text" placeholder="닉네임을 입력해주세요">
                                     </div>
                                     <div class="form-group">
                                     	
 	                                    <!-- 
 	                                    	원본 : <input class="form-control error" name="email" id="email" type="email" placeholder = "Enter email address">
 	                                    -->
-	                                    <input class="form-control error" name="qnaTitle" id="qnaTitle" type="text"	placeholder="제목을 입력해주세요">
+	                                    <input class="form-control error" name="qna.qnaTitle" id="qnaTitle" type="text"	placeholder="제목을 입력해주세요">
   									</div>
                                 	<table class="form-group">
                                 		<tr>
                                 			<td>
-                                				<select name="qnaCategory" id="qnaCategory">
+                                				<select name="qna.qnaCategory" id="qnaCategory">
 				                            		<option value="예약문의">예약</option>
 				                                	<option value="결제문의">결제</option>
 				                                	<option value="기타">기타</option>
@@ -230,12 +230,12 @@
                                 			</td>
                                 			
                                 			<td>
-                                				<input name="qnaSecret" id="qnaSecret" type="checkbox" value="비밀글"/>
+                                				<input name="qna.qnaSecret" id="qnaSecret" type="checkbox" value="비밀글"/>
 	                                			<label><span>비밀글</span></label>
                                 			</td>
                                 			
                                 			<td>
-                                				<input name="qnaSecret" id="qnaSecret" type="checkbox" value="공개글"/>
+                                				<input name="qna.qnaSecret" id="qnaSecret" type="checkbox" value="공개글"/>
 	                                			<label><span>공개글</span></label>
                                 			</td>
                                 		</tr>
@@ -243,7 +243,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <textarea class="form-control w-100 error" name="qnaContent" id="qnaContent" cols="30" rows="9" placeholder="내용을 상세히 입력해주세요. 1) 정확한 날짜와 시간  2) 사진이나 이미지 첨부  3) 상세한 상황 설명 "></textarea>
+                                        <textarea class="form-control w-100 error" name="qna.qnaContent" id="qnaContent" cols="30" rows="9" placeholder="내용을 상세히 입력해주세요. 1) 정확한 날짜와 시간  2) 사진이나 이미지 첨부  3) 상세한 상황 설명 "></textarea>
                                     </div>
                                 </div>
                                 <div>파일 첨부</div>
