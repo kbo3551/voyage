@@ -74,7 +74,7 @@ public class QnaService {
 	}
 	
 	// [Member] Qna 게시판 질문 수정
-	public int modifyQ(Qna qna, QnaImg qnaImg) {
+	public int modifyQ(Qna qna) {
 		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_modifyQ_Qna debug" + qnaMapper.modifyQ(qna));
 		return qnaMapper.modifyQ(qna);
 	}
@@ -86,7 +86,6 @@ public class QnaService {
 		qnaMapper.removeQImg(qnaNo);
 	}
 	// [Member] Qna 게시판 질문 작성
-	@Transactional
 	public void addQ(QnaForm qnaForm, String realPath, String memberId, String memberNickname) throws Exception {
 		// qnaForm값 디버깅 코드
 		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_qnaForm debug" + qnaForm.toString());
@@ -94,8 +93,10 @@ public class QnaService {
 		Qna qna = qnaForm.getQna();
 		qna.setMemberId(memberId);
 		qna.setMemberNickname(memberNickname);
+		// 문의글 등록
 		qnaMapper.addQ(qna);
 		// 이미지 추가에 사용할 qnaNo 값 확인
+		// qnaNo : auto Increment로 입력 받음
 		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_qnaNo debug" + qna.getQnaNo());
 		// 이미지 추가
 		List <MultipartFile> qList = qnaForm.getQnaImg();

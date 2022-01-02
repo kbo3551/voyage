@@ -1,7 +1,5 @@
 package com.gdu.voyage.controller;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,26 +8,22 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-
 import com.gdu.voyage.service.QnaService;
 import com.gdu.voyage.vo.Member;
 import com.gdu.voyage.vo.Qna;
 import com.gdu.voyage.vo.QnaAnswer;
 import com.gdu.voyage.vo.QnaForm;
-import com.gdu.voyage.vo.QnaImg;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
+@Transactional
 public class QnaController {
 	@Autowired QnaService qnaService;
 	private final int ROW_PER_PAGE = 4;
@@ -134,9 +128,9 @@ public class QnaController {
 	}
 
 	@PostMapping("/modifyQ")
-	public String modifyQ(Qna qna, QnaImg qnaImg) {
-		log.debug("★★★★★★★★★★★ [다원] qna_modifyQ_Controller() debug" + qnaService.modifyQ(qna, qnaImg));
-		qnaService.modifyQ(qna, qnaImg);
+	public String modifyQ(Qna qna) {
+		log.debug("★★★★★★★★★★★ [다원] qna_modifyQ_Controller() debug" + qnaService.modifyQ(qna));
+		qnaService.modifyQ(qna);
 		return "redirect:/getQnaOne?qnaNo=" + qna.getQnaNo();
 	}
 	// [Member] 질문 삭제

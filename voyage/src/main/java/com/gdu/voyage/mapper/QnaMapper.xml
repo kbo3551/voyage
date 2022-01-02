@@ -112,6 +112,9 @@
 			NOW(),
 			NOW()
 		)
+		<selectKey keyProperty="qnaNo" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 	</insert>
 	<!-- 질문 수정 -->
 	<update id="modifyQ" parameterType="com.gdu.voyage.vo.Qna">
