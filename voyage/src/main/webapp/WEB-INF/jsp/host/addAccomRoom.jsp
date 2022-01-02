@@ -349,15 +349,15 @@
 		numItem = numItem + 1;
 		let inputItem = '<div id="itemForm">';
 		inputItem += '<label><small>Name</small></label>';
-		inputItem += '<input type="text" class="form-control" id="accomRommItemName" name="accomRoomItem[0].accomRoomItemName" placeholder="ex) 칫솔" style="height:34px;">';
+		inputItem += '<input type="text" class="form-control" id="accomRommItemName" name="accomRoomItem['+numItem+'].accomRoomItemName" placeholder="ex) 칫솔" style="height:34px;">';
 		inputItem += '<label><small>Quantity</small></label>';
 		inputItem += '<div class="input-group">';
-		inputItem += '<input type="number" class="form-control" name="accomRoomItem[0].accomRoomItemQnt" placeholder="ex) 2" style="height:34px;">';
+		inputItem += '<input type="number" class="form-control" name="accomRoomItem['+numItem+'].accomRoomItemQnt" placeholder="ex) 2" style="height:34px;">';
 		inputItem += '<span class="input-group-text">개</span>';
 		inputItem += '</div>';
 		inputItem += '<label><small>Price</small></label>';
 		inputItem += '<div class="input-group">';
-		inputItem += '<input type="number" class="form-control" name="accomRoomItem[0].accomRoomItemPrice" placeholder="ex) 2000" style="height:34px;">';
+		inputItem += '<input type="number" class="form-control" name="accomRoomItem['+numItem+'].accomRoomItemPrice" placeholder="ex) 2000" style="height:34px;">';
 		inputItem += '<span class="input-group-text">원</span>';
 		inputItem += '</div>';
 		inputItem += '<hr>';
