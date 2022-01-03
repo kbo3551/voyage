@@ -100,7 +100,7 @@
 				                                            <li><a href="${contextPath}/member/selectMyOrderList">주문목록</a></li>
 				                                            <li><a href="${contextPath}/member/selectMyInterest">관심상품</a></li>
 				                                            <li><a href="${contextPath}/member/coupon">쿠폰</a></li>
-				                                            <li><a id="chatBtn" data-toggle="modal" data-target="#chatMain">채팅</a></li>
+				                                            <li><a id="chatBtn" data-toggle="modal" data-target="#myModal">채팅</a></li>
 				                                            <li><a href="${contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
@@ -176,32 +176,60 @@
         <!-- Header End -->
     </header>
     
-    <!-- The Modal -->
-	 <div class="modal" id="chatMain">
-	 	<div class="modal-dialog modal-dialog-scrollable">
-	 		<div class="modal-content">
-	      
-	        <!-- Modal Header -->
-	        <div class="modal-header">
-				<h2 class="modal-title">채팅</h2>
-				<button type="button" class="close" data-dismiss="modal">×</button>
-	        </div>
-	        
-	        <!-- Modal body -->
-	        <div class="modal-body">
-				<div>
-				<table class="table table-hover">
-					<tbody id="chatList">
-					</tbody>
-				</table>
+	<!-- The Modal : 채팅방 목록 -->
+	<div class="modal fade" id="myModal">
+		<div class="modal-dialog modal-dialog-scrollable">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h2 class="modal-title">채팅</h2>
+					<button type="button" class="close" data-dismiss="modal">×</button>
 				</div>
 				
-				<!-- Modal footer -->
-				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div>
+						<table class="table table-hover">
+							<tbody id="chatList">
+							</tbody>
+						</table>
+					</div>
+		
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					</div>
 				</div>
+				
 			</div>
-			
+		</div>
+	</div>
+	
+		<!-- The Modal : 1:1 채팅방 -->
+	<div class="modal fade" id="myModal2">
+		<div class="modal-dialog modal-dialog-scrollable">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h2 class="modal-title">채팅</h2>
+					<button type="button" class="close" data-dismiss="modal">×</button>
+				</div>
+				
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div>
+						<table class="table table-hover">
+							<tbody id="chatRoomList">
+							</tbody>
+						</table>
+					</div>
+		
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+				
 			</div>
 		</div>
 	</div>
