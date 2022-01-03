@@ -65,7 +65,7 @@ public class PaymentRestController {
 		 return accomQuarterlyProfit;
 	}
 	
-	// 사업자 체험 총 수익
+	// 사업자 체험 월 수익
 	@GetMapping("/selectActivityProfitByHostToMonth")
 	public long selectActivityProfitByHostToMonth(int hostNo) {
 		 log.trace("PaymentRestController 실행");
@@ -125,7 +125,7 @@ public class PaymentRestController {
 	public long selectAllProfitByHost(int hostNo) {
 		 log.trace("PaymentRestController 실행");
 		 
-		 long totalProfit = paymentService.selectAccomProfitByHost(hostNo);
+		 long totalProfit = paymentService.selectAllProfitByHost(hostNo);
 		 log.trace("★controller★ totalProfit : "+totalProfit);
 		 
 		 return totalProfit;
