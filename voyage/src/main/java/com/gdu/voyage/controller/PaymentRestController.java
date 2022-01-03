@@ -20,7 +20,7 @@ public class PaymentRestController {
 	@Autowired PaymentService paymentService;
 	
 	// 최근 한달간 체험 일별 수익
-	@GetMapping("/selectAccomProfitByMonthToDate")
+	@GetMapping("/selectActivityProfitByMonthToDate")
 	public List<ActivityPayment> selectActivityProfitByMonthToDate(int hostNo) {
 		 log.trace("PaymentRestController 실행");
 		 
