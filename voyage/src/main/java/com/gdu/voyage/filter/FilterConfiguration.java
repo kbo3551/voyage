@@ -39,5 +39,12 @@ public class FilterConfiguration implements WebMvcConfigurer {
 		return registrationBean; 
 	} 
 	
+	@Bean 
+	public FilterRegistrationBean<LoginFilter> LoginFilterRegistrationBean() { 
+		FilterRegistrationBean<LoginFilter> registrationBean = new FilterRegistrationBean<>(); 
+		registrationBean.setFilter(new LoginFilter()); 
+		registrationBean.addUrlPatterns("/login"); 
+		return registrationBean; 
+	} 
 	
 }
