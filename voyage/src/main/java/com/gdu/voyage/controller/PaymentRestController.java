@@ -45,10 +45,10 @@ public class PaymentRestController {
 	
 	// 해당 사업자의 분기별(3개월) 가장 많은 수익을 벌어들인 체험
 	@GetMapping("/selectActivityProfitByQuarterly")
-	public ActivityPayment selectActivityProfitByQuarterly(int hostNo) {
+	public String selectActivityProfitByQuarterly(int hostNo) {
 		 log.trace("PaymentRestController 실행");
 		 
-		 ActivityPayment activityQuarterlyProfit = paymentService.selectActivityProfitByQuarterly(hostNo);
+		 String activityQuarterlyProfit = paymentService.selectActivityProfitByQuarterly(hostNo).getActivity().getActivityName();
 		 log.trace("★controller★ activityQuarterlyProfit : "+activityQuarterlyProfit);
 		 
 		 return activityQuarterlyProfit;
@@ -56,10 +56,10 @@ public class PaymentRestController {
 	
 	// 해당 사업자의 분기별(3개월) 가장 많은 수익을 벌어들인 숙소
 	@GetMapping("/selectAccomProfitByQuarterly")
-	public AccomPayment selectAccomProfitByQuarterly(int hostNo) {
+	public String selectAccomProfitByQuarterly(int hostNo) {
 		 log.trace("PaymentRestController 실행");
 		 
-		 AccomPayment accomQuarterlyProfit = paymentService.selectAccomProfitByQuarterly(hostNo);
+		 String accomQuarterlyProfit = paymentService.selectAccomProfitByQuarterly(hostNo).getAccomBuilding().getAccomBuildingName();
 		 log.trace("★controller★ accomQuarterlyProfit : "+accomQuarterlyProfit);
 		 
 		 return accomQuarterlyProfit;
