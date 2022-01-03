@@ -133,7 +133,7 @@
 			(SELECT accom_building_no, CONCAT_WS('.',accom_building_image_name,accom_building_image_ext) accom_building_image_name FROM accom_building_image GROUP BY accom_building_no) abi,
 			(SELECT accom_building_no, GROUP_CONCAT(accom_building_spot_name SEPARATOR ', ') accom_building_spot_name FROM accom_building_spot GROUP BY accom_building_no) abs,
 			(SELECT iden_no, GROUP_CONCAT('#',hashtag SEPARATOR ' ') hashtag FROM hashtag GROUP BY iden_no) h,
-			(SELECT accom_building_no, COUNT(*) FROM accom_room GROUP BY accom_building_no) abr
+			(SELECT accom_building_no, COUNT(*) roomCnt FROM accom_room GROUP BY accom_building_no) abr
 		WHERE 
 			accom_building_state_admin = '승인완료' AND
 			accom_building_state = '공개' AND

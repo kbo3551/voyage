@@ -204,6 +204,11 @@ public class ProductController {
 		return "/product/activityOne";
 	}
 	
+	@GetMapping("/calendar")
+	public String getCalendar() {
+		return "/product/calendar";
+	}
+	
 	@GetMapping("/setProductCategory")
 	public String setProductCategory() {
 		log.debug("ProductController.setProductCategory 실행");
