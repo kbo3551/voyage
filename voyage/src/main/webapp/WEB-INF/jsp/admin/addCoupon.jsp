@@ -118,8 +118,8 @@
 		} else if($("#deadLine").val() == ""){
 			alert('쿠폰의 유효기간을 입력해주세요');
 			return;
-		} else if($("#couponTerms").val() < $("#couponDiscount").val()){
-			alert('할인 금액이 조건금액 보다 큽니다.');
+		} else if($("#couponTerms").val() <= $("#couponDiscount").val()){
+			alert('할인 금액이 조건금액과 같거나 큽니다.');
 			return;
 		} else {
 			AddCoupon.submit();

@@ -104,7 +104,7 @@
         <div class="content-area user-profiel" style="background-color: #FCFCFC;">&nbsp;
             <div class="container">   
                 <div class="row">
-                    <div class="col-sm-10 col-sm-offset-1 profiel-container">
+                    <div>
                    		<h1 class="page-title">Hello!  <span class="orange strong" style="color: olive;">${loginMember.getMemberNickname()}</span></h1>
 						<br>
                         <div class="profiel-header">
@@ -147,7 +147,8 @@
 							<h3 class="text-danger">&emsp;보유하신 쿠폰 목록이 없습니다.</h3>
 						</c:otherwise>
 					</c:choose>
-                <!-- 회운이 발급받은 쿠폰 페이징 -->
+					<br>
+                <!-- 회원이 발급받은 쿠폰 페이징 -->
                 <c:if test="${memberCouponCount > 0}">
                 <div class="container">
                 <ul class="nav justify-content-center bg-light">
@@ -222,6 +223,7 @@
                   </div>
                </div>
             </div>
+            <br>
       	<!-- 발급가능한 쿠폰 페이징 -->
            <c:if test="${couponCount > 0}">
                 <div class="container">
