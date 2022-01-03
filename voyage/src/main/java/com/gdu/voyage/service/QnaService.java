@@ -31,8 +31,7 @@ public class QnaService {
 	// Qna 게시판 목록 상세 내용
 	public Qna getQnaOneAndAnswer(int qnaNo) {
 		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] selectQnaOne debug >>>" + qnaMapper.selectQnaOneAndAnswer(qnaNo));
-		Qna qna = null;
-		qna = qnaMapper.selectQnaOneAndAnswer(qnaNo);
+		Qna qna = qnaMapper.selectQnaOneAndAnswer(qnaNo);
 		return qna;
 	}
 	// Qna 게시판 목록 조회
@@ -76,9 +75,11 @@ public class QnaService {
 	// [Member] Qna 게시판 질문 삭제
 	public void removeQ(int qnaNo) {
 		log.debug(qnaNo + "☆☆☆☆☆☆☆☆☆☆[다원] QnaService_removeQ_Qna debug");
-		qnaMapper.removeQ(qnaNo);
 		// 이미지 삭제
 		qnaMapper.removeQImg(qnaNo);
+		// 문의글 삭제
+		qnaMapper.removeQ(qnaNo);
+		
 	}
 	// [Member] Qna 게시판 질문 작성
 	public void addQ(QnaForm qnaForm, String realPath, String memberId, String memberNickname) throws Exception {

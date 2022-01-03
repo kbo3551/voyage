@@ -40,10 +40,8 @@
 		</association>
 		<!-- Img -->
 		<collection property="qnaImg" ofType="com.gdu.voyage.vo.QnaImg">
-			<id column="qna_image_no" property="qnaImgNo"/>
 			<result column="qna_image_name" property="qnaImgName"/>
 			<result column="qna_image_ext" property="qnaImgExt"/>
-			<result column="qna_image_size" property="qnaImgSize"/>
 		</collection>
 	</resultMap>
 	<!-- resultMap End -->
@@ -82,13 +80,21 @@
 			q.qna_secret,
 			q.create_date,
 			q.update_date,
-			an.admin_id,
-			an.answer_content
+			qa.admin_id,
+			qa.answer_content,
+			qi.qna_image_name,
+			qi.qna_image_ext
 		FROM 
-			qna q LEFT JOIN qna_answer an
+			qna q 
+		LEFT JOIN 
+			qna_answer qa
 		ON 
-			q.qna_no = an.qna_no
-		WHERE
+			q.qna_no = qa.qna_no
+		LEFT JOIN
+			qna_image qi
+		ON 
+			q.qna_no = qi.qna_no
+		WHERE 
 			q.qna_no = #{qnaNo}
 	</select>
 	<!-- 질문 등록 -->
@@ -131,7 +137,6 @@
 	<delete id="removeQ" parameterType="com.gdu.voyage.vo.Qna">
 		DELETE FROM qna 
 		WHERE qna_no = #{qnaNo}
-		AND member_nickname = #{memberNickname}
 	</delete>
 	<!-- 이미지 등록 -->
 	<insert id="addQImg" parameterType="com.gdu.voyage.vo.QnaImg">

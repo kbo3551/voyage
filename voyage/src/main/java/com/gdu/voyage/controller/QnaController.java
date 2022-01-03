@@ -114,12 +114,11 @@ public class QnaController {
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		Qna qna = qnaService.getQnaOneAndAnswer(qnaNo);
 		model.addAttribute("qna", qna);
-		// 비밀글 기능
 		// 비회원인 경우
-		if(qna.getQnaSecret().equals("비밀글") && loginMember == null) {
+		if( loginMember == null) {
 			return "redirect:/login";
 		// 로그인했지만 작성자가 아닌 경우 
-		} else if(!qna.getMemberNickname().equals(loginMember.getMemberNickname())) {
+		} else if(qna.getQnaSecret().equals("비밀글") && !qna.getMemberNickname().equals(loginMember.getMemberNickname())) {
 			return "redirect:/qnaList";
 		// 그 외...
 		} else {
@@ -140,12 +139,11 @@ public class QnaController {
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		Qna qna = qnaService.getQnaOneAndAnswer(qnaNo);
 		model.addAttribute("qna", qna);
-		// 비밀글 기능
 		// 비회원인 경우
-		if(qna.getQnaSecret().equals("비밀글") && loginMember == null) {
+		if(loginMember == null) {
 			return "redirect:/login";
 		// 로그인했지만 작성자가 아닌 경우 
-		} else if(!qna.getMemberNickname().equals(loginMember.getMemberNickname())) {
+		} else if(qna.getQnaSecret().equals("비밀글") && !qna.getMemberNickname().equals(loginMember.getMemberNickname())) {
 			return "redirect:/qnaList";
 		// 그 외...
 		} else {
