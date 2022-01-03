@@ -43,9 +43,14 @@ public class CouponController {
 		cm.setDeadLine(deadLine);
 		cm.setMemberId(memberId);
 		
+		log.debug("★★★[boryeong]CouponController★★★"+cm.toString());
 		
+		// 중복 발행 검사
+		String duplCheck = couponService.duplMemberCoupon(cm);
+		if(duplCheck.equals("쿠폰중복")) {
+			return "redirect:/member/coupon";
+		}
 		couponService.addMemberCoupon(cm);
-		
 		
 		return "redirect:/member/coupon";
 	}

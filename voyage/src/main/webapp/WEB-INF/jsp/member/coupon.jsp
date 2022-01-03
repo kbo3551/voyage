@@ -258,10 +258,6 @@
 	</div>
 	</div>
 	</div>
-	<script>
-	 function addCoupon(){		
-	
-	</script>
 	</main>
 
 

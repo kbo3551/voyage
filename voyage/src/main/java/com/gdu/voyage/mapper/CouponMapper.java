@@ -28,4 +28,6 @@ public interface CouponMapper {
 	int memberCouponTotalCount(String memberId);
 	// 회원 쿠폰 발급
 	void insertMemberCoupon(CouponMember couponMember);
+	// 쿠폰 중복 발급 방지
+	int selectMemberCoupon(CouponMember couponMember);
 }

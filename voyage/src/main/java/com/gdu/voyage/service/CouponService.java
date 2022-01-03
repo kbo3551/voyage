@@ -94,6 +94,17 @@ public class CouponService {
 		
 		return returnMap;
 	}
+	//쿠폰 중복 발급 검사
+	public String duplMemberCoupon(CouponMember couponMember) {
+		log.debug("☆☆☆[boryeong]CouponService회원 쿠폰 중복 발급 방지☆☆☆"+couponMember.toString());
+		int couponCheck = couponMapper.selectMemberCoupon(couponMember);
+		if(couponCheck == 1) {
+			log.debug("쿠폰 중복");
+			return "쿠폰중복";
+		}
+		return "중복없음";
+	}
+	
 	// 회원 쿠폰 발급
 	public void addMemberCoupon(CouponMember couponMember) {
 		log.debug("☆☆☆[boryeong]CouponService회원 쿠폰 발급☆☆☆"+couponMember.toString());
