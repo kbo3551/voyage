@@ -4,40 +4,42 @@
 
 	<!-- 최근 한달간 체험 일별 수익 -->
 	<select id="selectActivityProfitByMonthToDate" resultType="com.gdu.voyage.vo.ActivityPayment">
-		SELECT
-			DATE(update_date) updateDate,
-			activity_amount activityAmount
-		FROM
-			activity_payment
-		WHERE
-			host_no = #{hostNo}
-			AND
-			update_date BETWEEN
-			DATE_ADD(NOW(),INTERVAL -1 MONTH)
-			AND NOW()
-		GROUP BY
-			activityAmount
-		ORDER BY
-			activityAmount ASC
+		SELECT a.DATE AS updateDate , IFNULL(sum(b.activity_amount),0) as activityAmount
+		FROM (
+		    SELECT curdate() - interval (a.a + (10 * b.a) + (100 * c.a) + (1000 * d.a) ) day as DATE
+		    from 
+		        (SELECT 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as a
+		        CROSS JOIN
+		        (SELECT 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as b
+		        CROSS JOIN
+		        (SELECT 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as c
+		        CROSS JOIN
+		        (SELECT 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as d
+		    ) a left outer join `activity_payment` b on a.date = DATE(b.update_date) AND host_no = #{hostNo}
+		WHERE 1=1
+		AND a.DATE between DATE_ADD(NOW(), INTERVAL -1 month) AND NOW()
+		GROUP BY updateDate
+		ORDER BY updateDate ASC;
 	</select>
 
 	<!-- 최근 한달간 숙소 일별 수익 -->
 	<select id="selectAccomProfitByMonthToDate" resultType="com.gdu.voyage.vo.AccomPayment">
-		SELECT
-			DATE(update_date) updateDate,
-			accom_amount accomAmount
-		FROM
-			accom_payment
-		WHERE
-			host_no = #{hostNo}
-			AND
-			update_date BETWEEN
-			DATE_ADD(NOW(),INTERVAL -1 MONTH)
-			AND NOW()
-		GROUP BY
-			updateDate
-		ORDER BY
-			updateDate ASC
+		SELECT a.DATE AS updateDate , IFNULL(sum(b.accom_amount),0) as accomAmount
+		FROM (
+		    SELECT curdate() - interval (a.a + (10 * b.a) + (100 * c.a) + (1000 * d.a) ) day as DATE
+		    from 
+		        (SELECT 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as a
+		        CROSS JOIN
+		        (SELECT 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as b
+		        CROSS JOIN
+		        (SELECT 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as c
+		        CROSS JOIN
+		        (SELECT 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as d
+		    ) a left outer join `accom_payment` b on a.date = DATE(b.update_date) AND host_no = #{hostNo}
+		WHERE 1=1
+		AND a.DATE between DATE_ADD(NOW(), INTERVAL -1 month) AND NOW()
+		GROUP BY updateDate
+		ORDER BY updateDate ASC;
 	</select>
 
 	<!-- 해당 사업자의 분기별 가장 많은 수익을 벌어들인 체험 -->
