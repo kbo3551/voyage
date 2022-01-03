@@ -15,7 +15,8 @@
 		        (SELECT 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as c
 		        CROSS JOIN
 		        (SELECT 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as d
-		    ) a left outer join `activity_payment` b on a.date = DATE(b.update_date) AND host_no = #{hostNo}
+		    ) a left outer join `activity_payment` b on a.date = DATE(b.update_date) 
+		    AND host_no = #{hostNo} AND NOT activity_payment_state = '결제대기'  AND NOT activity_payment_state = '결제취소'
 		WHERE 1=1
 		AND a.DATE between DATE_ADD(NOW(), INTERVAL -1 month) AND NOW()
 		GROUP BY updateDate
@@ -35,7 +36,8 @@
 		        (SELECT 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as c
 		        CROSS JOIN
 		        (SELECT 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as d
-		    ) a left outer join `accom_payment` b on a.date = DATE(b.update_date) AND host_no = #{hostNo}
+		    ) a left outer join `accom_payment` b on a.date = DATE(b.update_date) 
+		    AND host_no = #{hostNo} AND NOT accom_payment_state = '결제대기'  AND NOT accom_payment_state = '결제취소'
 		WHERE 1=1
 		AND a.DATE between DATE_ADD(NOW(), INTERVAL -1 month) AND NOW()
 		GROUP BY updateDate

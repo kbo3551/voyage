@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 public class LoginFilter implements Filter {
 	@Override
 	 public void init(FilterConfig filterConfig) throws ServletException {
-		log.info("init AdminFilter");
+		log.info("init LoginFilter");
 	 }
 	
 	// 로그인 했으면 로그인페이지 못들어옴
