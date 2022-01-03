@@ -40,23 +40,31 @@ public class PaymentRestController {
 		 return accomMonthDateProfit;
 	}
 	
-	// 해당 사업자의 분기별(3개월) 가장 많은 수익을 벌어들인 체험
+	// 해당 사업자의 월별 가장 많은 수익을 벌어들인 체험
 	@GetMapping("/selectActivityProfitByQuarterly")
 	public String selectActivityProfitByQuarterly(int hostNo) {
 		 log.trace("PaymentRestController 실행");
 		 
-		 String activityQuarterlyProfit = paymentService.selectActivityProfitByQuarterly(hostNo).getActivity().getActivityName();
+		 String activityQuarterlyProfit = "해당없음";
+		 
+		 if(paymentService.selectActivityProfitByQuarterly(hostNo)  != null) {
+			 activityQuarterlyProfit = paymentService.selectActivityProfitByQuarterly(hostNo).getActivity().getActivityName();
+		 }
 		 log.trace("★controller★ activityQuarterlyProfit : "+activityQuarterlyProfit);
 		 
 		 return activityQuarterlyProfit;
 	}
 	
-	// 해당 사업자의 분기별(3개월) 가장 많은 수익을 벌어들인 숙소
+	// 해당 사업자의 월별 가장 많은 수익을 벌어들인 숙소
 	@GetMapping("/selectAccomProfitByQuarterly")
 	public String selectAccomProfitByQuarterly(int hostNo) {
 		 log.trace("PaymentRestController 실행");
 		 
-		 String accomQuarterlyProfit = paymentService.selectAccomProfitByQuarterly(hostNo).getAccomBuilding().getAccomBuildingName();
+		 String accomQuarterlyProfit = "해당없음";
+		 
+		 if(paymentService.selectAccomProfitByQuarterly(hostNo) != null) {
+			 accomQuarterlyProfit = paymentService.selectAccomProfitByQuarterly(hostNo).getAccomBuilding().getAccomBuildingName();
+		 }
 		 log.trace("★controller★ accomQuarterlyProfit : "+accomQuarterlyProfit);
 		 
 		 return accomQuarterlyProfit;
@@ -67,7 +75,7 @@ public class PaymentRestController {
 	public long selectActivityProfitByHostToMonth(int hostNo) {
 		 log.trace("PaymentRestController 실행");
 		 
-		 long activityMonthTotalProfit = paymentService.selectActivityProfitByHostToMonth(hostNo);
+		 long activityMonthTotalProfit = (long)paymentService.selectActivityProfitByHostToMonth(hostNo);
 		 log.trace("★controller★ activityMonthTotalProfit : "+activityMonthTotalProfit);
 		 
 		 return activityMonthTotalProfit;
@@ -78,7 +86,7 @@ public class PaymentRestController {
 	public long selectActivityProfitByHost(int hostNo) {
 		 log.trace("PaymentRestController 실행");
 		 
-		 long activityTotalProfit = paymentService.selectActivityProfitByHost(hostNo);
+		 long activityTotalProfit = (long)paymentService.selectActivityProfitByHost(hostNo);
 		 log.trace("★controller★ activityTotalProfit : "+activityTotalProfit);
 		 
 		 return activityTotalProfit;
@@ -89,7 +97,7 @@ public class PaymentRestController {
 	public long selectAccomProfitByHostToMonth(int hostNo) {
 		 log.trace("PaymentRestController 실행");
 		 
-		 long accomMonthTotalProfit = paymentService.selectAccomProfitByHostToMonth(hostNo);
+		 long accomMonthTotalProfit = (long)paymentService.selectAccomProfitByHostToMonth(hostNo);
 		 log.trace("★controller★ accomMonthTotalProfit : "+accomMonthTotalProfit);
 		 
 		 return accomMonthTotalProfit;
@@ -100,7 +108,7 @@ public class PaymentRestController {
 	public long selectAccomProfitByHost(int hostNo) {
 		 log.trace("PaymentRestController 실행");
 		 
-		 long accomTotalProfit = paymentService.selectAccomProfitByHost(hostNo);
+		 long accomTotalProfit = (long)paymentService.selectAccomProfitByHost(hostNo);
 		 log.trace("★controller★ accomTotalProfit : "+accomTotalProfit);
 		 
 		 return accomTotalProfit;
@@ -111,7 +119,7 @@ public class PaymentRestController {
 	public long selectAllProfitByHostToMonth(int hostNo) {
 		 log.trace("PaymentRestController 실행");
 		 
-		 long totalMonthProfit = paymentService.selectAllProfitByHostToMonth(hostNo);
+		 long totalMonthProfit = (long)paymentService.selectAllProfitByHostToMonth(hostNo);
 		 log.trace("★controller★ totalMonthProfit : "+totalMonthProfit);
 		 
 		 return totalMonthProfit;
@@ -122,7 +130,7 @@ public class PaymentRestController {
 	public long selectAllProfitByHost(int hostNo) {
 		 log.trace("PaymentRestController 실행");
 		 
-		 long totalProfit = paymentService.selectAllProfitByHost(hostNo);
+		 long totalProfit = (long)paymentService.selectAllProfitByHost(hostNo);
 		 log.trace("★controller★ totalProfit : "+totalProfit);
 		 
 		 return totalProfit;

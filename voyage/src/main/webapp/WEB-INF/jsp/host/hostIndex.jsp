@@ -259,7 +259,7 @@
                         				}		
                         			)
                         			
-                        			// 해당 사업자의 분기별(3개월) 가장 많은 수익을 벌어들인 숙소
+                        			// 해당 사업자의 월별 가장 많은 수익을 벌어들인 숙소
                         			$.ajax(
                         				{
                         					type: "GET",
@@ -272,7 +272,7 @@
                         				}		
                         			)
                         			
-                        			// 해당 사업자의 분기별(3개월) 가장 많은 수익을 벌어들인 숙소
+                        			// 해당 사업자의 월별 가장 많은 수익을 벌어들인 숙소
                         			$.ajax(
                         				{
                         					type: "GET",
@@ -468,10 +468,10 @@
                         		<br>
                         		
                         		<c:if test="${param.category != 'activity'}">
-                        		<div id="accomQuarterlyProfit">&nbsp;&nbsp;<b>이번 분기 최다실적 숙소 : </b></div>
+                        		<div id="accomQuarterlyProfit">&nbsp;&nbsp;<b>이번달 최다실적 숙소 : </b></div>
                         		</c:if>
                         		<c:if test="${param.category != 'accom'}">
-                        		<div id="activityQuarterlyProfit">&nbsp;&nbsp;<b>이번 분기 최다실적 체험 : </b></div>
+                        		<div id="activityQuarterlyProfit">&nbsp;&nbsp;<b>이번달 최다실적 체험 : </b></div>
                         		</c:if>
                         		
                         		<br>

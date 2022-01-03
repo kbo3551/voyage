@@ -53,44 +53,68 @@ public class PaymentService {
 		return map;
 	}
 	
-	// 해당 사업자의 분기별(3개월) 가장 많은 수익을 벌어들인 체험
+	// 해당 사업자의 월별 가장 많은 수익을 벌어들인 체험
 	public ActivityPayment selectActivityProfitByQuarterly(int hostNo) {
 		return paymentMapper.selectActivityProfitByQuarterly(hostNo);
 	}
 	
-	// 해당 사업자의 분기별(3개월) 가장 많은 수익을 벌어들인 숙소
+	// 해당 사업자의 월별 가장 많은 수익을 벌어들인 숙소
 	public AccomPayment selectAccomProfitByQuarterly(int hostNo) {
 		return paymentMapper.selectAccomProfitByQuarterly(hostNo);
 	}
 	
 	// 해당 사업자의 체험 월별 총 수익
 	public long selectActivityProfitByHostToMonth(int hostNo) {
-		return paymentMapper.selectActivityProfitByHost(hostNo, 1);
+		long result = 0;
+		if(paymentMapper.selectActivityProfitByHost(hostNo, 1) != null) {
+			result = (long) paymentMapper.selectActivityProfitByHost(hostNo, 1);
+		}
+		return result;
 	}
 	
 	// 해당 사업자의 체험 총 수익
 	public long selectActivityProfitByHost(int hostNo) {
-		return paymentMapper.selectActivityProfitByHost(hostNo, null);
+		long result = 0;
+		if(paymentMapper.selectActivityProfitByHost(hostNo, null) != null) {
+			result = (long) paymentMapper.selectActivityProfitByHost(hostNo, null);
+		}
+		return result;
 	}
 	
 	// 해당 사업자의 숙소 월별 총 수익
 	public long selectAccomProfitByHostToMonth(int hostNo) {
-		return paymentMapper.selectAccomProfitByHost(hostNo, 1);
+		long result = 0;
+		if(paymentMapper.selectAccomProfitByHost(hostNo, 1) != null) {
+			result = (long) paymentMapper.selectAccomProfitByHost(hostNo, 1);
+		}
+		return result;
 	}
 	
 	// 해당 사업자의 숙소 총 수익
 	public long selectAccomProfitByHost(int hostNo) {
-		return paymentMapper.selectAccomProfitByHost(hostNo, null);
+		long result = 0;
+		if(paymentMapper.selectAccomProfitByHost(hostNo, null) != null) {
+			result = (long) paymentMapper.selectAccomProfitByHost(hostNo, null);
+		}
+		return result;
 	}
 	
 	// 해당 사업자의 월별 총 수익
 	public long selectAllProfitByHostToMonth(int hostNo) {
-		return paymentMapper.selectAllProfitByHost(hostNo, 1);
+		long result = 0;
+		if(paymentMapper.selectAllProfitByHost(hostNo, 1) != null) {
+			result = (long) paymentMapper.selectAllProfitByHost(hostNo, 1);
+		}
+		return result;
 	}
 	
 	// 해당 사업자의 총 수익
 	public long selectAllProfitByHost(int hostNo) {
-		return paymentMapper.selectAllProfitByHost(hostNo, null);
+		long result = 0;
+		if(paymentMapper.selectAllProfitByHost(hostNo, null) != null) {
+			result = (long) paymentMapper.selectAllProfitByHost(hostNo, null);
+		}
+		return result;
 	}
 	
 	// 체험 결제 취소

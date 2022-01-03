@@ -44,11 +44,11 @@
 		ORDER BY updateDate ASC;
 	</select>
 
-	<!-- 해당 사업자의 분기별 가장 많은 수익을 벌어들인 체험 -->
+	<!-- 해당 사업자의 월별 가장 많은 수익을 벌어들인 체험 -->
 	<select id="selectActivityProfitByQuarterly" resultMap="ActivityPayment">
 		SELECT
 			a.activity_name,
-			SUM(ap.activity_amount) activity_amount
+			IFNULL(SUM(ap.activity_amount),0)
 		FROM
 			activity_payment ap
 		INNER JOIN
@@ -58,21 +58,25 @@
 			ap.host_no = #{hostNo}
 			AND
 			<![CDATA[
-			DATEDIFF(NOW(),ap.update_date) <= 90
+			DATEDIFF(NOW(),ap.update_date) <= 30
 			]]>
+			AND
+			NOT activity_payment_state = '결제대기' 
+			AND
+			NOT activity_payment_state = '결제취소'
 		GROUP BY
 			a.activity_name
 		ORDER BY
-			activity_amount DESC
+			activity_amount ASC
 		LIMIT
 			0,1
 	</select>
 
-	<!-- 해당 사업자의 분기별 가장 많은 수익을 벌어들인 숙소 -->
+	<!-- 해당 사업자의 월별 가장 많은 수익을 벌어들인 숙소 -->
 	<select id="selectAccomProfitByQuarterly" resultMap="AccomPayment">
 		SELECT
 			ab.accom_building_name,
-			SUM(ap.accom_amount) accom_amount
+			IFNULL(SUM(ap.accom_amount),0)
 		FROM
 			accom_payment ap
 		INNER JOIN
@@ -85,12 +89,16 @@
 			ap.host_no = #{hostNo}
 			AND
 			<![CDATA[
-			DATEDIFF(NOW(),ap.update_date) <= 90
+			DATEDIFF(NOW(),ap.update_date) <= 30
 			]]>
+			AND
+			NOT accom_payment_state = '결제대기' 
+			AND
+			NOT accom_payment_state = '결제취소'
 		GROUP BY
 			ab.accom_building_name
 		ORDER BY
-			accom_amount DESC
+			accom_amount ASC
 		LIMIT
 			0,1
 	</select>
@@ -98,7 +106,7 @@
 	<!-- 해당 사업자의 체험 총 수익, 월별 수익 -->
 	<select id="selectActivityProfitByHost" resultType="long">
 		SELECT
-			SUM(activity_amount)
+			IFNULL(SUM(activity_amount),0)
 		FROM
 			activity_payment
 		WHERE
@@ -118,7 +126,7 @@
 	<!-- 해당 사업자의 숙소 총 수익, 월별 수익 -->
 	<select id="selectAccomProfitByHost" resultType="long">
 		SELECT
-			SUM(accom_amount)
+			IFNULL(SUM(accom_amount),0)
 		FROM
 			accom_payment
 		WHERE
@@ -140,7 +148,7 @@
 		SELECT
 			SUM(
 			(SELECT
-				SUM(accom_amount)
+				IFNULL(SUM(accom_amount),0)
 			FROM
 				accom_payment
 			WHERE
@@ -158,7 +166,7 @@
 				)
 			+
 			(SELECT
-				SUM(activity_amount)
+				IFNULL(SUM(activity_amount),0)
 			FROM
 				activity_payment
 			WHERE

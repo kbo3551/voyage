@@ -9,7 +9,7 @@ public class ActivityPayment {
 	private String memberId;
 	private String activityBookingTime;
 	private int activityUsePerson;
-	private int activityAmount;
+	private long activityAmount;
 	private String activityPaymentState;
 	private String receipt;
 	private String createDate;

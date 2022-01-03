@@ -9,7 +9,7 @@ public class AccomPayment {
 	private String memberId;
 	private String accomCheckIn;
 	private String accomCheckOut;
-	private int accomAmount;
+	private long accomAmount;
 	private int accomUsePerson;
 	private String accomPaymentState;
 	private String receipt;
