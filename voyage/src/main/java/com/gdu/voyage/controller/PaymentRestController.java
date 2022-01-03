@@ -1,14 +1,12 @@
 package com.gdu.voyage.controller;
 
-import java.util.List;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gdu.voyage.service.PaymentService;
-import com.gdu.voyage.vo.AccomPayment;
-import com.gdu.voyage.vo.ActivityPayment;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,10 +21,10 @@ public class PaymentRestController {
 	
 	// 최근 한달간 체험 일별 수익
 	@GetMapping("/selectActivityProfitByMonthToDate")
-	public List<ActivityPayment> selectActivityProfitByMonthToDate(int hostNo) {
+	public TreeMap<String, Object> selectActivityProfitByMonthToDate(int hostNo) {
 		 log.trace("PaymentRestController 실행");
 		 
-		 List<ActivityPayment> activityMonthDateProfit = paymentService.selectActivityProfitByMonthToDate(hostNo);
+		 TreeMap<String, Object> activityMonthDateProfit = paymentService.selectActivityProfitByMonthToDate(hostNo);
 		 log.trace("★controller★ activityMonthDateProfit : "+activityMonthDateProfit);
 		 
 		 return activityMonthDateProfit;
@@ -34,12 +32,11 @@ public class PaymentRestController {
 	
 	// 최근 한달간 숙소 일별 수익
 	@GetMapping("/selectAccomProfitByMonthToDate")
-	public List<AccomPayment> selectAccomProfitByMonthToDate(int hostNo) {
+	public TreeMap<String, Object> selectAccomProfitByMonthToDate(int hostNo) {
 		 log.trace("PaymentRestController 실행");
 		 
-		 List<AccomPayment> accomMonthDateProfit = paymentService.selectAccomProfitByMonthToDate(hostNo);
+		 TreeMap<String, Object> accomMonthDateProfit = paymentService.selectAccomProfitByMonthToDate(hostNo);
 		 log.trace("★controller★ accomMonthDateProfit : "+accomMonthDateProfit);
-		 
 		 return accomMonthDateProfit;
 	}
 	

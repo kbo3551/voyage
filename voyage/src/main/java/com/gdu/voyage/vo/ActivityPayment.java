@@ -13,6 +13,7 @@ public class ActivityPayment {
 	private String activityPaymentState;
 	private String receipt;
 	private String createDate;
+	private String updateDate;
 	
 	// 결제내역 설명에 필요
 	private Activity activity;

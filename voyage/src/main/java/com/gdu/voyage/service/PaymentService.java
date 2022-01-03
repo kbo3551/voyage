@@ -3,6 +3,7 @@ package com.gdu.voyage.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,14 +21,36 @@ import lombok.extern.slf4j.Slf4j;
 public class PaymentService {
 	@Autowired private PaymentMapper paymentMapper;
 	
+	// TreeMap - 자동 정렬 기능이 달려있는 Map
+	
 	// 최근 한달간 체험 일별 수익
-	public List<ActivityPayment> selectActivityProfitByMonthToDate(int hostNo) {
-		return paymentMapper.selectActivityProfitByMonthToDate(hostNo);
+	public TreeMap<String, Object> selectActivityProfitByMonthToDate(int hostNo) {
+		
+		List<ActivityPayment> activityPayments = paymentMapper.selectActivityProfitByMonthToDate(hostNo);
+		
+		TreeMap<String, Object> map = new TreeMap<String, Object>();
+		
+		for(int i=0;i<activityPayments.size();i++) {
+			ActivityPayment param = activityPayments.get(i);
+			map.put(param.getUpdateDate().toString(), param.getActivityAmount());
+		}
+		
+		return map;
 	}
 	
 	// 최근 한달간 숙소 일별 수익
-	public List<AccomPayment> selectAccomProfitByMonthToDate(int hostNo) {
-		return paymentMapper.selectAccomProfitByMonthToDate(hostNo);
+	public TreeMap<String, Object> selectAccomProfitByMonthToDate(int hostNo) {
+		
+		List<AccomPayment> accomPayments = paymentMapper.selectAccomProfitByMonthToDate(hostNo);
+		
+		TreeMap<String, Object> map = new TreeMap<String, Object>();
+		
+		for(int i=0;i<accomPayments.size();i++) {
+			AccomPayment param = accomPayments.get(i);
+			map.put(param.getUpdateDate().toString(), param.getAccomAmount());
+		}
+		
+		return map;
 	}
 	
 	// 해당 사업자의 분기별(3개월) 가장 많은 수익을 벌어들인 체험

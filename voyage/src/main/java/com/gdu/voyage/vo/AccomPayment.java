@@ -14,6 +14,7 @@ public class AccomPayment {
 	private String accomPaymentState;
 	private String receipt;
 	private String createDate;
+	private String updateDate;
 	
 	// 결제내역 설명에 필요
 	private AccomBuilding accomBuilding;

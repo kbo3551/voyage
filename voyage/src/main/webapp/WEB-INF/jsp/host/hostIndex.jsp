@@ -27,6 +27,8 @@
             <link rel="stylesheet" href="${contextPath}/assets/css/nice-select.css">
             <link rel="stylesheet" href="${contextPath}/assets/css/style.css">
             <link rel="stylesheet" href="${contextPath}/bootstrap/css/bootstrap.min.css">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.js" integrity="sha512-zO8oeHCxetPn1Hd9PdDleg5Tw1bAaP0YmNvPY8CwcRyUk7d7/+nyElmFrB6f7vg4f7Fv4sui1mcep8RIEShczg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script src="${contextPath}/Chart.js-2.9.4/dist/Chart.js"></script>
             
     
 </head>
@@ -109,17 +111,370 @@
 						<br>
                         <div class="profiel-header">
                             <h2>
-                                사업자페이지 <br>
+                                <span style="float: left;">사업자페이지</span> 
+                                <span style="float: left; padding-left: 1.8%">
+									<select id="category" name="category" onchange="categorySelect()">
+										<c:choose>
+			                        		<c:when test="${param.category == 'accom'}">
+				                        		<option value="all">모두보기</option>
+				                        		<option value="accom" selected="selected">숙소</option>
+				                        		<option value="activity">체험</option>
+			                        		</c:when>
+			                        		<c:when test="${param.category == 'activity'}">
+				                        		<option value="all">모두보기</option>
+				                        		<option value="accom">숙소</option>
+				                        		<option value="activity" selected="selected">체험</option>
+			                        		</c:when>
+			                        		<c:otherwise>
+				                        		<option value="all" selected="selected">모두보기</option>
+				                        		<option value="accom">숙소</option>
+				                        		<option value="activity">체험</option>
+			                        		</c:otherwise>
+			                        	</c:choose>
+		                        	</select>
+								</span>
+								<br>
                             </h2>
                             <hr>
                         </div>
                         
+                        <!-- 카테고리 선택하면 해당 카테고리값만 나오게 함 -->
+                        <script>
+	                        function categorySelect(){ 
+	                    		// 카테고리 선택값을 가져와서 벨류 저장
+	                    		let category = document.getElementById("category"); 
+	                    		let selectCategoryValue = category.options[category.selectedIndex].value; 
+	                    		
+	                    		// 페이징
+	                    		let accomPage = 1;
+	                    		let activityPage = 1;
+	                    		if('${accomPage}' != null){
+	                    			accomPage = '${accomPage}';
+	                    		}
+	                    		if('${activityPage}' != null){
+	                    			activityPage = '${activityPage}';
+	                    		}
+	                    		
+	                    		let contextPath = '${contextPath}';
+	                    		
+	                    		location.replace(contextPath+'/host/hostIndex?accomPage='+accomPage+'&activityPage='+activityPage+'&category='+selectCategoryValue);
+	                    		
+	                        }
+                        
+                        </script>
                         
                         <div class="clear">
                         	<div class="col-sm-12">
-                        		&nbsp;&nbsp;<label>수익</label>
+                        		<script type="text/javascript">
+                        			// 사업자 번호
+                        			let hostNo = "${hostSession.getHostNo()}";
+                        			
+                        			// 총 수익
+                        			$.ajax(
+                        				{
+                        					type: "GET",
+                        					url:"/voyage/selectAllProfitByHost?hostNo="+hostNo,
+                        					dataType:"text",
+                        					success : function (data) {
+                        						let totalProfit = data;
+                        						totalProfit *= 1;
+                        						$('#totalProfit').append(totalProfit.toLocaleString());
+											}
+                        						
+                        				}		
+                        			)
+                        			
+                        			// 월 수익
+                        			$.ajax(
+                        				{
+                        					type: "GET",
+                        					url:"/voyage/selectAllProfitByHostToMonth?hostNo="+hostNo,
+                        					dataType:"text",
+                        					success : function (data) {
+                        						let totalMonthProfit = data;
+                        						totalMonthProfit *= 1;
+                        						$('#totalProfitByMonth').append(totalMonthProfit.toLocaleString());
+											}
+                        						
+                        				}		
+                        			)
+                        			
+                        			// 숙소 총 수익
+                        			$.ajax(
+                        				{
+                        					type: "GET",
+                        					url:"/voyage/selectAccomProfitByHost?hostNo="+hostNo,
+                        					dataType:"text",
+                        					success : function (data) {
+                        						let accomTotalProfit = data;
+                        						accomTotalProfit *= 1;
+                        						$('#accomTotalProfit').append(accomTotalProfit.toLocaleString());
+											}
+                        						
+                        				}		
+                        			)
+                        			
+                        			// 숙소 월 수익
+                        			$.ajax(
+                        				{
+                        					type: "GET",
+                        					url:"/voyage/selectAccomProfitByHostToMonth?hostNo="+hostNo,
+                        					dataType:"text",
+                        					success : function (data) {
+                        						let accomMonthTotalProfit = data;
+                        						accomMonthTotalProfit *= 1;
+                        						$('#accomMonthTotalProfit').append(accomMonthTotalProfit.toLocaleString());
+											}
+                        						
+                        				}		
+                        			)
+                        			
+                        			// 체험 총 수익
+                        			$.ajax(
+                        				{
+                        					type: "GET",
+                        					url:"/voyage/selectActivityProfitByHost?hostNo="+hostNo,
+                        					dataType:"text",
+                        					success : function (data) {
+                        						let activityTotalProfit = data;
+                        						activityTotalProfit *= 1;
+                        						$('#activityTotalProfit').append(activityTotalProfit.toLocaleString());
+											}
+                        						
+                        				}		
+                        			)
+                        			
+                        			// 체험 월 수익
+                        			$.ajax(
+                        				{
+                        					type: "GET",
+                        					url:"/voyage/selectActivityProfitByHostToMonth?hostNo="+hostNo,
+                        					dataType:"text",
+                        					success : function (data) {
+                        						let activityMonthTotalProfit = data;
+                        						activityMonthTotalProfit *= 1;
+                        						$('#activityMonthTotalProfit').append(activityMonthTotalProfit.toLocaleString());
+											}
+                        						
+                        				}		
+                        			)
+                        			
+                        			// 해당 사업자의 분기별(3개월) 가장 많은 수익을 벌어들인 숙소
+                        			$.ajax(
+                        				{
+                        					type: "GET",
+                        					url:"/voyage/selectAccomProfitByQuarterly?hostNo="+hostNo,
+                        					dataType:"text",
+                        					success : function (data) {
+                        						$('#accomQuarterlyProfit').append(data);
+											}
+                        						
+                        				}		
+                        			)
+                        			
+                        			// 해당 사업자의 분기별(3개월) 가장 많은 수익을 벌어들인 숙소
+                        			$.ajax(
+                        				{
+                        					type: "GET",
+                        					url:"/voyage/selectActivityProfitByQuarterly?hostNo="+hostNo,
+                        					dataType:"text",
+                        					success : function (data) {
+                        						$('#activityQuarterlyProfit').append(data);
+											}
+                        						
+                        				}		
+                        			)
+                        			
+                        			
+                        			
+                        			// 최근 한달간 숙소 일별 수익
+                        			$.ajax(
+                        				{
+                        					type: "GET",
+                        					url:"/voyage/selectAccomProfitByMonthToDate?hostNo="+hostNo,
+                        					async:false,
+                        					success : function (data) {
+                        						let label = [];
+                                                let amount = [];
+                        						
+                        						for(let key in data){
+                        							label.push(key)
+                        							amount.push(data[key])
+                        						}
+                        						
+                        						document.addEventListener("DOMContentLoaded", function() {
+
+                        							// Line chart
+                        							new Chart(document.getElementById("accom-dashboard-line"), {
+                        								type: "line",
+                        								data: {
+                        									labels: label,
+                        									datasets: [{
+                        										label: "",
+                        										fill: true,
+                        										data: amount,
+                        										backgroundColor: 'rgba(23, 21, 132, 0.1)',
+                        									    borderColor: 'rgb(255, 99, 132)',
+                        									    tension: 0.3
+                        									}]
+                        								},
+                        								options: {
+                        									// 컨테이너가 수행 할 때 차트 캔버스의 크기를 조정(dafalut : true)
+                        									responsive: true,
+                        									// 크기 조정 이벤트 후 새 크기로 애니메이션하는 데 걸리는 시간(밀리 초) (defalut : 0)
+                        									responsiveAnimationDuration: 1000,
+                        									// (width / height) 크기를 조정할 떄 원래 캔버스 종횡비를 유지 (defalut : true)
+                        									maintainAspectRatio: true,
+                        									// 캔버스 종횡비( width / height, 정사각형 캔버스를 나타내는 값) 높이가 속성으로 또는 스타일 통해 명시적으로 정의된 경우이 옵션은 무시
+                        									aspectRatio: 2,
+                        									title: {
+                        										display: true,
+                        										// 차트 제목 
+                        										text: '숙소 월별 수익'
+                        									},
+                        									legend:{
+                        										display: false
+                        									},
+                        									tooltips: {
+                        										mode: 'index',
+                        										intersect: false,
+                        									},
+                        									hover: {
+                        										mode: 'nearest',
+                        										intersect: true
+                        									},
+                        									
+                        									scales: {
+                        										xAxes: [{
+                        											reverse: true,
+                        											gridLines: {
+                        												color: "rgba(0,0,0,0.0)"
+                        											},
+                        											ticks: {
+                        							                    display: false
+                        							                }
+                        										}],
+                        									}
+                        								}
+                        							});
+                        						});
+                        					}	
+                        				}		
+                        			)
+                        			
+                        			
+                        			
+                        			
+                        			// 최근 한달간 체험 일별 수익
+                        			$.ajax(
+                        				{
+                        					type: "GET",
+                        					url:"/voyage/selectActivityProfitByMonthToDate?hostNo="+hostNo,
+                        					async:false,
+                        					success : function (data) {
+                        						let label = [];
+                                                let amount = [];
+                        						
+                        						for(let key in data){
+                        							label.push(key)
+                        							amount.push(data[key])
+                        						}
+                        						
+                        						document.addEventListener("DOMContentLoaded", function() {
+
+                        							// Line chart
+                        							new Chart(document.getElementById("activity-dashboard-line"), {
+                        								type: "line",
+                        								data: {
+                        									labels: label,
+                        									datasets: [{
+                        										label: "",
+                        										fill: true,
+                        										data: amount,
+                        										backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                        									    borderColor: 'rgb(23, 80, 190)',
+                        									    tension: 0.3
+                        									}]
+                        								},
+                        								options: {
+                        									// 컨테이너가 수행 할 때 차트 캔버스의 크기를 조정(dafalut : true)
+                        									responsive: true,
+                        									// 크기 조정 이벤트 후 새 크기로 애니메이션하는 데 걸리는 시간(밀리 초) (defalut : 0)
+                        									responsiveAnimationDuration: 1000,
+                        									// (width / height) 크기를 조정할 떄 원래 캔버스 종횡비를 유지 (defalut : true)
+                        									maintainAspectRatio: true,
+                        									// 캔버스 종횡비( width / height, 정사각형 캔버스를 나타내는 값) 높이가 속성으로 또는 스타일 통해 명시적으로 정의된 경우이 옵션은 무시
+                        									aspectRatio: 2,
+                        									title: {
+                        										display: true,
+                        										// 차트 제목 
+                        										text: '체험 월별 수익'
+                        									},
+                        									legend:{
+                        										display: false
+                        									},
+                        									tooltips: {
+                        										mode: 'index',
+                        										intersect: false,
+                        									},
+                        									hover: {
+                        										mode: 'nearest',
+                        										intersect: true
+                        									},
+                        									
+                        									scales: {
+                        										xAxes: [{
+                        											reverse: true,
+                        											gridLines: {
+                        												color: "rgba(0,0,0,0.0)"
+                        											},
+                        											ticks: {
+                        							                    display: false
+                        							                }
+                        										}],
+                        									}
+                        								}
+                        							});
+                        						});
+                        					}	
+                        				}		
+                        			)
+                        			
+                        			
+                        		</script>
                         		
+                        		<c:if test="${param.category == 'all' || param.category == null}">
+                        		<div id="totalProfit">&nbsp;&nbsp;<b>총 수익 : </b>&#8361;</div>
+                        		</c:if>
+                        		<c:if test="${param.category != 'activity'}">
+                        		<div id="accomTotalProfit">&nbsp;&nbsp;<b>숙소 총 수익 : </b>&#8361;</div>
+                        		</c:if>
+                        		<c:if test="${param.category != 'accom'}">
+                        		<div id="activityTotalProfit">&nbsp;&nbsp;<b>체험 총 수익 : </b>&#8361;</div>
+                        		</c:if>
                         		
+                        		<br>
+                        		
+                        		<c:if test="${param.category == 'all' || param.category == null}">
+                        		<div id="totalProfitByMonth">&nbsp;&nbsp;<b>월 수익 : </b>&#8361;</div>
+                        		</c:if>
+                        		<c:if test="${param.category != 'activity'}">
+                        		<div id="accomMonthTotalProfit">&nbsp;&nbsp;<b>숙소 월 수익 : </b>&#8361;</div>
+                        		</c:if>
+                        		<c:if test="${param.category != 'accom'}">
+                        		<div id="activityMonthTotalProfit">&nbsp;&nbsp;<b>체험 월 수익 : </b>&#8361;</div>
+                        		</c:if>
+                        		
+                        		<br>
+                        		
+                        		<c:if test="${param.category != 'activity'}">
+                        		<div id="accomQuarterlyProfit">&nbsp;&nbsp;<b>이번 분기 최다실적 숙소 : </b></div>
+                        		</c:if>
+                        		<c:if test="${param.category != 'accom'}">
+                        		<div id="activityQuarterlyProfit">&nbsp;&nbsp;<b>이번 분기 최다실적 체험 : </b></div>
+                        		</c:if>
+                        		
+                        		<br>
                         	</div>
                         </div>
                         
@@ -127,9 +482,22 @@
                         <br>
                         <br>
                         <br>
-                        
+                        <c:if test="${param.category != 'activity'}">
                         <div class="clear"> 
                             <div class="col-sm-12">
+	                            <div class="chart chart-sm">
+									<canvas id="accom-dashboard-line"></canvas>
+								</div>
+                            </div>
+                        </div>
+                        </c:if>
+                        
+                        
+                        <div class="clear"> 
+                        	<c:if test="${param.category != 'activity'}">
+                            <div class="col-sm-12">
+                            <br>
+                            <br>
 	                            &nbsp;&nbsp;<label>운영 숙소</label>
 	                            <c:if test="${accomReqCount > 0}">
 	                            	<span>&nbsp;&nbsp;<a href="${contextPath}/host/accomReqState" class="btn" style="background: rgb(40,180,240); color: white;">신청조회</a></span>
@@ -170,7 +538,7 @@
 								<div class="clear">
 		                           <ul class="nav justify-content-center">
 		                              <c:if test="${accomBeginRow > (ROW_PER_PAGE * 10)}">
-		                                 <li><a href="${contextPath}/host/hostIndex?accomPage=${accomPageNo-1}&activityPage=${activityPage}">&lt;</a></li>
+		                                 <li><a href="${contextPath}/host/hostIndex?accomPage=${accomPageNo-1}&activityPage=${activityPage}&category=${param.category}">&lt;</a></li>
 		                              </c:if>
 		                              <c:set var="doneLoop" value="false"></c:set>
 		                              <c:forEach var="f" begin="${accomPageNo}" end="${accomPageNo + 9}">
@@ -180,7 +548,7 @@
 		                                          <li class="active"><span class="nav-link">${f}</span></li>
 		                                       </c:when>
 		                                       <c:otherwise>
-		                                          <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${f}&activityPage=${activityPage}">${f}</a></li>
+		                                          <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${f}&activityPage=${activityPage}&category=${param.category}">${f}</a></li>
 		                                       </c:otherwise>
 		                                    </c:choose>
 		
@@ -190,14 +558,32 @@
 		                                 </c:if>
 		                              </c:forEach>
 		                              <c:if test="${accomPage + 10 <= accomLastPage}">
-		                                 <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${accomPage+10}&activityPage=${activityPage}">&gt;</a></li>
+		                                 <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${accomPage+10}&activityPage=${activityPage}&category=${param.category}">&gt;</a></li>
 		                              </c:if>
 		                           </ul>
 		                        </div>
 							</c:if>
-
+							</c:if>
+						
+							<c:if test="${param.category == 'all' || param.category == null}">
+							<br>
+							<hr>
+							<br>
+							</c:if>
+							
+							<c:if test="${param.category != 'accom'}">
 							<div class="clear"> 
 	                            <div class="col-sm-12">
+		                            <div class="chart chart-sm">
+										<canvas id="activity-dashboard-line"></canvas>
+									</div>
+	                            </div>
+                        	</div>
+							
+							<div class="clear"> 
+	                            <div class="col-sm-12">
+	                            	<br>
+	                            	<br>
 	                            	&nbsp;&nbsp;<label>운영 체험</label>
 	                            	<c:if test="${activityReqCount > 0}">
 	                            		<span>&nbsp;&nbsp;<a class="btn" href="${contextPath}/host/activityReqState" style="background: rgb(40,180,240); color: white;">신청조회</a></span>
@@ -240,7 +626,7 @@
 								<div class="clear">
 		                           <ul class="nav justify-content-center">
 		                              <c:if test="${activityBeginRow > (ROW_PER_PAGE * 10)}">
-		                                 <li><a href="${contextPath}/host/hostIndex?accomPage=${accomPage}&activityPage=${activityPageNo-1}">&lt;</a></li>
+		                                 <li><a href="${contextPath}/host/hostIndex?accomPage=${accomPage}&activityPage=${activityPageNo-1}&category=${param.category}">&lt;</a></li>
 		                              </c:if>
 		                              <c:set var="doneLoop" value="false"></c:set>
 		                              <c:forEach var="f" begin="${activityPageNo}" end="${activityPageNo + 9}">
@@ -250,7 +636,7 @@
 		                                          <li class="active"><span class="nav-link">${f}</span></li>
 		                                       </c:when>
 		                                       <c:otherwise>
-		                                          <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${accomPage}&activityPage=${f}">${f}</a></li>
+		                                          <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${accomPage}&activityPage=${f}&category=${param.category}">${f}</a></li>
 		                                       </c:otherwise>
 		                                    </c:choose>
 		
@@ -260,12 +646,12 @@
 		                                 </c:if>
 		                              </c:forEach>
 		                              <c:if test="${activityPage + 10 <= activityLastPage}">
-		                                 <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${accomPage}&activityPage=${activityPage+10}">&gt;</a></li>
+		                                 <li><a class="nav-link active" href="${contextPath}/host/hostIndex?accomPage=${accomPage}&activityPage=${activityPage+10}&category=${param.category}">&gt;</a></li>
 		                              </c:if>
 		                           </ul>
 		                       </div>
 							</c:if>
-							
+							</c:if>
 	                        
 							
                         	<div class="col-sm-20 col-sm-offset-1" style="text-align: right;">
