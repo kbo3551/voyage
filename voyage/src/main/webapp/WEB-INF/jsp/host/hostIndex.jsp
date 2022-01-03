@@ -443,37 +443,144 @@
                         			
                         		</script>
                         		
+
+                        		<!-- Earning 차트 -->
                         		<c:if test="${param.category == 'all' || param.category == null}">
-                        		<div id="totalProfit">&nbsp;&nbsp;<b>총 수익 : </b>&#8361;</div>
-                        		</c:if>
-                        		<c:if test="${param.category != 'activity'}">
-                        		<div id="accomTotalProfit">&nbsp;&nbsp;<b>숙소 총 수익 : </b>&#8361;</div>
-                        		</c:if>
-                        		<c:if test="${param.category != 'accom'}">
-                        		<div id="activityTotalProfit">&nbsp;&nbsp;<b>체험 총 수익 : </b>&#8361;</div>
-                        		</c:if>
+                        		<div class="clear">
+                        			<div class="card" style="float: left;  width: 50%">
+										<div class="card-body">
+											<div class="row">
+												<div class="col mt-0">
+													<h5 class="card-title">총 수익</h5>
+												</div>
+											</div>
+											<h1 class="mt-1 mb-3" id="totalProfit">&#8361;</h1>
+											<div class="mb-0">
+												<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
+												<span class="text-muted">Since last week</span>
+											</div>
+										</div>
+									</div>
+									<div class="card" style="float: left;  width: 50%">
+										<div class="card-body">
+											<div class="row">
+												<div class="col mt-0">
+													<h5 class="card-title">월 수익</h5>
+												</div>
+											</div>
+											<h1 class="mt-1 mb-3" id="totalProfitByMonth">&#8361;</h1>
+											<div class="mb-0">
+												<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
+												<span class="text-muted">Since last week</span>
+											</div>
+										</div>
+									</div>
+                        		</div>
+								</c:if>
+								
+								<c:if test="${param.category != 'activity'}">
+                        		<div class="clear">
+                        			<div class="card" style="float: left; width: 50%">
+										<div class="card-body">
+											<div class="row">
+												<div class="col mt-0">
+													<h5 class="card-title">숙소 총 수익</h5>
+												</div>
+											</div>
+											<h1 class="mt-1 mb-3" id="accomTotalProfit">&#8361;</h1>
+											<div class="mb-0">
+												<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 41.35% </span>
+												<span class="text-muted">Since last week</span>
+											</div>
+										</div>
+									</div>
+									<div class="card" style="float: left;  width: 50%">
+										<div class="card-body">
+											<div class="row">
+												<div class="col mt-0">
+													<h5 class="card-title">숙소 월 수익</h5>
+												</div>
+											</div>
+											<h1 class="mt-1 mb-3" id="accomMonthTotalProfit">&#8361;</h1>
+											<div class="mb-0">
+												<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 21.33% </span>
+												<span class="text-muted">Since last week</span>
+											</div>
+										</div>
+									</div>
+                        		</div>
+								</c:if>
+								
+								<c:if test="${param.category != 'accom'}">
+                        		<div class="clear">
+                        			<div class="card" style="float: left;  width: 50%">
+										<div class="card-body">
+											<div class="row">
+												<div class="col mt-0">
+													<h5 class="card-title">체험 총 수익</h5>
+												</div>
+											</div>
+											<h1 class="mt-1 mb-3" id="activityTotalProfit">&#8361;</h1>
+											<div class="mb-0">
+												<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 20.65% </span>
+												<span class="text-muted">Since last month</span>
+											</div>
+										</div>
+									</div>
+									<div class="card" style="float: left;  width: 50%">
+										<div class="card-body">
+											<div class="row">
+												<div class="col mt-0">
+													<h5 class="card-title">체험 월 수익</h5>
+												</div>
+											</div>
+											<h1 class="mt-1 mb-3" id="activityMonthTotalProfit">&#8361;</h1>
+											<div class="mb-0">
+												<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 3.36% </span>
+												<span class="text-muted">Since last month</span>
+											</div>
+										</div>
+									</div>
+                        		</div>
+								</c:if>
+                        		
                         		
                         		<br>
+                        		<br>
+                        		<br>
                         		
-                        		<c:if test="${param.category == 'all' || param.category == null}">
-                        		<div id="totalProfitByMonth">&nbsp;&nbsp;<b>월 수익 : </b>&#8361;</div>
-                        		</c:if>
-                        		<c:if test="${param.category != 'activity'}">
-                        		<div id="accomMonthTotalProfit">&nbsp;&nbsp;<b>숙소 월 수익 : </b>&#8361;</div>
-                        		</c:if>
-                        		<c:if test="${param.category != 'accom'}">
-                        		<div id="activityMonthTotalProfit">&nbsp;&nbsp;<b>체험 월 수익 : </b>&#8361;</div>
-                        		</c:if>
-                        		
+                        		<br>
+                        		<br>
+                        		<br>
                         		<br>
                         		
                         		<c:if test="${param.category != 'activity'}">
-                        		<div id="accomQuarterlyProfit">&nbsp;&nbsp;<b>이번달 최다실적 숙소 : </b></div>
+	                        		<div class="card" style="float: left;  width: 50%">
+										<div class="card-body">
+											<div class="row">
+												<div class="col mt-0">
+													<h5 class="card-title">이번달 최다실적 숙소</h5>
+												</div>
+											</div>
+											<h1 class="mt-1 mb-3" id="accomQuarterlyProfit"></h1>
+										</div>
+									</div>
                         		</c:if>
                         		<c:if test="${param.category != 'accom'}">
-                        		<div id="activityQuarterlyProfit">&nbsp;&nbsp;<b>이번달 최다실적 체험 : </b></div>
+                        			<div class="card" style="float: left;  width: 50%">
+										<div class="card-body">
+											<div class="row">
+												<div class="col mt-0">
+													<h5 class="card-title">이번달 최다실적 체험</h5>
+												</div>
+											</div>
+											<h1 class="mt-1 mb-3" id="activityQuarterlyProfit"></h1>
+										</div>
+									</div>
                         		</c:if>
                         		
+                        		
+                        		<br>
                         		<br>
                         	</div>
                         </div>
