@@ -40,6 +40,7 @@ public class ChatService {
 				Map<String, Object> paramMap = new HashMap<>();
 				
 				paramMap.put("chatNo", c.getChatNo());
+				paramMap.put("chatRoom", c.getChatRoom());
 				paramMap.put("memberNickname", loginMember.getMemberNickname());
 				
 				// 1-2. 해당 번호를 가지고 있는 채팅을 조회

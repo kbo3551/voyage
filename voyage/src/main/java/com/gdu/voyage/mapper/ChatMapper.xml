@@ -12,6 +12,7 @@
 	<resultMap type="com.gdu.voyage.vo.Chat" id="resultChat">
 		<!-- Chat -->
 		<id column="chat_no" property="chatNo"/>
+		<result column="chat_room" property="chatRoom"/>
 		<result column="to_member_id" property="toMemberId"/>
 		<result column="from_member_id" property="fromMemberId"/>
 		<result column="chat_content" property="chatContent"/>

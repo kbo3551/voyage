@@ -205,7 +205,10 @@
 		</div>
 	</div>
 	
-		<!-- The Modal : 1:1 채팅방 -->
+	<!-- The Modal : 1:1 채팅방 -->
+	<!-- 채팅방에 접근하기 위한 데이터 저장 용 input  -->
+	<input type="hidden" id="loginId" value="${loginMember.memberId}">
+	
 	<div class="modal fade" id="myModal2">
 		<div class="modal-dialog modal-dialog-scrollable">
 			<div class="modal-content">
