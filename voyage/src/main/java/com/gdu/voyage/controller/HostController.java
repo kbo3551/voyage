@@ -1,5 +1,6 @@
 package com.gdu.voyage.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.gdu.voyage.service.AccomBuildingService;
 import com.gdu.voyage.service.ActivityService;
 import com.gdu.voyage.service.HostService;
+import com.gdu.voyage.service.ProductService;
+import com.gdu.voyage.vo.Activity;
 import com.gdu.voyage.vo.Host;
 import com.gdu.voyage.vo.HostAsk;
 import com.gdu.voyage.vo.Member;
@@ -33,7 +36,7 @@ public class HostController {
 	@Autowired private HostService hostService;
 	@Autowired private AccomBuildingService accomBuildingService;
 	@Autowired private ActivityService activityService;
-	
+	@Autowired private ProductService productService;
 	
 	// 신청 대기중인 체험 목록
 	@GetMapping("/host/activityReqState")
@@ -192,4 +195,28 @@ public class HostController {
 	    model.addAttribute("url", "redirect:/index");
 	    return "/alert";
     }
+	
+	// 사업자 체험 상세보기
+	@GetMapping("/host/activityOne")
+	public String getHostActivityOne(Model model, int activityNo) {
+		log.debug("[debug] ProductController.getActivityOne 실행");
+		log.debug("[debug] ProductController.getActivityOne activityNo : " + activityNo);
+		
+		int currentPage = 0;
+		
+		// [사업자] 체험 상세 조회
+		Activity activityOne = productService.getActivityOne(activityNo);
+		model.addAttribute("activityOne", activityOne);
+		log.debug("[debug] ProductController.getActivityOne activityOne : " + activityOne);
+		
+		// [사업자] 체험 상세-목록 조회
+		List<Activity> activityOneList = productService.getActivityList(currentPage, ROW_PER_PAGE);
+		model.addAttribute("activityOneList", activityOneList);
+		log.debug("[debug] ProductController.getActivityOne activityOneList : " + activityOneList);
+		
+		return "/host/activityOne";
+	}
+
 }
+
+

@@ -831,7 +831,7 @@
 																<fmt:parseDate var="alCreateDateString" value="${al.createDate}" pattern="yyyy-MM-dd HH:mm:ss.S" />
 																<td style="display:table-cell;vertical-align:middle;" width="25%"><small><fmt:formatDate value="${alCreateDateString}" pattern="yyyy-MM-dd" /></small></td>
 																<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${al.activityState}</small></td>
-																<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="#" class="btn" style="background: rgb(130,130,130);">상세</a></small></td>
+																<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="${pageContext.request.contextPath}/host/activityOne?activityNo=${al.activityNo}" class="btn" style="background: rgb(130,130,130);">상세</a></small></td>
 															</tr>
 														</c:forEach>
 													</table>
