@@ -12,6 +12,8 @@ public class ActivityReview {
 	private String activityReviewContent;
 	private int activityReviewStar;
 	private int activityReviewViewCnt;
+	private String memberId;
+	private String memberNickname;
 	private String createDate;
 	private String updateDate;
 	

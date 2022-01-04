@@ -42,12 +42,49 @@
 	<select id="selectCountPage" resultType="int">
 		SELECT COUNT(*)FROM activity_review
 	</select>
-	<select id="selectReviewTotalCount" parameterType="String" resultType="int">
+	
+	<!-- 체험 후기 등록 -->
+	<insert id="addActivityReview" parameterType="com.gdu.voyage.vo.ActivityReview">
+		INSERT INTO activity_review(
+			activity_payment_details,
+			activity_review_title,
+			activity_review_content,
+			activity_review_star,
+			activity_review_view_cnt,
+			create_date,
+			update_date
+		) VALUES (
+			#{activityPaymentDetails},
+			#{activityReviewTitle},
+			#{activityReviewContent},
+			#{activityReviewStar},
+			#{activityReviewViewCnt},
+			NOW(),
+			NOW()
+		)
+	</insert>
+	
+	<select id="selectReviewTotalCount" resultType="int">
 		SELECT COUNT(*) FROM activity_review
 		<where>
-			<if test="payment_details != null">
-				payment_details = #{payment_details}
+			<if test="activityPaymentNo != null">
+				activity_payment_details = #{activityPaymentNo}
 			</if>
 		</where>
 	</select>
+	
+	<!-- 이미지 등록 -->
+	<insert id="addActivityReviewImage" parameterType="com.gdu.voyage.vo.ActivityReviewImage">
+		INSERT INTO activity_review_image(
+			activity_review_no,
+			activity_review_image_name,
+			activity_review_image_ext,
+			activity_review_image_size
+		) VALUES (
+			#{activityReviewNo},
+			#{activityReviewImageName},
+			#{activityReviewImageExt},
+			#{activityReviewImageSize}
+		)
+	</insert>
 </mapper>
