@@ -132,8 +132,7 @@ var doChatRoom = function(){
                for(i=0;i<item.length;i++) {
                   $('#chatList').append('<tr>');
                      $('#chatList').append('<td>'+item[i].member.memberNickname+':'+item[i].chatContent+','+item[i].chatRoom+'</td>');
-                     $('#chatList').append('<button id="chatRoomBtn" data-toggle="modal" data-target="#myModal2">입장</button>');
-                     $('#chatList').append('<input type="hidden" id="chatRoomNo" value="'+item[i].chatRoom+'">');
+                     $('#chatList').append('<button id="chatRoomBtn" value="'+item[i].chatRoom+'" data-toggle="modal" data-target="#myModal2">입장</button>');
                   $('#chatList').append('</tr>');
                };
             });
@@ -149,13 +148,15 @@ var doChatRoom = function(){
 	//$('#chatRoomBtn').click(function(){ -> $('body').on('click', '#chatRoomBtn', function() {
 	//console.log('chatRoom : ',$("body").on('button[id="chatRommBtn"]').attr("name"));
 	
-	// 세션 값에 저장된 (로그인한) Id
-	var loginId = $('#loginId').val();
-	console.log('loginId : ',loginId);
+		// 세션 값에 저장된 (로그인한) Id
+		var loginId = $('#loginId').val();
+		console.log('loginId : ',loginId);
+		
+		//접속하려는 채팅방의 번호 
+		var chatRoomNo = $(this).val();
+		console.log('chatRoomNo : ',chatRoomNo);
 	
-	//접속하려는 채팅방의 번호 
-	var chatRoomNo = $('#chatRoomNo').val();
-	console.log('chatRoomNo : ',chatRoomNo);
+	
 	
 		$.ajax({
 			url:'/voyage/chatRoom?chatRoom='+chatRoomNo,
