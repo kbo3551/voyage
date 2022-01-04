@@ -389,6 +389,20 @@
                         				}		
                         			)
                         			
+                        			// 사업자 월 수수료
+                        			$.ajax(
+                        				{
+                        					type: "GET",
+                        					url:"/voyage/selectHostMonthFees?hostNo="+hostNo,
+                        					dataType:"text",
+                        					success : function (data) {
+                        						let hostMonthFees = data;
+                        						hostMonthFees *= 1;
+                        						$('#hostMonthFees').append(hostMonthFees.toLocaleString());
+											}
+                        						
+                        				}		
+                        			)
                         			
                         			
                         			// 최근 한달간 숙소 일별 수익
@@ -559,7 +573,7 @@
 												</div>
 											</div>
 											<h1 class="mt-1 mb-3" id="totalProfit">&#8361;</h1>
-											<div class="mb-0" id="allProfit">
+											<div class="mb-0" id="allProfitMonth">
 											</div>
 										</div>
 									</div>
@@ -571,7 +585,7 @@
 												</div>
 											</div>
 											<h1 class="mt-1 mb-3" id="totalProfitByMonth">&#8361;</h1>
-											<div class="mb-0 " id="allProfitMonth">
+											<div class="mb-0 " id="allProfit">
 											</div>
 										</div>
 									</div>
@@ -588,7 +602,7 @@
 												</div>
 											</div>
 											<h1 class="mt-1 mb-3" id="accomTotalProfit">&#8361;</h1>
-											<div class="mb-0 " id="accomProfit">
+											<div class="mb-0 " id="accomProfitMonth">
 											</div>
 										</div>
 									</div>
@@ -600,7 +614,7 @@
 												</div>
 											</div>
 											<h1 class="mt-1 mb-3" id="accomMonthTotalProfit">&#8361;</h1>
-											<div class="mb-0 " id="accomProfitMonth">
+											<div class="mb-0 " id="accomProfit">
 											</div>
 										</div>
 									</div>
@@ -617,7 +631,7 @@
 												</div>
 											</div>
 											<h1 class="mt-1 mb-3" id="activityTotalProfit">&#8361;</h1>
-											<div class="mb-0 " id="activityProfit">
+											<div class="mb-0 " id="activityProfitMonth">
 											</div>
 										</div>
 									</div>
@@ -629,7 +643,7 @@
 												</div>
 											</div>
 											<h1 class="mt-1 mb-3" id="activityMonthTotalProfit">&#8361;</h1>
-											<div class="mb-0 " id="activityProfitMonth">
+											<div class="mb-0 " id="activityProfit">
 											</div>
 										</div>
 									</div>
@@ -831,7 +845,7 @@
 																<fmt:parseDate var="alCreateDateString" value="${al.createDate}" pattern="yyyy-MM-dd HH:mm:ss.S" />
 																<td style="display:table-cell;vertical-align:middle;" width="25%"><small><fmt:formatDate value="${alCreateDateString}" pattern="yyyy-MM-dd" /></small></td>
 																<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${al.activityState}</small></td>
-																<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="#" class="btn" style="background: rgb(130,130,130);">상세</a></small></td>
+																<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="${pageContext.request.contextPath}/host/activityOne?activityNo=${al.activityNo}" class="btn" style="background: rgb(130,130,130);">상세</a></small></td>
 															</tr>
 														</c:forEach>
 													</table>
@@ -881,6 +895,8 @@
                         	<div class="col-sm-20 col-sm-offset-1" style="text-align: right;">
                             	<br>
 							</div>
+							
+							<div id="hostMonthFees">이번달 사업자 수수료 : &#8361;</div>
                          </div>
                          <br>
 		            </div>

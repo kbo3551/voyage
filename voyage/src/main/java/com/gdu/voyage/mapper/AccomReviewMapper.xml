@@ -53,13 +53,17 @@
 	<!-- 숙소 후기 등록 -->
 	<insert id="addAccomReview" parameterType="com.gdu.voyage.vo.AccomReview">
 		INSERT INTO accom_review(
+			accom_payment_details,
 			accom_review_title,
+			accom_review_content,
 			accom_review_star,
 			accom_review_view_cnt,
 			create_date,
 			update_date
 		) VALUES (
+			#{accomPaymentDetails},
 			#{accomReviewTitle},
+			#{accomReviewContent},
 			#{accomReviewStar},
 			#{accomReviewViewCnt},
 			NOW(),
@@ -67,4 +71,18 @@
 		)
 	</insert>
 	
+	<!-- 이미지 등록 -->
+	<insert id="addAccomReviewImage" parameterType="com.gdu.voyage.vo.AccomReviewImage">
+		INSERT INTO accom_review_image(
+			accom_review_no,
+			accom_review_image_name,
+			accom_review_image_ext,
+			accom_review_image_size
+		) VALUES (
+			#{accomReviewNo},
+			#{accomReviewImageName},
+			#{accomReviewImageExt},
+			#{accomReviewImageSize}
+		)
+	</insert>
 </mapper>

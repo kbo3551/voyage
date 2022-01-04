@@ -7,22 +7,77 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gdu.voyage.mapper.AccomReviewMapper;
 import com.gdu.voyage.vo.AccomReview;
+import com.gdu.voyage.vo.AccomReviewImage;
+import com.gdu.voyage.vo.AccomReviewForm;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
+@Transactional
 public class AccomReviewService {
 	@Autowired AccomReviewMapper accomReviewMapper;
 
-	// [Member] Review 게시판 목록 작성
-	/*
-	 * public void addAccomReview(Review review) throws Exception { // qnaForm값 디버깅
-	 * 코드 log.debug("**********[상훈] ReviewService_ debug" + .toString());
-	 */
+	// 숙소 후기 작성
+		public void addAccomReview(AccomReviewForm accomReviewForm, String realPath, int accomPaymentDetails,  String memberId, String memberNickname) throws Exception {
+
+			log.debug("*****[상훈] AccomReviewService debug" + accomReviewForm.toString());
+			//accomReview에 accomPaymentDetails 저장
+			AccomReview accomReview = accomReviewForm.getAccomReview();
+			accomReview.setMemberId(memberId);
+			accomReview.setMemberNickname(memberNickname);
+			accomReview.setAccomPaymentDetails(accomPaymentDetails);
+			
+			// 후기글 등록
+			accomReviewMapper.addAccomReview(accomReview);
+			// 이미지 추가에 사용할 accomReviewNo 값 확인
+			log.debug("*****[상훈] AccomReviewService_AccomReviewNo debug" + accomReview.getAccomReviewNo());
+			// 이미지 추가
+			List <MultipartFile> aList = accomReviewForm.getAccomReviewImage();
+			// 이미지가 업로드 되었을 경우
+			if(aList != null) {
+				for(MultipartFile i : aList) {
+					AccomReviewImage accomReviewImage = new AccomReviewImage();
+					accomReviewImage.setAccomReviewNo(accomReview.getAccomReviewNo());
+					// 원본 이미지 파일 이름
+					String originalImagename = i.getOriginalFilename(); 
+					// 마지막 점의 위치
+					int p = originalImagename.lastIndexOf("."); 
+					String ext = originalImagename.substring(p+1);
+					// 중복되지 않는 문자 이름 생성
+					String prename = UUID.randomUUID().toString().replace("-", "");
+					String imagename = prename;
+					// qnaImg에 imgName, imgExt, imgSize 셋팅
+					accomReviewImage.setAccomReviewImageName(imagename);
+					accomReviewImage.setAccomReviewImageExt(ext);
+					accomReviewImage.setAccomReviewImageSize(i.getSize());
+					// qnaImg 값 디버깅 코드
+					log.debug("*****[상훈] AccomReviewService_AccomReviewImage debug" + accomReviewImage.toString());
+					// 테이블에 값 저장
+					accomReviewMapper.addAccomReviewImage(accomReviewImage);
+					
+					File f = new File(realPath+imagename+"."+ext);
+					try {
+						i.transferTo(f);
+					} catch (IllegalStateException | IOException e) {
+						e.printStackTrace();
+						// IllegalStateException | IOException e 예외처리를 무조건 해야하는 예외
+						// RuntimeException은 예외처리를 하지 않아도 됨
+						throw new RuntimeException();
+					}
+				}
+			}
+		}
+	
 	// 숙소 후기 목록
 	public Map<String, Object> getAccomReviewList(String Review, int currentPage, int rowPerPage) {
 

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.gdu.voyage.vo.AccomReview;
+import com.gdu.voyage.vo.AccomReviewImage;
 
 @Mapper
 public interface AccomReviewMapper {
@@ -21,4 +22,9 @@ public interface AccomReviewMapper {
 	// 페이지 수
 	int selectCountPage();
 	
+	// 이미지 추가
+	int addAccomReviewImage(AccomReviewImage accomReviewImage);
+	
+	// 이미지 삭제
+	int removeAccomReviewImage(int accomReviewNo);
 }
