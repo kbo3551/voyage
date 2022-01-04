@@ -41,14 +41,6 @@
 	<select id="selectCountPage" resultType="int">
 		SELECT COUNT(*)FROM accom_review
 	</select>
-	<select id="selectReviewTotalCount" parameterType="String" resultType="int">
-		SELECT COUNT(*) FROM accom_review
-		<where>
-			<if test="payment_details != null">
-				payment_details = #{payment_details}
-			</if>
-		</where>
-	</select>
 	
 	<!-- 숙소 후기 등록 -->
 	<insert id="addAccomReview" parameterType="com.gdu.voyage.vo.AccomReview">
@@ -70,6 +62,15 @@
 			NOW()
 		)
 	</insert>
+	
+	<select id="selectReviewTotalCount" resultType="int">
+		SELECT COUNT(*) FROM accom_review
+		<where>
+			<if test="payment_details != null">
+				payment_details = #{payment_details}
+			</if>
+		</where>
+	</select>
 	
 	<!-- 이미지 등록 -->
 	<insert id="addAccomReviewImage" parameterType="com.gdu.voyage.vo.AccomReviewImage">

@@ -6,13 +6,12 @@
 <meta charset="UTF-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <title>Insert title here</title>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
         	$(function(){
         		var ck = false;
         		
         		// 유효성 검사를 위한 변수 생성
-        		var valAccomPaymentDetails = $('#accomPaymentDetails').val();
         		var valAccomReviewTitle = $('#accomReviewTitle').val();
         		var valAccomReviewContent = $('#accomReviewContent').val();
 	       		// 이미지 추가 버튼 눌렀을 때
@@ -26,11 +25,6 @@
         		});
         		// send 버튼 눌렀을 때
         		$('#sendABtn').click(function(){
-					if(valAccomPaymentDetails == null || valAccomPaymentDetails == undifined || valAccomPaymentDetails == ""){
-						alert('결제정보가 없습니다. 이용 완료후 작성 해주세요.');
-						location.href = '/voyage/index';
-						return;
-					}
 					if(valAccomReviewTitle == null || valAccomReviewTitle == undifined || valAccomReviewTitle == ""){
 						alert('제목이 입력되지 않았습니다. 제목을 입력해주세요.');
 						$('#accomReviewTitle').focus();
@@ -57,6 +51,25 @@
         			$('#addAccomReviewForm').submit();
         		});
         	});
+        
+        </script>
+        <script>
+     // 중복 체크
+        let accomPaymentNo = "${param.accomPaymentNo}";
+                    $.ajax(
+                        {
+                            type: "GET",
+                            url:"/voyage/addAccomReviewCheck?accomPaymentNo="+accomPaymentNo,
+                            async:false,
+                            dataType:"text",
+                            success : function (data) {
+                                let accomPaymentNo = data;
+                                accomPaymentNo *= 1;
+                                document.writeln(data);
+                    	}
+                 	}
+              }
+       )
         </script>
         
         <meta name="description" content="">
@@ -143,13 +156,10 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                 	<div class="form-group">
-                                		<input class="form-controle error"  hidden="hidden" name="accomReview.accomReviewPaymentDetails" id="accomReviewPaymentDetails" type="text" value="${accomReview.accomReviewPaymentDetails}">
-                                	</div>
-                                	<div class="form-group">
-                                		<input class="form-controle error"  hidden="hidden" name="accomReview.memberId" id="memberId" type="text" value="${accomReview.memberId}">
+                                		<input class="form-controle error"  hidden="hidden" name="accomPaymentNo" type="number" value="${param.accomPaymentNo}">
                                 	</div>
                                     <div class="form-group">
-                                    	 <input class="form-control error" name="accomReview.memberNickname" id="memberNickname" type="text" value="${accomReview.memberNickname}" placeholder="닉네임을 입력해주세요">
+                                    	 <input class="form-control error" name="accomReview.memberNickname" id="memberNickname" type="text" value="${loginMember.getMemberNickname()}" readonly="readonly">
                                     </div>
                                     <div class="form-group">
 	                                    <input class="form-control error" name="accomReview.accomReviewTitle" id="accomReviewTitle" type="text"	placeholder="제목을 입력해주세요">

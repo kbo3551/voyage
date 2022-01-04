@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,14 +26,14 @@ public class AccomReviewService {
 	@Autowired AccomReviewMapper accomReviewMapper;
 
 	// 숙소 후기 작성
-		public void addAccomReview(AccomReviewForm accomReviewForm, String realPath, int accomPaymentDetails,  String memberId, String memberNickname) throws Exception {
+		public void addAccomReview(AccomReviewForm accomReviewForm, String realPath, int accomPaymentNo,  String memberId, String memberNickname) throws Exception {
 
 			log.debug("*****[상훈] AccomReviewService debug" + accomReviewForm.toString());
 			//accomReview에 accomPaymentDetails 저장
 			AccomReview accomReview = accomReviewForm.getAccomReview();
 			accomReview.setMemberId(memberId);
 			accomReview.setMemberNickname(memberNickname);
-			accomReview.setAccomPaymentDetails(accomPaymentDetails);
+			accomReview.setAccomPaymentDetails(accomPaymentNo);
 			
 			// 후기글 등록
 			accomReviewMapper.addAccomReview(accomReview);
@@ -78,8 +76,12 @@ public class AccomReviewService {
 			}
 		}
 	
+	public int selectReviewTotalCountOne(int accomPaymentNo) {
+		return accomReviewMapper.selectReviewTotalCount(accomPaymentNo);
+	}
+		
 	// 숙소 후기 목록
-	public Map<String, Object> getAccomReviewList(String Review, int currentPage, int rowPerPage) {
+	public Map<String, Object> getAccomReviewList(Integer accomPaymentNo, int currentPage, int rowPerPage) {
 
 		Map<String, Object> paraMap = new HashMap<>();
 		int beginRow = (currentPage - 1) * rowPerPage;
@@ -92,7 +94,7 @@ public class AccomReviewService {
 		Map<String, Object> returnMap = new HashMap<>();
 		
 		int lastPage = 0;
-		int totalCount = accomReviewMapper.selectReviewTotalCount(Review);
+		int totalCount = accomReviewMapper.selectReviewTotalCount(accomPaymentNo);
 		
 		lastPage = (totalCount / rowPerPage);
 		if (totalCount % rowPerPage != 0) {

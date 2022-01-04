@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import com.gdu.voyage.vo.Member;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Transactional
 @Controller
 public class AccomReviewController {
 	@Autowired AccomReviewService accomReviewService;
@@ -34,9 +36,9 @@ public class AccomReviewController {
 	
 	// [Member] 숙소 후기 목록 조회
 	@GetMapping("/getAccomReviewList")
-	public String getAccomReviewList(Model model, @RequestParam(defaultValue="1") int currentPage, @RequestParam @Nullable String Review) {
+	public String getAccomReviewList(Model model, @RequestParam(defaultValue="1") int currentPage, @RequestParam @Nullable Integer accomPaymentNo) {
 		log.debug("*********[상훈]ReviewController() 실행");
-		Map<String, Object> map = accomReviewService.getAccomReviewList(Review, currentPage, ROW_PER_PAGE);
+		Map<String, Object> map = accomReviewService.getAccomReviewList(accomPaymentNo, currentPage, ROW_PER_PAGE);
 		int controllPage = (currentPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
 		int pageNo = ((controllPage / 100) * 10 + 1);
 
@@ -57,36 +59,38 @@ public class AccomReviewController {
 		return "/templates_citylisting/getReviewOne";
 	}
 	
+	
 	// [Member] 후기 작성 get
-		@GetMapping("/addAccomReview")
-		public String addAccomReview(HttpSession session) {
-			log.debug("addAccomReviewController() 실행");
-			// session에서 로그인한 회원 정보 가져옴
-			Member loginMember = (Member)session.getAttribute("loginMember");
-			// 비회원일 경우, 로그인 후 이용 가능
-			if(loginMember == null) {
-				return "redirect:/login";
-			}
-			return "/templates_citylisting/addAccomReview";
+	@GetMapping("/addAccomReview")
+	public String addAccomReview(HttpSession session, Model model) {
+		log.debug("addAccomReviewController() 실행");
+		// session에서 로그인한 회원 정보 가져옴
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		model.addAttribute("loginMember", loginMember);
+		// 비회원일 경우, 로그인 후 이용 가능
+		if(loginMember == null) {
+			return "redirect:/login";
 		}
-		// [Member] 후기 작성 post
-		@PostMapping("/addAccomReview")
-		public String addAccomReview(HttpServletRequest request, AccomReviewForm accomReviewForm, 
-				HttpSession session) throws Exception {
-			// accomPaymentDetails값을 세션에서 가져옴
-			AccomReview accomReview = (AccomReview) session.getAttribute("accomReview");
-			Member loginMember = (Member) session.getAttribute("loginMember");
-			
-			String memberId = loginMember.getMemberId();
-			String memberNickname = loginMember.getMemberNickname();
-			
-			int accomPaymentDetails = accomReview.getAccomPaymentDetails();
+		return "/templates_citylisting/addAccomReview";
+	}
+	
+	// [Member] 후기 작성 post
+	@PostMapping("/addAccomReview")
+	public String addAccomReview(HttpServletRequest request, AccomReviewForm accomReviewForm, 
+			HttpSession session) throws Exception {
+		// accomPaymentDetails값을 세션에서 가져옴
+		AccomReview accomReview = (AccomReview) session.getAttribute("accomReview");
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		int accomPaymentNo = Integer.parseInt(request.getParameter("accomPaymentNo"));
+		String memberId = loginMember.getMemberId();
+		String memberNickname = loginMember.getMemberNickname();
+		
 			// 디버그 코드
 			log.debug("***** [상훈] addAccomReview_qnaForm_Controller() debug" + accomReviewForm.toString());
 			// 이미지 파일 절대 경로 설정
 			String realPath = request.getServletContext().getRealPath("resources/image/accomReview/");
 			
-			accomReviewService.addAccomReview(accomReviewForm, realPath, accomPaymentDetails, memberId, memberNickname);
+			accomReviewService.addAccomReview(accomReviewForm, realPath, accomPaymentNo, memberId, memberNickname);
 			
 			return "redirect:/getAccomReviewList?pageNo=1";
 		}
