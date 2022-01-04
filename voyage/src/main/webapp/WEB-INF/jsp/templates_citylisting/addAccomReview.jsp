@@ -54,22 +54,27 @@
         
         </script>
         <script>
-     // 중복 체크
+     	// 중복 체크
         let accomPaymentNo = "${param.accomPaymentNo}";
                     $.ajax(
                         {
                             type: "GET",
                             url:"/voyage/addAccomReviewCheck?accomPaymentNo="+accomPaymentNo,
-                            async:false,
+                            async: false,
                             dataType:"text",
                             success : function (data) {
                                 let accomPaymentNo = data;
                                 accomPaymentNo *= 1;
-                                document.writeln(data);
-                    	}
-                 	}
-              }
-       )
+                                
+                                let contextPath = "${pageContext.request.contextPath}";
+                                
+                                if(accomPaymentNo>0){
+                                	alert("중복으로 작성 할 수 없습니다.");
+                                	location.replace(contextPath+'/member/selectMyOrderList');
+                                }
+                    		}
+		              	}
+		      		 )
         </script>
         
         <meta name="description" content="">

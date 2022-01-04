@@ -66,8 +66,8 @@
 	<select id="selectReviewTotalCount" resultType="int">
 		SELECT COUNT(*) FROM accom_review
 		<where>
-			<if test="payment_details != null">
-				payment_details = #{payment_details}
+			<if test="accomPaymentNo != null">
+				accom_payment_details = #{accomPaymentNo}
 			</if>
 		</where>
 	</select>
