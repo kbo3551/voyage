@@ -74,25 +74,49 @@
                                 <h1>여행을 떠나고 싶으신가요?</h1>
                             </div>
                             <!--Hero form -->
-                            <form method="get" action="#" class="search-box">
+                            <form name="Search" id="Search" method="get" action="#" class="search-box">
                                 <div class="input-form">
-                                    <input type="text" placeholder="여행지를 입력해주세요">
+                                    <input type="text" name="searchWord" id="searchWord" placeholder="여행지를 입력해주세요" onkeypress="enterSearch()">
                                 </div>
                                 <div class="select-form">
                                     <div class="select-itms">
-                                        <select name="select" id="select1">
+                                        <select id="searchSelect">
                                             <option value="숙소">숙소</option>
                                             <option value="체험">체험</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="search-form">
-                                    <a href="#" onclick="">Search</a>
+                                    <a href="#" onclick="searchScript()">Search</a>
                                 </div>	
                             </form>	
                         </div>
                     </div>
                 </div>
+                
+                <script type="text/javascript">
+	                function searchScript(){
+	                	let category = document.getElementById("searchSelect");
+	                	category = category.options[category.selectedIndex].value;
+	                	let contextPath = '${contextPath}';
+						if($("#searchWord").val() == ""){
+							alert('키워드를 입력해주세요.');
+							return;
+						} else if (category == '숙소'){
+							$("#Search").attr("action", contextPath+"/getAccomProductList");
+							Search.submit();
+						} else if (category == '체험'){
+							$("#Search").attr("action", contextPath+"/getActivityProductList");
+							Search.submit();
+						}
+					};
+					
+					function enterSearch() {
+						if(window.event.keyCode == 13){
+							searchScript();
+						}
+					}
+                </script>
 
             </div>
         </div>
