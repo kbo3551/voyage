@@ -53,8 +53,9 @@ public class CouponController {
 			return "/alert";
 		}
 		couponService.addMemberCoupon(cm);
-		
-		return "redirect:/member/coupon";
+		model.addAttribute("msg", "쿠폰이 발급 되었습니다.");
+	    model.addAttribute("url", "redirect:/member/coupon");
+		return "/alert";
 	}
 	// 회원이 발급받은 쿠폰 list, 발급할 쿠폰list
 		@GetMapping("/member/coupon")
