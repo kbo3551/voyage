@@ -345,8 +345,18 @@
 																	</table>
 																	
 																</td>
-																<td style="display:table-cell;vertical-align:middle;" width="13%">${ap.accomPaymentState}</td>
-																<td style="display:table-cell;vertical-align:middle;" width="13%"><small><a href="#" data-toggle="modal" data-target="#acmModal${acmModalNo}" >명세</a></small>
+																<c:choose>
+																	<c:when test="${ap.accomPaymentState == '사용완료'}">
+																		<td style="display:table-cell;vertical-align:middle;" width="13%">
+																			<div>${ap.accomPaymentState}</div>
+																			<div><small><a href="${contextPath}/addAccomReview?accomPaymentNo=${ap.accomPaymentNo}" style="color:teal;">후기</a></small></div>
+																		</td>
+																	</c:when>
+																	<c:otherwise>
+																		<td style="display:table-cell;vertical-align:middle;" width="13%">${ap.accomPaymentState}</td>
+																	</c:otherwise>
+																</c:choose>
+																<td style="display:table-cell;vertical-align:middle;" width="13%"><a href="#" data-toggle="modal" data-target="#acmModal${acmModalNo}" >명세</a>
 																<!-- The Modal -->
 																  <div class="modal" id="acmModal${acmModalNo}">
 																    <div class="modal-dialog">
@@ -503,8 +513,19 @@
 																	</table>
 																	
 																</td>
-																<td style="display:table-cell;vertical-align:middle;" width="13%">${ac.activityPaymentState}</td>
-																<td style="display:table-cell;vertical-align:middle;" width="13%"><small><a href="#" data-toggle="modal" data-target="#actModal${actModalNo}" >명세</a></small>
+																<c:choose>
+																	<c:when test="${ac.activityPaymentState == '사용완료'}">
+																		<td style="display:table-cell;vertical-align:middle;" width="13%">
+																			<div>${ac.activityPaymentState}</div>
+																			<div><small><a href="${contextPath}/addActivityReview?activityPaymentNo=${ac.activityPaymentNo}" style="color:teal;">후기</a></small></div>
+																		</td>
+																	</c:when>
+																	<c:otherwise>
+																		<td style="display:table-cell;vertical-align:middle;" width="13%">${ac.activityPaymentState}</td>
+																	</c:otherwise>
+																</c:choose>
+																
+																<td style="display:table-cell;vertical-align:middle;" width="13%"><a href="#" data-toggle="modal" data-target="#actModal${actModalNo}" >명세</a>
 																
 																<!-- The Modal -->
 																  <div class="modal" id="actModal${actModalNo}">
