@@ -211,11 +211,11 @@ public class ProductController {
 		log.debug("[debug] ProductController.getCalendar 실행");
 		log.debug("[debug] ProductController.getCalendar accomRoomNo : " + accomRoomNo);
 		
-		// 해당 객실의 예약 내역 조회
-		List<Map<String, Object>> map = productService.getAccomRoomReserveByAll(accomRoomNo);
-		model.addAttribute("map", map);
+//		// 해당 객실의 예약 내역 조회
+//		List<Map<String, Object>> map = productService.getAccomRoomReserveDay(accomRoomNo);
+//		model.addAttribute("map", map);
 		model.addAttribute("accomRoomNo", accomRoomNo);
-		log.debug("[debug] ProductController.getCalendar map : " + map);		
+//		log.debug("[debug] ProductController.getCalendar map : " + map);		
 		
 		return "/product/calendar";
 	}

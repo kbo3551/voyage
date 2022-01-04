@@ -238,6 +238,8 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="calendar-section">
+						<input type="text" name="checkIn" value="" readonly="readonly">
+						<input type="text" name="checkOut" value="" readonly="readonly">
 			        <div class="row no-gutters">
 			          <div class="col-md-6">
 				            <div class="calendar calendar-first" id="calendar_first">
@@ -280,7 +282,7 @@
 				
 				<div class="wizard-footer">
 					<div class="pull-right">
-						<a href="${pageContext.request.contextPath}/addReservation?" class='btn btn-next btn-primary'>Next</a>
+						<a href="${pageContext.request.contextPath}/addReservation?" class='btn btn-next btn-primary' id="nextBtn">Next</a>
 <!-- 						<input type='button' class='btn btn-finish btn-primary' name='finish' id="roomSubmit" value='Finish' /> -->
 					</div>
 	

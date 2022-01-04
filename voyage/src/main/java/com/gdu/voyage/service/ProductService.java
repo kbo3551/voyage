@@ -1,5 +1,9 @@
 package com.gdu.voyage.service;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -147,11 +151,66 @@ public class ProductService {
 	
 	// 예약
 	// [사용자] 객실 예약 내역 전체 조회
-	public List<Map<String, Object>> getAccomRoomReserveByAll(int accomRoomNo) {
-		log.debug("[debug] ProductService.getAccomRoomReserveByAll accomRoomNo : " + accomRoomNo);
+	public List<String> getAccomRoomReserveDay(int accomRoomNo) {
+		log.debug("[debug] ProductService.getAccomRoomReserveDay accomRoomNo : " + accomRoomNo);
 		
-		List<Map<String, Object>> map = productMapper.selectAccomRoomReserveByAll(accomRoomNo);
+		// 체크인, 체크아웃 날짜를 list 안의 map 형태로 저장
+		List<Map<String, Object>> map = productMapper.selectAccomRoomReserveDay(accomRoomNo);
+		log.debug("[debug] ProductService.getAccomRoomReserveDay map : " + map);
+		//log.debug("[debug] ProductService.getAccomRoomReserveDay map.get(0) : " + map.get(0).get("accomCheckIn").toString());
 		
-		return map;
+		List<String> reverveDays = new ArrayList<>();
+				  
+		// 반복문을 통해 list 안의 i번째 map 데이터를 가져와
+		// 체크인 날짜로부터 체크아웃 날짜 사이의 (예약 불가능한) 모든 예약 날짜를 하나의 list에 저장
+		for(int i=0; i<map.size(); i++) {
+		  String accomCheckIn = map.get(i).get("accomCheckIn").toString();
+		  String accomCheckOut = map.get(i).get("accomCheckOut").toString();
+		  
+	      int checkInYear = Integer.parseInt(accomCheckIn.substring(0,4));
+	      int checkInMonth= Integer.parseInt(accomCheckIn.substring(5,7));
+	      int checkInDate = Integer.parseInt(accomCheckIn.substring(8,10));
+
+	      // 체크아웃 날짜를 '-' 없는 int 타입으로 가공하기 위한 코드
+	      String checkOutYear = accomCheckOut.substring(0,4);
+	      String checkOutMonth= accomCheckOut.substring(5,7);
+	      String checkOutDate = accomCheckOut.substring(8,10);
+	      
+	      String checkOut = checkOutYear + checkOutMonth + checkOutDate;
+
+	      int endDt = Integer.parseInt(checkOut);
+	 
+	      Calendar cal = Calendar.getInstance();
+	         
+	      // Calendar의 Month는 0부터 시작하므로 -1
+	      cal.set(checkInYear, checkInMonth-1, checkInDate);
+	        
+	      while(true) {
+	          log.debug("현재 날짜 출력 "+getDateByString(cal.getTime()));
+	             
+	          // 체크인 날짜로부터 하루씩 증가
+	          cal.add(Calendar.DATE, 1); 
+
+	          // 반환하기 위한 list에 모든 예약 날짜 저장
+	          reverveDays.add(getDateByString(cal.getTime()));
+	          
+	          // 현재 날짜가 체크아웃 날짜보다 크면 종료 
+	           if(getDateByInteger(cal.getTime()) > endDt) break;
+	      }
+		}
+		return reverveDays;
 	}
+	
+	// 날짜 데이터를 yyyyMMdd 형식으로 가공하여 int 타입으로 반환하기 위한 메소드
+	public int getDateByInteger(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        return Integer.parseInt(sdf.format(date));
+    }
+	
+	// 날짜 데이터를 yyyy-MM-dd 형식으로 가공하여 String 타입으로 반환하기 위한 메소드
+    public String getDateByString(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(date);
+    }
+
 }

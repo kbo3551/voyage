@@ -458,10 +458,10 @@
 			AND a.activity_no = h.iden_no
 	</select>
 	
-	<select id="selectAccomRoomReserveByAll" parameterType="int" resultType="map">
+	<select id="selectAccomRoomReserveDay" parameterType="int" resultType="map">
 		SELECT
-			accom_checkin accomCheckIn,
-			accom_checkout accomCheckOut
+			SUBSTR(accom_checkin, 1, 10) accomCheckIn,
+			SUBSTR(accom_checkout, 1, 10) accomCheckOut
 		FROM
 			accom_payment
 		WHERE accom_room_no=#{accomRoomNo}

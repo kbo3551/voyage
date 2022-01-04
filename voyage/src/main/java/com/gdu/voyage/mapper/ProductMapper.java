@@ -47,5 +47,5 @@ public interface ProductMapper {
 	
 	// 예약
 	// 객실 예약 내역 전체 조회
-	List<Map<String, Object>> selectAccomRoomReserveByAll(int accomRoomNo);
+	List<Map<String, Object>> selectAccomRoomReserveDay(int accomRoomNo);
 }
