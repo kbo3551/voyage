@@ -141,8 +141,8 @@
                             </div>
                             <div class="location-details">
                                 <p>서울</p>
-                                <a href="#" class="location-btn"> 2 <i class="ti-plus"></i> 체험</a>
-								<a href="#" class="location-btn"> 4 <i class="ti-plus"></i> 숙소</a>
+                                <a href="${contextPath}/getActivityProductList?searchAddress=서울" class="location-btn"> 2 <i class="ti-plus"></i> 체험</a>
+								<a href="${contextPath}/getAccomProductList?searchAddress=서울" class="location-btn"> 4 <i class="ti-plus"></i> 숙소</a>
                             </div>
                         </div>
                     </div>
@@ -153,8 +153,8 @@
                             </div>
                             <div class="location-details">
                                 <p>제주</p>
-                                <a href="#" class="location-btn"> 8 <i class="ti-plus"></i> 체험</a>
-								<a href="#" class="location-btn"> 16 <i class="ti-plus"></i> 숙소</a>
+                                <a href="${contextPath}/getActivityProductList?searchAddress=제주" class="location-btn"> 8 <i class="ti-plus"></i> 체험</a>
+								<a href="${contextPath}/getAccomProductList?searchAddress=제주" class="location-btn"> 16 <i class="ti-plus"></i> 숙소</a>
                             </div>
                         </div>
                     </div>
@@ -165,8 +165,8 @@
                             </div>
                             <div class="location-details">
                                 <p>부산</p>
-                                <a href="#" class="location-btn"> 32 <i class="ti-plus"></i> 체험</a>
-								<a href="#" class="location-btn"> 64 <i class="ti-plus"></i> 숙소</a>
+                                <a href="${contextPath}/getActivityProductList?searchAddress=부산" class="location-btn"> 32 <i class="ti-plus"></i> 체험</a>
+								<a href="${contextPath}/getAccomProductList?searchAddress=부산" class="location-btn"> 64 <i class="ti-plus"></i> 숙소</a>
                             </div>
                         </div>
                     </div>
@@ -177,8 +177,8 @@
                             </div>
                             <div class="location-details">
                                 <p>강원</p>
-                                <a href="#" class="location-btn"> 128 <i class="ti-plus"></i> 체험</a>
-								<a href="#" class="location-btn"> 256 <i class="ti-plus"></i> 숙소</a>
+                                <a href="${contextPath}/getActivityProductList?searchAddress=강원" class="location-btn"> 128 <i class="ti-plus"></i> 체험</a>
+								<a href="${contextPath}/getAccomProductList?searchAddress=강원" class="location-btn"> 256 <i class="ti-plus"></i> 숙소</a>
                             </div>
                         </div>
                     </div>
@@ -189,8 +189,8 @@
                             </div>
                             <div class="location-details">
                                 <p>인천</p>
-                                <a href="#" class="location-btn"> 512 <i class="ti-plus"></i> 체험</a>
-								<a href="#" class="location-btn"> 1024 <i class="ti-plus"></i> 숙소</a>
+                                <a href="${contextPath}/getActivityProductList?searchAddress=인천" class="location-btn"> 512 <i class="ti-plus"></i> 체험</a>
+								<a href="${contextPath}/getAccomProductList?searchAddress=인천" class="location-btn"> 1024 <i class="ti-plus"></i> 숙소</a>
                             </div>
                         </div>
                     </div>
@@ -201,8 +201,8 @@
                             </div>
                             <div class="location-details">
                                 <p>대구</p>
-                                <a href="#" class="location-btn"> 2048 <i class="ti-plus"></i> 체험</a>
-								<a href="#" class="location-btn"> 4096 <i class="ti-plus"></i> 숙소</a>
+                                <a href="${contextPath}/getActivityProductList?searchAddress=대구" class="location-btn"> 2048 <i class="ti-plus"></i> 체험</a>
+								<a href="${contextPath}/getAccomProductList?searchAddress=대구" class="location-btn"> 4096 <i class="ti-plus"></i> 숙소</a>
                             </div>
                         </div>
                     </div>
@@ -210,70 +210,16 @@
                 <!-- More Btn -->
                 <div class="row justify-content-center">
                     <div class="room-btn pt-20">
-                        <a href="catagori.html" class="btn view-btn1">View All Places</a>
+                        <a href="${contextPath}/setProductCategory" class="btn view-btn1">View All Places</a>
                     </div>
                 </div>
             </div>
         </div>
-         
-        <!-- Popular Locations End -->
-        <!-- Services Area Start -->
-        <div class="services-area pt-150 pb-150 section-bg" data-background="assets/img/gallery/section_bg02.jpg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!-- Section Tittle -->
-                        <div class="section-tittle section-tittle2 text-center mb-80">
-                            <span>Easy to explore</span>
-                            <h2>How It Works</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row justify-content-between">
-                    <div class="col-lg-3 col-md-6">
-                        <div class="single-services text-center mb-50">
-                            <div class="services-icon">
-                                <span class="flaticon-list"></span>
-                            </div>
-                            <div class="services-cap">
-                                <h5><a href="#">1. Choose a Category</a></h5>
-                                <p>incidid labore lore magna aliqua uisipsum suspendis loris.</p>
-                            </div>
-                            <!-- Shpape -->
-                            <img class="shape1 d-none d-lg-block" src="assets/img/icon/serices1.png" alt="">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="single-services text-center mb-50">
-                            <div class="services-icon">
-                                <span class="flaticon-problem"></span>
-                            </div>
-                            <div class="services-cap">
-                                <h5><a href="#">2. what you want</a></h5>
-                                <p>incidid labore lore magna aliqua uisipsum suspendis loris.</p>
-                            </div>
-                            <img class="shape2 d-none d-lg-block" src="assets/img/icon/serices2.png" alt="">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="single-services text-center mb-50">
-                            <div class="services-icon">
-                                <span class="flaticon-respect"></span>
-                            </div>
-                            <div class="services-cap">
-                                <h5><a href="#">3. Go out & Explore</a></h5>
-                                <p>incidid labore lore magna aliqua uisipsum suspendis loris.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Services Area End -->
+
         <!-- Categories Area Start -->
-        <div class="categories-area section-padding30">
+        <div class="categories-area section-padding20">
             <div class="container">
-                <div class="row">
+            	<div class="row">
                     <div class="col-lg-12">
                         <!-- Section Tittle -->
                         <div class="section-tittle text-center mb-80">
@@ -283,57 +229,45 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-6">
+                	<div class="col-lg-30 col-md-6 col-sm-6">
                         <div class="single-cat text-center mb-50">
-                            <div class="cat-icon">
-                                <span class="flaticon-bed"></span>
-                            </div>
-                            <div class="cat-cap">
-                                <h5><a href="catagori.html">Leving Hotel</a></h5>
-                                <p>Must explain your how this keind denoun pleasure</p>
-                                <a href="catagori.html">View Details</a>
-                            </div>
+                            <a href="${contextPath}/getActivityProductList">
+	                            <div class="cat-icon">
+	                                <span class="flaticon-drink"></span>
+	                            </div>
+	                            <div class="cat-cap">
+	                                <h5>체험</h5>
+	                                <p>인생의 전환점을 찾아보세요</p>
+	                                View Details
+	                            </div>
+                            </a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="col-lg-30 col-md-6 col-sm-6">
                         <div class="single-cat text-center mb-50">
-                            <div class="cat-icon">
-                                <span class="flaticon-drink"></span>
-                            </div>
-                            <div class="cat-cap">
-                                <h5><a href="catagori.html">Night Life</a></h5>
-                                <p>Must explain your how this keind denoun pleasure</p>
-                                <a href="catagori.html">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-cat text-center mb-50">
-                            <div class="cat-icon">
-                                <span class="flaticon-home"></span>
-                            </div>
-                            <div class="cat-cap">
-                                <h5><a href="catagori.html">Culture Place</a></h5>
-                                <p>Must explain your how this keind denoun pleasure</p>
-                                <a href="catagori.html">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-cat text-center mb-50">
-                            <div class="cat-icon">
-                                <span class="flaticon-food"></span>
-                            </div>
-                            <div class="cat-cap">
-                                <h5><a href="catagori.html">Resturent</a></h5>
-                                <p>Must explain your how this keind denoun pleasure</p>
-                                <a href="catagori.html">View Details</a>
-                            </div>
+                        	<a href="${contextPath}/getAccomProductList">
+	                            <div class="cat-icon">
+	                                <span class="flaticon-bed"></span>
+	                            </div>
+	                            <div class="cat-cap">
+	                                <h5>숙소</h5>
+	                                <p>휴식이 필요하지 않으신가요?</p>
+	                                View Details
+	                            </div>
+                            </a>
                         </div>
                     </div>
                  </div>
             </div>
         </div>
+        
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        
         <!-- Categories Area End -->
          <!-- peoples-visit Start -->
          <div class="peoples-visit dining-padding-top">
@@ -343,18 +277,17 @@
                     <div class="row justify-content-end">
                         <div class="col-lg-8">
                             <div class="visit-caption">
-                                <span>We are offering for you</span>
-                                <h3>Every Month, Millions of People 
-                                    visit this site We’ve Built.</h3>
-                                <p>Unlike what its name implies, dry cleaning is not actually a 'dry' process. Clothes are soaked in a different solvent.</p>
+                                <span>Jang Gun Mung Gun</span>
+                                <h3>The World is Your Oyster</h3>
+                                <p>I'm the pirate king. It'll work!</p>
                                 <!--Single Visit categories -->
                                 <div class="visit-categories mb-40">
                                     <div class="visit-location">
                                         <span class="flaticon-travel"></span>
                                     </div>
                                     <div class="visit-cap">
-                                        <h4>Great places in the world</h4>
-                                        <p>Unlike what its name implies, dry cleaning is not actu  process. Clothes soaked differentent.
+                                        <h4>The pirate "Straw Hat Loopy" is temporarily closed.</h4>
+                                        <p>This is my precious treasure that I received from my friend long time ago! I swore to this hat that I would collect comrades and become pirates.
                                         </p>
                                     </div>
                                 </div>
@@ -364,8 +297,8 @@
                                         <span class="flaticon-work"></span>
                                     </div>
                                     <div class="visit-cap">
-                                        <h4>Biggest category listing</h4>
-                                        <p>Unlike what its name implies, dry cleaning is not actu  process. Clothes soaked differentent.
+                                        <h4>Are you going to be communist or not?</h4>
+                                        <p>Now... Sungsoon-hyung, Kim Doo-han-woo knelt down like this. Are you ready?
                                         </p>
                                     </div>
                                 </div>
@@ -376,88 +309,7 @@
             </div>
         </div>
         <!-- peoples-visit End -->
-        <!-- Testimonial Start -->
-        <div class="testimonial-area testimonial-padding">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!-- Section Tittle -->
-                        <div class="section-tittle text-center mb-80">
-                            <span>Our client testimonials</span>
-                            <h2>What our client say</h2>
-                        </div> 
-                    </div>
-                </div>
-                <div class="row align-items-center">
-                    <div class="col-lg-11 col-md-11">
-                        <div class="h1-testimonial-active">
-                            <!-- Single Testimonial -->
-                            <div class="single-testimonial text-center">
-                                <!-- Testimonial Content -->
-                                <div class="testimonial-caption ">
-                                    <div class="testimonial-top-cap">
-                                        <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis por incididunt ut labore et dolore mas. </p>
-                                    </div>
-                                    <!-- founder -->
-                                    <div class="testimonial-founder d-flex align-items-center justify-content-center mb-30">
-                                        <div class="founder-img">
-                                            <img src="${contextPath}/assets/img/testmonial/Homepage_testi.png" alt="">
-                                        </div>
-                                        <div class="founder-text">
-                                            <span>Oliva jems</span>
-                                            <p>UIX designer</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single Testimonial -->
-                            <div class="single-testimonial text-center">
-                                <!-- Testimonial Content -->
-                                <div class="testimonial-caption ">
-                                    <div class="testimonial-top-cap">
-                                        <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis por incididunt ut labore et dolore mas. </p>
-                                    </div>
-                                    <!-- founder -->
-                                    <div class="testimonial-founder d-flex align-items-center justify-content-center mb-30">
-                                        <div class="founder-img">
-                                            <img src="${contextPath}/assets/img/testmonial/Homepage_testi.png" alt="">
-                                        </div>
-                                        <div class="founder-text">
-                                            <span>Oliva jems</span>
-                                            <p>UIX designer</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Testimonial End -->
-        <!-- Subscribe Area Start -->
-        <div class="subscribe-area section-bg pt-150 pb-150" data-background="assets/img/gallery/section_bg04.jpg">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-xl-6 col-lg-8">
-                        <!-- Section Tittle -->
-                        <div class="section-tittle section-tittle2 text-center mb-40">
-                            <span>Subscribe out newslatter</span>
-                            <h2>Subscribe For Newsletter</h2>
-                        </div> 
-                        <!--Hero form -->
-                        <form action="#" class="search-box">
-                            <div class="input-form">
-                                <input type="text" placeholder="What are you looking for?">
-                            </div>
-                            <div class="search-form">
-                                <a href="#">Send Now</a>
-                            </div>	
-                        </form>	
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <!-- Subscribe Area End -->
         <!-- Blog Ara Start -->
         <div class="home-blog-area section-padding30">
