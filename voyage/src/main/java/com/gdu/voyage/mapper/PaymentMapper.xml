@@ -60,7 +60,7 @@
 					update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 MONTH) AND NOW())
 			</when>
 			<otherwise>
-				update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -2 WEEK) AND  DATE_ADD(NOW(), INTERVAL -1 WEEK)
+				update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -2 WEEK) AND  DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -1 WEEK)
 					)
 				from accom_payment
 				WHERE
@@ -97,7 +97,7 @@
 						update_date between DATE_ADD(NOW(), INTERVAL -1 MONTH) AND NOW())
 				</when>
 				<otherwise>
-					update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -2 WEEK) AND  DATE_ADD(NOW(), INTERVAL -1 WEEK)
+					update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -2 WEEK) AND  DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -1 WEEK)
 						)
 					from activity_payment
 					WHERE
@@ -151,7 +151,7 @@
 					AND
 					NOT activity_payment_state = '결제대기'
 					AND
-					update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -2 WEEK) AND  DATE_ADD(NOW(), INTERVAL -1 WEEK)
+					update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -2 WEEK) AND  DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -1 WEEK)
 					)
 				from activity_payment
 				WHERE
@@ -204,7 +204,7 @@
 					AND
 					NOT accom_payment_state = '결제대기'
 					AND
-					update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -2 WEEK) AND  DATE_ADD(NOW(), INTERVAL -1 WEEK)
+					update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -2 WEEK) AND  DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -1 WEEK)
 					)
 				from accom_payment
 				WHERE
