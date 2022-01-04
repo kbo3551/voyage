@@ -70,32 +70,6 @@
                         <div class="hero-cap text-center pt-50 pb-20">
                             <h2>체험 리뷰</h2>
                         </div>
-                        <!--Hero form -->
-                        <form action="#" class="search-box search-box2">
-                            <div class="input-form">
-	                            <!--  
-	                            <input type="text" placeholder="What are you looking for?">
-	                            -->
-	                            <input type="text" placeholder="후기 검색">
-                            </div>
-                            <div class="select-form">
-                            <!--
-                                <div class="select-itms">
-                                    <select name="select" id="select1">
-                                        <option value="">All Catagories</option>
-                                        <option value="">Catagories One</option>
-                                        <option value="">Catagories Two</option>
-                                        <option value="">Catagories Three</option>
-                                        <option value="">Catagories Four</option>
-                                    </select>
-                                </div>
-                             -->
-                            </div>
-                            <!-- Search box -->
-                            <div class="search-form">
-                                <a type="button" id="reviewSearchBtn">Search</a>
-                            </div>	
-                        </form>	
                     </div>
                 </div>
             </div>
@@ -110,10 +84,6 @@
                             <div class="col-lg-12">
                                 <div class="count mb-35">
                                     <span> + ${totalCount}개의 후기글이 존재합니다.</span>
-                                    <!-- 후기글을 작성하는 페이지 이동 버튼  -->
-                                    <div class="form-group mt-3">
-                                    	<a type="button" href="${pageContext.request.contextPath}/addActivityReview" class="button button-contactForm boxed-btn">Write</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -132,21 +102,6 @@
 		                                        	<span>${review.activityReviewStar}</span>
 		                                        	<h3><a href="${pageContext.request.contextPath}/getReviewOne?activityReivewNo=${review.activityReviewNo}">${review.activityReviewTitle}</a></h3>
 		                                            <p>${review.activityReviewNo}</p>
-		                                            <div class="list-footer">
-		                                            	<!--  
-		                                         		<ul>
-		                                                	<li>${review.activityPaymentDetails}</li>
-		                                               	</ul>
-		                                               	-->
-		                                            </div>
-		                                                <!-- 
-		                                                	<div class="list-footer">
-			                                                    <ul>
-			                                                        <li>+10 278 367 9823</li>
-			                                                        <li>contact@midnight.com</li>
-			                                                    </ul>
-		                                                	</div>
-		                                                 -->
 		                                          </div>
 		                                        </div>
 		                                      </div>
