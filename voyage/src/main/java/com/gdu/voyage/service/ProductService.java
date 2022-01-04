@@ -144,12 +144,14 @@ public class ProductService {
 		return productMapper.selectActivityOne(activityNo);
 	}
 	
-	// [사용자] 체험 상세-목록 조회
-//	public List<Activity> getActivityOneList() {
-//		
-//		List<Activity> activityOneList = productMapper.selectActivityOneList();
-//		
-//		log.debug("[debug] ProductService.getActivityOneList activityOneList : " + activityOneList);
-//		return activityOneList;
-//	}
+	
+	// 예약
+	// [사용자] 객실 예약 내역 전체 조회
+	public List<Map<String, Object>> getAccomRoomReserveByAll(int accomRoomNo) {
+		log.debug("[debug] ProductService.getAccomRoomReserveByAll accomRoomNo : " + accomRoomNo);
+		
+		List<Map<String, Object>> map = productMapper.selectAccomRoomReserveByAll(accomRoomNo);
+		
+		return map;
+	}
 }

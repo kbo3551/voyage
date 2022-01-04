@@ -314,7 +314,7 @@
                <div class="col-lg-4">
                   <div class="blog_right_sidebar">
                      <aside class="single_sidebar_widget search_widget">
-                        <form action="${pageContext.request.contextPath}/calendar" method="get">
+<%--                         <form action="${pageContext.request.contextPath}/member/calendar?accomRoomNo=${accomRoomOne.accomRoomNo }" method="get"> --%>
 <!--                            <div class="form-group"> -->
 <!--                               <div class="input-group mb-3"> -->
 <!--                                  <input type="text" class="form-control" placeholder='Search Keyword' -->
@@ -324,9 +324,10 @@
 <!--                                  </div> -->
 <!--                               </div> -->
 <!--                            </div> -->
-                           <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                              type="submit">예약</button>
-                        </form>
+<!--                            <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" -->
+<!--                               type="submit">예약</button> -->
+<!--                         </form> -->
+                        <a href="${pageContext.request.contextPath}/calendar?accomRoomNo=${accomRoomOne.accomRoomNo }" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn">예약</a>
                      </aside>
 <!--                      <aside class="single_sidebar_widget post_category_widget"> -->
 <!--                         <h4 class="widget_title">Facilities</h4> -->

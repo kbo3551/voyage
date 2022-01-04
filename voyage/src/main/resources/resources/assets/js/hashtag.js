@@ -30,7 +30,7 @@
 		    $.ajax({
 		        type : 'GET',
 		        dataType : 'json',
-		        url : "http://localhost/hashtagSearh?"
+		        url : "/voyage/hashtagSearh?"
 		            + "searchKeyword="
 		            + word,
 		            error : function(err) {

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.javassist.bytecode.stackmap.MapMaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
@@ -205,8 +206,23 @@ public class ProductController {
 	}
 	
 	@GetMapping("/calendar")
-	public String getCalendar() {
+	public String getCalendar(Model model, 
+								@RequestParam @Nullable int accomRoomNo) {
+		log.debug("[debug] ProductController.getCalendar 실행");
+		log.debug("[debug] ProductController.getCalendar accomRoomNo : " + accomRoomNo);
+		
+		// 해당 객실의 예약 내역 조회
+		List<Map<String, Object>> map = productService.getAccomRoomReserveByAll(accomRoomNo);
+		model.addAttribute("map", map);
+		model.addAttribute("accomRoomNo", accomRoomNo);
+		log.debug("[debug] ProductController.getCalendar map : " + map);		
+		
 		return "/product/calendar";
+	}
+	
+	@GetMapping("/addReservation")
+	public String addReservation() {
+		return "/product/addReservation";
 	}
 	
 	@GetMapping("/setProductCategory")

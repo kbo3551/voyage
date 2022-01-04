@@ -44,4 +44,8 @@ public interface ProductMapper {
 	// 체험 상세
 	// [사용자] 체험 상세 조회
 	Activity selectActivityOne(int activityNo);
+	
+	// 예약
+	// 객실 예약 내역 전체 조회
+	List<Map<String, Object>> selectAccomRoomReserveByAll(int accomRoomNo);
 }

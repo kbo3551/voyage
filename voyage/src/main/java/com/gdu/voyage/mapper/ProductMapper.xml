@@ -458,6 +458,24 @@
 			AND a.activity_no = h.iden_no
 	</select>
 	
+	<select id="selectAccomRoomReserveByAll" parameterType="int" resultType="map">
+		SELECT
+			accom_checkin accomCheckIn,
+			accom_checkout accomCheckOut
+		FROM
+			accom_payment
+		WHERE accom_room_no=#{accomRoomNo}
+	</select>
+	
+	<select id="selectAccomRoomItem" parameterType="int" resultType="map">
+		SELECT
+			accom_checkin accomCheckIn,
+			accom_checkout accomCheckOut
+		FROM
+			accom_payment
+		WHERE accom_room_no=#{accomRoomNo}
+	</select>
+	
 	<!-- 체험 상세-목록 조회 -->
 <!-- 	<select id="selectActivityOneList" resultMap="resultActivityList"> -->
 <!-- 		SELECT  -->

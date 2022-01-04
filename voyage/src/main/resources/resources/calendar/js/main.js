@@ -1,8 +1,44 @@
 (function($) {
 
 	"use strict";
-
+	
 	$( document ).ready(function() {
+	
+	var roomNo = $('#accomRoomNo').attr('name');
+	
+	// 기존 예약일을 저장하는 배열
+	var arr = '';
+	var checkIn = [];
+	var checkOut = [];
+		
+	// start Ajax
+	    $.ajax({
+	        type : 'GET',
+	        dataType : 'json',
+	        url : "/voyage/accomRoomReserveByAll?"
+	            + "accomRoomNo="
+	            + roomNo,
+	            error : function(err) {
+	                console.log("실행중 오류가 발생하였습니다.");
+	            },
+	        async:false, // ajax 데이터 전역 변수에 저장
+            success : function(data) {
+            	
+				$(data).each(function(index, item){ // each : JSON의 반복문
+					console.log("체크인"+item.accomCheckIn);
+					console.log("체크아웃"+item.accomCheckOut);
+					
+					checkIn[index] = item.accomCheckIn.substring(5, 10);
+					checkOut[index] = item.accomCheckOut.substring(5, 10);
+					
+				});
+        	} 
+	     });
+	     // end Ajax
+	     
+	     console.log("checkIn"+checkIn);
+	     console.log("checkOut"+checkOut);
+	     	
 		function c(passed_month, passed_year, calNum) {
 			var calendar = calNum == 0 ? calendars.cal1 : calendars.cal2;
 			makeWeek(calendar.weekline);
@@ -10,6 +46,7 @@
 			var calMonthArray = makeMonthArray(passed_month, passed_year);
 			var r = 0;
 			var u = false;
+			
 			while(!u) {
 				if(daysArray[r] == calMonthArray[0].weekday) { u = true } 
 				else { 
@@ -22,6 +59,19 @@
 					calendar.datesBody.append('<div class="blank"></div>');
 				} else {
 					var shownDate = calMonthArray[cell].day;
+					var shownMonth = calMonthArray[cell].monthday;
+					
+					// 월과 일이 한 자릿수면 앞에 0을 붙여줌
+					if(shownMonth.toString().length < 2) {
+						shownMonth = '0'+shownMonth;
+					}
+					if(shownDate.toString().length < 2) {
+						shownDate = '0'+shownDate;
+					}
+					
+					var dateObj = shownMonth + '-' + shownDate;
+					//console.log("dateObj"+dateObj);
+	
 					// Later refactiroing -- iter_date not needed after "today" is found
 					var iter_date = new Date(passed_year,passed_month,shownDate); 
 					if ( 
@@ -32,8 +82,26 @@
 							&& iter_date < today) {						
 						var m = '<div class="past-date">';
 					} else {
-						var m = checkToday(iter_date)?'<div class="today">':"<div>";
+						var m = checkToday(iter_date)?'<div class="today">':"<div id=" + 'date' + " class=" + dateObj +">";
 					}
+					
+					// 기존 예약일은 예약 불가
+					for(var i=0; i<=checkIn.length; i++) {
+						if(dateObj == checkIn[i] || dateObj == checkOut[i]) {
+							var m = '<div class="past-date">';
+						}
+					}					
+					
+					//if(dateObj == checkIn[0] || dateObj == checkOut[0]) {
+					//	var m = '<div class="past-date">';
+					//}
+					//if(dateObj == checkIn[1] || dateObj == checkOut[1]) {
+					//	var m = '<div class="past-date">';
+					//}
+					
+				var test = $('#date').attr('class');
+				console.log("test"+test);
+					
 					calendar.datesBody.append(m + shownDate + "</div>");
 				}
 			}
@@ -168,7 +236,8 @@
 			for(var r=1;r<getDaysInMonth(passed_year, passed_month)+1;r++) {
 				e.push({day: r,
 						// Later refactor -- weekday needed only for first week
-						weekday: daysArray[getWeekdayNum(passed_year,passed_month,r)]
+						weekday: daysArray[getWeekdayNum(passed_year,passed_month,r)],
+						monthday: passed_month+1
 					});
 			}
 			return e;
