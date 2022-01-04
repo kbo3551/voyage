@@ -56,18 +56,25 @@
         <script>
      // 중복 체크
         let activityPaymentNo = "${param.activityPaymentNo}";
-                    $.ajax( {
-                            type: "GET",
-                            url:"/voyage/addActivityReviewCheck?activityPaymentNo="+activityPaymentNo,
-                            async:false,
-                            dataType:'json',
-                            success : function (data) {
-                                let activityPaymentNo = data;
-                                activityPaymentNo *= 1;
-                                document.writeln(data);
-                    	}
+                    $.ajax( 
+                   		{
+                           type: "GET",
+                           url:"/voyage/addActivityReviewCheck?activityPaymentNo="+activityPaymentNo,
+                           async:false,
+                           dataType:'text',
+                           success : function (data) {
+                               let activityPaymentNo = data;
+                               activityPaymentNo *= 1;
+                               
+							let contextPath = "${pageContext.request.contextPath}";
+                               
+                               if(activityPaymentNo>0){
+                               	alert("중복으로 작성 할 수 없습니다.");
+                               	window.history.back();
+                               }
+                   		}
                  	}
-              });
+              );
         </script>
         
         <meta name="description" content="">
