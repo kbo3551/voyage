@@ -28,7 +28,7 @@ public class CouponController {
 	private final int ROW_PER_PAGE = 10;
 	// 회원 쿠폰 발급
 	@PostMapping("/member/addMemberCoupon")
-	public String postAddMemberCoupon(CouponMember couponMember,HttpSession session, Coupon coupon) {
+	public String postAddMemberCoupon(CouponMember couponMember,HttpSession session, Coupon coupon,Model model) {
 		System.out.println("★★★[boryeong]CouponController_postAddMemberCoupon실행★★★");
 		
 		// 회원 세션 정보
@@ -48,7 +48,9 @@ public class CouponController {
 		// 중복 발행 검사
 		String duplCheck = couponService.duplMemberCoupon(cm);
 		if(duplCheck.equals("쿠폰중복")) {
-			return "redirect:/member/coupon";
+			model.addAttribute("msg", "이미 발급된 쿠폰입니다");
+		    model.addAttribute("url", "redirect:/member/coupon");
+			return "/alert";
 		}
 		couponService.addMemberCoupon(cm);
 		

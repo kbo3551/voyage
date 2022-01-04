@@ -261,8 +261,6 @@
 	</div>
 	</div>
 	</main>
-
-
 	<c:import url="/WEB-INF/jsp/partial/footer.jsp"/>
     
     <!-- Scroll Up -->
