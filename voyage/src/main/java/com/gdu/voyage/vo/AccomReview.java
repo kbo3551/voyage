@@ -12,6 +12,8 @@ public class AccomReview {
 	private String accomReviewContent;
 	private int accomReviewStar;
 	private int accomReviewViewCnt;
+	private String memberId;
+	private String memberNickname;
 	private String createDate;
 	private String updateDate;
 	

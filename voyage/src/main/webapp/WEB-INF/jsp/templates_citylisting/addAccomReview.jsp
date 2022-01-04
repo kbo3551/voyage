@@ -149,7 +149,7 @@
                                 		<input class="form-controle error"  hidden="hidden" name="accomReview.memberId" id="memberId" type="text" value="${accomReview.memberId}">
                                 	</div>
                                     <div class="form-group">
-                                    	 <input class="form-control error" name="accomReview.memberNickname" id="memberNickname" type="text" placeholder="닉네임을 입력해주세요">
+                                    	 <input class="form-control error" name="accomReview.memberNickname" id="memberNickname" type="text" value="${accomReview.memberNickname}" placeholder="닉네임을 입력해주세요">
                                     </div>
                                     <div class="form-group">
 	                                    <input class="form-control error" name="accomReview.accomReviewTitle" id="accomReviewTitle" type="text"	placeholder="제목을 입력해주세요">

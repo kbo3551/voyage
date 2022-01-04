@@ -74,13 +74,13 @@ public class AccomReviewController {
 		public String addAccomReview(HttpServletRequest request, AccomReviewForm accomReviewForm, 
 				HttpSession session) throws Exception {
 			// accomPaymentDetails값을 세션에서 가져옴
-			AccomReview imforAccomReview = (AccomReview) session.getAttribute("imforAccomReview");
+			AccomReview accomReview = (AccomReview) session.getAttribute("accomReview");
 			Member loginMember = (Member) session.getAttribute("loginMember");
 			
 			String memberId = loginMember.getMemberId();
 			String memberNickname = loginMember.getMemberNickname();
 			
-			int accomPaymentDetails = imforAccomReview.getAccomPaymentDetails();
+			int accomPaymentDetails = accomReview.getAccomPaymentDetails();
 			// 디버그 코드
 			log.debug("***** [상훈] addAccomReview_qnaForm_Controller() debug" + accomReviewForm.toString());
 			// 이미지 파일 절대 경로 설정

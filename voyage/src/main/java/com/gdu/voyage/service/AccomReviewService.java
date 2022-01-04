@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.gdu.voyage.mapper.AccomReviewMapper;
 import com.gdu.voyage.vo.AccomReview;
 import com.gdu.voyage.vo.AccomReviewImage;
-import com.gdu.voyage.vo.Member;
 import com.gdu.voyage.vo.AccomReviewForm;
 
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +33,8 @@ public class AccomReviewService {
 			log.debug("*****[상훈] AccomReviewService debug" + accomReviewForm.toString());
 			//accomReview에 accomPaymentDetails 저장
 			AccomReview accomReview = accomReviewForm.getAccomReview();
+			accomReview.setMemberId(memberId);
+			accomReview.setMemberNickname(memberNickname);
 			accomReview.setAccomPaymentDetails(accomPaymentDetails);
 			
 			// 후기글 등록
