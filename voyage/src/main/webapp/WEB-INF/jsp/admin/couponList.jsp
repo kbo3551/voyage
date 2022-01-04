@@ -17,7 +17,7 @@
 
 <link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
-<title>HostAskList</title>
+<title>쿠폰 리스트</title>
 
 <link href="${pageContext.request.contextPath}/admin/css/app.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">

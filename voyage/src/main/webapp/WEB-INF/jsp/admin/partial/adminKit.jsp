@@ -23,6 +23,11 @@
                    	 <i class="align-middle" data-feather="home"></i> <span class="align-middle">사용자 페이지</span>
                   </a>
             </li>
+             <li class="sidebar-item">
+               <a class="sidebar-link" href="${pageContext.request.contextPath}/admin/adminIndex">
+                   	 <i class="align-middle" data-feather="home"></i> <span class="align-middle">관리자 홈</span>
+                  </a>
+            </li>
             <!-- 프로필 수정 -->
             <li class="sidebar-item">
                <a class="sidebar-link" href="${pageContext.request.contextPath}/admin/adminUpdate">
@@ -30,11 +35,11 @@
                   </a>
             </li>
             <!-- 대시보드(차트표) -->
-            <li class="sidebar-item active">
-               <a class="sidebar-link" href="index.html">
-                     <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-                 </a>
-            </li>
+<!--             <li class="sidebar-item active"> -->
+<!--                <a class="sidebar-link" href="index.html"> -->
+<!--                      <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span> -->
+<!--                  </a> -->
+<!--             </li> -->
 
          
          <!--    <li class="sidebar-item">
@@ -49,11 +54,11 @@
                    </a>
             </li>           -->   
             <!-- 공란(복사해서 이용) -->
-            <li class="sidebar-item">
-               <a class="sidebar-link" href="pages-blank.html">
-               		<i class="align-middle" data-feather="book"></i> <span class="align-middle">Blank</span>
-               </a>
-            </li>
+<!--             <li class="sidebar-item"> -->
+<!--                <a class="sidebar-link" href="pages-blank.html"> -->
+<!--                		<i class="align-middle" data-feather="book"></i> <span class="align-middle">Blank</span> -->
+<!--                </a> -->
+<!--             </li> -->
             <!-- 추가사항 -->
             <li class="sidebar-item">
                <a class="sidebar-link" href="${pageContext.request.contextPath}/admin/adminNoticeList">
@@ -117,14 +122,14 @@
                    </a>
             </li>
    
-            <li class="sidebar-item">
-               <a class="sidebar-link" href="maps-google.html">
-                     <i class="align-middle" data-feather="map"></i> <span class="align-middle">Maps</span>
-                   </a>
-            </li>
-         </ul>
+<!--             <li class="sidebar-item"> -->
+<!--                <a class="sidebar-link" href="maps-google.html"> -->
+<!--                      <i class="align-middle" data-feather="map"></i> <span class="align-middle">Maps</span> -->
+<!--                    </a> -->
+<!--             </li> -->
+<!--          </ul> -->
    
-
+			</ul>
       </div>
    </nav>
 </body>
