@@ -83,7 +83,7 @@
 					// 기존 예약일은 예약 불가
 					for(var d=0; d<=reserveDays.length; d++) {
 						if(dateObj == reserveDays[d]) {
-							var m = '<div class="past-date">';
+							var m = '<div class="past-date" style="text-decoration: line-through;">';
 						}
 					}				
 					calendar.datesBody.append(m + shownDate + "</div>");
