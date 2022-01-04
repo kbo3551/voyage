@@ -18,6 +18,7 @@ import com.gdu.voyage.vo.Member;
 import com.gdu.voyage.vo.Qna;
 import com.gdu.voyage.vo.QnaAnswer;
 import com.gdu.voyage.vo.QnaForm;
+import com.gdu.voyage.vo.QnaImg;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -53,13 +54,26 @@ public class QnaController {
 
 	//[Member] Qna 상세 내용
 	@GetMapping("/getQnaOne") 
-	public String getQnaOne(HttpSession session, Model model, int qnaNo, String memberId) {
+	public String getQnaOne(HttpSession session, Model model, int qnaNo, String memberId, 
+			@RequestParam(defaultValue="1") int currentPage) {
 		
 		log.debug("getQnaOneController() 실행");
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		log.debug(qnaNo + "★★★★★★★★★★★ [다원] getQnaOne_qnaNo_Controller() debug");
-		Qna qna = qnaService.getQnaOneAndAnswer(qnaNo);
-	    log.debug(qna + "★★★★★★★★★★★ [다원] getQnaOne_qna_Controller() debug");
+	    Map<String, Object> map = qnaService.getQnaImgList(qnaNo, currentPage, ROW_PER_PAGE);
+	    log.debug("★★★★★★★★★★★ [다원] getQnaOne_map_Controller() debug" + map.toString());
+	    Qna qna = qnaService.getQnaOneAndAnswer(qnaNo);
+	    log.debug(qna.toString() + "★★★★★★★★★★★ [다원] getQnaOne_qna_Controller() debug");
+	   
+		int controllPage = (currentPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
+		int pageNo = ((controllPage / 100) * 10 + 1);
+		
+		model.addAttribute("controllPage", controllPage);
+		model.addAttribute("qnaNo", qnaNo);
+		model.addAttribute("qnaImgList", map.get("qnaImgList"));
+		model.addAttribute("lastPage", map.get("lastPage"));
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("pageNo", pageNo);
 	    model.addAttribute("qna", qna);
 	 	// 비밀글 기능
 	 	// 비회원인 경우
@@ -113,6 +127,7 @@ public class QnaController {
 		log.debug("modifyQuestionController() 실행");
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		Qna qna = qnaService.getQnaOneAndAnswer(qnaNo);
+		
 		model.addAttribute("qna", qna);
 		// 비회원인 경우
 		if( loginMember == null) {
@@ -131,7 +146,8 @@ public class QnaController {
 		log.debug("★★★★★★★★★★★ [다원] qna_modifyQ_Controller() debug" + qnaService.modifyQ(qna));
 		qnaService.modifyQ(qna);
 		return "redirect:/getQnaOne?qnaNo=" + qna.getQnaNo();
-	}
+	}	
+	
 	// [Member] 질문 삭제
 	@GetMapping("/removeQ")
 	public String removeQ(HttpSession session, Model model, int qnaNo) {

@@ -31,8 +31,44 @@ public class QnaService {
 	// Qna 게시판 목록 상세 내용
 	public Qna getQnaOneAndAnswer(int qnaNo) {
 		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] selectQnaOne debug >>>" + qnaMapper.selectQnaOneAndAnswer(qnaNo));
+		// 문의글 상세 내용
 		Qna qna = qnaMapper.selectQnaOneAndAnswer(qnaNo);
 		return qna;
+	}
+	// Qna 게시판 목록 상세 내용 - 이미지 목록
+	public Map<String, Object> getQnaImgList(int qnaNo, int currentPage, int rowPerPage){
+		// 매개변수 값 가공
+		Map<String, Object> paramMap = new HashMap<>();
+		int beginRow = (currentPage - 1) * rowPerPage;
+				
+		paramMap.put("beginRow", beginRow);
+		paramMap.put("rowPerPage", rowPerPage);
+		paramMap.put("qnaNo", qnaNo);
+				
+		List<QnaImg> qnaImgList = qnaMapper.selectQnaImgList(paramMap);
+		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_getQnaOneAndAnswer_qnaImgList debug" + qnaImgList.toString());
+		Qna qna = new Qna();
+		qna.setQnaImg(qnaImgList);
+		// Mapper로부터 호출한 결과값 가공
+		Map<String, Object> returnMap = new HashMap<>();
+		// 마지막 페이지를 나타내는 변수 lastPage값 0으로 초기화
+		int lastPage = 0;
+		// 전체 게시글 수
+		int totalCount = qnaMapper.selectQnaImgTotalCount(qnaNo);
+		// lastPage 값 셋팅
+		lastPage = (totalCount / rowPerPage);
+		if(totalCount % rowPerPage != 0) {
+			lastPage += 1;
+		}
+		// returnMap에 필요한 값 저장
+		returnMap.put("qnaImgList", qnaImgList);
+		returnMap.put("qna", qna);
+		returnMap.put("lastPage", lastPage);
+		returnMap.put("totalCount",totalCount);
+		returnMap.put("qnaNo",qnaNo);
+		// 디버깅 코드
+		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_getQnaImgList_returnMap debug" + returnMap);
+		return returnMap;
 	}
 	// Qna 게시판 목록 조회
 	public Map<String, Object> getQnaList(String searchWord, int currentPage, int rowPerPage){

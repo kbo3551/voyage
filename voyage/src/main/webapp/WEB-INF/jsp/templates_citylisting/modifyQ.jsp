@@ -220,6 +220,9 @@
                                 	</table>			
                                 </div>
                                 <div class="col-12">
+                                	<div class="form-group">
+				                   		<img src="${pageContext.request.contextPath}/resources/image/qna/${qnaForm.qnaImg.qnaImgName}.${qnaForm.qnaImg.qnaImgExt}" alt="">
+				                   	</div>
                                     <div class="form-group">
                                         <textarea class="form-control w-100 error" name="qnaContent" id="qnaContent" cols="30" rows="9">${qna.qnaContent}</textarea>
                                     </div>

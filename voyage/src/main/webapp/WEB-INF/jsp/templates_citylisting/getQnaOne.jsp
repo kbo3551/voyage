@@ -167,8 +167,11 @@
                                     <div class="form-group">
                                         Content : <textarea class="form-control w-100 error" name="qnaContent" id="qnaContentOne" cols="30" rows="9" readonly="readonly">${qna.qnaContent}</textarea>
                                     </div>
+                                    <!-- 이미지 -->
                                     <div class="form-group">
-                                    	<img src="${pageContext.request.contextPath}/resources/image/qna/${qnaImg.getQnaImgName}.${qnaImg.getQnaImgExt}">
+	                                	<c:forEach items="${qnaImgList}" var="qnaImg">
+	                                   		<input type="file" name="qnaImg" id="qnaImg[0]" value="${pageContext.request.contextPath}/resources/image/qna/${qnaImg.qnaImgName}.${qnaImg.qnaImgExt}">
+	                                    </c:forEach>
                                     </div>
                                 </div>
                             </div>

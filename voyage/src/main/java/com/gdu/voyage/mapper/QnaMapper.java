@@ -28,11 +28,15 @@ public interface QnaMapper {
 	// 질문 추가
 	int addQ(Qna qna);
 	
-	//[Member] Image part
+	//Image part
 	// 이미지 추가
 	int addQImg(QnaImg qnaImg);
 	// 이미지 삭제
 	int removeQImg(int qnaNo);
+	// 이미지 목록
+	List <QnaImg> selectQnaImgList(Map<String, Object> param);
+	// 이미지 수
+	int selectQnaImgTotalCount(int qnaNo);
 	
 	// [Admin] Only Admin part
 	// 답변 없는 질문 list

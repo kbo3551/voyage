@@ -18,13 +18,13 @@
         			
         			if(category != null && searchWord != null ){
         				// 이동 경로
-            			location.href = "/qnaList?qnaCategory=" + category + "&searchWord=" + searchWord;
+            			location.href = "${pageContext.request.contextPath}/qnaList?qnaCategory=" + category + "&searchWord=" + searchWord;
         			} else if(category != null && searchWord == null){
-        				location.href = "/qnaList?qnaCategory=" + category;
+        				location.href = "${pageContext.request.contextPath}/qnaList?qnaCategory=" + category;
         			} else if(searchWord != null && category == null){
-        				location.href = "/qnaList?searchWord=" + searchWord;
+        				location.href = "${pageContext.request.contextPath}/qnaList?searchWord=" + searchWord;
         			} else {
-        				location.href = "/qnaList?pageNo=1";	
+        				location.href = "${pageContext.request.contextPath}/qnaList?pageNo=1";	
         			}        		
         		});
         		
