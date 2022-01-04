@@ -14,8 +14,6 @@
          async: false, //ajax 옵션에 async 옵션이 있다. 서버로부터 값이 오지 않으면 잠시 다음으로 넘어가지 않는것이다.
          success:function(result){
             console.log('result : ', result);
-            console.log('출력 test : ', result.chatList[0].chatContent);
-            console.log('출력 test : ', result.chatList[0].member.memberNickname);
             $('#chatList').empty(); // 먼저 출력된 목록이 있으면 지운다
             $.each(result, function(index, item){
                console.log('출력 test : ', index);
@@ -57,20 +55,20 @@
 			success:function(result){
 				console.log('result : ', result);
 				$('#chatRoomList').empty(); // 먼저 출력된 목록이 있으면 지운다
-				//$.each(result, function(index, item){
-					for(i=0;i<=result.length;i++) {
-						var myId = result[i].fromMemberId;
-						if(myId == loginId) {
-							$('#chatRoomList').append('<tr>');
-								$('#chatRoomList').append('<td>'+result[i].chatContent+'</td>');
-							$('#chatRoomList').append('</tr>');
-						} else if(myId != loginId){
-							$('#chatRoomList').append('<tr>');
-								$('#chatRoomList').append('<td>'+result[i].memberNickname+':'+result[i].chatContent+'</td>');
-							$('#chatRoomList').append('</tr>');
-						}
+				$.each(result, function(index, item){
+					console.log('출력 test : ', index);
+           			console.log('출력 test : ', item);
+					// 로그인된 아이디와 보낸 아이디가 같다면 닉네임을 출력하지 않음 
+					if(loginId == item.fromMemberId) {
+						$('#chatRoomList').append('<tr>');
+							$('#chatRoomList').append('<td>'+item.chatContent+'</td>');
+						$('#chatRoomList').append('</tr>');
+					} else if(loginId != item.fromMemberId){
+						$('#chatRoomList').append('<tr>');
+							$('#chatRoomList').append('<td>'+item.memberNickname+':'+item.chatContent+'</td>');
+						$('#chatRoomList').append('</tr>');
 					}
-				//});
+				});
 			}
 		});
 	});
