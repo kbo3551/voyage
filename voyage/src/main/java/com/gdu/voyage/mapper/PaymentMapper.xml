@@ -60,7 +60,7 @@
 					update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 MONTH) AND NOW())
 			</when>
 			<otherwise>
-				update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -2 WEEK) AND  DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 WEEK)
+				update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -2 WEEK) AND  DATE_ADD(NOW(), INTERVAL -1 WEEK)
 					)
 				from accom_payment
 				WHERE
@@ -70,7 +70,7 @@
 					AND
 					NOT accom_payment_state = '결제대기'
 					AND
-					update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 WEEK) AND NOW())
+					update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -1 WEEK) AND NOW())
 			</otherwise>
 		</choose>
 		+
@@ -97,7 +97,7 @@
 						update_date between DATE_ADD(NOW(), INTERVAL -1 MONTH) AND NOW())
 				</when>
 				<otherwise>
-					update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -2 WEEK) AND  DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 WEEK)
+					update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -2 WEEK) AND  DATE_ADD(NOW(), INTERVAL -1 WEEK)
 						)
 					from activity_payment
 					WHERE
@@ -107,7 +107,7 @@
 						AND
 						NOT activity_payment_state = '결제대기'
 						AND
-						update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 WEEK) AND NOW())
+						update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -1 WEEK) AND NOW())
 				</otherwise>
 			</choose>
 			
@@ -151,7 +151,7 @@
 					AND
 					NOT activity_payment_state = '결제대기'
 					AND
-					update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -2 WEEK) AND  DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 WEEK)
+					update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -2 WEEK) AND  DATE_ADD(NOW(), INTERVAL -1 WEEK)
 					)
 				from activity_payment
 				WHERE
@@ -161,7 +161,7 @@
 					AND
 					NOT activity_payment_state = '결제대기'
 					AND
-					update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 WEEK) AND NOW()
+					update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -1 WEEK) AND NOW()
 			</otherwise>
 		</choose>
 		
@@ -204,7 +204,7 @@
 					AND
 					NOT accom_payment_state = '결제대기'
 					AND
-					update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -2 WEEK) AND  DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 WEEK)
+					update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -2 WEEK) AND  DATE_ADD(NOW(), INTERVAL -1 WEEK)
 					)
 				from accom_payment
 				WHERE
@@ -214,7 +214,7 @@
 					AND
 					NOT accom_payment_state = '결제대기'
 					AND
-					update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 WEEK) AND NOW()
+					update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -1 WEEK) AND NOW()
 			</otherwise>
 		</choose>
 		
@@ -361,7 +361,7 @@
 			</if>
 	</select>
 
-	<!-- 해당 사업자의 총 수익, 월별 수익 -->
+	<!-- 해당 사업자의 총 수익, 월별 수익, 수수료 -->
 	<select id="selectAllProfitByHost" resultType="long">
 		SELECT
 			SUM(
@@ -401,6 +401,9 @@
 				</if>
 				)
 			)
+			<if test="month == 2">
+			* 0.05
+			</if>
 	</select>
 
 	<!-- 숙소 -->

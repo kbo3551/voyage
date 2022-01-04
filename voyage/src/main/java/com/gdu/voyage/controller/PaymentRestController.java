@@ -19,6 +19,12 @@ public class PaymentRestController {
 	
 	// 사업자 -- 
 	
+	// 이번달 사업자 수수료
+	@GetMapping("/selectHostMonthFees")
+	public long selectHostMonthFees(int hostNo) {
+		 return paymentService.selectHostMonthFees(hostNo);
+	}
+	
 	// 이번달 체험 예약인원
 	@GetMapping("/selectActivityUsePerson")
 	public int selectActivityUsePerson(int hostNo) {

@@ -21,6 +21,16 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 public class PaymentService {
 	@Autowired private PaymentMapper paymentMapper;
+	
+	// 이번달 사업자 수수료
+	public long selectHostMonthFees(int hostNo) {
+		long result = 0;
+		if(paymentMapper.selectAllProfitByHost(hostNo, 2) != null) {
+			result = (long) paymentMapper.selectAllProfitByHost(hostNo, 2);
+		}
+		return result;
+	}
+	
 	// 이번달 체험 예약인원
 	public int selectActivityUsePerson(int hostNo) {
 		int result = 0;
