@@ -14,7 +14,7 @@
 			AND
 			NOT activity_payment_state = '결제대기'
 			AND
-			update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 MONTH) AND NOW()
+			update_date between DATE_ADD(NOW(), INTERVAL -1 MONTH) AND NOW()
 	</select>
 	
 	<!-- 이번달 숙소 예약인원 -->
@@ -30,7 +30,7 @@
 			AND
 			NOT accom_payment_state = '결제대기'
 			AND
-			update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 MONTH) AND NOW()
+			update_date between DATE_ADD(NOW(), INTERVAL -1 MONTH) AND NOW()
 	</select>
 
 	<!-- 저번달, 저번주와 비교해서 벌어들인 전체 수익 -->
@@ -47,7 +47,7 @@
 			AND
 		<choose>
 			<when test="month==1">
-				update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -2 MONTH) AND  DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 MONTH)
+				update_date between DATE_ADD(NOW(), INTERVAL -1 MONTH) AND  DATE_ADD(NOW(), INTERVAL -2 MONTH)
 					)
 				from accom_payment
 				WHERE
@@ -57,10 +57,10 @@
 					AND
 					NOT accom_payment_state = '결제대기'
 					AND
-					update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 MONTH) AND NOW())
+					update_date between DATE_ADD(NOW(), INTERVAL -1 MONTH) AND NOW())
 			</when>
 			<otherwise>
-				update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -2 WEEK) AND  DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -1 WEEK)
+				update_date between DATE_ADD(NOW(), INTERVAL -1 WEEK) AND  DATE_ADD(NOW(), INTERVAL -2 WEEK)
 					)
 				from accom_payment
 				WHERE
@@ -70,7 +70,7 @@
 					AND
 					NOT accom_payment_state = '결제대기'
 					AND
-					update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -1 WEEK) AND NOW())
+					update_date between DATE_ADD(NOW(), INTERVAL -1 WEEK) AND NOW())
 			</otherwise>
 		</choose>
 		+
@@ -84,7 +84,7 @@
 			AND
 			<choose>
 				<when test="month==1">
-					update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -2 MONTH) AND  DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 MONTH)
+					update_date between DATE_ADD(NOW(), INTERVAL -1 MONTH) AND  DATE_ADD(NOW(), INTERVAL -2 MONTH)
 						)
 					from activity_payment
 					WHERE
@@ -97,7 +97,7 @@
 						update_date between DATE_ADD(NOW(), INTERVAL -1 MONTH) AND NOW())
 				</when>
 				<otherwise>
-					update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -2 WEEK) AND  DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -1 WEEK)
+					update_date between DATE_ADD(NOW(), INTERVAL -1 WEEK) AND  DATE_ADD(NOW(), INTERVAL -2 WEEK)
 						)
 					from activity_payment
 					WHERE
@@ -107,7 +107,7 @@
 						AND
 						NOT activity_payment_state = '결제대기'
 						AND
-						update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -1 WEEK) AND NOW())
+						update_date between DATE_ADD(NOW(), INTERVAL -1 WEEK) AND NOW())
 				</otherwise>
 			</choose>
 			
@@ -130,7 +130,7 @@
 					AND
 					NOT activity_payment_state = '결제대기'
 					AND
-					update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -2 MONTH) AND  DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 MONTH)
+					update_date between DATE_ADD(NOW(), INTERVAL -1 MONTH) AND  DATE_ADD(NOW(), INTERVAL -2 MONTH)
 					)
 				from activity_payment
 				WHERE
@@ -140,7 +140,7 @@
 					AND
 					NOT activity_payment_state = '결제대기'
 					AND
-					update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 MONTH) AND NOW()
+					update_date between DATE_ADD(NOW(), INTERVAL -1 MONTH) AND NOW()
 			</when>
 			
 			<otherwise>
@@ -151,7 +151,7 @@
 					AND
 					NOT activity_payment_state = '결제대기'
 					AND
-					update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -2 WEEK) AND  DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -1 WEEK)
+					update_date between DATE_ADD(NOW(), INTERVAL -1 WEEK) AND  DATE_ADD(NOW(), INTERVAL -2 WEEK)
 					)
 				from activity_payment
 				WHERE
@@ -161,7 +161,7 @@
 					AND
 					NOT activity_payment_state = '결제대기'
 					AND
-					update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -1 WEEK) AND NOW()
+					update_date between DATE_ADD(NOW(), INTERVAL -1 WEEK) AND NOW()
 			</otherwise>
 		</choose>
 		
@@ -183,7 +183,7 @@
 					AND
 					NOT accom_payment_state = '결제대기'
 					AND
-					update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -2 MONTH) AND  DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 MONTH)
+					update_date between DATE_ADD(NOW(), INTERVAL -1 MONTH) AND  DATE_ADD(NOW(), INTERVAL -2 MONTH)
 					)
 				from accom_payment
 				WHERE
@@ -193,7 +193,7 @@
 					AND
 					NOT accom_payment_state = '결제대기'
 					AND
-					update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 MONTH) AND NOW()
+					update_date between DATE_ADD(NOW(), INTERVAL -1 MONTH) AND NOW()
 			</when>
 			
 			<otherwise>
@@ -204,7 +204,7 @@
 					AND
 					NOT accom_payment_state = '결제대기'
 					AND
-					update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -2 WEEK) AND  DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -1 WEEK)
+					update_date between DATE_ADD(NOW(), INTERVAL -1 WEEK) AND  DATE_ADD(NOW(), INTERVAL -2 WEEK)
 					)
 				from accom_payment
 				WHERE
@@ -214,7 +214,7 @@
 					AND
 					NOT accom_payment_state = '결제대기'
 					AND
-					update_date between DATE_ADD(DATE(DATE(NOW())+((7-DAYOFWEEK(NOW())+1))), INTERVAL -1 WEEK) AND NOW()
+					update_date between DATE_ADD(NOW(), INTERVAL -1 WEEK) AND NOW()
 			</otherwise>
 		</choose>
 		
@@ -276,7 +276,7 @@
 			ap.host_no = #{hostNo}
 			AND
 			<![CDATA[
-			ap.update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 Month) AND NOW()
+			ap.update_date between DATE_ADD(NOW(), INTERVAL -1 Month) AND NOW()
 			]]>
 			AND
 			NOT activity_payment_state = '결제대기' 
@@ -307,7 +307,7 @@
 			ap.host_no = #{hostNo}
 			AND
 			<![CDATA[
-			ap.update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 Month) AND NOW()
+			ap.update_date between DATE_ADD(NOW(), INTERVAL -1 Month) AND NOW()
 			]]>
 			AND
 			NOT accom_payment_state = '결제대기' 
@@ -336,7 +336,7 @@
 			<if test="month == 1">
 				<![CDATA[
 				AND
-				update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 Month) AND NOW()
+				update_date between DATE_ADD(NOW(), INTERVAL -1 Month) AND NOW()
 				]]>
 			</if>
 	</select>
@@ -356,7 +356,7 @@
 			<if test="month == 1">
 				<![CDATA[
 				AND
-				update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 Month) AND NOW()
+				update_date between DATE_ADD(NOW(), INTERVAL -1 Month) AND NOW()
 				]]>
 			</if>
 	</select>
@@ -378,7 +378,7 @@
 				<if test="month >= 1">
 					<![CDATA[
 					AND
-					update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 Month) AND NOW()
+					update_date between DATE_ADD(NOW(), INTERVAL -1 Month) AND NOW()
 					]]>
 				</if>
 				)
@@ -396,7 +396,7 @@
 				<if test="month >= 1">
 					<![CDATA[
 					AND
-					update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 Month) AND NOW()
+					update_date between DATE_ADD(NOW(), INTERVAL -1 Month) AND NOW()
 					]]>
 				</if>
 				)
