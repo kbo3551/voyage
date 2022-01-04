@@ -375,7 +375,7 @@
 				NOT accom_payment_state = '결제취소'
 				AND
 				NOT accom_payment_state = '결제대기'
-				<if test="month == 1">
+				<if test="month >= 1">
 					<![CDATA[
 					AND
 					update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 Month) AND NOW()
@@ -393,7 +393,7 @@
 				NOT activity_payment_state = '결제취소'
 				AND
 				NOT activity_payment_state = '결제대기'
-				<if test="month == 1">
+				<if test="month >= 1">
 					<![CDATA[
 					AND
 					update_date between DATE_ADD(LAST_DAY(NOW()), INTERVAL -1 Month) AND NOW()
