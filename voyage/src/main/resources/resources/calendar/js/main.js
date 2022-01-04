@@ -7,7 +7,6 @@
 	var roomNo = $('#accomRoomNo').attr('name');
 	
 	// 기존 예약일을 저장하는 배열
-	var arr = '';
 	var checkIn = [];
 	var checkOut = [];
 		
@@ -25,11 +24,8 @@
             success : function(data) {
             	
 				$(data).each(function(index, item){ // each : JSON의 반복문
-					console.log("체크인"+item.accomCheckIn);
-					console.log("체크아웃"+item.accomCheckOut);
-					
-					checkIn[index] = item.accomCheckIn.substring(5, 10);
-					checkOut[index] = item.accomCheckOut.substring(5, 10);
+					checkIn[index] = item.accomCheckIn.substring(0, 10);
+					checkOut[index] = item.accomCheckOut.substring(0, 10);
 					
 				});
         	} 
@@ -58,6 +54,7 @@
 				if(cell >= calMonthArray.length) {
 					calendar.datesBody.append('<div class="blank"></div>');
 				} else {
+					var shownYear = passed_year;
 					var shownDate = calMonthArray[cell].day;
 					var shownMonth = calMonthArray[cell].monthday;
 					
@@ -69,7 +66,7 @@
 						shownDate = '0'+shownDate;
 					}
 					
-					var dateObj = shownMonth + '-' + shownDate;
+					var dateObj = shownYear + '-' + shownMonth + '-' + shownDate;
 					//console.log("dateObj"+dateObj);
 	
 					// Later refactiroing -- iter_date not needed after "today" is found
@@ -82,26 +79,15 @@
 							&& iter_date < today) {						
 						var m = '<div class="past-date">';
 					} else {
-						var m = checkToday(iter_date)?'<div class="today">':"<div id=" + 'date' + " class=" + dateObj +">";
+						var m = checkToday(iter_date)?'<div class="today">':"<div value=" + dateObj +">";
 					}
 					
 					// 기존 예약일은 예약 불가
-					for(var i=0; i<=checkIn.length; i++) {
-						if(dateObj == checkIn[i] || dateObj == checkOut[i]) {
+					for(var d=0; d<=checkIn.length; d++) {
+						if(dateObj == checkIn[d] || dateObj == checkOut[d]) {
 							var m = '<div class="past-date">';
 						}
 					}					
-					
-					//if(dateObj == checkIn[0] || dateObj == checkOut[0]) {
-					//	var m = '<div class="past-date">';
-					//}
-					//if(dateObj == checkIn[1] || dateObj == checkOut[1]) {
-					//	var m = '<div class="past-date">';
-					//}
-					
-				var test = $('#date').attr('class');
-				console.log("test"+test);
-					
 					calendar.datesBody.append(m + shownDate + "</div>");
 				}
 			}
@@ -120,6 +106,7 @@
 
 			clickedElement = calendar.datesBody.find('div');
 			clickedElement.on("click", function(){
+			
 				clicked = $(this);
 				if (clicked.hasClass('past-date')) { return; }
 				var whichCalendar = calendar.name;
@@ -143,6 +130,7 @@
 						// then choose dates again from the start :)
 						bothCals.find(".calendar_content").find("div").each(function(){
 							$(this).removeClass("selected");
+							//$(this).removeAttr('name');
 						});
 						selected = {};
 						selected[firstClicked.year] = {};
@@ -156,6 +144,7 @@
 						secondClick = false;
 						bothCals.find(".calendar_content").find("div").each(function(){
 							$(this).removeClass("selected");
+							//$(this).removeAttr('name');
 						});	
 					}
 				}
@@ -195,6 +184,7 @@
 						firstClick = false;
 						secondClick = false;
 						$(this).removeClass("selected");
+						//$(this).removeAttr('name');
 					}
 
 
@@ -211,6 +201,9 @@
 				var dateElements1 = datesBody1.find('div');
 				var dateElements2 = datesBody2.find('div');
 
+				// 예약일 문자열 전체를 저장할 변수
+				var reserveTxt = '';
+				
 				function highlightDates(passed_year, passed_month, dateElements){
 					if (passed_year in selected && passed_month in selected[passed_year]) {
 						var daysToCompare = selected[passed_year][passed_month];
@@ -219,13 +212,49 @@
 							dateElements.each(function(index) {
 								if (parseInt($(this).text()) == daysToCompare[d]) {
 									$(this).addClass('selected');
+									reserveTxt += $(this).text();
+									//var val = $('.selected').val();
+									//console.log("val"+val);
+									//console.log("$(this)"+$(this).text());
 								}
+								
 							});	
+								
 						}
 						
 					}
+					//var checkInYear = passed_year;
+					//var checkInMonth = passed_month+1;
+					//console.log("passed_year"+passed_year);
+					//console.log("passed_month"+(passed_month+1));
+				
+					// 체크인 날짜는 예약일 문자열 전체 중 앞에서 두글자
+					var checkInDate = reserveTxt.substring(0, 2);
+					//console.log("checkInDate"+checkInDate);
+					
+					// 체크아웃 날짜는 예약일 문자열 전체 중 뒤에서 두글자
+					var checkOutDate = reserveTxt.substring(reserveTxt.length-2, reserveTxt.length);
+					//console.log("checkOutDate"+checkOutDate);
+					
+					// 총 숙박일은 예약일 문자열 전체를 2로 나눈 값
+					var days = reserveTxt.length / 2;
+							
+					$('#checkIn').empty();
+					$('#checkOut').empty();
+					$('#days').empty();
+						
+					$('#checkIn').append(checkInDate);
+					$('#checkOut').append(checkOutDate);
+					$('#days').append(days);
+					
+					//var accomCheckIn = checkInYear + '-' + checkInMonth + '-' + checkInDate;
+					//var accomCheckOut = checkInYear + '-' + checkInMonth + '-' + checkOutDate;
+					//console.log("accomCheckIn"+accomCheckIn);
+					//console.log("accomCheckOut"+accomCheckOut);
+					
+					//var class_name = $('#selected').attr('class');
+					//console.log("class_name"+class_name);
 				}
-
 				highlightDates(year, month, dateElements1);
 				highlightDates(nextYear, nextMonth, dateElements2);
 			}
@@ -459,7 +488,10 @@
 				}
 			}
 			return selected;
-		}
+		}		
+				
 });
 
+									
 })(jQuery);
+
