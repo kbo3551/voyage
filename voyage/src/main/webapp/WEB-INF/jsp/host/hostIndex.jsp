@@ -596,7 +596,7 @@
 										<div class="card-body">
 											<div class="row">
 												<div class="col mt-0">
-													<h5 class="card-title">숙소 월 수익</h5>
+													<h5 class="card-title">월 수익</h5>
 												</div>
 											</div>
 											<h1 class="mt-1 mb-3" id="accomMonthTotalProfit">&#8361;</h1>
