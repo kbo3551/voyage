@@ -19,6 +19,18 @@ public class PaymentRestController {
 	
 	// 사업자 -- 
 	
+	// 이번달 체험 예약인원
+	@GetMapping("/selectActivityUsePerson")
+	public int selectActivityUsePerson(int hostNo) {
+		 return paymentService.selectActivityUsePerson(hostNo);
+	}
+		
+	// 이번달 숙소 예약인원
+	@GetMapping("/selectAccomUsePerson")
+	public int selectAccomUsePerson(int hostNo) {
+		 return paymentService.selectAccomUsePerson(hostNo);
+	}
+	
 	// 해당 사업자의 저번달과 비교한 체험 월 수익
 	@GetMapping("/selectActivityProfitCompareByMonth")
 	public String selectActivityProfitCompareByMonth(int hostNo) {

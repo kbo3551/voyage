@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.PaymentMapper">
+	<!-- 이번달 체험 예약인원 -->
+	<select id="selectActivityUsePerson" resultType="int">
+		SELECT
+			SUM(activity_use_person)
+		FROM
+			activity_payment
+		WHERE
+			host_no = #{hostNo}
+			AND
+			NOT activity_payment_state = '결제취소'
+			AND
+			NOT activity_payment_state = '결제대기'
+			AND
+			update_date between DATE_ADD(NOW(), INTERVAL -1 MONTH) AND NOW()
+	</select>
+	
+	<!-- 이번달 숙소 예약인원 -->
+	<select id="selectAccomUsePerson" resultType="int">
+		SELECT
+			SUM(accom_use_person)
+		FROM
+			accom_payment
+		WHERE
+			host_no = #{hostNo}
+			AND
+			NOT accom_payment_state = '결제취소'
+			AND
+			NOT accom_payment_state = '결제대기'
+			AND
+			update_date between DATE_ADD(NOW(), INTERVAL -1 MONTH) AND NOW()
+	</select>
+
 	<!-- 저번달, 저번주와 비교해서 벌어들인 전체 수익 -->
 	<select id="selectAllProfitCompare" resultType="long">
 		SELECT

@@ -34,7 +34,8 @@ public interface PaymentMapper {
 	List<AccomPayment> selectAccomProfitByMonthToDate(int hostNo);
 	// 저번주, 혹은 저번달 숙소 수익과 비교한 비율(month가 0이면 week)
 	Object selectAccomProfitCompare(int hostNo, Integer month);
-	
+	// 이번달 숙소 예약인원
+	Integer selectAccomUsePerson(int hostNo);
 	
 	// 체험 //
 	// 결제 취소
@@ -53,4 +54,6 @@ public interface PaymentMapper {
 	List<ActivityPayment> selectActivityProfitByMonthToDate(int hostNo);
 	// 저번주, 혹은 저번달 체험 수익과 비교한 비율(month가 0이면 week)
 	Object selectActivityProfitCompare(int hostNo, Integer month);
+	// 이번달 체험 예약인원
+	Integer selectActivityUsePerson(int hostNo);
 }

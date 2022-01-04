@@ -363,6 +363,32 @@
                         				}		
                         			)
                         			
+                        			// 이번달 숙소 예약인원
+                        			$.ajax(
+                        				{
+                        					type: "GET",
+                        					url:"/voyage/selectAccomUsePerson?hostNo="+hostNo,
+                        					dataType:"text",
+                        					success : function (data) {
+                        						$('#accomUsePerson').append(data+'명');
+											}
+                        						
+                        				}		
+                        			)
+                        			
+                        			// 이번달 체험 예약인원
+                        			$.ajax(
+                        				{
+                        					type: "GET",
+                        					url:"/voyage/selectActivityUsePerson?hostNo="+hostNo,
+                        					dataType:"text",
+                        					success : function (data) {
+                        						$('#activityUsePerson').append(data+'명');
+											}
+                        						
+                        				}		
+                        			)
+                        			
                         			
                         			
                         			// 최근 한달간 숙소 일별 수익
@@ -641,6 +667,31 @@
 												</div>
 											</div>
 											<h1 class="mt-1 mb-3" id="activityQuarterlyProfit"></h1>
+										</div>
+									</div>
+                        		</c:if>
+                        		
+                        		<c:if test="${param.category == 'accom'}">
+	                        		<div class="card" style="float: left;  width: 50%">
+										<div class="card-body">
+											<div class="row">
+												<div class="col mt-0">
+													<h5 class="card-title">이번달 숙소 예약인원</h5>
+												</div>
+											</div>
+											<h1 class="mt-1 mb-3" id="accomUsePerson"></h1>
+										</div>
+									</div>
+                        		</c:if>
+                        		<c:if test="${param.category == 'activity'}">
+                        			<div class="card" style="float: left;  width: 50%">
+										<div class="card-body">
+											<div class="row">
+												<div class="col mt-0">
+													<h5 class="card-title">이번달 체험 예약인원</h5>
+												</div>
+											</div>
+											<h1 class="mt-1 mb-3" id="activityUsePerson"></h1>
 										</div>
 									</div>
                         		</c:if>
