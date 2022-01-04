@@ -70,7 +70,7 @@
                                 
                                 if(accomPaymentNo>0){
                                 	alert("중복으로 작성 할 수 없습니다.");
-                                	location.replace(contextPath+'/member/selectMyOrderList');
+                                	window.history.back();
                                 }
                     		}
 		              	}

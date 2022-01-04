@@ -348,7 +348,7 @@
 																<c:choose>
 																	<c:when test="${ap.accomPaymentState == '사용완료'}">
 																		<td style="display:table-cell;vertical-align:middle;" width="13%">
-																			<div>${ap.accomPaymentState}</div>
+																			<div>숙박완료</div>
 																			<div><small><a href="${contextPath}/addAccomReview?accomPaymentNo=${ap.accomPaymentNo}" style="color:teal;">후기</a></small></div>
 																		</td>
 																	</c:when>
@@ -516,7 +516,7 @@
 																<c:choose>
 																	<c:when test="${ac.activityPaymentState == '사용완료'}">
 																		<td style="display:table-cell;vertical-align:middle;" width="13%">
-																			<div>${ac.activityPaymentState}</div>
+																			<div>체험완료</div>
 																			<div><small><a href="${contextPath}/addActivityReview?activityPaymentNo=${ac.activityPaymentNo}" style="color:teal;">후기</a></small></div>
 																		</td>
 																	</c:when>
