@@ -12,8 +12,10 @@ import com.gdu.voyage.vo.ActivityPayment;
 public interface PaymentMapper {
 	
 	// 숙소+결제 //
-	//  해당 사업자의 총 수익, 월별 총수익
+	// 해당 사업자의 총 수익, 월별 총수익
 	Object selectAllProfitByHost(int hostNo, Integer month);
+	// 저번주, 혹은 저번달 수익과 비교한 비율(month가 0이면 week)
+	Object selectAllProfitCompare(int hostNo, Integer month);
 	
 	// 숙소 //
 	// 결제 취소
@@ -30,6 +32,8 @@ public interface PaymentMapper {
 	AccomPayment selectAccomProfitByQuarterly(int hostNo);
 	// 최근 한달간 일별 수익
 	List<AccomPayment> selectAccomProfitByMonthToDate(int hostNo);
+	// 저번주, 혹은 저번달 숙소 수익과 비교한 비율(month가 0이면 week)
+	Object selectAccomProfitCompare(int hostNo, Integer month);
 	
 	
 	// 체험 //
@@ -47,4 +51,6 @@ public interface PaymentMapper {
 	ActivityPayment selectActivityProfitByQuarterly(int hostNo);
 	// 최근 한달간 일별 수익
 	List<ActivityPayment> selectActivityProfitByMonthToDate(int hostNo);
+	// 저번주, 혹은 저번달 체험 수익과 비교한 비율(month가 0이면 week)
+	Object selectActivityProfitCompare(int hostNo, Integer month);
 }

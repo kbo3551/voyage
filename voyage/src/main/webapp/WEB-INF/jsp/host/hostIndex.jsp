@@ -285,6 +285,84 @@
                         				}		
                         			)
                         			
+                        			// 해당 사업자의 저번주와 비교한 총 수익
+                        			$.ajax(
+                        				{
+                        					type: "GET",
+                        					url:"/voyage/selectAllProfitCompare?hostNo="+hostNo,
+                        					dataType:"text",
+                        					success : function (data) {
+                        						$('#allProfit').append(data);
+											}
+                        						
+                        				}		
+                        			)
+                        			
+                        			// 해당 사업자의 저번달과 비교한 월 수익
+                        			$.ajax(
+                        				{
+                        					type: "GET",
+                        					url:"/voyage/selectAllProfitCompareByMonth?hostNo="+hostNo,
+                        					dataType:"text",
+                        					success : function (data) {
+                        						$('#allProfitMonth').append(data);
+											}
+                        						
+                        				}		
+                        			)
+                        			
+                        			// 해당 사업자의 저번주와 비교한 숙소 수익
+                        			$.ajax(
+                        				{
+                        					type: "GET",
+                        					url:"/voyage/selectAccomProfitCompare?hostNo="+hostNo,
+                        					dataType:"text",
+                        					success : function (data) {
+                        						$('#accomProfit').append(data);
+											}
+                        						
+                        				}		
+                        			)
+                        			
+                        			// 해당 사업자의 저번달과 비교한 숙소 월 수익
+                        			$.ajax(
+                        				{
+                        					type: "GET",
+                        					url:"/voyage/selectAccomProfitCompareByMonth?hostNo="+hostNo,
+                        					dataType:"text",
+                        					success : function (data) {
+                        						$('#accomProfitMonth').append(data);
+											}
+                        						
+                        				}		
+                        			)
+                        			
+                        			// 해당 사업자의 저번주와 비교한 체험 수익
+                        			$.ajax(
+                        				{
+                        					type: "GET",
+                        					url:"/voyage/selectActivityProfitCompare?hostNo="+hostNo,
+                        					dataType:"text",
+                        					success : function (data) {
+                        						$('#activityProfit').append(data);
+											}
+                        						
+                        				}		
+                        			)
+                        			
+                        			// 해당 사업자의 저번달과 비교한 체험 월 수익
+                        			$.ajax(
+                        				{
+                        					type: "GET",
+                        					url:"/voyage/selectActivityProfitCompareByMonth?hostNo="+hostNo,
+                        					dataType:"text",
+                        					success : function (data) {
+                        						$('#activityProfitMonth').append(data);
+											}
+                        						
+                        				}		
+                        			)
+                        			
                         			
                         			
                         			// 최근 한달간 숙소 일별 수익
@@ -455,9 +533,7 @@
 												</div>
 											</div>
 											<h1 class="mt-1 mb-3" id="totalProfit">&#8361;</h1>
-											<div class="mb-0">
-												<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
-												<span class="text-muted">Since last week</span>
+											<div class="mb-0" id="allProfit">
 											</div>
 										</div>
 									</div>
@@ -469,9 +545,7 @@
 												</div>
 											</div>
 											<h1 class="mt-1 mb-3" id="totalProfitByMonth">&#8361;</h1>
-											<div class="mb-0">
-												<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
-												<span class="text-muted">Since last week</span>
+											<div class="mb-0 " id="allProfitMonth">
 											</div>
 										</div>
 									</div>
@@ -488,9 +562,7 @@
 												</div>
 											</div>
 											<h1 class="mt-1 mb-3" id="accomTotalProfit">&#8361;</h1>
-											<div class="mb-0">
-												<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 41.35% </span>
-												<span class="text-muted">Since last week</span>
+											<div class="mb-0 " id="accomProfit">
 											</div>
 										</div>
 									</div>
@@ -502,9 +574,7 @@
 												</div>
 											</div>
 											<h1 class="mt-1 mb-3" id="accomMonthTotalProfit">&#8361;</h1>
-											<div class="mb-0">
-												<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 21.33% </span>
-												<span class="text-muted">Since last week</span>
+											<div class="mb-0 " id="accomProfitMonth">
 											</div>
 										</div>
 									</div>
@@ -521,9 +591,7 @@
 												</div>
 											</div>
 											<h1 class="mt-1 mb-3" id="activityTotalProfit">&#8361;</h1>
-											<div class="mb-0">
-												<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 20.65% </span>
-												<span class="text-muted">Since last month</span>
+											<div class="mb-0 " id="activityProfit">
 											</div>
 										</div>
 									</div>
@@ -535,9 +603,7 @@
 												</div>
 											</div>
 											<h1 class="mt-1 mb-3" id="activityMonthTotalProfit">&#8361;</h1>
-											<div class="mb-0">
-												<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 3.36% </span>
-												<span class="text-muted">Since last month</span>
+											<div class="mb-0 " id="activityProfitMonth">
 											</div>
 										</div>
 									</div>

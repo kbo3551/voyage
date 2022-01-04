@@ -1,6 +1,192 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.PaymentMapper">
+	<!-- 저번달, 저번주와 비교해서 벌어들인 전체 수익 -->
+	<select id="selectAllProfitCompare" resultType="long">
+		SELECT
+		SUM(
+		(select sum(accom_amount) -
+		(SELECT
+			IFNULL(SUM(accom_amount),1)
+		FROM
+			accom_payment
+		WHERE
+			host_no = 3
+			AND
+		<choose>
+			<when test="month==1">
+				update_date between DATE_ADD(NOW(), INTERVAL -2 MONTH) AND  DATE_ADD(NOW(), INTERVAL -1 MONTH)
+					)
+				from accom_payment
+				WHERE
+					host_no = 3
+					AND
+					NOT accom_payment_state = '결제취소'
+					AND
+					NOT accom_payment_state = '결제대기'
+					AND
+					update_date between DATE_ADD(NOW(), INTERVAL -1 MONTH) AND NOW())
+			</when>
+			<otherwise>
+				update_date between DATE_ADD(NOW(), INTERVAL -2 WEEK) AND  DATE_ADD(NOW(), INTERVAL -1 WEEK)
+					)
+				from accom_payment
+				WHERE
+					host_no = 3
+					AND
+					NOT accom_payment_state = '결제취소'
+					AND
+					NOT accom_payment_state = '결제대기'
+					AND
+					update_date between DATE_ADD(NOW(), INTERVAL -1 WEEK) AND NOW())
+			</otherwise>
+		</choose>
+		+
+		(select sum(activity_amount) -
+		(SELECT
+			IFNULL(SUM(activity_amount),1)
+		FROM
+			activity_payment
+		WHERE
+			host_no = 3
+			AND
+			<choose>
+				<when test="month==1">
+					update_date between DATE_ADD(NOW(), INTERVAL -2 MONTH) AND  DATE_ADD(NOW(), INTERVAL -1 MONTH)
+						)
+					from activity_payment
+					WHERE
+						host_no = 3
+						AND
+						NOT activity_payment_state = '결제취소'
+						AND
+						NOT activity_payment_state = '결제대기'
+						AND
+						update_date between DATE_ADD(NOW(), INTERVAL -1 MONTH) AND NOW())
+				</when>
+				<otherwise>
+					update_date between DATE_ADD(NOW(), INTERVAL -2 WEEK) AND  DATE_ADD(NOW(), INTERVAL -1 WEEK)
+						)
+					from activity_payment
+					WHERE
+						host_no = 3
+						AND
+						NOT activity_payment_state = '결제취소'
+						AND
+						NOT activity_payment_state = '결제대기'
+						AND
+						update_date between DATE_ADD(NOW(), INTERVAL -1 WEEK) AND NOW())
+				</otherwise>
+			</choose>
+			
+		)
+	</select>
+	
+	<!-- 저번달, 저번주와 비교해서 벌어들인 체험 수익 -->
+	<select id="selectActivityProfitCompare" resultType="long">
+		select sum(activity_amount) -
+		(SELECT
+			IFNULL(SUM(activity_amount),1)
+		FROM
+			activity_payment
+		<choose>
+			<when test = "month == 1">
+				WHERE
+					host_no = #{hostNo}
+					AND
+					NOT activity_payment_state = '결제취소'
+					AND
+					NOT activity_payment_state = '결제대기'
+					AND
+					update_date between DATE_ADD(NOW(), INTERVAL -2 MONTH) AND  DATE_ADD(NOW(), INTERVAL -1 MONTH)
+					)
+				from activity_payment
+				WHERE
+					host_no = #{hostNo}
+					AND
+					NOT activity_payment_state = '결제취소'
+					AND
+					NOT activity_payment_state = '결제대기'
+					AND
+					update_date between DATE_ADD(NOW(), INTERVAL -1 MONTH) AND NOW()
+			</when>
+			
+			<otherwise>
+				WHERE
+					host_no = #{hostNo}
+					AND
+					NOT activity_payment_state = '결제취소'
+					AND
+					NOT activity_payment_state = '결제대기'
+					AND
+					update_date between DATE_ADD(NOW(), INTERVAL -2 WEEK) AND  DATE_ADD(NOW(), INTERVAL -1 WEEK)
+					)
+				from activity_payment
+				WHERE
+					host_no = #{hostNo}
+					AND
+					NOT activity_payment_state = '결제취소'
+					AND
+					NOT activity_payment_state = '결제대기'
+					AND
+					update_date between DATE_ADD(NOW(), INTERVAL -1 WEEK) AND NOW()
+			</otherwise>
+		</choose>
+		
+	</select>
+	
+	<!-- 저번달, 저번주와 비교해서 벌어들인 숙소 수익 -->
+	<select id="selectAccomProfitCompare" resultType="long">
+		select sum(accom_amount) -
+		(SELECT
+			IFNULL(SUM(accom_amount),1)
+		FROM
+			accom_payment
+		<choose>
+			<when test = "month == 1">
+				WHERE
+					host_no = #{hostNo}
+					AND
+					NOT accom_payment_state = '결제취소'
+					AND
+					NOT accom_payment_state = '결제대기'
+					AND
+					update_date between DATE_ADD(NOW(), INTERVAL -2 MONTH) AND  DATE_ADD(NOW(), INTERVAL -1 MONTH)
+					)
+				from accom_payment
+				WHERE
+					host_no = #{hostNo}
+					AND
+					NOT accom_payment_state = '결제취소'
+					AND
+					NOT accom_payment_state = '결제대기'
+					AND
+					update_date between DATE_ADD(NOW(), INTERVAL -1 MONTH) AND NOW()
+			</when>
+			
+			<otherwise>
+				WHERE
+					host_no = #{hostNo}
+					AND
+					NOT accom_payment_state = '결제취소'
+					AND
+					NOT accom_payment_state = '결제대기'
+					AND
+					update_date between DATE_ADD(NOW(), INTERVAL -2 WEEK) AND  DATE_ADD(NOW(), INTERVAL -1 WEEK)
+					)
+				from accom_payment
+				WHERE
+					host_no = #{hostNo}
+					AND
+					NOT accom_payment_state = '결제취소'
+					AND
+					NOT accom_payment_state = '결제대기'
+					AND
+					update_date between DATE_ADD(NOW(), INTERVAL -1 WEEK) AND NOW()
+			</otherwise>
+		</choose>
+		
+	</select>
 
 	<!-- 최근 한달간 체험 일별 수익 -->
 	<select id="selectActivityProfitByMonthToDate" resultType="com.gdu.voyage.vo.ActivityPayment">

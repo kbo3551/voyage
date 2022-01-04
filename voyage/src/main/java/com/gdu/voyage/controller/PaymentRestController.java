@@ -14,10 +14,46 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 public class PaymentRestController {
 	@Autowired PaymentService paymentService;
-	
+	// 관리자 --
 	
 	
 	// 사업자 -- 
+	
+	// 해당 사업자의 저번달과 비교한 체험 월 수익
+	@GetMapping("/selectActivityProfitCompareByMonth")
+	public String selectActivityProfitCompareByMonth(int hostNo) {
+		 return paymentService.selectActivityProfitCompareByMonth(hostNo);
+	}
+		
+	// 해당 사업자의 저번주와 비교한 체험 수익
+	@GetMapping("/selectActivityProfitCompare")
+	public String selectActivityProfitCompare(int hostNo) {
+		 return paymentService.selectActivityProfitCompare(hostNo);
+	}
+	
+	// 해당 사업자의 저번달과 비교한 숙소 월 수익
+	@GetMapping("/selectAccomProfitCompareByMonth")
+	public String selectAccomProfitCompareByMonth(int hostNo) {
+		 return paymentService.selectAccomProfitCompareByMonth(hostNo);
+	}
+		
+	// 해당 사업자의 저번주와 비교한 숙소 수익
+	@GetMapping("/selectAccomProfitCompare")
+	public String selectAccomProfitCompare(int hostNo) {
+		 return paymentService.selectAccomProfitCompare(hostNo);
+	}
+	
+	// 해당 사업자의 저번달과 비교한 월 수익
+	@GetMapping("/selectAllProfitCompareByMonth")
+	public String selectAllProfitCompareByMonth(int hostNo) {
+		 return paymentService.selectAllProfitCompareByMonth(hostNo);
+	}
+		
+	// 해당 사업자의 저번주와 비교한 총 수익
+	@GetMapping("/selectAllProfitCompare")
+	public String selectAllProfitCompare(int hostNo) {
+		 return paymentService.selectAllProfitCompare(hostNo);
+	}
 	
 	// 최근 한달간 체험 일별 수익
 	@GetMapping("/selectActivityProfitByMonthToDate")

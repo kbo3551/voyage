@@ -1,5 +1,6 @@
 package com.gdu.voyage.service;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,108 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 public class PaymentService {
 	@Autowired private PaymentMapper paymentMapper;
+	
+	// 해당 사업자의 저번달과 비교한 체험 월 수익
+	public String selectActivityProfitCompareByMonth(int hostNo) {
+		DecimalFormat formatter = new DecimalFormat("###,###");
+		String str = "<span class='text-success'>0 </span><span class='text-muted'>Since last Month</span>";
+		long result = 0;
+		if(paymentMapper.selectActivityProfitCompare(hostNo, 1) != null) {
+			result = (long) paymentMapper.selectActivityProfitCompare(hostNo, 1);
+		}
+		if(result > 0) {
+			str = "<span class='text-success'>"+formatter.format(result)+" </span><span class='text-muted'>Since last Month</span>";
+		}
+		if(result < 0) {
+			str = "<span class='text-danger'>"+formatter.format(result)+" </span><span class='text-muted'>Since last Month</span>";
+		}
+		return str;
+	}
+	
+	// 해당 사업자의 저번주와 비교한 체험 수익
+	public String selectActivityProfitCompare(int hostNo) {
+		DecimalFormat formatter = new DecimalFormat("###,###");
+		String str = "<span class='text-success'>0 </span><span class='text-muted'>Since last week</span>";
+		long result = 0;
+		if(paymentMapper.selectActivityProfitCompare(hostNo, null) != null) {
+			result = (long) paymentMapper.selectActivityProfitCompare(hostNo, null);
+		}
+		if(result > 0) {
+			str = "<span class='text-success'>"+formatter.format(result)+" </span><span class='text-muted'>Since last week</span>";
+		}
+		if(result < 0) {
+			str = "<span class='text-danger'>"+formatter.format(result)+" </span><span class='text-muted'>Since last week</span>";
+		}
+		return str;
+	}
+	
+	// 해당 사업자의 저번달과 비교한 숙소 월 수익
+	public String selectAccomProfitCompareByMonth(int hostNo) {
+		DecimalFormat formatter = new DecimalFormat("###,###");
+		String str = "<span class='text-success'>0 </span><span class='text-muted'>Since last Month</span>";
+		long result = 0;
+		if(paymentMapper.selectAccomProfitCompare(hostNo, 1) != null) {
+			result = (long) paymentMapper.selectAccomProfitCompare(hostNo, 1);
+		}
+		if(result > 0) {
+			str = "<span class='text-success'>"+formatter.format(result)+" </span><span class='text-muted'>Since last Month</span>";
+		}
+		if(result < 0) {
+			str = "<span class='text-danger'>"+formatter.format(result)+" </span><span class='text-muted'>Since last Month</span>";
+		}
+		return str;
+	}
+	
+	// 해당 사업자의 저번주와 비교한 숙소 수익
+	public String selectAccomProfitCompare(int hostNo) {
+		DecimalFormat formatter = new DecimalFormat("###,###");
+		String str = "<span class='text-success'>0 </span><span class='text-muted'>Since last week</span>";
+		long result = 0;
+		if(paymentMapper.selectAccomProfitCompare(hostNo, null) != null) {
+			result = (long) paymentMapper.selectAccomProfitCompare(hostNo, null);
+		}
+		if(result > 0) {
+			str = "<span class='text-success'>"+formatter.format(result)+" </span><span class='text-muted'>Since last week</span>";
+		}
+		if(result < 0) {
+			str = "<span class='text-danger'>"+formatter.format(result)+" </span><span class='text-muted'>Since last week</span>";
+		}
+		return str;
+	}
+	
+	// 해당 사업자의 저번달과 비교한 월 수익
+	public String selectAllProfitCompareByMonth(int hostNo) {
+		DecimalFormat formatter = new DecimalFormat("###,###");
+		String str = "<span class='text-success'>0 </span><span class='text-muted'>Since last month</span>";
+		long result = 0;
+		if(paymentMapper.selectAllProfitCompare(hostNo, 1) != null) {
+			result = (long) paymentMapper.selectAllProfitCompare(hostNo, 1);
+		}
+		if(result > 0) {
+			str = "<span class='text-success'>"+formatter.format(result)+" </span><span class='text-muted'>Since last month</span>";
+		}
+		if(result < 0) {
+			str = "<span class='text-danger'>"+formatter.format(result)+" </span><span class='text-muted'>Since last month</span>";
+		}
+		return str;
+	}
+	
+	// 해당 사업자의 저번주와 비교한 총 수익
+	public String selectAllProfitCompare(int hostNo) {
+		DecimalFormat formatter = new DecimalFormat("###,###");
+		String str = "<span class='text-success'>0 </span><span class='text-muted'>Since last week</span>";
+		long result = 0;
+		if(paymentMapper.selectAllProfitCompare(hostNo, null) != null) {
+			result = (long) paymentMapper.selectAllProfitCompare(hostNo, null);
+		}
+		if(result > 0) {
+			str = "<span class='text-success'>"+formatter.format(result)+" </span><span class='text-muted'>Since last week</span>";
+		}
+		if(result < 0) {
+			str = "<span class='text-danger'>"+formatter.format(result)+" </span><span class='text-muted'>Since last week</span>";
+		}
+		return str;
+	}
 	
 	// TreeMap - 자동 정렬 기능이 달려있는 Map
 	
