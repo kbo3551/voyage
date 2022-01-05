@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.PaymentMapper">
+	<!-- 숙소별 수익 -->
+	<select id="selectAccomProfitByAccomBuilding" resultType="int">
+		SELECT
+			IFNULL(SUM(accom_amount),0)
+		FROM
+			accom_payment ap
+		LEFT JOIN accom_room ar ON ap.accom_room_no = ar.accom_room_no
+		LEFT JOIN accom_building ab ON ar.accom_building_no = ab.accom_building_no
+		WHERE
+			ab.accom_building_no = #{accomBuildingNo}
+			AND
+			(
+			ap.host_no = #{hostNo}
+			AND
+			NOT accom_payment_state = '결제취소'
+			AND
+			NOT accom_payment_state = '결제대기'
+			)
+			<if test="month != null">
+				AND
+				ap.update_date between DATE_ADD(NOW(), INTERVAL -1 Month) AND NOW()
+			</if>
+			
+	</select>
+
 	<!-- 이번달 체험 예약인원 -->
 	<select id="selectActivityUsePerson" resultType="int">
 		SELECT
@@ -235,6 +260,9 @@
 		        (SELECT 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as d
 		    ) a left outer join `activity_payment` b on a.date = DATE(b.update_date) 
 		    AND host_no = #{hostNo} AND NOT activity_payment_state = '결제대기'  AND NOT activity_payment_state = '결제취소'
+		    <if test="activityNo != null">
+		    	AND activity_no = #{activityNo}
+		    </if>
 		WHERE 1=1
 		AND a.DATE between DATE_ADD(NOW(), INTERVAL -1 month) AND NOW()
 		GROUP BY updateDate
@@ -256,6 +284,9 @@
 		        (SELECT 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as d
 		    ) a left outer join `accom_payment` b on a.date = DATE(b.update_date) 
 		    AND host_no = #{hostNo} AND NOT accom_payment_state = '결제대기'  AND NOT accom_payment_state = '결제취소'
+		    <if test="accomRoomNo != null">
+		    	AND accom_room_no = #{accomRoomNo}
+		    </if>
 		WHERE 1=1
 		AND a.DATE between DATE_ADD(NOW(), INTERVAL -1 month) AND NOW()
 		GROUP BY updateDate

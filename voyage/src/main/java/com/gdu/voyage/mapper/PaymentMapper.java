@@ -31,11 +31,13 @@ public interface PaymentMapper {
 	// 해당 사업자의 분기별(3개월) 가장 많은 수익을 벌어들인 숙소
 	AccomPayment selectAccomProfitByQuarterly(int hostNo);
 	// 최근 한달간 일별 수익
-	List<AccomPayment> selectAccomProfitByMonthToDate(int hostNo);
+	List<AccomPayment> selectAccomProfitByMonthToDate(int hostNo, Integer accomRoomNo);
 	// 저번주, 혹은 저번달 숙소 수익과 비교한 비율(month가 0이면 week)
 	Object selectAccomProfitCompare(int hostNo, Integer month);
 	// 이번달 숙소 예약인원
 	Integer selectAccomUsePerson(int hostNo);
+	// 숙소별 수익
+	Object selectAccomProfitByAccomBuilding(int hostNo,int accomBuildingNo, Integer month);
 	
 	// 체험 //
 	// 결제 취소
@@ -51,7 +53,7 @@ public interface PaymentMapper {
 	// 해당 사업자의 분기별(3개월) 가장 많은 수익을 벌어들인 체험
 	ActivityPayment selectActivityProfitByQuarterly(int hostNo);
 	// 최근 한달간 일별 수익
-	List<ActivityPayment> selectActivityProfitByMonthToDate(int hostNo);
+	List<ActivityPayment> selectActivityProfitByMonthToDate(int hostNo, Integer activityNo);
 	// 저번주, 혹은 저번달 체험 수익과 비교한 비율(month가 0이면 week)
 	Object selectActivityProfitCompare(int hostNo, Integer month);
 	// 이번달 체험 예약인원

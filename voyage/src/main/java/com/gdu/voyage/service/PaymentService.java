@@ -156,7 +156,7 @@ public class PaymentService {
 	// 최근 한달간 체험 일별 수익
 	public TreeMap<String, Object> selectActivityProfitByMonthToDate(int hostNo) {
 		
-		List<ActivityPayment> activityPayments = paymentMapper.selectActivityProfitByMonthToDate(hostNo);
+		List<ActivityPayment> activityPayments = paymentMapper.selectActivityProfitByMonthToDate(hostNo, null);
 		
 		TreeMap<String, Object> map = new TreeMap<String, Object>();
 		
@@ -171,7 +171,7 @@ public class PaymentService {
 	// 최근 한달간 숙소 일별 수익
 	public TreeMap<String, Object> selectAccomProfitByMonthToDate(int hostNo) {
 		
-		List<AccomPayment> accomPayments = paymentMapper.selectAccomProfitByMonthToDate(hostNo);
+		List<AccomPayment> accomPayments = paymentMapper.selectAccomProfitByMonthToDate(hostNo, null);
 		
 		TreeMap<String, Object> map = new TreeMap<String, Object>();
 		
