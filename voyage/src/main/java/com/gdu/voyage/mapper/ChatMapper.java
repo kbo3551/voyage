@@ -20,4 +20,8 @@ public interface ChatMapper {
 
 	// [사용자] 채팅 보내기
 	int insertChat(Chat chat);
+	
+	// [사용자] 채팅 확인시 chatRead = '0' 으로 변경
+	// chatRoom과 자신의 아이디를 사용해 나에게 온 채팅중 내가 읽은 것만 update
+	int updateChatRead(Map<String, Object> map);
 }

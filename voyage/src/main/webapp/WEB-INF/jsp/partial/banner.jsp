@@ -18,6 +18,7 @@
 	.btn:before {
 		background: rgba(190,255,255,0.2);
 	}
+
 </style>
 <body>
     <!-- Preloader Start -->
@@ -223,7 +224,7 @@
 				
 				<!-- Modal body -->
 				<div class="modal-body">
-					<div>
+					<div id="scrollmodalBody" style="overflow:auto; width:auto; height:400px;">
 						<table class="table table-hover">
 							<tbody id="chatRoomList">
 							</tbody>
@@ -326,7 +327,7 @@
   	    });
   	};
 
-  	function disconnect() {
+  	function disConnect() {
   		console.log('disConnect!');
 		stompClient.disconnect();
 		console.log(stompClient);
