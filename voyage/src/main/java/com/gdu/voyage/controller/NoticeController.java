@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
@@ -27,6 +29,7 @@ public class NoticeController {
 	@Autowired NoticeService noticeService;
 	
 	private final int ROW_PER_PAGE = 10;
+	Notice notice = new Notice();
 	//관리자
 	
 	//noticeList
@@ -35,7 +38,8 @@ public class NoticeController {
 		//리스트를 불러오는 코드
 		Map<String, Object> noticeMap = noticeService.getNoticeListByTop(currentPage, ROW_PER_PAGE, searchNotice);
 		log.debug(noticeMap.toString()+"★★★ [DoHun] Notice List Controller 실행, noticeMap ★★★");
-
+		
+		
 		//페이징
 		int controllPage = (currentPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
 		//검색과 페이징
@@ -79,7 +83,7 @@ public class NoticeController {
 		//입력하는 코드
 		noticeService.insertNoticeOne(noticeForm, realPath);
 
-		return "/admin/adminNoticeList";
+		return "redirect:/admin/adminNoticeList";
 	}
 	//delete
 	@GetMapping("/admin/removeNotice")
@@ -90,28 +94,28 @@ public class NoticeController {
 	//update
 	@GetMapping("/admin/modifyNotice")
 	public String updateNoticeOne(int noticeNo) {
-		return "/admin/modifyNotice";
+		return "redirect:/admin/modifyNotice";
 	}
 	
 	@PostMapping("/admin/modifyNotice")
 	public String modifyNoticeOne(int noticeNo) {
-		return "/admin/adminNoticeList";
+		return "redirect:/admin/adminNoticeList";
 	}
 	
 	//일반사용자
 	
 	//noticeList
 	@GetMapping("/noticeList")
-	public String notcieListByAll(Model model, @RequestParam(defaultValue = "1") int currentPage, @RequestParam @Nullable String searchNotice) {
+	public String notcieListByAll(Model model, @RequestParam(defaultValue = "1") int currentPage, @RequestParam @Nullable String searchNotice, HttpServletRequest request) {
 		//리스트를 불러오는 코드
 		Map<String, Object> noticeMap = noticeService.getNoticeListByTop(currentPage, ROW_PER_PAGE, searchNotice);
 		log.debug(noticeMap.toString()+"★★★ [DoHun] Notice List Controller 실행, noticeMap ★★★");
-
+		
+		log.debug(searchNotice+"★★★ [DoHun] Notice List Controller 실행, searchNotice ★★★");	
 		//페이징
 		int controllPage = (currentPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
 		//검색과 페이징
-		model.addAttribute("controllPage", controllPage);
-		model.addAttribute("searchnotice", searchNotice);
+		model.addAttribute("controllPage", controllPage);	
 		model.addAttribute("noticeList", noticeMap.get("noticeList"));
 		model.addAttribute("lastPage", noticeMap.get("lastPage"));
 		model.addAttribute("currentPage", currentPage);
@@ -119,7 +123,10 @@ public class NoticeController {
 		int pageNo = ((controllPage / 100) * 10 + 1);
 		
 		model.addAttribute("pageNo", pageNo);
-			
+	
+		model.addAttribute("searchnotice", searchNotice);
+		
+		log.debug(notice.getSearchNotice()+"★★★ [DoHun] Notice List Controller 실행, notice.searchNotice ★★★");		
 		return "/noticeList";
 	}
 	

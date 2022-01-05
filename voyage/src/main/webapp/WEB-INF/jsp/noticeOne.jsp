@@ -79,22 +79,24 @@
         <section class="blog_area single-post-area section-padding">
         	<div class="container">
         		<div class="row">
-       				<div class="single-post">
-       					<c:if test="${noticeFile.noticeNo==notice.noticeNo && NoticeFile != null}">
-							<div class="feature-img">
-								<img class="card-img-top" src="${pageContext.request.contextPath}image/${noticeFile.noticeFileName+'.'+noticeFile.noticeFileExt}" alt="unplash">
-								${notice.noticeFileNo}
-							</div>
-						</c:if>
+       				<div class="single-post">	
 						<div class="blog-details">
 							<h2>${notice.noticeNo}. ${notice.noticeTitle}</h2>
 						</div>
+						
 						<ul class="blog-info-link mt-3 mb-4">
 							<li>작성자 : ${notice.adminId}</li>
 				        	<li>조회수 : ${notice.noticeViewCnt}</li>
 				        	<li>개시일 : ${notice.createDate}</li>
 				        	<li>수정일 : ${notice.updateDate}</li>
 				        </ul>
+				        
+						<div class="feature-img">
+							<c:if test="${!(empty notice.noticeFile)}">
+								<img class="card-img-top" src="${pageContext.request.contextPath}/resources/image/notice/${notice.noticeFile.noticeFileName}.${notice.noticeFile.noticeFileExt}" alt="unplash">							
+							</c:if>				
+						</div>
+						
 				        <p class="excert">
 				        	${notice.noticeContent}
 				        </p>	

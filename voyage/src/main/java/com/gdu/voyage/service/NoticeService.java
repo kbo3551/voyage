@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 public class NoticeService {
 	@Autowired NoticeMapper noticeMapper;
-	
+	Notice notice = new Notice();
 	//고민 사항 : 수정 시 추가로 들어올 파일의 중복 검사는 필요한가?
 	
 	//Map(notice 리스트,페이징)으로 묶어서 리턴

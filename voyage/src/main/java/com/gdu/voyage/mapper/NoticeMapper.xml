@@ -10,12 +10,14 @@
 		<result column = "notice_view_cnt" property="noticeViewCnt"/>
 		<result column = "create_date" property="createDate"/>
 		<result column = "update_date" property="updateDate"/>
-		<collection property="noticeFileList" ofType="com.gdu.voyage.vo.NoticeFile">
-			<result column ="notice_file_no" property="noticeFileNo"/>
+		<collection property="noticeFile" resultMap="NoticeFile" /> 
+	</resultMap>
+	
+	<resultMap type="com.gdu.voyage.vo.NoticeFile" id="NoticeFile">
+		<result column ="notice_file_no" property="noticeFileNo"/>
 			<result column = "notice_file_name" property="noticeFileName"/>
 			<result column = "notice_file_ext" property="noticeFileExt"/>
 			<result column = "notice_file_size" property="noticeFileSize"/>
-		</collection>
 	</resultMap>
 	
 	

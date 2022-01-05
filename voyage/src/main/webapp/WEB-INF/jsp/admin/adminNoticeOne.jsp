@@ -57,9 +57,9 @@
 									<textarea cols="100%" rows="5" readonly="readonly">${notice.noticeContent}</textarea>
 								</div>
 								<div>
-									
-									<img class="card-img-top" src="${pageContext.request.contextPath}/resources/image/notice/${NoticeFile.noticeFileName}.${NoticeFile.noticeFileExt}" alt="Unsplash">
-									
+									<c:if test="${!(empty notice.noticeFile)}">
+										<img class="card-img-top" src="${pageContext.request.contextPath}/resources/image/notice/${notice.noticeFile.noticeFileName}.${notice.noticeFile.noticeFileExt}" alt="Unsplash">
+									</c:if>
 								</div>
 							</div>
 							<div>

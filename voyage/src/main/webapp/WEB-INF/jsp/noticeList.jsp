@@ -80,7 +80,7 @@
 	       	<div class="container">
 		        <div class="row">
 		        	<div class="col-lg-8 mb-5 mb-lg-0">
-				        <div class="blog_left_sidebar">							
+			        	<div class="blog_left_sidebar">							
 							<c:forEach items="${noticeList}" var="n" >
 								<article class="blog_item">
 									<div class="blog_details">
@@ -109,12 +109,12 @@
 											<c:choose>
 												<c:when test="${currentPage == f}">
 													<li class="page-item active">
-														<a href="${pageContext.request.contextPath}/noticeList?currentPage=${f}" class="page-link">${f}</a>
+														<a href="${pageContext.request.contextPath}/noticeList?currentPage=${f}&searchNotice=${param.searchNotice}" class="page-link">${f}</a>
 													</li>
 												</c:when>
 												<c:otherwise>
 													<li class="page-item">
-														<a href="${pageContext.request.contextPath}/noticeList?currentPage=${f}" class="page-link">${f}</a>
+														<a href="${pageContext.request.contextPath}/noticeList?currentPage=${f}&searchNotice=${param.searchNotice}" class="page-link">${f}</a>
 													</li>
 												</c:otherwise>
 											</c:choose>
@@ -125,7 +125,7 @@
 									</c:forEach>
 									<c:if test="${currentPage + 10 <= lastPage}">
 										<li class="page-item">
-											<a href="${pageContext.request.contextPath}/noticeList?currentPage=${pageNo+10}" class="page-link" aria-label="Next">
+											<a href="${pageContext.request.contextPath}/noticeList?currentPage=${pageNo+10}&searchNotice=${param.searchNotice}" class="page-link" aria-label="Next">
 												<i class="ti-angle-right">
 												</i>
 											</a>
@@ -138,24 +138,24 @@
 					<div class="col-lg-4">
 			        	<div class="blog_right_sidebar">
 			        		<aside class="single_sidebar_widget search_widget">
-					        	<form method="get" action="${pageContext.request.contextPath}/noticeList">
+			        			<form method="get" action="${pageContext.request.contextPath}/noticeList">
 									<div class="form-group">
 										<div class="input-group mb-3">
-											<input type="text" class="form-control" placeholder="search" name="searchNotice" onfocus="this.placeholder = '' " onblur="this.placeholder = 'search'">																	
+											<input type="text" class="form-control" placeholder="search" name="searchNotice" id="searchNotice" onfocus="this.placeholder = '' " onblur="this.placeholder = 'search'" id = "searchBtn">																	
 										</div>
 										<button type="submit" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn">검색</button>
 									</div>
-								</form> 
+								</form>
 							</aside> 
 						</div>
 					</div>	
 				</div>
-	        </div>    
+	        </div>
 		</section>           
         <!-- listing-area Area End -->
         
     </main>
-
+	
     <!--footer.jsp 시작  -->
     <c:import url="/WEB-INF/jsp/partial/footer.jsp"/>
     <!--footer.jsp 끝  -->
@@ -164,9 +164,10 @@
     <div id="back-top" >
         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
     </div>
-
-
+    
+    
     <!-- JS here -->
+    	
 		<!-- All JS Custom Plugins Link Here here -->
         <script src="${pageContext.request.contextPath}/assets/js/vendor/modernizr-3.5.0.min.js"></script>
 		<!-- Jquery, Popper, Bootstrap -->
