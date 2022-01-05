@@ -41,6 +41,13 @@ public interface AccomBuildingMapper {
 	//갯수
 	int selectInterestedAccomBuildingCount(String memberId);
 	
+	// 관심상품 추가
+	int insertAccomBuildingByInterest(int accomBuildingNo, String memberId);
+	// 관심상품 제거
+	int deleteAccomBuildingByInterest(int accomBuildingNo, String memberId);
+	// 관심상품 확인
+	int selectAccomBuildingByInterestOne(int accomBuildingNo, String memberId);
+	
 	// 관리자, 사업자
 	// 사업자별 신청중인 숙소 조회 list
 	List<AccomBuilding> selectReqAccomBuildingListByHost(Map<String, Object> map);

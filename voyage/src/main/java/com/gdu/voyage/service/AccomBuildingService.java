@@ -32,6 +32,19 @@ public class AccomBuildingService {
 	@Autowired
 	private AccomBuildingMapper accomBuildingMapper;
 	
+	// 관심상품 추가
+	public int insertAccomBuildingByInterest(int accomBuildingNo, String memberId) {
+		return accomBuildingMapper.insertAccomBuildingByInterest(accomBuildingNo,memberId);
+	}
+	// 관심상품 제거
+	public int deleteAccomBuildingByInterest(int accomBuildingNo, String memberId) {
+		return accomBuildingMapper.deleteAccomBuildingByInterest(accomBuildingNo,memberId);
+	}
+	// 관심상품 확인
+	public int selectAccomBuildingByInterestOne(int accomBuildingNo, String memberId) {
+		return accomBuildingMapper.selectAccomBuildingByInterestOne(accomBuildingNo,memberId);
+	}
+	
 	// 이미지가 포함된 관심상품 목록
 	public Map<String, Object> selectAccomBuildingByInterest(int currentPage, int rowPerPage,String memberId) {
 		Map<String, Object> paraMap = new HashMap<>();

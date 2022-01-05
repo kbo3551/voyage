@@ -12,9 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gdu.voyage.service.AccomBuildingService;
@@ -44,6 +42,23 @@ public class MemberController {
 	@Autowired AccomBuildingService accomBuildingService;
 	@Autowired ActivityService activityService;
 	
+	
+	// 관심상품 제거
+	@GetMapping("member/deleteMyInterest")
+	public String deleteMyInterest(HttpSession session, String category,
+			@Nullable String activityNo, @Nullable String accomBuildingNo) {
+		log.trace("MemberController() 실행");
+		Member m = (Member) session.getAttribute("loginMember");
+		
+		if(category.equals("건물")) {
+			accomBuildingService.deleteAccomBuildingByInterest(Integer.parseInt(accomBuildingNo),m.getMemberId());
+			log.trace(accomBuildingNo,m.getMemberId());
+		} else if(category.equals("체험")) {
+			activityService.deleteActivityByInterest(Integer.parseInt(activityNo),m.getMemberId());
+		}
+		
+		return "redirect:/member/selectMyInterest";
+	}
 	
 	// 관심상품목록
 	@GetMapping("member/selectMyInterest")

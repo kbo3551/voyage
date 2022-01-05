@@ -31,6 +31,19 @@ public class ActivityService {
 	@Autowired
 	private ActivityMapper activityMapper;
 	
+	// 관심상품 추가
+		public int insertActivityByInterest(int activityNo, String memberId) {
+			return activityMapper.insertActivityByInterest(activityNo,memberId);
+		}
+		// 관심상품 제거
+		public int deleteActivityByInterest(int activityNo, String memberId) {
+			return activityMapper.deleteActivityByInterest(activityNo,memberId);
+		}
+		// 관심상품 확인
+		public int selectActivityByInterestOne(int activityNo, String memberId) {
+			return activityMapper.selectActivityByInterestOne(activityNo,memberId);
+		}
+	
 	// 이미지가 포함된 관심상품 목록
 	public Map<String, Object> selectActivityByInterest(int currentPage, int rowPerPage,String memberId) {
 		Map<String, Object> paraMap = new HashMap<>();

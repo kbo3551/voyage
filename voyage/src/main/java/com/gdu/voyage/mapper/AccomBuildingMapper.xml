@@ -211,9 +211,35 @@
 	</delete>
 	
 	<!-- 회원 -->
+	
+	<!-- 관심상품 추가 -->
+	<insert id="insertAccomBuildingByInterest">
+		INSERT INTO accom_building_interest(
+			accom_building_no,
+			member_id
+		) VALUES (
+			${accomBuildingNo},
+			#{memberId}
+		)
+	</insert>
+	<!-- 관심상품 제거 -->
+	<delete id="deleteAccomBuildingByInterest">
+		DELETE FROM accom_building_interest
+		WHERE accom_building_no = #{accomBuildingNo}
+		AND member_id = #{memberId}
+	</delete>
+	<!-- 관심상품 확인 -->
+	<select id="selectAccomBuildingByInterestOne" resultType="int">
+		SELECT count(*)
+		FROM accom_building_interest
+		WHERE accom_building_no = #{accomBuildingNo}
+		AND member_id = #{memberId}
+	</select>
+	
 	<!-- 이미지가 포함된 관심상품목록 -->
 	<select id="selectAccomBuildingByInterest" resultMap="AccomBuilding">
 		SELECT
+			ab.accom_building_no,
 			ab.accom_building_name,
 			ab.accom_building_description,
 			ab.accom_building_phone,
