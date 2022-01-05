@@ -33,8 +33,97 @@
             <link rel="stylesheet" href="${contextPath}/assets/css/style.css">
 		
 		<!-- 눈누 - 한산스네오 레귤러 폰트 -->
-		<style type="text/css">
 		
+		<style type="text/css">
+		  
+  .slider {
+    width: 600px;
+    text-align: center;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .slides {
+    display: flex;
+    overflow-x: auto;
+    /* overflow: hidden; */
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  .slides::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  .slides::-webkit-scrollbar-thumb {
+    background: black;
+    border-radius: 10px;
+  }
+  .slides::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .slides > div {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    width: 600px;
+    height: 300px;
+    margin-right: 50px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #eee;
+    transform-origin: center center;
+    transform: scale(1);
+    transition: transform 0.5s;
+    position: relative;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+  }
+  
+  .author-info {
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 0.75rem;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+  }
+  .author-info a {
+    color: white;
+  }
+  #imga {
+    object-fit: cover;
+    position: absolute;
+    top: ;
+    left: ;
+    width: auto;
+    max-height: 100%;
+  }
+  
+  .slider > a {
+    display: inline-flex;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: #eee;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 0 0 0.5rem 0;
+    position: relative;
+  }
+  .slider > a:active {
+    top: 1px;
+  }
+  .slider > a:focus {
+    background: #000;
+  }
+  
 			@font-face {
 			    font-family: 'SpoqaHanSansNeo-Regular';
 			    	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff');
@@ -61,6 +150,12 @@
 			.profiel-container {
 			    border: 0px;
 			}
+			
+			* {
+    box-sizing: border-box;
+  }
+
+			
 		</style>
 		
     </head>
@@ -139,9 +234,9 @@
 							<c:forEach items="${activityOne.getActivitySpotList()}" var="acs">
 								<tr>						
 									<td><input type="hidden" name="spotNo" value="${acs.activitySpotNo}">
-										장소:<input  readonly="readonly" name="activitySpotName" value="${acs.getActivitySpotName()}"></td>
-									<td>종류:<input  readonly="readonly" name="activitySpotCategory" value="${acs.getActivitySpotCategory()}"></td>
-									<td>소개:<input  readonly="readonly" name="activitySpotDescription" value="${acs.getActivitySpotDescription()}"></td>
+										장소<input  readonly="readonly" name="activitySpotName" value="${acs.getActivitySpotName()}"></td>
+									<td>종류<input  readonly="readonly" name="activitySpotCategory" value="${acs.getActivitySpotCategory()}"></td>
+									<td>소개<input  readonly="readonly" name="activitySpotDescription" value="${acs.getActivitySpotDescription()}"></td>
 								</tr>
 							</c:forEach>
 						</table>
@@ -158,6 +253,15 @@
 								</c:forEach>
 						</table>
 						<br>
+						 <div class="slider">
+						
+						  <div class="slides">
+						   <c:forEach items="${activityOne.getActivityImageList()}" var="aci">
+						    <div id="slide-1"><img id="imga" src="${contextPath}/resources/image/activity/${aci.getActivityImageName()}.jpg" alt=""></div>
+						    </c:forEach>
+						  </div>
+						</div>
+						<br>
 						<div><button class="btn btn-finish btn-primary" type="submit">수정</button></div>
 					</div>
 					<br>
@@ -168,7 +272,7 @@
                   </div>
             </div>
       </section>
- 
+
 
 	</main>
 	<!--footer.jsp 시작  -->
@@ -201,4 +305,3 @@
     
 </body>
 </html>
-
