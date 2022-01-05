@@ -86,8 +86,11 @@
                   <div class="single-post">
                      <div class="feature-img">
                         <c:forEach items="${activityOne.activityImageList }" var="aci" varStatus="status">
-                   			<img src="${pageContext.request.contextPath}/resources/image/activity/${aci.getActivityImageName() }" alt="">
+                   			<img src="${pageContext.request.contextPath}/resources/image/activity/${aci.getActivityImageName() }.${aci.getActivityImageExt() }" alt="">
                    		</c:forEach>
+                   		<c:forEach items="${activityOne.getActivityImageList()}" var="aci">
+	                        <img id="imga" src="${pageContext.request.contextPath}/resources/image/activity/${aci.getActivityImageName()}.${aci.activityImageExt}" alt="">
+	                    </c:forEach>
                      </div>
                      <div class="blog_details">
                         <h2> ${activityOne.activityName }</h2>

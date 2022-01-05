@@ -85,7 +85,7 @@
                   <div class="single-post">
                      <div class="feature-img">
                         <c:forEach items="${accomRoomOne.accomRoomImageList }" var="ari" varStatus="status">
-                   			<img src="${pageContext.request.contextPath}/resources/image/accom_room/${ari.getAccomRoomImageName() }" alt="">
+                   			<img src="${pageContext.request.contextPath}/resources/image/accom_room/${ari.getAccomRoomImageName() }.${ari.getAccomRoomImageExt() }" alt="">
                    		</c:forEach>
                      </div>
                      <div class="blog_details">
@@ -314,6 +314,7 @@
                   <div class="blog_right_sidebar">
                      <aside class="single_sidebar_widget search_widget">
                         <form action="${pageContext.request.contextPath}/calendarAccom" method="get">
+							<input type="hidden" name="accomRoomNo" value="${accomRoomOne.accomRoomNo }">
 <!--                            <div class="form-group"> -->
 <!--                               <div class="input-group mb-3"> -->
 <!--                                  <input type="text" class="form-control" placeholder='Search Keyword' -->
@@ -323,7 +324,6 @@
 <!--                                  </div> -->
 <!--                               </div> -->
 <!--                            </div> -->
-								<input type="hidden" name="accomRoomNo" value="${accomRoomOne.accomRoomNo }">
                            <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" id="submitBtn">
                            		예약
                            </button>
