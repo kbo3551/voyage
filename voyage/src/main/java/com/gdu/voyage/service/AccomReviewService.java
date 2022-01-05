@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gdu.voyage.mapper.AccomReviewMapper;
+import com.gdu.voyage.vo.AccomBuilding;
 import com.gdu.voyage.vo.AccomReview;
 import com.gdu.voyage.vo.AccomReviewImage;
 import com.gdu.voyage.vo.AccomReviewForm;
@@ -26,7 +27,7 @@ public class AccomReviewService {
 	@Autowired AccomReviewMapper accomReviewMapper;
 
 	// 숙소 후기 작성
-		public void addAccomReview(AccomReviewForm accomReviewForm, String realPath, int accomPaymentNo,  String memberId, String memberNickname) throws Exception {
+		public void addAccomReview(AccomReviewForm accomReviewForm, String realPath, int accomPaymentNo,  String memberId, String memberNickname,int accomReviewStar) throws Exception {
 
 			log.debug("*****[상훈] AccomReviewService debug" + accomReviewForm.toString());
 			//accomReview에 accomPaymentDetails 저장
@@ -34,7 +35,7 @@ public class AccomReviewService {
 			accomReview.setMemberId(memberId);
 			accomReview.setMemberNickname(memberNickname);
 			accomReview.setAccomPaymentDetails(accomPaymentNo);
-			
+			accomReview.setAccomReviewStar(accomReviewStar);
 			// 후기글 등록
 			accomReviewMapper.addAccomReview(accomReview);
 			// 이미지 추가에 사용할 accomReviewNo 값 확인
@@ -107,5 +108,13 @@ public class AccomReviewService {
 		return returnMap;
 
 	}
-	
+	//조회수
+	public void accomReviewViewCnt(int accomReviewNo, int accomReviewViewCnt) {
+		accomReviewMapper.accomReviewViewCnt(accomReviewNo, accomReviewViewCnt);
+	}
+	// 숙소 후기 상세보기
+	public AccomReview getAccomReviewOne(int accomReviewNo) {
+		log.debug(accomReviewNo + "***********[상훈] accomReviewService One");
+		return accomReviewMapper.selectAccomReviewOne(accomReviewNo);
+			}
 }

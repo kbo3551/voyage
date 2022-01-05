@@ -52,12 +52,23 @@ public class AccomReviewController {
 		return "/templates_citylisting/getAccomReviewList";
 	}
 	
-	@GetMapping("/getReviewOne")
-	public String getReviewOne() {
-		System.out.println("ReviewController() 실행");
-	      
-		return "/templates_citylisting/getReviewOne";
+	// 숙소 후기 상세 보기
+	@GetMapping("/accomReviewOne")
+	public String getAccomReviewOne(Model model, int accomReviewNo) {
+		log.debug(accomReviewNo+"***** [상훈] accomReviewOne 실행 accomReviewNo");
+		AccomReview accomReview = new AccomReview();
+		accomReview = accomReviewService.getAccomReviewOne(accomReviewNo);
+		
+		int accomReviewViewCnt = accomReview.getAccomReviewViewCnt()+1;
+		accomReview.setAccomReviewViewCnt(accomReviewViewCnt);
+		accomReviewService.accomReviewViewCnt(accomReviewNo, accomReviewViewCnt);
+		
+		model.addAttribute("accomReview", accomReview);
+		log.debug(model+"***** [상훈] accomReviewOne 실행 model");
+		
+		return "accomReviewOne";
 	}
+	
 	
 	
 	// [Member] 후기 작성 get
@@ -66,6 +77,7 @@ public class AccomReviewController {
 		log.debug("addAccomReviewController() 실행");
 		// session에서 로그인한 회원 정보 가져옴
 		Member loginMember = (Member)session.getAttribute("loginMember");
+		
 		model.addAttribute("loginMember", loginMember);
 		// 비회원일 경우, 로그인 후 이용 가능
 		if(loginMember == null) {
@@ -76,23 +88,21 @@ public class AccomReviewController {
 	
 	// [Member] 후기 작성 post
 	@PostMapping("/addAccomReview")
-	public String addAccomReview(HttpServletRequest request, AccomReviewForm accomReviewForm, 
-			HttpSession session) throws Exception {
-		// accomPaymentDetails값을 세션에서 가져옴
-		AccomReview accomReview = (AccomReview) session.getAttribute("accomReview");
+	public String addAccomReview(HttpServletRequest request, AccomReviewForm accomReviewForm, AccomReview accomReview,
+		HttpSession session) throws Exception {
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		int accomPaymentNo = Integer.parseInt(request.getParameter("accomPaymentNo"));
 		String memberId = loginMember.getMemberId();
 		String memberNickname = loginMember.getMemberNickname();
+		int accomReviewStar = accomReview.getAccomReviewStar();
+		// 디버그 코드
+		log.debug("***** [상훈] addAccomReview_qnaForm_Controller() debug" + accomReviewForm.toString());
+		// 이미지 파일 절대 경로 설정
+		String realPath = request.getServletContext().getRealPath("resources/image/accomReview/");
 		
-			// 디버그 코드
-			log.debug("***** [상훈] addAccomReview_qnaForm_Controller() debug" + accomReviewForm.toString());
-			// 이미지 파일 절대 경로 설정
-			String realPath = request.getServletContext().getRealPath("resources/image/accomReview/");
-			
-			accomReviewService.addAccomReview(accomReviewForm, realPath, accomPaymentNo, memberId, memberNickname);
-			
-			return "redirect:/getAccomReviewList?pageNo=1";
-		}
+		accomReviewService.addAccomReview(accomReviewForm, realPath, accomPaymentNo, memberId, memberNickname, accomReviewStar);
+	
+		return "redirect:/getAccomReviewList?pageNo=1";
+	}
 
 }

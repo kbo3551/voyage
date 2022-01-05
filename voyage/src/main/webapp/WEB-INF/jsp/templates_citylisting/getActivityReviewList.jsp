@@ -100,7 +100,7 @@
 		                                        </div>
 		                                   		<div class="list-caption">
 		                                        	<span>${review.activityReviewStar}</span>
-		                                        	<h3><a href="${pageContext.request.contextPath}/getReviewOne?activityReivewNo=${review.activityReviewNo}">${review.activityReviewTitle}</a></h3>
+		                                        	<h3><a href="${pageContext.request.contextPath}/activityReviewOne?activityReivewNo=${review.activityReviewNo}">${review.activityReviewTitle}</a></h3>
 		                                            <p>${review.activityReviewNo}</p>
 		                                          </div>
 		                                        </div>

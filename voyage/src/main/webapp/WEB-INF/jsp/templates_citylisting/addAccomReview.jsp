@@ -14,6 +14,7 @@
         		// 유효성 검사를 위한 변수 생성
         		var valAccomReviewTitle = $('#accomReviewTitle').val();
         		var valAccomReviewContent = $('#accomReviewContent').val();
+        		var valAccomReviewStar = $('#accomReviewStar').val();
 	       		// 이미지 추가 버튼 눌렀을 때
         		$('#addImgBtn').click(function(){
         			let html = '<div><input type="file" name="accomReviewImage" id="accomReviewImage"></div>';
@@ -34,6 +35,12 @@
 					if(valAccomReviewContent == null || valAccomReviewContent == defined || valAccomReviewContent == ""){
 						alert('내용이 입력되지 않았습니다. 내용을 입력해주세요.');
 						$('#accomReviewContent').focus();
+						return;
+					}
+					
+					if(valAccomReviewStar == null || valAccomReviewStar == defined || valAccomReviewStar == ""){
+						alert('별점이 입력되지 않았습니다. 별점을 입력해주세요.');
+						$('#accomReviewStar').focus();
 						return;
 					}
         		 	ck = true;
@@ -109,6 +116,37 @@
 				font-family: 'SpoqaHanSansNeo-Regular';
 			}
 			
+		#accomReviewForm fieldset{
+		    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+		    border: 0; /* 필드셋 테두리 제거 */
+		}
+		#accomReviewForm input[type=radio]{
+		    display: none; /* 라디오박스 감춤 */
+		}
+		#accomReviewForm label{
+		    font-size: 3em; /* 이모지 크기 */
+		    color: transparent; /* 기존 이모지 컬러 제거 */
+		    text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+		}
+		color: transparent; /* 기존 이모지 컬러 제거 */
+		text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+		#accomReviewForm label:hover{
+		    text-shadow: 0 0 0 #a00; /* 마우스 호버 */
+		}
+		#accomReviewForm label:hover ~ label{
+		    text-shadow: 0 0 0 #a00; /* 마우스 호버 뒤에오는 이모지들 */
+		}
+		#accomReviewForm fieldset{
+		    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+		    direction: rtl; /* 이모지 순서 반전 */
+		    border: 0; /* 필드셋 테두리 제거 */
+		}
+		#accomReviewForm fieldset legend{
+		    text-align: left;
+		}
+		#accomReviewForm input[type=radio]:checked ~ label{
+		    text-shadow: 0 0 0 #a00; /* 마우스 클릭 체크 */
+		}
 		</style>
 <body>
    <body>
@@ -175,6 +213,15 @@
                                         <textarea class="form-control w-100 error" name="accomReview.accomReviewContent" id="accomReviewContent" cols="30" rows="9" placeholder="내용을 입력해주세요. 이미지 파일을 첨부해주시면 도움이 됩니다."></textarea>
                                     </div>
                                 </div>
+								    <fieldset>
+								        <legend>별점</legend>
+										<input type="radio" name="accomReviewStar" value="5" id="rate1"><label for="rate1">⭐</label>
+								        <input type="radio" name="accomReviewStar" value="4" id="rate2"><label for="rate2">⭐</label>
+								        <input type="radio" name="accomReviewStar" value="3" id="rate3"><label for="rate3">⭐</label>
+								        <input type="radio" name="accomReviewStar" value="2" id="rate4"><label for="rate4">⭐</label>
+								        <input type="radio" name="accomReviewStar" value="1" id="rate5"><label for="rate5">⭐</label>
+								    </fieldset>
+								&nbsp;
                                 <div>파일 첨부</div>
                                 <div>
                                 	<button type="button" id="addImgBtn">Add Img</button>

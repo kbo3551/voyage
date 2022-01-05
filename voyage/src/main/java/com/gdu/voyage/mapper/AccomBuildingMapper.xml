@@ -400,7 +400,7 @@
 			FROM 
 				accom_building
             WHERE 
-            	accom_building_no = #{accom_building_no}
+            	accom_building_no = #{accomBuildingNo}
     </select>
     
     <!-- 등록된 숙소 승인여부 수정 -->

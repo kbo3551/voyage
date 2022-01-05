@@ -6,6 +6,7 @@
 		<!-- Review -->
 		<id column="accom_review_no" property="accomReviewNo"/>
 		<result column="accom_review_title" property="accomReviewTitle"/>
+		<result column="accom_review_content" property="accomReviewContent"/>
 		<result column="accom_review_star" property="accomReviewStar"/>
 		<result column="accom_review_view_cnt" property="accomReviewViewCnt"/>
 		<result column="update_date" property="updateDate"/>
@@ -35,6 +36,22 @@
 			update_date DESC
 		LIMIT
 			#{beginRow}, #{rowPerPage}
+	</select>
+	
+	<!-- review no에 따른 숙소 후기 상세 조회 -->
+	<select id="selectAccomReviewOne" parameterType="com.gdu.voyage.vo.AccomReview" resultMap="resultReview">
+			SELECT
+            	accom_review_no,
+	            accom_payment_details,
+	            accom_review_title,
+	            accom_review_star,
+	            accom_review_view_cnt
+	            create_date,
+	            update_date
+			FROM 
+				accom_review
+            WHERE 
+            	accom_review_no = #{accomReviewNo}
 	</select>
 	
 	<!-- 페이징 -->

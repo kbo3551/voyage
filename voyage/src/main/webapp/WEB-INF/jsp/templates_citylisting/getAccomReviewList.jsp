@@ -39,47 +39,6 @@
 		body {
 			font-family: 'SpoqaHanSansNeo-Regular';
 		}
-		.star-rating {
-		  border:solid 1px #ccc;
-		  display:flex;
-		  flex-direction: row-reverse;
-		  font-size:1.5em;
-		  justify-content:space-around;
-		  padding:0 .2em;
-		  text-align:center;
-		  width:5em;
-		}
-		
-		.star-rating input {
-		  display:none;
-		}
-		
-		.star-rating label {
-		  color:#ccc;
-		  cursor:pointer;
-		}
-		
-		.star-rating :checked ~ label {
-		  color:#f90;
-		}
-		
-		.star-rating label:hover,
-		.star-rating label:hover ~ label {
-		  color:#fc0;
-		}
-		
-		/* explanation */
-		
-		article {
-		  background-color:#ffe;
-		  box-shadow:0 0 1em 1px rgba(0,0,0,.25);
-		  color:#006;
-		  font-family:cursive;
-		  font-style:italic;
-		  margin:4em;
-		  max-width:30em;
-		  padding:2em;
-}
 	</style>
 	
 	<!-- Preloader Start -->
@@ -133,29 +92,12 @@
                                 	<c:forEach items="${accomReviewList}" var="review">
                                     	<div class="col-lg-6 ">
                                         	<div class="single-listing mb-30" id = "reviewArrayList">
-	                                        	<div class="list-img">
-			                                    	<img src="assets/img/gallery/list1.png" alt="">
-				                                    	<!-- <span>Open</span> -->
-		                                        </div>
+	                                        	 <p>${review.accomReviewNo}번글</p>
 		                                   		<div class="list-caption">
-		                                        	<span>${review.accomReviewStar}</span>
-		                                        	<h3><a href="${pageContext.request.contextPath}/getReviewOne?accomReivewNo=${review.accomReviewNo}">${review.accomReviewTitle}</a></h3>
-		                                            <p>${review.accomReviewNo}</p>
-		                                            <div class="list-footer">
-		                                            	<!--  
-		                                         		<ul>
-		                                                	<li>${review.accomPaymentDetails}</li>
-		                                               	</ul>
-		                                               	-->
-		                                            </div>
-		                                                <!-- 
-		                                                	<div class="list-footer">
-			                                                    <ul>
-			                                                        <li>+10 278 367 9823</li>
-			                                                        <li>contact@midnight.com</li>
-			                                                    </ul>
-		                                                	</div>
-		                                                 -->
+		                                        	<span>별점 : ${review.accomReviewStar} </span>
+		                                        	<div>조회수 : ${review.accomReviewViewCnt}</div>
+		                                        	<h3><a href="${pageContext.request.contextPath}/accomReviewOne?accomReivewNo=${review.accomReviewNo}">${review.accomReviewTitle}</a></h3>
+		                                           
 		                                          </div>
 		                                        </div>
 		                                      </div>
