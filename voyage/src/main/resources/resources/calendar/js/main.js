@@ -29,8 +29,6 @@
      });
      // end Ajax
      	     
-	     console.log("checkIn"+checkIn);
-	     console.log("checkOut"+checkOut);
 	     console.log("reserveDays"+reserveDays);
 	     	
 		function c(passed_month, passed_year, calNum) {
@@ -66,7 +64,7 @@
 					
 					var dateObj = shownYear + '-' + shownMonth + '-' + shownDate;
 					//console.log("dateObj"+dateObj);
-	
+					
 					// Later refactiroing -- iter_date not needed after "today" is found
 					var iter_date = new Date(passed_year,passed_month,shownDate); 
 					if ( 
@@ -79,13 +77,15 @@
 					} else {
 						var m = checkToday(iter_date)?'<div class="today">':"<div value=" + dateObj +">";
 					}
-					
+								
 					// 기존 예약일은 예약 불가
 					for(var d=0; d<=reserveDays.length; d++) {
 						if(dateObj == reserveDays[d]) {
 							var m = '<div class="past-date" style="text-decoration: line-through;">';
+						} else if(checkToday(iter_date)) {
+							var m = '<div class="past-date" style="text-decoration: line-through; font-weight: 700; font-size: 18px; color: #bd83ce;">';
 						}
-					}				
+					}	
 					calendar.datesBody.append(m + shownDate + "</div>");
 				}
 			}

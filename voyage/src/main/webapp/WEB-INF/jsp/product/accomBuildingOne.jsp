@@ -12,6 +12,9 @@
         <link rel="manifest" href="site.webmanifest">
 		<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
 
+      		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+      		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+      		
 		<!-- CSS here -->
             <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css">
             <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/owl.carousel.min.css">
@@ -27,8 +30,6 @@
             <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
             <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
             
-      		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-      		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
    </head>
    
    <!-- 눈누 - 한산스네오 레귤러 폰트 -->

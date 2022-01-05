@@ -215,9 +215,9 @@
     </div>
     <!--Hero End -->
 	
-	<input type="hidden" id="accomRoomNo" name="${accomRoomNo }">
-	
-	<section class="ftco-section" style="padding-top: 3%;">
+	<form action="${pageContext.request.contextPath}/addAccomReservation" method="get">
+		<input type="hidden" id="accomRoomNo" name="${accomRoomNo }">
+		<section class="ftco-section" style="padding-top: 3%;">
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-md-6 text-center mb-3">
@@ -294,6 +294,7 @@
 				</div>
 			</div>
 		</section>
+	</form>
 	
 	</main>
 	<!--footer.jsp 시작  -->

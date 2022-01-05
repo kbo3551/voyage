@@ -205,19 +205,14 @@ public class ProductController {
 		return "/product/activityOne";
 	}
 	
-	@GetMapping("/calendar")
-	public String getCalendar(Model model, 
-								@RequestParam @Nullable int accomRoomNo) {
+	@GetMapping("/calendarAccom")
+	public String getCalendar(Model model, int accomRoomNo) {
 		log.debug("[debug] ProductController.getCalendar 실행");
 		log.debug("[debug] ProductController.getCalendar accomRoomNo : " + accomRoomNo);
 		
-//		// 해당 객실의 예약 내역 조회
-//		List<Map<String, Object>> map = productService.getAccomRoomReserveDay(accomRoomNo);
-//		model.addAttribute("map", map);
-		model.addAttribute("accomRoomNo", accomRoomNo);
-//		log.debug("[debug] ProductController.getCalendar map : " + map);		
-		
-		return "/product/calendar";
+		model.addAttribute("accomRoomNo", accomRoomNo);		
+		// [사용자] 숙소 예약 캘린더 페이지로 이동
+		return "/product/calendarAccom";
 	}
 	
 	@GetMapping("/addReservation")
