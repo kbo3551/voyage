@@ -91,59 +91,83 @@
       <section class="blog_area single-post-area section-padding" style="padding-bottom: 20px !important;">
       
          <div class="container">
-            <div class="row">
-            
-               <div class="col-lg-8 posts-list">
+            <div class="center">
                   <div>
                      <div>
-                      <h1 style="font-size:30px;">체험 상세</h1>
-                        <c:forEach items="${activityOne.activityImageList }" var="aci" varStatus="status">
-                   			<img src="${pageContext.request.contextPath}/resources/image/activity/${aci.getActivityImageName() }" alt="">
-                   		</c:forEach>
+                      <h1 style="font-size:30px; font-family: inherit;">체험 상세</h1>
                      </div>
                      <div class="blog_details">
+                     <form action="" method="post">
                         <h2> ${activityOne.activityName }</h2>
-                        <ul class="blog-info-link mt-3 pt-4 mb-0">
-                           <li><a style="color: #555555;"><i class="fa fa-user"></i> 최대인원 ${activityOne.activityMaxP }</a></li>
-                           <li><a style="color: #555555;"><i class="fa fa-comments"></i> 최대이용시간 ${activityOne.activityMaxT }</a></li>
+                        <ul>
+                           <li><a style="font-size: 1.3em; color: #555555;"><i class="fa fa-user"></i> 최대인원 ${activityOne.activityMaxP }</a></li>
+                           <li><a style="font-size: 1.3em; color: #555555;"><i class="fa fa-comments"></i> 최대이용시간 ${activityOne.activityMaxT }</a></li>
                         </ul>
-                        <ul class="blog-info-link mt-3 mb-4">
-                           <li style="font-size: 1.3em;"><a style="color: #555555;"><i class="fa fa-user"></i>₩ ${activityOne.activityPrice }</a></li>
+                        <ul>
+                           <li style="font-size: 1.3em;"><a style="color: #555555;"><i class="fa fa-user"></i>체험가:₩ ${activityOne.activityPrice }</a></li>
                         </ul>
-						 <div class="quote-wrapper" style="width:500px;height:150px;">
-                            <label>DESCRIPTION:</label>
-                       		 <input style="width:300px;height:50px;font-size:15px;" class="form-control" type="text" readonly="readonly" value="${activityOne.activityDescription }">
-                         </div> 
-                 		 <div class="quote-wrapper" style="width:500px;height:150px;">
-                            <label>오픈</label>
-                       		<input style="width:300px;height:50px;font-size:15px;" class="form-control" type="text" readonly="readonly" value=" ${activityOne.activityOpenHour }">
-                         </div> 
-                     	<div class="quote-wrapper" style="width:500px;height:150px;">
-                            <label>마감</label>
-                       		<input style="width:300px;height:50px;font-size:15px;" class="form-control" type="text" readonly="readonly" value=" ${activityOne.activityCloseHour }">
-                         </div> 
-                        <div class="quote-wrapper" style="width:500px;height:350px;">
-                            <label>해시태그</label>
-                            <c:forEach items="${activityOne.getHashtagList()}" var="h">
-                       		<input style="width:300px;height:50px;font-size:15px;" class="form-control" type="text" readonly="readonly" value=" ${h.getHashtag() }">
- 
-                       		</c:forEach>
-                         </div> 
-                         <div class="quote-wrapper" style="width:500px;height:300px;">
-                            <label>추천장소</label>
-                             <c:forEach items="${activityOne.getActivitySpotList()}" var="acs">
-                       		<input style="width:300px;height:50px;font-size:15px;"class="form-control" type="text" readonly="readonly" value="장소명: ${acs.getActivitySpotName()}">
-                   
-                       		<input style="width:300px;height:50px;font-size:15px;"class="form-control" type="text" readonly="readonly" value="종류: ${acs.getActivitySpotCategory()}">
-                 
-                       		<input style="width:300px;height:50px;font-size:15px;"class="form-control" type="text" readonly="readonly" value="DESCRIPTION: ${acs.getActivitySpotDescription()}">
-                       		</c:forEach>
-                         </div> 
+                        <br>
+                        <div align="center">
+						<table class="table"  style="width: 30%; font-size: 1.3em; text-align: center;">
+							<thead>
+									<tr>
+										<th>DESCRIPTION</th>
+									</tr>
+							</thead>
+								<tr>
+									<td><input  readonly="readonly" name="" value="${activityOne.activityDescription }"></td>
+								</tr>
+						</table>
+						<table class="table"style="width: 30%; font-size: 1.3em; text-align: center;" >
+							<thead>
+									<tr>
+										<th>오픈</th>
+										<th>마감</th>
+									</tr>
+							</thead>
+								<tr>
+									<td><input  readonly="readonly" name="" value="${activityOne.activityOpenHour }"></td>
+									<td><input  readonly="readonly" name="" value="${activityOne.activityCloseHour }"></td>
+								</tr>
+						</table>
+						<table class="table" style="width: 65%; font-size: 1.3em; text-align: center;">
+							<thead>
+									<tr>
+										<th></th>
+										<th>추천장소</th>
+										<th></th>
+									</tr>
+							</thead>
+							<c:forEach items="${activityOne.getActivitySpotList()}" var="acs">
+								<tr>						
+									<td><input  readonly="readonly" name="" value="장소:${acs.getActivitySpotName()}"></td>
+									<td><input  readonly="readonly" name="" value="종류:${acs.getActivitySpotCategory()}"></td>
+									<td><input  readonly="readonly" name="" value="설명:${acs.getActivitySpotDescription()}"></td>
+								</tr>
+							</c:forEach>
+						</table>
+						<table class="table" style="width: 30%; font-size: 1.3em; text-align: center;">
+							<thead>
+									<tr>
+										<th>해시태그</th>
+									</tr>
+							</thead>
+								<c:forEach items="${activityOne.getHashtagList()}" var="h">
+								<tr>
+									<td><input readonly="readonly" name="" value="${h.getHashtag() }"></td>
+								</tr>
+								</c:forEach>
+						</table>
+						<br>
+						<div><button class="btn btn-finish btn-primary" type="submit">수정</button></div>
+					</div>
+					<br>
+					</form>
+                         </div>
                      </div>
                   </div>
             </div>
-			</div>
-         </div>
+
       </section>
  
 
