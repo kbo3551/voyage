@@ -102,4 +102,15 @@
 			NOW()
 		)
 	</insert>
+	
+	<!-- [사용자] 채팅 확인시 chatRead = '0' 으로 변경 -->
+	<update id="updateChatRead" parameterType="Map">
+		UPDATE chat
+		SET
+			chat_read = '0'
+		WHERE
+			chat_room = #{chatRoom}
+			AND
+			to_member_id = #{memberId}
+	</update>
 </mapper>

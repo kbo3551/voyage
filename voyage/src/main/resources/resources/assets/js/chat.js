@@ -36,7 +36,7 @@
 	$(변하지않는요소).on(click, 변하지않는요소안의 변하는요소, function..)  의 형태로 변하지않는 상위요소에 이벤트를 걸어주는 방식을 보통사용합니다. */
 	//$('#chatRoomBtn').click(function(){ -> $('body').on('click', '#chatRoomBtn', function() {
 	//console.log('chatRoom : ',$("body").on('button[id="chatRommBtn"]').attr("name"));
-	
+		
 		// 세션 값에 저장된 (로그인한) Id
 		var loginId = $('#loginId').val();
 		console.log('loginId : ',loginId);
@@ -44,6 +44,8 @@
 		// 접속하려는 채팅방의 번호 
 		var chatRoomNo = $(this).val();
 		console.log('chatRoomNo : ',chatRoomNo);
+		
+		$('#scrollmodalBody').scrollTop($('#scrollmodalBody')[0].scrollHeight);
 	
 		$.ajax({
 			url:'/voyage/chatRoom?chatRoom='+chatRoomNo,
