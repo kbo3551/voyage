@@ -93,19 +93,17 @@
          <div class="container">
             <div class="center">
                   <div>
-                     <div>
-                      <h1 style="font-size:30px; font-family: inherit;">체험 상세</h1>
-                     </div>
                      <div class="blog_details">
                      <form action="" method="post">
-                        <h2> ${activityOne.activityName }</h2>
+                        <h2 style="font-size: 2em; color: #555555;"><input style="text-align: center;" readonly="readonly" name="activityName" value="${activityOne.activityName }"></h2>
                         <ul>
-                           <li><a style="font-size: 1.3em; color: #555555;"><i class="fa fa-user"></i> 최대인원 ${activityOne.activityMaxP }</a></li>
-                           <li><a style="font-size: 1.3em; color: #555555;"><i class="fa fa-comments"></i> 최대이용시간 ${activityOne.activityMaxT }</a></li>
+                           <li><a style="font-size: 1.3em; color: #555555;"><i class="fa fa-user"></i> 최대인원 <input style="text-align: center;" readonly="readonly" name="activityMaxP" value="${activityOne.activityMaxP }"></a></li>
+                           <li><a style="font-size: 1.3em; color: #555555;"><i class="fa fa-comments"></i> 최대이용시간 <input style="text-align: center;" readonly="readonly" name="activityMaxT" value="${activityOne.activityMaxT }"></a></li>
                         </ul>
                         <ul>
-                           <li style="font-size: 1.3em;"><a style="color: #555555;"><i class="fa fa-user"></i>체험가:₩ ${activityOne.activityPrice }</a></li>
+                           <li style="font-size: 1.3em;"><a style="color: #555555;"><i class="fa fa-user"></i>체험가<input style="text-align: center;" readonly="readonly" name="activityPrice" value="${activityOne.activityPrice }"></a></li>
                         </ul>
+                       
                         <br>
                         <div align="center">
 						<table class="table"  style="width: 30%; font-size: 1.3em; text-align: center;">
@@ -115,7 +113,7 @@
 									</tr>
 							</thead>
 								<tr>
-									<td><input  readonly="readonly" name="" value="${activityOne.activityDescription }"></td>
+									<td><input  readonly="readonly" name="activityDescription" value="${activityOne.activityDescription }"></td>
 								</tr>
 						</table>
 						<table class="table"style="width: 30%; font-size: 1.3em; text-align: center;" >
@@ -126,8 +124,8 @@
 									</tr>
 							</thead>
 								<tr>
-									<td><input  readonly="readonly" name="" value="${activityOne.activityOpenHour }"></td>
-									<td><input  readonly="readonly" name="" value="${activityOne.activityCloseHour }"></td>
+									<td><input  readonly="readonly" name="activityOpenHour" value="${activityOne.activityOpenHour }"></td>
+									<td><input  readonly="readonly" name="activityCloseHour" value="${activityOne.activityCloseHour }"></td>
 								</tr>
 						</table>
 						<table class="table" style="width: 65%; font-size: 1.3em; text-align: center;">
@@ -140,9 +138,10 @@
 							</thead>
 							<c:forEach items="${activityOne.getActivitySpotList()}" var="acs">
 								<tr>						
-									<td><input  readonly="readonly" name="" value="장소:${acs.getActivitySpotName()}"></td>
-									<td><input  readonly="readonly" name="" value="종류:${acs.getActivitySpotCategory()}"></td>
-									<td><input  readonly="readonly" name="" value="설명:${acs.getActivitySpotDescription()}"></td>
+									<td><input type="hidden" name="spotNo" value="${acs.activitySpotNo}">
+										장소:<input  readonly="readonly" name="activitySpotName" value="${acs.getActivitySpotName()}"></td>
+									<td>종류:<input  readonly="readonly" name="activitySpotCategory" value="${acs.getActivitySpotCategory()}"></td>
+									<td>소개:<input  readonly="readonly" name="activitySpotDescription" value="${acs.getActivitySpotDescription()}"></td>
 								</tr>
 							</c:forEach>
 						</table>
@@ -154,7 +153,7 @@
 							</thead>
 								<c:forEach items="${activityOne.getHashtagList()}" var="h">
 								<tr>
-									<td><input readonly="readonly" name="" value="${h.getHashtag() }"></td>
+									<td><input style="text-align: center;" readonly="readonly" name="hashtag" value="${h.getHashtag() }"></td>
 								</tr>
 								</c:forEach>
 						</table>
@@ -163,11 +162,11 @@
 					</div>
 					<br>
 					</form>
+					
                          </div>
                      </div>
                   </div>
             </div>
-
       </section>
  
 
