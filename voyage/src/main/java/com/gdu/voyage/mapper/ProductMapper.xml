@@ -19,6 +19,7 @@
 			<result column="accom_address_detail" property="accomAddressDetail"/>
 		</association>
 		<collection property="accomBuildingSpotList" ofType="com.gdu.voyage.vo.AccomBuildingSpot">
+			<result column="accom_building_spot_no" property="accomBuildingSpotNo"/>
 			<result column="accom_building_spot_name" property="accomBuildingSpotName"/>
 			<result column="accom_building_spot_category" property="accomBuildingSpotCategory"/>
 			<result column="accom_building_spot_description" property="accomBuildingSpotDescription"/>
@@ -102,6 +103,7 @@
 			<result column="activity_address_detail" property="activityAddressDetail"/>
 		</association>
 		<collection property="activitySpotList" ofType="com.gdu.voyage.vo.ActivitySpot">
+			<result column="activity_spot_no" property="activitySpotNo"/>
 			<result column="activity_spot_name" property="activitySpotName"/>
 			<result column="activity_spot_category" property="activitySpotCategory"/>
 			<result column="activity_spot_description" property="activitySpotDescription"/>
@@ -242,6 +244,7 @@
 			abf.accom_building_facility_name,
 			abi.accom_building_image_name,
 			abi.accom_building_image_ext,
+			abs.accom_building_spot_no,
 			abs.accom_building_spot_name,
 			abs.accom_building_spot_category,
 			abs.accom_building_spot_description,
@@ -434,6 +437,7 @@
 			a.activity_state_admin,
 			a.create_date,
 			a.update_date,
+			acs.activity_spot_no,
 			acs.activity_spot_name,
 			acs.activity_spot_category,
 			acs.activity_spot_description,

@@ -138,20 +138,71 @@
 		)
 	</insert>
 	
-	<!-- 체험의 해시태그 입력 -->
-	<insert id="insertActivityHashtag" parameterType="com.gdu.voyage.vo.Hashtag">
-		INSERT INTO hashtag (
-			iden_no,
-			table_name,
-			hashtag,
-			create_date
-		) VALUES (
-			#{idenNo},
-			#{tableName},
-			#{hashtag},
-			NOW()
-		)
-	</insert>
+	
+	
+	<!-- 체험 수정 : selectKey를 사용하여 체험의 식별번호를 받아온뒤 나머지 추가 정보들도 함께 insert  -->
+    <update id="updateActivity" parameterType="com.gdu.voyage.vo.Activity">
+		UPDATE activity
+		SET activity_name = #{activityName},
+		activity_open_date = #{activityOpenDate},
+		activity_close_date = #{activityCloseDate},
+		activity_price = #{activityPrice},
+		activity_open_hour = #{activityOpenHour},
+		activity_close_hour = #{activityCloseHour},
+		activity_max_t = #{activityMaxT},
+		activity_max_p = #{activityMaxP},
+		activity_description = #{activityDescription},
+		activity_phone = #{activityPhone},
+		update_date = NOW()
+		WHERE activity_no = #{activityNo}
+	</update>
+	
+	<!-- 체험의 이미지 파일 수정 -->
+	<update id="updateActivityImage" parameterType="com.gdu.voyage.vo.ActivityImage">
+		UPDATE activity_image
+		SET activity_image_name = #{activityImageName},
+		activity_image_ext = #{activityImageExt},
+		activity_image_size = #{activityImageSize}
+		WHERE activity_no = #{activityNo}
+	</update>
+	
+	<!-- 체험의 주소 수정 -->
+	<update id="updateActivityAddress" parameterType="com.gdu.voyage.vo.ActivityAddress">
+		UPDATE activity_address
+		SET activity_address_postal_code = #{activityAddressPostalCode},
+		activity_address_zip = #{activityAddressZip},
+		activity_address_detail = #{activityAddressDetail},
+		update_date = NOW()
+		WHERE activity_no = #{activityNo}
+	</update>
+	
+	<!-- 체험의 추천 장소 수정 -->
+	<update id="updateActivitySpot" parameterType="com.gdu.voyage.vo.ActivitySpot">
+		UPDATE activity_spot
+		SET activity_spot_name = #{activitySpotName},
+		activity_spot_category = #{activitySpotCategory},
+		activity_spot_description = #{activitySpotDescription}
+		WHERE activity_no = #{activityNo}
+	</update>
+	
+	<!-- 체험 추천장소의 주소 수정 -->
+	<update id="updateActivitySpotAddress" parameterType="com.gdu.voyage.vo.SpotAddress">
+		UPDATE spot_address
+		SET spot_address_postal_code = #{spotAddressPostalCode},
+		spot_address_zip = #{spotAddressZip},
+		spot_address_detail = #{spotAddressDetail},
+		update_date = NOW()
+		WHERE spot_no = #{spotNo}
+	</update>
+	
+	
+	<!-- 체험의 해시태그 삭제 -->
+	<delete id="deleteActivityHashtag" parameterType="com.gdu.voyage.vo.Hashtag">
+		DELETE FROM hashtag
+		WHERE iden_no = #{idenNo}
+		AND table_name = '체험'
+		AND hashtag = #{hashtag}
+	</delete>
 	
 	<!-- 회원 -->
 	<!-- 이미지가 포함된 관심상품목록 -->

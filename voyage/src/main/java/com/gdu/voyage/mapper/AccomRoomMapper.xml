@@ -74,4 +74,40 @@
 			NOW()
 		)
 	</insert>
+	
+	<!-- 숙소-객실 수정 -->
+	<update id="updateAccomRoom" parameterType="com.gdu.voyage.vo.AccomRoom">
+		UPDATE accom_room
+		SET accom_room_name = #{accomRoomName},
+		accom_room_price = #{accomRoomPrice},
+		accom_room_description = #{accomRoomDescription},
+		accom_room_stan = #{accomRoomStan},
+		accom_room_max = #{accomRoomMax},
+		update_date = NOW()
+		WHERE accom_room_no = #{accomRoomNo}
+	</update>
+	
+	<!-- 숙소-객실의 이미지 파일 수정 -->
+	<update id="updateAccomRoomImage" parameterType="com.gdu.voyage.vo.AccomRoomImage">
+		UPDATE accom_room_image
+		SET accom_room_image_name = #{accomRoomImageName},
+		accom_room_image_ext = #{accomRoomImageExt},
+		accom_room_image_size = #{accomRoomImageSize}
+		WHERE accom_room_no = #{accomRoomNo}
+	</update>
+	
+	<!-- 숙소-객실의 물품옵션 삭제 -->
+	<delete id="deleteAccomRoomItem" parameterType="com.gdu.voyage.vo.AccomRoomItem">
+		DELETE FROM accom_room_item
+		WHERE accom_room_no = #{accomRoomNo}
+		AND accom_room_item_name = #{accomRoomItemName}
+	</delete>
+	
+	<!-- 숙소-객실의 해시태그 삭제 -->
+	<delete id="deleteAccomRoomHashtag" parameterType="com.gdu.voyage.vo.Hashtag">
+		DELETE FROM hashtag
+		WHERE iden_no = #{idenNo}
+		AND table_name = '객실'
+		AND hashtag = #{hashtag}
+	</delete>
 </mapper>

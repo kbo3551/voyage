@@ -145,6 +145,70 @@
 		)
 	</insert>
 	
+	
+	<!-- 숙소-건물 수정-->
+	<update id="updateAccomBuilding" parameterType="com.gdu.voyage.vo.AccomBuilding">
+		UPDATE accom_building
+		SET accom_building_name = #{accomBuildingName},
+		accom_building_description = #{accomBuildingDescription},
+		accom_building_phone = #{accomBuildingPhone},
+		update_date = NOW()
+		WHERE accom_building_no = #{accomBuildingNo}
+	</update>
+	
+	<!-- 숙소-건물의 이미지 파일 수정 -->
+	<update id="updateAccomBuildingImage" parameterType="com.gdu.voyage.vo.AccomBuildingImage">
+		UPDATE accom_building_image
+		SET accom_building_image_name = #{accomBuildingImageName},
+		accom_building_image_ext = #{accomBuildingImageExt},
+		accom_building_image_size = #{accomBuildingImageSize}
+		WHERE accom_building_no = #{accomBuildingNo}
+	</update>
+	
+	<!-- 숙소-건물의 주소 수정 -->
+	<update id="updateAccomBuildingAddress" parameterType="com.gdu.voyage.vo.AccomAddress">
+		UPDATE accom_address
+		SET accom_address_postal_code = #{accomAddressPostalCode},
+		accom_address_zip = #{accomAddressZip},
+		accom_address_detail = #{accomAddressDetail},
+		update_date = NOW()
+		WHERE accom_building_no = #{accomBuildingNo}
+	</update>
+	
+	<!-- 숙소-건물의 시설 수정 -->
+	<update id="updateAccomBuildingFacility" parameterType="com.gdu.voyage.vo.AccomBuildingFacility">
+		UPDATE accom_building_facility
+		SET accom_building_facility_name = #{accomBuildingFacilityName}
+		WHERE accom_building_no = #{accomBuildingNo}
+	</update>
+	
+	<!-- 숙소-건물의 추천장소 수정 -->
+	<update id="updateAccomBuildingSpot" parameterType="com.gdu.voyage.vo.AccomBuildingSpot">
+		UPDATE accom_building_spot
+		SET accom_building_spot_name = #{accomBuildingSpotName},
+		accom_building_spot_category = #{accomBuildingSpotCategory},
+		accom_building_spot_description = #{accomBuildingSpotDescription}
+		WHERE accom_building_no = #{accomBuildingNo}
+	</update>
+	
+	<!-- 숙소-건물, 추천장소의 주소 수정 -->
+	<update id="updateAccomSpotAddress" parameterType="com.gdu.voyage.vo.SpotAddress">
+		UPDATE spot_address
+		SET spot_address_postal_code = #{spotAddressPostalCode},
+		spot_address_zip = #{spotAddressZip},
+		spot_address_detail = #{spotAddressDetail},
+		update_date = NOW()
+		WHERE spot_no = #{spotNo}
+	</update>
+	
+	<!-- 숙소-건물의 해시태그 삭제 -->
+	<delete id="deleteAccomBuildingHashtag" parameterType="com.gdu.voyage.vo.Hashtag">
+		DELETE FROM hashtag
+		WHERE iden_no = #{idenNo}
+		AND table_name = '건물'
+		AND hashtag = #{hashtag}
+	</delete>
+	
 	<!-- 회원 -->
 	<!-- 이미지가 포함된 관심상품목록 -->
 	<select id="selectAccomBuildingByInterest" resultMap="AccomBuilding">
@@ -344,9 +408,10 @@
     
     <!-- 삭제 요청 처리. 마지막 체크인 날짜로부터 일주일이 되면 삭제 처리 -->
 	<update id="updateDormantAccomBuilding">
-		UPDATE accom_building
-		SET
-			accom_building_state_admin = "삭제"
+		UPDATE accom_building ab
+		INNER JOIN accom_room ar ON ab.accom_building_no = ar.accom_building_no
+		SET ab.accom_building_state_admin = '삭제',
+			ar.accom_room_state = '비공개'
 		WHERE
 			DATEDIFF(NOW(),update_date) >= 7
 		AND

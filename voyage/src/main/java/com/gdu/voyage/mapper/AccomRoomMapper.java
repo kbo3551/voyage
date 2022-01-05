@@ -20,4 +20,11 @@ public interface AccomRoomMapper {
 	int insertAccomRoomImage(AccomRoomImage accomRoomImage);
 	int insertAccomRoomItem(AccomRoomItem accomRoomItem);
 	int insertAccomRoomHashtag(Hashtag Hashtag);
+	
+	// 숙소-객실 수정
+	int updateAccomRoom(AccomRoom accomRoom);
+	int updateAccomRoomImage(AccomRoomImage accomRoomImage);
+
+	int deleteAccomRoomItem(AccomRoomItem accomRoomItem);
+	int deleteAccomRoomHashtag(Hashtag Hashtag);
 }

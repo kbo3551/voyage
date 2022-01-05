@@ -25,6 +25,16 @@ public interface AccomBuildingMapper {
 	int insertAccomSpotAddress(SpotAddress spotAddress);
 	int insertAccomBuildingHashtag(Hashtag Hashtag);
 	
+	// 숙소-건물 수정 : 숙소-건물정보 + 이미지 + 시설 + 추천장소
+	int updateAccomBuilding(AccomBuilding accomBuilding);
+	int updateAccomBuildingImage(AccomBuildingImage accomBuidingImage);
+	int updateAccomBuildingAddress(AccomAddress accomAddress);
+	int updateAccomBuildingFacility(AccomBuildingFacility accomBuildingFacility);
+	int updateAccomBuildingSpot(AccomBuildingSpot accomBuildingSpot);
+	int updateAccomSpotAddress(SpotAddress spotAddress);
+	// 해시태그 삭제
+	int deleteAccomBuildingHashtag(Hashtag Hashtag);
+	
 	// 회원
 	// 이미지가 포함된 관심상품 목록
 	List<AccomBuilding> selectAccomBuildingByInterest(Map<String, Object> map);

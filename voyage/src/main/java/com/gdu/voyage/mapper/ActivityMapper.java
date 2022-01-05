@@ -47,6 +47,16 @@ public interface ActivityMapper {
 	int insertActivitySpotAddress(SpotAddress spotAddress);
 	int insertActivityHashtag(Hashtag hashtag);
 	
+	// 체험 수정 : 체험 정보 + 이미지 + 추천장소
+	int updateActivity(Activity activity);
+	int updateActivityImage(ActivityImage activityImage);
+	int updateActivityAddress(ActivityAddress activityAddress);
+	int updateActivitySpot(ActivitySpot activitySpot);
+	int updateActivitySpotAddress(SpotAddress spotAddress);
+	
+	// 해시태그 삭제
+	int deleteActivityHashtag(Hashtag hashtag);
+	
 	// 체험 삭제 요청
 	int updateDormantActivity();
 }
