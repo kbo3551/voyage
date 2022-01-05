@@ -9,6 +9,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="${contextPath}/webjars/jquery/jquery.min.js"></script>
+<script src="${contextPath}/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="${contextPath}/webjars/stomp-websocket/stomp.min.js"></script>
 <link rel="stylesheet" href="${contextPath}/assets/css/hashtag.css">
 </head>
 <style>
@@ -86,7 +89,7 @@
 				                                            <li><a href="${contextPath}/member/selectMyOrderList">주문목록</a></li>
 				                                            <li><a href="${contextPath}/member/selectMyInterest">관심상품</a></li>
 				                                            <li><a href="${contextPath}/member/coupon">쿠폰</a></li>
-				                                            <li><a id="chatBtn" data-toggle="modal" data-target="#chatMain">채팅</a></li>
+				                                            <li><a id="chatBtn" data-toggle="modal" data-target="#myModal">채팅</a></li>
 				                                            <li><a href="${contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
@@ -114,7 +117,7 @@
 				                                            <li><a href="${contextPath}/member/selectMyOrderList">주문목록</a></li>
 				                                            <li><a href="${contextPath}/member/selectMyInterest">관심상품</a></li>
 				                                            <li><a href="${contextPath}/member/coupon">쿠폰</a></li>
-				                                            <li><a id="chatBtn" data-toggle="modal" data-target="#chatMain">채팅</a></li>
+				                                            <li><a id="chatBtn" data-toggle="modal" data-target="#myModal">채팅</a></li>
 				                                            <li><a href="${contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
@@ -128,7 +131,7 @@
 				                                            <li><a href="${contextPath}/member/selectMyOrderList">주문목록</a></li>
 				                                            <li><a href="${contextPath}/member/selectMyInterest">관심상품</a></li>
 				                                            <li><a href="${contextPath}/member/coupon">쿠폰</a></li>
-				                                            <li><a id="chatBtn" data-toggle="modal" data-target="#chatMain">채팅</a></li>
+				                                            <li><a id="chatBtn" data-toggle="modal" data-target="#myModal">채팅</a></li>
 				                                            <li><a href="${contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
@@ -183,7 +186,7 @@
 				<!-- Modal Header -->
 				<div class="modal-header">
 					<h2 class="modal-title">채팅</h2>
-					<button type="button" class="close" data-dismiss="modal">×</button>
+					<button type="button" class="close" id="closeChat" data-dismiss="modal">×</button>
 				</div>
 				
 				<!-- Modal body -->
@@ -197,7 +200,7 @@
 		
 					<!-- Modal footer -->
 					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-danger" id="closeChat" data-dismiss="modal">Close</button>
 					</div>
 				</div>
 				
@@ -229,7 +232,17 @@
 		
 					<!-- Modal footer -->
 					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+						<form action="${contextPath}/chat" method="post" id="chatForm" style="width: 100%">
+							<div class="input-group mb-3">
+								<input type="hidden" id="fromMemberId" name="fromMemberId" value="${loginMember.memberId}">
+								<input type="hidden" id="chatRoomForm" name="chatRoom" value="">
+								<input type="hidden" id="toMemberId" name="toMemberId" value="">
+								<textarea class="form-control" id="chatContentForm" name="chatContent" placeholder="채팅을 입력하세요"></textarea>
+								<div class="input-group-append">
+									<button class="btn btn-primary" id="sendBtn" type="button">SEND</button>
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
 				
@@ -242,5 +255,99 @@
   
   	<script src="${contextPath}/assets/js/chat.js"></script>
   	<script src="${contextPath}/assets/js/hashtag.js"></script>
+  	
+  	
+  	<!-- webSocket,STOMP 사용해서 채팅프로그램 구현하기  -->
+  	<script type="text/javascript">
+  	let stompClient = null; // null : 접속X
+	let msgCon = ''; // 메세지 저장할 변수
+	
+	// 페이지 접속 시 접속 = connection
+	$('#chatBtn').click(function(){
+		connect();
+	});
+	
+	// 모달 close 시 접속 해
+	$('#closeChat').click(function(){
+		disConnect();
+	});
+	// 메세지 전송을 위한 버튼
+	$('#sendBtn').click(function(){
+		sendChat();
+		// 전송후 textbox의 value 삭제
+		$('#chatContentForm').prop('value', '');
+	});
+	// 엔터키를 클릭했을 때 메세지 전송 버튼을 누르는 클릭이벤트 실행
+	$(document).keypress(function(event){
+		if(event.keyCode == '13') {
+			$('#sendBtn').click();
+		}
+	});
+
+	// 3개의 함수 : connect(), disConnect(), sendMsg()
+	// 서버에 접속하는 함수
+  	function connect() {
+  		console.log('connect!');
+  		
+  		// 서버의 설정된 endPoint('/ws')값과 동일하게 설정
+		let sockjs = new SockJS('/voyage/ws');
+		stompClient = Stomp.over(sockjs);
+		console.log('stompClient : ', stompClient);
+  	  	
+  		// 접속 -> 성공시 2번째 매개값인 콜백함수가 실행
+  	    stompClient.connect({}, function (connectedMsg) {
+  	      	console.log('접속성공');
+			console.log('connectedMsg : ', connectedMsg);
+			
+			// 서버측에서 메세지가 전달되면 -> 콜백으로 구현
+			// .subscribe() : 소켓 서버로부터 특정 도착지의 데이터 구독
+			stompClient.subscribe('/vovoChatServer', function(resp){
+				console.log(resp);
+				
+				// stringify()로 저장한 json 문자열을 분석하여 자바스크립트 객체(배열)를 리턴하는 메서드 -> JSON.parse()
+				let obj = JSON.parse(resp.body);
+				
+				if(obj.memberId != $('#fromMemberId').val()) {
+					msgCon = '<div style="margin:10px; clear:both;">';
+					msgCon += '<div style="float:left;">';
+					// msgCon += '<div style="font-weight: bold; margin:5px;">' + obj.memberName + '</div>';
+					msgCon += '<div style="background-color: white; border-radius: 10%; margin:5px; padding:5px;">' + obj.chatContent + '</div>';
+					msgCon += '</div>';
+					msgCon += '</div>';
+				} else {
+					msgCon = '<div style="margin:10px; clear:both;">';
+					msgCon += '<div style="float:right;">';
+					msgCon += '<div style="background-color: #ffeb33; border-radius: 10%; margin:5px; padding:5px;">' + obj.chatContent + '</div>';
+					msgCon += '</div>';
+					msgCon += '</div>';
+				}
+				$('#chatRoomList').append(msgCon);
+  	        });
+  	    });
+  	};
+
+  	function disconnect() {
+  		console.log('disConnect!');
+		stompClient.disconnect();
+		console.log(stompClient);
+  	};
+  	
+ 	// 챗팅 메세지를 보내는 함수
+  	function sendChat() { //Message객체에 값 전달 
+  		// 메세지가 없을 때 보내지 않음
+		if($('#chatContentForm').val() =='') {
+			return;
+		}
+		let chat = {};
+		chat.chatRoom = $('#chatRoomForm').val();
+		chat.toMemberId = $('#toMemberId').val();
+		chat.fromMemberId = $('#loginId').val();
+		chat.chatContent = $('#chatContentForm').val();
+		// 입력받은 데이터를 .stringify()를 이용해 string으로 바꾸어 로컬 스토리지에 저장
+		let jsonStr = JSON.stringify(chat); 
+		// 소켓 서버의 특정 도착지로 데이터 전송 -> .send()) : ('문자열형식 도착지', 헤더, 전송할 데이터)
+		stompClient.send('/vovoChat', {}, jsonStr);
+  	};
+	</script>
 </body>
 </html>

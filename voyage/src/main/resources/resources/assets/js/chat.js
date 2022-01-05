@@ -20,7 +20,7 @@
                console.log('출력 test : ', item);
                for(i=0;i<item.length;i++) {
                   $('#chatList').append('<tr>');
-                     $('#chatList').append('<td>'+item[i].member.memberNickname+':'+item[i].chatContent+','+item[i].chatRoom+'</td>');
+                     $('#chatList').append('<td>'+item[i].member.memberNickname+':'+item[i].chatContent+','+item[i].chatRead+'</td>');
                      $('#chatList').append('<button id="chatRoomBtn" value="'+item[i].chatRoom+'" data-toggle="modal" data-target="#myModal2">입장</button>');
                   $('#chatList').append('</tr>');
                };
@@ -41,11 +41,9 @@
 		var loginId = $('#loginId').val();
 		console.log('loginId : ',loginId);
 		
-		//접속하려는 채팅방의 번호 
+		// 접속하려는 채팅방의 번호 
 		var chatRoomNo = $(this).val();
 		console.log('chatRoomNo : ',chatRoomNo);
-	
-	
 	
 		$.ajax({
 			url:'/voyage/chatRoom?chatRoom='+chatRoomNo,
@@ -63,12 +61,17 @@
 						$('#chatRoomList').append('<tr>');
 							$('#chatRoomList').append('<td>'+item.chatContent+'</td>');
 						$('#chatRoomList').append('</tr>');
+						// 보내는 사람 기준의 받는 사람 id 저장 
+						$('#toMemberId').val(item.toMemberId);
 					} else if(loginId != item.fromMemberId){
 						$('#chatRoomList').append('<tr>');
-							$('#chatRoomList').append('<td>'+item.memberNickname+':'+item.chatContent+'</td>');
+							$('#chatRoomList').append('<td>'+item.memberNickname+':'+item.chatContent+':'+item.chatRead+'</td>');
 						$('#chatRoomList').append('</tr>');
+						// 보내는 사람 기준의 받는 사람 id 저장 
+						$('#toMemberId').val(item.fromMemberId);
 					}
 				});
+				$('#chatRoomForm').val(chatRoomNo);
 			}
 		});
 	});
