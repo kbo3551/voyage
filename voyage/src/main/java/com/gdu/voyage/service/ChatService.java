@@ -73,4 +73,11 @@ public class ChatService {
 
 		return chatListByToMember;
 	}
+	
+	// [사용자] 채팅 보내기
+	public void addChat(Chat chat) {
+		// 매개변수 디버깅
+		log.debug("☆[지혜]service☆ chat : " + chat.toString());
+		chatMapper.insertChat(chat);
+	}
 }

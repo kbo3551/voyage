@@ -17,4 +17,7 @@ public interface ChatMapper {
 	
 	// [사용자] 채팅방 접속 시 채팅 내용 조회 
 	List<Map<String, Object>> selectChatByToChatRoom(Map<String, Object> map);
+
+	// [사용자] 채팅 보내기
+	int insertChat(Chat chat);
 }
