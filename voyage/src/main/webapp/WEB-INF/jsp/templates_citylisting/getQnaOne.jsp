@@ -9,7 +9,6 @@
         <!-- jQuery here -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
-        	// 버튼 눌렀을 때, 이동 경로 설정
         	$(function(){
         		// 관리자의 답변 여부를 확인할 변수 valAnswerDate, valAnswerContent 생성
         		var valAdminId = $('#adminId').val();
@@ -68,7 +67,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- <link rel="manifest" href="site.webmanifest">  -->
-		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+		<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/favicon.ico">
 
 		<!-- CSS here -->
             <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -106,7 +105,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/loder.jpg" alt="">
+                    <img src="${pageContext.request.contextPath}/assets/img/logo/loder.jpg" alt="">
                 </div>
             </div>
         </div>
@@ -162,6 +161,9 @@
                                     <div class="form-group">
                                     	Nickname : <input class="form-control error" name="memberNickname" id="memberNickName" value="${qna.memberNickname}" readonly="readonly">
                                     </div>
+                                    <div class="form-group">
+                                     	<input class="form-control error" name="qnaSecret" id="qnaSecret" value="${qna.qnaSecret}" hidden="hidden">
+                                    </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
@@ -169,10 +171,8 @@
                                     </div>
                                     <!-- 이미지 -->
                                     <div class="form-group">
-	                                	<c:forEach items="${qnaImgList}" var="qnaImg">
-	                                   		<input type="file" name="qnaImg" id="qnaImg[0]" value="${pageContext.request.contextPath}/resources/image/qna/${qnaImg.qnaImgName}.${qnaImg.qnaImgExt}">
-	                                    </c:forEach>
-                                    </div>
+	                                	<img width="400px" height="200px" src="${pageContext.request.contextPath}/resources/image/qna/${qna.qnaImg.qnaImgName}.${qna.qnaImg.qnaImgExt}">
+                                   	</div>
                                 </div>
                             </div>
                             <div class="form-group mt-3">

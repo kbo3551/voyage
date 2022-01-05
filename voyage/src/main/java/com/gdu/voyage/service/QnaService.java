@@ -29,47 +29,15 @@ public class QnaService {
 	@Autowired QnaMapper qnaMapper;
 		
 	// Qna 게시판 목록 상세 내용
+	// ISSUE : qnaImg 부분 []로 나오고 내용 안 나옴...
 	public Qna getQnaOneAndAnswer(int qnaNo) {
-		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] selectQnaOne debug >>>" + qnaMapper.selectQnaOneAndAnswer(qnaNo));
 		// 문의글 상세 내용
-		Qna qna = qnaMapper.selectQnaOneAndAnswer(qnaNo);
+		Qna qna = new Qna();
+		qna = qnaMapper.selectQnaOneAndAnswer(qnaNo);
+		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_getQnaOneAndAnswer_qna debug >>>" + qna);
 		return qna;
 	}
-	// Qna 게시판 목록 상세 내용 - 이미지 목록
-	public Map<String, Object> getQnaImgList(int qnaNo, int currentPage, int rowPerPage){
-		// 매개변수 값 가공
-		Map<String, Object> paramMap = new HashMap<>();
-		int beginRow = (currentPage - 1) * rowPerPage;
-				
-		paramMap.put("beginRow", beginRow);
-		paramMap.put("rowPerPage", rowPerPage);
-		paramMap.put("qnaNo", qnaNo);
-				
-		List<QnaImg> qnaImgList = qnaMapper.selectQnaImgList(paramMap);
-		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_getQnaOneAndAnswer_qnaImgList debug" + qnaImgList.toString());
-		Qna qna = new Qna();
-		qna.setQnaImg(qnaImgList);
-		// Mapper로부터 호출한 결과값 가공
-		Map<String, Object> returnMap = new HashMap<>();
-		// 마지막 페이지를 나타내는 변수 lastPage값 0으로 초기화
-		int lastPage = 0;
-		// 전체 게시글 수
-		int totalCount = qnaMapper.selectQnaImgTotalCount(qnaNo);
-		// lastPage 값 셋팅
-		lastPage = (totalCount / rowPerPage);
-		if(totalCount % rowPerPage != 0) {
-			lastPage += 1;
-		}
-		// returnMap에 필요한 값 저장
-		returnMap.put("qnaImgList", qnaImgList);
-		returnMap.put("qna", qna);
-		returnMap.put("lastPage", lastPage);
-		returnMap.put("totalCount",totalCount);
-		returnMap.put("qnaNo",qnaNo);
-		// 디버깅 코드
-		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_getQnaImgList_returnMap debug" + returnMap);
-		return returnMap;
-	}
+	
 	// Qna 게시판 목록 조회
 	public Map<String, Object> getQnaList(String searchWord, int currentPage, int rowPerPage){
 		// 매개변수 값 가공
@@ -104,9 +72,54 @@ public class QnaService {
 	}
 	
 	// [Member] Qna 게시판 질문 수정
-	public int modifyQ(Qna qna) {
-		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_modifyQ_Qna debug" + qnaMapper.modifyQ(qna));
-		return qnaMapper.modifyQ(qna);
+	public void modifyQ(QnaForm qnaForm, String realPath, String memberId, String memberNickname) {
+		// 매개변수 qnaForm 값 디버깅 코드
+		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_modifyQ_Qna debug" + qnaForm.toString());
+		//qna에 memberId, memberNickname 저장
+		Qna qna = qnaForm.getQna();
+		qna.setMemberId(memberId);
+		qna.setMemberNickname(memberNickname);
+		// 문의글 수정
+		qnaMapper.modifyQ(qna);
+		// 이미지 추가에 사용할 qnaNo 값 확인
+		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_qnaNo debug" + qna.getQnaNo());
+		// 이미지 추가
+		List <MultipartFile> qList = qnaForm.getQnaImg();
+		// 이미지가 업로드 되었을 경우
+		if(qList != null) {
+			for(MultipartFile i : qList) {
+				QnaImg qnaImg = new QnaImg();
+				// qnaImg의 QnaNo 셋팅
+				qnaImg.setQnaNo(qna.getQnaNo());
+				// 원본 이미지 파일 이름
+				String originalImgname = i.getOriginalFilename(); 
+				// 마지막 점의 위치
+				int p = originalImgname.lastIndexOf("."); 
+				String ext = originalImgname.substring(p+1);
+				// 중복되지 않는 문자 이름 생성
+				String prename = UUID.randomUUID().toString().replace("-", "");
+				String imgname = prename;
+				// qnaImg에 imgName, imgExt, imgSize 셋팅
+				qnaImg.setQnaImgName(imgname);
+				qnaImg.setQnaImgExt(ext);
+				qnaImg.setQnaImgSize(i.getSize());
+				// qnaImg 값 디버깅 코드
+				log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_qnaImg debug" + qnaImg.toString());
+				// 테이블에 값 저장
+				qnaMapper.addQImg(qnaImg);
+						
+				File f = new File(realPath+imgname+"."+ext);
+				try {
+					i.transferTo(f);
+				} catch (IllegalStateException | IOException e) {
+					e.printStackTrace();
+					// IllegalStateException | IOException e 예외처리를 무조건 해야하는 예외
+					// RuntimeException은 예외처리를 하지 않아도 됨
+					throw new RuntimeException();
+				}
+			}
+		}
+		
 	}
 	// [Member] Qna 게시판 질문 삭제
 	public void removeQ(int qnaNo) {

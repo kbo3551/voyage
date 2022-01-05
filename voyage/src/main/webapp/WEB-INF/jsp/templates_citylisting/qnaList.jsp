@@ -189,7 +189,7 @@
 									                               <li class="page-item active"><a class="page-link">${f}</a></li>
 									                            </c:when>
 									                            <c:otherwise>
-									                               <li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/qnaList?currentPage=${f}">${f}</a></li>
+									                               <li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/qnaList?currentPage=${f}&searchWord=${searchWord}">${f}</a></li>
 									                            </c:otherwise>
 									                         </c:choose>
 									                         <c:if test="${f == lastPage}">

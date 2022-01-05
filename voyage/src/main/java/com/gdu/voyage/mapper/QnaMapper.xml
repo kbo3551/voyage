@@ -38,12 +38,15 @@
 			<id column="admin_id" property="adminId"/>
 			<result column="answer_content" property="answerContent"/>
 		</association>
+		<!-- Img -->
+		<collection property="qnaImg" resultMap="QnaImg" /> 
 	</resultMap>
-	<!-- 이미지 목록 -->
-	<resultMap type="com.gdu.voyage.vo.QnaImg" id="resultQnaImg">
-		<id column="qna_no" property="qnaNo"/>
+	
+	<resultMap type="com.gdu.voyage.vo.QnaImg" id="QnaImg">
+		<result column="qna_image_no" property="qnaImgNo"/>
 		<result column="qna_image_name" property="qnaImgName"/>
 		<result column="qna_image_ext" property="qnaImgExt"/>
+		<result column="qna_image_size" property="qnaImgSize"/>
 	</resultMap>
 	<!-- resultMap End -->
 	<!-- Q&A 전체 목록 -->
@@ -82,13 +85,19 @@
 			q.create_date,
 			q.update_date,
 			qa.admin_id,
-			qa.answer_content
+			qa.answer_content,
+			qi.qna_image_name,
+			qi.qna_image_ext
 		FROM 
 			qna q 
 		LEFT JOIN 
 			qna_answer qa
 		ON 
 			q.qna_no = qa.qna_no
+		LEFT JOIN
+			qna_image qi
+		ON
+			q.qna_no = qi.qna_no
 		WHERE 
 			q.qna_no = #{qnaNo}
 	</select>
@@ -152,17 +161,6 @@
 			WHERE 
 				qna_no = #{qnaNo}
 	</delete>
-	<!-- 이미지 목록 -->
-	<select id="selectQnaImgList" parameterType="com.gdu.voyage.vo.QnaImg" resultMap="resultQnaImg">
-		SELECT 
-			qna_no,
-			qna_image_name,
-			qna_image_ext
-		FROM qna_image
-		LIMIT 
-			#{beginRow}, #{rowPerPage}
-	</select>
-	
 	<!-- 관리자 페이지 Q&A 답변 : 답변 없는 질문 list 조회 -->
 	<select id="selectNoneAnswerQ" parameterType="com.gdu.voyage.vo.Qna" resultMap="resultQna">
 		SELECT

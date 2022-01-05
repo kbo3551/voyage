@@ -17,8 +17,10 @@ public class Qna {
 	private String updateDate;
 	private String createDate;
 	private QnaAnswer qnaAnswer;
+	// 이미지 파일 -> 1:1
+	private QnaImg qnaImg;
 	// 이미지 파일 -> 1:N
-	private List<QnaImg> qnaImg;
+	private List<QnaImg> qnaImgList;
 	// Q&A 검색용
 	private String searchWord;
 }

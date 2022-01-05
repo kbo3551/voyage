@@ -33,14 +33,11 @@ public interface QnaMapper {
 	int addQImg(QnaImg qnaImg);
 	// 이미지 삭제
 	int removeQImg(int qnaNo);
-	// 이미지 목록
-	List <QnaImg> selectQnaImgList(Map<String, Object> param);
-	// 이미지 수
-	int selectQnaImgTotalCount(int qnaNo);
 	
 	// [Admin] Only Admin part
 	// 답변 없는 질문 list
 	List<Qna> selectNoneAnswerQ(Map<String, Object> param);
 	// 답변 추가
 	int addA(QnaAnswer qnaAnswer);
+	
 }

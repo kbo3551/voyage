@@ -17,14 +17,6 @@
         		var valMemberNickname = $('#memberNickname').val();
         		var valQnaTitle = $('#qnaTitle').val();
         		var valQnaContent = $('#qnaContent').val();
-	       		// 이미지 추가 버튼 눌렀을 때
-        		$('#addImgBtn').click(function(){
-        			let html = '<div><input type="file" name="qnaImg" id="qnaImg"></div>';
-        			$('#Imginput').append(html);
-        		});
-        		// 이미지 삭제 버튼 눌렀을 때
-        		$('#removeImgBtn').click(function(){
-        			$('#Imginput').children().last().remove();
         		});
         		// send 버튼 눌렀을 때
         		$('#sendQBtn').click(function(){
@@ -248,8 +240,7 @@
                                 </div>
                                 <div>파일 첨부</div>
                                 <div>
-                                	<button type="button" id="addImgBtn">Add Img</button>
-                                	<button type="button" id="removeImgBtn">Del Img</button>
+                                	<div><input type="file" name="qnaImg" id="qnaImg"></div>
                                 </div>
                                 <div id="Imginput"></div>
                             </div>
