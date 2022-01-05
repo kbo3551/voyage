@@ -173,24 +173,10 @@
                                 	</table>			
                                 </div>
                                 <div class="col-12">
-                                	<div class="form-group">
-				                   		
-				                   	</div>
                                     <div class="form-group">
                                         <textarea class="form-control w-100 error" name="qnaContent" id="qnaContent" cols="30" rows="9">${qna.qnaContent}</textarea>
-                                    </div>
-                                    <div class="form-group">
-                                    	<c:forEach items="${qnaImgList}" var="qnaImg">
-	                                   		<input type="file" name="qnaImg" id="qnaImg[0]" value="${qnaImg.qnaImgName}.${qnaImg.qnaImgExt}">
-	                                    </c:forEach>
-                                    </div>
+                                    </div>  
                                 </div>
-                                <div>파일 첨부</div>
-                                <div>
-                                	<button type="button" id="addImgBtn">Add Img</button>
-                                	<button type="button" id="removeImgBtn">Del Img</button>
-                                </div>
-                                <div id="Imginput"></div>
                             </div>
                             <div class="form-group mt-3">
                             	<!-- 원본 버튼 : Send  -->
