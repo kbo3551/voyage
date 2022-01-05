@@ -234,12 +234,12 @@
 	                                        </div>
 		                                    <div class="list-caption" style="padding: 10px 15px 18px 15px;">
 		                                        <span style="right: 13px;">
-	   	                                        	<a href="${pageContext.request.contextPath}/accomRoomOne?accomRoomNo=${ar.accomRoomNo }" style="color: #fff;">
+	   	                                        	<a href="${pageContext.request.contextPath}/accomRoomOne?accomRoomNo=${ar.accomRoomNo }&accomBuildingNo=${accomBuildingOne.accomBuildingNo }" style="color: #fff;">
 	   	                                        		Open
 	   	                                        	</a>
 	   	                                       	</span>
 		                                        <h3>
-	                                              	<a href="${pageContext.request.contextPath}/accomRoomOne?accomRoomNo=${ar.accomRoomNo }" style="font-size: 0.8em;">
+	                                              	<a href="${pageContext.request.contextPath}/accomRoomOne?accomRoomNo=${ar.accomRoomNo }&accomBuildingNo=${accomBuildingOne.accomBuildingNo }" style="font-size: 0.8em;">
 	                                              		${ar.getAccomRoomName()} room
 	                                              	</a>
 	                                            </h3>
