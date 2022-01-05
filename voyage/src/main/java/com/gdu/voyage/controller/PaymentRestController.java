@@ -94,6 +94,27 @@ public class PaymentRestController {
 		 return accomMonthDateProfit;
 	}
 	
+	// 최근 한달간 체험별, 일별 수익
+	@GetMapping("/selectActivityOneProfitByMonthToDate")
+	public TreeMap<String, Object> selectActivityOneProfitByMonthToDate(int hostNo) {
+		 log.trace("PaymentRestController 실행");
+		 
+		 TreeMap<String, Object> activityOneMonthDateProfit = paymentService.selectActivityOneProfitByMonthToDate(hostNo);
+		 log.trace("★controller★ activityOneMonthDateProfit : "+activityOneMonthDateProfit);
+		 
+		 return activityOneMonthDateProfit;
+	}
+	
+	// 최근 한달간 객실별, 일별 수익
+	@GetMapping("/selectAccomRoomOneProfitByMonthToDate")
+	public TreeMap<String, Object> selectAccomRoomOneProfitByMonthToDate(int hostNo) {
+		 log.trace("PaymentRestController 실행");
+		 
+		 TreeMap<String, Object> accomRoomOneMonthDateProfit = paymentService.selectAccomProfitByMonthToDate(hostNo);
+		 log.trace("★controller★ accomRoomOneMonthDateProfit : "+accomRoomOneMonthDateProfit);
+		 return accomRoomOneMonthDateProfit;
+	}
+	
 	// 해당 사업자의 월별 가장 많은 수익을 벌어들인 체험
 	@GetMapping("/selectActivityProfitByQuarterly")
 	public String selectActivityProfitByQuarterly(int hostNo) {
