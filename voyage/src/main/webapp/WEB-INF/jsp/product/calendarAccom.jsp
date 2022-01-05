@@ -215,8 +215,11 @@
     </div>
     <!--Hero End -->
 	
-	<form action="${pageContext.request.contextPath}/addAccomReservation" method="get">
-		<input type="hidden" id="accomRoomNo" name="${accomRoomNo }">
+	<form action="${pageContext.request.contextPath}/addAccomReservation" method="get" id="calendarForm">
+		<input type="hidden" name="accomRoomNo" value="${accomRoomNo }">
+		<input type="hidden" name="checkIn" id="checkIn" value="">
+		<input type="hidden" name="checkOut" id="checkOut" value="">
+		
 		<section class="ftco-section" style="padding-top: 3%;">
 			<div class="container">
 				<div class="row justify-content-center">
@@ -226,10 +229,10 @@
 				</div>
 				<div class="row justify-content-center mb-2">
 					<div class="col-md-3 text-center">
-						<h6 class="heading-section" style="font-size: 1.5em;">check In : <span id="checkIn"></span></h6>
+						<h6 class="heading-section" style="font-size: 1.5em;">check In : <span id="checkInDate"></span></h6>
 					</div>
 					<div class="col-md-3 text-center">
-						<h6 class="heading-section" style="font-size: 1.5em;">check Out : <span id="checkOut"></span></h6>
+						<h6 class="heading-section" style="font-size: 1.5em;">check Out : <span id="checkOutDate"></span></h6>
 					</div>
 					<div class="col-md-3 text-center">
 						<h6 class="heading-section" style="font-size: 1.5em;"><span id="days"></span> days</h6>
@@ -238,8 +241,6 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="calendar-section">
-						<input type="text" name="checkIn" value="" readonly="readonly">
-						<input type="text" name="checkOut" value="" readonly="readonly">
 			        <div class="row no-gutters">
 			          <div class="col-md-6">
 				            <div class="calendar calendar-first" id="calendar_first">
@@ -282,14 +283,8 @@
 				
 				<div class="wizard-footer">
 					<div class="pull-right">
-						<a href="${pageContext.request.contextPath}/addReservation?" class='btn btn-next btn-primary' id="nextBtn">Next</a>
-<!-- 						<input type='button' class='btn btn-finish btn-primary' name='finish' id="roomSubmit" value='Finish' /> -->
+						<button class="calendarBtn" type="button" id="submitBtn">NEXT</button>
 					</div>
-	
-<!-- 					<div class="pull-left"> -->
-<!-- 						<input type='button' class='btn btn-previous btn-default' -->
-<!-- 							name='previous' value='Previous' /> -->
-<!-- 					</div> -->
 					<div class="clearfix"></div>
 				</div>
 			</div>
@@ -352,7 +347,15 @@
   
   
         <script type="text/javascript">
-        
+        // calendarForm 유효성 검사
+        $('#submitBtn').click(function(){
+        	// checkIn, checkOut 입력값 유효성 검사
+        	if ($('#checkIn').val() == '' || $('#checkOut').val() == '') {
+        		alert('체크인 체크아웃 일정을 선택하세요.');
+        		return;
+        	}
+        	$('#calendarForm').submit();
+        });
         </script>
 </body>
 </html>

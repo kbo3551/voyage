@@ -4,7 +4,7 @@
 	
 	$( document ).ready(function() {
 	
-	var roomNo = $('#accomRoomNo').attr('name');
+	var roomNo = $('input[name=accomRoomNo]').val();
 	
 	// 기존 예약일을 저장하는 배열
 	var reserveDays = [];
@@ -225,21 +225,21 @@
 				
 					// 체크인 날짜는 예약일 문자열 전체 중 앞에서 두글자
 					var checkInDate = reserveTxt.substring(0, 2);
-					//console.log("checkInDate"+checkInDate);
+					console.log("checkInDate"+checkInDate);
 					
 					// 체크아웃 날짜는 예약일 문자열 전체 중 뒤에서 두글자
 					var checkOutDate = reserveTxt.substring(reserveTxt.length-2, reserveTxt.length);
-					//console.log("checkOutDate"+checkOutDate);
+					console.log("checkOutDate"+checkOutDate);
 					
 					// 총 숙박일은 예약일 문자열 전체를 2로 나눈 값
 					var days = reserveTxt.length / 2;
 							
-					$('#checkIn').empty();
-					$('#checkOut').empty();
+					$('#checkInDate').empty();
+					$('#checkOutDate').empty();
 					$('#days').empty();
 						
-					$('#checkIn').append(checkInDate);
-					$('#checkOut').append(checkOutDate);
+					$('#checkInDate').append(checkInDate);
+					$('#checkOutDate').append(checkOutDate);
 					$('#days').append(days);
 					
 					//var accomCheckIn = checkInYear + '-' + checkInMonth + '-' + checkInDate;
