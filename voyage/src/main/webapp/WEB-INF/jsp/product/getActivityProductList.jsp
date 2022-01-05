@@ -127,18 +127,8 @@
 <%-- 		                                    </c:if> --%>
 <%-- 	                                	</c:forEach> --%>
 <!-- 	                                </div> -->
-	                                <!-- Review -->
-	                                <div class="select-job-items2 pt-80">
-	                                    <select name="searchReviewScore">
-	                                        <option value="">별점</option>
-	                                        <option value="0">0</option>
-	                                        <option value="1">1</option>
-	                                        <option value="2">2</option>
-	                                        <option value="3">3</option>
-	                                        <option value="4">4</option>
-	                                        <option value="5">5</option>
-	                                    </select>
-	                                </div>
+	                             
+	                                
 	                            </div>
 	
 	                            <div class="single-listing">
@@ -150,7 +140,7 @@
 	                                    <div class="widgets_inner">
 	                                        <div class="range_item">
 	                                            <!-- <div id="slider-range"></div> -->
-	                                            <input type="text" class="js-range-slider" value="" name="searchPrice"/>
+	                                            <input type="text" class="js-range-slider" name="searchPrice"/>
 	                                            <div class="d-flex align-items-center pb-30">
 	                                                <div class="price_text">
 	                                                    <p>Price :</p>

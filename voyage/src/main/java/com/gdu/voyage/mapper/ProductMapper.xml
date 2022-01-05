@@ -172,7 +172,9 @@
 			accom_building_facility_name,
 			COUNT(accom_building_facility_name)
 		FROM
-			accom_building_facility
+			accom_building_facility abf
+			JOIN accom_building ab ON abf.accom_building_no = ab.accom_building_no
+		WHERE NOT ab.accom_building_state = '비공개'
 		GROUP BY
 			accom_building_facility_name
 		ORDER BY
@@ -227,13 +229,16 @@
             ab.accom_building_description LIKE '%${searchWord}%' OR
             aba.accom_address_zip LIKE '%${searchWord}%' OR   
             abf.accom_building_facility_name LIKE '%${searchWord}%')
-            AND
          </if>
+         AND
          <!-- 지역 검색 -->
          <if test='#{searchAccomAddress} != null'>
-            
             (aba.accom_address_zip LIKE '%${searchAddress}%')   
             AND   
+         </if>
+         <if test='#{searchFacilityList} != null'>
+         	(abf.accom_building_facility_name REGEXP '${searchFacilityList}')
+         	AND
          </if>
             
             <![CDATA[
@@ -242,17 +247,6 @@
             abr.accom_room_price <= #{maxPrice}
             ]]>
                GROUP BY accom_building_name      
-<!--          AND -->
-<!--             f.accom_building_facility_name  -->
-<!--             시설 검색 -->
-<!--             <if test="#{searchFacilityList} != null"> -->
-<!--                <foreach collection="searchFacilityList" item="facility" open="LIKE '%" close="%'" separator="%' LIKE '%"> -->
-<!--                   ${searchFacilityList} -->
-<!--                   <foreach collection="facility" item="f" open="(" close=")" separator=","> -->
-<!--                      ${f.searchFacilityList} -->
-<!--                   </foreach> -->
-<!--                </foreach> -->
-<!--             </if>    -->
       ORDER BY
          update_date DESC;
    </select>

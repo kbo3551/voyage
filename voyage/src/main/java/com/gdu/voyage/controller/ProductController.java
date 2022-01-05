@@ -1,17 +1,19 @@
 package com.gdu.voyage.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
-import org.apache.ibatis.javassist.bytecode.stackmap.MapMaker;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.ProductService;
@@ -31,6 +33,7 @@ public class ProductController {
 	// [사용자] 숙소
    @GetMapping("/getAccomProductList")
    public String getAccomBuildingList(Model model,
+		   					  HttpServletRequest request,
                               @RequestParam(defaultValue = "1") int currentPage,
                               @RequestParam @Nullable String searchWord, 
                               @RequestParam @Nullable String searchAddress,
@@ -39,6 +42,8 @@ public class ProductController {
                               @RequestParam @Nullable String searchPrice
                               ) {
       log.debug("[debug] ProductController.getAccomBuildingList 실행");
+      
+      
       Integer minPrice = 0;
       Integer maxPrice = 10000000;
       // 검색 시 사용할 매개변수 가공
@@ -58,10 +63,17 @@ public class ProductController {
       log.debug("[debug] ProductController.getAccomBuildingList minPrice : " + minPrice);
       log.debug("[debug] ProductController.getAccomBuildingList maxPrice : " + maxPrice);
       
+      String facilityList = null;
+      // 시설 리스트 String으로 변환
+      if(searchFacilityList != null) {
+    	  facilityList = searchFacilityList.stream().map(n -> String.valueOf(n))
+    			  		.collect(Collectors.joining("|"));
+      }
+      
       Map<String, Object> paramMap = new HashMap<>();
       paramMap.put("searchWord", searchWord);
       paramMap.put("searchAddress", searchAddress);
-      paramMap.put("searchFacilityList", searchFacilityList);
+      paramMap.put("searchFacilityList", facilityList);
       paramMap.put("minPrice",  minPrice);
       paramMap.put("maxPrice",  maxPrice);
       
@@ -142,7 +154,7 @@ public class ProductController {
 	
 	
 	// [사용자] 체험
-   @GetMapping("/getActivityProductList")
+   @RequestMapping("/getActivityProductList")
    public String getActivityProduct(Model model,
                               @RequestParam(defaultValue = "1") int currentPage,
                               @RequestParam @Nullable String searchWord, 

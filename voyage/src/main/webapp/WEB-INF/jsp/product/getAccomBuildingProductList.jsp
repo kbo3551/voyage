@@ -113,31 +113,19 @@
 	                                </div> 
 	                                <!-- Facilities -->
 	                                <div class="small-section-tittle2 pt-80">
-	                                    <h4>Facilities</h4>
+	                                    <h4>Best Facilities</h4>
 	                                </div>
 	                                <div class="select-Categories pt-10 pb-30" style="width: 50%; float: left;">
 	                                	<c:forEach items="${facilityByBest}" var="af" varStatus="status">
 	                                		<label class="container">${af.accomBuildingFacilityName }<span style="font-size: 0.8em; color: #03B92B; padding-left: 5%;">${af.accomBuildingFacilityBest }</span>
-		                                        <input type="checkbox" name="searchFacilityList" value="${af.accomBuildingFacilityName }">
-		                                        <span class="checkmark"></span>
+		                                        		<input type="checkbox" name="searchFacilityList" value="${af.accomBuildingFacilityName}">
+		                                        		<span class="checkmark"></span>
 		                                    </label>
 		                                    <c:if test="${status.count == 3 }">
 			                                    </div>
 			                                    <div class="select-Categories pt-10 pb-30" style="width: 50%; float: left;">
 		                                    </c:if>
 	                                	</c:forEach>
-	                                </div>
-	                                <!-- Review -->
-	                                <div class="select-job-items2">
-	                                    <select name="searchReviewScore">
-	                                        <option value="">별점</option>
-	                                        <option value="0">0</option>
-	                                        <option value="1">1</option>
-	                                        <option value="2">2</option>
-	                                        <option value="3">3</option>
-	                                        <option value="4">4</option>
-	                                        <option value="5">5</option>
-	                                    </select>
 	                                </div>
 	                            </div>
 	
