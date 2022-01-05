@@ -6,7 +6,6 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.gdu.voyage.vo.AccomBuilding;
 import com.gdu.voyage.vo.Activity;
 import com.gdu.voyage.vo.ActivityAddress;
 import com.gdu.voyage.vo.ActivityImage;
@@ -30,6 +29,13 @@ public interface ActivityMapper {
 	List<Activity> selectActivityByInterest(Map<String, Object> map);
 	//갯수
 	int selectInterestedActivityCount(String memberId);
+	
+	// 관심상품 추가
+	int insertActivityByInterest(int ActivityNo, String memberId);
+	// 관심상품 제거
+	int deleteActivityByInterest(int ActivityNo, String memberId);
+	// 관심상품 확인
+	int selectActivityByInterestOne(int ActivityNo, String memberId);
 	
 	// 사업자별 신청 대기중인 체험 리스트
 	List<Activity> selectReqActivityListByHost(Map<String, Object> map);

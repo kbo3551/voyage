@@ -283,6 +283,9 @@ margin: 35px auto;
 .wizard-card.ct-wizard-orange .nav-pills > li.active a{
     background-color: #FDC600;
 }
+.wizard-card.ct-wizard-orange .nav-pills > li.active a.reservation{
+    background-color: #BD83CE !important;
+}
 .wizard-card.ct-wizard-red .nav-pills > li.active a{
     background-color: #ff3b30;
 }

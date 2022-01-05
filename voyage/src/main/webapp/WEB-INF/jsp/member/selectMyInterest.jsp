@@ -229,15 +229,17 @@
 																<td style="display:table-cell;vertical-align:middle;">
 																	<c:choose>
 																	        <c:when test="${fn:length(aci.accomBuildingName) gt 13}">
-																	        	${fn:substring(aci.accomBuildingName, 0, 12)}...
+																	        	<a href="${contextPath}/accomBuildingOne?accomBuildingNo=${aci.accomBuildingNo}">${fn:substring(aci.accomBuildingName, 0, 12)}...</a>
 																	        </c:when>
 																	        <c:otherwise>
-																	        	${aci.accomBuildingName}
+																	        	<a href="${contextPath}/accomBuildingOne?accomBuildingNo=${aci.accomBuildingNo}">${aci.accomBuildingName}</a>
 																	        </c:otherwise>
 																	</c:choose>
 																</td>
 																<td style="display:table-cell;vertical-align:middle;">${aci.accomBuildingState}</td>
 																<td style="display:table-cell;vertical-align:middle;"><small><a href="#" data-toggle="modal" data-target="#acmModal${acmModalNo}">상세</a></small>
+																<br>
+																<small><a href="${contextPath}/member/deleteMyInterest?category=건물&accomBuildingNo=${aci.accomBuildingNo}" onclick="return confirm('정말 삭제하시겠습니까?');" style="color: gray;">삭제</a></small>
 																<!-- The Modal -->
 																  <div class="modal" id="acmModal${acmModalNo}">
 																    <div class="modal-dialog">
@@ -350,15 +352,18 @@
 																<td style="display:table-cell;vertical-align:middle;">
 																	<c:choose>
 																	        <c:when test="${fn:length(aci.activityName) gt 13}">
-																	        	${fn:substring(aci.activityName, 0, 12)}...
+																	        	<a href="${contextPath}/activityOne?activityNo=${aci.activityNo}">${fn:substring(aci.activityName, 0, 12)}...</a>
 																	        </c:when>
 																	        <c:otherwise>
-																	        	${aci.activityName}
+																	        	<a href="${contextPath}/activityOne?activityNo=${aci.activityNo}">${aci.activityName}</a>
 																	        </c:otherwise>
 																	</c:choose>
 																</td>
 																<td style="display:table-cell;vertical-align:middle;">${aci.activityState}</td>
-																<td style="display:table-cell;vertical-align:middle;"><small><a href="#" data-toggle="modal" data-target="#actModal${actModalNo}">상세</a></small>
+																<td style="display:table-cell;vertical-align:middle;">
+																<small><a href="#" data-toggle="modal" data-target="#actModal${actModalNo}">상세</a></small>
+																<br>
+																<small><a href="${contextPath}/member/deleteMyInterest?category=체험&activityNo=${aci.activityNo}" onclick="return confirm('정말 삭제하시겠습니까?');" style="color: gray;">삭제</a></small>
 																<!-- The Modal -->
 																  <div class="modal" id="actModal${actModalNo}">
 																    <div class="modal-dialog">

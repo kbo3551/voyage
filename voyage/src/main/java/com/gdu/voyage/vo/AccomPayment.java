@@ -7,6 +7,7 @@ public class AccomPayment {
 	private int accomPaymentNo;
 	private int accomRoomNo;
 	private String memberId;
+	private int hostNo;
 	private String accomCheckIn;
 	private String accomCheckOut;
 	private long accomAmount;

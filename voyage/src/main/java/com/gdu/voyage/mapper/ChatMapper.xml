@@ -85,4 +85,21 @@
 		WHERE
 			c.chat_room = #{chatRoom} AND (NOT m.member_nickname IN(#{memberNickname}))
 	</select>
+	
+	<!-- [사용자] 채팅 보내기 -->
+	<insert id="insertChat" parameterType="com.gdu.voyage.vo.Chat">
+		INSERT INTO chat(
+			chat_room,
+			to_member_id,
+			from_member_id,
+			chat_content,
+			create_date
+		) VALUES (
+			#{chatRoom},
+			#{toMemberId},
+			#{fromMemberId},
+			#{chatContent},
+			NOW()
+		)
+	</insert>
 </mapper>

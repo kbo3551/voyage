@@ -10,10 +10,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.gdu.voyage.vo.Admin;
-import com.gdu.voyage.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 

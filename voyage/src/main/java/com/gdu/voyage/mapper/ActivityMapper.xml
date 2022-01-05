@@ -206,9 +206,35 @@
 	</delete>
 	
 	<!-- 회원 -->
+	<!-- 관심상품 추가 -->
+	<insert id="insertActivityByInterest">
+		INSERT INTO activity_interest(
+			activity_no,
+			member_id
+		) VALUES (
+			${activityNo},
+			#{memberId}
+		)
+	</insert>
+	<!-- 관심상품 제거 -->
+	<delete id="deleteActivityByInterest">
+		DELETE FROM activity_interest
+		WHERE activity_no = #{activityNo}
+		AND member_id = #{memberId}
+	</delete>
+	<!-- 관심상품 확인 -->
+	<select id="selectActivityByInterestOne" resultType="int">
+		SELECT count(*)
+		FROM activity_interest
+		WHERE activity_no = #{activityNo}
+		AND member_id = #{memberId}
+	</select>
+	
+	
 	<!-- 이미지가 포함된 관심상품목록 -->
 	<select id="selectActivityByInterest" resultMap="Activity">
 		SELECT
+			a.activity_no,
 			a.activity_name,
 			a.activity_description,
 			a.activity_open_date,
