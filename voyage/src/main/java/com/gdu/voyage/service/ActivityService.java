@@ -279,4 +279,103 @@ public class ActivityService {
 			}
 		}
 	}
+	
+	// 체험 수정
+	public void updateActivity(ActivityForm activityForm, String realPath, int hostNo) {
+		// 매개변수 디버깅 //activityForm  --> 숙소-건물정보 + 이미지 + 시설 + 추천장소 + 해시태그
+		log.debug("☆service☆ activityForm : " + activityForm.toString());
+		
+		// 1) 체험 수정 : activity 입력
+		Activity activity = activityForm.getActivity();
+		activity.setHostNo(hostNo);
+		activity.setActivityNo(activity.getActivityNo());
+		activityMapper.updateActivity(activity);
+		
+		// 2) 체험의 이미지 수정 : activityImage 입력
+		List<MultipartFile> imageList = activityForm.getActivityImage();
+		// 이미지 파일이 업로드 되었다면 (null이 아니라면)
+		if(imageList != null) {
+			for(MultipartFile i : imageList) {
+				ActivityImage activityImage = new ActivityImage();
+				// 입력시 만들어진 key 값을 리턴 받아 온 값 세팅
+				activityImage.setActivityNo(activity.getActivityNo());
+				// 오리지널 이름 뒤에서 점까지
+				String originalFilename = i.getOriginalFilename(); // 원본이름
+				int p = originalFilename.lastIndexOf("."); // 마지막 점의 위치
+				String ext = originalFilename.substring(p+1);
+				// 중복되지 않는 문자이름 생성
+				String prename = UUID.randomUUID().toString().replace("-", "");
+				String filename = prename;
+				
+				activityImage.setActivityNo(activity.getActivityNo());
+				activityImage.setActivityImageName(filename);
+				activityImage.setActivityImageExt(ext);
+				activityImage.setActivityImageSize(i.getSize());
+				log.debug("☆service☆ activityImage : " + activityImage);
+								
+				// 2-1) 테이블에 저장
+				activityMapper.updateActivityImage(activityImage);
+				
+				// 2-2) 이미지 파일을 저장
+				File f = new File(realPath+filename+"."+ext);
+				try {
+					i.transferTo(f);
+				} catch (IllegalStateException | IOException e) {
+					e.printStackTrace();
+					// IllegalStateException | IOException e 예외처리를 무조건 해야하는 예외
+					// RuntimeException은 예외처리를 하지 않아도 됨
+					throw new RuntimeException();
+				}
+			}
+		}
+		
+		// 3) 체험의 주소 수정 : activityAddress 입력
+		ActivityAddress activityAddress = activityForm.getActivityAddress();
+		activityAddress.setActivityNo(activity.getActivityNo());
+		log.debug("☆service☆ activityAddress : " + activityAddress);
+		// 3-1) 테이블에 저장
+		activityMapper.updateActivityAddress(activityAddress);
+		
+		// 4) 체험의 추천장소 수정
+		// activitySpotForm으로 체험의 추천장소와 주소 리스트도 같이 불러와 저장한다
+		List<ActivitySpotForm> spotList = activityForm.getActivitySpotForm();
+		if(spotList != null) {
+			for(ActivitySpotForm s : spotList) {
+				ActivitySpot activitySpot = new ActivitySpot();
+				activitySpot.setActivitySpotNo(s.getActivitySpot().getActivitySpotNo());
+				activitySpot.setActivitySpotName(s.getActivitySpot().getActivitySpotName());
+				activitySpot.setActivitySpotCategory(s.getActivitySpot().getActivitySpotCategory());
+				activitySpot.setActivitySpotDescription(s.getActivitySpot().getActivitySpotDescription());
+				log.debug("☆service☆ activitySpot : " + activitySpot);
+			
+				// 4-1) 테이블에 저장
+				activityMapper.updateActivitySpot(activitySpot);
+				
+				// 4-2)
+				log.debug("☆service☆ activitySpotNo : " + activitySpot.getActivitySpotNo());
+				SpotAddress spotAddress = new SpotAddress();
+				spotAddress.setSpotNo(activitySpot.getActivitySpotNo());
+				spotAddress.setSpotAddressPotalCode(s.getSpotAddress().getSpotAddressPotalCode());
+				spotAddress.setSpotAddressZip(s.getSpotAddress().getSpotAddressZip());
+				spotAddress.setSpotAddressDetail(s.getSpotAddress().getSpotAddressDetail());
+				log.debug("☆service☆ spotAddress : " + spotAddress);
+				
+				// 4-3) 테이블에 저장
+				activityMapper.updateActivitySpotAddress(spotAddress);
+			}
+		}
+	}
+	
+	//해시태그 삭제
+	public void deleteHashtag(Hashtag hashtag) {
+		// 5) 체험의 해시태그 수정
+		hashtag.setIdenNo(hashtag.getIdenNo());
+		hashtag.setTableName("체험");
+		hashtag.setHashtag(hashtag.getHashtag());
+		log.debug("☆service☆ hashtag : " + hashtag);
+		
+		// 5-1) 테이블에 저장
+		activityMapper.deleteActivityHashtag(hashtag);
+
+	}
 }

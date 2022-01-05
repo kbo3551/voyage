@@ -182,7 +182,7 @@
 		SET activity_spot_name = #{activitySpotName},
 		activity_spot_category = #{activitySpotCategory},
 		activity_spot_description = #{activitySpotDescription}
-		WHERE activity_no = #{activityNo}
+		WHERE activity_spot_no = #{activitySpotNo}
 	</update>
 	
 	<!-- 체험 추천장소의 주소 수정 -->
@@ -193,6 +193,7 @@
 		spot_address_detail = #{spotAddressDetail},
 		update_date = NOW()
 		WHERE spot_no = #{spotNo}
+		AND spot_table = '체험'
 	</update>
 	
 	

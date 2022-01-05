@@ -199,6 +199,7 @@
 		spot_address_detail = #{spotAddressDetail},
 		update_date = NOW()
 		WHERE spot_no = #{spotNo}
+		AND spot_table = '건물'
 	</update>
 	
 	<!-- 숙소-건물의 해시태그 삭제 -->
