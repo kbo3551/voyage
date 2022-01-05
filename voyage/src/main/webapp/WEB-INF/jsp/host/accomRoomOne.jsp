@@ -130,7 +130,6 @@
 		body {
 			font-family: 'SpoqaHanSansNeo-Regular';
 		}
-		
 	</style>
 	
 	<!-- Preloader Start -->
@@ -151,17 +150,23 @@
     <!-- banner.jsp 끝 -->
 
     <main>
+
+        <!-- Hero Start-->
         <div class="hero-area3 hero-overly2 d-flex align-items-center ">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-xl-8 col-lg-9">
                         <div class="hero-cap text-center pt-50 pb-20">
-                            <h2>체험 상세</h2>
+                            <h2>객실 상세</h2>
                         </div>
+                        <!--Hero form -->
+                    
                     </div>
                 </div>
             </div>
         </div>
+        <!--Hero End -->
+      <!--================Blog Area =================-->
       <section class="blog_area single-post-area section-padding" style="padding-bottom: 20px !important;">
          <div class="container">
             <div class="row">
@@ -170,26 +175,25 @@
                      <div class="feature-img">
                     <div class="slider">
                     <div class="slides">
-                        <c:forEach items="${activityOne.getActivityImageList()}" var="aci">
-                           <div id="slide-1"><img id="imga" src="${pageContext.request.contextPath}/resources/image/activity/${aci.getActivityImageName()}.${aci.activityImageExt}" alt=""></div>
+                        <c:forEach items="${accomRoomOne.getAccomRoomImageList()}" var="ari">
+                           <div id="slide-1"><img id="imga" src="${pageContext.request.contextPath}/resources/image/accom_room/${ari.getAccomRoomImageName()}.${ari.accomRoomImageExt}" alt=""></div>
                          </c:forEach>
                       </div> 
                       </div>
                      </div>
                      <div class="blog_details">
-                        <h2> ${activityOne.activityName }</h2>
+                        <h2> ${accomRoomOne.accomRoomName } room</h2>
                         <ul class="blog-info-link mt-3 pt-4 mb-0">
-                           <li><a style="color: #555555;"><i class="fa fa-user"></i> 최대인원 ${activityOne.activityMaxP }</a></li>
-                           <li><a style="color: #555555;"><i class="fa fa-comments"></i> 최대이용시간 ${activityOne.activityMaxT }</a></li>
+                           <li><a style="color: #555555;"><i class="fa fa-user"></i> 기준인원 ${accomRoomOne.accomRoomStan }</a></li>
+                           <li><a style="color: #555555;"><i class="fa fa-comments"></i> 최대인원 ${accomRoomOne.accomRoomMax }</a></li>
                         </ul>
                         <ul class="blog-info-link mt-3 mb-4">
-                           <li style="font-size: 1.3em;"><a style="color: #555555;"><i class="fa fa-user"></i>₩ ${activityOne.activityPrice }</a></li>
+                           <li style="font-size: 1.3em;"><a style="color: #555555;">₩ ${accomRoomOne.accomRoomPrice }</a></li>
                         </ul>
                         <div class="quote-wrapper">
                            <div class="quotes">
-                              DESCRIPTION : ${activityOne.activityDescription }
+                              DESCRIPTION : ${accomRoomOne.accomRoomDescription }
                               <br><br>
-                              <small>오픈: ${activityOne.activityOpenHour } / 마감: ${activityOne.activityCloseHour }</small>
                            </div>
                         </div>
                      </div>
@@ -197,38 +201,37 @@
                </div>
                <div class="col-lg-4">
                   <div class="blog_right_sidebar">
+                     <aside class="single_sidebar_widget search_widget">
+                        <form action="${pageContext.request.contextPath}/#" method="get">
+							<input type="hidden" name="accomRoomNo" value="${accomRoomOne.accomRoomNo }">
+                           <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit" >
+                           		삭제
+                           </button>
+                        </form>
+                        
+                     </aside>
 					<aside class="single_sidebar_widget tag_cloud_widget">
                         <h4 class="widget_title">해시태그</h4>
                         <ul class="list">
-                        	<c:forEach items="${activityOne.getHashtagList()}" var="h">
+                        	<c:forEach items="${accomRoomOne.getHashtagList()}" var="h">
 		                       <li>
 	                              <a href="${pageContext.request.contextPath}/#">${h.getHashtag() }</a>
 	                           </li>
 	                     	</c:forEach>	
                         </ul>
                      </aside>
-                     <aside class="single_sidebar_widget popular_post_widget">
-                        <h3 class="widget_title">Host 추천 장소</h3>
-                        <c:forEach items="${activityOne.getActivitySpotList()}" var="acs">
-	                        <div class="media post_item">
-	                           <img src="${pageContext.request.contextPath}/assets/img/post/post_1.png" alt="post">
-	                           <div class="media-body">
-	                              <a>
-	                                 <h3 style="margin-top: 0px !important;">${acs.getActivitySpotName()}</h3>
+                     <aside class="single_sidebar_widget post_category_widget">
+                        <h4 class="widget_title">Items<span style="font-size: 0.6em; padding-left: 5%;">추가 가능한 물품 목록</span></h4>
+                        <ul class="list cat-list">
+          					<c:forEach items="${accomRoomOne.getAccomRoomItemList()}" var="art" varStatus="status">
+	          					<li style="color: #555555;">
+	                              <a href="#" class="d-flex">
+	                                 ${art.getAccomRoomItemName() } <span style="font-size: 0.9em; padding-left: 3%;">₩${art.getAccomRoomItemPrice() }</span>
 	                              </a>
-	                              <small style="color: #EB566C;">${acs.getActivitySpotCategory()}</small>
-	                              <h5 style="margin-top: 2px !important;">${acs.getActivitySpotDescription()}</h5>
-	                           </div>
-	                        </div>
-	                     </c:forEach>
-                     </aside>
-                     
-                     <aside class="single_sidebar_widget instagram_feeds">
-                            <form action="${pageContext.request.contextPath}/#" method="get">
-							<input type="hidden" name="accomRoomNo" value="${activityOne.activityNo}">
-                     <div align="center"><button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit">삭제</button></div>
-                     </form>
-                     </aside>
+	                           </li>
+          					</c:forEach>
+                        </ul>
+                      </aside>
                   </div>
                </div>
             </div>
@@ -238,11 +241,8 @@
             <div class="container">
                 <div class="row justify-content-center pt-80" style="border-top: 1px solid #eee;">
                 </div>
-						<br>
-                        </div>
-                    </div>
-               
-
+            </div>
+        </div>
         
     </main>
 
