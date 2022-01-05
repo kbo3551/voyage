@@ -154,7 +154,6 @@
 			* {
     box-sizing: border-box;
   }
-
 			
 		</style>
 		
@@ -257,7 +256,7 @@
 						
 						  <div class="slides">
 						   <c:forEach items="${activityOne.getActivityImageList()}" var="aci">
-						    <div id="slide-1"><img id="imga" src="${contextPath}/resources/image/activity/${aci.getActivityImageName()}.jpg" alt=""></div>
+						    <div id="slide-1"><img id="imga" src="${contextPath}/resources/image/activity/${aci.getActivityImageName()}.${aci.activityImageExt}" alt=""></div>
 						    </c:forEach>
 						  </div>
 						</div>
