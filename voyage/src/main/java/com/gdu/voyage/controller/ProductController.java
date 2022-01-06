@@ -79,31 +79,35 @@ public class ProductController {
       paramMap.put("searchFacilityList", facilityList);
       paramMap.put("minPrice",  minPrice);
       paramMap.put("maxPrice",  maxPrice);
+      paramMap.put("page",  page);
+      paramMap.put("ROW_PER_PAGE",  ROW_PER_PAGE);
       
-      List<AccomBuilding> accomBuilding = new ArrayList<>();
+      Map<String, Object> accomMap = new HashMap<>();
       
       // 검색 조회와 일반 조회 분기
       if(searchWord != null || searchAddress != null || searchFacilityList != null || searchPrice != null) {
          // [사용자] 숙소-건물 목록 검색 조회
-         accomBuilding = productService.getAccomBuildingListBySearch(paramMap);
+    	  accomMap = productService.getAccomBuildingListBySearch(paramMap);
 //		               log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
-         model.addAttribute("accomBuilding", accomBuilding);
-         log.debug("[debug] ProductController.getAccomBuildingList accomBuilding : " + accomBuilding);
+    	  
+         log.debug("[debug] ProductController.getAccomBuildingList accomBuilding : " + accomMap);
       } else {
          // [사용자] 숙소-건물 목록 조회
-    	  Map<String, Object> accomMap = productService.getAccomBuildingList(page, ROW_PER_PAGE,null);
+    	  accomMap = productService.getAccomBuildingList(page, ROW_PER_PAGE,null);
 //		         log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
     	  
     	  
-    	  model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
-    	  model.addAttribute("beginRow", beginRow);
-         model.addAttribute("accomBuilding", accomMap.get("accomBuildingList"));
-         model.addAttribute("lastPage", accomMap.get("lastPage"));
-	      model.addAttribute("totalCount", accomMap.get("totalCount"));
-	      model.addAttribute("page", page);
-	      model.addAttribute("pageNo", pageNo);
-         log.debug("[debug] ProductController.getAccomBuildingList accomBuilding : " + accomBuilding);
+    	  
+         log.debug("[debug] ProductController.getAccomBuildingList accomBuilding : " + accomMap);
       }
+      
+      model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
+	  model.addAttribute("beginRow", beginRow);
+     model.addAttribute("accomBuilding", accomMap.get("accomBuildingList"));
+     model.addAttribute("lastPage", accomMap.get("lastPage"));
+      model.addAttribute("totalCount", accomMap.get("totalCount"));
+      model.addAttribute("page", page);
+      model.addAttribute("pageNo", pageNo);
             
       // [사용자] 숙소-건물 시설 인기 조회
       List<Map<String, Object>> facilityByBest = productService.getAccomBuildingFacilityByBest();

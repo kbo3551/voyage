@@ -92,13 +92,45 @@ public class ProductService {
 	}
 		
 	// [사용자] 숙소-건물 목록 검색 조회
-	public List<AccomBuilding> getAccomBuildingListBySearch(Map<String, Object> param) {
+	public Map<String, Object> getAccomBuildingListBySearch(Map<String, Object> param) {
 		log.debug("[debug] ProductService.getAccomBuildingListBySearch param : " + param);
-		
-		List<AccomBuilding> accomBuildingList = productMapper.selectAccomBuildingListBySearch(param);
-		
-		log.debug("[debug] ProductService.getAccomBuildingList accomBuildingList : " + accomBuildingList);
-		return accomBuildingList;
+		log.debug("[debug] ProductService.getAccomBuildingList currentPage : " );
+        log.debug("[debug] ProductService.getAccomBuildingList ROW_PER_PAGE : " );
+        
+        int ROW_PER_PAGE=((int)param.get("ROW_PER_PAGE"));
+
+        int beginRow = (((int)param.get("page"))-1) * ROW_PER_PAGE;
+        
+        List<AccomBuilding> accomBuildingList = new ArrayList<>();
+        
+        param.put("beginRow", beginRow);
+        param.put("count", null);
+
+        accomBuildingList = productMapper.selectAccomBuildingListBySearch(param);
+
+        Map<String, Object> returnMap = new HashMap<>();
+        
+        param.replace("count", 1);
+        
+        int lastPage = 0;
+        AccomBuilding accomBuilding = productMapper.selectAccomBuildingListBySearch(param).get(0);
+        int totalCount = accomBuilding.getCnt();
+        
+ 
+        log.debug("[debug] ProductService.getAccomBuildingList accomBuildingList : " + accomBuildingList);
+
+        
+        lastPage = totalCount / ROW_PER_PAGE;
+        
+        if(totalCount % ROW_PER_PAGE !=0) {
+            lastPage += 1;
+        }
+        
+        returnMap.put("accomBuildingList", accomBuildingList);
+        returnMap.put("lastPage", lastPage);
+        returnMap.put("totalCount", totalCount);
+
+		return returnMap;
 	}
 		
 	// [사용자] 숙소-건물 상세 조회

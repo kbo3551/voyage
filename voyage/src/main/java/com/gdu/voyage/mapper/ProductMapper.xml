@@ -223,12 +223,14 @@
 	<!-- 숙소-건물 목록 검색 조회 -->
    <select id="selectAccomBuildingListBySearch" parameterType="Map" resultMap="resultAccomBuilding">
       SELECT 
-          <if test="count == null">
-            ab.*, aba.*, abf.*, abi.*, abs.*, h.* , abr.*, abrCnt.*
-         </if>
-         <if test="count == 1">
-         count(*)
-      </if>
+	<choose>
+                <when test="count == 1">
+                    count(*) cnt
+                </when>
+                <otherwise>
+                    ab.*, aba.*, abf.*, abi.*, abs.*, h.* , abr.*, abrCnt.*
+                </otherwise>
+            </choose>
       FROM 
          (SELECT * FROM accom_building) ab,
          (SELECT accom_building_no, GROUP_CONCAT(accom_address_zip) accom_address_zip FROM accom_address GROUP BY accom_building_no) aba,
@@ -275,7 +277,11 @@
             ]]>
                GROUP BY accom_building_name      
       ORDER BY
-         update_date DESC;
+         update_date DESC
+	 <if test="count != null">
+            LIMIT
+                #{beginRow}, #{ROW_PER_PAGE}
+        </if>
    </select>
    
     <!-- 숙소-건물 상세 조회 -->
