@@ -35,7 +35,7 @@ public interface ProductMapper {
 	
 	// 체험 목록
 	// [사용자] 체험 목록 조회
-	List<Activity> selectActivityList();
+	List<Activity> selectActivityList(Integer beginRow, Integer ROW_PER_PAGE, Integer count);
 	// [사용자] 체험 목록 검색 조회
 	List<Activity> selectActivityListBySearch(Map<String, Object> param);
 	// [사용자] 체험 지역 인기 조회

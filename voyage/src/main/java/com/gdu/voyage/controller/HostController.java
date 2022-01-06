@@ -212,9 +212,8 @@ public class HostController {
 		log.debug("[debug] ProductController.getActivityOne activityOne : " + activityOne);
 		
 		// [사업자] 체험 상세-목록 조회
-		List<Activity> activityOneList = productService.getActivityList(currentPage, ROW_PER_PAGE);
-		model.addAttribute("activityOneList", activityOneList);
-		log.debug("[debug] ProductController.getActivityOne activityOneList : " + activityOneList);
+		Map<String, Object> activityMap = productService.getActivityList(currentPage, ROW_PER_PAGE,2);
+		model.addAttribute("activityOneList", activityMap.get("activityList"));
 		
 		return "/host/activityOne";
 	}
@@ -238,7 +237,7 @@ public class HostController {
 	      log.debug("[debug] ProductController.getAccomBuildingOne accomRoom : " + accomRoom);
 
 	      // [사업자] 숙소-건물 상세-목록 조회
-	      Map<String, Object> accomMap = (Map<String, Object>) productService.getAccomBuildingList(currentPage, ROW_PER_PAGE,2);
+	      Map<String, Object> accomMap = productService.getAccomBuildingList(currentPage, ROW_PER_PAGE,2);
 	      model.addAttribute("accomBuildingOneList", accomMap.get("accomBuildingList"));
 	      log.debug("[debug] ProductController.getAccomBuildingOne accomMap : " + accomMap);
 	      

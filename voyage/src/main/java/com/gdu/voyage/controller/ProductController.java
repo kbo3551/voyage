@@ -173,13 +173,17 @@ public class ProductController {
 	// [사용자] 체험
 	@GetMapping("/getActivityProductList")
 	public String getActivityProduct(Model model,
-                                @RequestParam(defaultValue = "1") int currentPage,
+                                @RequestParam(defaultValue = "1") int page,
                                 @RequestParam @Nullable String searchWord, 
                                 @RequestParam @Nullable String searchAddress,
                                 @RequestParam @Nullable Integer searchReviewScore,
                                 @RequestParam @Nullable String searchPrice
                                 ) {
         log.debug("[debug] ProductController.getActivityProduct 실행");
+        
+        // 페이징
+        int beginRow = (page * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
+        int pageNo = ((beginRow / 100) * 10 + 1);
       
         // 검색 시 사용할 매개변수 가공
         Integer minPrice = 0;
@@ -205,22 +209,30 @@ public class ProductController {
         paramMap.put("searchReviewScore", searchReviewScore);
         paramMap.put("minPrice",  minPrice);
         paramMap.put("maxPrice",  maxPrice);
+        paramMap.put("page",  page);
+        paramMap.put("ROW_PER_PAGE",  ROW_PER_PAGE);
       
-        List<Activity> activity = new ArrayList<>();
+        Map<String, Object> activityMap = new HashMap<>();
       
         // 검색 조회와 일반 조회 분기
         if(searchWord != null || searchAddress != null ||  searchReviewScore != null || searchPrice != null) {
            // [사용자] 체험 목록 검색 조회
-           activity = productService.getActivityListBySearch(paramMap);
+        	activityMap = productService.getActivityListBySearch(paramMap);
 //	               log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
-           model.addAttribute("activity", activity);
-           log.debug("[debug] ProductController.getActivityProduct activity : " + activity);
+
         } else {
            // [사용자] 체험 목록 조회
-           activity = productService.getActivityList(currentPage, ROW_PER_PAGE);
-           model.addAttribute("activity", activity);
-           log.debug("[debug] ProductController.getActivityProduct activity : " + activity);
+        	activityMap = productService.getActivityList(page, ROW_PER_PAGE,null);
+        	
         }
+        
+        model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
+  	  model.addAttribute("beginRow", beginRow);
+       model.addAttribute("activity", activityMap.get("activityList"));
+       model.addAttribute("lastPage", activityMap.get("lastPage"));
+        model.addAttribute("totalCount", activityMap.get("totalCount"));
+        model.addAttribute("page", page);
+        model.addAttribute("pageNo", pageNo);
 
         // [사용자] 체험 지역 인기 조회
         List<Map<String, Object>> addressZipByBest = productService.getActivityAddressByBest();
@@ -243,7 +255,10 @@ public class ProductController {
 		log.debug("[debug] ProductController.getActivityOne activityOne : " + activityOne);
 		
 		// [사용자] 체험 상세-목록 조회
-		List<Activity> activityOneList = productService.getActivityList(currentPage, ROW_PER_PAGE);
+		Map<String,Object> activityMap = productService.getActivityList(currentPage, ROW_PER_PAGE,2);
+		
+		@SuppressWarnings("unchecked")
+		List<Activity> activityOneList = (List<Activity>) activityMap.get("activityList") ;
 		model.addAttribute("activityOneList", activityOneList);
 		log.debug("[debug] ProductController.getActivityOne activityOneList : " + activityOneList);
 		

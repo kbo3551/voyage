@@ -28,8 +28,6 @@ public class ProductService {
 	
 	// [사용자] 숙소-건물 목록 조회
     public Map<String, Object> getAccomBuildingList(int page, int ROW_PER_PAGE, @Nullable Integer one) {
-        log.debug("[debug] ProductService.getAccomBuildingList currentPage : " );
-        log.debug("[debug] ProductService.getAccomBuildingList ROW_PER_PAGE : " );
         
 
         int beginRow = (page-1) * ROW_PER_PAGE;
@@ -94,8 +92,6 @@ public class ProductService {
 	// [사용자] 숙소-건물 목록 검색 조회
 	public Map<String, Object> getAccomBuildingListBySearch(Map<String, Object> param) {
 		log.debug("[debug] ProductService.getAccomBuildingListBySearch param : " + param);
-		log.debug("[debug] ProductService.getAccomBuildingList currentPage : " );
-        log.debug("[debug] ProductService.getAccomBuildingList ROW_PER_PAGE : " );
         
         int ROW_PER_PAGE=((int)param.get("ROW_PER_PAGE"));
 
@@ -170,19 +166,39 @@ public class ProductService {
 	}	
 	
 	// [사용자] 체험 목록 조회
-	public List<Activity> getActivityList(int currentPage, int ROW_PER_PAGE) {
-		log.debug("[debug] ProductService.getActivityList currentPage : " );
-		log.debug("[debug] ProductService.getActivityList ROW_PER_PAGE : " );
+	public Map<String, Object> getActivityList(int page, int ROW_PER_PAGE, @Nullable Integer one) {
 		
-		int beginRow = (currentPage-1) * ROW_PER_PAGE;
-		Map<String, Object> paramMap = new HashMap<>();
-		paramMap.put("beginRow", beginRow);
-		paramMap.put("ROW_PER_PAGE", ROW_PER_PAGE);
+		int beginRow = (page-1) * ROW_PER_PAGE;
+        
+        List<Activity> activityList = new ArrayList<>();
+        
+        
+        if(one == null) {
+        	activityList = productMapper.selectActivityList(beginRow,ROW_PER_PAGE, null);
+        } else if(one == 2) {
+        	activityList = productMapper.selectActivityList(beginRow,ROW_PER_PAGE, 2);
+        } else {
+        	activityList = productMapper.selectActivityList(beginRow,ROW_PER_PAGE, one);
+        }
 		
-		List<Activity> activityList = productMapper.selectActivityList();
+        Map<String, Object> returnMap = new HashMap<>();
+        
+        int lastPage = 0;
+        Activity activity = productMapper.selectActivityList(beginRow,ROW_PER_PAGE, 1).get(0);
+        int totalCount = activity.getCnt();
+        
+        lastPage = totalCount / ROW_PER_PAGE;
+        
+        if(totalCount % ROW_PER_PAGE !=0) {
+            lastPage += 1;
+        }
+        
+        returnMap.put("activityList", activityList);
+        returnMap.put("lastPage", lastPage);
+        returnMap.put("totalCount", totalCount);
 		
 		log.debug("[debug] ProductService.getActivityList activityList : " + activityList);
-		return activityList;
+		return returnMap;
 	}
 	// [사용자] 체험 지역 인기 조회
 	public List<Map<String, Object>> getActivityAddressByBest() {
@@ -192,13 +208,37 @@ public class ProductService {
 	}
 	
 	// [사용자] 체험 목록 검색 조회
-	public List<Activity> getActivityListBySearch(Map<String, Object> param) {
+	public Map<String, Object> getActivityListBySearch(Map<String, Object> param) {
 		log.debug("[debug] ProductService.getActivityListBySearch param : " + param);
+		
+		int ROW_PER_PAGE=((int)param.get("ROW_PER_PAGE"));
+        int beginRow = (((int)param.get("page"))-1) * ROW_PER_PAGE;
 		
 		List<Activity> activityList = productMapper.selectActivityListBySearch(param);
 		
+		param.put("beginRow", beginRow);
+        param.put("count", null);
+        
+        Map<String, Object> returnMap = new HashMap<>();
+        param.replace("count", 1);
+        
+        int lastPage = 0;
+        Activity activity = productMapper.selectActivityListBySearch(param).get(0);
+        int totalCount = activity.getCnt();
+        
+        
+        lastPage = totalCount / ROW_PER_PAGE;
+        
+        if(totalCount % ROW_PER_PAGE !=0) {
+            lastPage += 1;
+        }
+        
+        returnMap.put("activityList", activityList);
+        returnMap.put("lastPage", lastPage);
+        returnMap.put("totalCount", totalCount);
+        
 		log.debug("[debug] ProductService.getActivityList activityList : " + activityList);
-		return activityList;
+		return returnMap;
 	}
 
 	// [사용자] 체험 상세 조회

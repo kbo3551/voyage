@@ -22,6 +22,7 @@ public class Activity {
 	private String activityStateAdmin;
 	private String createDate;
 	private String updateDate;
+	private int cnt;
 
 	// 1:1 AccomBuildingImage (이미지 하나만 불러올때)
 	private ActivityImage activityImage;
