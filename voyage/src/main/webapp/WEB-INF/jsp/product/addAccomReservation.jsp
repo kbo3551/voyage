@@ -62,7 +62,7 @@
 			    border: 0px;
 			}
 		</style>
-		
+
     </head>
     
     <body>
@@ -105,11 +105,11 @@
 				<div class="wizard-container">
 	
 					<div class="wizard-card ct-wizard-orange" id="wizardProperty">
-						<form action="${contextPath}/host/addAccomBuilding" method="post" enctype="multipart/form-data" id="accomBuildingForm">
+						<form action="${pageContext.request.contextPath}/member/loadPayment" method="get" id="accomBuildingForm">
 							<div class="wizard-header">
-								<h3>
-									<b>Accommodation</b> _building<br>
-									<small>숙소-건물의 정보를 입력해주세요.</small>
+								<h3 class="pt-15 pb-15">
+									<b>Reservation</b> _accomodation<br>
+									<small>숙소 예약 정보를 확인하세요.</small>
 								</h3>
 							</div>
 	
@@ -121,49 +121,83 @@
 							</ul>
 	
 							<div class="tab-content">
-	
 								<div class="tab-pane" id="step1">
-									<h3 class="text-center">Basic information</h3>
-									<div class="row p-b-15">
-										<div class="col-sm-offset-1" style="margnin:0 auto;">
-											<div class="picture-container" style="float:left; margin-left:20px;">
-												<div class="picture">
-													<img src="${contextPath}/assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview" title="" />
-													<input type="file" name="accomBuildingImage" id="wizard-picture">
-												</div>
-											</div>
-											<div class="picture-container" style="float:left; margin-left:20px;">
-												<div class="picture">
-													<img src="${contextPath}/assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview2" title="" />
-													<input type="file" name="accomBuildingImage" id="wizard-picture2">
-												</div>
-											</div>
-											<div class="picture-container" style="float:left; margin-left:20px;">
-												<div class="picture">
-													<img src="${contextPath}/assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview3" title="" />
-													<input type="file" name="accomBuildingImage" id="wizard-picture3">
-												</div>
-											</div>
-											<div class="picture-container" style="float:left; margin-left:20px;">
-												<div class="picture">
-													<img src="${contextPath}/assets/img/default-property.jpg" class="picture-src" id="wizardPicturePreview4" title="" />
-													<input type="file" name="accomBuildingImage" id="wizard-picture4">
-												</div>
+									<div class="row mt-4">
+										<div class="col-sm-4 pt-40 mr-0 pr-0 pl-30" style="margin:0 auto; display: flex; align-content: center; align-items: flex-start;">
+											<div class="form-group">											
+												<input type="hidden" name="accomCheckIn" value="${checkIn }">
+												<input type="hidden" name="accomCheckOut" value="${checkOut }">				
+												<h3 class="pt-20 pb-20"><i>check In <span style="color: #BD83CE; font-weight: bold; font-size: 1.2em;">${checkIn }</span>, check Out <span style="color: #BD83CE; font-weight: bold; font-size: 1.2em;">${checkOut }</span></i></h3>
+												<c:forEach items="${accomRoomOne.accomRoomImageList }" var="ari" varStatus="status" begin="1" end="1">
+						                   			<img src="${pageContext.request.contextPath}/resources/image/accom_room/${ari.getAccomRoomImageName() }.${ari.getAccomRoomImageExt() }" alt="">
+						                   		</c:forEach>
 											</div>
 										</div>
-										<div class="col-sm-6" style="margin:0 auto;"> 
-											<div class="form-group">
-												<h4>Name <small>(required)</small></h4>
-												<input name="accomBuilding.accomBuildingName" type="text" id="accomBuildingName" class="form-control" placeholder="Sky villa ..." style="height:34px;">
+										<div class="col-sm-6 pt-30 pl-0 pr-30" style="margin:0 auto;"> 
+											<h1 class="text-center pb-30 pr-30">Basic information</h1>
+											<div style="display: flex; flex-wrap: nowrap; justify-content: flex-start; border-bottom: 1px solid #eaeaea;">
+												<div class="col-sm-12">
+													<div class="form-group" style="float: left; width: 50%;">
+														<input type="hidden" name="accomRoomNo" value="${accomRoomOne.accomRoomNo }">
+														<input type="hidden" name="hostNo" value="${accomRoomOne.hostNo }">	
+														<h4>Building <small style="font-size: 0.6em;">숙소 이름</small></h4>
+														<h2 class="pt-10 pl-10" style="letter-spacing: 0.1em;">${accomRoomOne.accomBuilding.accomBuildingName }</h2>
+													</div>
+													<div class="form-group" style="float: left; width: 50%;">
+														<h4>Room <small style="font-size: 0.6em;">객실 이름</small></h4>
+														<h2 class="pt-10 pl-10" style="letter-spacing: 0.1em;">${accomRoomOne.accomRoomName }</h2>
+													</div>
+												</div>
 											</div>
-	
-											<div class="form-group">
-												<h4>Description <small>(required)</small></h4>
-												<textarea name="accomBuilding.accomBuildingDescription" id="accomBuildingDescription" class="form-control" placeholder="루프탑이 있는 ..." rows="8"></textarea>
+											<div class="pt-30" style="display: flex; flex-wrap: nowrap; justify-content: flex-start; border-bottom: 1px solid #eaeaea;">
+												<div class="col-sm-12">
+													<div class="form-group" style="float: left; width: 50%;">
+														<h4>Buidlgin Description</h4>
+														<h2 class="pt-10 pl-10" style="font-size: 0.9em;">${accomRoomOne.accomBuilding.accomBuildingDescription }</h2>
+													</div>
+													<div class="form-group" style="float: left; width: 50%;">
+														<h4>Phone</h4>
+														<h2 class="pt-10 pl-10" style="font-size: 0.9em;">${accomRoomOne.accomBuilding.accomBuildingPhone }</h2>
+													</div>
+												</div>
 											</div>
-											<div class="form-group">
-												<h4>Phone <small>(required)</small></h4>
-												<input name="accomBuilding.accomBuildingPhone" type="tel" id="accomBuildingPhone" class="form-control" placeholder="02-0000-0000" style="height:34px;">
+											<div class="pt-15" style="display: flex; flex-wrap: nowrap; justify-content: flex-start; border-bottom: 1px solid #eaeaea;">
+												<div class="col-sm-12">
+													<div class="form-group" style="float: left;">
+														<h4>Facility <small style="font-size: 0.6em;">시설 정보</small></h4>
+														<div style="display: flex; flex-wrap: nowrap; justify-content: flex-start;">
+															<c:forEach items="${accomRoomOne.accomBuildingFacilityList }" var="abf" varStatus="status">
+																<c:choose>
+																 	<c:when test="${status.last}">
+															            <h2 class="pt-10 ml-10" style="float: left; font-size: 0.9em; width: auto;">${abf.accomBuildingFacilityName }</h2>
+															        </c:when>
+															        <c:otherwise>
+															            <h2 class="pt-10 ml-10" style="float: left; font-size: 0.9em; width: auto;">${abf.accomBuildingFacilityName }, </h2>	
+															        </c:otherwise>
+															    </c:choose>
+															</c:forEach>
+														</div>													
+													</div>
+												</div>
+											</div>
+											<div class="pt-15" style="display: flex; flex-wrap: nowrap; justify-content: flex-start; border-bottom: 1px solid #eaeaea;">
+												<div class="col-sm-12">
+													<div class="form-group" style="float: left;">
+														<h4>Item <small style="font-size: 0.6em;">물품 정보</small></h4>
+														<div style="display: flex; flex-wrap: nowrap; justify-content: flex-start;">
+															<c:forEach items="${accomRoomOne.accomRoomItemList }" var="art" varStatus="status">
+																<c:choose>
+																 	<c:when test="${status.last}">
+															            <h2 class="pt-10 ml-10" style="float: left; font-size: 0.9em; width: auto;">${art.accomRoomItemName }</h2>
+															        </c:when>
+															        <c:otherwise>
+															            <h2 class="pt-10 ml-10" style="float: left; font-size: 0.9em; width: auto;">${art.accomRoomItemName }, </h2>	
+															        </c:otherwise>
+															    </c:choose>
+															</c:forEach>
+														</div>													
+													</div>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -171,111 +205,130 @@
 								<!--  End step 1 -->
 	
 								<div class="tab-pane" id="step2">
-									<h3 class="text-center">Address &amp; Facility</h3>
 									<div class="row mt-4">
-										<div class="col-sm-6" style="margin:0 auto;">
-										
-											<div class="col-sm-12">
-												<div class="form-group">
-													<h4>
-														Address <small>(required) </small>
-														<input type="button" class="btn-sm" style="width:130px; color:white; background: #ff3d1c; border-radius: 30px;
-    													color: #fff; font-weight: 500;" onclick="execDaumPostcode()" value="우편번호">
-													</h4>
-		                                    		<input type="number" class="form-control" id="postalCode" name="accomAddress.accomAddressPotalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" readonly="readonly" style="height:34px;">
-													<input type="text" class="form-control" id="roadAddress" name="accomAddress.accomAddressZip" placeholder="도로명주소가 입력됩니다." readonly="readonly" style="height:34px;">
-													<input type="text" class="form-control" id="addressDetail" name="accomAddress.accomAddressDetail" placeholder="상세주소" style="height:34px;">
-												</div>
+										<div class="col-sm-4 pt-40 mr-0 pr-0 pl-30" style="margin:0 auto; display: flex; align-content: center; align-items: flex-start;">
+											<div class="form-group">
+												<c:forEach items="${accomRoomOne.accomRoomImageList }" var="ari" varStatus="status" begin="1" end="1">
+												<h3 class="pt-20 pb-20"><i>check In <span style="color: #BD83CE; font-weight: bold; font-size: 1.2em;">${checkIn }</span>, check Out <span style="color: #BD83CE; font-weight: bold; font-size: 1.2em;">${checkOut }</span></i></h3>
+						                   			<img src="${pageContext.request.contextPath}/resources/image/accom_room/${ari.getAccomRoomImageName() }.${ari.getAccomRoomImageExt() }" alt="">
+						                   		</c:forEach>
 											</div>
-											
-											<div class="col-sm-12 mt-4">
-												<div class="form-group">
-													<h4>
-														Facility
-														<span class="m-2" style="float: right;">
-															<input type="button" class="btn-sm" style="width:80px; color:white; background: #ff3d1c; border-radius: 30px;
-		    													color: #fff; font-weight: 500;" id="addFacility" value="시설추가">
-		    												<input type="button" class="btn-sm" style="width:80px; color:white; background: #ff3d1c; border-radius: 30px;
-		    													color: #fff; font-weight: 500;" id="delFacility" value="삭제">
-			                                    		</span>
-		                                    		</h4>
-		                                    		<h4><small>* 입력 폼 하나당, 시설 하나씩 입력해주세요.</small></h4>
-		                                    		
-		                                    		<div class="form-group" id="facilityPlace">
-														<input type="text" class="form-control" id="accomBuildingFacilityName" name="accomBuildingFacility[0].accomBuildingFacilityName" placeholder="ex) 주차장" style="height:34px;">
+										</div>
+										<div class="col-sm-6 pt-30 pl-0 pr-30" style="margin:0 auto;"> 
+											<h1 class="text-center pb-25 pr-30">Price &amp; Option</h1>
+											<div class="pt-50 pb-17" style="display: flex; flex-wrap: nowrap; justify-content: flex-start; border-bottom: 1px solid #eaeaea;">
+												<div class="col-sm-12">
+													<div class="form-group">
+														<input type="hidden" name="accomAmount" id="accomAmount" value="">
+														<h4>Price <small style="font-size: 0.6em;">추가 인원과 추가 물품의 가격을 모두 더한 금액입니다.</small></h4>
+														<h1 class="pt-10 pl-10" style="letter-spacing: 0.1em; font-size: 1.5em;"><i><span id="total">${accomRoomOne.accomRoomPrice }</span></i></h1>
 													</div>
 												</div>
 											</div>
-											
+											<div class="pt-15" style="display: flex; flex-wrap: nowrap; justify-content: flex-start; border-bottom: 1px solid #eaeaea;">
+												<div class="col-sm-12">
+													<div class="form-group">
+														<input type="hidden" id="accomRoomStan" value="${accomRoomOne.accomRoomStan }">
+														<input type="hidden" id="accomRoomPrice" value="${accomRoomOne.accomRoomPrice }">
+														<h4>사용인원  <small style="font-size: 0.6em;">￦10000</small><span class="pl-10" style="font-size: 0.8em;"><i class="fa fa-user" style="color: #C99DBC;"></i> 기준인원 ${accomRoomOne.accomRoomStan } &nbsp; <i class="fa fa-user" style="color: #C99DBC;"></i> 최대인원 ${accomRoomOne.accomRoomMax }</span></h4>
+														<div class="input-group" style="width: 300px;">
+														    <input type="number" class="form-control" name="accomUsePerson" id="accomUsePerson" min="${accomRoomOne.accomRoomStan }" max="${accomRoomOne.accomRoomMax }" placeholder="${accomRoomOne.accomRoomStan }" value="${accomRoomOne.accomRoomStan }" style="height: 34px; width: 150px;">
+															<span class="input-group-text">명</span>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="col-sm-12 pt-15">
+												<div class="form-group" style="display: flex; flex-wrap: nowrap;">
+												<c:set var="itemLast" value="0"/>
+													<c:forEach items="${accomRoomOne.accomRoomItemList }" var="art" varStatus="status">
+													<c:set var="itemLast" value="${itemLast +1 }"/>
+														<div class="pr-20">
+															<h4>${art.getAccomRoomItemName() } <small style="font-size: 0.6em;">￦${art.getAccomRoomItemPrice() }</small></h4>
+															<div style="float: left;">
+																<div class="input-group">
+<%-- 																	<c:set var="x" value="accomItemPrice"/>  --%>
+<%-- 																	<input type="text" id="${x+status.count}" value="${art.getAccomRoomItemPrice() }" readonly="readonly"> --%>
+																	
+																	<input type="hidden" id="accomItemPrice${status.count }" value="${art.getAccomRoomItemPrice() }">
+																    <input type="number" class="form-control" name="accomUsePerson" id="accomRoomItemQnt${status.count}" min="0" max="${art.getAccomRoomItemQnt() }" placeholder="0" style="height:34px;">
+																	<span class="input-group-text">개</span>
+																</div>
+															</div>
+														</div>
+													</c:forEach>
+													<input type="hidden" id="itemLast" value="${itemLast }">
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
 								<!-- End step 2 -->
 	
 								<div class="tab-pane" id="step3">
-									<h3 class="text-center">Spot &amp; Hashtag</h3>
-									<div class="row mt-4">
-										<div class="col-sm-6" style="margin:0 auto;">
+<!-- 									<h3 class="text-center">Spot &amp; Hashtag</h3> -->
+<!-- 									<div class="row mt-4"> -->
+<!-- 										<div class="col-sm-6" style="margin:0 auto;"> -->
 										
-											<div class="col-sm-12 mt-2">
-												<div class="form-group">
-													<h4>
-														Spot
-														<span class="m-2" style="float: right;">
-															<input type="button" class="btn-sm" style="width:80px; color:white; background: #ff3d1c; border-radius: 30px;
-		    													color: #fff; font-weight: 500;" id="addSpot" value="추천장소추가">
-		    												<input type="button" class="btn-sm" style="width:80px; color:white; background: #ff3d1c; border-radius: 30px;
-		    													color: #fff; font-weight: 500;" id="delSpot" value="삭제">
-			                                    		</span>
-													</h4>
+<!-- 											<div class="col-sm-12 mt-2"> -->
+<!-- 												<div class="form-group"> -->
+<!-- 													<h4> -->
+<!-- 														Spot -->
+<!-- 														<span class="m-2" style="float: right;"> -->
+<!-- 															<input type="button" class="btn-sm" style="width:80px; color:white; background: #ff3d1c; border-radius: 30px; -->
+<!-- 		    													color: #fff; font-weight: 500;" id="addSpot" value="추천장소추가"> -->
+<!-- 		    												<input type="button" class="btn-sm" style="width:80px; color:white; background: #ff3d1c; border-radius: 30px; -->
+<!-- 		    													color: #fff; font-weight: 500;" id="delSpot" value="삭제"> -->
+<!-- 			                                    		</span> -->
+<!-- 													</h4> -->
 													
-													<div class="form-group" id="spotPlace">
-														<div id="spotForm">
-															<label><small>Name</small></label>
-				                                    		<input type="text" class="form-control" id="accomBuildingSpotName" name="accomSpotForm[0].accomBuildingSpot.accomBuildingSpotName" placeholder="ex) 보보커피" style="height:34px;">
-															<label><small>Category</small></label>
-															<input type="text" class="form-control" id="accomBuildingSpotCategory" name="accomSpotForm[0].accomBuildingSpot.accomBuildingSpotCategory" placeholder="ex) 카페" style="height:34px;">
-															<label><small>Description</small></label>
-															<textarea class="form-control" id="accomBuildingSpotDescription" name="accomSpotForm[0].accomBuildingSpot.accomBuildingSpotDescription" placeholder="ex) 사장님이 직접 로스팅한 에소프레소를 맛볼 수 있는 곳..." rows="8"></textarea>
-														</div>
-														<div>
-															<span>
-																<label><small>Spot Address </small></label>
-																<input type="button" class="btn-sm" style="width:130px; color:white; background: #ff3d1c; border-radius: 30px;
-		    													color: #fff; font-weight: 500;" onclick="execDaumPostcodeSpot()" value="우편번호">
-															</span>
-				                                    		<input type="number" class="form-control" id="spotPostalCode" name="accomSpotForm[0].spotAddress.spotAddressPotalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" readonly="readonly" style="height:34px;">
-															<input type="text" class="form-control" id="spotRoadAddress" name="accomSpotForm[0].spotAddress.spotAddressZip" placeholder="도로명주소가 입력됩니다." readonly="readonly" style="height:34px;">
-															<input type="text" class="form-control" id="spotAddressDetail" name="accomSpotForm[0].spotAddress.spotAddressDetail" placeholder="상세주소" style="height:34px;">
-														</div>
-														<hr>
-													</div>
-												</div>
-											</div>
+<!-- 													<div class="form-group" id="spotPlace"> -->
+<!-- 														<div id="spotForm"> -->
+<!-- 															<label><small>Name</small></label> -->
+<!-- 				                                    		<input type="text" class="form-control" id="accomBuildingSpotName" name="accomSpotForm[0].accomBuildingSpot.accomBuildingSpotName" placeholder="ex) 보보커피" style="height:34px;"> -->
+<!-- 															<label><small>Category</small></label> -->
+<!-- 															<input type="text" class="form-control" id="accomBuildingSpotCategory" name="accomSpotForm[0].accomBuildingSpot.accomBuildingSpotCategory" placeholder="ex) 카페" style="height:34px;"> -->
+<!-- 															<label><small>Description</small></label> -->
+<!-- 															<textarea class="form-control" id="accomBuildingSpotDescription" name="accomSpotForm[0].accomBuildingSpot.accomBuildingSpotDescription" placeholder="ex) 사장님이 직접 로스팅한 에소프레소를 맛볼 수 있는 곳..." rows="8"></textarea> -->
+<!-- 														</div> -->
+<!-- 														<div> -->
+<!-- 															<span> -->
+<!-- 																<label><small>Spot Address </small></label> -->
+<!-- 																<input type="button" class="btn-sm" style="width:130px; color:white; background: #ff3d1c; border-radius: 30px; -->
+<!-- 		    													color: #fff; font-weight: 500;" onclick="execDaumPostcodeSpot()" value="우편번호"> -->
+<!-- 															</span> -->
+<!-- 				                                    		<input type="number" class="form-control" id="spotPostalCode" name="accomSpotForm[0].spotAddress.spotAddressPotalCode" placeholder="버튼을 클릭해 우편번호 찾기를 진행해주세요 *" readonly="readonly" style="height:34px;"> -->
+<!-- 															<input type="text" class="form-control" id="spotRoadAddress" name="accomSpotForm[0].spotAddress.spotAddressZip" placeholder="도로명주소가 입력됩니다." readonly="readonly" style="height:34px;"> -->
+<!-- 															<input type="text" class="form-control" id="spotAddressDetail" name="accomSpotForm[0].spotAddress.spotAddressDetail" placeholder="상세주소" style="height:34px;"> -->
+<!-- 														</div> -->
+<!-- 														<hr> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
 											
-											<div class="col-sm-12 mt-4">
-												<div class="form-group">
-													<h4>
-														HashTag
-														<span class="m-2" style="float: right;">
-															<input type="button" class="btn-sm" style="width:80px; color:white; background: #ff3d1c; border-radius: 30px;
-		    													color: #fff; font-weight: 500;" id="addHashtag" value="해시태그추가">
-		    												<input type="button" class="btn-sm" style="width:80px; color:white; background: #ff3d1c; border-radius: 30px;
-		    													color: #fff; font-weight: 500;" id="delHashtag" value="삭제">
-			                                    		</span>
-		                                    		</h4>
-		                                    		<h4><small>* 입력 폼 하나당, 해시태그 하나씩 입력해주세요.</small></h4>
-		                                    		<div class="form-group" id="hashtagPlace">
-														<div class="input-group">
-														    <span class="input-group-addon"><i class="fas fa-hashtag"></i></span>
-														    <input type="text" class="form-control" id="inputHashtag" name="hashtag[0].hashtag" placeholder="ex) 오션뷰" style="height:34px;">
-														</div>
-													</div>
-												</div>
-											</div>
+<!-- 											<div class="col-sm-12 mt-4"> -->
+<!-- 												<div class="form-group"> -->
+<!-- 													<h4> -->
+<!-- 														HashTag -->
+<!-- 														<span class="m-2" style="float: right;"> -->
+<!-- 															<input type="button" class="btn-sm" style="width:80px; color:white; background: #ff3d1c; border-radius: 30px; -->
+<!-- 		    													color: #fff; font-weight: 500;" id="addHashtag" value="해시태그추가"> -->
+<!-- 		    												<input type="button" class="btn-sm" style="width:80px; color:white; background: #ff3d1c; border-radius: 30px; -->
+<!-- 		    													color: #fff; font-weight: 500;" id="delHashtag" value="삭제"> -->
+<!-- 			                                    		</span> -->
+<!-- 		                                    		</h4> -->
+<!-- 		                                    		<h4><small>* 입력 폼 하나당, 해시태그 하나씩 입력해주세요.</small></h4> -->
+<!-- 		                                    		<div class="form-group" id="hashtagPlace"> -->
+<!-- 														<div class="input-group"> -->
+<!-- 														    <span class="input-group-addon"><i class="fas fa-hashtag"></i></span> -->
+<!-- 														    <input type="text" class="form-control" id="inputHashtag" name="hashtag[0].hashtag" placeholder="ex) 오션뷰" style="height:34px;"> -->
+<!-- 														</div> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
 											
-										</div>
-									</div>
+<!-- 										</div> -->
+<!-- 									</div> -->
 								</div>
 								<!--  End step 3 -->
 	
@@ -308,7 +361,7 @@
 							<div class="wizard-footer">
 								<div class="pull-right">
 									<input type='button' class='btn btn-next btn-primary' style="background-color: #BD83CE; color: #fff;" name='next' value='Next' /> 
-									<input type='button' class='btn btn-finish btn-primary' style="background-color: #BD83CE; color: #fff;" name='finish' id="accomSubmit" value='Finish' />
+									<input type='submit' class='btn btn-finish btn-primary' style="background-color: #BD83CE; color: #fff;" name='finish' id="accomSubmit" value='Finish' />
 								</div>
 								<div class="pull-left">
 									<input type='button' class='btn btn-previous btn-default' style="background-color: #BD83CE; color: #fff;" name='previous' value='Previous' />
@@ -334,41 +387,13 @@
     </div>
     
     <!-- JS here -->
-    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
-    
-		<!-- All JS Custom Plugins Link Here here -->
-<%--         <script src="${pageContext.request.contextPath}/assets/js/vendor/modernizr-3.5.0.min.js"></script> --%>
-		<!-- Jquery, Popper, Bootstrap -->
-<%-- 		<script src="${pageContext.request.contextPath}/assets/js/vendor/jquery-1.12.4.min.js"></script> --%>
-<%--         <script src="${pageContext.request.contextPath}/assets/js/popper.min.js"></script> --%>
-<%--         <script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script> --%>
-	    <!-- Jquery Mobile Menu -->
-<%--         <script src="${pageContext.request.contextPath}/assets/js/jquery.slicknav.min.js"></script> --%>
-
-		<!-- Jquery Slick , Owl-Carousel Plugins -->
-<%--         <script src="${pageContext.request.contextPath}/assets/js/owl.carousel.min.js"></script> --%>
-<%--         <script src="${pageContext.request.contextPath}/assets/js/slick.min.js"></script> --%>
-		<!-- One Page, Animated-HeadLin -->
-        <script src="${pageContext.request.contextPath}/assets/js/wow.min.js"></script>
-<%--         <script src="${pageContext.request.contextPath}/assets/js/price-range.js"></script> --%>
-<%-- 		<script src="${pageContext.request.contextPath}/assets/js/animated.headline.js"></script> --%>
-<%--         <script src="${pageContext.request.contextPath}/assets/js/jquery.magnific-popup.js"></script> --%>
-
-		<!-- Nice-select, sticky -->
-<%--         <script src="${pageContext.request.contextPath}/assets/js/jquery.nice-select.min.js"></script> --%>
-<%-- 		<script src="${pageContext.request.contextPath}/assets/js/jquery.sticky.js"></script> --%>
-        
-        <!-- contact js -->
-<%--         <script src="${pageContext.request.contextPath}/assets/js/contact.js"></script> --%>
-<%--         <script src="${pageContext.request.contextPath}/assets/js/jquery.form.js"></script> --%>
-<%--         <script src="${pageContext.request.contextPath}/assets/js/jquery.validate.min.js"></script> --%>
-<%--         <script src="${pageContext.request.contextPath}/assets/js/mail-script.js"></script> --%>
-<%--         <script src="${pageContext.request.contextPath}/assets/js/jquery.ajaxchimp.min.js"></script> --%>
-        
-		<!-- Jquery Plugins, main Jquery -->	
-        <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  
+	  
+	<!-- Jquery Plugins, main Jquery -->	
+    <script src="${pageContext.request.contextPath}/assets/js/wow.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 
 	<script src="${contextPath}/accom/js/vendor/modernizr-2.6.2.min.js"></script>
     <script src="${contextPath}/accom/js//jquery-1.10.2.min.js"></script>
@@ -387,6 +412,8 @@
     <script src="${contextPath}/accom/js/wizard.js"></script>
 
     <script src="${contextPath}/accom/js/main.js"></script>
-
+    
+    <script src="${contextPath}/accom/js/total-price.js"></script>
+    
 </body>
 </html>

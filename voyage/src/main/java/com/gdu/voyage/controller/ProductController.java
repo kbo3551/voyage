@@ -1,24 +1,27 @@
 package com.gdu.voyage.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.ProductService;
 import com.gdu.voyage.vo.AccomBuilding;
+import com.gdu.voyage.vo.AccomPayment;
 import com.gdu.voyage.vo.AccomRoom;
 import com.gdu.voyage.vo.Activity;
+import com.gdu.voyage.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -88,23 +91,30 @@ public class ProductController {
       if(searchWord != null || searchAddress != null || searchFacilityList != null || searchPrice != null) {
          // [사용자] 숙소-건물 목록 검색 조회
     	  accomMap = productService.getAccomBuildingListBySearch(paramMap);
-//		               log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
+//			               log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
     	  
          log.debug("[debug] ProductController.getAccomBuildingList accomBuilding : " + accomMap);
       } else {
          // [사용자] 숙소-건물 목록 조회
     	  accomMap = productService.getAccomBuildingList(page, ROW_PER_PAGE,null);
-//		         log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
+//			         log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
     	  
     	  
     	  
          log.debug("[debug] ProductController.getAccomBuildingList accomBuilding : " + accomMap);
       }
       
+      if(accomMap.get("totalCount") == null) {
+    	  model.addAttribute("msg", "검색 결과가 없습니다.");
+	  	    model.addAttribute("url", "redirect:/getAccomProductList");
+	  	    return "/alert";
+      }
+
+      
       model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
 	  model.addAttribute("beginRow", beginRow);
-     model.addAttribute("accomBuilding", accomMap.get("accomBuildingList"));
-     model.addAttribute("lastPage", accomMap.get("lastPage"));
+      model.addAttribute("accomBuilding", accomMap.get("accomBuildingList"));
+      model.addAttribute("lastPage", accomMap.get("lastPage"));
       model.addAttribute("totalCount", accomMap.get("totalCount"));
       model.addAttribute("page", page);
       model.addAttribute("pageNo", pageNo);
@@ -120,7 +130,7 @@ public class ProductController {
       log.debug("[debug] ProductController.getAccomBuildingList addressZipByBest : " + addressZipByBest);
             
       return "/product/getAccomBuildingProductList";
-   }
+    }
 	
 	@GetMapping("/accomBuildingOne")
 	public String getAccomBuildingOne(Model model, int accomBuildingNo) {
@@ -149,6 +159,7 @@ public class ProductController {
 		
 		return "/product/accomBuildingOne";
 	}
+	
 	@GetMapping("/accomRoomOne")
 	public String getAccomRoomOne(Model model, int accomBuildingNo, int accomRoomNo) {
 		log.debug("[debug] ProductController.getAccomRoomOne 실행");
@@ -218,7 +229,7 @@ public class ProductController {
         if(searchWord != null || searchAddress != null ||  searchReviewScore != null || searchPrice != null) {
            // [사용자] 체험 목록 검색 조회
         	activityMap = productService.getActivityListBySearch(paramMap);
-//	               log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
+//		               log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
 
         } else {
            // [사용자] 체험 목록 조회
@@ -226,10 +237,16 @@ public class ProductController {
         	
         }
         
+        if(activityMap.get("totalCount") == null) {
+      	  model.addAttribute("msg", "검색 결과가 없습니다.");
+  	  	    model.addAttribute("url", "redirect:/getActivityProductList");
+  	  	    return "/alert";
+        }
+        
         model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
-  	  model.addAttribute("beginRow", beginRow);
-       model.addAttribute("activity", activityMap.get("activityList"));
-       model.addAttribute("lastPage", activityMap.get("lastPage"));
+  	    model.addAttribute("beginRow", beginRow);
+        model.addAttribute("activity", activityMap.get("activityList"));
+        model.addAttribute("lastPage", activityMap.get("lastPage"));
         model.addAttribute("totalCount", activityMap.get("totalCount"));
         model.addAttribute("page", page);
         model.addAttribute("pageNo", pageNo);
@@ -265,7 +282,7 @@ public class ProductController {
 		return "/product/activityOne";
 	}
 	
-	@GetMapping("/calendarAccom")
+	@GetMapping("/member/calendarAccom")
 	public String getCalendar(Model model, int accomRoomNo) {
 		log.debug("[debug] ProductController.getCalendar 실행");
 		log.debug("[debug] ProductController.getCalendar accomRoomNo : " + accomRoomNo);
@@ -275,21 +292,47 @@ public class ProductController {
 		return "/product/calendarAccom";
 	}
 	
-	@GetMapping("/addAccomReservation")
-	public String addReservation(Model model, int accomRoomNo) {
+	@GetMapping("/member/addAccomReservation")
+	public String addReservation(Model model, int accomRoomNo, String checkIn, String checkOut) {
 		log.debug("[debug] ProductController.addReservation 실행");
 		log.debug("[debug] ProductController.addReservation accomRoomNo : " + accomRoomNo);
+		log.debug("[debug] ProductController.addReservation checkIn : " + checkIn);
+		log.debug("[debug] ProductController.addReservation checkOut : " + checkOut);
 		
 		// [사용자] 숙소-건물-객실 상세 조회
 		AccomRoom accomRoomOne = productService.getAccomRoomOne(accomRoomNo);
 		model.addAttribute("accomRoomOne", accomRoomOne);
 		log.debug("[debug] ProductController.addReservation accomRoomOne : " + accomRoomOne);
-		
+
+		model.addAttribute("checkIn", checkIn);
+		model.addAttribute("checkOut", checkOut);
 		// 객실 예약 정보 조회
 		
 		return "/product/addAccomReservation";
 	}
 	
+	@GetMapping("/member/loadPayment")
+	public String addReservation(HttpSession session, AccomPayment accomPayment, Model model) {
+		log.debug("[debug] ProductController.addReservation 실행");
+
+		String memberId = ((Member) session.getAttribute("loginMember")).getMemberId();
+		log.debug("[debug] ProductController.addReservation memberId : " + memberId);
+		accomPayment.setMemberId(memberId);
+		
+		log.debug("[debug] ProductController.addReservation accomPayment : " + accomPayment);
+		
+		productService.addAccomPayment(accomPayment);
+		
+		return "/product/loadPayment";
+	}
+	
+    @GetMapping("/member/finishPayment")
+	public String addPayment() {
+		log.debug("[debug] ProductController.addReservation 실행");
+
+		return "/product/finishPayment";
+	}
+		
 	@GetMapping("/setProductCategory")
 	public String setProductCategory() {
 		log.debug("ProductController.setProductCategory 실행");

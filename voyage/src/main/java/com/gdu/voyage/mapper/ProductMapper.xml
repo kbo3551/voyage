@@ -14,7 +14,7 @@
 		<result column="create_date" property="createDate"/>
 		<result column="update_date" property="updateDate"/>
 		<result column="roomCnt" property="roomCnt"/>
-        <result column="cnt" property="cnt"/>
+		<result column="cnt" property="cnt"/>
 		<association property="accomAddress" javaType="com.gdu.voyage.vo.AccomAddress">
 			<result column="accom_address_zip" property="accomAddressZip"/>
 			<result column="accom_address_detail" property="accomAddressDetail"/>
@@ -221,17 +221,69 @@
 			0, 8;
 	</select>
 	
+	<!-- 수정수정 -->
 	<!-- 숙소-건물 목록 검색 조회 -->
    <select id="selectAccomBuildingListBySearch" parameterType="Map" resultMap="resultAccomBuilding">
       SELECT 
-	<choose>
-                <when test="count == 1">
-                    count(*) cnt
-                </when>
-                <otherwise>
                     ab.*, aba.*, abf.*, abi.*, abs.*, h.* , abr.*, abrCnt.*
-                </otherwise>
-            </choose>
+      FROM 
+         (SELECT * FROM accom_building) ab,
+         (SELECT accom_building_no, GROUP_CONCAT(accom_address_zip) accom_address_zip FROM accom_address GROUP BY accom_building_no) aba,
+         (SELECT accom_building_no, GROUP_CONCAT(accom_building_facility_name SEPARATOR ', ') accom_building_facility_name FROM accom_building_facility GROUP BY accom_building_no) abf,
+         (SELECT accom_building_no, CONCAT_WS('.',accom_building_image_name,accom_building_image_ext) accom_building_image_name FROM accom_building_image GROUP BY accom_building_no) abi,
+         (SELECT accom_building_no, GROUP_CONCAT(accom_building_spot_name SEPARATOR ', ') accom_building_spot_name FROM accom_building_spot GROUP BY accom_building_no) abs,
+         (SELECT iden_no, GROUP_CONCAT('#',hashtag SEPARATOR ' ') hashtag FROM hashtag GROUP BY iden_no) h,
+         (SELECT accom_building_no, accom_room_price FROM accom_room WHERE accom_room_state = '공개' GROUP BY accom_building_no, accom_room_price) abr,
+         (SELECT accom_building_no, COUNT(*) roomCnt FROM accom_room WHERE accom_room_state = '공개' GROUP BY accom_building_no) abrCnt
+         
+      WHERE 
+         accom_building_state_admin = '승인완료' AND
+         accom_building_state = '공개' AND
+         ab.accom_building_no = aba.accom_building_no AND
+         ab.accom_building_no = abf.accom_building_no AND
+         ab.accom_building_no = abi.accom_building_no AND
+         ab.accom_building_no = abs.accom_building_no AND
+         ab.accom_building_no = h.iden_no AND
+         ab.accom_building_no = abr.accom_building_no AND
+         ab.accom_building_no = abrCnt.accom_building_no
+         AND
+         <!-- 입렵(해시태그, 건물 이름, 건물 소개글) 검색 -->
+         <if test='#{searchWord} != null'>            
+            (h.hashtag LIKE '%${searchWord}%' OR
+            ab.accom_building_name LIKE '%${searchWord}%' OR
+            ab.accom_building_description LIKE '%${searchWord}%' OR
+            aba.accom_address_zip LIKE '%${searchWord}%' OR   
+            abf.accom_building_facility_name LIKE '%${searchWord}%')
+         </if>
+         AND
+         <!-- 지역 검색 -->
+         <if test='#{searchAccomAddress} != null'>
+            (aba.accom_address_zip LIKE '%${searchAddress}%')   
+            AND   
+         </if>
+         <if test='#{searchFacilityList} != null'>
+            (abf.accom_building_facility_name REGEXP '${searchFacilityList}')
+            AND
+         </if>            
+            <![CDATA[
+            abr.accom_room_price >= #{minPrice}
+            AND
+            abr.accom_room_price <= #{maxPrice}
+            ]]>
+               GROUP BY accom_building_name      
+      ORDER BY
+         update_date DESC
+	 <if test="count != null">
+            LIMIT
+                #{beginRow}, #{ROW_PER_PAGE}
+        </if>
+   </select>
+   
+   <!-- 수정수정 -->
+   <!-- 숙소-건물 목록 검색 조회 -->
+   <select id="selectAccomBuildingListBySearchCount" parameterType="Map" resultType="int">
+      SELECT 
+                    count(*)
       FROM 
          (SELECT * FROM accom_building) ab,
          (SELECT accom_building_no, GROUP_CONCAT(accom_address_zip) accom_address_zip FROM accom_address GROUP BY accom_building_no) aba,
@@ -475,17 +527,59 @@
 			0, 8;
 	</select>
 	
+	<!-- 수정수정 -->
 	<!-- 체험 목록 검색 조회 -->
    <select id="selectActivityListBySearch" parameterType="Map" resultMap="resultActivity">
       SELECT 
-         <choose>
-                <when test="count == 1">
-                    count(*) cnt
-                </when>
-                <otherwise>
-	         		ac.*, aca.*, aci.*, acs.*, h.*
-	      		</otherwise>
-          </choose>
+	       ac.*, aca.*, aci.*, acs.*, h.*
+      FROM 
+         (SELECT * FROM activity) ac,
+         (SELECT activity_no, GROUP_CONCAT(activity_address_zip) activity_address_zip FROM activity_address GROUP BY activity_no) aca,
+         (SELECT activity_no, CONCAT_WS('.',activity_image_name,activity_image_ext) activity_image_name FROM activity_image GROUP BY activity_no) aci,
+         (SELECT activity_no, GROUP_CONCAT(activity_spot_name SEPARATOR ', ') activity_spot_name FROM activity_spot GROUP BY activity_no) acs,
+         (SELECT iden_no, GROUP_CONCAT('#',hashtag SEPARATOR ' ') hashtag FROM hashtag GROUP BY iden_no) h
+      WHERE 
+         activity_state_admin = '승인완료' AND
+         activity_state = '공개' AND
+         ac.activity_no = aca.activity_no AND
+         ac.activity_no = aci.activity_no AND
+         ac.activity_no = acs.activity_no AND
+         ac.activity_no = h.iden_no
+         
+         <!-- 입력(해시태그, 체험 이름, 체험 소개글) 검색 -->
+         <if test="#{searchWord} != null">
+            AND
+            (h.hashtag LIKE '%${searchWord}%' OR
+            ac.activity_name LIKE '%${searchWord}%' OR
+            ac.activity_description LIKE '%${searchWord}%' OR
+            aca.activity_address_zip LIKE '%${searchWord}%')
+         </if>
+         
+         <!-- 지역 검색 -->
+         <if test="#{searchAccomAddress} != null">
+            AND
+            (aca.activity_address_zip LIKE '%${searchAddress}%')      
+         </if>
+         AND
+          <![CDATA[
+            ac.activity_price >= #{minPrice}
+            AND
+            ac.activity_price <= #{maxPrice}
+            ]]>
+               GROUP BY activity_name 
+      ORDER BY
+         update_date DESC
+     <if test="count != null">
+            LIMIT
+                #{beginRow}, #{ROW_PER_PAGE}
+        </if>
+   </select>
+   
+   <!-- 수정수정 -->
+   <!-- 체험 목록 검색 조회 -->
+   <select id="selectActivityListBySearchCount" parameterType="Map" resultType="int">
+      SELECT 
+              count(*)
       FROM 
          (SELECT * FROM activity) ac,
          (SELECT activity_no, GROUP_CONCAT(activity_address_zip) activity_address_zip FROM activity_address GROUP BY activity_no) aca,
@@ -614,17 +708,44 @@
 <!-- 			AND a.activity_no = aca.activity_no -->
 <!-- 			AND a.activity_no = h.iden_no -->
 <!-- 	</select> -->
-	
+
 	<!-- 객실 예약 내역 전체 조회 -->
-	<select id="selectAccomRoomReserveDay" parameterType="int" resultType="map">
-		SELECT
-			SUBSTR(accom_checkin, 1, 10) accomCheckIn,
-			SUBSTR(accom_checkout, 1, 10) accomCheckOut
-		FROM
-			accom_payment
+	<select id="selectAccomRoomReserveDay" parameterType="int"
+		resultType="map">
+		SELECT SUBSTR(accom_checkin, 1, 10) accomCheckIn,
+		SUBSTR(accom_checkout, 1, 10) accomCheckOut FROM accom_payment
 		WHERE accom_room_no=#{accomRoomNo}
 	</select>
-	
-	
-	
+
+	<!-- 숙소 예약 -->
+	<insert id="insertAccomPayment" parameterType="com.gdu.voyage.vo.AccomPayment">
+		INSERT INTO accom_payment (
+			accom_room_no,
+			member_id,
+			host_no,
+			accom_checkin,
+			accom_checkout,
+			accom_amount,
+			accom_use_person,
+			accom_payment_state,
+			receipt,
+			create_date,
+			update_date
+		) VALUES (
+			#{accomRoomNo},
+			#{memberId},
+			#{hostNo},
+			#{accomCheckIn},
+			#{accomCheckOut},
+			#{accomAmount},
+			#{accomUsePerson},
+			'결제대기',
+			'명세',
+			NOW(),
+			NOW()
+		)
+		<selectKey keyProperty="accomPaymentNo" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
 </mapper>

@@ -415,7 +415,7 @@
                <div class="col-lg-4">
                   <div class="blog_right_sidebar">
                      <aside class="single_sidebar_widget search_widget">
-                        <form action="${pageContext.request.contextPath}/calendarAccom" method="get">
+                        <form action="${pageContext.request.contextPath}/member/calendarAccom" method="get">
 							<input type="hidden" name="accomRoomNo" value="${accomRoomOne.accomRoomNo }">
 <!--                            <div class="form-group"> -->
 <!--                               <div class="input-group mb-3"> -->

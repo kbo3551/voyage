@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gdu.voyage.mapper.ProductMapper;
 import com.gdu.voyage.vo.AccomBuilding;
+import com.gdu.voyage.vo.AccomPayment;
 import com.gdu.voyage.vo.AccomRoom;
 import com.gdu.voyage.vo.Activity;
 
@@ -310,5 +311,21 @@ public class ProductService {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(date);
     }
+    
+    // [사용자] 객실 예약
+  	public void addAccomPayment(AccomPayment accomPayment) {
+  		// 날짜 형식 가공
+//  		String checkIn = accomPayment.getAccomCheckIn();
+//  		checkIn = checkIn + " 00:00:00";
+//  		String checkOut = accomPayment.getAccomCheckOut();
+//  		checkOut = checkOut + " 00:00:00";
+//  		
+//  		accomPayment.setAccomCheckIn(checkIn);
+//  		accomPayment.setAccomCheckOut(checkOut);
+//  		
+//  		log.debug("[debug] ProductService.addAccomPayment checkIn : " );
+  		
+  		productMapper.insertAccomPayment(accomPayment);
+  	}
 
-}
+ }

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.gdu.voyage.vo.AccomBuilding;
+import com.gdu.voyage.vo.AccomPayment;
 import com.gdu.voyage.vo.AccomRoom;
 import com.gdu.voyage.vo.Activity;
 
@@ -16,6 +17,8 @@ public interface ProductMapper {
 	List<AccomBuilding> selectAccomBuildingList(Integer beginRow, Integer ROW_PER_PAGE, Integer count);
 	// [사용자] 숙소-건물 목록 검색 조회
 	List<AccomBuilding> selectAccomBuildingListBySearch(Map<String, Object> param);
+	// [사용자] 숙소-건물 목록 검색 count
+	Integer selectAccomBuildingListBySearchCount(Map<String, Object> param);
 	// [사용자] 숙소-건물 시설 인기 조회
 	List<Map<String, Object>> selectAccomBuildingFacilityByBest();
 	// [사용자] 숙소-건물 지역 인기 조회
@@ -38,6 +41,8 @@ public interface ProductMapper {
 	List<Activity> selectActivityList(Integer beginRow, Integer ROW_PER_PAGE, Integer count);
 	// [사용자] 체험 목록 검색 조회
 	List<Activity> selectActivityListBySearch(Map<String, Object> param);
+	// [사용자] 체험 목록 검색 count
+	Integer selectActivityListBySearchCount(Map<String, Object> param);
 	// [사용자] 체험 지역 인기 조회
 	List<Map<String, Object>> selectActivityAddressByBest();
 	
@@ -48,4 +53,6 @@ public interface ProductMapper {
 	// 예약
 	// 객실 예약 내역 전체 조회
 	List<Map<String, Object>> selectAccomRoomReserveDay(int accomRoomNo);
+	// [사용자] 숙소 예약
+	int insertAccomPayment(AccomPayment accomPayment);
 }

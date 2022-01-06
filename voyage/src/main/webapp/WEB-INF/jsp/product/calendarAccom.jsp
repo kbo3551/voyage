@@ -215,7 +215,7 @@
     </div>
     <!--Hero End -->
 	
-	<form action="${pageContext.request.contextPath}/addAccomReservation" method="get" id="calendarForm">
+	<form action="${pageContext.request.contextPath}/member/addAccomReservation" method="get" id="calendarForm">
 		<input type="hidden" name="accomRoomNo" value="${accomRoomNo }">
 		<input type="hidden" name="checkIn" id="checkIn" value="">
 		<input type="hidden" name="checkOut" id="checkOut" value="">

@@ -77,12 +77,11 @@
 					} else {
 						var m = checkToday(iter_date)?'<div class="today">':"<div value=" + dateObj +">";
 					}
-								
 					// 기존 예약일은 예약 불가
 					for(var d=0; d<=reserveDays.length; d++) {
 						if(dateObj == reserveDays[d]) {
 							var m = '<div class="past-date" style="text-decoration: line-through;">';
-						} else if(checkToday(iter_date)) {
+						} else if(dateObj == reserveDays[d] && checkToday(iter_date) == true) {
 							var m = '<div class="past-date" style="text-decoration: line-through; font-weight: 700; font-size: 18px; color: #bd83ce;">';
 						}
 					}	
