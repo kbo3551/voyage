@@ -74,11 +74,23 @@
                 </div>
             </div>
         </div>
-        	<div class="listing-area pt-120 pb-120">
+        <section class="blog_area sectiong-padding">
             <div class="container">
                 <div class="row">
-                   <!-- Left Content -->
-                    <!-- Right content -->
+                <div class="col-lg-4">
+			        	<div class="blog_right_sidebar">
+			        		<aside class="single_sidebar_widget search_widget">
+			        			<form method="get" action="${pageContext.request.contextPath}/getActivityReviewList">
+									<div class="form-group">
+										<div class="input-group mb-3">
+											<input type="text" class="form-control" placeholder="search" name="searchReview" id="searchReview" onfocus="this.placeholder = '' " onblur="this.placeholder = 'search'" id = "searchBtn">																	
+										</div>
+										<button type="submit" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn">검색</button>
+									</div>
+								</form>
+							</aside> 
+						</div>
+					</div>
                     <div class="col-xl-8 col-lg-8 col-md-6">
                         <div class="row">
                             <div class="col-lg-12">
@@ -110,8 +122,6 @@
                         </div>
                     </div>
             	</div>
-            </div>
-        <!--Hero End -->
                    <div class="pagination-area pt-70 text-center">
                             <div class="container">
                                 <div class="row">
@@ -149,6 +159,7 @@
                                 </div>
                             </div>
                         </div>
+				</section> 
         <!-- listing-area Area End -->
 
     </main>

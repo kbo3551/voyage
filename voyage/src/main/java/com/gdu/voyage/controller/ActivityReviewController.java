@@ -28,9 +28,9 @@ public class ActivityReviewController {
 	
 	// [Member] 숙소 후기 목록 조회
 		@GetMapping("/getActivityReviewList")
-		public String getActivityReviewList(Model model, @RequestParam(defaultValue="1") int currentPage, @RequestParam @Nullable Integer activityPaymentNo) {
+		public String getActivityReviewList(Model model, @RequestParam(defaultValue="1") int currentPage, @RequestParam @Nullable String searchReview, Integer activityPaymentNo, HttpServletRequest request) {
 			log.debug("ReviewController() 실행");
-			Map<String, Object> map = activityReviewService.getActivityReviewList(activityPaymentNo, currentPage, ROW_PER_PAGE);
+			Map<String, Object> map = activityReviewService.getActivityReviewList(activityPaymentNo, currentPage, ROW_PER_PAGE, searchReview);
 			int controllPage = (currentPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
 			int pageNo = ((controllPage / 100) * 10 + 1);
 
@@ -40,6 +40,7 @@ public class ActivityReviewController {
 			model.addAttribute("totalCount", map.get("totalCount"));
 			model.addAttribute("currentPage", currentPage);
 			model.addAttribute("pageNo", pageNo);
+			model.addAttribute("searchReview", searchReview);
 			
 			return "/getActivityReviewList";
 		}

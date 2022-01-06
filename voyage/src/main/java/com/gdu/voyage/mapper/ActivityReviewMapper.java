@@ -25,7 +25,7 @@ public interface ActivityReviewMapper {
 	ActivityReview selectActivityReviewOne(int activityReviewNo);
 	
 	// 체험 후기 게시글 수
-	int selectReviewTotalCount(Integer activityPaymentNo);
+	int selectReviewTotalCount(Integer activityPaymentNo, String searchReview);
 	
 	// 페이지 수
 	int selectCountPage();

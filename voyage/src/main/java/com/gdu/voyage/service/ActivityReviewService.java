@@ -79,24 +79,25 @@ public class ActivityReviewService {
 	}
 
 	public int selectReviewTotalCountOne(int activityPaymentNo) {
-		return activityReviewMapper.selectReviewTotalCount(activityPaymentNo);
+		return activityReviewMapper.selectReviewTotalCount(activityPaymentNo, null);
 	}
 
 	// 체험 후기 목록
-	public Map<String, Object> getActivityReviewList(Integer activityPaymentNo, int currentPage, int rowPerPage) {
+	public Map<String, Object> getActivityReviewList(Integer activityPaymentNo, int currentPage, int rowPerPage, String searchReview) {
 
 		Map<String, Object> paraMap = new HashMap<>();
 		int beginRow = (currentPage - 1) * rowPerPage;
 
 		paraMap.put("beginRow", beginRow);
 		paraMap.put("rowPerPage", rowPerPage);
+		paraMap.put("searchReview", searchReview);
 
 		List<ActivityReview> activityReviewList = activityReviewMapper.selectActivityReviewList(paraMap);
 
 		Map<String, Object> returnMap = new HashMap<>();
 
 		int lastPage = 0;
-		int totalCount = activityReviewMapper.selectReviewTotalCount(activityPaymentNo);
+		int totalCount = activityReviewMapper.selectReviewTotalCount(activityPaymentNo, searchReview);
 
 		lastPage = (totalCount / rowPerPage);
 		if (totalCount % rowPerPage != 0) {
@@ -105,6 +106,7 @@ public class ActivityReviewService {
 		returnMap.put("activityReviewList", activityReviewList);
 		returnMap.put("lastPage", lastPage);
 		returnMap.put("totalCount", totalCount);
+		returnMap.put("searchReview", searchReview);
 
 		return returnMap;
 

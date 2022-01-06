@@ -33,8 +33,13 @@
 			update_date
 		FROM
 			activity_review
+			<where>
+				<if test="searchReview != null">
+					activity_review_title LIKE '%${searchReview}%'
+				</if>
+			</where>
 		ORDER BY
-			update_date DESC
+			activity_review_no DESC, update_date DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	
@@ -46,7 +51,7 @@
 	            activity_review_title,
 	            activity_review_content,
 	            activity_review_star,
-	            activity_review_view_cnt
+	            activity_review_view_cnt,
 	            create_date,
 	            update_date
 			FROM 
