@@ -138,6 +138,20 @@
 		)
 	</insert>
 	
+	<insert id="insertActivityHashtag" parameterType="com.gdu.voyage.vo.Hashtag">
+		INSERT INTO hashtag (
+			iden_no,
+			table_name,
+			hashtag,
+			create_date
+		) VALUES (
+			#{idenNo},
+			'체험',
+			#{hashtag},
+			NOW()
+		)
+	</insert>
+	
 	
 	
 	<!-- 체험 수정 : selectKey를 사용하여 체험의 식별번호를 받아온뒤 나머지 추가 정보들도 함께 insert  -->

@@ -61,7 +61,7 @@ public class ActivityController {
 		// accomBuildingForm과 realPath를 매개변수로 하여 같이 service에 전달
 		activityService.addActivity(activityForm, realPath, hostNo);
 
-		return "redirect:/host/activityOne?activityNo="+activityForm.getActivity().getActivityNo();
+		return "redirect:/host/hostIndex";
 	}
 
 	// 관리자

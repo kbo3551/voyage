@@ -102,7 +102,7 @@ public class AccomController {
 		
 		// accomRoomForm과 realPath를 매개변수로 하여 같이 service에 전달
 		accomRoomService.addAccomRoom(accomRoomForm, realPath, hostNo);
-		return "redirect:/host/accomBuildingOne?accomBuildingNo="+accomRoomForm.getAccomRoom().getAccomBuildingNo();
+		return "redirect:/host/hostIndex";
 	}
 	
 
