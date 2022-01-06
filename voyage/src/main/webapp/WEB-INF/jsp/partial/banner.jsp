@@ -219,7 +219,7 @@
 				<!-- Modal Header -->
 				<div class="modal-header">
 					<h2 class="modal-title">채팅</h2>
-					<button type="button" class="close" data-dismiss="modal">×</button>
+					<button type="button" id="closeChatRoom" class="close" data-dismiss="modal">×</button>
 				</div>
 				
 				<!-- Modal body -->

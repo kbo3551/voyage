@@ -2,12 +2,14 @@
  * chat
  */
 
- // [사용자] 나의 채팅 목록 조회
- $(document).ready(function(){
-	
-   // chatBtn을 누르면 목록 불러오는 부분
-   $('#chatBtn').click(function(){
-      $.ajax({
+// 2초 간격으로 메시지를 보여줌
+//var timerId = setInterval(() => alert('째깍'), 2000);
+// 5초 후에 정지
+//setTimeout(() => { clearInterval(timerId); alert('정지'); }, 5000);
+
+// ajax를 하나의 함수로 선언 : chatRoomListF
+function chatRoomListF(){
+	$.ajax({
          url:'/voyage/chatRoomList',
          type:'GET',
          datatype:'json',
@@ -36,7 +38,24 @@
             });
          }
       });
+} 
+
+ // [사용자] 나의 채팅 목록 조회
+ $(document).ready(function(){
+	
+   // chatBtn을 누르면 목록 불러오는 부분
+   $('#chatBtn').click(function(){
+		chatRoomListF();
+     	// 2초에 한번씩 채팅 목록 불러오기(실시간 알림 전용)
+   		timerId = setInterval(function(){
+			chatRoomListF();
+		},2000);
    });
+
+	// chatRoomBtn을 누르면 목록 불러오는 부분
+	$('body').on('click', '#closeChatRoom', function() {
+		clearTimeout(timerId);
+	});
 
 	// chatRoomBtn을 누르면 목록 불러오는 부분
 	$('body').on('click', '#chatRoomBtn', function() {
@@ -102,6 +121,8 @@
 	// 모달 위에 모달을 출력하게 해주는 스크립트 코드 
 	$('#openBtn').click(function() {
 		$('#myModal').modal({
+			backdrop: 'static',
+            keyboard: false,
 			show: true
 		})
 	});
@@ -151,7 +172,7 @@ $('#closeChat').click(function(){
 $('#sendBtn').click(function(){
 	sendChat();
 	// 전송후 textbox의 value 삭제
-	$('#chatContentForm').prop('value', null);
+	$('#chatContentForm').prop('value', '');
 });
 // 엔터키를 클릭했을 때 메세지 전송 버튼을 누르는 클릭이벤트 실행
 $(document).keypress(function(event){
