@@ -56,8 +56,8 @@
 			c.create_date,
 			(SELECT chat_read
 				FROM chat
-				WHERE from_member_id = #{memberId} AND chat_room = #{chatRoom}
-				GROUP BY chat_read) chat_read,
+				WHERE to_member_id = #{memberId} AND chat_room = #{chatRoom}
+				ORDER BY create_date DESC limit 1) chat_read,
 			m.member_nickname,
 			m.member_level
 		FROM

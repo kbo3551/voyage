@@ -225,10 +225,8 @@
 				<!-- Modal body -->
 				<div class="modal-body">
 					<div id="scrollmodalBody" style="overflow:auto; width:auto; height:400px;">
-						<table class="table table-hover">
-							<tbody id="chatRoomList">
-							</tbody>
-						</table>
+						<!-- 채팅 출력 -->
+						<div id="chatMsgList"></div>
 					</div>
 		
 					<!-- Modal footer -->
@@ -260,6 +258,7 @@
   	
   	<!-- webSocket,STOMP 사용해서 채팅프로그램 구현하기  -->
   	<script type="text/javascript">
+  	
   	let stompClient = null; // null : 접속X
 	let msgCon = ''; // 메세지 저장할 변수
 	
@@ -276,7 +275,7 @@
 	$('#sendBtn').click(function(){
 		sendChat();
 		// 전송후 textbox의 value 삭제
-		$('#chatContentForm').prop('value', '');
+		$('#chatContentForm').prop('value', null);
 	});
 	// 엔터키를 클릭했을 때 메세지 전송 버튼을 누르는 클릭이벤트 실행
 	$(document).keypress(function(event){
@@ -308,22 +307,24 @@
 				// stringify()로 저장한 json 문자열을 분석하여 자바스크립트 객체(배열)를 리턴하는 메서드 -> JSON.parse()
 				let obj = JSON.parse(resp.body);
 				
-				if(obj.memberId != $('#fromMemberId').val()) {
-					msgCon = '<div style="margin:10px; clear:both;">';
+				if(obj.memberId == $('#fromMemberId').val()) {
+					msgCon = '<div id="chatCon" style="margin:10px; clear:both;">';
 					msgCon += '<div style="float:left;">';
-					// msgCon += '<div style="font-weight: bold; margin:5px;">' + obj.memberName + '</div>';
+					msgCon += '<div style="font-weight: bold; margin:5px;">' + obj.memberNickname + '</div>';
 					msgCon += '<div style="background-color: white; border-radius: 10%; margin:5px; padding:5px;">' + obj.chatContent + '</div>';
 					msgCon += '</div>';
 					msgCon += '</div>';
 				} else {
-					msgCon = '<div style="margin:10px; clear:both;">';
+					msgCon = '<div id="chatCon" style="margin:10px; clear:both;">';
 					msgCon += '<div style="float:right;">';
 					msgCon += '<div style="background-color: #ffeb33; border-radius: 10%; margin:5px; padding:5px;">' + obj.chatContent + '</div>';
 					msgCon += '</div>';
 					msgCon += '</div>';
 				}
-				$('#chatRoomList').append(msgCon);
-  	        });
+				$('#chatMsgList').append(msgCon);
+				// 메세지 추가 후 스크롤을 가장 아래로 가게 함 
+				$('#scrollmodalBody').scrollTop($('#scrollmodalBody')[0].scrollHeight);
+			});
   	    });
   	};
 

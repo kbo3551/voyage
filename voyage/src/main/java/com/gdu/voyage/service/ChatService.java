@@ -42,6 +42,7 @@ public class ChatService {
 				paramMap.put("chatNo", c.getChatNo());
 				paramMap.put("chatRoom", c.getChatRoom());
 				paramMap.put("memberNickname", loginMember.getMemberNickname());
+				paramMap.put("memberId", loginMember.getMemberId());
 				
 				// 1-2. 해당 번호를 가지고 있는 채팅을 조회
 				Chat chatOne = chatMapper.selectChatListByNo(paramMap);
@@ -54,7 +55,7 @@ public class ChatService {
 		return returnMap;
 	}
 	
-	// [사용자] 채팅방 접속 시 채팅 내용 조회 및 chatRead = 0으로 수
+	// [사용자] 채팅방 접속 시 채팅 내용 조회 및 chatRead = 0으로 수정 
 	public List<Map<String, Object>> getChatgetChatByToMember(Member loginMember, int chatRoom) {
 		// 받아온 memberId와 memberNickname 디버깅 
 		log.debug("☆[지혜]service☆ memberId : " + loginMember.getMemberId());
@@ -67,7 +68,6 @@ public class ChatService {
 		paramMap.put("chatRoom", chatRoom);
 		paramMap.put("memberNickname", loginMember.getMemberNickname());
 		paramMap.put("memberId", loginMember.getMemberId());
-		paramMap.put("chatRoom",chatRoom);
 		
 		// chatRead 수정 : chatRoom과 자신의 아이디를 사용해 update
 		chatMapper.updateChatRead(paramMap);
