@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.gdu.voyage.vo.AccomBuilding;
 import com.gdu.voyage.vo.AccomBuildingFacility;
 import com.gdu.voyage.vo.AccomBuildingImage;
+import com.gdu.voyage.vo.AccomBuildingInterest;
 import com.gdu.voyage.vo.AccomBuildingSpot;
 import com.gdu.voyage.vo.Hashtag;
 import com.gdu.voyage.vo.AccomAddress;
@@ -44,8 +45,10 @@ public interface AccomBuildingMapper {
 	//갯수
 	int selectInterestedAccomBuildingCount(String memberId);
 	
+	// 관심상품 중복 방지
+	int selectAccomBuildingByInterests(AccomBuildingInterest accomBuildingInterest);
 	// 관심상품 추가
-	int insertAccomBuildingByInterest(int accomBuildingNo, String memberId);
+	void insertAccomBuildingByInterest(AccomBuildingInterest accomBuildingInterest);
 	// 관심상품 제거
 	int deleteAccomBuildingByInterest(int accomBuildingNo, String memberId);
 	// 관심상품 확인

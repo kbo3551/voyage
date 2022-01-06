@@ -18,8 +18,10 @@ import com.gdu.voyage.vo.AccomBuilding;
 import com.gdu.voyage.vo.AccomBuildingFacility;
 import com.gdu.voyage.vo.AccomBuildingForm;
 import com.gdu.voyage.vo.AccomBuildingImage;
+import com.gdu.voyage.vo.AccomBuildingInterest;
 import com.gdu.voyage.vo.AccomBuildingSpot;
 import com.gdu.voyage.vo.AccomSpotForm;
+import com.gdu.voyage.vo.ActivityInterest;
 import com.gdu.voyage.vo.Hashtag;
 import com.gdu.voyage.vo.SpotAddress;
 
@@ -41,8 +43,19 @@ public class AccomBuildingService {
 	}
 	
 	// 관심상품 추가
-	public int insertAccomBuildingByInterest(int accomBuildingNo, String memberId) {
-		return accomBuildingMapper.insertAccomBuildingByInterest(accomBuildingNo,memberId);
+	public void insertAccomBuildingByInterest(AccomBuildingInterest accomBuildingInterest) {
+		accomBuildingMapper.insertAccomBuildingByInterest(accomBuildingInterest);
+	}
+	// 관심상품 중복 추가 검사
+	public String duplAccomBuildingInterest(AccomBuildingInterest accomBuildingInterest) {
+		log.debug("☆☆☆[boryeong]CouponService회원 관심 상품 중복 방지☆☆☆"+accomBuildingInterest.toString());
+		int interestCheck = accomBuildingMapper.selectAccomBuildingByInterests(accomBuildingInterest);
+		log.debug("☆☆☆[boryeong]CouponService회원 관심 상품 중복 방지☆☆☆"+accomBuildingInterest.toString());
+		if(interestCheck == 1) {
+			log.debug("관심중복");
+			return "관심중복";
+		}
+		return "중복없음";
 	}
 	// 관심상품 제거
 	public int deleteAccomBuildingByInterest(int accomBuildingNo, String memberId) {

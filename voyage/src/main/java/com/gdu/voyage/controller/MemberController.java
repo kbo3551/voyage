@@ -20,6 +20,7 @@ import com.gdu.voyage.service.ActivityService;
 import com.gdu.voyage.service.LoginService;
 import com.gdu.voyage.service.MemberService;
 import com.gdu.voyage.service.PaymentService;
+import com.gdu.voyage.vo.AccomBuildingInterest;
 import com.gdu.voyage.vo.ActivityInterest;
 import com.gdu.voyage.vo.Admin;
 import com.gdu.voyage.vo.Host;
@@ -496,6 +497,31 @@ public class MemberController {
 		activityService.insertActivityByInterest(ai);
 		model.addAttribute("msg", "관심 상품이 등록 되었습니다.");
 	    model.addAttribute("url", "redirect:/activityOne?activityNo="+ActivityNo);
+		return "/alert";
+	}
+	
+	// 숙소 관심상품 등록
+	@PostMapping("/member/addAccomBuildingByInterest")
+	public String postAddAccomBuildingByInterest(HttpSession session,HttpServletRequest request,AccomBuildingInterest accomBuildingInterest,Model model) {
+		System.out.println("★★★[boryeong]MemberController_addaccomBuildingByInterest실행★★★");
+		
+		int AccomBuildingNo = Integer.parseInt(request.getParameter("accomBuildingNo"));
+		// 회원 세션 정보
+		String memberId = ((Member) session.getAttribute("loginMember")).getMemberId();
+		
+		AccomBuildingInterest abi = new AccomBuildingInterest();
+		abi.setAccomBuildingNo(AccomBuildingNo);
+		abi.setMemberId(memberId);
+		// 중복 등록 방지
+		String interestCheck = accomBuildingService.duplAccomBuildingInterest(abi);
+		if(interestCheck.equals("관심중복")) {
+			model.addAttribute("msg", "이미 관심상품 등록된 상품입니다");
+		    model.addAttribute("url", "redirect:/accomBuildingOne?accomBuildingNo="+AccomBuildingNo);
+			return "/alert";
+		}
+		accomBuildingService.insertAccomBuildingByInterest(abi);
+		model.addAttribute("msg", "관심 상품이 등록 되었습니다.");
+	    model.addAttribute("url", "redirect:/accomBuildingOne?accomBuildingNo="+AccomBuildingNo);
 		return "/alert";
 	}
 }

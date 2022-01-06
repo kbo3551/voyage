@@ -261,8 +261,11 @@
                   </div>
                   <div class="navigation-top">
                      <div class="d-sm-flex justify-content-between text-center">
-                        <p class="like-info"><span class="align-middle"><i class="fa fa-heart"></i></span> Lily and 4
-                           people like this</p>
+                       <form action="${pageContext.request.contextPath}/member/addAccomBuildingByInterest" method="post" name="addAccomBuildingByInterest" id="addAccomBuildingByInterest">
+                        <input type="hidden" name="accomBuildingNo" value=${accomBuildingOne.accomBuildingNo }>
+                        <p class="like-info"><span class="align-middle">
+                        <button  class="fa fa-heart" type="submit"></button>
+                        </span></p></form>
                         <div class="col-sm-4 text-center my-2 my-sm-0">
                            <!-- <p class="comment-count"><span class="align-middle"><i class="fa fa-comment"></i></span> 06 Comments</p> -->
                         </div>

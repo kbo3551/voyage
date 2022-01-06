@@ -225,14 +225,24 @@
 	</delete>
 	
 	<!-- 회원 -->
-	
+	<!-- 관심상품 중복 방지 -->
+	<select id="selectAccomBuildingByInterests" resultType="int">
+	SELECT
+		count(member_id)
+	FROM
+		accom_building_interest
+	WHERE
+		member_id = #{memberId}
+	AND
+		accom_building_no = #{accomBuildingNo}
+	</select>
 	<!-- 관심상품 추가 -->
 	<insert id="insertAccomBuildingByInterest">
 		INSERT INTO accom_building_interest(
 			accom_building_no,
 			member_id
 		) VALUES (
-			${accomBuildingNo},
+			#{accomBuildingNo},
 			#{memberId}
 		)
 	</insert>
