@@ -19,10 +19,19 @@
                console.log('출력 test : ', index);
                console.log('출력 test : ', item);
                for(i=0;i<item.length;i++) {
-                  $('#chatList').append('<tr>');
-                     $('#chatList').append('<td>'+item[i].member.memberNickname+':'+item[i].chatContent+','+item[i].chatRead+'</td>');
-                     $('#chatList').append('<button id="chatRoomBtn" value="'+item[i].chatRoom+'" data-toggle="modal" data-target="#myModal2">입장</button>');
-                  $('#chatList').append('</tr>');
+					if(item[i].chatRead == 1) {
+	                  $('#chatList').append('<tr>');
+	                     $('#chatList').append('<td class="w-100"><i class="far fa-envelope" style="color:red"></i> <span style="font-weight:bold;">'+item[i].member.memberNickname+'</span><div>'+item[i].chatContent+'</div>');
+	                     $('#chatList').append('<button class="btn" style="width:30px;" id="chatRoomBtn" value="'+item[i].chatRoom+'" data-toggle="modal" data-target="#myModal2">입장</button>');
+	                     $('#chatList').append('</td>');
+	                  $('#chatList').append('</tr>');
+	                 } else {
+					  $('#chatList').append('<tr>');
+	                     $('#chatList').append('<td class="w-100"><i class="far fa-envelope-open" style="color:#808080;"></i> <span style="font-weight:bold; color:#808080;">'+item[i].member.memberNickname+'</span><div style="color:#808080;">'+item[i].chatContent+'</div>');
+	                     $('#chatList').append('<button class="btn" style="width:30px;" id="chatRoomBtn" value="'+item[i].chatRoom+'" data-toggle="modal" data-target="#myModal2">입장</button>');
+	                     $('#chatList').append('</td>');
+	                  $('#chatList').append('</tr>');
+					}
                };
             });
          }
