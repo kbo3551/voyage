@@ -18,6 +18,10 @@ public class AccomRoom {
 	private String createDate;
 	private String updateDate;
 	
+	// 1:N
+	private AccomBuilding accomBuilding;
+	// 1:N
+	private List<AccomBuildingFacility> accomBuildingFacilityList;
 	// 1:N - AccomRoomImage
 	private List<AccomRoomImage> accomRoomImageList;
 	// 1:N - AccomRoomItem

@@ -13,7 +13,6 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.ProductService;
@@ -34,7 +33,7 @@ public class ProductController {
    @GetMapping("/getAccomProductList")
    public String getAccomBuildingList(Model model,
 		   					  HttpServletRequest request,
-                              @RequestParam(defaultValue = "1") int currentPage,
+                              @RequestParam(defaultValue = "1") int page,
                               @RequestParam @Nullable String searchWord, 
                               @RequestParam @Nullable String searchAddress,
                               @RequestParam @Nullable List<String> searchFacilityList,
@@ -42,6 +41,10 @@ public class ProductController {
                               @RequestParam @Nullable String searchPrice
                               ) {
       log.debug("[debug] ProductController.getAccomBuildingList 실행");
+      
+      // 페이징
+      int beginRow = (page * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
+      int pageNo = ((beginRow / 100) * 10 + 1);
       
       
       Integer minPrice = 0;
@@ -83,14 +86,22 @@ public class ProductController {
       if(searchWord != null || searchAddress != null || searchFacilityList != null || searchPrice != null) {
          // [사용자] 숙소-건물 목록 검색 조회
          accomBuilding = productService.getAccomBuildingListBySearch(paramMap);
-//	               log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
+//		               log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
          model.addAttribute("accomBuilding", accomBuilding);
          log.debug("[debug] ProductController.getAccomBuildingList accomBuilding : " + accomBuilding);
       } else {
          // [사용자] 숙소-건물 목록 조회
-         accomBuilding = productService.getAccomBuildingList(currentPage, ROW_PER_PAGE);
-//	         log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
-         model.addAttribute("accomBuilding", accomBuilding);
+    	  Map<String, Object> accomMap = productService.getAccomBuildingList(page, ROW_PER_PAGE,null);
+//		         log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
+    	  
+    	  
+    	  model.addAttribute("ROW_PER_PAGE", ROW_PER_PAGE);
+    	  model.addAttribute("beginRow", beginRow);
+         model.addAttribute("accomBuilding", accomMap.get("accomBuildingList"));
+         model.addAttribute("lastPage", accomMap.get("lastPage"));
+	      model.addAttribute("totalCount", accomMap.get("totalCount"));
+	      model.addAttribute("page", page);
+	      model.addAttribute("pageNo", pageNo);
          log.debug("[debug] ProductController.getAccomBuildingList accomBuilding : " + accomBuilding);
       }
             
@@ -125,13 +136,15 @@ public class ProductController {
 		log.debug("[debug] ProductController.getAccomBuildingOne accomRoom : " + accomRoom);
 
 		// [사용자] 숙소-건물 상세-목록 조회
-		List<AccomBuilding> accomBuildingOneList = productService.getAccomBuildingList(currentPage, ROW_PER_PAGE);
-		model.addAttribute("accomBuildingOneList", accomBuildingOneList);
-		log.debug("[debug] ProductController.getAccomBuildingOne accomBuildingOneList : " + accomBuildingOneList);
+		Map<String, Object> accomBuildingMap = productService.getAccomBuildingList(currentPage, ROW_PER_PAGE,2);
+		
+		
+		model.addAttribute("accomBuildingOneList", accomBuildingMap.get("accomBuildingOneList"));
+		
+		log.debug("[debug] ProductController.getAccomBuildingOne accomBuildingOneList : " + accomBuildingMap.get("accomBuildingOneList"));
 		
 		return "/product/accomBuildingOne";
 	}
-	
 	@GetMapping("/accomRoomOne")
 	public String getAccomRoomOne(Model model, int accomBuildingNo, int accomRoomNo) {
 		log.debug("[debug] ProductController.getAccomRoomOne 실행");
@@ -154,64 +167,64 @@ public class ProductController {
 	
 	
 	// [사용자] 체험
-   @RequestMapping("/getActivityProductList")
-   public String getActivityProduct(Model model,
-                              @RequestParam(defaultValue = "1") int currentPage,
-                              @RequestParam @Nullable String searchWord, 
-                              @RequestParam @Nullable String searchAddress,
-                              @RequestParam @Nullable Integer searchReviewScore,
-                              @RequestParam @Nullable String searchPrice
-                              ) {
-      log.debug("[debug] ProductController.getActivityProduct 실행");
+	@GetMapping("/getActivityProductList")
+	public String getActivityProduct(Model model,
+                                @RequestParam(defaultValue = "1") int currentPage,
+                                @RequestParam @Nullable String searchWord, 
+                                @RequestParam @Nullable String searchAddress,
+                                @RequestParam @Nullable Integer searchReviewScore,
+                                @RequestParam @Nullable String searchPrice
+                                ) {
+        log.debug("[debug] ProductController.getActivityProduct 실행");
       
-      // 검색 시 사용할 매개변수 가공
-      Integer minPrice = 0;
-      Integer maxPrice = 10000000;
-      // 검색 시 사용할 매개변수 가공
-      if(searchPrice != null) {
-         String[] price = searchPrice.split(";");
-         minPrice = Integer.parseInt(price[0]);
-         maxPrice = Integer.parseInt(price[1]);
-         if(maxPrice==0) {
-            maxPrice = 10000000;
-         }
-      }
-      log.debug("[debug] ProductController.getAccomBuildingList searchWord : " + searchWord);
-      log.debug("[debug] ProductController.getAccomBuildingList searchAddress : " + searchAddress);
-      log.debug("[debug] ProductController.getAccomBuildingList searchReviewScore : " + searchReviewScore);
-      log.debug("[debug] ProductController.getAccomBuildingList minPrice : " + minPrice);
-      log.debug("[debug] ProductController.getAccomBuildingList maxPrice : " + maxPrice);
+        // 검색 시 사용할 매개변수 가공
+        Integer minPrice = 0;
+        Integer maxPrice = 10000000;
+        // 검색 시 사용할 매개변수 가공
+        if(searchPrice != null) {
+           String[] price = searchPrice.split(";");
+           minPrice = Integer.parseInt(price[0]);
+           maxPrice = Integer.parseInt(price[1]);
+           if(maxPrice==0) {
+              maxPrice = 10000000;
+           }
+        }
+        log.debug("[debug] ProductController.getAccomBuildingList searchWord : " + searchWord);
+        log.debug("[debug] ProductController.getAccomBuildingList searchAddress : " + searchAddress);
+        log.debug("[debug] ProductController.getAccomBuildingList searchReviewScore : " + searchReviewScore);
+        log.debug("[debug] ProductController.getAccomBuildingList minPrice : " + minPrice);
+        log.debug("[debug] ProductController.getAccomBuildingList maxPrice : " + maxPrice);
 
-      Map<String, Object> paramMap = new HashMap<>();
-      paramMap.put("searchWord", searchWord);
-      paramMap.put("searchAddress", searchAddress);
-      paramMap.put("searchReviewScore", searchReviewScore);
-      paramMap.put("minPrice",  minPrice);
-      paramMap.put("maxPrice",  maxPrice);
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("searchWord", searchWord);
+        paramMap.put("searchAddress", searchAddress);
+        paramMap.put("searchReviewScore", searchReviewScore);
+        paramMap.put("minPrice",  minPrice);
+        paramMap.put("maxPrice",  maxPrice);
       
-      List<Activity> activity = new ArrayList<>();
+        List<Activity> activity = new ArrayList<>();
       
-      // 검색 조회와 일반 조회 분기
-      if(searchWord != null || searchAddress != null ||  searchReviewScore != null || searchPrice != null) {
-         // [사용자] 체험 목록 검색 조회
-         activity = productService.getActivityListBySearch(paramMap);
+        // 검색 조회와 일반 조회 분기
+        if(searchWord != null || searchAddress != null ||  searchReviewScore != null || searchPrice != null) {
+           // [사용자] 체험 목록 검색 조회
+           activity = productService.getActivityListBySearch(paramMap);
 //	               log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());
-         model.addAttribute("activity", activity);
-         log.debug("[debug] ProductController.getActivityProduct activity : " + activity);
-      } else {
-         // [사용자] 체험 목록 조회
-         activity = productService.getActivityList(currentPage, ROW_PER_PAGE);
-         model.addAttribute("activity", activity);
-         log.debug("[debug] ProductController.getActivityProduct activity : " + activity);
-      }
+           model.addAttribute("activity", activity);
+           log.debug("[debug] ProductController.getActivityProduct activity : " + activity);
+        } else {
+           // [사용자] 체험 목록 조회
+           activity = productService.getActivityList(currentPage, ROW_PER_PAGE);
+           model.addAttribute("activity", activity);
+           log.debug("[debug] ProductController.getActivityProduct activity : " + activity);
+        }
 
-      // [사용자] 체험 지역 인기 조회
-      List<Map<String, Object>> addressZipByBest = productService.getActivityAddressByBest();
-      model.addAttribute("addressZipByBest", addressZipByBest);
-      log.debug("[debug] ProductController.getActivityProduct addressZipByBest : " + addressZipByBest);
+        // [사용자] 체험 지역 인기 조회
+        List<Map<String, Object>> addressZipByBest = productService.getActivityAddressByBest();
+        model.addAttribute("addressZipByBest", addressZipByBest);
+        log.debug("[debug] ProductController.getActivityProduct addressZipByBest : " + addressZipByBest);
       
-      return "/product/getActivityProductList";
-   }
+        return "/product/getActivityProductList";
+    }
 	
 	@GetMapping("/activityOne")
 	public String getActivityOne(Model model, int activityNo) {

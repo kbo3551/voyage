@@ -18,6 +18,7 @@ public class AccomBuilding {
 	private String createDate;
 	private String updateDate;
 	private int roomCnt;
+	private int cnt;
 	
 	// 평균값
 	private double AVG;

@@ -113,13 +113,13 @@
 	                                </div> 
 	                                <!-- Facilities -->
 	                                <div class="small-section-tittle2 pt-80">
-	                                    <h4>Best Facilities</h4>
+	                                    <h4>Facilities</h4>
 	                                </div>
 	                                <div class="select-Categories pt-10 pb-30" style="width: 50%; float: left;">
 	                                	<c:forEach items="${facilityByBest}" var="af" varStatus="status">
 	                                		<label class="container">${af.accomBuildingFacilityName }<span style="font-size: 0.8em; color: #03B92B; padding-left: 5%;">${af.accomBuildingFacilityBest }</span>
-		                                        		<input type="checkbox" name="searchFacilityList" value="${af.accomBuildingFacilityName}">
-		                                        		<span class="checkmark"></span>
+		                                        <input type="checkbox" name="searchFacilityList" value="${af.accomBuildingFacilityName }">
+		                                        <span class="checkmark"></span>
 		                                    </label>
 		                                    <c:if test="${status.count == 3 }">
 			                                    </div>
@@ -164,7 +164,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="count mb-35">
-                                    <span>5432 Listings are available</span>
+                                    <span>${totalCount} Listings are available</span>
                                 </div>
                             </div>
                         </div>
@@ -240,17 +240,70 @@
                                     <div class="col-xl-12">
                                         <div class="single-wrap d-flex justify-content-center">
                                             <nav aria-label="Page navigation example">
-<%--                                             	<c:choose> --%>
-<%--                                             		<c:when test=""> --%>
-	                                            		<ul class="pagination justify-content-start">
-		                                                    <li class="page-item active"><a class="page-link" href="#">01</a></li>
-		                                                    <li class="page-item"><a class="page-link" href="#">02</a></li>
-		                                                    <li class="page-item"><a class="page-link" href="#">03</a></li>
-		                                                	<li class="page-item"><a class="page-link" href="#"><span class="ti-angle-right"></span></a></li>
-	                                                	</ul>
-<%--                                             		</c:when> --%>
-<%--                                             	</c:choose> --%>
-                                                
+                                            	<c:choose>
+			                                    	<c:when test="param.searchWord != null || param.searchAddress != null || param.searchPrice != null">
+			                                    		<c:if test="${totalCount > 0}">
+															<div class="clear">
+									                           <ul class="nav justify-content-center">
+									                              <c:if test="${beginRow > (ROW_PER_PAGE * 10)}">
+									                                 <li><a href="${pageContext.request.contextPath}/getAccomProductList?page=${pageNo-1}&searchWord=${param.searchWord}&searchAddress=${param.searchAddress}&searchPrice=${param.searchPrice}">&lt;</a></li>
+									                              </c:if>
+									                              <c:set var="doneLoop" value="false"></c:set>
+									                              <c:forEach var="f" begin="${pageNo}" end="${pageNo + 9}">
+									                                 <c:if test="${not doneLoop}">
+									                                    <c:choose>
+									                                       <c:when test="${page == f}">
+									                                          <li class="active"><span class="nav-link">${f}</span></li>
+									                                       </c:when>
+									                                       <c:otherwise>
+									                                          <li><a style="color: blue;" class="nav-link active" href="${pageContext.request.contextPath}/getAccomProductList?page=${page+1}&searchWord=${param.searchWord}&searchAddress=${param.searchAddress}&searchPrice=${param.searchPrice}">${f}</a></li>
+									                                       </c:otherwise>
+									                                    </c:choose>
+									
+									                                    <c:if test="${f == lastPage}">
+									                                       <c:set var="doneLoop" value="true"></c:set>
+									                                    </c:if>
+									                                 </c:if>
+									                              </c:forEach>
+									                              <c:if test="${page + 10 <= lastPage}">
+									                                 <li><a class="nav-link active" href="${pageContext.request.contextPath}/getAccomProductList?page=${page+10}&searchWord=${param.searchWord}&searchAddress=${param.searchAddress}&searchPrice=${param.searchPrice}">&gt;</a></li>
+									                              </c:if>
+									                           </ul>
+									                        </div>
+														</c:if>
+			                                    	</c:when>
+			                                    	<c:otherwise>
+			                                    		<c:if test="${totalCount > 0}">
+															<div class="clear">
+									                           <ul class="nav justify-content-center">
+									                              <c:if test="${beginRow > (ROW_PER_PAGE * 10)}">
+									                                 <li><a href="${pageContext.request.contextPath}/getAccomProductList?page=${pageNo-1}">&lt;</a></li>
+									                              </c:if>
+									                              <c:set var="doneLoop" value="false"></c:set>
+									                              <c:forEach var="f" begin="${pageNo}" end="${pageNo + 9}">
+									                                 <c:if test="${not doneLoop}">
+									                                    <c:choose>
+									                                       <c:when test="${page == f}">
+									                                          <li class="active"><span class="nav-link">${f}</span></li>
+									                                       </c:when>
+									                                       <c:otherwise>
+									                                          <li><a style="color: blue;" class="nav-link active" href="${pageContext.request.contextPath}/getAccomProductList?page=${f}">${f}</a></li>
+									                                       </c:otherwise>
+									                                    </c:choose>
+									
+									                                    <c:if test="${f == lastPage}">
+									                                       <c:set var="doneLoop" value="true"></c:set>
+									                                    </c:if>
+									                                 </c:if>
+									                              </c:forEach>
+									                              <c:if test="${page + 10 <= lastPage}">
+									                                 <li><a class="nav-link active" href="${pageContext.request.contextPath}/getAccomProductList?page=${page+10}">&gt;</a></li>
+									                              </c:if>
+									                           </ul>
+									                        </div>
+														</c:if>
+			                                    	</c:otherwise>
+			                                    </c:choose>
                                             </nav>
                                         </div>
                                     </div>

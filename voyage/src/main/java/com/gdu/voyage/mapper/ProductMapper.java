@@ -13,7 +13,7 @@ import com.gdu.voyage.vo.Activity;
 public interface ProductMapper {
 	// 숙소-건물 목록
 	// [사용자] 숙소-건물 목록 조회
-	List<AccomBuilding> selectAccomBuildingList();
+	List<AccomBuilding> selectAccomBuildingList(Integer beginRow, Integer ROW_PER_PAGE, Integer count);
 	// [사용자] 숙소-건물 목록 검색 조회
 	List<AccomBuilding> selectAccomBuildingListBySearch(Map<String, Object> param);
 	// [사용자] 숙소-건물 시설 인기 조회

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,30 +27,55 @@ public class ProductService {
 	@Autowired ProductMapper productMapper;
 	
 	// [사용자] 숙소-건물 목록 조회
-	public List<AccomBuilding> getAccomBuildingList(int currentPage, int ROW_PER_PAGE) {
-		log.debug("[debug] ProductService.getAccomBuildingList currentPage : " );
-		log.debug("[debug] ProductService.getAccomBuildingList ROW_PER_PAGE : " );
-		
-		int beginRow = (currentPage-1) * ROW_PER_PAGE;
-		Map<String, Object> paramMap = new HashMap<>();
-		paramMap.put("beginRow", beginRow);
-		paramMap.put("ROW_PER_PAGE", ROW_PER_PAGE);
-		
-		List<AccomBuilding> accomBuildingList = productMapper.selectAccomBuildingList();
-		// accomBuildingList 가공 - 해시태그 링크 연결을 위해 accomBuildingList 에서 Hahstag 분리
-//		List<String> hashtagList = new ArrayList<>();
-//		for(int i=0; i<accomBuildingList.size(); i++) {
-//			hashtagList.add(accomBuildingList.get(i).getHashtagList().get(0).getHashtag());
-//		}
-		
-//		Map<String, Object> returnMap = new HashMap<>();
-//		returnMap.put("accomBuildingList", accomBuildingList);
-//		returnMap.put("hashtagList", hashtagList);
-		log.debug("[debug] ProductService.getAccomBuildingList accomBuildingList : " + accomBuildingList);
-//		log.debug("[debug] ProductService.getAccomBuildingList hashtagList : " + hashtagList);
-		
-		return accomBuildingList;
-	}
+    public Map<String, Object> getAccomBuildingList(int page, int ROW_PER_PAGE, @Nullable Integer one) {
+        log.debug("[debug] ProductService.getAccomBuildingList currentPage : " );
+        log.debug("[debug] ProductService.getAccomBuildingList ROW_PER_PAGE : " );
+        
+
+        int beginRow = (page-1) * ROW_PER_PAGE;
+        
+        List<AccomBuilding> accomBuildingList = new ArrayList<>();
+        
+        if(one != null) {
+            accomBuildingList = productMapper.selectAccomBuildingList(beginRow,ROW_PER_PAGE, one);
+        } else {
+            accomBuildingList = productMapper.selectAccomBuildingList(beginRow,ROW_PER_PAGE, null);
+        }
+        
+        
+        
+        Map<String, Object> returnMap = new HashMap<>();
+        
+        int lastPage = 0;
+        AccomBuilding accomBuilding = productMapper.selectAccomBuildingList(beginRow,ROW_PER_PAGE, 1).get(0);
+        int totalCount = accomBuilding.getCnt();
+        
+        
+        
+        // accomBuildingList 가공 - 해시태그 링크 연결을 위해 accomBuildingList 에서 Hahstag 분리
+//        List<String> hashtagList = new ArrayList<>();
+//        for(int i=0; i<accomBuildingList.size(); i++) {
+//            hashtagList.add(accomBuildingList.get(i).getHashtagList().get(0).getHashtag());
+//        }
+        
+//        Map<String, Object> returnMap = new HashMap<>();
+//        returnMap.put("accomBuildingList", accomBuildingList);
+//        returnMap.put("hashtagList", hashtagList);
+        log.debug("[debug] ProductService.getAccomBuildingList accomBuildingList : " + accomBuildingList);
+//        log.debug("[debug] ProductService.getAccomBuildingList hashtagList : " + hashtagList);
+        
+        lastPage = totalCount / ROW_PER_PAGE;
+        
+        if(totalCount % ROW_PER_PAGE !=0) {
+            lastPage += 1;
+        }
+        
+        returnMap.put("accomBuildingList", accomBuildingList);
+        returnMap.put("lastPage", lastPage);
+        returnMap.put("totalCount", totalCount);
+        
+        return returnMap;
+    }
 	
 	// [사용자] 숙소-건물 시설 인기 조회
 	public List<Map<String, Object>> getAccomBuildingFacilityByBest() {
