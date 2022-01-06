@@ -192,6 +192,74 @@
 		
 	</select>
 	
+	
+	<!-- 저번달, 저번주와 비교해서 벌어들인 건물별 숙소 수익 -->
+	<select id="selectAccomProfitOneCompare" resultType="long">
+		select sum(accom_amount) -
+		(SELECT
+			IFNULL(SUM(accom_amount),1)
+		FROM
+			accom_payment ap
+			JOIN accom_room ar ON ap.accom_room_no = ar.accom_room_no
+		   JOIN accom_building ab ON ar.accom_building_no = ab.accom_building_no
+		<choose>
+			<when test = "month == 1">
+				WHERE
+					ap.host_no = #{hostNo}
+					AND
+					NOT accom_payment_state = '결제취소'
+					AND
+					NOT accom_payment_state = '결제대기'
+					AND
+					ab.accom_building_no = #{accomBuildingNo}
+					AND
+					ap.update_date between DATE_ADD(NOW(), INTERVAL -1 MONTH) AND  DATE_ADD(NOW(), INTERVAL -2 MONTH)
+					)
+				from accom_payment ap
+				JOIN accom_room ar ON ap.accom_room_no = ar.accom_room_no
+		   	JOIN accom_building ab ON ar.accom_building_no = ab.accom_building_no
+				WHERE
+					ap.host_no = #{hostNo}
+					AND
+					NOT accom_payment_state = '결제취소'
+					AND
+					NOT accom_payment_state = '결제대기'
+					AND
+					ab.accom_building_no = #{accomBuildingNo}
+					AND
+					ap.update_date between DATE_ADD(NOW(), INTERVAL -1 MONTH) AND NOW()
+			</when>
+			
+			<otherwise>
+				WHERE
+					ap.host_no = #{hostNo}
+					AND
+					NOT accom_payment_state = '결제취소'
+					AND
+					NOT accom_payment_state = '결제대기'
+					AND
+					ab.accom_building_no = #{accomBuildingNo}
+					AND
+					ap.update_date between DATE_ADD(NOW(), INTERVAL -1 WEEK) AND  DATE_ADD(NOW(), INTERVAL -2 WEEK)
+					)
+				from accom_payment ap
+				JOIN accom_room ar ON ap.accom_room_no = ar.accom_room_no
+		   	JOIN accom_building ab ON ar.accom_building_no = ab.accom_building_no
+				WHERE
+					ap.host_no = #{hostNo}
+					AND
+					NOT accom_payment_state = '결제취소'
+					AND
+					NOT accom_payment_state = '결제대기'
+					AND
+					ab.accom_building_no = #{accomBuildingNo}
+					AND
+					ap.update_date between DATE_ADD(NOW(), INTERVAL -1 WEEK) AND NOW()
+			</otherwise>
+		</choose>
+		
+	</select>
+	
 	<!-- 저번달, 저번주와 비교해서 벌어들인 숙소 수익 -->
 	<select id="selectAccomProfitCompare" resultType="long">
 		select sum(accom_amount) -
@@ -371,7 +439,31 @@
 				]]>
 			</if>
 	</select>
-
+	
+	<!-- 해당 사업자의 건물별 숙소 총 수익, 월별 수익 -->
+	<select id="selectAccomProfitOneByHost" resultType="long">
+		SELECT
+			IFNULL(SUM(accom_amount),0)
+		FROM
+			accom_payment ap
+		   JOIN accom_room ar ON ap.accom_room_no = ar.accom_room_no
+		   JOIN accom_building ab ON ar.accom_building_no = ab.accom_building_no
+		WHERE
+			ap.host_no = #{hostNo}
+			AND
+			NOT accom_payment_state = '결제취소'
+			AND
+			NOT accom_payment_state = '결제대기'
+			AND
+			ab.accom_building_no = #{accomBuildingNo}
+			<if test="month == 1">
+				<![CDATA[
+				AND
+				ap.update_date between DATE_ADD(NOW(), INTERVAL -1 Month) AND NOW()
+				]]>
+			</if>
+	</select>
+	
 	<!-- 해당 사업자의 숙소 총 수익, 월별 수익 -->
 	<select id="selectAccomProfitByHost" resultType="long">
 		SELECT

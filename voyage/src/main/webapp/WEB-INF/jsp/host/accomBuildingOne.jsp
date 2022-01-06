@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Directory HTML-5 Template </title>
+        <title>숙소 상세 </title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="site.webmanifest">
@@ -137,6 +137,16 @@
 		
 	</style>
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<!-- Preloader Start -->
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
@@ -150,6 +160,10 @@
     </div>
 
    <body>
+   
+   
+   	
+   
     <!-- banner.jsp 시작 -->
     <c:import url="/WEB-INF/jsp/partial/banner.jsp"/>
     <!-- banner.jsp 끝 -->
@@ -168,6 +182,35 @@
         </div>
       <section class="blog_area single-post-area section-padding" style="padding-bottom: 20px !important;">
          <div class="container">
+         
+	         <div class="clear">
+	            <div class="card" style="float: left; width: 50%">
+	         <div class="card-body">
+	            <div class="row">
+	               <div class="col mt-0">
+	                  <h5 class="card-title">숙소 총 수익</h5>
+	               </div>
+	            </div>
+	            <h1 class="mt-1 mb-3" id="accomTotalProfit">&#8361;</h1>
+	            <div class="mb-0 " id="accomProfitMonth">
+	            </div>
+	         </div>
+	      </div>
+	      <div class="card" style="float: left;  width: 50%">
+	         <div class="card-body">
+	            <div class="row">
+	               <div class="col mt-0">
+	                  <h5 class="card-title">숙소 월 수익</h5>
+	               </div>
+	            </div>
+	            <h1 class="mt-1 mb-3" id="accomMonthTotalProfit">&#8361;</h1>
+	            <div class="mb-0 " id="accomProfit">
+	            </div>
+	         </div>
+	      </div>
+	         </div>
+         
+         
             <div class="row">
                <div class="col-lg-8 posts-list">
                   <div class="single-post">
@@ -269,7 +312,7 @@
                <div class="col-lg-4">
                   <div class="blog_right_sidebar">
                      <aside class="single_sidebar_widget post_category_widget">
-                        <div align="center"><button class="btn btn-finish btn-primary" type="submit">숙소추가</button></div>
+                        <div align="center"><button onclick="location.href='${pageContext.request.contextPath}/host/addAccomRoom?accomBuildingNo=${accomBuildingOne.accomBuildingNo }'" class="btn btn-finish btn-primary">객실추가</button></div>
                         <br>
                         <h4 class="widget_title">시설</h4>
                         <ul class="list cat-list">
@@ -320,7 +363,71 @@
             </div>
          </div>
       </section>
-
+	
+	
+	<script type="text/javascript">
+		let hostNo = "${hostSession.getHostNo()}";
+		let accomBuildingNo = "${param.accomBuildingNo}";
+		
+		// 숙소 총 수익
+        $.ajax(
+           {
+              type: "GET",
+              url:"/voyage/selectAccomProfitOneByHost?hostNo="+hostNo+"&accomBuildingNo="+accomBuildingNo,
+              dataType:"text",
+              success : function (data) {
+                 let accomTotalProfit = data;
+                 accomTotalProfit *= 1;
+                 $('#accomTotalProfit').append(accomTotalProfit.toLocaleString());
+        }
+                 
+           }      
+        )
+        
+        // 숙소 월 수익
+        $.ajax(
+           {
+              type: "GET",
+              url:"/voyage/selectAccomProfitOneByHostToMonth?hostNo="+hostNo+"&accomBuildingNo="+accomBuildingNo,
+              dataType:"text",
+              success : function (data) {
+                 let accomMonthTotalProfit = data;
+                 accomMonthTotalProfit *= 1;
+                 $('#accomMonthTotalProfit').append(accomMonthTotalProfit.toLocaleString());
+                 
+        }
+                 
+           }      
+        )
+	
+        // 해당 사업자의 저번주와 비교한 숙소 수익
+        $.ajax(
+           {
+              type: "GET",
+              url:"/voyage/selectAccomProfitOneCompare?hostNo="+hostNo+"&accomBuildingNo="+accomBuildingNo,
+              dataType:"text",
+              success : function (data) {
+                 $('#accomProfit').append(data);
+        }
+                 
+           }      
+        )
+        
+        // 해당 사업자의 저번달과 비교한 숙소 수익
+        $.ajax(
+           {
+              type: "GET",
+              url:"/voyage/selectAccomProfitOneCompareByMonth?hostNo="+hostNo+"&accomBuildingNo="+accomBuildingNo,
+              dataType:"text",
+              success : function (data) {
+                 $('#accomProfitMonth').append(data);
+        }
+                 
+           }      
+        )
+        
+	</script>
+	
         
     </main>
 

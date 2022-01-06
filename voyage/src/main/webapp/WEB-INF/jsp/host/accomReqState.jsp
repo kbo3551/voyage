@@ -125,7 +125,7 @@
 														<td style="font-weight: bold; display:table-cell;vertical-align:middle;">이름</td>
 														<td style="font-weight: bold; display:table-cell;vertical-align:middle;">생성일</td>
 														<td style="font-weight: bold; display:table-cell;vertical-align:middle;"></td>
-														<td style="font-weight: bold; display:table-cell;vertical-align:middle;"></td>
+														
 													</tr>
 													<c:forEach var="ab" items="${accomBuildingReqList}">
 														<tr>
@@ -142,7 +142,7 @@
 																</c:when>
 															</c:choose>
 															</small></td>
-															<td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="#" class="btn" style="background: rgb(130,130,130);">상세</a></small></td>
+														
 														</tr>
 													</c:forEach>
 												</table>

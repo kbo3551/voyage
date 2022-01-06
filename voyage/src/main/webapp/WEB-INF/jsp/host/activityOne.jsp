@@ -157,9 +157,6 @@
          let hostNo = "${hostSession.getHostNo()}";
          // 체험 번호
          let activityNo = "${param.activityNo}"
-         
-         // 체험 이름
-         let activityName = "${activityName}"
 			
          
         	// 최근 한달간 체험 일별 수익
@@ -205,7 +202,7 @@
                                title: {
                                   display: true,
                                   // 차트 제목 
-                                  text: activityName+' 월별 수익'
+                                  text: ' 월별 수익'
                                },
                                legend:{
                                   display: false

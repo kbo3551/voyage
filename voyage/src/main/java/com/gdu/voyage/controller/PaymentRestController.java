@@ -19,6 +19,17 @@ public class PaymentRestController {
 	
 	// 사업자 -- 
 	
+	// 최근 한달간 특정 객실 일별 수익
+	@GetMapping("/selectAccomRoomProfitByMonthToDateOne")
+	public TreeMap<String, Object> selectAccomRoomProfitByMonthToDateOne(int hostNo,int accomRoomNo) {
+		 log.trace("PaymentRestController 실행");
+		 
+		 TreeMap<String, Object> activityMonthDateProfit = paymentService.selectAccomRoomProfitByMonthToDateOne(hostNo,accomRoomNo);
+		 log.trace("★controller★ activityMonthDateProfit : "+activityMonthDateProfit);
+		 
+		 return activityMonthDateProfit;
+	}
+	
 	// 최근 한달간 특정 체험 일별 수익
 	@GetMapping("/selectActivityProfitByMonthToDateOne")
 	public TreeMap<String, Object> selectActivityProfitByMonthToDateOne(int hostNo,int activityNo) {
@@ -61,7 +72,7 @@ public class PaymentRestController {
 		 return paymentService.selectActivityProfitCompare(hostNo);
 	}
 	
-	// 해당 사업자의 저번달과 비교한 숙소 월 수익
+	// 해당 사업자의 저번달과 비교한 숙소 수익
 	@GetMapping("/selectAccomProfitCompareByMonth")
 	public String selectAccomProfitCompareByMonth(int hostNo) {
 		 return paymentService.selectAccomProfitCompareByMonth(hostNo);
@@ -71,6 +82,18 @@ public class PaymentRestController {
 	@GetMapping("/selectAccomProfitCompare")
 	public String selectAccomProfitCompare(int hostNo) {
 		 return paymentService.selectAccomProfitCompare(hostNo);
+	}
+	
+	// 해당 사업자의 저번달과 비교한 건물별 숙소 수익
+	@GetMapping("/selectAccomProfitOneCompareByMonth")
+	public String selectAccomProfitOneCompareByMonth(int hostNo,int accomBuildingNo) {
+		 return paymentService.selectAccomProfitOneCompareByMonth(hostNo,accomBuildingNo);
+	}
+		
+	// 해당 사업자의 저번주와 비교한 건물별 숙소 수익
+	@GetMapping("/selectAccomProfitOneCompare")
+	public String selectAccomProfitOneCompare(int hostNo,int accomBuildingNo) {
+		 return paymentService.selectAccomProfitOneCompare(hostNo,accomBuildingNo);
 	}
 	
 	// 해당 사업자의 저번달과 비교한 월 수익
@@ -178,6 +201,28 @@ public class PaymentRestController {
 		 
 		 return activityTotalProfit;
 	}
+	// 사업자 특정 숙소 월별 총 수익
+	@GetMapping("/selectAccomProfitOneByHostToMonth")
+	public long selectAccomProfitOneByHostToMonth(int hostNo,int accomBuildingNo) {
+		 log.trace("PaymentRestController 실행");
+		 
+		 long accomMonthTotalProfit = (long)paymentService.selectAccomProfitOneByHostToMonth(hostNo,accomBuildingNo);
+		 log.trace("★controller★ accomMonthTotalProfit : "+accomMonthTotalProfit);
+		 
+		 return accomMonthTotalProfit;
+	}
+	
+	// 사업자 특정 숙소 총 수익
+	@GetMapping("/selectAccomProfitOneByHost")
+	public long selectAccomProfitOneByHost(int hostNo,int accomBuildingNo) {
+		 log.trace("PaymentRestController 실행");
+		 
+		 long accomTotalProfit = (long)paymentService.selectAccomProfitOneByHost(hostNo,accomBuildingNo);
+		 log.trace("★controller★ accomTotalProfit : "+accomTotalProfit);
+		 
+		 return accomTotalProfit;
+	}
+	
 	
 	// 사업자 숙소 월별 총 수익
 	@GetMapping("/selectAccomProfitByHostToMonth")

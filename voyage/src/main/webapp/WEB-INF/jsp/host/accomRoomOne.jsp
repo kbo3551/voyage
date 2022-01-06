@@ -26,6 +26,8 @@
             <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/nice-select.css">
             <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
             <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.js" integrity="sha512-zO8oeHCxetPn1Hd9PdDleg5Tw1bAaP0YmNvPY8CwcRyUk7d7/+nyElmFrB6f7vg4f7Fv4sui1mcep8RIEShczg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script src="${contextPath}/Chart.js-2.9.4/dist/Chart.js"></script>
    </head>
    
    <!-- 눈누 - 한산스네오 레귤러 폰트 -->
@@ -148,6 +150,91 @@
     <!-- banner.jsp 시작 -->
     <c:import url="/WEB-INF/jsp/partial/banner.jsp"/>
     <!-- banner.jsp 끝 -->
+    
+    
+    
+    <script type="text/javascript">
+         // 사업자 번호
+         let hostNo = "${hostSession.getHostNo()}";
+         // 건물 번호
+         let accomRoomNo = "${param.accomRoomNo}"
+
+             // 최근 한달간 숙소 일별 수익
+              $.ajax(
+                 {
+                    type: "GET",
+                    url:"/voyage/selectAccomRoomProfitByMonthToDateOne?hostNo="+hostNo+"&accomRoomNo="+accomRoomNo,
+                    async:false,
+                    success : function (data) {
+                       let label = [];
+                       let amount = [];
+                       
+                       for(let key in data){
+                          label.push(key)
+                          amount.push(data[key])
+                       }
+                       
+                       document.addEventListener("DOMContentLoaded", function() {
+
+                          // Line chart
+                          new Chart(document.getElementById("accom-dashboard-line"), {
+                             type: "line",
+                             data: {
+                                labels: label,
+                                datasets: [{
+                                   label: "",
+                                   fill: true,
+                                   data: amount,
+                                   backgroundColor: 'rgba(23, 21, 132, 0.1)',
+                                    borderColor: 'rgb(255, 99, 132)',
+                                    tension: 0.3
+                                }]
+                             },
+                             options: {
+                                // 컨테이너가 수행 할 때 차트 캔버스의 크기를 조정(dafalut : true)
+                                responsive: true,
+                                // 크기 조정 이벤트 후 새 크기로 애니메이션하는 데 걸리는 시간(밀리 초) (defalut : 0)
+                                responsiveAnimationDuration: 1000,
+                                // (width / height) 크기를 조정할 떄 원래 캔버스 종횡비를 유지 (defalut : true)
+                                maintainAspectRatio: true,
+                                // 캔버스 종횡비( width / height, 정사각형 캔버스를 나타내는 값) 높이가 속성으로 또는 스타일 통해 명시적으로 정의된 경우이 옵션은 무시
+                                aspectRatio: 2,
+                                title: {
+                                   display: true,
+                                   // 차트 제목 
+                                   text: '월별 수익'
+                                },
+                                legend:{
+                                   display: false
+                                },
+                                tooltips: {
+                                   mode: 'index',
+                                   intersect: false,
+                                },
+                                hover: {
+                                   mode: 'nearest',
+                                   intersect: true
+                                },
+                                
+                                scales: {
+                                   xAxes: [{
+                                      reverse: true,
+                                      gridLines: {
+                                         color: "rgba(0,0,0,0.0)"
+                                      },
+                                      ticks: {
+                                              display: false
+                                          }
+                                   }],
+                                }
+                             }
+                          });
+                       });
+                    }   
+                 }      
+              )
+         
+    </script>
 
     <main>
 
@@ -169,6 +256,14 @@
       <!--================Blog Area =================-->
       <section class="blog_area single-post-area section-padding" style="padding-bottom: 20px !important;">
          <div class="container">
+         <div class="clear">
+               		<div class="col-sm-12">
+                          <div class="chart chart-sm">
+                              <canvas id="accom-dashboard-line"></canvas>
+                           </div>
+                     </div>
+                    
+               	</div>
             <div class="row">
                <div class="col-lg-8 posts-list">
                   <div class="single-post">

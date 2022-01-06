@@ -28,12 +28,16 @@ public interface PaymentMapper {
 	int selectAccomCountPage(String memberId);
 	// 해당 사업자의 숙소 총 수익, 월별 총수익
 	Object selectAccomProfitByHost(int hostNo, Integer month);
+	// 해당 사업자의 건물별 숙소 총 수익, 월별 총수익
+	Object selectAccomProfitOneByHost(int hostNo,int accomBuildingNo, Integer month);
 	// 해당 사업자의 분기별(3개월) 가장 많은 수익을 벌어들인 숙소
 	AccomPayment selectAccomProfitByQuarterly(int hostNo);
 	// 최근 한달간 일별 수익
 	List<AccomPayment> selectAccomProfitByMonthToDate(int hostNo, Integer accomRoomNo);
 	// 저번주, 혹은 저번달 숙소 수익과 비교한 비율(month가 0이면 week)
 	Object selectAccomProfitCompare(int hostNo, Integer month);
+	// 저번주, 혹은 저번달 숙소 수익과 비교한 건물별 비율(month가 0이면 week)
+	Object selectAccomProfitOneCompare(int hostNo,int accomBuildingNo, Integer month);
 	// 이번달 숙소 예약인원
 	Integer selectAccomUsePerson(int hostNo);
 	// 숙소별 수익

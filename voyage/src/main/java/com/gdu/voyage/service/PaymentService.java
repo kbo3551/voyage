@@ -83,7 +83,7 @@ public class PaymentService {
 		return str;
 	}
 	
-	// 해당 사업자의 저번달과 비교한 숙소 월 수익
+	// 해당 사업자의 저번달과 비교한 숙소 수익
 	public String selectAccomProfitCompareByMonth(int hostNo) {
 		DecimalFormat formatter = new DecimalFormat("###,###");
 		String str = "<span class='text-success'>0 </span><span class='text-muted'>Since last Month</span>";
@@ -107,6 +107,40 @@ public class PaymentService {
 		long result = 0;
 		if(paymentMapper.selectAccomProfitCompare(hostNo, null) != null) {
 			result = (long) paymentMapper.selectAccomProfitCompare(hostNo, null);
+		}
+		if(result > 0) {
+			str = "<span class='text-success'>"+formatter.format(result)+" </span><span class='text-muted'>Since last week</span>";
+		}
+		if(result < 0) {
+			str = "<span class='text-danger'>"+formatter.format(result)+" </span><span class='text-muted'>Since last week</span>";
+		}
+		return str;
+	}
+	
+	// 해당 사업자의 저번달과 비교한 건물별 숙소 수익
+	public String selectAccomProfitOneCompareByMonth(int hostNo,int accomBuildingNo) {
+		DecimalFormat formatter = new DecimalFormat("###,###");
+		String str = "<span class='text-success'>0 </span><span class='text-muted'>Since last Month</span>";
+		long result = 0;
+		if(paymentMapper.selectAccomProfitOneCompare(hostNo,accomBuildingNo, 1) != null) {
+			result = (long) paymentMapper.selectAccomProfitOneCompare(hostNo,accomBuildingNo, 1);
+		}
+		if(result > 0) {
+			str = "<span class='text-success'>"+formatter.format(result)+" </span><span class='text-muted'>Since last Month</span>";
+		}
+		if(result < 0) {
+			str = "<span class='text-danger'>"+formatter.format(result)+" </span><span class='text-muted'>Since last Month</span>";
+		}
+		return str;
+	}
+	
+	// 해당 사업자의 저번주와 비교한 건물별 숙소 수익
+	public String selectAccomProfitOneCompare(int hostNo,int accomBuildingNo) {
+		DecimalFormat formatter = new DecimalFormat("###,###");
+		String str = "<span class='text-success'>0 </span><span class='text-muted'>Since last week</span>";
+		long result = 0;
+		if(paymentMapper.selectAccomProfitOneCompare(hostNo,accomBuildingNo, null) != null) {
+			result = (long) paymentMapper.selectAccomProfitOneCompare(hostNo,accomBuildingNo, null);
 		}
 		if(result > 0) {
 			str = "<span class='text-success'>"+formatter.format(result)+" </span><span class='text-muted'>Since last week</span>";
@@ -153,6 +187,20 @@ public class PaymentService {
 	
 	// TreeMap - 자동 정렬 기능이 달려있는 Map
 	
+	// 최근 한달간 특정 객실 일별 수익
+	public TreeMap<String, Object> selectAccomRoomProfitByMonthToDateOne(int hostNo,int accomRoomNo) {
+		
+		List<AccomPayment> accomPayments = paymentMapper.selectAccomProfitByMonthToDate(hostNo, accomRoomNo);
+		
+		TreeMap<String, Object> map = new TreeMap<String, Object>();
+		
+		for(int i=0;i<accomPayments.size();i++) {
+			AccomPayment param = accomPayments.get(i);
+			map.put(param.getUpdateDate().toString(), param.getAccomAmount());
+		}
+		
+		return map;
+	}
 	
 	// 최근 한달간 특정 체험 일별 수익
 	public TreeMap<String, Object> selectActivityProfitByMonthToDateOne(int hostNo,int activityNo) {
@@ -254,6 +302,24 @@ public class PaymentService {
 		long result = 0;
 		if(paymentMapper.selectActivityProfitByHost(hostNo, null) != null) {
 			result = (long) paymentMapper.selectActivityProfitByHost(hostNo, null);
+		}
+		return result;
+	}
+	
+	// 해당 사업자의 특정 숙소 월별 총 수익
+	public long selectAccomProfitOneByHostToMonth(int hostNo,int accomBuildingNo) {
+		long result = 0;
+		if(paymentMapper.selectAccomProfitOneByHost(hostNo,accomBuildingNo, 1) != null) {
+			result = (long) paymentMapper.selectAccomProfitOneByHost(hostNo,accomBuildingNo, 1);
+		}
+		return result;
+	}
+	
+	// 해당 사업자의 특정 숙소 총 수익
+	public long selectAccomProfitOneByHost(int hostNo,int accomBuildingNo) {
+		long result = 0;
+		if(paymentMapper.selectAccomProfitOneByHost(hostNo,accomBuildingNo, null) != null) {
+			result = (long) paymentMapper.selectAccomProfitOneByHost(hostNo,accomBuildingNo, null);
 		}
 		return result;
 	}

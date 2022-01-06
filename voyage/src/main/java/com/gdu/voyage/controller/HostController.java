@@ -238,7 +238,7 @@ public class HostController {
 	      log.debug("[debug] ProductController.getAccomBuildingOne accomRoom : " + accomRoom);
 
 	      // [사업자] 숙소-건물 상세-목록 조회
-	      Map<String, Object> accomMap = (Map<String, Object>) productService.getAccomBuildingList(currentPage, ROW_PER_PAGE,null);
+	      Map<String, Object> accomMap = (Map<String, Object>) productService.getAccomBuildingList(currentPage, ROW_PER_PAGE,2);
 	      model.addAttribute("accomBuildingOneList", accomMap.get("accomBuildingList"));
 	      log.debug("[debug] ProductController.getAccomBuildingOne accomMap : " + accomMap);
 	      
