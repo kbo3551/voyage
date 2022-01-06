@@ -236,7 +236,7 @@
                         <form action="${pageContext.request.contextPath}/member/addActivityByInterest" method="post" name="addActivityByInterest" id="addActivityByInterest">
                         <input type="hidden" name="activityNo" value=${activityOne.activityNo }>
                         <p class="like-info"><span class="align-middle">
-                        <button  class="fa fa-heart" type="submit"></button>
+                        <button  class="btn" style="background-color: rgb(220,74,100);" type="submit">♥</button>
                         </span>
                         </p>
                         </form>
