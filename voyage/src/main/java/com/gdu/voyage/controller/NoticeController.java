@@ -25,7 +25,7 @@ public class NoticeController {
 	@Autowired NoticeService noticeService;
 	
 	private final int ROW_PER_PAGE = 10;
-	Notice notice = new Notice();
+	
 	//관리자
 	
 	//noticeList
@@ -67,7 +67,7 @@ public class NoticeController {
 	}
 	//insert
 	@GetMapping("/admin/addNotice")
-	public String addNoticeOne(HttpServletResponse response) {
+	public String addNoticeOne() {
 		return "/admin/addNotice";
 	}
 	
@@ -77,6 +77,8 @@ public class NoticeController {
 		//사진
 		String realPath = request.getServletContext().getRealPath("resources/image/notice//");
 		//입력하는 코드
+		noticeService.insertNoticeOne(noticeForm);
+		
 		noticeService.insertNoticeOne(noticeForm, realPath);
 		
 		return "redirect:/admin/adminNoticeList";
@@ -135,7 +137,6 @@ public class NoticeController {
 	
 		model.addAttribute("searchnotice", searchNotice);
 		
-		log.debug(notice.getSearchNotice()+"★★★ [DoHun] Notice List Controller 실행, notice.searchNotice ★★★");		
 		return "/noticeList";
 	}
 	

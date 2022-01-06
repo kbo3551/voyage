@@ -121,6 +121,14 @@
 			notice_no = #{noticeNo}
 	</update>
 	
+	<select id="selectInsertNotice" resultType="int">
+		SELECT notice_no FROM notice
+		ORDER BY
+			update_date DESC
+		LIMIT
+			0, 1
+	</select>
+	
 	<!-- 공지사항 One(상세보기) -->
 	<select id="selectNoticeOne" resultMap="notice" parameterType="com.gdu.voyage.vo.Notice">
 		SELECT

@@ -27,6 +27,8 @@ public interface NoticeMapper {
 	void insertNoticefile(NoticeFile noticefile);
 	void deleteNoticeFile(int noticeNo);
 	
+	int selectInsertNotice();
+	
 	//조회수
 	void updateNoticeViewCnt(int noticeNo,int noticeViewCnt);
 }

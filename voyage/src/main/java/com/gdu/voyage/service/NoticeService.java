@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 public class NoticeService {
 	@Autowired NoticeMapper noticeMapper;
-	Notice notice = new Notice();
+	
 	//고민 사항 : 수정 시 추가로 들어올 파일의 중복 검사는 필요한가?
 	
 	//Map(notice 리스트,페이징)으로 묶어서 리턴
@@ -61,17 +61,20 @@ public class NoticeService {
 		return noticeMapper.selectNoticeOne(noticeNo);
 	}
 	//insert(내용+사진 입력)
-	public void insertNoticeOne(NoticeForm noticeForm, String realPath) {
+	public void insertNoticeOne(NoticeForm noticeForm) {
 		log.debug(noticeForm+"☆☆☆[DoHun] NoticeInsert, Insert☆☆☆");
 		//입력하는 코드
 		Notice notice = noticeForm.getNotice();
 
 		noticeMapper.insertNotice(notice);
+	}
+	
+	public void insertNoticeOne(NoticeForm noticeForm, String realPath) {
 		
 		MultipartFile file=noticeForm.getNoticeFile();
 		if(file != null) {	
 			NoticeFile noticeFile = new NoticeFile();
-			noticeFile.setNoticeNo(notice.getNoticeNo());
+			noticeFile.setNoticeNo(noticeMapper.selectInsertNotice());
 			String originalFileName=file.getOriginalFilename();
 			int p = originalFileName.lastIndexOf(".");
 			String ext = originalFileName.substring(p+1);
