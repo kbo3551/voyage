@@ -23,12 +23,9 @@ public interface NoticeMapper {
 	Notice selectNoticeOne(int noticeNo);
 	// 공지사항 파일
 	List<NoticeFile> selectNoticeFileList();
-	//입력, 삭제 단계에서 사용되는 추가 삭제
+	//파일 단계에서 사용되는 추가 삭제
 	void insertNoticefile(NoticeFile noticefile);
 	void deleteNoticeFile(int noticeNo);
-	//업데이트시 사용되는 파일 추가 삭제
-	void insertNoticefileUpdate(NoticeFile noticefile);
-	void deleteNoticeFileUpdate(NoticeFile noticefile);
 	
 	//조회수
 	void updateNoticeViewCnt(int noticeNo,int noticeViewCnt);

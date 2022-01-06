@@ -1,11 +1,9 @@
 package com.gdu.voyage.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
@@ -16,9 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.NoticeService;
-import com.gdu.voyage.vo.AccomRoomForm;
 import com.gdu.voyage.vo.Notice;
-import com.gdu.voyage.vo.NoticeFile;
 import com.gdu.voyage.vo.NoticeForm;
 
 import lombok.extern.slf4j.Slf4j;
@@ -71,7 +67,7 @@ public class NoticeController {
 	}
 	//insert
 	@GetMapping("/admin/addNotice")
-	public String addNoticeOne() {
+	public String addNoticeOne(HttpServletResponse response) {
 		return "/admin/addNotice";
 	}
 	
@@ -82,26 +78,39 @@ public class NoticeController {
 		String realPath = request.getServletContext().getRealPath("resources/image/notice//");
 		//입력하는 코드
 		noticeService.insertNoticeOne(noticeForm, realPath);
-
+		
 		return "redirect:/admin/adminNoticeList";
 	}
 	//delete
 	@GetMapping("/admin/removeNotice")
 	public String removeNoticeOne(int noticeNo) {
 		noticeService.deleteNoticeOne(noticeNo);
-		return "/admin/adminNoticeList";
+		return "redirect:/admin/adminNoticeList";
 	}
 	//update
 	@GetMapping("/admin/modifyNotice")
-	public String updateNoticeOne(int noticeNo) {
-		return "redirect:/admin/modifyNotice";
+	public String updateNoticeOne(Model model, int noticeNo, HttpServletResponse response) {
+		Notice notice = noticeService.getNoticeOne(noticeNo);
+		model.addAttribute("notice", notice);
+		return "/admin/modifyNotice";
 	}
 	
 	@PostMapping("/admin/modifyNotice")
-	public String modifyNoticeOne(int noticeNo) {
+	public String modifyNoticeOne(NoticeForm noticeForm, HttpServletRequest request) {
+		
+		//사진
+		String realPath = request.getServletContext().getRealPath("resources/image/notice//");
+		
+		noticeService.updateNoticeOne(noticeForm, realPath);
+		
 		return "redirect:/admin/adminNoticeList";
 	}
 	
+	@PostMapping("/admin/removeNoticeModifyFile")
+	public String removeNoticeModifyFile(int noticeNo) {
+		noticeService.deleteUpdateNoticeFile(noticeNo);
+		return "redirect:/admin/modifyNotice";
+	}
 	//일반사용자
 	
 	//noticeList

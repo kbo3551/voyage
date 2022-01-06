@@ -40,7 +40,11 @@
 				<h1 class="h3 mb-3"><strong>관리자</strong> 공지사항</h1>
 				
 				<!-- 입력공간 -->
-				<form method="post" action="${pageContext.request.contextPath}/admin/modifyNotice">
+				<form method="post" action="${pageContext.request.contextPath}/admin/modifyNotice"  enctype="multipart/form-data" id="noticeForm">
+					<!-- 작성자 -->
+					<input type="hidden" name="notice.adminId" value="${loginMember.getMemberId()}">
+					<!-- 식별번호 -->
+					<input type="text" name="notice.noticeNo" value="${notice.noticeNo}">
 					<!-- 공지 제목 -->
 					<div class="row">
 						<div class="card">
@@ -48,55 +52,51 @@
 								<h5 class="card-title mb-0">공지사항 제목</h5>
 							</div>
 							<div class="card-body">
-								<input type="text" class="form-control" placeholder="제목" name="noticeTitle" value="noticeTitle">
+								<input type="text" class="form-control" placeholder="제목" name="notice.noticeTitle" value="${notice.noticeTitle}">
 							</div>
 						</div>
 					</div>
-					<!-- 상단고정(공지중요성)체크 -->
-					<div class="col-12 col-lg-6">
-						<div class="card">
-							<div class="card-header">
-								<h5 class="card-title mb-0">상단고정 여부</h5>
-							</div>
-							<div class="card-body">
-								<select class="form-select mb-3" name="noticeTop">
-									<!-- 게시글 수정 전 고정여부에 따른 option -->
-									<c:choose>
-										<c:when test="${noticeTop eq 'Y'}">
-											<!-- 상단 비고정 -->
-											<option value="N">일반</option>
-											<!-- 상단 고정 -->
-											<option selected value="Y">중요</option>
-										</c:when>
-										<c:otherwise>
-											<!-- 상단 비고정 -->
-											<option selected value="N">일반</option>
-											<!-- 상단 고정 -->
-											<option value="Y">중요</option>
-										</c:otherwise>
-									</c:choose>
-								</select>
-							</div>
-						</div>
-					</div>
-					<!-- 사진 -->
-					<div>
-						<img class="card-img-top" src="${pageContext.request.contextPath}/resources/image/notice/${noticeFile.noticeFileName}.${noticeFile.noticeFileExt}" alt="Unsplash">					
-						<button type="submit" name="deleteNoticeFileBtn">삭제</button>
-					</div>
-					<br>
-					<div>
-						<button type="submit" name="addNoticeFileBtn">이미지 추가</button>
-					</div>
-					<br>
-					<!-- 공지내용 -->
 					<div class="row">
 						<div class="card">
 							<div class="card-header">
-								<h5 class="card-title mb-0">내용</h5>
+								<!-- 상단고정(공지중요성)체크 -->
+								<div>
+									<h5 class="card-title mb-0">상단고정 여부</h5>
+								</div>
+								<div>
+									<select class="form-select mb-3" name="notice.noticeTop">
+										<!-- 게시글 수정 전 고정여부에 따른 option -->
+										<c:choose>
+											<c:when test="${notice.noticeTop == 'Y'}">
+												<!-- 상단 비고정 -->
+												<option value="N">일반</option>
+												<!-- 상단 고정 -->
+												<option selected value="Y">중요</option>
+											</c:when>
+											<c:otherwise>
+												<!-- 상단 비고정 -->
+												<option selected value="N">일반</option>
+												<!-- 상단 고정 -->
+												<option value="Y">중요</option>
+											</c:otherwise>
+										</c:choose>
+									</select>
+								</div>
+								<!-- 사진 -->
+								<c:choose>
+									<c:when test="${!(empty notice.noticeFile)}">	
+										<img class="card-img-top" src="${pageContext.request.contextPath}/resources/image/notice/${notice.noticeFile.noticeFileName}.${notice.noticeFile.noticeFileExt}" alt="noImage" style="max-width:100% hegiht:auto">
+										<a href="${pageContext.request.contextPath}/admin/removeNoticeModifyFile?noticeNo=${noticeNo}" class="btn btn-primary">삭제</a>
+									</c:when>
+									<c:otherwise>
+										<input type="file" name="noticeFile" id="noticeFile">
+									</c:otherwise>
+								</c:choose>	
 							</div>
+							<!-- 공지내용 -->
 							<div class="card-body">
-								<textarea class="form-control" rows="3" placeholder="내용입력" name="noticeContent">${noticeContent}</textarea>
+								<h5 class="card-title mb-0">내용</h5>
+								<textarea class="form-control" rows="3" placeholder="내용입력" name="notice.noticeContent">${notice.noticeContent}</textarea>
 							</div>
 						</div>
 					</div>

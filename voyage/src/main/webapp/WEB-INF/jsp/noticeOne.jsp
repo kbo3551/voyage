@@ -93,7 +93,7 @@
 				        
 						<div class="feature-img">
 							<c:if test="${!(empty notice.noticeFile)}">
-								<img class="card-img-top" src="${pageContext.request.contextPath}/resources/image/notice/${notice.noticeFile.noticeFileName}.${notice.noticeFile.noticeFileExt}" alt="unplash">							
+								<img class="card-img-top" src="${pageContext.request.contextPath}/resources/image/notice/${notice.noticeFile.noticeFileName}.${notice.noticeFile.noticeFileExt}" alt="존재하지 않는 이미지 입니다." style="max-width:100% hegiht:auto">							
 							</c:if>				
 						</div>
 						

@@ -17,9 +17,12 @@
 	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
 	<title>AdminKit Demo - Bootstrap 5 Admin Templateee</title>
-
+	
 	<link href="${pageContext.request.contextPath}/admin/css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
 </head>
 
 <body>
@@ -40,7 +43,7 @@
 				<h1 class="h3 mb-3"><strong>관리자</strong> 공지사항</h1>
 				
 				<!-- 입력공간 -->
-				<form method="post" action="${pageContext.request.contextPath}/admin/addNotice"  enctype="multipart/form-data" id="accomBuildingForm">
+				<form method="post" action="${pageContext.request.contextPath}/admin/addNotice"  enctype="multipart/form-data" id="noticeForm">
 					<!-- 작성자 -->
 					<input type="hidden" name="notice.adminId" value="${loginMember.getMemberId()}">
 					<!-- 공지 제목 -->
@@ -62,9 +65,6 @@
 									<option value="Y">중요</option>
 								</select>
 								<!-- 사진 -->
-								<input type="file" name="noticeFile" id="noticeFile">			
-								<input type="file" name="noticeFile" id="noticeFile">
-								<input type="file" name="noticeFile" id="noticeFile">
 								<input type="file" name="noticeFile" id="noticeFile">
 							</div>
 						</div>
@@ -81,7 +81,7 @@
 						</div>
 					</div>
 					<!-- 공지 Insert -->
-					<button class="btn btn-primary btn-lg" type="submit">입력</button>
+					<button class="btn btn-primary btn-lg" id="noticeAddBtn" type="submit">입력</button>
 				</form>
 			</div>
 		</main>

@@ -58,7 +58,7 @@
 								</div>
 								<div>
 									<c:if test="${!(empty notice.noticeFile)}">
-										<img class="card-img-top" src="${pageContext.request.contextPath}/resources/image/notice/${notice.noticeFile.noticeFileName}.${notice.noticeFile.noticeFileExt}" alt="Unsplash">
+										<img class="card-img-top" src="${pageContext.request.contextPath}/resources/image/notice/${notice.noticeFile.noticeFileName}.${notice.noticeFile.noticeFileExt}" alt="noImage" style="max-width:100% hegiht:auto">
 									</c:if>
 								</div>
 							</div>

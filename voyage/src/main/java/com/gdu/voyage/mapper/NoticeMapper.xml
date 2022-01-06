@@ -15,9 +15,9 @@
 	
 	<resultMap type="com.gdu.voyage.vo.NoticeFile" id="NoticeFile">
 		<result column ="notice_file_no" property="noticeFileNo"/>
-			<result column = "notice_file_name" property="noticeFileName"/>
-			<result column = "notice_file_ext" property="noticeFileExt"/>
-			<result column = "notice_file_size" property="noticeFileSize"/>
+		<result column = "notice_file_name" property="noticeFileName"/>
+		<result column = "notice_file_ext" property="noticeFileExt"/>
+		<result column = "notice_file_size" property="noticeFileSize"/>
 	</resultMap>
 	
 	
@@ -68,8 +68,8 @@
 			#{noticeTitle},
 			#{noticeContent},
 			'0',
-			Now(),
-			Now()
+			NOW(),
+			NOW()
 		) 
 	</insert>
 	<!-- 파일 insert -->

@@ -8,10 +8,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gdu.voyage.mapper.NoticeMapper;
@@ -62,35 +60,41 @@ public class NoticeService {
 		log.debug(noticeNo+"☆☆☆[DoHun] NoticeOne, Service☆☆☆");
 		return noticeMapper.selectNoticeOne(noticeNo);
 	}
-	
 	//insert(내용+사진 입력)
 	public void insertNoticeOne(NoticeForm noticeForm, String realPath) {
 		log.debug(noticeForm+"☆☆☆[DoHun] NoticeInsert, Insert☆☆☆");
 		//입력하는 코드
 		Notice notice = noticeForm.getNotice();
+		
+		
 		noticeMapper.insertNotice(notice);
 		
-		//사진파일을 가져오는 코드(사진파일 원본 이름을 분리하고 가공)
-		List<MultipartFile> file=noticeForm.getNoticefile();
-		if(file != null) {
-			for(MultipartFile i : file) {
-				NoticeFile noticeFile = new NoticeFile();
-				noticeFile.setNoticeNo(notice.getNoticeNo());
-				String originalFileName=i.getOriginalFilename();
-				int pointPrevLength = originalFileName.lastIndexOf(".");
-				String ext = originalFileName.substring(pointPrevLength+1);
-				String prevName=UUID.randomUUID().toString().replace("-", "");
-				String fileName = prevName;
-				
-				noticeFile.setNoticeFileName(fileName);
-				noticeFile.setNoticeFileExt(ext);
-				noticeFile.setNoticeFileSize(i.getSize());
-				
-				noticeMapper.insertNoticefile(noticeFile);
-				
-				File f= new File(realPath+fileName+"."+ext);
-				
+		MultipartFile file=noticeForm.getNoticeFile();
+		if(file != null) {	
+			NoticeFile noticeFile = new NoticeFile();
+			noticeFile.setNoticeNo(notice.getNoticeNo());
+			String originalFileName=file.getOriginalFilename();
+			int p = originalFileName.lastIndexOf(".");
+			String ext = originalFileName.substring(p+1);
+			String prename=UUID.randomUUID().toString().replace("-", "");
+			String filename = prename;
+			
+			noticeFile.setNoticeFileName(filename);
+			noticeFile.setNoticeFileExt(ext);
+			noticeFile.setNoticeFileSize(file.getSize());
+			log.debug(noticeFile.toString()+"☆☆☆[DoHun] NoticeInsert, Insert☆☆☆");
+			
+			noticeMapper.insertNoticefile(noticeFile);
+			
+			File f= new File(realPath+filename+"."+ext);
+			try {
+				file.transferTo(f);
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+				throw new RuntimeException();
 			}
+			log.debug(f+"☆☆☆[DoHun] NoticeInsert, file☆☆☆");
+			
 		}
 	}
 	
@@ -102,9 +106,43 @@ public class NoticeService {
 	}
 	
 	//수정
-	public void updateNoticeOne() {
+	public void updateNoticeOne(NoticeForm noticeForm, String realPath) {
 		
+		Notice notice = noticeForm.getNotice();
 		
+		noticeMapper.updateNotice(notice);		
+	
+		MultipartFile file=noticeForm.getNoticeFile();
+		if(file != null) {	
+			NoticeFile noticeFile = new NoticeFile();
+			noticeFile.setNoticeNo(notice.getNoticeNo());
+			String originalFileName=file.getOriginalFilename();
+			int p = originalFileName.lastIndexOf(".");
+			String ext = originalFileName.substring(p+1);
+			String prename=UUID.randomUUID().toString().replace("-", "");
+			String filename = prename;
+			
+			noticeFile.setNoticeFileName(filename);
+			noticeFile.setNoticeFileExt(ext);
+			noticeFile.setNoticeFileSize(file.getSize());
+			log.debug(noticeFile.toString()+"☆☆☆[DoHun] NoticeInsert, Insert☆☆☆");
+			
+			noticeMapper.insertNoticefile(noticeFile);
+			
+			File f= new File(realPath+filename+"."+ext);
+			try {
+				file.transferTo(f);
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+				throw new RuntimeException();
+			}
+			log.debug(f+"☆☆☆[DoHun] NoticeInsert, file☆☆☆");
+			
+		}
+	}
+	
+	public void deleteUpdateNoticeFile(int noticeNo){
+		noticeMapper.deleteNoticeFile(noticeNo);
 	}
 	
 	//조회수
