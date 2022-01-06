@@ -316,8 +316,6 @@
 																	
 																
 																</td>
-																<fmt:parseDate var="apAccomCheckInString" value="${ap.accomCheckIn}" pattern="yyyy-MM-dd HH:mm:ss.S" />
-																<fmt:parseDate var="apAccomCheckOutString" value="${ap.accomCheckOut}" pattern="yyyy-MM-dd HH:mm:ss.S" />
 																<td style="display:table-cell;vertical-align:middle;" width="61%">
 																	<table frame="void">
 																		<td class="square" style="clear:both; width: 30%">
@@ -337,7 +335,7 @@
 																			</small></p>
 																			
 																			<p><small>인원 : ${ap.accomUsePerson}명 / 기간 : 
-																			<fmt:formatDate value="${apAccomCheckInString}" pattern="yyyy-MM-dd HH:mm" /> ~ <fmt:formatDate value="${apAccomCheckOutString}" pattern="yyyy-MM-dd HH:mm" />
+																			${ap.accomCheckIn} ~ ${ap.accomCheckOut}
 																			</small></p>
 																			<p><b><fmt:formatNumber type="number" maxFractionDigits="3" value="${ap.accomAmount}" />원</b></p>
 																			</span>
