@@ -57,7 +57,7 @@
 	
    <body>
     <!-- 배너 : 시작 -->
-    <c:import url="../partial\\banner.jsp"/>
+    <c:import url="/WEB-INF/jsp/partial/banner.jsp"/>
     <!-- 배너 : 끝 -->
 
     <main>
@@ -153,7 +153,7 @@
 
     </main>
     <!--footer.jsp 시작  -->
-    <c:import url="../partial\\footer.jsp"/>
+    <c:import url="/WEB-INF/jsp/partial/footer.jsp"/>
     <!--footer.jsp 끝  -->
     <!-- Scroll Up -->
     <div id="back-top" >

@@ -41,7 +41,7 @@ public class ActivityReviewController {
 			model.addAttribute("currentPage", currentPage);
 			model.addAttribute("pageNo", pageNo);
 			
-			return "/templates_citylisting/getActivityReviewList";
+			return "/getActivityReviewList";
 		}
 		
 		// 숙소 후기 상세 보기
@@ -56,7 +56,7 @@ public class ActivityReviewController {
 			model.addAttribute("activityReview", activityReview);
 			model.addAttribute("accomReviewViewCnt", activityReviewViewCnt);
 			log.debug(model+"***** [상훈] activityReviewOne 실행 model");
-			return "activityReviewOne";
+			return "/activityReviewOne";
 		}
 		
 		// [Member] 후기 작성 get
@@ -70,7 +70,7 @@ public class ActivityReviewController {
 			if(loginMember == null) {
 				return "redirect:/login";
 			}
-			return "/templates_citylisting/addActivityReview";
+			return "/addActivityReview";
 		}
 		
 		// [Member] 후기 작성 post
