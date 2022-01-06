@@ -35,12 +35,14 @@
    <!-- 눈누 - 한산스네오 레귤러 폰트 -->
 	<style type="text/css">
 	
+	
 			  
   .slider {
     width: 600px;
     text-align: center;
     border-radius: 10px;
     overflow: hidden;
+
   }
   
   .slides {
@@ -50,13 +52,15 @@
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
+    
   }
   .slides::-webkit-scrollbar {
     width: 10px;
     height: 10px;
+    
   }
   .slides::-webkit-scrollbar-thumb {
-    background: black;
+    background: rgb(200,200,200);
     border-radius: 10px;
   }
   .slides::-webkit-scrollbar-track {
@@ -80,6 +84,7 @@
     justify-content: center;
     align-items: center;
     font-size: 100px;
+    background-color: rgba(200,200,200,0.01);
   }
   
   .author-info {
@@ -92,9 +97,11 @@
     left: 0;
     width: 100%;
     margin: 0;
+    
   }
   .author-info a {
     color: white;
+    
   }
   #imga {
     object-fit: cover;
@@ -115,12 +122,15 @@
     border-radius: 50%;
     margin: 0 0 0.5rem 0;
     position: relative;
+    
   }
   .slider > a:active {
     top: 1px;
+    
   }
   .slider > a:focus {
     background: #000;
+    
   }
   
 	
