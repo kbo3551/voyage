@@ -39,7 +39,6 @@
 		body {
 			font-family: 'SpoqaHanSansNeo-Regular';
 		}
-		
 	</style>
 	
 	<!-- Preloader Start -->
@@ -54,10 +53,9 @@
         </div>
     </div>
 	
-	
    <body>
     <!-- 배너 : 시작 -->
-    <c:import url="../partial\\banner.jsp"/>
+    <c:import url="/WEB-INF/jsp/partial/banner.jsp"/>
     <!-- 배너 : 끝 -->
 
     <main>
@@ -68,7 +66,7 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-8 col-lg-9">
                         <div class="hero-cap text-center pt-50 pb-20">
-                            <h2>체험 리뷰</h2>
+                            <h2>숙소 리뷰</h2>
                         </div>
                     </div>
                 </div>
@@ -91,17 +89,15 @@
                         <div class="listing-details-area">
                             <div class="container">
                                 <div class="row">
-                                	<c:forEach items="${activityReviewList}" var="review">
+                                	<c:forEach items="${accomReviewList}" var="review">
                                     	<div class="col-lg-6 ">
                                         	<div class="single-listing mb-30" id = "reviewArrayList">
-	                                        	<div class="list-img">
-			                                    	<img src="assets/img/gallery/list1.png" alt="">
-				                                    	<!-- <span>Open</span> -->
-		                                        </div>
+	                                        	 <p>${review.accomReviewNo}번글</p>
 		                                   		<div class="list-caption">
-		                                        	<span>${review.activityReviewStar}</span>
-		                                        	<h3><a href="${pageContext.request.contextPath}/activityReviewOne?activityReivewNo=${review.activityReviewNo}">${review.activityReviewTitle}</a></h3>
-		                                            <p>${review.activityReviewNo}</p>
+		                                        	<span>별점 : ${review.accomReviewStar} </span>
+		                                        	<div>조회수 : ${review.accomReviewViewCnt}</div>
+		                                        	<h3><a href="${pageContext.request.contextPath}/accomReviewOne?accomReviewNo=${review.accomReviewNo}">${review.accomReviewTitle}</a></h3>
+		                                           
 		                                          </div>
 		                                        </div>
 		                                      </div>
@@ -114,7 +110,11 @@
             	</div>
             </div>
         <!--Hero End -->
-                   <div class="pagination-area pt-70 text-center">
+        <!-- listing Area Start -->
+       
+                        <!-- listing Details End -->
+                        <!--Pagination Start  -->
+                        <div class="pagination-area pt-70 text-center">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-xl-12">
@@ -123,7 +123,7 @@
                                                <!-- 페이징 -->
 									                <ul class="pagination justify-content-start">
 									                   <c:if test="${beginRow > (ROW_PER_PAGE * 10)}">
-									                      <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/getActivityReviewList?pageNo=${pageNo-1}">&lt;</a></li>
+									                      <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/getAccomReviewList?pageNo=${pageNo-1}">&lt;</a></li>
 									                   </c:if>
 									                   <c:set var="doneLoop" value="false"></c:set>
 									                   <c:forEach var="f" begin="${pageNo}" end="${pageNo + 9}">
@@ -133,7 +133,7 @@
 									                               <li class="page-item active"><a class="page-link">${f}</a></li>
 									                            </c:when>
 									                            <c:otherwise>
-									                               <li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/getActivityReviewList?currentPage=${f}">${f}</a></li>
+									                               <li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/getAccomReviewList?currentPage=${f}">${f}</a></li>
 									                            </c:otherwise>
 									                         </c:choose>
 									                         <c:if test="${f == lastPage}">
@@ -142,7 +142,7 @@
 									                      </c:if>
 									                   </c:forEach>
 									                   <c:if test="${currentPage + 10 <= lastPage}">
-									                      <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/getActivityReviewList?currentPage=${pageNo+10}">&gt;</a></li>
+									                      <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/getAccomReviewList?currentPage=${pageNo+10}">&gt;</a></li>
 									                   </c:if>
 									                </ul>
                                             </nav>
@@ -151,11 +151,12 @@
                                 </div>
                             </div>
                         </div>
+                        <!--Pagination End  -->
         <!-- listing-area Area End -->
 
     </main>
     <!--footer.jsp 시작  -->
-    <c:import url="../partial\\footer.jsp"/>
+    <c:import url="/WEB-INF/jsp/partial/footer.jsp"/>
     <!--footer.jsp 끝  -->
     <!-- Scroll Up -->
     <div id="back-top" >

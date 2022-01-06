@@ -44,8 +44,9 @@
             	accom_review_no,
 	            accom_payment_details,
 	            accom_review_title,
+	            accom_review_content,
 	            accom_review_star,
-	            accom_review_view_cnt
+	            accom_review_view_cnt,
 	            create_date,
 	            update_date
 			FROM 
@@ -53,6 +54,13 @@
             WHERE 
             	accom_review_no = #{accomReviewNo}
 	</select>
+	
+	<!-- 조회수 -->
+	<update id="accomReviewViewCnt">
+        UPDATE accom_review
+            SET accom_review_view_cnt = accom_review_view_cnt+1
+            WHERE accom_review_no = ${accomReviewNo}
+    </update>
 	
 	<!-- 페이징 -->
 	<select id="selectCountPage" resultType="int">

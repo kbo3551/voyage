@@ -17,7 +17,7 @@ public interface AccomReviewMapper {
 	List<AccomReview> selectAccomReviewList (Map<String, Object> param);
 	
 	//조회수
-	void accomReviewViewCnt(int accomReviewNo,int accomReviewViewCnt);
+	void accomReviewViewCnt(int accomReviewNo);
 	
 	// 숙소 후기 상세 조회 one
 	AccomReview selectAccomReviewOne(int accomReviewNo);

@@ -109,8 +109,8 @@ public class AccomReviewService {
 
 	}
 	//조회수
-	public void accomReviewViewCnt(int accomReviewNo, int accomReviewViewCnt) {
-		accomReviewMapper.accomReviewViewCnt(accomReviewNo, accomReviewViewCnt);
+	public void accomReviewViewCnt(int accomReviewNo) {
+		accomReviewMapper.accomReviewViewCnt(accomReviewNo);
 	}
 	// 숙소 후기 상세보기
 	public AccomReview getAccomReviewOne(int accomReviewNo) {

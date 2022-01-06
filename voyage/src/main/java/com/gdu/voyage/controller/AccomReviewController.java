@@ -49,24 +49,23 @@ public class AccomReviewController {
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("pageNo", pageNo);
 		
-		return "/templates_citylisting/getAccomReviewList";
+		return "/getAccomReviewList";
 	}
 	
 	// 숙소 후기 상세 보기
 	@GetMapping("/accomReviewOne")
 	public String getAccomReviewOne(Model model, int accomReviewNo) {
 		log.debug(accomReviewNo+"***** [상훈] accomReviewOne 실행 accomReviewNo");
-		AccomReview accomReview = new AccomReview();
-		accomReview = accomReviewService.getAccomReviewOne(accomReviewNo);
+		AccomReview accomReview = accomReviewService.getAccomReviewOne(accomReviewNo);
 		
 		int accomReviewViewCnt = accomReview.getAccomReviewViewCnt()+1;
-		accomReview.setAccomReviewViewCnt(accomReviewViewCnt);
-		accomReviewService.accomReviewViewCnt(accomReviewNo, accomReviewViewCnt);
+		accomReviewService.accomReviewViewCnt(accomReviewNo);
 		
 		model.addAttribute("accomReview", accomReview);
+		model.addAttribute("accomReviewViewCnt", accomReviewViewCnt);
 		log.debug(model+"***** [상훈] accomReviewOne 실행 model");
 		
-		return "accomReviewOne";
+		return "/accomReviewOne";
 	}
 	
 	
@@ -83,7 +82,7 @@ public class AccomReviewController {
 		if(loginMember == null) {
 			return "redirect:/login";
 		}
-		return "/templates_citylisting/addAccomReview";
+		return "/addAccomReview";
 	}
 	
 	// [Member] 후기 작성 post

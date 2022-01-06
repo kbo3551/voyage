@@ -12,12 +12,11 @@
         		var ck = false;
         		
         		// 유효성 검사를 위한 변수 생성
-        		var valAccomReviewTitle = $('#accomReviewTitle').val();
-        		var valAccomReviewContent = $('#accomReviewContent').val();
-        		var valAccomReviewStar = $('#accomReviewStar').val();
+        		var valActivityReviewTitle = $('#activityReviewTitle').val();
+        		var valActivityReviewContent = $('#activityReviewContent').val();
 	       		// 이미지 추가 버튼 눌렀을 때
         		$('#addImgBtn').click(function(){
-        			let html = '<div><input type="file" name="accomReviewImage" id="accomReviewImage"></div>';
+        			let html = '<div><input type="file" name="activityReviewImage" id="activityReviewImage"></div>';
         			$('#Imageinput').append(html);
         		});
         		// 이미지 삭제 버튼 눌렀을 때
@@ -26,26 +25,20 @@
         		});
         		// send 버튼 눌렀을 때
         		$('#sendABtn').click(function(){
-					if(valAccomReviewTitle == null || valAccomReviewTitle == undifined || valAccomReviewTitle == ""){
+					if(valActivityReviewTitle == null || valActivityReviewTitle == undifined || valActivityReviewTitle == ""){
 						alert('제목이 입력되지 않았습니다. 제목을 입력해주세요.');
-						$('#accomReviewTitle').focus();
+						$('#activityReviewTitle').focus();
 						return;
 					}
 					
-					if(valAccomReviewContent == null || valAccomReviewContent == defined || valAccomReviewContent == ""){
+					if(valActivityReviewContent == null || valActivityReviewContent == defined || valActivityReviewContent == ""){
 						alert('내용이 입력되지 않았습니다. 내용을 입력해주세요.');
-						$('#accomReviewContent').focus();
-						return;
-					}
-					
-					if(valAccomReviewStar == null || valAccomReviewStar == defined || valAccomReviewStar == ""){
-						alert('별점이 입력되지 않았습니다. 별점을 입력해주세요.');
-						$('#accomReviewStar').focus();
+						$('#activityReviewContent').focus();
 						return;
 					}
         		 	ck = true;
         			// index : 이미지 파일명, item : 파일 경로
-        			$('#accomReviewImage').each(function(index, item){
+        			$('#activityReviewImage').each(function(index, item){
         				console.log($(item).val());
         				if($(item).val() == ''){
         					ck = false;	
@@ -55,33 +48,33 @@
         			if(ck == false){
         				alert('이미지 파일을 선택해주세요');
         			}
-        			$('#addAccomReviewForm').submit();
+        			$('#addActivityReviewForm').submit();
         		});
         	});
         
         </script>
         <script>
-     	// 중복 체크
-        let accomPaymentNo = "${param.accomPaymentNo}";
-                    $.ajax(
-                        {
-                            type: "GET",
-                            url:"/voyage/addAccomReviewCheck?accomPaymentNo="+accomPaymentNo,
-                            async: false,
-                            dataType:"text",
-                            success : function (data) {
-                                let accomPaymentNo = data;
-                                accomPaymentNo *= 1;
-                                
-                                let contextPath = "${pageContext.request.contextPath}";
-                                
-                                if(accomPaymentNo>0){
-                                	alert("중복으로 작성 할 수 없습니다.");
-                                	window.history.back();
-                                }
-                    		}
-		              	}
-		      		 )
+     // 중복 체크
+        let activityPaymentNo = "${param.activityPaymentNo}";
+                    $.ajax( 
+                   		{
+                           type: "GET",
+                           url:"/voyage/addActivityReviewCheck?activityPaymentNo="+activityPaymentNo,
+                           async:false,
+                           dataType:'text',
+                           success : function (data) {
+                               let activityPaymentNo = data;
+                               activityPaymentNo *= 1;
+                               
+							let contextPath = "${pageContext.request.contextPath}";
+                               
+                               if(activityPaymentNo>0){
+                               	alert("중복으로 작성 할 수 없습니다.");
+                               	window.history.back();
+                               }
+                   		}
+                 	}
+              );
         </script>
         
         <meta name="description" content="">
@@ -115,38 +108,37 @@
 			body {
 				font-family: 'SpoqaHanSansNeo-Regular';
 			}
-			
-		#accomReviewForm fieldset{
+			#activityReviewForm fieldset{
 		    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
 		    border: 0; /* 필드셋 테두리 제거 */
-		}
-		#accomReviewForm input[type=radio]{
-		    display: none; /* 라디오박스 감춤 */
-		}
-		#accomReviewForm label{
-		    font-size: 3em; /* 이모지 크기 */
-		    color: transparent; /* 기존 이모지 컬러 제거 */
-		    text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
-		}
-		color: transparent; /* 기존 이모지 컬러 제거 */
-		text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
-		#accomReviewForm label:hover{
-		    text-shadow: 0 0 0 #a00; /* 마우스 호버 */
-		}
-		#accomReviewForm label:hover ~ label{
-		    text-shadow: 0 0 0 #a00; /* 마우스 호버 뒤에오는 이모지들 */
-		}
-		#accomReviewForm fieldset{
-		    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
-		    direction: rtl; /* 이모지 순서 반전 */
-		    border: 0; /* 필드셋 테두리 제거 */
-		}
-		#accomReviewForm fieldset legend{
-		    text-align: left;
-		}
-		#accomReviewForm input[type=radio]:checked ~ label{
-		    text-shadow: 0 0 0 #a00; /* 마우스 클릭 체크 */
-		}
+			}
+			#activityReviewForm input[type=radio]{
+			    display: none; /* 라디오박스 감춤 */
+			}
+			#activityReviewForm label{
+			    font-size: 3em; /* 이모지 크기 */
+			    color: transparent; /* 기존 이모지 컬러 제거 */
+			    text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+			}
+			color: transparent; /* 기존 이모지 컬러 제거 */
+			text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+			#activityReviewForm label:hover{
+			    text-shadow: 0 0 0 #a00; /* 마우스 호버 */
+			}
+			#activityReviewForm label:hover ~ label{
+			    text-shadow: 0 0 0 #a00; /* 마우스 호버 뒤에오는 이모지들 */
+			}
+			#activityReviewForm fieldset{
+			    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+			    direction: rtl; /* 이모지 순서 반전 */
+			    border: 0; /* 필드셋 테두리 제거 */
+			}
+			#activityReviewForm fieldset legend{
+			    text-align: left;
+			}
+			#activityReviewForm input[type=radio]:checked ~ label{
+			    text-shadow: 0 0 0 #a00; /* 마우스 클릭 체크 */
+			}
 		</style>
 <body>
    <body>
@@ -162,7 +154,7 @@
         </div>
     </div>
    	<!-- 배너 : 시작 -->
-  	<c:import url="../partial\\banner.jsp"/>
+  	<c:import url="/WEB-INF/jsp/partial/banner.jsp"/>
    	<!-- 배너 : 끝 -->
 
     <main>
@@ -173,7 +165,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center pt-50">
-                            <h2>후기 작성</h2>
+                            <h2>체험 후기 작성</h2>
                         </div>
                     </div>
                 </div>
@@ -195,39 +187,32 @@
                     	<!-- 원본 : Massage -->
                         <h3 class="mb-40">Review</h3>
                         <!-- Form -->
-                        <form method="post" class="form-contact contact_form mb-80" action="${pageContext.request.contextPath}/addAccomReview" enctype="multipart/form-data" id="accomReviewForm">
+                        <form method="post" class="form-contact contact_form mb-80" action="${pageContext.request.contextPath}/addActivityReview" enctype="multipart/form-data" id="activityReviewForm">
                             <div class="row">
                                 <div class="col-sm-6">
                                 	<div class="form-group">
-                                		<input class="form-controle error"  hidden="hidden" name="accomPaymentNo" type="number" value="${param.accomPaymentNo}">
+                                		<input class="form-controle error"  hidden="hidden" name="activityPaymentNo" type="number" value="${param.activityPaymentNo}">
                                 	</div>
                                     <div class="form-group">
-                                    	 <input class="form-control error" name="accomReview.memberNickname" id="memberNickname" type="text" value="${loginMember.getMemberNickname()}" readonly="readonly">
+                                    	 <input class="form-control error" name="activityReview.memberNickname" id="memberNickname" type="text" value="${loginMember.getMemberNickname()}" readonly="readonly">
                                     </div>
                                     <div class="form-group">
-	                                    <input class="form-control error" name="accomReview.accomReviewTitle" id="accomReviewTitle" type="text"	placeholder="제목을 입력해주세요">
+	                                    <input class="form-control error" name="activityReview.activityReviewTitle" id="activityReviewTitle" type="text"	placeholder="제목을 입력해주세요">
   									</div>			
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <textarea class="form-control w-100 error" name="accomReview.accomReviewContent" id="accomReviewContent" cols="30" rows="9" placeholder="내용을 입력해주세요. 이미지 파일을 첨부해주시면 도움이 됩니다."></textarea>
+                                        <textarea class="form-control w-100 error" name="activityReview.activityReviewContent" id="activityReviewContent" cols="30" rows="9" placeholder="내용을 입력해주세요. 이미지 파일을 첨부해주시면 도움이 됩니다."></textarea>
                                     </div>
                                 </div>
-								    <fieldset>
+                                 <fieldset>
 								        <legend>별점</legend>
-										<input type="radio" name="accomReviewStar" value="5" id="rate1"><label for="rate1">⭐</label>
-								        <input type="radio" name="accomReviewStar" value="4" id="rate2"><label for="rate2">⭐</label>
-								        <input type="radio" name="accomReviewStar" value="3" id="rate3"><label for="rate3">⭐</label>
-								        <input type="radio" name="accomReviewStar" value="2" id="rate4"><label for="rate4">⭐</label>
-								        <input type="radio" name="accomReviewStar" value="1" id="rate5"><label for="rate5">⭐</label>
+										<input type="radio" name="activityReviewStar" value="5" id="rate1"><label for="rate1">⭐</label>
+								        <input type="radio" name="activityReviewStar" value="4" id="rate2"><label for="rate2">⭐</label>
+								        <input type="radio" name="activityReviewStar" value="3" id="rate3"><label for="rate3">⭐</label>
+								        <input type="radio" name="activityReviewStar" value="2" id="rate4"><label for="rate4">⭐</label>
+								        <input type="radio" name="activityReviewStar" value="1" id="rate5"><label for="rate5">⭐</label>
 								    </fieldset>
-								&nbsp;
-                                <div>파일 첨부</div>
-                                <div>
-                                	<button type="button" id="addImgBtn">Add Img</button>
-                                	<button type="button" id="removeImgBtn">Del Img</button>
-                                </div>
-                                <div id="Imageinput"></div>
                             </div>
                             <div class="form-group mt-3">
                             	<!-- 원본 버튼 : Send  -->

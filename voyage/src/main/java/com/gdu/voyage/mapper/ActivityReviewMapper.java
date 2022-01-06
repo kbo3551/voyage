@@ -5,18 +5,24 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.gdu.voyage.vo.AccomReview;
 import com.gdu.voyage.vo.ActivityReview;
 import com.gdu.voyage.vo.ActivityReviewImage;
 
 @Mapper
 public interface ActivityReviewMapper {
 
-	// 숙소 후기 추가 (숙소 체크아웃 끝나고 등록가능 accom_payment 테이블과 조인해서 체크아웃확인후 등록)
+	// 체험 후기 추가 (체험 체크아웃 끝나고 등록가능 activity_payment 테이블과 조인해서 체크아웃확인후 등록)
 	int addActivityReview(ActivityReview activityReview);
 		
-	
 	// 체험 후기 전체 목록
 	List<ActivityReview> selectActivityReviewList (Map<String, Object> param);
+	
+	//조회수
+	void activityReviewViewCnt(int activityReviewNo);
+	
+	// 체험 후기 상세 조회 one
+	ActivityReview selectActivityReviewOne(int activityReviewNo);
 	
 	// 체험 후기 게시글 수
 	int selectReviewTotalCount(Integer activityPaymentNo);

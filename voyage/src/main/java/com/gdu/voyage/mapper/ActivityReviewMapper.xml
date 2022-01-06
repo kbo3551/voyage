@@ -38,6 +38,30 @@
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	
+	<!-- review no에 따른 숙소 후기 상세 조회 -->
+	<select id="selectActivityReviewOne" parameterType="com.gdu.voyage.vo.ActivityReview" resultMap="resultReview">
+			SELECT
+            	activity_review_no,
+	            activity_payment_details,
+	            activity_review_title,
+	            activity_review_content,
+	            activity_review_star,
+	            activity_review_view_cnt
+	            create_date,
+	            update_date
+			FROM 
+				activity_review
+            WHERE 
+            	activity_review_no = #{activityReviewNo}
+	</select>
+	
+	<!-- 조회수 -->
+	<update id="activityReviewViewCnt">
+        UPDATE activity_review
+            SET activity_review_view_cnt = activity_review_view_cnt+1
+            WHERE activity_review_no = ${activityReviewNo}
+    </update>
+	
 	<!-- 페이징 -->
 	<select id="selectCountPage" resultType="int">
 		SELECT COUNT(*)FROM activity_review

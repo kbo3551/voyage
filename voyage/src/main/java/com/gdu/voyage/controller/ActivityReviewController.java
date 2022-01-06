@@ -43,6 +43,22 @@ public class ActivityReviewController {
 			
 			return "/templates_citylisting/getActivityReviewList";
 		}
+		
+		// 숙소 후기 상세 보기
+		@GetMapping("/activityReviewOne")
+		public String getActivityReviewOne(Model model, int activityReviewNo) {
+			log.debug(activityReviewNo+"***** [상훈] activityReviewOne 실행 activityReviewNo");
+			ActivityReview activityReview = activityReviewService.getActivityReviewOne(activityReviewNo);
+			
+			int activityReviewViewCnt = activityReview.getActivityReviewViewCnt()+1;
+			activityReviewService.activityReviewViewCnt(activityReviewNo);
+			
+			model.addAttribute("activityReview", activityReview);
+			model.addAttribute("accomReviewViewCnt", activityReviewViewCnt);
+			log.debug(model+"***** [상훈] activityReviewOne 실행 model");
+			return "activityReviewOne";
+		}
+		
 		// [Member] 후기 작성 get
 		@GetMapping("/addActivityReview")
 		public String addActivityReview(HttpSession session, Model model) {
@@ -61,8 +77,6 @@ public class ActivityReviewController {
 		@PostMapping("/addActivityReview")
 		public String addActivityReview(HttpServletRequest request, ActivityReviewForm activityReviewForm, 
 				HttpSession session) throws Exception {
-			// activityPaymentDetails값을 세션에서 가져옴
-			ActivityReview activityReview = (ActivityReview) session.getAttribute("activityReview");
 			Member loginMember = (Member) session.getAttribute("loginMember");
 			int activityPaymentNo = Integer.parseInt(request.getParameter("activityPaymentNo"));
 			String memberId = loginMember.getMemberId();

@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gdu.voyage.mapper.ActivityReviewMapper;
+import com.gdu.voyage.vo.AccomReview;
 import com.gdu.voyage.vo.ActivityReview;
 import com.gdu.voyage.vo.ActivityReviewForm;
 import com.gdu.voyage.vo.ActivityReviewImage;
@@ -108,5 +109,15 @@ public class ActivityReviewService {
 		return returnMap;
 
 	}
+	//조회수
+	public void activityReviewViewCnt(int activityReviewNo) {
+		activityReviewMapper.activityReviewViewCnt(activityReviewNo);
+	}
+	
+	// 체험 후기 상세보기
+	public ActivityReview getActivityReviewOne(int activityReviewNo) {
+		log.debug(activityReviewNo + "***********[상훈] activityReviewService One");
+		return activityReviewMapper.selectActivityReviewOne(activityReviewNo);
+			}
 
 }
