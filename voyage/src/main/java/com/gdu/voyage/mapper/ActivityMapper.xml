@@ -232,6 +232,17 @@
 	</delete>
 	
 	<!-- 회원 -->
+	<!-- 관심상품 중복 방지 -->
+	<select id="selectActivityByInterests" resultType="int">
+	SELECT
+		count(member_id)
+	FROM
+		activity_interest
+	WHERE
+		member_id = #{memberId}
+	AND
+		activity_no = ${activityNo}
+	</select>
 	<!-- 관심상품 추가 -->
 	<insert id="insertActivityByInterest">
 		INSERT INTO activity_interest(

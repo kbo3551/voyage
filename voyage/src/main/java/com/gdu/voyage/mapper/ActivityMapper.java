@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.gdu.voyage.vo.Activity;
 import com.gdu.voyage.vo.ActivityAddress;
 import com.gdu.voyage.vo.ActivityImage;
+import com.gdu.voyage.vo.ActivityInterest;
 import com.gdu.voyage.vo.ActivitySpot;
 import com.gdu.voyage.vo.Hashtag;
 import com.gdu.voyage.vo.SpotAddress;
@@ -31,7 +32,9 @@ public interface ActivityMapper {
 	int selectInterestedActivityCount(String memberId);
 	
 	// 관심상품 추가
-	int insertActivityByInterest(int ActivityNo, String memberId);
+	void insertActivityByInterest(ActivityInterest activityInterest);
+	// 관심상품 중복 방지
+	int selectActivityByInterests(ActivityInterest activityInterest);
 	// 관심상품 제거
 	int deleteActivityByInterest(int ActivityNo, String memberId);
 	// 관심상품 확인

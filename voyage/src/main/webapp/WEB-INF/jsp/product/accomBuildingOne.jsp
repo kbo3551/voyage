@@ -35,6 +35,105 @@
    <!-- 눈누 - 한산스네오 레귤러 폰트 -->
 	<style type="text/css">
 	
+	
+			  
+  .slider {
+    width: 600px;
+    text-align: center;
+    border-radius: 10px;
+    overflow: hidden;
+
+  }
+  
+  .slides {
+    display: flex;
+    overflow-x: auto;
+    /* overflow: hidden; */
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    
+  }
+  .slides::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    
+  }
+  .slides::-webkit-scrollbar-thumb {
+    background: rgb(200,200,200);
+    border-radius: 10px;
+  }
+  .slides::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .slides > div {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    width: 600px;
+    height: 300px;
+    margin-right: 50px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #eee;
+    transform-origin: center center;
+    transform: scale(1);
+    transition: transform 0.5s;
+    position: relative;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+    background-color: rgba(200,200,200,0.01);
+  }
+  
+  .author-info {
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 0.75rem;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    
+  }
+  .author-info a {
+    color: white;
+    
+  }
+  #imga {
+    object-fit: cover;
+    top: ;
+    left: ;
+    width: auto;
+    max-height: 100%;
+  }
+  
+  .slider > a {
+    display: inline-flex;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: #eee;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 0 0 0.5rem 0;
+    position: relative;
+    
+  }
+  .slider > a:active {
+    top: 1px;
+    
+  }
+  .slider > a:focus {
+    background: #000;
+    
+  }
+  
+	
 		@font-face {
 		    font-family: 'SpoqaHanSansNeo-Regular';
 		    	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff');
@@ -91,13 +190,15 @@
                      <div class="feature-img">
 <%--                         <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/blog/single_blog_1.png" alt=""> --%>
                      </div>
-                    <div class="fade">
-                     	<c:forEach items="${accomBuildingOne.accomBuildingImageList }" var="abi" varStatus="status">
-                     		<div>
-                   				<img class="img-fluid" style="height: 400px;" src="${pageContext.request.contextPath}/resources/image/accom_building/${abi.getAccomBuildingImageName() }.${abi.getAccomBuildingImageExt() }" alt="">
-                   			</div>
-                   		</c:forEach>
-                   	</div>
+
+                     	 <div class="slider">
+                    <div class="slides">
+                        <c:forEach items="${accomBuildingOne.getAccomBuildingImageList()}" var="abi">
+                           <div id="slide-1"><img id="imga" src="${pageContext.request.contextPath}/resources/image/accom_building/${abi.getAccomBuildingImageName()}.${abi.accomBuildingImageExt}" alt=""></div>
+                         </c:forEach>
+                      </div> 
+                      </div>
+
                      <!-- slider -->
 <!--                      <div class="row"> -->
 <!--                            <div class="light-slide-item">             -->
@@ -568,8 +669,8 @@
                             	<div style="text-align: left; padding-right: 8%;">
 	                                <h3 style="letter-spacing: 0.1em;"><i class="fa fa-map-marker"></i> Address</h3>
 	                                <p>
-	                                    <small>${accomBuildingOne.accomAddress.accomAddressZip }</small><br>
-	                                    <small>${accomBuildingOne.accomAddress.accomAddressDetail }</small>
+	                                    <small id="address">${accomBuildingOne.accomAddress.accomAddressZip }</small><br>
+	                                    <small id="addressName">${accomBuildingOne.accomAddress.accomAddressDetail }</small>
 	                                </p>
                                 </div>
                             </div>
@@ -598,17 +699,61 @@
                 </div>
                 
                 <!-- Map -->
-                <div id="map" style="width:500px;height:400px;"></div>
-				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0fdeb74ea7218785dc85928a77d4373c"></script>
-				<script>
-					var container = document.getElementById('map');
-					var options = {
-						center: new kakao.maps.LatLng(33.450701, 126.570667),
-						level: 3
-					};
-			
-					var map = new kakao.maps.Map(container, options);
-				</script>
+             	<div class="center-block" id="map" style="width:1000px;height:400px;"></div>
+             	<br>
+	           	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5f63299ede92b61fa942fb3c84d11fa3&libraries=services"></script>
+				   <script>
+                          var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                          mapOption = {
+                              center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                              level: 3 // 지도의 확대 레벨
+                          };  
+
+                      // 지도를 생성합니다    
+                      var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+                      // 주소-좌표 변환 객체를 생성합니다
+                      var geocoder = new kakao.maps.services.Geocoder();
+						
+						// 주소로 좌표를 검색합니다
+						geocoder.addressSearch($('#address').text(), function(result, status) {
+						
+							// 정상적으로 검색이 완료됐으면 
+						     if (status === kakao.maps.services.Status.OK) {
+
+						        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+						        
+						        // 결과값으로 받은 위치를 마커로 표시합니다
+						        var marker = new kakao.maps.Marker({
+						            map: map,
+						            position: coords
+						        });
+
+						        // 인포윈도우로 장소에 대한 설명을 표시합니다
+						        var infowindow = new kakao.maps.InfoWindow({
+						            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+$('#addressName').text()+'</div>'
+						        });
+						        infowindow.open(map, marker);
+
+						        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+						        map.setCenter(coords);
+						    } 
+						});	
+							
+								
+						var zoomControl = new kakao.maps.ZoomControl();
+						// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+						var mapTypeControl = new kakao.maps.MapTypeControl();
+
+						// 지도 타입 컨트롤을 지도에 표시합니다
+						map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+						map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+						
+						var geocoder = new kakao.maps.services.Geocoder();
+						
+								
+						</script>
+
                 <!--End Map -->
                 <!-- Contact From -->
                 <!-- From -->

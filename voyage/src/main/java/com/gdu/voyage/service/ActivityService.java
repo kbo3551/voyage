@@ -17,6 +17,7 @@ import com.gdu.voyage.vo.Activity;
 import com.gdu.voyage.vo.ActivityAddress;
 import com.gdu.voyage.vo.ActivityForm;
 import com.gdu.voyage.vo.ActivityImage;
+import com.gdu.voyage.vo.ActivityInterest;
 import com.gdu.voyage.vo.ActivitySpot;
 import com.gdu.voyage.vo.ActivitySpotForm;
 import com.gdu.voyage.vo.Hashtag;
@@ -39,17 +40,28 @@ public class ActivityService {
 	}
 	
 	// 관심상품 추가
-		public int insertActivityByInterest(int activityNo, String memberId) {
-			return activityMapper.insertActivityByInterest(activityNo,memberId);
+	public void insertActivityByInterest(ActivityInterest activityInterest) {
+		activityMapper.insertActivityByInterest(activityInterest);
+	}
+	// 관심상품 중복 추가 검사
+	public String duplActivityInterest(ActivityInterest activityInterest) {
+		log.debug("☆☆☆[boryeong]CouponService회원 쿠폰 중복 발급 방지☆☆☆"+activityInterest.toString());
+		int interestCheck = activityMapper.selectActivityByInterests(activityInterest);
+		if(interestCheck == 1) {
+			log.debug("관심중복");
+			return "관심중복";
 		}
-		// 관심상품 제거
-		public int deleteActivityByInterest(int activityNo, String memberId) {
-			return activityMapper.deleteActivityByInterest(activityNo,memberId);
-		}
+		return "중복없음";
+	}
+	// 관심상품 제거
+	public int deleteActivityByInterest(int activityNo, String memberId) {
+		return activityMapper.deleteActivityByInterest(activityNo,memberId);
+	}
+	
 		// 관심상품 확인
-		public int selectActivityByInterestOne(int activityNo, String memberId) {
-			return activityMapper.selectActivityByInterestOne(activityNo,memberId);
-		}
+	public int selectActivityByInterestOne(int activityNo, String memberId) {
+		return activityMapper.selectActivityByInterestOne(activityNo,memberId);
+	}
 	
 	// 이미지가 포함된 관심상품 목록
 	public Map<String, Object> selectActivityByInterest(int currentPage, int rowPerPage,String memberId) {

@@ -40,7 +40,6 @@
     text-align: center;
     border-radius: 10px;
     overflow: hidden;
-
   }
   
   .slides {
@@ -169,7 +168,6 @@
          let hostNo = "${hostSession.getHostNo()}";
          // 건물 번호
          let accomRoomNo = "${param.accomRoomNo}"
-
              // 최근 한달간 숙소 일별 수익
               $.ajax(
                  {
@@ -186,7 +184,6 @@
                        }
                        
                        document.addEventListener("DOMContentLoaded", function() {
-
                           // Line chart
                           new Chart(document.getElementById("accom-dashboard-line"), {
                              type: "line",

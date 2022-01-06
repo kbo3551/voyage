@@ -20,6 +20,7 @@ import com.gdu.voyage.service.ActivityService;
 import com.gdu.voyage.service.LoginService;
 import com.gdu.voyage.service.MemberService;
 import com.gdu.voyage.service.PaymentService;
+import com.gdu.voyage.vo.ActivityInterest;
 import com.gdu.voyage.vo.Admin;
 import com.gdu.voyage.vo.Host;
 import com.gdu.voyage.vo.Member;
@@ -41,7 +42,6 @@ public class MemberController {
 	@Autowired PaymentService paymentService;
 	@Autowired AccomBuildingService accomBuildingService;
 	@Autowired ActivityService activityService;
-	
 	
 	// 관심상품 제거
 	@GetMapping("member/deleteMyInterest")
@@ -474,5 +474,28 @@ public class MemberController {
 	    
 	    return "redirect:/login";
 	 }
-	 
-}	
+	// 체험 관심상품 등록
+	@PostMapping("/member/addActivityByInterest")
+	public String postAddActivityByInterest(HttpSession session,HttpServletRequest request,ActivityInterest activityInterest,Model model) {
+		System.out.println("★★★[boryeong]MemberController_addActivityByInterest실행★★★");
+		
+		int ActivityNo = Integer.parseInt(request.getParameter("activityNo"));
+		// 회원 세션 정보
+		String memberId = ((Member) session.getAttribute("loginMember")).getMemberId();
+		
+		ActivityInterest ai = new ActivityInterest();
+		ai.setActivityNo(ActivityNo);
+		ai.setMemberId(memberId);
+		// 중복 등록 방지
+		String interestCheck = activityService.duplActivityInterest(ai);
+		if(interestCheck.equals("관심중복")) {
+			model.addAttribute("msg", "이미 관심상품 등록된 상품입니다");
+		    model.addAttribute("url", "redirect:/activityOne?activityNo="+ActivityNo);
+			return "/alert";
+		}
+		activityService.insertActivityByInterest(ai);
+		model.addAttribute("msg", "관심 상품이 등록 되었습니다.");
+	    model.addAttribute("url", "redirect:/activityOne?activityNo="+ActivityNo);
+		return "/alert";
+	}
+}
