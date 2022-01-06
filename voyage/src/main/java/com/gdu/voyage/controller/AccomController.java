@@ -39,7 +39,23 @@ public class AccomController {
 	HostService hostService;
 
 	// 사업자
-	// 숙소_건물 등록
+	
+	// 숙소 삭제 요청
+	@GetMapping("/host/deleteRequestAccomBuilding")
+	public String deleteRequestAccomBuilding(HttpServletRequest request,HttpSession session) {
+		log.debug("AccomController 실행");
+		
+		int accomBuildingNo = Integer.parseInt(request.getParameter("accomBuildingNo"));
+		int hostNo = ((Host) session.getAttribute("hostSession")).getHostNo();
+		
+		AccomBuilding accomBuilding = new AccomBuilding();
+		accomBuilding.setAccomBuildingNo(accomBuildingNo);
+		accomBuilding.setHostNo(hostNo);
+		
+		accomBuildingService.deleteRequestAccomBuilding(accomBuilding);
+		
+		return "redirect:/host/hostIndex";
+	}
 	
 	// 객실 삭제
 	@GetMapping("/host/deleteAccomRoom")
@@ -59,6 +75,7 @@ public class AccomController {
 		return "redirect:/host/accomBuildingOne?accomBuildingNo="+accomBuildingNo;
 	}
 	
+	// 숙소_건물 등록
 	@GetMapping("/host/addAccomBuilding")
 	public String addAccomBuilding() {
 		log.debug("AccomController 실행");

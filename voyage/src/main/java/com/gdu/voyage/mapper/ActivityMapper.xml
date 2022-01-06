@@ -29,6 +29,18 @@
 	</resultMap>
 
 	<!-- 사업자 -->
+	
+	<!-- 체험 비공개처리 -->
+	<update id="deleteActivity" parameterType="com.gdu.voyage.vo.Activity">
+		UPDATE activity
+		SET activity_state = '비공개',
+		activity_state_admin = '삭제대기',
+		update_date = NOW()
+		WHERE
+		activity_no = #{activityNo} AND
+		host_no = #{hostNo}
+	</update>
+	
     <!-- 체험 입력 : selectKey를 사용하여 체험의 식별번호를 받아온뒤 나머지 추가 정보들도 함께 insert  -->
     <insert id="insertActivity" parameterType="com.gdu.voyage.vo.Activity">
 		INSERT INTO activity (
@@ -360,6 +372,7 @@
 	            activity_close_date as activityCloseDate,
 	            activity_description as activityDescription,
 	            activity_state as activityState,
+	            activity_state_admin as activityStateAdmin,
 	            create_date as createDate,
 	            update_date as updateDate
             FROM 

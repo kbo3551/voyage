@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gdu.voyage.mapper.AccomBuildingMapper;
+import com.gdu.voyage.vo.AccomAddress;
 import com.gdu.voyage.vo.AccomBuilding;
 import com.gdu.voyage.vo.AccomBuildingFacility;
 import com.gdu.voyage.vo.AccomBuildingForm;
@@ -20,7 +21,6 @@ import com.gdu.voyage.vo.AccomBuildingImage;
 import com.gdu.voyage.vo.AccomBuildingSpot;
 import com.gdu.voyage.vo.AccomSpotForm;
 import com.gdu.voyage.vo.Hashtag;
-import com.gdu.voyage.vo.AccomAddress;
 import com.gdu.voyage.vo.SpotAddress;
 
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +31,14 @@ import lombok.extern.slf4j.Slf4j;
 public class AccomBuildingService {
 	@Autowired
 	private AccomBuildingMapper accomBuildingMapper;
+	
+	
+	// 숙소 비공개요청
+	public void deleteRequestAccomBuilding(AccomBuilding accomBuilding) {
+		log.debug("☆service☆ AccomBuilding : "+accomBuilding);
+		accomBuildingMapper.deleteRequestAccomBuilding(accomBuilding);
+		return;
+	}
 	
 	// 관심상품 추가
 	public int insertAccomBuildingByInterest(int accomBuildingNo, String memberId) {

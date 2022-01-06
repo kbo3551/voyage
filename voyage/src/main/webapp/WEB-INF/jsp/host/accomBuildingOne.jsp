@@ -363,10 +363,24 @@
                      
                      <aside class="single_sidebar">
                      <br>
-                        	<form action="${pageContext.request.contextPath}/#" method="get">
-							<input type="hidden" name="accomRoomNo" value="${accomBuildingOne.accomBuildingNo}">
-                     <div align="center"><button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit">삭제</button></div>
-                     </form>
+                      <form name="DeleteAccom" action="${pageContext.request.contextPath}/host/deleteRequestAccomBuilding" method="get">
+							<input type="hidden" name="accomBuildingNo" value="${param.accomBuildingNo}">
+                           <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="button" onclick="deleteAccomScript()" >
+                           		삭제
+                           </button>
+                        </form>
+                        
+                        <script type="text/javascript">
+                        	function deleteAccomScript() {
+                        		if(confirm("정말로 삭제하시겠습니까?")){
+                        			DeleteAccom.submit();
+                        			return;
+                        		} else {
+                        			return;
+                        		}
+							}
+                        
+                        </script>
                      </aside>
                   </div>
                </div>

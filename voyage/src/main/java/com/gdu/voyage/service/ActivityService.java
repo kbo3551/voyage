@@ -31,6 +31,13 @@ public class ActivityService {
 	@Autowired
 	private ActivityMapper activityMapper;
 	
+	// 체험 비공개처리
+	public void deleteActivity(Activity activity) {
+		log.debug("☆service☆ activity : "+activity.toString());
+		activityMapper.deleteActivity(activity);
+		return;
+	}
+	
 	// 관심상품 추가
 		public int insertActivityByInterest(int activityNo, String memberId) {
 			return activityMapper.insertActivityByInterest(activityNo,memberId);

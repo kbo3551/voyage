@@ -339,10 +339,24 @@
                      </aside>
                      
                      <aside class="single_sidebar_widget instagram_feeds">
-                            <form action="${pageContext.request.contextPath}/#" method="get">
-							<input type="hidden" name="accomRoomNo" value="${activityOne.activityNo}">
-                     <div align="center"><button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit">삭제</button></div>
-                     </form>
+	                     <form name="DeleteActivity" action="${pageContext.request.contextPath}/host/deleteActivity" method="get">
+								<input type="hidden" name="activityNo" value="${param.activityNo}">
+	                           <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="button" onclick="deleteActivityScript()" >
+	                           		삭제
+	                           </button>
+	                        </form>
+	                        
+	                        <script type="text/javascript">
+	                        	function deleteActivityScript() {
+	                        		if(confirm("정말로 삭제하시겠습니까?")){
+	                        			DeleteActivity.submit();
+	                        			return;
+	                        		} else {
+	                        			return;
+	                        		}
+								}
+	                        
+	                        </script>
                      </aside>
                   </div>
                </div>

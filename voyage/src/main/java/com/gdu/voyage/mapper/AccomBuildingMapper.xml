@@ -46,6 +46,20 @@
 		</selectKey>
 	</insert>
 	
+	<!-- 숙소 비공개 처리 -->
+	<update id="deleteRequestAccomBuilding" parameterType="com.gdu.voyage.vo.AccomBuilding">
+		UPDATE accom_building ab INNER JOIN accom_room ar ON ab.accom_building_no = ar.accom_building_no AND ab.host_no = ar.host_no
+		SET
+		ab.accom_building_state = '비공개',
+		ab.accom_building_state_admin = '삭제대기',
+		ar.accom_room_state = '비공개',
+		ab.update_date = NOW(),
+		ar.update_date = NOW()
+		WHERE
+		ab.accom_building_no = #{accomBuildingNo} AND
+		ab.host_no = #{hostNo}
+	</update>
+	
 	<!-- 숙소-건물의 이미지 파일 입력 -->
 	<insert id="insertAccomBuildingImage" parameterType="com.gdu.voyage.vo.AccomBuildingImage">
 		INSERT INTO accom_building_image (

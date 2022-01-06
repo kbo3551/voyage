@@ -18,6 +18,7 @@ import com.gdu.voyage.service.ActivityService;
 import com.gdu.voyage.service.HostService;
 import com.gdu.voyage.vo.Activity;
 import com.gdu.voyage.vo.ActivityForm;
+import com.gdu.voyage.vo.Host;
 import com.gdu.voyage.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +32,24 @@ public class ActivityController {
 	ActivityService activityService;
 	@Autowired
 	HostService hostService;
-
+	
+	// 체험 삭제 요청
+	@GetMapping("/host/deleteActivity")
+	public String deleteActivity(HttpServletRequest request,HttpSession session) {
+		log.debug("ActivityController 실행");
+		
+		int activityNo = Integer.parseInt(request.getParameter("activityNo"));
+		int hostNo = ((Host) session.getAttribute("hostSession")).getHostNo();
+		
+		Activity activity = new Activity();
+		activity.setActivityNo(activityNo);
+		activity.setHostNo(hostNo);
+		
+		activityService.deleteActivity(activity);
+		
+		return "redirect:/host/hostIndex";
+	}
+	
 	// 사업자
 	@GetMapping("/host/addActivity")
 	public String addActivity() {

@@ -25,6 +25,9 @@ public interface AccomBuildingMapper {
 	int insertAccomSpotAddress(SpotAddress spotAddress);
 	int insertAccomBuildingHashtag(Hashtag Hashtag);
 	
+	// 숙소 비공개처리
+	int deleteRequestAccomBuilding(AccomBuilding accomBuilding);
+	
 	// 숙소-건물 수정 : 숙소-건물정보 + 이미지 + 시설 + 추천장소
 	int updateAccomBuilding(AccomBuilding accomBuilding);
 	int updateAccomBuildingImage(AccomBuildingImage accomBuidingImage);

@@ -757,7 +757,16 @@
                                              <td style="display:table-cell;vertical-align:middle;" width="25%"><small>${ab.accomBuildingName}</small></td>
                                              <fmt:parseDate var="abCreateDateString" value="${ab.createDate}" pattern="yyyy-MM-dd HH:mm:ss.S" />
                                              <td style="display:table-cell;vertical-align:middle;" width="25%"><small><fmt:formatDate value="${abCreateDateString}" pattern="yyyy-MM-dd" /></small></td>
-                                             <td style="display:table-cell;vertical-align:middle;" width="25%"><small>${ab.accomBuildingState}</small></td>
+                                             <c:choose>
+                                             	<c:when test="${ab.accomBuildingState eq '비공개'}">
+                                             		<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${ab.accomBuildingStateAdmin}</small></td>
+                                             	</c:when>
+                                             	<c:otherwise>
+                                             		<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${ab.accomBuildingState}</small></td>
+                                             	</c:otherwise>
+                                             </c:choose>
+                                             
+                                             
                                              <td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="${pageContext.request.contextPath}/host/accomBuildingOne?accomBuildingNo=${ab.accomBuildingNo}" class="btn" style="background: rgb(130,130,130);">상세</a></small></td>
                                           </tr>
                                        </c:forEach>
@@ -844,7 +853,14 @@
                                                 <td style="display:table-cell;vertical-align:middle;" width="25%"><small>${al.activityName}</small></td>
                                                 <fmt:parseDate var="alCreateDateString" value="${al.createDate}" pattern="yyyy-MM-dd HH:mm:ss.S" />
                                                 <td style="display:table-cell;vertical-align:middle;" width="25%"><small><fmt:formatDate value="${alCreateDateString}" pattern="yyyy-MM-dd" /></small></td>
-                                                <td style="display:table-cell;vertical-align:middle;" width="25%"><small>${al.activityState}</small></td>
+                                                <c:choose>
+	                                             	<c:when test="${al.activityState eq '비공개'}">
+	                                             		<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${al.activityStateAdmin}</small></td>
+	                                             	</c:when>
+	                                             	<c:otherwise>
+	                                             		<td style="display:table-cell;vertical-align:middle;" width="25%"><small>${al.activityState}</small></td>
+	                                             	</c:otherwise>
+                                            	</c:choose>
                                                 <td style="display:table-cell;vertical-align:middle;" width="25%"><small><a href="${pageContext.request.contextPath}/host/activityOne?activityNo=${al.activityNo}" class="btn" style="background: rgb(130,130,130);">상세</a></small></td>
                                              </tr>
                                           </c:forEach>

@@ -63,6 +63,9 @@ public interface ActivityMapper {
 	// 해시태그 삭제
 	int deleteActivityHashtag(Hashtag hashtag);
 	
+	// 체험 비공개처리
+	int deleteActivity(Activity activity);
+	
 	// 체험 삭제 요청
 	int updateDormantActivity();
 }
