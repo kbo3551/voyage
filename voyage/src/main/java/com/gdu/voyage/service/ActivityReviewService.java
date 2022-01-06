@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gdu.voyage.mapper.ActivityReviewMapper;
-import com.gdu.voyage.vo.AccomReview;
 import com.gdu.voyage.vo.ActivityReview;
 import com.gdu.voyage.vo.ActivityReviewForm;
 import com.gdu.voyage.vo.ActivityReviewImage;

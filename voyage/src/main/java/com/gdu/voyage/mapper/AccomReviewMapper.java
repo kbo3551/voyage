@@ -23,7 +23,7 @@ public interface AccomReviewMapper {
 	AccomReview selectAccomReviewOne(int accomReviewNo);
 	
 	// 숙소 후기 게시글 수
-	int selectReviewTotalCount(Integer accomPaymentNo);
+	int selectReviewTotalCount(Integer accomPaymentNo, String searchReview);
 		
 	// 페이지 수
 	int selectCountPage();

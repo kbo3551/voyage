@@ -42,6 +42,8 @@ public class ActivityReviewController {
 			model.addAttribute("pageNo", pageNo);
 			model.addAttribute("searchReview", searchReview);
 			
+			log.debug(model+"*********[상훈]ReviewController() 실행 model");
+			
 			return "/getActivityReviewList";
 		}
 		

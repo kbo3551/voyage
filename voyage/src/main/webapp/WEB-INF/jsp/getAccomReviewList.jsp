@@ -5,7 +5,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Directory HTML-5 Template </title>
+        <title>AccomReviewList</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="site.webmanifest">
@@ -72,9 +72,23 @@
                 </div>
             </div>
         </div>
-        	<div class="listing-area pt-120 pb-120">
+        	 <br>
             <div class="container">
                 <div class="row">
+                <div class="col-lg-4">
+			        	<div class="blog_right_sidebar">
+			        		<aside class="single_sidebar_widget search_widget">
+			        			<form method="get" action="${pageContext.request.contextPath}/getAccomReviewList">
+									<div class="form-group">
+										<div class="input-group mb-3">
+											<input type="text" class="form-control" placeholder="search" name="searchReview" id="searchReview" onfocus="this.placeholder = '' " onblur="this.placeholder = 'search'" id = "searchBtn">																	
+										</div>
+										<button type="submit" class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn">검색</button>
+									</div>
+								</form>
+							</aside> 
+						</div>
+					</div>
                    <!-- Left Content -->
                     <!-- Right content -->
                     <div class="col-xl-8 col-lg-8 col-md-6">
@@ -108,7 +122,6 @@
                         </div>
                     </div>
             	</div>
-            </div>
         <!--Hero End -->
         <!-- listing Area Start -->
        

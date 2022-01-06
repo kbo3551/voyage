@@ -36,9 +36,9 @@ public class AccomReviewController {
 	
 	// [Member] 숙소 후기 목록 조회
 	@GetMapping("/getAccomReviewList")
-	public String getAccomReviewList(Model model, @RequestParam(defaultValue="1") int currentPage, @RequestParam @Nullable Integer accomPaymentNo) {
+	public String getAccomReviewList(Model model, @RequestParam(defaultValue="1") int currentPage, @RequestParam @Nullable String searchReview, Integer accomPaymentNo, HttpServletRequest request) {
 		log.debug("*********[상훈]ReviewController() 실행");
-		Map<String, Object> map = accomReviewService.getAccomReviewList(accomPaymentNo, currentPage, ROW_PER_PAGE);
+		Map<String, Object> map = accomReviewService.getAccomReviewList(accomPaymentNo, currentPage, ROW_PER_PAGE, searchReview);
 		int controllPage = (currentPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
 		int pageNo = ((controllPage / 100) * 10 + 1);
 
@@ -48,6 +48,9 @@ public class AccomReviewController {
 		model.addAttribute("totalCount", map.get("totalCount"));
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("searchReview", searchReview);
+		
+		log.debug(model+"*********[상훈]ReviewController() 실행 model");
 		
 		return "/getAccomReviewList";
 	}

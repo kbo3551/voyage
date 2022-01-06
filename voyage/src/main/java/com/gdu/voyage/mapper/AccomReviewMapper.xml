@@ -32,8 +32,13 @@
 			update_date
 		FROM
 			accom_review
+			<where>
+				<if test="searchReview != null">
+					accom_review_title LIKE '%${searchReview}%'
+				</if>
+			</where>
 		ORDER BY
-			update_date DESC
+			accom_review_no DESC, update_date DESC
 		LIMIT
 			#{beginRow}, #{rowPerPage}
 	</select>

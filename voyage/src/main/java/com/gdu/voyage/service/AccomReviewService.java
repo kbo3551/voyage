@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gdu.voyage.mapper.AccomReviewMapper;
-import com.gdu.voyage.vo.AccomBuilding;
 import com.gdu.voyage.vo.AccomReview;
 import com.gdu.voyage.vo.AccomReviewImage;
 import com.gdu.voyage.vo.AccomReviewForm;
@@ -78,24 +77,25 @@ public class AccomReviewService {
 		}
 	
 	public int selectReviewTotalCountOne(int accomPaymentNo) {
-		return accomReviewMapper.selectReviewTotalCount(accomPaymentNo);
+		return accomReviewMapper.selectReviewTotalCount(accomPaymentNo, null);
 	}
 		
 	// 숙소 후기 목록
-	public Map<String, Object> getAccomReviewList(Integer accomPaymentNo, int currentPage, int rowPerPage) {
+	public Map<String, Object> getAccomReviewList(Integer accomPaymentNo, int currentPage, int rowPerPage, String searchReview) {
 
 		Map<String, Object> paraMap = new HashMap<>();
 		int beginRow = (currentPage - 1) * rowPerPage;
 		
 		paraMap.put("beginRow", beginRow);
 		paraMap.put("rowPerPage", rowPerPage);
+		paraMap.put("searchReview", searchReview);
 
 		List<AccomReview> accomReviewList = accomReviewMapper.selectAccomReviewList(paraMap);
 		
 		Map<String, Object> returnMap = new HashMap<>();
 		
 		int lastPage = 0;
-		int totalCount = accomReviewMapper.selectReviewTotalCount(accomPaymentNo);
+		int totalCount = accomReviewMapper.selectReviewTotalCount(accomPaymentNo, searchReview);
 		
 		lastPage = (totalCount / rowPerPage);
 		if (totalCount % rowPerPage != 0) {
@@ -104,6 +104,7 @@ public class AccomReviewService {
 		returnMap.put("accomReviewList", accomReviewList);
 		returnMap.put("lastPage", lastPage);
 		returnMap.put("totalCount", totalCount);
+		returnMap.put("searchReview", searchReview);
 		
 		return returnMap;
 
