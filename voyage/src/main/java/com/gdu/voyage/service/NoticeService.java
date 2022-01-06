@@ -65,8 +65,7 @@ public class NoticeService {
 		log.debug(noticeForm+"☆☆☆[DoHun] NoticeInsert, Insert☆☆☆");
 		//입력하는 코드
 		Notice notice = noticeForm.getNotice();
-		
-		
+
 		noticeMapper.insertNotice(notice);
 		
 		MultipartFile file=noticeForm.getNoticeFile();
@@ -140,12 +139,12 @@ public class NoticeService {
 			
 		}
 	}
-	
+	//사진삭제
 	public void deleteUpdateNoticeFile(int noticeNo){
 		noticeMapper.deleteNoticeFile(noticeNo);
 	}
 	
-	//조회수
+	//조회수증가
 	public void updateNoticeViewCnt(int noticeNo, int noticeViewCnt) {
 		noticeMapper.updateNoticeViewCnt(noticeNo, noticeViewCnt);
 	}

@@ -106,10 +106,10 @@ public class NoticeController {
 		return "redirect:/admin/adminNoticeList";
 	}
 	
-	@PostMapping("/admin/removeNoticeModifyFile")
-	public String removeNoticeModifyFile(int noticeNo) {
-		noticeService.deleteUpdateNoticeFile(noticeNo);
-		return "redirect:/admin/modifyNotice";
+	@GetMapping("/admin/removeNoticeModifyFile")
+	public String removeNoticeModifyFile(Notice notice) {
+		noticeService.deleteUpdateNoticeFile(notice.getNoticeNo());
+		return "redirect:/admin/adminNoticeList";
 	}
 	//일반사용자
 	
