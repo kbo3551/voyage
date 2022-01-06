@@ -24,13 +24,13 @@ function chatRoomListF(){
 					if(item[i].chatRead == 1) {
 	                  $('#chatList').append('<tr>');
 	                     $('#chatList').append('<td class="w-100"><i class="far fa-envelope" style="color:red"></i> <span style="font-weight:bold;">'+item[i].member.memberNickname+'</span><div>'+item[i].chatContent+'</div>');
-	                     $('#chatList').append('<button class="btn" style="width:30px;" id="chatRoomBtn" value="'+item[i].chatRoom+'" data-toggle="modal" data-target="#myModal2">입장</button>');
+	                     $('#chatList').append('<button class="btn" style="width:30px;" id="chatRoomBtn" value="'+item[i].chatRoom+'" data-toggle="modal" data-target="#myModal2" data-backdrop="static" data-keyboard="false">입장</button>');
 	                     $('#chatList').append('</td>');
 	                  $('#chatList').append('</tr>');
 	                 } else {
 					  $('#chatList').append('<tr>');
 	                     $('#chatList').append('<td class="w-100"><i class="far fa-envelope-open" style="color:#808080;"></i> <span style="font-weight:bold; color:#808080;">'+item[i].member.memberNickname+'</span><div style="color:#808080;">'+item[i].chatContent+'</div>');
-	                     $('#chatList').append('<button class="btn" style="width:30px;" id="chatRoomBtn" value="'+item[i].chatRoom+'" data-toggle="modal" data-target="#myModal2">입장</button>');
+	                     $('#chatList').append('<button class="btn" style="width:30px;" id="chatRoomBtn" value="'+item[i].chatRoom+'" data-toggle="modal" data-target="#myModal2" data-backdrop="static" data-keyboard="false">입장</button>');
 	                     $('#chatList').append('</td>');
 	                  $('#chatList').append('</tr>');
 					}
@@ -43,19 +43,29 @@ function chatRoomListF(){
  // [사용자] 나의 채팅 목록 조회
  $(document).ready(function(){
 	
+	// 페이지 로딩시 새로운 채팅이 있을 시에는 채팅 글씨 색 red로 변경
+	$.ajax({
+         url:'/voyage/chatRoomList',
+         type:'GET',
+         datatype:'json',
+         async: false, //ajax 옵션에 async 옵션이 있다. 서버로부터 값이 오지 않으면 잠시 다음으로 넘어가지 않는것이다.
+         success:function(result){
+            $('#chatList').empty(); // 먼저 출력된 목록이 있으면 지운다
+            $.each(result, function(index, item){
+               console.log('새로운 메세지가 있습니다');
+               for(i=0;i<item.length;i++) {
+					if(item[i].chatRead == 1) {
+	                  $('#chatBtn').css('color','red');
+	                 }
+               };
+            });
+         }
+      });
+	
    // chatBtn을 누르면 목록 불러오는 부분
    $('#chatBtn').click(function(){
 		chatRoomListF();
-     	// 2초에 한번씩 채팅 목록 불러오기(실시간 알림 전용)
-   		timerId = setInterval(function(){
-			chatRoomListF();
-		},2000);
    });
-
-	// chatRoomBtn을 누르면 목록 불러오는 부분
-	$('body').on('click', '#closeChatRoom', function() {
-		clearTimeout(timerId);
-	});
 
 	// chatRoomBtn을 누르면 목록 불러오는 부분
 	$('body').on('click', '#chatRoomBtn', function() {
@@ -66,6 +76,16 @@ function chatRoomListF(){
 	//console.log('chatRoom : ',$("body").on('button[id="chatRommBtn"]').attr("name"));
 	    // 스크롤을 가장 아래로 가게 함 
 		$('#scrollmodalBody').scrollTop($('#scrollmodalBody')[0].scrollHeight);
+	    
+	    // 2초에 한번씩 채팅 목록 불러오기(실시간 알림 전용)
+   		timerId = setInterval(function(){
+			chatRoomListF();
+		},2000);
+		
+		// closeChatRoom을 누르면 채팅 목록을 불러오지 않 부분
+		$('body').on('click', '#closeChatRoom', function() {
+			clearTimeout(timerId);
+		});
 	     
 		// 세션 값에 저장된 (로그인한) Id
 		var loginId = $('#loginId').val();
@@ -121,8 +141,6 @@ function chatRoomListF(){
 	// 모달 위에 모달을 출력하게 해주는 스크립트 코드 
 	$('#openBtn').click(function() {
 		$('#myModal').modal({
-			backdrop: 'static',
-            keyboard: false,
 			show: true
 		})
 	});
@@ -158,15 +176,14 @@ function chatRoomListF(){
 let stompClient = null; // null : 접속X
 let msgCon = ''; // 메세지 저장할 변수
 
-// 페이지 접속 시 접속 = connection
-$('#chatBtn').click(function(){
-	connect();
-});
-
-// 모달 close 시 접속 해제 
-$('#closeChat').click(function(){
-	disConnect();
-});
+// 로그인 시 접속 = connection / 로그아웃 시 접속 해
+$(document).ready(function(){
+		if(loginMember != ""){
+			connect();
+		} else {
+			disConnect();
+		}
+	});
 
 // 메세지 전송을 위한 버튼
 $('#sendBtn').click(function(){

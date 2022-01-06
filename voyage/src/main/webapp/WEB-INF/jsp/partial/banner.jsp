@@ -90,7 +90,7 @@
 				                                            <li><a href="${contextPath}/member/selectMyOrderList">주문목록</a></li>
 				                                            <li><a href="${contextPath}/member/selectMyInterest">관심상품</a></li>
 				                                            <li><a href="${contextPath}/member/coupon">쿠폰</a></li>
-				                                            <li><a id="chatBtn" data-toggle="modal" data-target="#myModal">채팅</a></li>
+				                                            <li><a href="#" id="chatBtn" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">채팅</a></li>
 				                                            <li><a href="${contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
@@ -104,7 +104,7 @@
 				                                            <li><a href="${contextPath}/member/selectMyOrderList">주문목록</a></li>
 				                                            <li><a href="${contextPath}/member/selectMyInterest">관심상품</a></li>
 				                                            <li><a href="${contextPath}/member/coupon">쿠폰</a></li>
-				                                            <li><a id="chatBtn" data-toggle="modal" data-target="#myModal">채팅</a></li>
+				                                            <li><a id="chatBtn" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">채팅</a></li>
 				                                            <li><a href="${contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
@@ -118,7 +118,7 @@
 				                                            <li><a href="${contextPath}/member/selectMyOrderList">주문목록</a></li>
 				                                            <li><a href="${contextPath}/member/selectMyInterest">관심상품</a></li>
 				                                            <li><a href="${contextPath}/member/coupon">쿠폰</a></li>
-				                                            <li><a id="chatBtn" data-toggle="modal" data-target="#myModal">채팅</a></li>
+				                                            <li><a id="chatBtn" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">채팅</a></li>
 				                                            <li><a href="${contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
@@ -132,7 +132,7 @@
 				                                            <li><a href="${contextPath}/member/selectMyOrderList">주문목록</a></li>
 				                                            <li><a href="${contextPath}/member/selectMyInterest">관심상품</a></li>
 				                                            <li><a href="${contextPath}/member/coupon">쿠폰</a></li>
-				                                            <li><a id="chatBtn" data-toggle="modal" data-target="#myModal">채팅</a></li>
+				                                            <li><a id="chatBtn" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">채팅</a></li>
 				                                            <li><a href="${contextPath}/logout">로그아웃</a></li>
 			                                            </ul>
 		                                            </li>
@@ -250,6 +250,8 @@
 	</div>
     
 	<script type="text/javascript">
+	let loginMember = "${loginMember.memberId}";
+	
 	</script>
   
   	<script src="${contextPath}/assets/js/chat.js"></script>
