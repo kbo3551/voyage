@@ -30,6 +30,106 @@
    
    <!-- 눈누 - 한산스네오 레귤러 폰트 -->
 	<style type="text/css">
+	<style type="text/css">
+	
+	
+			  
+  .slider {
+    width: 600px;
+    text-align: center;
+    border-radius: 10px;
+    overflow: hidden;
+
+  }
+  
+  .slides {
+    display: flex;
+    overflow-x: auto;
+    /* overflow: hidden; */
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    
+  }
+  .slides::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    
+  }
+  .slides::-webkit-scrollbar-thumb {
+    background: rgb(200,200,200);
+    border-radius: 10px;
+  }
+  .slides::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .slides > div {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    width: 700px;
+    height: 300px;
+    margin-right: 50px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #eee;
+    transform-origin: center center;
+    transform: scale(1);
+    transition: transform 0.5s;
+    position: relative;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+    background-color: rgba(200,200,200,0.01);
+  }
+  
+  .author-info {
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 0.75rem;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    
+  }
+  .author-info a {
+    color: white;
+    
+  }
+  #imga {
+    object-fit: cover;
+    top: ;
+    left: ;
+    width: auto;
+    max-height: 100%;
+  }
+  
+  .slider > a {
+    display: inline-flex;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: #eee;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 0 0 0.5rem 0;
+    position: relative;
+    
+  }
+  .slider > a:active {
+    top: 1px;
+    
+  }
+  .slider > a:focus {
+    background: #000;
+    
+  }
+  
 	
 		@font-face {
 		    font-family: 'SpoqaHanSansNeo-Regular';
@@ -85,12 +185,13 @@
                <div class="col-lg-8 posts-list">
                   <div class="single-post">
                      <div class="feature-img">
-                        <c:forEach items="${activityOne.activityImageList }" var="aci" varStatus="status">
-                   			<img src="${pageContext.request.contextPath}/resources/image/activity/${aci.getActivityImageName() }.${aci.getActivityImageExt() }" alt="">
-                   		</c:forEach>
+                     <div class="slider">
+                    <div class="slides">
                    		<c:forEach items="${activityOne.getActivityImageList()}" var="aci">
-	                        <img id="imga" src="${pageContext.request.contextPath}/resources/image/activity/${aci.getActivityImageName()}.${aci.activityImageExt}" alt="">
+	                        <div id="slide-1"><img id="imga" src="${pageContext.request.contextPath}/resources/image/activity/${aci.getActivityImageName()}.${aci.activityImageExt}" alt=""></div>
 	                    </c:forEach>
+	                    </div>
+	                    </div>
                      </div>
                      <div class="blog_details">
                         <h2> ${activityOne.activityName }</h2>
@@ -523,7 +624,7 @@
                 </div>
                 <!-- Map -->
                 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5f63299ede92b61fa942fb3c84d11fa3&libraries=services"></script>
-						<div class="center-block" id="map" style="width:500px;height:400px;"></div>
+						<div class="center-block" id="map" style="width:1000px;height:400px;"></div>
 						<br>
 
                           <script>
