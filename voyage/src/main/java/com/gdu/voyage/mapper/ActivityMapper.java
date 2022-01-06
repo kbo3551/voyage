@@ -36,9 +36,9 @@ public interface ActivityMapper {
 	// 관심상품 중복 방지
 	int selectActivityByInterests(ActivityInterest activityInterest);
 	// 관심상품 제거
-	int deleteActivityByInterest(int ActivityNo, String memberId);
+	int deleteActivityByInterest(int activityNo, String memberId);
 	// 관심상품 확인
-	int selectActivityByInterestOne(int ActivityNo, String memberId);
+	int selectActivityByInterestOne(int activityNo, String memberId);
 	
 	// 사업자별 신청 대기중인 체험 리스트
 	List<Activity> selectReqActivityListByHost(Map<String, Object> map);
