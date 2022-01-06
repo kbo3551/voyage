@@ -67,6 +67,7 @@ public class ChatService {
 		paramMap.put("chatRoom", chatRoom);
 		paramMap.put("memberNickname", loginMember.getMemberNickname());
 		paramMap.put("memberId", loginMember.getMemberId());
+		paramMap.put("chatRoom",chatRoom);
 		
 		// chatRead 수정 : chatRoom과 자신의 아이디를 사용해 update
 		chatMapper.updateChatRead(paramMap);

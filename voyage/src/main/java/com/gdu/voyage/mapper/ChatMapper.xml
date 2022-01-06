@@ -54,7 +54,10 @@
 			c.from_member_id,
 			c.chat_content,
 			c.create_date,
-			c.chat_read,
+			(SELECT chat_read
+				FROM chat
+				WHERE from_member_id = #{memberId} AND chat_room = #{chatRoom}
+				GROUP BY chat_read) chat_read,
 			m.member_nickname,
 			m.member_level
 		FROM
