@@ -29,7 +29,6 @@ public class QnaService {
 	@Autowired QnaMapper qnaMapper;
 		
 	// Qna 게시판 목록 상세 내용
-	// ISSUE : qnaImg 부분 []로 나오고 내용 안 나옴...
 	public Qna getQnaOneAndAnswer(int qnaNo) {
 		// 문의글 상세 내용
 		Qna qna = new Qna();

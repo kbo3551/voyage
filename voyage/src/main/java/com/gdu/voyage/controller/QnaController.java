@@ -72,7 +72,7 @@ public class QnaController {
 	 	if(qna.getQnaSecret().equals("비밀글") && loginMember == null) {
 	 		response.setContentType("text/html; charset=UTF-8");
 	 		PrintWriter out = response.getWriter();
-	 		out.println("<script>alert('게스트 계정입니다. 로그인해주세요.');location.href='/voyage/login';</script>");
+	 		out.println("<script>alert('비회원 계정입니다. 로그인해주세요.');location.href='/voyage/login';</script>");
 	 		out.flush();
 
 	 		return "redirect:/login";
@@ -91,7 +91,7 @@ public class QnaController {
 	}
 	// [Member] 질문 작성 get
 	@GetMapping("/addQ")
-	public String addQ(HttpSession session) {
+	public String addQ(HttpSession session, HttpServletResponse response) throws Exception{
 		log.debug("addQuestionController() 실행");
 		// session에서 로그인한 회원 정보 가져옴
 		Member loginMember = (Member)session.getAttribute("loginMember");
@@ -124,7 +124,7 @@ public class QnaController {
 	}
 	// [Member] 질문 수정
 	@GetMapping("/modifyQ")
-	public String modifyQ(HttpSession session, Model model, int qnaNo) {
+	public String modifyQ(HttpSession session, Model model, int qnaNo, HttpServletResponse response) throws Exception{
 		log.debug("modifyQuestionController() 실행");
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		Qna qna = qnaService.getQnaOneAndAnswer(qnaNo);
@@ -132,9 +132,17 @@ public class QnaController {
 		model.addAttribute("qna", qna);
 		// 비회원인 경우
 		if( loginMember == null) {
+			response.setContentType("text/html; charset=UTF-8");
+	 		PrintWriter out = response.getWriter();
+	 		out.println("<script>alert('비회원 계정입니다. 로그인해주세요.');location.href='/voyage/login';</script>");
+	 		out.flush();
 			return "redirect:/login";
 		// 로그인했지만 작성자가 아닌 경우 
 		} else if(qna.getQnaSecret().equals("비밀글") && !qna.getMemberNickname().equals(loginMember.getMemberNickname())) {
+			response.setContentType("text/html; charset=UTF-8");
+	 		PrintWriter out = response.getWriter();
+	 		out.println("<script>alert('수정 기능은 작성자만 이용할 수 있습니다.'); location.href='/voyage/qnaList';</script>");
+	 		out.flush();
 			return "redirect:/qnaList";
 		// 그 외...
 		} else {
@@ -153,16 +161,24 @@ public class QnaController {
 	
 	// [Member] 질문 삭제
 	@GetMapping("/removeQ")
-	public String removeQ(HttpSession session, Model model, int qnaNo) {
+	public String removeQ(HttpSession session, Model model, int qnaNo, HttpServletResponse response) throws Exception {
 		log.debug("removeQuestionController() 실행");
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		Qna qna = qnaService.getQnaOneAndAnswer(qnaNo);
 		model.addAttribute("qna", qna);
 		// 비회원인 경우
 		if(loginMember == null) {
+			response.setContentType("text/html; charset=UTF-8");
+	 		PrintWriter out = response.getWriter();
+	 		out.println("<script>alert('비회원 계정입니다. 로그인해주세요.');location.href='/voyage/login';</script>");
+	 		out.flush();
 			return "redirect:/login";
 		// 로그인했지만 작성자가 아닌 경우 
 		} else if(qna.getQnaSecret().equals("비밀글") && !qna.getMemberNickname().equals(loginMember.getMemberNickname())) {
+			response.setContentType("text/html; charset=UTF-8");
+	 		PrintWriter out = response.getWriter();
+	 		out.println("<script>alert('삭제 기능은 작성자만 이용할 수 있습니다.'); location.href='/voyage/qnaList';</script>");
+	 		out.flush();
 			return "redirect:/qnaList";
 		// 그 외...
 		} else {
