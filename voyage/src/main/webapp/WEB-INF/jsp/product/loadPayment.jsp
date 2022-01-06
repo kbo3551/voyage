@@ -70,10 +70,6 @@
 	<!-- iamport.payment.js -->
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     
-     
-
-   
-   	
 	<script>
 		const IMP = window.IMP; // 생략 가능
  	    IMP.init("imp56049127");
@@ -105,11 +101,6 @@
  		    alert(msg);
 		});
  	</script> 
-    
-   
-    
-   
-    
     
     <body>
     <!-- Preloader Start -->

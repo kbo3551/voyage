@@ -703,7 +703,7 @@
                 <!-- Map -->
              	<div class="center-block" id="map" style="width:1000px;height:400px;"></div>
              	<br>
-	           	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5f63299ede92b61fa942fb3c84d11fa3&libraries=services"></script>
+	           	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0fdeb74ea7218785dc85928a77d4373c&libraries=services"></script>
 				   <script>
                           var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                           mapOption = {
