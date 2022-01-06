@@ -153,6 +153,22 @@ public class PaymentService {
 	
 	// TreeMap - 자동 정렬 기능이 달려있는 Map
 	
+	
+	// 최근 한달간 특정 체험 일별 수익
+	public TreeMap<String, Object> selectActivityProfitByMonthToDateOne(int hostNo,int activityNo) {
+		
+		List<ActivityPayment> activityPayments = paymentMapper.selectActivityProfitByMonthToDate(hostNo, activityNo);
+		
+		TreeMap<String, Object> map = new TreeMap<String, Object>();
+		
+		for(int i=0;i<activityPayments.size();i++) {
+			ActivityPayment param = activityPayments.get(i);
+			map.put(param.getUpdateDate().toString(), param.getActivityAmount());
+		}
+		
+		return map;
+	}
+	
 	// 최근 한달간 체험 일별 수익
 	public TreeMap<String, Object> selectActivityProfitByMonthToDate(int hostNo) {
 		

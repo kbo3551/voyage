@@ -19,6 +19,18 @@ public class PaymentRestController {
 	
 	// 사업자 -- 
 	
+	// 최근 한달간 특정 체험 일별 수익
+	@GetMapping("/selectActivityProfitByMonthToDateOne")
+	public TreeMap<String, Object> selectActivityProfitByMonthToDateOne(int hostNo,int activityNo) {
+		 log.trace("PaymentRestController 실행");
+		 
+		 TreeMap<String, Object> activityMonthDateProfit = paymentService.selectActivityProfitByMonthToDateOne(hostNo,activityNo);
+		 log.trace("★controller★ activityMonthDateProfit : "+activityMonthDateProfit);
+		 
+		 return activityMonthDateProfit;
+	}
+	
+	
 	// 이번달 사업자 수수료
 	@GetMapping("/selectHostMonthFees")
 	public long selectHostMonthFees(int hostNo) {
