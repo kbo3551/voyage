@@ -27,4 +27,6 @@ public interface AccomRoomMapper {
 
 	int deleteAccomRoomItem(AccomRoomItem accomRoomItem);
 	int deleteAccomRoomHashtag(Hashtag Hashtag);
+	
+	int deleteAccomRoom(AccomRoom accomRoom);
 }

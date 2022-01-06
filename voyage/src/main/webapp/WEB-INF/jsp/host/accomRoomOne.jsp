@@ -297,12 +297,25 @@
                <div class="col-lg-4">
                   <div class="blog_right_sidebar">
                      <aside class="single_sidebar_widget search_widget">
-                        <form action="${pageContext.request.contextPath}/#" method="get">
+                        <form name="DeleteAccomRoom" action="${pageContext.request.contextPath}/host/deleteAccomRoom" method="get">
 							<input type="hidden" name="accomRoomNo" value="${accomRoomOne.accomRoomNo }">
-                           <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit" >
+							<input type="hidden" name="accomBuildingNo" value="${param.accomBuildingNo}">
+                           <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="button" onclick="deleteAccomRoomScript()" >
                            		삭제
                            </button>
                         </form>
+                        
+                        <script type="text/javascript">
+                        	function deleteAccomRoomScript() {
+                        		if(confirm("정말로 삭제하시겠습니까?")){
+                        			DeleteAccomRoom.submit();
+                        			return;
+                        		} else {
+                        			return;
+                        		}
+							}
+                        
+                        </script>
                         
                      </aside>
 					<aside class="single_sidebar_widget tag_cloud_widget">

@@ -19,7 +19,9 @@ import com.gdu.voyage.service.AccomRoomService;
 import com.gdu.voyage.service.HostService;
 import com.gdu.voyage.vo.AccomBuilding;
 import com.gdu.voyage.vo.AccomBuildingForm;
+import com.gdu.voyage.vo.AccomRoom;
 import com.gdu.voyage.vo.AccomRoomForm;
+import com.gdu.voyage.vo.Host;
 import com.gdu.voyage.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +40,25 @@ public class AccomController {
 
 	// 사업자
 	// 숙소_건물 등록
+	
+	// 객실 삭제
+	@GetMapping("/host/deleteAccomRoom")
+	public String deleteAccomRoom(HttpServletRequest request,HttpSession session) {
+		log.debug("AccomController 실행");
+		
+		int accomBuildingNo = Integer.parseInt(request.getParameter("accomBuildingNo"));
+		int accomRoomNo = Integer.parseInt(request.getParameter("accomRoomNo"));
+		int hostNo = ((Host) session.getAttribute("hostSession")).getHostNo();
+		
+		AccomRoom accomRoom = new AccomRoom();
+		accomRoom.setAccomRoomNo(accomRoomNo);
+		accomRoom.setHostNo(hostNo);
+		
+		accomRoomService.deleteAccomRoom(accomRoom);
+		
+		return "redirect:/host/accomBuildingOne?accomBuildingNo="+accomBuildingNo;
+	}
+	
 	@GetMapping("/host/addAccomBuilding")
 	public String addAccomBuilding() {
 		log.debug("AccomController 실행");

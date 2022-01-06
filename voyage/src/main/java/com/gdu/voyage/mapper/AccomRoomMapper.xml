@@ -87,6 +87,16 @@
 		WHERE accom_room_no = #{accomRoomNo}
 	</update>
 	
+	<!-- 객실 비공개처리 -->
+	<update id="deleteAccomRoom" parameterType="com.gdu.voyage.vo.AccomRoom">
+		UPDATE accom_room
+		SET accom_room_state = '비공개',
+		update_date = NOW()
+		WHERE
+		accom_room_no = #{accomRoomNo} AND
+		host_no = #{hostNo}
+	</update>
+	
 	<!-- 숙소-객실의 이미지 파일 수정 -->
 	<update id="updateAccomRoomImage" parameterType="com.gdu.voyage.vo.AccomRoomImage">
 		UPDATE accom_room_image

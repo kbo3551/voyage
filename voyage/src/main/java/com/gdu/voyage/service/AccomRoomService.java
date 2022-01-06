@@ -27,6 +27,14 @@ public class AccomRoomService {
 	private AccomRoomMapper accomRoomMapper;
 	
 	// 사업자
+	
+	// 객실 비공개처리
+	public void deleteAccomRoom(AccomRoom accomRoom) {
+		log.debug("☆service☆ accomRoomForm : "+accomRoom);
+		accomRoomMapper.deleteAccomRoom(accomRoom);
+		return;
+	}
+	
 	// 숙소-객실 입력
 	public void addAccomRoom(AccomRoomForm accomRoomForm, String realPath, int hostNo) {
 		// 매개변수 디버깅 //accomRoomForm  --> 숙소-객실정보 + 이미지 + 아이템
