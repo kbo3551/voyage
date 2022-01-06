@@ -27,7 +27,7 @@ public class ActivityReviewService {
 	ActivityReviewMapper activityReviewMapper;
 
 	// 숙소 후기 작성
-	public void addActivityReview(ActivityReviewForm activityReviewForm, String realPath, int activityPaymentNo, String memberId, String memberNickname) throws Exception {
+	public void addActivityReview(ActivityReviewForm activityReviewForm, String realPath, int activityPaymentNo, String memberId, String memberNickname, int activityReviewStar) throws Exception {
 
 		log.debug("*****[상훈] ActivityReviewService debug" + activityReviewForm.toString());
 	
@@ -35,6 +35,7 @@ public class ActivityReviewService {
 		activityReview.setMemberId(memberId);
 		activityReview.setMemberNickname(memberNickname);
 		activityReview.setActivityPaymentDetails(activityPaymentNo);
+		activityReview.setActivityReviewStar(activityReviewStar);
 
 		// 후기글 등록
 		activityReviewMapper.addActivityReview(activityReview);

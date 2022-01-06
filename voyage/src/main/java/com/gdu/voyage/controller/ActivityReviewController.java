@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import com.gdu.voyage.vo.Member;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Transactional
 @Controller
 public class ActivityReviewController {
 	@Autowired ActivityReviewService activityReviewService;
@@ -78,19 +80,20 @@ public class ActivityReviewController {
 		
 		// [Member] 후기 작성 post
 		@PostMapping("/addActivityReview")
-		public String addActivityReview(HttpServletRequest request, ActivityReviewForm activityReviewForm, 
+		public String addActivityReview(HttpServletRequest request, ActivityReviewForm activityReviewForm, ActivityReview activityReview,
 				HttpSession session) throws Exception {
 			Member loginMember = (Member) session.getAttribute("loginMember");
 			int activityPaymentNo = Integer.parseInt(request.getParameter("activityPaymentNo"));
 			String memberId = loginMember.getMemberId();
 			String memberNickname = loginMember.getMemberNickname();
+			int activityReviewStar = activityReview.getActivityReviewStar();
 			
 				// 디버그 코드
 				log.debug("***** [상훈] addActivityReview_qnaForm_Controller() debug" + activityReviewForm.toString());
 				// 이미지 파일 절대 경로 설정
 				String realPath = request.getServletContext().getRealPath("resources/image/activityReview/");
 				
-				activityReviewService.addActivityReview(activityReviewForm, realPath, activityPaymentNo, memberId, memberNickname);
+				activityReviewService.addActivityReview(activityReviewForm, realPath, activityPaymentNo, memberId, memberNickname, activityReviewStar);
 				
 				return "redirect:/getActivityReviewList?pageNo=1";
 			}

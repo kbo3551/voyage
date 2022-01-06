@@ -40,7 +40,8 @@
 			</where>
 		ORDER BY
 			activity_review_no DESC, update_date DESC
-		LIMIT #{beginRow}, #{rowPerPage}
+		LIMIT 
+			#{beginRow}, #{rowPerPage}
 	</select>
 	
 	<!-- review no에 따른 숙소 후기 상세 조회 -->
@@ -102,18 +103,4 @@
 		</where>
 	</select>
 	
-	<!-- 이미지 등록 -->
-	<insert id="addActivityReviewImage" parameterType="com.gdu.voyage.vo.ActivityReviewImage">
-		INSERT INTO activity_review_image(
-			activity_review_no,
-			activity_review_image_name,
-			activity_review_image_ext,
-			activity_review_image_size
-		) VALUES (
-			#{activityReviewNo},
-			#{activityReviewImageName},
-			#{activityReviewImageExt},
-			#{activityReviewImageSize}
-		)
-	</insert>
 </mapper>
