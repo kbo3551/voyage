@@ -72,54 +72,13 @@ public class QnaService {
 	}
 	
 	// [Member] Qna 게시판 질문 수정
-	public void modifyQ(QnaForm qnaForm, String realPath, String memberId, String memberNickname) {
+	public int modifyQ(Qna qna) {
 		// 매개변수 qnaForm 값 디버깅 코드
-		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_modifyQ_Qna debug" + qnaForm.toString());
-		//qna에 memberId, memberNickname 저장
-		Qna qna = qnaForm.getQna();
-		qna.setMemberId(memberId);
-		qna.setMemberNickname(memberNickname);
+		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_modifyQ_Qna debug" + qna.toString());
 		// 문의글 수정
 		qnaMapper.modifyQ(qna);
-		// 이미지 추가에 사용할 qnaNo 값 확인
-		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_qnaNo debug" + qna.getQnaNo());
-		// 이미지 추가
-		List <MultipartFile> qList = qnaForm.getQnaImg();
-		// 이미지가 업로드 되었을 경우
-		if(qList != null) {
-			for(MultipartFile i : qList) {
-				QnaImg qnaImg = new QnaImg();
-				// qnaImg의 QnaNo 셋팅
-				qnaImg.setQnaNo(qna.getQnaNo());
-				// 원본 이미지 파일 이름
-				String originalImgname = i.getOriginalFilename(); 
-				// 마지막 점의 위치
-				int p = originalImgname.lastIndexOf("."); 
-				String ext = originalImgname.substring(p+1);
-				// 중복되지 않는 문자 이름 생성
-				String prename = UUID.randomUUID().toString().replace("-", "");
-				String imgname = prename;
-				// qnaImg에 imgName, imgExt, imgSize 셋팅
-				qnaImg.setQnaImgName(imgname);
-				qnaImg.setQnaImgExt(ext);
-				qnaImg.setQnaImgSize(i.getSize());
-				// qnaImg 값 디버깅 코드
-				log.debug("☆☆☆☆☆☆☆☆☆☆[다원] QnaService_qnaImg debug" + qnaImg.toString());
-				// 테이블에 값 저장
-				qnaMapper.addQImg(qnaImg);
-						
-				File f = new File(realPath+imgname+"."+ext);
-				try {
-					i.transferTo(f);
-				} catch (IllegalStateException | IOException e) {
-					e.printStackTrace();
-					// IllegalStateException | IOException e 예외처리를 무조건 해야하는 예외
-					// RuntimeException은 예외처리를 하지 않아도 됨
-					throw new RuntimeException();
-				}
-			}
-		}
 		
+		return qnaMapper.modifyQ(qna);
 	}
 	// [Member] Qna 게시판 질문 삭제
 	public void removeQ(int qnaNo) {

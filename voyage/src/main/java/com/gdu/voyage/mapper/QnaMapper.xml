@@ -196,12 +196,6 @@
 			NOW()
 		)
 	</insert>
-	<!-- Q&A 이미지 수 -->
-	<select id="selectQnaImgTotalCount" parameterType="int" resultType="int">
-		SELECT COUNT(*) FROM qna_image
-		WHERE
-			qna_no = #{qnaNo}
-	</select>
 	<!-- Q&A 문의글 수 -->
 	<select id="selectQnaTotalCount" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM qna

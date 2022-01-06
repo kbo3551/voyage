@@ -86,6 +86,10 @@
 								<label>글내용</label>
 								<textarea cols="80" readonly="readonly">${qna.qnaContent}</textarea>
 							</div>
+							<div>
+								<label>첨부파일</label>
+	                            <img width="400px" height="200px" src="${pageContext.request.contextPath}/resources/image/qna/${qna.qnaImg.qnaImgName}.${qna.qnaImg.qnaImgExt}">
+							</div>
 						</div>
 						<div>
 							<a href="${pageContext.request.contextPath}/admin/adminQnaList?pageNo=1" class="btn">Back</a>

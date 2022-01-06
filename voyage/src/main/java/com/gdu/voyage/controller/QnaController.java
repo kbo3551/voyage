@@ -143,22 +143,12 @@ public class QnaController {
 	}
 
 	@PostMapping("/modifyQ")
-	public String modifyQ(HttpServletRequest request, QnaForm qnaForm, 
-			HttpSession session) {
-		// memberId, memberNickname값을 세션에서 가져옴
-		Member loginMember = (Member) session.getAttribute("loginMember");
+	public String modifyQ(Qna qna) {
 		// 디버그 코드
-		log.debug("★★★★★★★★★★★ [다원] modifyQ_loginMember_Controller() debug" + loginMember.toString());
+		log.debug("★★★★★★★★★★★ [다원] modifyQ_qna_Controller() debug" + qna.toString());
+		qnaService.modifyQ(qna);
 		
-		String memberId = loginMember.getMemberId();
-		String memberNickname = loginMember.getMemberNickname();
-
-		log.debug("★★★★★★★★★★★ [다원] modifyQ_qnaForm_Controller() debug" + qnaForm.toString());
-		// 이미지 파일 절대 경로 설정
-		String realPath = request.getServletContext().getRealPath("resources/image/qna//");
-		
-		qnaService.modifyQ(qnaForm, realPath, memberId, memberNickname);
-		return "redirect:/getQnaOne?qnaNo=" + qnaForm.getQna().getQnaNo();
+		return "redirect:/getQnaOne?qnaNo=" + qna.getQnaNo();
 	}	
 	
 	// [Member] 질문 삭제
@@ -244,7 +234,6 @@ public class QnaController {
 	    log.debug(qna + "★★★★★★★★★★★ [다원] getQnaOne_qna_Controller() debug");
 	    model.addAttribute("qna", qna);
 	    model.addAttribute("loginMember", loginMember);
-	    
 	    // 관리자 계정이면 관리자 Q&A 내용 상세 보기 페이지로 이동
 	 	// 그 외 회원이면 일반 Q&A 내용 상세 보기 페이지로 이동
 	 	if(loginMember.getMemberLevel() == 2) {
