@@ -59,6 +59,7 @@
 	   	INSERT INTO notice(
 			admin_id,
 			notice_title,
+			notice_top,
 			notice_content,
 			notice_view_cnt,
 			create_date,
@@ -66,6 +67,7 @@
 		) VALUES(
 			#{adminId},
 			#{noticeTitle},
+			#{noticeTop},
 			#{noticeContent},
 			'0',
 			NOW(),
@@ -107,6 +109,7 @@
 		UPDATE notice 
 		SET 
 			notice_title = #{noticeTitle},
+			notice_top = #{noticeTop},
 			notice_content = #{noticeContent},
 			update_date = NOW()
 		WHERE 
@@ -120,7 +123,7 @@
 		WHERE 
 			notice_no = #{noticeNo}
 	</update>
-	
+	<!-- 이미지 삽입시 이미지 삽입할 공지사항 식별번호 -->
 	<select id="selectInsertNotice" resultType="int">
 		SELECT notice_no FROM notice
 		ORDER BY
