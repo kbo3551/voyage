@@ -269,10 +269,4 @@ public class AdminController {
 		return "redirect:/admin/hostList";
 	}
 
-	@GetMapping("/admin/adminIndex")
-	public String index() {
-		System.out.println("AdminController() 실행");
-
-		return "admin/adminIndex";
-	}
 }

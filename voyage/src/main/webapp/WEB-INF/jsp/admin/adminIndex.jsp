@@ -48,40 +48,42 @@
 		<main class="content">
 			<div class="container-fluid p-0">
 	
-				<h1 class="h3 mb-3"><strong>Analytics</strong> Dashboard</h1>
+				<h1 class="h3 mb-3"><strong>관리자</strong> 메인 페이지</h1>
 	
-				<div class="row">
+				<div class="row">	
+					<div align="center">
+						<h5 class="h5 mb-3"><strong>사업자</strong> 총 수익확인 </h5>
+					</div>
 					<div class="col-xl-6 col-xxl-5 d-flex">
 						<div class="w-100">
 							<div class="row">
 								<div class="col-sm-6">
-									<!-- sales 차트 -->
+									<!-- 이번달 결제 수 차트 -->
 									<div class="card">
 										<div class="card-body">
 											<div class="row">
 												<div class="col mt-0">
-													<h5 class="card-title">Sales</h5>
+													<h5 class="card-title">이번달 결제 수</h5>
 												</div>
-	
 												<div class="col-auto">
 													<div class="stat text-primary">
-														<i class="align-middle" data-feather="truck"></i>
+														<i class="align-middle" data-feather="user"></i>
 													</div>
 												</div>
 											</div>
-											<h1 class="mt-1 mb-3">2.382</h1>
+											<h1 class="mt-1 mb-3">${totalPersonMonth} 회</h1>
 											<div class="mb-0">
-												<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
-												<span class="text-muted">Since last week</span>
+												<span class="text-muted"> <i class="mdi mdi-arrow-bottom-right"></i> ${calendarList[0]}</span>
+												<span class="text-muted">월</span>
 											</div>
 										</div>
 									</div>
-									<!-- visitors 차트 -->
+									<!-- 1년간 결제 수 차트 -->
 									<div class="card">
 										<div class="card-body">
 											<div class="row">
 												<div class="col mt-0">
-													<h5 class="card-title">Visitors</h5>
+													<h5 class="card-title">1년간 결제 수</h5>
 												</div>
 	
 												<div class="col-auto">
@@ -90,22 +92,22 @@
 													</div>
 												</div>
 											</div>
-											<h1 class="mt-1 mb-3">14.212</h1>
+											<h1 class="mt-1 mb-3">${totalPersonYear} 회</h1>
 											<div class="mb-0">
-												<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span>
-												<span class="text-muted">Since last week</span>
+												<span class="text-muted"> <i class="mdi mdi-arrow-bottom-right"></i> ${calendarList[0]}</span>
+												<span class="text-muted">월</span>
 											</div>
 										</div>
 									</div>
 								</div>
 								
 								<div class="col-sm-6">
-									<!-- Earning 차트 -->
+									<!-- 이번달 수익 차트 -->
 									<div class="card">
 										<div class="card-body">
 											<div class="row">
 												<div class="col mt-0">
-													<h5 class="card-title">Earnings</h5>
+													<h5 class="card-title">이번 달 총 수익</h5>
 												</div>
 	
 												<div class="col-auto">
@@ -114,31 +116,31 @@
 													</div>
 												</div>
 											</div>
-											<h1 class="mt-1 mb-3">$21.300</h1>
+											<h1 class="mt-1 mb-3">${totalPaymentMonth} &#8361</h1>
 											<div class="mb-0">
-												<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
-												<span class="text-muted">Since last week</span>
+												<span class="text-muted"> <i class="mdi mdi-arrow-bottom-right"></i> ${calendarList[0]}</span>
+												<span class="text-muted">월</span>
 											</div>
 										</div>
 									</div>
-									<!-- Orders차트 -->
+									<!-- 1년간 총 수익 차트 -->
 									<div class="card">
 										<div class="card-body">
 											<div class="row">
 												<div class="col mt-0">
-													<h5 class="card-title">Orders</h5>
+													<h5 class="card-title">1년간 총 수익</h5>
 												</div>
 	
 												<div class="col-auto">
 													<div class="stat text-primary">
-														<i class="align-middle" data-feather="shopping-cart"></i>
+														<i class="align-middle" data-feather="dollar-sign"></i>
 													</div>
 												</div>
 											</div>
-											<h1 class="mt-1 mb-3">64</h1>
+											<h1 class="mt-1 mb-3">${totalPaymentYear} &#8361</h1>
 											<div class="mb-0">
-												<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -2.25% </span>
-												<span class="text-muted">Since last week</span>
+												<span class="text-muted"> <i class="mdi mdi-arrow-bottom-right"></i> ${calendarList[0]}</span>
+												<span class="text-muted">월</span>
 											</div>
 										</div>
 									</div>
@@ -152,7 +154,7 @@
 							<!-- RecentMovement 선그래프 차트 -->
 							<div class="card-header">
 	
-								<h5 class="card-title mb-0">Recent Movement</h5>
+								<h5 class="card-title mb-0">월 별 수익</h5>
 							</div>
 							<div class="card-body py-3">
 								<div class="chart chart-sm">
@@ -164,12 +166,12 @@
 				</div>
 				
 				<div class="row">
-					<div class="col-12 col-md-6 col-xxl-3 d-flex order-2 order-xxl-3">
+					<div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
 						<div class="card flex-fill w-100">
 							<!-- Browser Usage 원형차트 -->
 							<div class="card-header">
 	
-								<h5 class="card-title mb-0">Browser Usage</h5>
+								<h5 class="card-title mb-0">숙소 체험 총 결제 건수</h5>
 							</div>
 							<div class="card-body d-flex">
 								<div class="align-self-center w-100">
@@ -182,148 +184,33 @@
 									<table class="table mb-0">
 										<tbody>
 											<tr>
-												<td>Chrome</td>
-												<td class="text-end">4306</td>
+												<td>숙소</td>
+												<td class="text-end">${totalPersonAccom}</td>
 											</tr>
 											<tr>
-												<td>Firefox</td>
-												<td class="text-end">3801</td>
-											</tr>
-											<tr>
-												<td>IE</td>
-												<td class="text-end">1689</td>
+												<td>체험</td>
+												<td class="text-end">${totalPersonActivity}</td>
 											</tr>
 										</tbody>
 									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
-						<div class="card flex-fill w-100">
-							<!-- Real-Time 차트 -->
-							<div class="card-header">
-	
-								<h5 class="card-title mb-0">Real-Time</h5>
-							</div>
-							<div class="card-body px-4">
-								<div id="world_map" style="height:350px;"></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-12 col-md-6 col-xxl-3 d-flex order-1 order-xxl-1">
-							<div class="card flex-fill">
-								<!-- Calendar 달력 차트 -->
-								<div class="card-header">
-	
-									<h5 class="card-title mb-0">Calendar</h5>
-								</div>
-								<div class="card-body d-flex">
-									<div class="align-self-center w-100">
-										<div class="chart">
-											<div id="datetimepicker-dashboard"></div>
+									<div class="card flex-fill">
+									<!-- Calendar 달력 차트 -->
+									<div class="card-header">
+		
+										<h5 class="card-title mb-0">Calendar</h5>
+										</div>
+										<div class="card-body d-flex">
+											<div class="align-self-center w-100">
+												<div class="chart" style="position: relative; height:50vh; width:40vw">
+													<div id="datetimepicker-dashboard"></div>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-	
-					<div class="row">
-						<div class="col-12 col-lg-8 col-xxl-9 d-flex">
-							<div class="card flex-fill">
-								<!-- Latest Projects 차트 -->
-								<div class="card-header">
-	
-									<h5 class="card-title mb-0">Latest Projects</h5>
-								</div>
-								<table class="table table-hover my-0">
-									<thead>
-										<tr>
-											<th>Name</th>
-											<th class="d-none d-xl-table-cell">Start Date</th>
-											<th class="d-none d-xl-table-cell">End Date</th>
-											<th>Status</th>
-											<th class="d-none d-md-table-cell">Assignee</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Project Apollo</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-success">Done</span></td>
-											<td class="d-none d-md-table-cell">Vanessa Tucker</td>
-										</tr>
-										<tr>
-											<td>Project Fireball</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-danger">Cancelled</span></td>
-											<td class="d-none d-md-table-cell">William Harris</td>
-										</tr>
-										<tr>
-											<td>Project Hades</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-success">Done</span></td>
-											<td class="d-none d-md-table-cell">Sharon Lessman</td>
-										</tr>
-										<tr>
-											<td>Project Nitro</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-warning">In progress</span></td>
-											<td class="d-none d-md-table-cell">Vanessa Tucker</td>
-										</tr>
-										<tr>
-											<td>Project Phoenix</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-success">Done</span></td>
-											<td class="d-none d-md-table-cell">William Harris</td>
-										</tr>
-										<tr>
-											<td>Project X</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-success">Done</span></td>
-											<td class="d-none d-md-table-cell">Sharon Lessman</td>
-										</tr>
-										<tr>
-											<td>Project Romeo</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-success">Done</span></td>
-											<td class="d-none d-md-table-cell">Christina Mason</td>
-										</tr>
-										<tr>
-											<td>Project Wombat</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-warning">In progress</span></td>
-											<td class="d-none d-md-table-cell">William Harris</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-						<div class="col-12 col-lg-4 col-xxl-3 d-flex">
-							<div class="card flex-fill w-100">
-								<!-- monthly sales 차트 -->
-								<div class="card-header">
-	
-									<h5 class="card-title mb-0">Monthly Sales</h5>
-								</div>
-								<div class="card-body d-flex w-100">
-									<div class="align-self-center chart chart-lg">
-										<canvas id="chartjs-dashboard-bar"></canvas>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-	
+					</div>	
 				</div>
 			</main>
     <!-- adminFooter : 시작 -->
@@ -345,25 +232,25 @@
 		new Chart(document.getElementById("chartjs-dashboard-line"), {
 			type: "line",
 			data: {
-				labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+				labels: ["${calendarList[11]}", "${calendarList[10]}", "${calendarList[9]}", "${calendarList[8]}", "${calendarList[7]}", "${calendarList[6]}", "${calendarList[5]}", "${calendarList[4]}", "${calendarList[3]}", "${calendarList[2]}", "${calendarList[1]}", "${calendarList[0]}"],
 				datasets: [{
-					label: "Sales ($)",
+					label: "월 총 수익(원)",
 					fill: true,
 					backgroundColor: gradient,
 					borderColor: window.theme.primary,
 					data: [
-						2115,
-						1562,
-						1584,
-						1892,
-						1587,
-						1923,
-						2566,
-						2448,
-						2805,
-						3438,
-						2917,
-						3327
+						${payList[11]},
+						${payList[10]},
+						${payList[9]},
+						${payList[8]},
+						${payList[7]},
+						${payList[6]},
+						${payList[5]},
+						${payList[4]},
+						${payList[3]},
+						${payList[2]},
+						${payList[1]},
+						${payList[0]}
 					]
 				}]
 			},
@@ -411,13 +298,12 @@
 		new Chart(document.getElementById("chartjs-dashboard-pie"), {
 			type: "pie",
 			data: {
-				labels: ["Chrome", "Firefox", "IE"],
+				labels: ["숙소", "체험"],
 				datasets: [{
-					data: [4306, 3801, 1689],
+					data: [${totalPersonAccom}, ${totalPersonActivity}],
 					backgroundColor: [
 						window.theme.primary,
-						window.theme.warning,
-						window.theme.danger
+						window.theme.warning
 					],
 					borderWidth: 5
 				}]
@@ -433,121 +319,12 @@
 		});
 	});
 	</script>
-	<script>
-	document.addEventListener("DOMContentLoaded", function() {
-		// Bar chart
-		new Chart(document.getElementById("chartjs-dashboard-bar"), {
-			type: "bar",
-			data: {
-				labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-				datasets: [{
-					label: "This year",
-					backgroundColor: window.theme.primary,
-					borderColor: window.theme.primary,
-					hoverBackgroundColor: window.theme.primary,
-					hoverBorderColor: window.theme.primary,
-					data: [54, 67, 41, 55, 62, 45, 55, 73, 60, 76, 48, 79],
-					barPercentage: .75,
-					categoryPercentage: .5
-				}]
-			},
-			options: {
-				maintainAspectRatio: false,
-				legend: {
-					display: false
-				},
-				scales: {
-					yAxes: [{
-						gridLines: {
-							display: false
-						},
-						stacked: false,
-						ticks: {
-							stepSize: 20
-						}
-					}],
-					xAxes: [{
-						stacked: false,
-						gridLines: {
-							color: "transparent"
-						}
-					}]
-				}
-			}
-		});
-	});
-	</script>
-	<script>
-	document.addEventListener("DOMContentLoaded", function() {
-		var markers = [{
-				coords: [31.230391, 121.473701],
-				name: "Shanghai"
-			},
-			{
-				coords: [28.704060, 77.102493],
-				name: "Delhi"
-			},
-			{
-				coords: [6.524379, 3.379206],
-				name: "Lagos"
-			},
-			{
-				coords: [35.689487, 139.691711],
-				name: "Tokyo"
-			},
-			{
-				coords: [23.129110, 113.264381],
-				name: "Guangzhou"
-			},
-			{
-				coords: [40.7127837, -74.0059413],
-				name: "New York"
-			},
-			{
-				coords: [34.052235, -118.243683],
-				name: "Los Angeles"
-			},
-			{
-				coords: [41.878113, -87.629799],
-				name: "Chicago"
-			},
-			{
-				coords: [51.507351, -0.127758],
-				name: "London"
-			},
-			{
-				coords: [40.416775, -3.703790],
-				name: "Madrid "
-			}
-		];
-		var map = new jsVectorMap({
-			map: "world",
-			selector: "#world_map",
-			zoomButtons: true,
-			markers: markers,
-			markerStyle: {
-				initial: {
-					r: 9,
-					strokeWidth: 7,
-					stokeOpacity: .4,
-					fill: window.theme.primary
-				},
-				hover: {
-					fill: window.theme.primary,
-					stroke: window.theme.primary
-				}
-			},
-			zoomOnScroll: false
-		});
-		window.addEventListener("resize", () => {
-			map.updateSize();
-		});
-	});
-	</script>
+	
+	
 	<script>
 	document.addEventListener("DOMContentLoaded", function() {
 		var date = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000);
-		var defaultDate = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
+		var defaultDate = new Date(Date.now());
 		document.getElementById("datetimepicker-dashboard").flatpickr({
 			inline: true,
 			prevArrow: "<span title=\"Previous month\">&laquo;</span>",

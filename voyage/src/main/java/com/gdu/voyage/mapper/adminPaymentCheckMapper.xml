@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.voyage.mapper.adminPaymentCheckMapper">
+
+	
+	<!-- 이번달 체험 예약인원 -->
+	<select id="selectActivityUsePersonByAdmin" resultType="int">
+		SELECT
+			SUM(activity_use_person)
+		FROM
+			activity_payment
+		WHERE
+			NOT activity_payment_state = '결제취소'
+			AND
+			NOT activity_payment_state = '결제대기'
+			AND
+			update_date LIKE CONCAT((SELECT DATE_FORMAT(LAST_DAY(NOW()), '%Y-%m')),'%')
+	</select>
+	
+	<!-- 이번달 숙소 예약인원 -->
+	<select id="selectAccomUsePersonByAdmin" resultType="int">
+		SELECT
+			SUM(accom_use_person)
+		FROM
+			accom_payment
+		WHERE
+			NOT accom_payment_state = '결제취소'
+			AND
+			NOT accom_payment_state = '결제대기'
+			AND
+			update_date LIKE CONCAT((SELECT DATE_FORMAT(LAST_DAY(NOW()), '%Y-%m')),'%')
+	</select>
+	
+	<!-- 이번년도 체험 예약인원 -->
+	<select id="selectActivityUsePersonByAdminYear" resultType="int">
+		SELECT
+			SUM(activity_use_person)
+		FROM
+			activity_payment
+		WHERE
+			NOT activity_payment_state = '결제취소'
+			AND
+			NOT activity_payment_state = '결제대기'
+			AND
+			update_date  LIKE CONCAT((SELECT DATE_FORMAT(LAST_DAY(NOW()), '%Y')),'%')
+	</select>
+	
+	<!-- 이번년도 숙소 예약인원 -->
+	<select id="selectAccomUsePersonByAdminYear" resultType="int">
+		SELECT
+			SUM(accom_use_person)
+		FROM
+			accom_payment
+		WHERE
+			NOT accom_payment_state = '결제취소'
+			AND
+			NOT accom_payment_state = '결제대기'
+			AND
+			update_date LIKE CONCAT((SELECT DATE_FORMAT(LAST_DAY(NOW()), '%Y')),'%')
+	</select>
+	
+	<!-- 체험 총 수익, 월별 수익 -->
+	<select id="selectActivityProfitByAdmin" resultType="long">
+		SELECT
+			IFNULL(SUM(activity_amount),0)
+		FROM
+			activity_payment
+		WHERE
+			NOT activity_payment_state = '결제취소'
+			AND
+			NOT activity_payment_state = '결제대기'			
+			AND
+			update_date LIKE CONCAT((SELECT DATE_FORMAT(LAST_DAY(NOW()), '%Y-%m')),'%')				
+	</select>
+	
+	<!-- 건물별 숙소 총 수익, 월별 수익 -->
+	<select id="selectAccomProfitOneByAdmin" resultType="long">
+		SELECT
+			IFNULL(SUM(accom_amount),0)
+		FROM
+			accom_payment ap
+		   JOIN accom_room ar ON ap.accom_room_no = ar.accom_room_no
+		   JOIN accom_building ab ON ar.accom_building_no = ab.accom_building_no
+		WHERE
+			NOT accom_payment_state = '결제취소'
+			AND
+			NOT accom_payment_state = '결제대기'			
+			AND
+			ap.update_date LIKE CONCAT((SELECT DATE_FORMAT(LAST_DAY(NOW()), '%Y-%m')),'%')
+				
+	</select>
+	
+	<!-- 체험 총 수익, 연별 수익 -->
+	<select id="selectActivityProfitByAdminYear" resultType="long">
+		SELECT
+			IFNULL(SUM(activity_amount),0)
+		FROM
+			activity_payment
+		WHERE
+			NOT activity_payment_state = '결제취소'
+			AND
+			NOT activity_payment_state = '결제대기'			
+			AND
+			update_date LIKE CONCAT((SELECT DATE_FORMAT(LAST_DAY(NOW()), '%Y')),'%')			
+	</select>
+	
+	<!-- 건물별 숙소 총 수익, 연별 수익 -->
+	<select id="selectAccomProfitOneByAdminYear" resultType="long">
+		SELECT
+			IFNULL(SUM(accom_amount),0)
+		FROM
+			accom_payment ap
+		   JOIN accom_room ar ON ap.accom_room_no = ar.accom_room_no
+		   JOIN accom_building ab ON ar.accom_building_no = ab.accom_building_no
+		WHERE
+			NOT accom_payment_state = '결제취소'
+			AND
+			NOT accom_payment_state = '결제대기'			
+			AND
+			ap.update_date LIKE CONCAT((SELECT DATE_FORMAT(LAST_DAY(NOW()), '%Y')),'%')
+				
+	</select>
+	
+	<!-- 각 달 -->
+	<select id="selectMonth" resultType="String">	
+		SELECT 
+			DATE_FORMAT(LAST_DAY(NOW() - INTERVAL #{countMonth} MONTH), '%Y-%m') 		
+	</select>
+	<!-- 체험 총 수익, 월별 수익 -->
+	<select id="selectActivityProfitByAdminMonthYear" resultType="int">
+		SELECT
+			IFNULL(SUM(activity_amount),0)
+		FROM
+			activity_payment
+		WHERE
+			NOT activity_payment_state = '결제취소'
+			AND
+			NOT activity_payment_state = '결제대기'			
+			AND
+			update_date LIKE CONCAT(#{countMonth},'%')				
+	</select>
+	
+	<!-- 건물별 숙소 총 수익, 월별 수익 -->
+	<select id="selectAccomProfitOneByAdminMonthYear" resultType="int">
+		SELECT
+			IFNULL(SUM(accom_amount),0)
+		FROM
+			accom_payment ap
+		   JOIN accom_room ar ON ap.accom_room_no = ar.accom_room_no
+		   JOIN accom_building ab ON ar.accom_building_no = ab.accom_building_no
+		WHERE
+			NOT accom_payment_state = '결제취소'
+			AND
+			NOT accom_payment_state = '결제대기'			
+			AND
+			ap.update_date LIKE CONCAT(#{countMonth},'%')				
+	</select>
+	<!-- 총 체험 예약인원 -->
+	<select id="selectActivityUsePersonByAdminAll" resultType="int">
+		SELECT
+			SUM(activity_use_person)
+		FROM
+			activity_payment
+		WHERE
+			NOT activity_payment_state = '결제취소'
+			AND
+			NOT activity_payment_state = '결제대기'
+	</select>
+	
+	<!-- 총 숙소 예약인원 -->
+	<select id="selectAccomUsePersonByAdminAll" resultType="int">
+		SELECT
+			SUM(accom_use_person)
+		FROM
+			accom_payment
+		WHERE
+			NOT accom_payment_state = '결제취소'
+			AND
+			NOT accom_payment_state = '결제대기'
+	</select>
+</mapper>
