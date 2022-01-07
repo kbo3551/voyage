@@ -16,27 +16,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.gdu.voyage.service.AccomReportService;
+import com.gdu.voyage.service.AccrReportService;
 
 import com.gdu.voyage.vo.Member;
-import com.gdu.voyage.vo.AccomReport;
+import com.gdu.voyage.vo.AccomReviewReport;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-public class AccomReportController {
-	@Autowired AccomReportService reportService;
+public class AccrReportController {
+	@Autowired AccrReportService accrReportService;
 	private final int ROW_PER_PAGE = 10;
 	
 	// [Admin] 신고 목록 
-	@GetMapping("/admin/accomReportList")
+	@GetMapping("/admin/accomReviewReportList")
 	public String reportList(Model model,
 			@RequestParam(defaultValue="1") int currentPage,
 			@RequestParam @Nullable String searchWord) {
 		log.debug("reportListController() 실행");
 		
-		Map<String, Object> map = reportService.getReportList(searchWord, currentPage, ROW_PER_PAGE);
+		Map<String, Object> map = accrReportService.getReportList(searchWord, currentPage, ROW_PER_PAGE);
 		log.debug("★★★★★★★★★★★ [다원] reportList_map_Controller() debug" + map.toString());
 		
 		int controllPage = (currentPage * ROW_PER_PAGE) - (ROW_PER_PAGE - 1);
@@ -48,12 +48,12 @@ public class AccomReportController {
 		model.addAttribute("lastPage", map.get("lastPage"));
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("pageNo", pageNo);
-		return "/admin/accomReportList";
+		return "/admin/accomReviewReportList";
 	}
 
 	// [Member] 신고 작성 
-	@GetMapping("/addAccomReport")
-	public String addReport(HttpSession session, HttpServletResponse response) throws IOException {
+	@GetMapping("/addAccomReviewReport")
+	public String addAccrReport(HttpSession session, HttpServletResponse response) throws IOException {
 		log.debug("addReport_Controller() 실행");
 		// 세션에서 로그인 정보를 가져와 member 객체에 저장
 		Member loginMember = (Member)session.getAttribute("loginMember");
@@ -66,23 +66,23 @@ public class AccomReportController {
 			out.flush();
 			return "redirect:/login"; 
 		}
-		return "/addAccomReport";
+		return "/addAccomReviewReport";
 	}
 	
-	@PostMapping("/addAccomReport")
-	public String addReport(AccomReport report, int accomRoomNo, HttpSession session,
+	@PostMapping("/addAccomReviewReport")
+	public String addAccrReport(AccomReviewReport report, int accomReviewNo, Model model,
+			HttpSession session,
 			HttpServletRequest request) throws Exception {
 		// 세션에서 로그인 정보를 가져와 member 객체에 저장
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		// 변수에 값 셋팅 
 		String memberId = loginMember.getMemberId();
-		accomRoomNo = Integer.parseInt(request.getParameter("accomRoomNo"));
+		accomReviewNo = Integer.parseInt(request.getParameter("accomReviewNo"));
 		
-		log.debug("★★★★★★★★★★★ [다원] addReport_idenNo_Controller() debug" + accomRoomNo);
+		log.debug("★★★★★★★★★★★ [다원] addReport_idenNo_Controller() debug" + accomReviewNo);
 
 		// 서비스로 값 전달
-		reportService.addReport(report, accomRoomNo, memberId);
-		
+		accrReportService.addAccrReport(report, accomReviewNo, memberId);
 		return "redirect:/index";
 	} 
 }

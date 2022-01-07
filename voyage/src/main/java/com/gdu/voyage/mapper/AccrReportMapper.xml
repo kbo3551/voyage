@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdu.voyage.mapper.AccrReportMapper">
+	<!-- resultMap Here -->
+	<!-- 신고 전체 목록 -->
+	<resultMap type="com.gdu.voyage.vo.AccomReviewReport" id="resultReport">
+		<id column="accr_report_no" property="accrReportNo"/>
+		<result column="accom_review_no" property="accomReviewNo"/>
+		<result column="member_id" property="memberId"/>
+		<result column="report_category" property="reportCategory"/>
+		<result column="create_date" property="createDate"/>
+	</resultMap>
+	<!-- resultMap End -->
+	<!-- 신고 작성 -->
+	<insert id="addAccrReport" parameterType="com.gdu.voyage.vo.AccomReviewReport">
+		INSERT INTO accom_review_report(
+			accom_review_no,
+			member_id,
+			report_category,
+			create_date
+		) VALUES (
+			#{accomReviewNo},
+			#{memberId},
+			#{reportCategory},
+			NOW()
+		)	
+	</insert>
+	<!-- 신고 전체 목록 -->
+	<select id="selectReportAll" resultMap="resultReport" parameterType="Map">
+		SELECT
+			accr_report_no,
+			accom_review_no,
+			member_id,
+			report_category,
+			create_date
+		FROM
+			accom_review_report
+		<where>
+			<if test="searchWord != null">
+				report_category LIKE CONCAT ('%',#{searchWord},'%')
+			</if>
+		</where>
+		ORDER BY 
+			create_date DESC
+		LIMIT
+			#{beginRow}, #{rowPerPage}	
+	</select>
+	<!-- 총 신고 수 -->
+	<select id="reportTotalCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM accom_review_report
+		<where>
+			<if test="searchWord != null">
+				report_category LIKE CONCAT ('%',#{searchWord},'%')
+			</if>
+		</where>
+	</select>
+</mapper>
