@@ -422,8 +422,9 @@
                </div>
                <div class="col-lg-4">
                   <div class="blog_right_sidebar">
-<!--                      <aside class="single_sidebar_widget search_widget"> -->
-<!--                         <form action="#"> -->
+                     <aside class="single_sidebar_widget search_widget">
+                        <form action="${pageContext.request.contextPath}/member/calendarActivity" method="get">
+                        	<input type="hidden" name="activityNo" value="${activityOne.activityNo }">
 <!--                            <div class="form-group"> -->
 <!--                               <div class="input-group mb-3"> -->
 <!--                                  <input type="text" class="form-control" placeholder='Search Keyword' -->
@@ -433,10 +434,12 @@
 <!--                                  </div> -->
 <!--                               </div> -->
 <!--                            </div> -->
-<!--                            <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" -->
-<!--                               type="submit">Search</button> -->
-<!--                         </form> -->
-<!--                      </aside> -->
+                           <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" id="submitBtn">
+                           		예약
+                           </button>
+                        </form>
+                        
+                     </aside>
 <!--                      <aside class="single_sidebar_widget post_category_widget"> -->
 <!--                         <h4 class="widget_title">Facilities</h4> -->
 <!--                         <ul class="list cat-list"> -->

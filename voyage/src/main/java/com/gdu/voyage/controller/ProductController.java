@@ -13,7 +13,6 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdu.voyage.service.ProductService;
@@ -21,6 +20,7 @@ import com.gdu.voyage.vo.AccomBuilding;
 import com.gdu.voyage.vo.AccomPayment;
 import com.gdu.voyage.vo.AccomRoom;
 import com.gdu.voyage.vo.Activity;
+import com.gdu.voyage.vo.ActivityPayment;
 import com.gdu.voyage.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
@@ -282,10 +282,11 @@ public class ProductController {
 		return "/product/activityOne";
 	}
 	
+	// 숙소 예약
 	@GetMapping("/member/calendarAccom")
-	public String getCalendar(Model model, int accomRoomNo) {
-		log.debug("[debug] ProductController.getCalendar 실행");
-		log.debug("[debug] ProductController.getCalendar accomRoomNo : " + accomRoomNo);
+	public String getAccomCalendar(Model model, int accomRoomNo) {
+		log.debug("[debug] ProductController.getAccomCalendar 실행");
+		log.debug("[debug] ProductController.getAccomCalendar accomRoomNo : " + accomRoomNo);
 		
 		model.addAttribute("accomRoomNo", accomRoomNo);		
 		// [사용자] 숙소 예약 캘린더 페이지로 이동
@@ -293,44 +294,94 @@ public class ProductController {
 	}
 	
 	@GetMapping("/member/addAccomReservation")
-	public String addReservation(Model model, int accomRoomNo, String checkIn, String checkOut) {
-		log.debug("[debug] ProductController.addReservation 실행");
-		log.debug("[debug] ProductController.addReservation accomRoomNo : " + accomRoomNo);
-		log.debug("[debug] ProductController.addReservation checkIn : " + checkIn);
-		log.debug("[debug] ProductController.addReservation checkOut : " + checkOut);
+	public String addAccomReservation(Model model, int accomRoomNo, String checkIn, String checkOut) {
+		log.debug("[debug] ProductController.addAccomReservation 실행");
+		log.debug("[debug] ProductController.addAccomReservation accomRoomNo : " + accomRoomNo);
+		log.debug("[debug] ProductController.addAccomReservation checkIn : " + checkIn);
+		log.debug("[debug] ProductController.addAccomReservation checkOut : " + checkOut);
 		
 		// [사용자] 숙소-건물-객실 상세 조회
 		AccomRoom accomRoomOne = productService.getAccomRoomOne(accomRoomNo);
 		model.addAttribute("accomRoomOne", accomRoomOne);
-		log.debug("[debug] ProductController.addReservation accomRoomOne : " + accomRoomOne);
+		log.debug("[debug] ProductController.addAccomReservation accomRoomOne : " + accomRoomOne);
 
 		model.addAttribute("checkIn", checkIn);
 		model.addAttribute("checkOut", checkOut);
-		// 객실 예약 정보 조회
 		
 		return "/product/addAccomReservation";
 	}
 	
-	@GetMapping("/member/loadPayment")
-	public String addReservation(HttpSession session, AccomPayment accomPayment, Model model) {
-		log.debug("[debug] ProductController.addReservation 실행");
+	@GetMapping("/member/loadAccomPayment")
+	public String addAccomReservation(HttpSession session, AccomPayment accomPayment, Model model) {
+		log.debug("[debug] ProductController.addAccomReservation 실행");
 
 		String memberId = ((Member) session.getAttribute("loginMember")).getMemberId();
-		log.debug("[debug] ProductController.addReservation memberId : " + memberId);
+		log.debug("[debug] ProductController.addAccomReservation memberId : " + memberId);
 		accomPayment.setMemberId(memberId);
 		
-		log.debug("[debug] ProductController.addReservation accomPayment : " + accomPayment);
+		log.debug("[debug] ProductController.addAccomReservation accomPayment : " + accomPayment);
 		
 		productService.addAccomPayment(accomPayment);
 		
-		return "/product/loadPayment";
+		return "/product/loadAccomPayment";
 	}
 	
-    @GetMapping("/member/finishPayment")
-	public String addPayment() {
-		log.debug("[debug] ProductController.addReservation 실행");
+    @GetMapping("/member/finishAccomPayment")
+	public String addAccomPayment() {
+		log.debug("[debug] ProductController.addAccomPayment 실행");
 
-		return "/product/finishPayment";
+		return "/product/finishAccomPayment";
+	}
+    
+    // 체험 예약
+    @GetMapping("/member/calendarActivity")
+	public String getActivityCalendar(Model model, int activityNo) {
+		log.debug("[debug] ProductController.getActivityCalendar 실행");
+		log.debug("[debug] ProductController.getActivityCalendar activityNo : " + activityNo);
+		
+		model.addAttribute("activityNo", activityNo);		
+		// [사용자] 체험 예약 캘린더 페이지로 이동
+		return "/product/calendarActivity";
+	}
+	
+	@GetMapping("/member/addActivityReservation")
+	public String addActivityReservation(Model model, int activityNo, String checkIn, String checkOut) {
+		log.debug("[debug] ProductController.addActivityReservation 실행");
+		log.debug("[debug] ProductController.addActivityReservation activityNo : " + activityNo);
+		//log.debug("[debug] ProductController.addActivityReservation checkIn : " + checkIn);
+		//log.debug("[debug] ProductController.addActivityReservation checkOut : " + checkOut);
+		
+		// [사용자] 체험 상세 조회
+		Activity activityOne = productService.getActivityOne(activityNo);
+		model.addAttribute("activityOne", activityOne);
+		log.debug("[debug] ProductController.getActivityOne activityOne : " + activityOne);
+
+		//model.addAttribute("checkIn", checkIn);
+		//model.addAttribute("checkOut", checkOut);
+		
+		return "/product/addActivityReservation";
+	}
+	
+	@GetMapping("/member/loadActivityPayment")
+	public String addActivityReservation(HttpSession session, ActivityPayment activityPayment, Model model) {
+		log.debug("[debug] ProductController.addActivityReservation 실행");
+
+		String memberId = ((Member) session.getAttribute("loginMember")).getMemberId();
+		log.debug("[debug] ProductController.addActivityReservation memberId : " + memberId);
+		activityPayment.setMemberId(memberId);
+		
+		log.debug("[debug] ProductController.addActivityReservation activityPayment : " + activityPayment);
+		
+		productService.addActivityPayment(activityPayment);
+		
+		return "/product/loadActivityPayment";
+	}
+	
+    @GetMapping("/member/finishActivityPayment")
+	public String addActivityPayment() {
+		log.debug("[debug] ProductController.addActivityReservation 실행");
+
+		return "/product/finishActivityPayment";
 	}
 		
 	@GetMapping("/setProductCategory")

@@ -70,37 +70,45 @@
 	<!-- iamport.payment.js -->
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     
-	<script>
-		const IMP = window.IMP; // 생략 가능
- 	    IMP.init("imp56049127");
-
- 		IMP.request_pay({
-		    pg : 'html5_inicis', // version 1.1.0부터 지원.
- 		    pay_method : 'card',
- 		    merchant_uid : 'merchant_' + new Date().getTime(),
- 		    name : '주문명:결제테스트',
- 		    amount : 100, //판매 가격
- 		    buyer_email : 'iamport@siot.do',
- 		    buyer_name : '구매자이름',
- 		    buyer_tel : '010-1234-5678',
- 		    buyer_addr : '서울특별시 강남구 삼성동',
- 		    buyer_postcode : '123-456'
- 		}, function(rsp) {
- 		    if ( rsp.success ) {
- 		        var msg = '결제가 완료되었습니다.';
- 		        msg += '고유ID : ' + rsp.imp_uid;
- 		        msg += '상점 거래ID : ' + rsp.merchant_uid;
- 		        msg += '결제 금액 : ' + rsp.paid_amount;
- 		        msg += '카드 승인번호 : ' + rsp.apply_num;
- 		        $('#addPaymentForm').submit();
- 		    } else {
- 		        var msg = '결제에 실패하였습니다.';
- 		        msg += '에러내용 : ' + rsp.error_msg;
- 		       location.href='/voyage/index';
- 		    }
- 		    alert(msg);
-		});
- 	</script> 
+    <script type="text/javascript">
+    
+	    var IMP = window.IMP; // 생략 가능
+	    IMP.init("imp56049127"); // 예: imp00000000
+    
+	    function requestPay() {
+	      // IMP.request_pay(param, callback) 결제창 호출
+	      IMP.request_pay({ // param
+	          pg: "html5_inicis",
+	          pay_method: "card",
+	          merchant_uid: "ORD20180131-0000011",
+	          name: "노르웨이 회전 의자",
+	          amount: 64900,
+	          buyer_email: "gildong@gmail.com",
+	          buyer_name: "홍길동",
+	          buyer_tel: "010-4242-4242",
+	          buyer_addr: "서울특별시 강남구 신사동",
+	          buyer_postcode: "01181"
+	      }, function (rsp) { // callback
+		          if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+		              // jQuery로 HTTP 요청
+		              jQuery.ajax({
+		                  url: "/voyage/", // 예: https://www.myservice.com/payments/complete
+		                  method: "POST",
+		                  headers: { "Content-Type": "application/json" },
+		                  data: {
+		                      imp_uid: rsp.imp_uid,
+		                      merchant_uid: rsp.merchant_uid
+		                  }
+		              }).done(function (data) {
+		                // 가맹점 서버 결제 API 성공시 로직
+		              })
+		            } else {
+		              alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+		            }
+	          });
+	    }
+   </script>
+    
     
     <body>
     <!-- Preloader Start -->
@@ -142,11 +150,11 @@
 				<div class="wizard-container">
 	
 					<div class="wizard-card ct-wizard-orange" id="wizardProperty">
-						<form action="${pageContext.request.contextPath}/member/finishPayment" method="get" id="addPaymentForm">
+						<form action="${contextPath}/host/addAccomBuilding" method="post" enctype="multipart/form-data" id="accomBuildingForm">
 							<div class="wizard-header">
 								<h3 class="pt-15 pb-15">
-									<b>Reservation</b> _accomodation<br>
-									<small>숙소 결제 정보를 확인하세요.</small>
+									<b>Reservation</b> _activity<br>
+									<small>체험 결제 정보를 확인하세요.</small>
 								</h3>
 							</div>
 	
@@ -155,7 +163,7 @@
 							</ul>
 	
 							<div class="tab-content" style="padding-left: 46%;">
-								<h2>결제중 ..</h2>
+								<h2>결제 성공!</h2>
 							</div>
 	
 							<div class="wizard-footer">
@@ -183,15 +191,41 @@
     </div>
     
     <!-- JS here -->
-   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
+    
+		<!-- All JS Custom Plugins Link Here here -->
+<%--         <script src="${pageContext.request.contextPath}/assets/js/vendor/modernizr-3.5.0.min.js"></script> --%>
+		<!-- Jquery, Popper, Bootstrap -->
+<%-- 		<script src="${pageContext.request.contextPath}/assets/js/vendor/jquery-1.12.4.min.js"></script> --%>
+<%--         <script src="${pageContext.request.contextPath}/assets/js/popper.min.js"></script> --%>
+<%--         <script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script> --%>
+	    <!-- Jquery Mobile Menu -->
+<%--         <script src="${pageContext.request.contextPath}/assets/js/jquery.slicknav.min.js"></script> --%>
 
-	<!-- One Page, Animated-HeadLin -->
-    <script src="${pageContext.request.contextPath}/assets/js/wow.min.js"></script>
+		<!-- Jquery Slick , Owl-Carousel Plugins -->
+<%--         <script src="${pageContext.request.contextPath}/assets/js/owl.carousel.min.js"></script> --%>
+<%--         <script src="${pageContext.request.contextPath}/assets/js/slick.min.js"></script> --%>
+		<!-- One Page, Animated-HeadLin -->
+        <script src="${pageContext.request.contextPath}/assets/js/wow.min.js"></script>
+<%--         <script src="${pageContext.request.contextPath}/assets/js/price-range.js"></script> --%>
+<%-- 		<script src="${pageContext.request.contextPath}/assets/js/animated.headline.js"></script> --%>
+<%--         <script src="${pageContext.request.contextPath}/assets/js/jquery.magnific-popup.js"></script> --%>
 
-	<!-- Jquery Plugins, main Jquery -->	
-    <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+		<!-- Nice-select, sticky -->
+<%--         <script src="${pageContext.request.contextPath}/assets/js/jquery.nice-select.min.js"></script> --%>
+<%-- 		<script src="${pageContext.request.contextPath}/assets/js/jquery.sticky.js"></script> --%>
+        
+        <!-- contact js -->
+<%--         <script src="${pageContext.request.contextPath}/assets/js/contact.js"></script> --%>
+<%--         <script src="${pageContext.request.contextPath}/assets/js/jquery.form.js"></script> --%>
+<%--         <script src="${pageContext.request.contextPath}/assets/js/jquery.validate.min.js"></script> --%>
+<%--         <script src="${pageContext.request.contextPath}/assets/js/mail-script.js"></script> --%>
+<%--         <script src="${pageContext.request.contextPath}/assets/js/jquery.ajaxchimp.min.js"></script> --%>
+        
+		<!-- Jquery Plugins, main Jquery -->	
+        <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 
 	<script src="${contextPath}/accom/js/vendor/modernizr-2.6.2.min.js"></script>
     <script src="${contextPath}/accom/js//jquery-1.10.2.min.js"></script>
@@ -212,9 +246,6 @@
     <script src="${contextPath}/accom/js/main.js"></script>
     
     <script src="${contextPath}/accom/js/total-price.js"></script>
-    
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 </body>
 </html>

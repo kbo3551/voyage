@@ -9,6 +9,7 @@ import com.gdu.voyage.vo.AccomBuilding;
 import com.gdu.voyage.vo.AccomPayment;
 import com.gdu.voyage.vo.AccomRoom;
 import com.gdu.voyage.vo.Activity;
+import com.gdu.voyage.vo.ActivityPayment;
 
 @Mapper
 public interface ProductMapper {
@@ -51,8 +52,14 @@ public interface ProductMapper {
 	Activity selectActivityOne(int activityNo);
 	
 	// 예약
-	// 객실 예약 내역 전체 조회
+	// [사용자] 객실 예약 내역 전체 조회
 	List<Map<String, Object>> selectAccomRoomReserveDay(int accomRoomNo);
 	// [사용자] 숙소 예약
 	int insertAccomPayment(AccomPayment accomPayment);
+	
+	// 예약
+	// [사용자] 체험 예약 내역 전체 조회
+	List<Map<String, Object>> selectActivityReserveDay(int activityNo);
+	// [사용자] 체험 예약
+	int insertActivityPayment(ActivityPayment activityPayment);
 }

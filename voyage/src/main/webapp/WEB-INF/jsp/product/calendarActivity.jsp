@@ -205,7 +205,7 @@
             <div class="row justify-content-center">
                 <div class="col-xl-8 col-lg-9">
                     <div class="hero-cap text-center pt-50 pb-20">
-                        <h2>객실 상세</h2>
+                        <h2>체험 상세</h2>
                     </div>
                     <!--Hero form -->
                 
@@ -215,8 +215,8 @@
     </div>
     <!--Hero End -->
 	
-	<form action="${pageContext.request.contextPath}/member/addAccomReservation" method="get" id="calendarForm">
-		<input type="hidden" name="accomRoomNo" value="${accomRoomNo }">
+	<form action="${pageContext.request.contextPath}/member/addActivityReservation" method="get" id="calendarForm">
+		<input type="hidden" name="activityNo" value="${activityNo }">
 		<input type="hidden" name="checkIn" id="checkIn" value="">
 		<input type="hidden" name="checkOut" id="checkOut" value="">
 		
@@ -315,7 +315,7 @@
 		<script src="${pageContext.request.contextPath}/calendar/js/jquery.min.js"></script>
 		<script src="${pageContext.request.contextPath}/calendar/js/popper.js"></script>
 		<script src="${pageContext.request.contextPath}/calendar/js/bootstrap.min.js"></script>
-		<script src="${pageContext.request.contextPath}/calendar/js/mainAccom.js"></script>
+		<script src="${pageContext.request.contextPath}/calendar/js/mainActivity.js"></script>
   
         <script type="text/javascript">
         // calendarForm 유효성 검사

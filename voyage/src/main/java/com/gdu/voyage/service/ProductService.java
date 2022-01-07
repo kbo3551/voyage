@@ -18,6 +18,7 @@ import com.gdu.voyage.vo.AccomBuilding;
 import com.gdu.voyage.vo.AccomPayment;
 import com.gdu.voyage.vo.AccomRoom;
 import com.gdu.voyage.vo.Activity;
+import com.gdu.voyage.vo.ActivityPayment;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,28 +41,13 @@ public class ProductService {
         } else {
             accomBuildingList = productMapper.selectAccomBuildingList(beginRow,ROW_PER_PAGE, null);
         }
-        
-        
-        
         Map<String, Object> returnMap = new HashMap<>();
         
         int lastPage = 0;
         AccomBuilding accomBuilding = productMapper.selectAccomBuildingList(beginRow,ROW_PER_PAGE, 1).get(0);
         int totalCount = accomBuilding.getCnt();
         
-        
-        
-        // accomBuildingList 가공 - 해시태그 링크 연결을 위해 accomBuildingList 에서 Hahstag 분리
-//        List<String> hashtagList = new ArrayList<>();
-//        for(int i=0; i<accomBuildingList.size(); i++) {
-//            hashtagList.add(accomBuildingList.get(i).getHashtagList().get(0).getHashtag());
-//        }
-        
-//        Map<String, Object> returnMap = new HashMap<>();
-//        returnMap.put("accomBuildingList", accomBuildingList);
-//        returnMap.put("hashtagList", hashtagList);
         log.debug("[debug] ProductService.getAccomBuildingList accomBuildingList : " + accomBuildingList);
-//        log.debug("[debug] ProductService.getAccomBuildingList hashtagList : " + hashtagList);
         
         lastPage = totalCount / ROW_PER_PAGE;
         
@@ -146,17 +132,8 @@ public class ProductService {
 		paramMap.put("ROW_PER_PAGE", ROW_PER_PAGE);
 		
 		List<AccomRoom> accomRoomList = productMapper.selectAccomRoomList(accomBuildingNo);
-		// accomBuildingList 가공 - 해시태그 링크 연결을 위해 accomBuildingList 에서 Hahstag 분리
-//			List<String> hashtagList = new ArrayList<>();
-//			for(int i=0; i<accomBuildingList.size(); i++) {
-//				hashtagList.add(accomBuildingList.get(i).getHashtagList().get(0).getHashtag());
-//			}
 		
-//			Map<String, Object> returnMap = new HashMap<>();
-//			returnMap.put("accomBuildingList", accomBuildingList);
-//			returnMap.put("hashtagList", hashtagList);
 		log.debug("[debug] ProductService.getAccomRoomList accomRoomList : " + accomRoomList);
-//			log.debug("[debug] ProductService.getAccomBuildingList hashtagList : " + hashtagList);
 		
 		return accomRoomList;
 	}
@@ -327,5 +304,73 @@ public class ProductService {
   		
   		productMapper.insertAccomPayment(accomPayment);
   	}
+  	
+  	// 체험 예약
+  	// [사용자] 체험 예약 내역 전체 조회
+ 	public List<String> getActivityReserveDay(int activityNo) {
+ 		log.debug("[debug] ProductService.getActivityReserveDay activityNo : " + activityNo);
+ 		
+ 		// 체크인, 체크아웃 날짜를 list 안의 map 형태로 저장
+ 		List<Map<String, Object>> map = productMapper.selectActivityReserveDay(activityNo);
+ 		log.debug("[debug] ProductService.getActivityReserveDay map : " + map);
+ 		//log.debug("[debug] ProductService.getAccomRoomReserveDay map.get(0) : " + map.get(0).get("accomCheckIn").toString());
+ 		
+ 		List<String> reverveDays = new ArrayList<>();
+ 				  
+ 		// 반복문을 통해 list 안의 i번째 map 데이터를 가져와
+ 		// 체크인 날짜로부터 체크아웃 날짜 사이의 (예약 불가능한) 모든 예약 날짜를 하나의 list에 저장
+ 		for(int i=0; i<map.size(); i++) {
+ 		  String accomCheckIn = map.get(i).get("accomCheckIn").toString();
+ 		  String accomCheckOut = map.get(i).get("accomCheckOut").toString();
+ 		  
+ 	      int checkInYear = Integer.parseInt(accomCheckIn.substring(0,4));
+ 	      int checkInMonth= Integer.parseInt(accomCheckIn.substring(5,7));
+ 	      int checkInDate = Integer.parseInt(accomCheckIn.substring(8,10));
+
+ 	      // 체크아웃 날짜를 '-' 없는 int 타입으로 가공하기 위한 코드
+ 	      String checkOutYear = accomCheckOut.substring(0,4);
+ 	      String checkOutMonth= accomCheckOut.substring(5,7);
+ 	      String checkOutDate = accomCheckOut.substring(8,10);
+ 	      
+ 	      String checkOut = checkOutYear + checkOutMonth + checkOutDate;
+
+ 	      int endDt = Integer.parseInt(checkOut);
+ 	 
+ 	      Calendar cal = Calendar.getInstance();
+ 	         
+ 	      // Calendar의 Month는 0부터 시작하므로 -1
+ 	      cal.set(checkInYear, checkInMonth-1, checkInDate);
+ 	        
+ 	      while(true) {
+ 	          log.debug("현재 날짜 출력 "+getDateByString(cal.getTime()));
+ 	             
+ 	          // 체크인 날짜로부터 하루씩 증가
+ 	          cal.add(Calendar.DATE, 1); 
+
+ 	          // 반환하기 위한 list에 모든 예약 날짜 저장
+ 	          reverveDays.add(getDateByString(cal.getTime()));
+ 	          
+ 	          // 현재 날짜가 체크아웃 날짜보다 크면 종료 
+ 	           if(getDateByInteger(cal.getTime()) > endDt) break;
+ 	      }
+ 		}
+ 		return reverveDays;
+ 	}
+     
+     // [사용자] 체험 예약
+   	public void addActivityPayment(ActivityPayment activityPayment) {
+   		// 날짜 형식 가공
+//   		String checkIn = accomPayment.getAccomCheckIn();
+//   		checkIn = checkIn + " 00:00:00";
+//   		String checkOut = accomPayment.getAccomCheckOut();
+//   		checkOut = checkOut + " 00:00:00";
+//   		
+//   		accomPayment.setAccomCheckIn(checkIn);
+//   		accomPayment.setAccomCheckOut(checkOut);
+//   		
+//   		log.debug("[debug] ProductService.addAccomPayment checkIn : " );
+   		
+   		productMapper.insertActivityPayment(activityPayment);
+   	}
 
  }
