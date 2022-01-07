@@ -7,25 +7,26 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gdu.voyage.mapper.ReportMapper;
+import com.gdu.voyage.mapper.AccomReportMapper;
 import com.gdu.voyage.vo.Qna;
-import com.gdu.voyage.vo.Report;
+import com.gdu.voyage.vo.AccomReport;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class ReportService {
-	@Autowired ReportMapper reportMapper;
+public class AccomReportService {
+	@Autowired AccomReportMapper reportMapper;
 	
 	// [member] 신고 작성
-	public int addReport(Report report, int idenNo, String table, String memberId) {
+	public int addReport(AccomReport report, int accomRoomNo, String memberId) {
+		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] ReportService_addReport_idenNo debug" + accomRoomNo);
+		
+		report.setAccomRoomNo(accomRoomNo);
 		report.setMemberId(memberId);
-		report.setIdenNo(idenNo);
-		report.setTable(table);
 		// 디버깅 코드
-		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] ReportService_report debug" + report.toString());
-		reportMapper.addReport(report);
+		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] ReportService_addReport_report debug" + report.toString());
+		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] ReportService_addReport_reportMapper.addReport() debug" + reportMapper.addReport(report));
 		return reportMapper.addReport(report);
 	}
 	
@@ -40,7 +41,7 @@ public class ReportService {
 		// 검색어
 		paramMap.put("searchWord", searchWord);
 		
-		List<Report> reportList = reportMapper.reportList(paramMap);
+		List<AccomReport> reportList = reportMapper.selectReportAll(paramMap);
 		// reportList 디버깅 코드
 		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] ReportService_getReportList_reportList debug" + reportList.toString());
 		// Mapper로부터 호출한 결과값 가공
@@ -63,14 +64,5 @@ public class ReportService {
 		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] ReportService_getReportList_returnMap debug" + returnMap);		
 				
 		return returnMap;
-	}
-	// [admin] 신고 내용 상세
-	public Report getReportOne(int reportNo) {
-		Report report = new Report();
-		report = reportMapper.selectReportOne(reportNo);
-		// 디버깅 코드
-		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] ReportService_getReportOne_report debug" + report.toString());
-		
-		return report;
 	}
 }

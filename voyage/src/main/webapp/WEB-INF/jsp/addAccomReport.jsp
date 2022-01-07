@@ -90,17 +90,11 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                 	<div class="form-group">
-                                		<input class="form-controle error" hidden="hidden" name="memberId" id="memberId" type="text" value="${report.memberId}" placeholder="아이디를 입력해주세요">
+                                		<input class="form-controle error" hidden="hidden" name="memberId" id="memberId" type="text" value="${loginMember.getMemberId()}" placeholder="아이디를 입력해주세요">
                                 	</div>
                                     <div class="form-group">
-                                    	<!-- 
-                                    		원본 : <input class="form-control error" name="name" id="name" type="text"  placeholder="Your Name">
-                                    	 -->
-                                    	 <input class="form-control error" hidden="hidden" name="idenNo" id="idenNo" type="text" value="${report.idenNo}" readonly="readonly">
+                                    	<input class="form-control error" name="accomRoomNo" id="accomRoomNo" type="text" value="${param.accomRoomNo}" readonly="readonly">
                                     </div>
-                                    <div class="form-group">
-	                                    <input class="form-control error" hidden="hidden" name="table" id="table" type="text" value="${report.table}" readonly="readonly">
-  									</div>
                                 	<table class="form-group">
                                 		<tr>
                                 			<td>
