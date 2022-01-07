@@ -261,7 +261,7 @@
                                     <div class="col-xl-12">
                                         <div class="single-wrap d-flex justify-content-center">
                                             <c:choose>
-			                                    	<c:when test="param.searchWord != null || param.searchAddress != null || param.searchPrice != null">
+			                                    	<c:when test="${param.searchWord != null || param.searchAddress != null || param.searchPrice != null}">
 			                                    		<c:if test="${totalCount > 0}">
 															<div class="clear">
 									                           <ul class="nav justify-content-center">

@@ -87,17 +87,18 @@ public class ProductService {
         List<AccomBuilding> accomBuildingList = new ArrayList<>();
         
         param.put("beginRow", beginRow);
-        param.put("count", null);
 
         accomBuildingList = productMapper.selectAccomBuildingListBySearch(param);
 
         Map<String, Object> returnMap = new HashMap<>();
-        
-        param.replace("count", 1);
-        
         int lastPage = 0;
-        AccomBuilding accomBuilding = productMapper.selectAccomBuildingListBySearch(param).get(0);
-        int totalCount = accomBuilding.getCnt();
+        
+        Integer totalCount = productMapper.selectAccomBuildingListBySearchCount(param);
+        
+        if(totalCount == null) {
+        	returnMap.put("totalCount", totalCount);
+        	return returnMap;
+          }
         
  
         log.debug("[debug] ProductService.getAccomBuildingList accomBuildingList : " + accomBuildingList);
@@ -191,18 +192,19 @@ public class ProductService {
 		
 		int ROW_PER_PAGE=((int)param.get("ROW_PER_PAGE"));
         int beginRow = (((int)param.get("page"))-1) * ROW_PER_PAGE;
-		
+        param.put("beginRow", beginRow);
+        
 		List<Activity> activityList = productMapper.selectActivityListBySearch(param);
-		
-		param.put("beginRow", beginRow);
-        param.put("count", null);
         
         Map<String, Object> returnMap = new HashMap<>();
-        param.replace("count", 1);
         
         int lastPage = 0;
-        Activity activity = productMapper.selectActivityListBySearch(param).get(0);
-        int totalCount = activity.getCnt();
+        Integer totalCount = productMapper.selectActivityListBySearchCount(param);
+        
+        if(totalCount == null) {
+        	returnMap.put("totalCount", totalCount);
+        	return returnMap;
+          }
         
         
         lastPage = totalCount / ROW_PER_PAGE;

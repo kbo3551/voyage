@@ -113,13 +113,26 @@
 	                                </div> 
 	                                <!-- Facilities -->
 	                                <div class="small-section-tittle2 pt-80">
-	                                    <h4>Facilities</h4>
+	                                    <h4>Best Facilities</h4>
 	                                </div>
 	                                <div class="select-Categories pt-10 pb-30" style="width: 50%; float: left;">
 	                                	<c:forEach items="${facilityByBest}" var="af" varStatus="status">
 	                                		<label class="container">${af.accomBuildingFacilityName }<span style="font-size: 0.8em; color: #03B92B; padding-left: 5%;">${af.accomBuildingFacilityBest }</span>
-		                                        <input type="checkbox" name="searchFacilityList" value="${af.accomBuildingFacilityName }">
+		                                        <input type="checkbox" name="searchFacilityList" value="${af.accomBuildingFacilityName }" onclick="doOpenCheck(this);">
 		                                        <span class="checkmark"></span>
+		                                        
+		                                        
+		                                        <script type="text/javascript">
+		                                        
+		                                        function doOpenCheck(chk){
+		                                            var obj = document.getElementsByName("searchFacilityList");
+		                                            for(var i=0; i<obj.length; i++){
+		                                                if(obj[i] != chk){
+		                                                    obj[i].checked = false;
+		                                                }
+		                                            }
+		                                        }
+		                                        </script>
 		                                    </label>
 		                                    <c:if test="${status.count == 3 }">
 			                                    </div>
@@ -241,12 +254,12 @@
                                         <div class="single-wrap d-flex justify-content-center">
                                             <nav aria-label="Page navigation example">
                                             	<c:choose>
-			                                    	<c:when test="param.searchWord != null || param.searchAddress != null || param.searchPrice != null">
+			                                    	<c:when test="${param.searchWord != null || param.searchAddress != null || param.searchPrice != null}">
 			                                    		<c:if test="${totalCount > 0}">
 															<div class="clear">
 									                           <ul class="nav justify-content-center">
 									                              <c:if test="${beginRow > (ROW_PER_PAGE * 10)}">
-									                                 <li><a href="${pageContext.request.contextPath}/getAccomProductList?page=${pageNo-1}&searchWord=${param.searchWord}&searchAddress=${param.searchAddress}&searchPrice=${param.searchPrice}">&lt;</a></li>
+									                                 <li><a href="${pageContext.request.contextPath}/getAccomProductList?page=${pageNo-1}&searchWord=${param.searchWord}&searchFacilityList=${param.searchFacilityList}&searchAddress=${param.searchAddress}&searchPrice=${param.searchPrice}">&lt;</a></li>
 									                              </c:if>
 									                              <c:set var="doneLoop" value="false"></c:set>
 									                              <c:forEach var="f" begin="${pageNo}" end="${pageNo + 9}">
@@ -256,7 +269,7 @@
 									                                          <li class="active"><span class="nav-link">${f}</span></li>
 									                                       </c:when>
 									                                       <c:otherwise>
-									                                          <li><a style="color: blue;" class="nav-link active" href="${pageContext.request.contextPath}/getAccomProductList?page=${page+1}&searchWord=${param.searchWord}&searchAddress=${param.searchAddress}&searchPrice=${param.searchPrice}">${f}</a></li>
+									                                          <li><a style="color: blue;" class="nav-link active" href="${pageContext.request.contextPath}/getAccomProductList?page=${page+1}&searchWord=${param.searchWord}&searchFacilityList=${param.searchFacilityList}&searchAddress=${param.searchAddress}&searchPrice=${param.searchPrice}">${f}</a></li>
 									                                       </c:otherwise>
 									                                    </c:choose>
 									
@@ -266,7 +279,7 @@
 									                                 </c:if>
 									                              </c:forEach>
 									                              <c:if test="${page + 10 <= lastPage}">
-									                                 <li><a class="nav-link active" href="${pageContext.request.contextPath}/getAccomProductList?page=${page+10}&searchWord=${param.searchWord}&searchAddress=${param.searchAddress}&searchPrice=${param.searchPrice}">&gt;</a></li>
+									                                 <li><a class="nav-link active" href="${pageContext.request.contextPath}/getAccomProductList?page=${page+10}&searchWord=${param.searchWord}&searchFacilityList=${param.searchFacilityList}&searchAddress=${param.searchAddress}&searchPrice=${param.searchPrice}">&gt;</a></li>
 									                              </c:if>
 									                           </ul>
 									                        </div>

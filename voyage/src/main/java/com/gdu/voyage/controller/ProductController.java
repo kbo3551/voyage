@@ -187,7 +187,6 @@ public class ProductController {
                                 @RequestParam(defaultValue = "1") int page,
                                 @RequestParam @Nullable String searchWord, 
                                 @RequestParam @Nullable String searchAddress,
-                                @RequestParam @Nullable Integer searchReviewScore,
                                 @RequestParam @Nullable String searchPrice
                                 ) {
         log.debug("[debug] ProductController.getActivityProduct 실행");
@@ -210,14 +209,12 @@ public class ProductController {
         }
         log.debug("[debug] ProductController.getAccomBuildingList searchWord : " + searchWord);
         log.debug("[debug] ProductController.getAccomBuildingList searchAddress : " + searchAddress);
-        log.debug("[debug] ProductController.getAccomBuildingList searchReviewScore : " + searchReviewScore);
         log.debug("[debug] ProductController.getAccomBuildingList minPrice : " + minPrice);
         log.debug("[debug] ProductController.getAccomBuildingList maxPrice : " + maxPrice);
 
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("searchWord", searchWord);
         paramMap.put("searchAddress", searchAddress);
-        paramMap.put("searchReviewScore", searchReviewScore);
         paramMap.put("minPrice",  minPrice);
         paramMap.put("maxPrice",  maxPrice);
         paramMap.put("page",  page);
@@ -226,7 +223,7 @@ public class ProductController {
         Map<String, Object> activityMap = new HashMap<>();
       
         // 검색 조회와 일반 조회 분기
-        if(searchWord != null || searchAddress != null ||  searchReviewScore != null || searchPrice != null) {
+        if(searchWord != null || searchAddress != null || searchPrice != null) {
            // [사용자] 체험 목록 검색 조회
         	activityMap = productService.getActivityListBySearch(paramMap);
 //		               log.debug("[debug] accomBuilding.get(0).getAccomBuildingName() "+accomBuilding.get(0).getAccomBuildingName());

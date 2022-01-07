@@ -272,16 +272,17 @@
                GROUP BY accom_building_name      
       ORDER BY
          update_date DESC
-	 <if test="count != null">
             LIMIT
                 #{beginRow}, #{ROW_PER_PAGE}
-        </if>
    </select>
    
    <!-- 숙소-건물 목록 검색 조회 -->
    <select id="selectAccomBuildingListBySearchCount" parameterType="Map" resultType="int">
       SELECT 
                     count(*)
+      FROM(
+      SELECT
+      	accom_building_name
       FROM 
          (SELECT * FROM accom_building) ab,
          (SELECT accom_building_no, GROUP_CONCAT(accom_address_zip) accom_address_zip FROM accom_address GROUP BY accom_building_no) aba,
@@ -326,13 +327,7 @@
             AND
             abr.accom_room_price <= #{maxPrice}
             ]]>
-               GROUP BY accom_building_name      
-      ORDER BY
-         update_date DESC
-	 <if test="count != null">
-            LIMIT
-                #{beginRow}, #{ROW_PER_PAGE}
-        </if>
+               GROUP BY accom_building_name) a
    </select>
    
     <!-- 숙소-건물 상세 조회 -->
@@ -488,10 +483,8 @@
                GROUP BY activity_name 
       ORDER BY
          update_date DESC
-     <if test="count != null">
             LIMIT
                 #{beginRow}, #{ROW_PER_PAGE}
-        </if>
    </select>
    
    <!-- 수정수정 -->
@@ -499,6 +492,9 @@
    <select id="selectActivityListBySearchCount" parameterType="Map" resultType="int">
       SELECT 
               count(*)
+       FROM(
+      SELECT
+      	activity_name
       FROM 
          (SELECT * FROM activity) ac,
          (SELECT activity_no, GROUP_CONCAT(activity_address_zip) activity_address_zip FROM activity_address GROUP BY activity_no) aca,
@@ -533,13 +529,7 @@
             AND
             ac.activity_price <= #{maxPrice}
             ]]>
-               GROUP BY activity_name 
-      ORDER BY
-         update_date DESC
-     <if test="count != null">
-            LIMIT
-                #{beginRow}, #{ROW_PER_PAGE}
-        </if>
+               GROUP BY activity_name ) A
    </select>
 	
 	<!-- 체험 상세 조회 -->
