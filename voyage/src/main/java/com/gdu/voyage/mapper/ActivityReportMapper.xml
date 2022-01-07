@@ -29,7 +29,7 @@
 	<select id="selectReportAll" resultMap="resultReport" parameterType="Map">
 		SELECT
 			activity_report_no,
-			accom_room_no,
+			activity_no,
 			member_id,
 			report_category,
 			create_date
