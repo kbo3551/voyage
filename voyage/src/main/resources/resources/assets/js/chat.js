@@ -52,10 +52,10 @@ function chatRoomListF(){
          success:function(result){
             $('#chatList').empty(); // 먼저 출력된 목록이 있으면 지운다
             $.each(result, function(index, item){
-               console.log('새로운 메세지가 있습니다');
                for(i=0;i<item.length;i++) {
 					if(item[i].chatRead == 1) {
-	                  $('#chatBtn').css('color','red');
+						console.log('새로운 메세지가 있습니다');
+	                  	$('#chatBtn').css('color','red');
 	                 }
                };
             });
