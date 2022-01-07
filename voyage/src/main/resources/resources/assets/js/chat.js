@@ -43,6 +43,7 @@ function chatRoomListF(){
  // [사용자] 나의 채팅 목록 조회
  $(document).ready(function(){
 	
+	//var pathname = $(location).attr('pathname');
 	// 페이지 로딩시 새로운 채팅이 있을 시에는 채팅 글씨 색 red로 변경
 	$.ajax({
          url:'/voyage/chatRoomList',
