@@ -36,7 +36,7 @@ public class AccomReportController {
 	private final int ROW_PER_PAGE = 10;
 	
 	// [Admin] 신고 목록 
-	@GetMapping("/admin/reportList")
+	@GetMapping("/admin/accomReportList")
 	public String reportList(Model model,
 			@RequestParam(defaultValue="1") int currentPage,
 			@RequestParam @Nullable String searchWord) {
@@ -54,7 +54,7 @@ public class AccomReportController {
 		model.addAttribute("lastPage", map.get("lastPage"));
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("pageNo", pageNo);
-		return "/admin/AccomReportList";
+		return "/admin/accomReportList";
 	}
 
 	// [Member] 신고 작성 

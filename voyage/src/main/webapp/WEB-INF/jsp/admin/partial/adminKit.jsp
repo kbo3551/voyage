@@ -13,7 +13,7 @@
              <span class="align-middle">관리자 페이지</span>
            </a>
    
-         <ul class="sidebar-nav">
+         <ul class="sidebar-nav nav-pills">
             <li class="sidebar-header">
                Pages
             </li>
@@ -109,9 +109,31 @@
             <li class="sidebar-item">
                <a class="sidebar-link" href="${pageContext.request.contextPath}/admin/couponList">
                       <i class="align-middle" data-feather="book"></i> <span class="align-middle">쿠폰 관리</span>
-                    </a>
+               </a>
             </li>
-   
+            <li class="sidebar-header">
+               Report
+            </li>
+            <li class="sidebar-item">
+               <a class="sidebar-link" href="${pageContext.request.contextPath}/admin/accomReportList">
+               		<i class="align-middle" data-feather="trash-2"></i> <span class="align-middle">객실 신고</span>
+               </a>
+            </li>
+            <li class="sidebar-item">
+               <a class="sidebar-link" href="${pageContext.request.contextPath}/admin/activityReportList">
+               		<i class="align-middle" data-feather="trash-2"></i> <span class="align-middle">체험 신고</span>
+               </a>
+            </li>
+            <li class="sidebar-item">
+               <a class="sidebar-link" href="${pageContext.request.contextPath}/admin/accomReviewReportList">
+               		<i class="align-middle" data-feather="trash-2"></i> <span class="align-middle">객실 리뷰 신고</span>
+               </a>
+            </li>
+            <li class="sidebar-item">
+               <a class="sidebar-link" href="${pageContext.request.contextPath}/admin/activityReviewReportList">
+               		<i class="align-middle" data-feather="trash-2"></i> <span class="align-middle">체험 리뷰 신고</span>
+               </a>
+            </li>
             <li class="sidebar-header">
                Plugins & Addons
             </li>
