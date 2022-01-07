@@ -114,7 +114,7 @@
 	                                <!-- Facilities -->
 	                                <div class="small-section-tittle2 pt-80">
 	                                    <h4>Best Facilities</h4>
-	                                </div>
+	                                </div> 
 	                                <div class="select-Categories pt-10 pb-30" style="width: 50%; float: left;">
 	                                	<c:forEach items="${facilityByBest}" var="af" varStatus="status">
 	                                		<label class="container">${af.accomBuildingFacilityName }<span style="font-size: 0.8em; color: #03B92B; padding-left: 5%;">${af.accomBuildingFacilityBest }</span>
