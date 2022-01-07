@@ -107,11 +107,12 @@
                                     	<div class="col-lg-6 ">
                                         	<div class="single-listing mb-30" id = "reviewArrayList">
 	                                        	 <p>${review.activityReviewNo}번글</p>
+		                                   		<div id="di" class="card text-white bg-info mb-3">
 		                                   		<div class="list-caption">
 		                                        	<span>별점 : ${review.activityReviewStar} </span>
 		                                        	<div>조회수 : ${review.activityReviewViewCnt}</div>
 		                                        	<h3><a href="${pageContext.request.contextPath}/activityReviewOne?activityReviewNo=${review.activityReviewNo}">${review.activityReviewTitle}</a></h3>
-		                                           
+		                                           </div>
 		                                          </div>
 		                                        </div>
 		                                      </div>
