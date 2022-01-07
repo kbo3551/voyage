@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gdu.voyage.mapper.AccomReportMapper">
+<mapper namespace="com.gdu.voyage.mapper.ActivityReportMapper">
 	<!-- resultMap Here -->
 	<!-- 신고 전체 목록 -->
-	<resultMap type="com.gdu.voyage.vo.AccomReport" id="resultReport">
-		<id column="accom_report_no" property="accomReportNo"/>
-		<result column="accom_room_no" property="accomRoomNo"/>
+	<resultMap type="com.gdu.voyage.vo.ActivityReport" id="resultReport">
+		<id column="activity_report_no" property="activityReportNo"/>
+		<result column="activity_no" property="activityNo"/>
 		<result column="member_id" property="memberId"/>
 		<result column="report_category" property="reportCategory"/>
 		<result column="create_date" property="createDate"/>
 	</resultMap>
 	<!-- resultMap End -->
 	<!-- 신고 작성 -->
-	<insert id="addAccomReport" parameterType="com.gdu.voyage.vo.AccomReport">
-		INSERT INTO accom_report(
-			accom_room_no,
+	<insert id="addActivityReport" parameterType="com.gdu.voyage.vo.ActivityReport">
+		INSERT INTO activity_report(
+			activity_no,
 			member_id,
 			report_category,
 			create_date
 		) VALUES (
-			#{accomRoomNo},
+			#{activityNo},
 			#{memberId},
 			#{reportCategory},
 			NOW()
@@ -28,13 +28,13 @@
 	<!-- 신고 전체 목록 -->
 	<select id="selectReportAll" resultMap="resultReport" parameterType="Map">
 		SELECT
-			accom_report_no,
+			activity_report_no,
 			accom_room_no,
 			member_id,
 			report_category,
 			create_date
 		FROM
-			accom_report
+			activity_report
 		<where>
 			<if test="searchWord != null">
 				report_category LIKE CONCAT ('%',#{searchWord},'%')
@@ -47,7 +47,7 @@
 	</select>
 	<!-- 총 신고 수 -->
 	<select id="reportTotalCount" parameterType="String" resultType="int">
-		SELECT COUNT(*) FROM accom_report
+		SELECT COUNT(*) FROM activity_report
 		<where>
 			<if test="searchWord != null">
 				report_category LIKE CONCAT ('%',#{searchWord},'%')

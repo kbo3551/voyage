@@ -1,33 +1,33 @@
 package com.gdu.voyage.service;
 
 import java.util.HashMap;
-
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gdu.voyage.mapper.AccomReportMapper;
+import com.gdu.voyage.mapper.ActivityReportMapper;
 import com.gdu.voyage.vo.AccomReport;
+import com.gdu.voyage.vo.ActivityReport;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class AccomReportService {
-	@Autowired AccomReportMapper accomReportMapper;
+public class ActivityReportService {
+	@Autowired ActivityReportMapper activityReportMapper;
 	
 	// [member] 신고 작성
-	public int addReport(AccomReport report, int accomRoomNo, String memberId) {
-		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] ReportService_addReport_idenNo debug" + accomRoomNo);
+	public int addActivityReport(ActivityReport report, int activityNo, String memberId) {
+		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] ReportService_addReport_idenNo debug" + activityNo);
 		
-		report.setAccomRoomNo(accomRoomNo);
+		report.setActivityNo(activityNo);
 		report.setMemberId(memberId);
 		// 디버깅 코드
 		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] ReportService_addReport_report debug" + report.toString());
-		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] ReportService_addReport_reportMapper.addReport() debug" + accomReportMapper.addAccomReport(report));
-		return accomReportMapper.addAccomReport(report);
+		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] ReportService_addReport_reportMapper.addReport() debug" + activityReportMapper.addActivityReport(report));
+		return activityReportMapper.addActivityReport(report);
 	}
 	
 	// [admin] 신고 목록
@@ -41,7 +41,7 @@ public class AccomReportService {
 		// 검색어
 		paramMap.put("searchWord", searchWord);
 		
-		List<AccomReport> reportList = accomReportMapper.selectReportAll(paramMap);
+		List<ActivityReport> reportList = activityReportMapper.selectReportAll(paramMap);
 		// reportList 디버깅 코드
 		log.debug("☆☆☆☆☆☆☆☆☆☆[다원] ReportService_getReportList_reportList debug" + reportList.toString());
 		// Mapper로부터 호출한 결과값 가공
@@ -49,7 +49,7 @@ public class AccomReportService {
 		// 마지막 페이지를 나타내는 변수 lastPage값 0으로 초기화
 		int lastPage = 0;
 		// 전체 신고 수
-		int totalCount = accomReportMapper.reportTotalCount(searchWord);
+		int totalCount = activityReportMapper.reportTotalCount(searchWord);
 		// lastPage 값 셋팅
 		lastPage = (totalCount / rowPerPage);
 		if(totalCount % rowPerPage != 0) {

@@ -70,7 +70,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center pt-50">
-                            <h2>객실 신고 작성</h2>
+                            <h2>체험 신고 작성</h2>
                         </div>
                     </div>
                 </div>
@@ -86,14 +86,14 @@
                     	<!-- 원본 : Massage -->
                         <h3 class="mb-40">Report</h3>
                         <!-- Form -->
-                        <form method="post" class="form-contact contact_form mb-80" action="${pageContext.request.contextPath}/addAccomReport" id="accomReportForm">
+                        <form method="post" class="form-contact contact_form mb-80" action="${pageContext.request.contextPath}/addActivityReport" id="activityReportForm">
                             <div class="row">
                                 <div class="col-sm-6">
                                 	<div class="form-group">
                                 		<input class="form-controle error" hidden="hidden" name="memberId" id="memberId" type="text" value="${loginMember.getMemberId()}" placeholder="아이디를 입력해주세요">
                                 	</div>
                                     <div class="form-group">
-                                    	<input class="form-control error" name="accomRoomNo" id="accomRoomNo" type="text" value="${param.accomRoomNo}" readonly="readonly">
+                                    	<input class="form-control error" name="activityNo" id="activityNo" type="text" value="${param.activityNo}" readonly="readonly">
                                     </div>
                                 	<table class="form-group">
                                 		<tr>
@@ -109,7 +109,7 @@
                                 </div>
                             </div>
                             <div class="form-group mt-3">
-                                <button type="submit" id="sendAccReportBtn" class="button button-contactForm boxed-btn">Send</button>
+                                <button type="submit" id="sendActReportBtn" class="button button-contactForm boxed-btn">Send</button>
                             </div>
                         </form>
                     </div>
