@@ -15,7 +15,11 @@
 		$('.hashtag_body').css('top','-300000%');
 		$('#search__box').css('top','-300000%');
     });
-
+    
+    // 모바일 화면에서 해시태그 창 사라짐
+    if($(window).width() <= 992) {
+    	$('.hashtag_body').empty();
+    }
 
 	       var donut = $('#hashtagSearchParam').val();
 	       console.log("donut : "+donut);
