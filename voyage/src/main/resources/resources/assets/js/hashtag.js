@@ -17,10 +17,21 @@
     });
     
     // 모바일 화면에서 해시태그 창 사라짐
-    if($(window).width() <= 992) {
-    	$('.hashtag_body').empty();
-    }
-
+    $(document).ready(function(){
+		windowSize();
+	});
+    
+	$(window).resize(function () {
+		//console.log("$(window).width() : "+$(window).width());
+		windowSize();
+    });
+    
+    function windowSize() {
+		if($(window).width() <= 992) {
+	    	$('.hashtag_body').empty();
+	    }
+	}
+    
 	       var donut = $('#hashtagSearchParam').val();
 	       console.log("donut : "+donut);
 
