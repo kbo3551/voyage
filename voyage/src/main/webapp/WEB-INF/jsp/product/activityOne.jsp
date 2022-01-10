@@ -30,16 +30,14 @@
    
    <!-- 눈누 - 한산스네오 레귤러 폰트 -->
 	<style type="text/css">
-	<style type="text/css">
 	
 	
 			  
   .slider {
-    width: 600px;
+    width: 90%;
     text-align: center;
     border-radius: 10px;
     overflow: hidden;
-
   }
   
   .slides {
@@ -66,7 +64,7 @@
   .slides > div {
     scroll-snap-align: start;
     flex-shrink: 0;
-    width: 700px;
+    width: 100%;
     height: 300px;
     margin-right: 50px;
     border-radius: 10px;
