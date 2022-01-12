@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gdu.voyage.service.AdminService;
+import com.gdu.voyage.service.AlarmService;
 import com.gdu.voyage.vo.Admin;
 import com.gdu.voyage.vo.AdminAddress;
 import com.gdu.voyage.vo.Host;
@@ -29,6 +30,8 @@ import lombok.extern.slf4j.Slf4j;
 public class AdminController {
 	@Autowired
 	AdminService adminService;
+	@Autowired
+	AlarmService alarmService;
 	private final int ROW_PER_PAGE = 10;
 
 	// 어드민 정보수정
@@ -226,6 +229,11 @@ public class AdminController {
 		if (!(hostAsk.getAskState().equals("승인거부"))) {
 			adminService.insertHost(memberId, adminId);
 			adminService.updateMemberLv(memberId);
+			// 사업자 승인 시 알림 
+			alarmService.modifyHostAlarm(hostAsk);
+		} else {
+			// 사업자 승인거부 시 알림 
+			alarmService.modifyRejectingHostAlarm(hostAsk);
 		}
 		;
 		log.debug("★★★[boryeong]AdminController_hostAsk★★★" + hostAsk.toString());

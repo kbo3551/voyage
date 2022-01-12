@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gdu.voyage.service.AlarmService;
 import com.gdu.voyage.service.CouponService;
 import com.gdu.voyage.vo.Coupon;
 import com.gdu.voyage.vo.CouponMember;
@@ -25,6 +26,8 @@ import lombok.extern.slf4j.Slf4j;
 public class CouponController {
 	@Autowired
 	CouponService couponService;
+	@Autowired
+	AlarmService alarmService;
 	private final int ROW_PER_PAGE = 10;
 	// 회원 쿠폰 발급
 	@PostMapping("/member/addMemberCoupon")
@@ -55,6 +58,10 @@ public class CouponController {
 		couponService.addMemberCoupon(cm);
 		model.addAttribute("msg", "쿠폰이 발급 되었습니다.");
 	    model.addAttribute("url", "redirect:/member/coupon");
+	    
+	    // 쿠폰 발급 알림 생성
+	 	alarmService.addCouponAlarm(cm);
+	 		
 		return "/alert";
 	}
 	// 회원이 발급받은 쿠폰 list, 발급할 쿠폰list
