@@ -2,13 +2,20 @@
  * chat
  */
 
-// 2초 간격으로 메시지를 보여줌
-//var timerId = setInterval(() => alert('째깍'), 2000);
-// 5초 후에 정지
-//setTimeout(() => { clearInterval(timerId); alert('정지'); }, 5000);
 
 // ajax를 하나의 함수로 선언 : chatRoomListF
 function chatRoomListF(){
+	
+	// 컨텍스트와 필터의 경로설정을 위한 url 불러오기 
+	console.log($(location).attr('pathname'));
+	var chatUrlAll = $(location).attr('pathname').split('/');
+	console.log(chatUrlAll);
+	var chatUrl = '';
+	for(e=0;e<chatUrlAll.length-1;e++){
+		chatUrl += chatUrlAll[e]+'/';
+	}
+	console.log(chatUrl);
+	
 	$.ajax({
          url:'/voyage/chatRoomList',
          type:'GET',
