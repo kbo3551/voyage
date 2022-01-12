@@ -8,4 +8,7 @@ public class Alarm {
 	private String memberId;
 	private String alarmContent;
 	private int alarmRead;
+	private String alarmLink;
+	private String createDate;
+	private Member member;
 }
