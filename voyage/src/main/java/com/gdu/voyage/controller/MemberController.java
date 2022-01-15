@@ -1,5 +1,6 @@
 package com.gdu.voyage.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.gdu.voyage.service.AccomBuildingService;
 import com.gdu.voyage.service.ActivityService;
 import com.gdu.voyage.service.LoginService;
+import com.gdu.voyage.service.MailSendService;
 import com.gdu.voyage.service.MemberService;
 import com.gdu.voyage.service.PaymentService;
 import com.gdu.voyage.vo.AccomBuildingInterest;
@@ -43,6 +46,7 @@ public class MemberController {
 	@Autowired PaymentService paymentService;
 	@Autowired AccomBuildingService accomBuildingService;
 	@Autowired ActivityService activityService;
+	@Autowired MailSendService mss;
 	
 	// 관심상품 제거
 	@GetMapping("member/deleteMyInterest")
@@ -407,36 +411,24 @@ public class MemberController {
 	
 	// 회원가입
 	@PostMapping("/addMember")
-	public String postAddMember(HttpServletRequest request, RedirectAttributes redirect) {
+	public String postAddMember(Model model, HttpServletRequest request, RedirectAttributes redirect,
+			@ModelAttribute Member member, @ModelAttribute MemberAddress memberAddress) {
 		log.trace("MemberController() 실행");
-	    String memberId = request.getParameter("id");
-	    String memberPw = request.getParameter("password");
-	    String memberFirstName = request.getParameter("firstname");
-	    String memberLastName = request.getParameter("lastname");
-	    String memberNickname = request.getParameter("nickname");
-	    String memberPhone = request.getParameter("phone");
-	    String memberEmail = request.getParameter("email");
-	    String memberReg = request.getParameter("socialsecuritynumber");
-	    int memberAddressPostalCode = Integer.parseInt(request.getParameter("postalCode"));
-	    String memberAddressZip = request.getParameter("roadAddress");
-	    String memberAddressDetail = request.getParameter("detailAddress");
-	    String memberDescription = request.getParameter("description");
 	    
-	    memberReg = memberReg.substring(0, 6)+"-"+memberReg.substring(6, 13);
+		String memberReg = member.getMemberReg().substring(0, 6)+"-"+member.getMemberReg().substring(6, 13);
 	    
 	    // 맴버 객체. 포함되지 않은 4개의 값은 Mapper에 존재
 	    Member m = new Member();
-	    m.setMemberId(memberId);
-	    m.setMemberPw(memberPw);
-	    m.setMemberFirstName(memberFirstName);
-	    m.setMemberLastName(memberLastName);
-	    m.setMemberNickname(memberNickname);
-	    m.setMemberPhone(memberPhone);
-	    m.setMemberEmail(memberEmail);
+	    m.setMemberId(member.getMemberId());
+	    m.setMemberPw(member.getMemberPw());
+	    m.setMemberFirstName(member.getMemberFirstName());
+	    m.setMemberLastName(member.getMemberLastName());
+	    m.setMemberNickname(member.getMemberNickname());
+	    m.setMemberPhone(member.getMemberPhone());
+	    m.setMemberEmail(member.getMemberEmail());
 	    m.setMemberReg(memberReg);
-	    m.setMemberDescription(memberDescription);
+	    m.setMemberDescription(member.getMemberDescription());
 	    m.setMemberLevel(0);
-	    m.setMemberActive("활동");
 	    
 	    // 디버그
 	    log.trace("★controller★"+m.toString());
@@ -459,10 +451,10 @@ public class MemberController {
 	    
 	    // 주소 객체
 	    MemberAddress addr = new MemberAddress();
-	    addr.setMemberId(memberId);
-	    addr.setMemberAddressPostalCode(memberAddressPostalCode);
-	    addr.setMemberAddressZip(memberAddressZip);
-        addr.setMemberAddressDetail(memberAddressDetail);
+	    addr.setMemberId(member.getMemberId());
+	    addr.setMemberAddressPostalCode(memberAddress.getMemberAddressPostalCode());
+	    addr.setMemberAddressZip(memberAddress.getMemberAddressZip());
+        addr.setMemberAddressDetail(memberAddress.getMemberAddressDetail());
         
         // 디버그
         log.trace("★controller★"+addr.toString());
@@ -471,10 +463,36 @@ public class MemberController {
 	    memberService.addMemberAddress(addr);
 	    
 	    // create_id 테이블에 아이디 저장
-	    memberService.addMemberCreateId(memberId);
+	    memberService.addMemberCreateId(member.getMemberId());
 	    
-	    return "redirect:/login";
+	    String authKey = mss.sendAuthMail(member.getMemberEmail(), member.getMemberId());
+	    member.setAuthKey(authKey);
+
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("memberEmail", member.getMemberEmail());
+        map.put("authKey", member.getAuthKey());
+        map.put("memberId", member.getMemberId());
+        
+        //DB에 authKey 업데이트
+        memberService.updateAuthKey(map);
+
+	    
+        model.addAttribute("msg", "입력하신 이메일로 메일이 전송되었습니다.\n메일인증 후에 로그인이 가능합니다.");
+	    model.addAttribute("url", "redirect:/login");
+	    return "/alert";
 	 }
+	
+	// 이메일 인증
+	@GetMapping("/signUpConfirm")
+	 public String signUpConfirm(@RequestParam Map<String, String> map, Model model){
+	    //email, authKey 가 일치할경우 authStatus 업데이트
+	    memberService.updateAuthStatus(map);
+	    
+	    model.addAttribute("msg", "이메일 인증이 완료되었습니다.");
+	    model.addAttribute("url", "redirect:/login");
+	    return "/alert";
+	}
+	
 	// 체험 관심상품 등록
 	@PostMapping("/member/addActivityByInterest")
 	public String postAddActivityByInterest(HttpSession session,HttpServletRequest request,ActivityInterest activityInterest,Model model) {

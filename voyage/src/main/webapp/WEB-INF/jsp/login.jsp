@@ -101,11 +101,11 @@
 		                            <form id="login" action="${contextPath}/login" method="post">
 			                                	<label for="id">User ID</label>
 		                                <div class="form-group">
-			                                    <input type="text" class="form-control" id="id" name="id" placeholder="회원 - 141 / 사업자 - test / 관리자 - admin" onkeypress="enterLogin()">
+			                                    <input type="text" class="form-control" id="id" name="memberId" placeholder="회원 - 141 / 사업자 - test / 관리자 - admin" onkeypress="enterLogin()">
 		                                </div>
 		                                <div class="form-group" style="clear: both;">
 		                                    <label for="password">Password</label>
-		                                    <input type="password" class="form-control" id="password" name="password" value="1234" placeholder="1234" onkeypress="enterLogin()">
+		                                    <input type="password" class="form-control" id="password" name="memberPw" value="1234" placeholder="1234" onkeypress="enterLogin()">
 		                                </div>
 		                                <div class="text-center">
 		                                    <button type="button" class="btn" style="background: rgb(0,172,238);

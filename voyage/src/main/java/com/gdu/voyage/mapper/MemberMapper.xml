@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdu.voyage.mapper.MemberMapper">
+	<!-- 이메일 인증 완료 -->
+	<update id="updateAuthStatus">
+		UPDATE member
+		SET
+			member_active = "활동"
+		WHERE
+			member_id = #{memberId}
+	</update>
+
+	<!-- 이메일 인증 대조용 인증코드 셋팅 -->
+	<update id="updateAuthKey">
+		UPDATE member
+		SET
+			auth_key = #{authKey}
+		WHERE
+			member_id = #{memberId}
+	</update>
+
 	<!-- 휴면 계정 처리. 마지막 로그인 날짜가 지금으로부터 반년 이상인 대상을 휴면 처리 -->
 	<update id="updateDormantMember">
 		UPDATE member
@@ -136,7 +154,7 @@
 				member_reg,
 				member_description,
 				member_level,
-				member_active,
+				auth_key,
 				create_date,
 				update_date,
 				last_login
@@ -152,7 +170,7 @@
 			#{memberReg},
 			#{memberDescription},
 			#{memberLevel},
-			#{memberActive},
+			'mockdata',
 			NOW(),
 			NOW(),
 			NOW()

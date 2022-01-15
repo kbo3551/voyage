@@ -39,6 +39,29 @@
 		<collection property="memberAddress" resultMap="memberAddress" />
 	</resultMap>
 	
+	<!-- 회원 이메일 받아오기 -->
+	<select id="selectMemberEmail" resultType="String">
+		SELECT
+			member_email
+		FROM
+			member
+		WHERE
+			member_id = #{memberId}
+	</select>
+	
+	
+	<!-- 미인증 회원 확인 -->
+	<select id="selectUncertifiedMember" resultType="int">
+		SELECT
+			count(member_id)
+		FROM
+			member
+		WHERE
+			member_id = #{memberId}
+			AND
+			member_active = "미인증"
+	</select>
+	
 	<!-- 정지당한 회원 확인 -->
 	<select id="selectBanMember" resultType="int">
 		SELECT
@@ -91,7 +114,9 @@
 			AND
 			NOT m.member_active = "탈퇴"
 			AND
-			NOT m.member_active = "정지";
+			NOT m.member_active = "정지"
+			AND
+			NOT m.member_active = "미인증";
 	</select>
 	
 	

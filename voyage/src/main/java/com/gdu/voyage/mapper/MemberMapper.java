@@ -1,5 +1,7 @@
 package com.gdu.voyage.mapper;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.gdu.voyage.vo.Member;
@@ -18,4 +20,6 @@ public interface MemberMapper {
 	void insertMemberAddress(MemberAddress mAddress);
 	void insertMember(Member member);
 	void insertCreateId(String memberId);
+	void updateAuthKey(Map<String, String> map);
+	void updateAuthStatus(Map<String, String> map);
 }

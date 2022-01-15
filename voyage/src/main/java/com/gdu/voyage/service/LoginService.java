@@ -43,6 +43,14 @@ public class LoginService {
 		return loginMapper.selectDeleteMember(memberId);
 	}
 	
+	public int selectUncertifiedMember(String memberId) {
+		return loginMapper.selectUncertifiedMember(memberId);
+	}
+	
+	public String selectMemberEmail(String memberId) {
+		return loginMapper.selectMemberEmail(memberId);
+	}
+	
 	public Member login(Member member) {
 		log.trace("☆service☆"+member.toString());
 		Member loginMember = loginMapper.login(member);

@@ -1,5 +1,7 @@
 package com.gdu.voyage.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,15 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MemberService {
 	@Autowired MemberMapper memberMapper;
+	
+	
+	public void updateAuthKey(Map<String, String> map) {
+		memberMapper.updateAuthKey(map);
+	}
+	
+	public void updateAuthStatus(Map<String, String> map) {
+		memberMapper.updateAuthStatus(map);
+	}
 	
  /* 휴면 계정 처리. 마지막 로그인 날짜가 지금으로부터 반년 이상이거나
 	생성날짜가 반년 이상이고 로그인 기록이 없는 대상을 휴면 처리 */

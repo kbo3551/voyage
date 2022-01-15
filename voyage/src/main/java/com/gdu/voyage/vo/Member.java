@@ -18,6 +18,7 @@ public class Member {
 	private String createDate;
 	private String updateDate;
 	private String lastLogin;
+	private String authKey;
 	
 	private MemberAddress memberAddress;
 }

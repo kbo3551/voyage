@@ -13,6 +13,8 @@ public interface LoginMapper {
 	void updateLastLogin(String memberId);
 	int selectBanMember(String memberId);
 	int selectDeleteMember(String memberId);
+	int selectUncertifiedMember(String memberId);
+	String selectMemberEmail(String memberId);
 	// Member 로그인 정보
 	Member login(Member member);
 	// Admin 로그인 정보
