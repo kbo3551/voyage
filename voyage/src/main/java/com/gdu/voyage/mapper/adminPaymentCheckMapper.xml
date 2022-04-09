@@ -4,7 +4,7 @@
 
 	
 	<!-- 이번달 체험 예약인원 -->
-	<select id="selectActivityUsePersonByAdmin" resultType="int">
+	<select id="selectActivityUsePersonByAdmin" resultType="integer">
 		SELECT
 			SUM(activity_use_person)
 		FROM
@@ -18,7 +18,7 @@
 	</select>
 	
 	<!-- 이번달 숙소 예약인원 -->
-	<select id="selectAccomUsePersonByAdmin" resultType="int">
+	<select id="selectAccomUsePersonByAdmin" resultType="integer">
 		SELECT
 			SUM(accom_use_person)
 		FROM
@@ -32,7 +32,7 @@
 	</select>
 	
 	<!-- 이번년도 체험 예약인원 -->
-	<select id="selectActivityUsePersonByAdminYear" resultType="int">
+	<select id="selectActivityUsePersonByAdminYear" resultType="integer">
 		SELECT
 			SUM(activity_use_person)
 		FROM
@@ -46,7 +46,7 @@
 	</select>
 	
 	<!-- 이번년도 숙소 예약인원 -->
-	<select id="selectAccomUsePersonByAdminYear" resultType="int">
+	<select id="selectAccomUsePersonByAdminYear" resultType="integer">
 		SELECT
 			SUM(accom_use_person)
 		FROM
@@ -91,7 +91,7 @@
 	</select>
 	
 	<!-- 체험 총 수익, 연별 수익 -->
-	<select id="selectActivityProfitByAdminYear" resultType="long">
+	<select id="selectActivityProfitByAdminYear" resultType="integer">
 		SELECT
 			IFNULL(SUM(activity_amount),0)
 		FROM
@@ -127,7 +127,7 @@
 			DATE_FORMAT(LAST_DAY(NOW() - INTERVAL #{countMonth} MONTH), '%Y-%m') 		
 	</select>
 	<!-- 체험 총 수익, 월별 수익 -->
-	<select id="selectActivityProfitByAdminMonthYear" resultType="int">
+	<select id="selectActivityProfitByAdminMonthYear" resultType="integer">
 		SELECT
 			IFNULL(SUM(activity_amount),0)
 		FROM
@@ -141,7 +141,7 @@
 	</select>
 	
 	<!-- 건물별 숙소 총 수익, 월별 수익 -->
-	<select id="selectAccomProfitOneByAdminMonthYear" resultType="int">
+	<select id="selectAccomProfitOneByAdminMonthYear" resultType="integer">
 		SELECT
 			IFNULL(SUM(accom_amount),0)
 		FROM
@@ -156,7 +156,7 @@
 			ap.update_date LIKE CONCAT(#{countMonth},'%')				
 	</select>
 	<!-- 총 체험 예약인원 -->
-	<select id="selectActivityUsePersonByAdminAll" resultType="int">
+	<select id="selectActivityUsePersonByAdminAll" resultType="integer">
 		SELECT
 			SUM(activity_use_person)
 		FROM
@@ -168,7 +168,7 @@
 	</select>
 	
 	<!-- 총 숙소 예약인원 -->
-	<select id="selectAccomUsePersonByAdminAll" resultType="int">
+	<select id="selectAccomUsePersonByAdminAll" resultType="integer">
 		SELECT
 			SUM(accom_use_person)
 		FROM
