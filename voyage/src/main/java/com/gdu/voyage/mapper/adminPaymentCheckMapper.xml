@@ -4,7 +4,8 @@
 
 	
 	<!-- 이번달 체험 예약인원 -->
-	<select id="selectActivityUsePersonByAdmin" resultType="intger">
+
+	<select id="selectActivityUsePersonByAdmin" resultType="integer">
 		SELECT
 			SUM(activity_use_person)
 		FROM
@@ -91,7 +92,7 @@
 	</select>
 	
 	<!-- 체험 총 수익, 연별 수익 -->
-	<select id="selectActivityProfitByAdminYear" resultType="long">
+	<select id="selectActivityProfitByAdminYear" resultType="integer">
 		SELECT
 			IFNULL(SUM(activity_amount),0)
 		FROM
