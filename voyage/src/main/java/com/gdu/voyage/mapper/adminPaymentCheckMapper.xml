@@ -4,9 +4,13 @@
 
 	
 	<!-- 이번달 체험 예약인원 -->
-	<select id="selectActivityUsePersonByAdmin" resultType="integer">
+	<select id="selectActivityUsePersonByAdmin" resultType="int">
 		SELECT
-			SUM(activity_use_person)
+		CASE WHEN SUM(activity_use_person) IS NOT NULL
+                 THEN SUM(activity_use_person)
+                 WHEN SUM(activity_use_person) IS NULL
+                 THEN 1
+			END
 		FROM
 			activity_payment
 		WHERE
@@ -18,9 +22,13 @@
 	</select>
 	
 	<!-- 이번달 숙소 예약인원 -->
-	<select id="selectAccomUsePersonByAdmin" resultType="integer">
+	<select id="selectAccomUsePersonByAdmin" resultType="int">
 		SELECT
-			SUM(accom_use_person)
+			CASE WHEN SUM(accom_use_person) IS NOT NULL
+                 THEN SUM(accom_use_person)
+                 WHEN SUM(accom_use_person) IS NULL
+                 THEN 1
+			END
 		FROM
 			accom_payment
 		WHERE
@@ -32,9 +40,13 @@
 	</select>
 	
 	<!-- 이번년도 체험 예약인원 -->
-	<select id="selectActivityUsePersonByAdminYear" resultType="integer">
+	<select id="selectActivityUsePersonByAdminYear" resultType="int">
 		SELECT
-			SUM(activity_use_person)
+		CASE WHEN SUM(activity_use_person) IS NOT NULL
+                 THEN SUM(activity_use_person)
+                 WHEN SUM(activity_use_person) IS NULL
+                 THEN 1
+			END
 		FROM
 			activity_payment
 		WHERE
@@ -46,7 +58,7 @@
 	</select>
 	
 	<!-- 이번년도 숙소 예약인원 -->
-	<select id="selectAccomUsePersonByAdminYear" resultType="integer">
+	<select id="selectAccomUsePersonByAdminYear" resultType="int">
 		SELECT
 			SUM(accom_use_person)
 		FROM
@@ -91,7 +103,7 @@
 	</select>
 	
 	<!-- 체험 총 수익, 연별 수익 -->
-	<select id="selectActivityProfitByAdminYear" resultType="integer">
+	<select id="selectActivityProfitByAdminYear" resultType="long">
 		SELECT
 			IFNULL(SUM(activity_amount),0)
 		FROM
@@ -127,7 +139,7 @@
 			DATE_FORMAT(LAST_DAY(NOW() - INTERVAL #{countMonth} MONTH), '%Y-%m') 		
 	</select>
 	<!-- 체험 총 수익, 월별 수익 -->
-	<select id="selectActivityProfitByAdminMonthYear" resultType="integer">
+	<select id="selectActivityProfitByAdminMonthYear" resultType="int">
 		SELECT
 			IFNULL(SUM(activity_amount),0)
 		FROM
@@ -141,7 +153,7 @@
 	</select>
 	
 	<!-- 건물별 숙소 총 수익, 월별 수익 -->
-	<select id="selectAccomProfitOneByAdminMonthYear" resultType="integer">
+	<select id="selectAccomProfitOneByAdminMonthYear" resultType="int">
 		SELECT
 			IFNULL(SUM(accom_amount),0)
 		FROM
@@ -156,9 +168,14 @@
 			ap.update_date LIKE CONCAT(#{countMonth},'%')				
 	</select>
 	<!-- 총 체험 예약인원 -->
-	<select id="selectActivityUsePersonByAdminAll" resultType="integer">
+	<select id="selectActivityUsePersonByAdminAll" resultType="int">
 		SELECT
-			SUM(activity_use_person)
+		
+		CASE WHEN SUM(activity_use_person) IS NOT NULL
+                 THEN SUM(activity_use_person)
+                 WHEN SUM(activity_use_person) IS NULL
+                 THEN 1
+			END
 		FROM
 			activity_payment
 		WHERE
@@ -168,9 +185,14 @@
 	</select>
 	
 	<!-- 총 숙소 예약인원 -->
-	<select id="selectAccomUsePersonByAdminAll" resultType="integer">
+	<select id="selectAccomUsePersonByAdminAll" resultType="int">
 		SELECT
-			SUM(accom_use_person)
+		CASE WHEN SUM(accom_use_person) IS NOT NULL
+                 THEN SUM(accom_use_person)
+                 WHEN SUM(accom_use_person) IS NULL
+                 THEN 1
+			END
+			
 		FROM
 			accom_payment
 		WHERE
